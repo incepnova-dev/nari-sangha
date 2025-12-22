@@ -6,7 +6,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-const App = () => {
+const App: React.FC = () => {
   console.log('App is running');
   return (
     <View style={styles.container}>
@@ -49,3 +49,5 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
