@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/rightsection/CommunityOverview.css";
+import "styles/narisangha/rightsection";
 
 const CommunityOverview = ({ myCreatedGroups, myExternalGroups, connections, externalFeeds }) => {
   return (

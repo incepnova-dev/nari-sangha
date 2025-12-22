@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/leftsection/ExternalGroupsList.css";
+import "styles/narisangha/leftsection";
 
 const ExternalGroupsList = ({ myExternalGroups, setViewMode }) => {
   return (

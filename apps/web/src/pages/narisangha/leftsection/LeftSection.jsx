@@ -7,7 +7,7 @@ import CreatedGroupsList from "./CreatedGroupsList";
 import ExternalGroupsList from "./ExternalGroupsList";
 import ProviderConnections from "./ProviderConnections";
 import LiveConversations from "./LiveConversations";
-import "../../../styles/narisangha/leftsection/LeftSection.css";
+import "styles/narisangha/leftsection";
 
 const LeftSection = ({
   mode,

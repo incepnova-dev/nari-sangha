@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/narisangha/narisangha.css";
+import "styles/narisangha";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import MainSection from "./main/MainSection";
@@ -180,7 +180,7 @@ export default function NariSangha() {
 
   const continueJoin = async () => {
     const payload = joinForm;
-    const data = await callAgent("/agent/searchCommunities", {
+    await callAgent("/agent/searchCommunities", {
       mode: "join",
       ...payload
     });

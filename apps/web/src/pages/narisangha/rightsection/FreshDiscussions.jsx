@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/rightsection/FreshDiscussions.css";
+import "styles/narisangha/rightsection";
 
 const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchExternalFeeds, setViewMode }) => {
   return (

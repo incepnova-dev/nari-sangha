@@ -1,4 +1,5 @@
 import React from "react";
+import "styles/narisangha/rightsection/LiveQAForum.css";
 
 const LiveQAForum = () => {
   return (
@@ -43,9 +44,9 @@ const LiveQAForum = () => {
           </div>
           <div className="feed-item-meta">
             <span className="feed-tag">Quora · Women Health Topics</span>
-            <a href="#" className="feed-link">
+            <button className="feed-link feed-link-button">
               Open thread
-            </a>
+            </button>
           </div>
         </article>
 
@@ -59,9 +60,9 @@ const LiveQAForum = () => {
           </div>
           <div className="feed-item-meta">
             <span className="feed-tag">StackOverflow · Healthtech</span>
-            <a href="#" className="feed-link">
+            <button className="feed-link feed-link-button">
               Open thread
-            </a>
+            </button>
           </div>
         </article>
       </div>

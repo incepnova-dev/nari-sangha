@@ -5,7 +5,7 @@ import TopBarCTA from "./TopBarCTA";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { getProperty } from "../../../languages";
 import { signOut } from "../../../services/api";
-import "../../../styles/narisangha/header/Header.css";
+import "styles/narisangha/header";
 
 const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser, setCurrentUser }) => {
   const handleLogout = async () => {

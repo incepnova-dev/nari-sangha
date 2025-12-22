@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/leftsection/LiveConversations.css";
+import "styles/narisangha/leftsection";
 
 const LiveConversations = ({ stage, setStage, loadingFeeds, externalFeeds }) => {
   return (

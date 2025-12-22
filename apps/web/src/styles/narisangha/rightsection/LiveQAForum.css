@@ -1,0 +1,15 @@
+.feed-link-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+}
+
+.feed-link-button:hover {
+  opacity: 0.8;
+}
+

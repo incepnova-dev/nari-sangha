@@ -3,7 +3,7 @@ import { createPortal, flushSync } from "react-dom";
 import { getProperty } from "../../../languages";
 import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
-import "../../../styles/narisangha/UnauthenticatedLanding.css";
+import "styles/narisangha";
 
 const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
   const message = getProperty("landing.welcome", language);

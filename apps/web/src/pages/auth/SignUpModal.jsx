@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/auth/SignUpModal.css";
+import "styles/auth";
 import { getProperty } from "../../languages";
 import wmhealthpic from "../../images/wmhealthpic.png";
 

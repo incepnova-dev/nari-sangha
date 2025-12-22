@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/leftsection/CreatedGroupsList.css";
+import "styles/narisangha/leftsection";
 
 const CreatedGroupsList = ({ myCreatedGroups, setViewMode, setMode }) => {
   return (

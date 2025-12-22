@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../styles/narisangha/leftsection/ProviderConnections.css";
+import "styles/narisangha/leftsection";
 
 const ProviderConnections = ({ connections, connectingProvider, handleConnectProvider, myExternalGroups }) => {
   return (
