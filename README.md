@@ -135,8 +135,6 @@ npm run build
 - Dev server: `http://localhost:3000`
 - Main routes (from `App.tsx`):
   - `/narisangha` – Nari Sangha main experience
-  - `/patients` – Women patients page
-  - `/womenChild` – Women & child health page
 
 If the API is running on `http://localhost:3001`, configure any API clients in `src/config/api.config.js` to point to that base URL.
 

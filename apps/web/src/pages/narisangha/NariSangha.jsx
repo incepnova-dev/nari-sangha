@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import patientData from "../../data/womenpatients.json";
 import "../../styles/narisangha/narisangha.css";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
