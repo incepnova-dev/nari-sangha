@@ -200,6 +200,8 @@ export default function NariSangha() {
       />
 
       <MainSection
+        currentUser={currentUser}
+        language={language}
         mode={mode}
         setMode={setMode}
         viewMode={viewMode}

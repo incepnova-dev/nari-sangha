@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
 import { getProperty } from "../../../languages";
@@ -75,7 +76,7 @@ const TopBarCTA = ({
           </>
         )}
       </div>
-      {!currentUser && (
+      {!currentUser && createPortal(
         <>
           <SignInModal
             isOpen={isSignInModalOpen}
@@ -88,7 +89,8 @@ const TopBarCTA = ({
             onClose={handleCloseSignUpModal}
             language={language}
           />
-        </>
+        </>,
+        document.body
       )}
     </>
   );

@@ -29,15 +29,16 @@ const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser
           </div>
         )}
 
-        <TopBarCTA
-          setMode={setMode}
-          language={language}
-          currentUser={currentUser}
-          onSignInSuccess={setCurrentUser}
-          onLogout={handleLogout}
-        />
-
-        <LanguageSwitcher language={language} setLanguage={setLanguage} />
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginLeft: "auto" }}>
+          <TopBarCTA
+            setMode={setMode}
+            language={language}
+            currentUser={currentUser}
+            onSignInSuccess={setCurrentUser}
+            onLogout={handleLogout}
+          />
+          <LanguageSwitcher language={language} setLanguage={setLanguage} />
+        </div>
       </div>
     </header>
   );
