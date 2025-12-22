@@ -1,8 +1,9 @@
 import React from "react";
+import "../../../styles/narisangha/rightsection/FreshDiscussions.css";
 
 const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchExternalFeeds, setViewMode }) => {
   return (
-    <section className="forum-card" style={{ marginTop: "2rem" }}>
+    <section className="forum-card fresh-discussions-section">
       <header>
         <div>
           <h2>Fresh Community Discussions</h2>
@@ -10,11 +11,11 @@ const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchE
         </div>
       </header>
       
-      <div className="feed-filters" style={{ marginBottom: "1rem" }}>
+      <div className="feed-filters fresh-discussions-filters">
         <select 
           value={stage} 
           onChange={(e) => setStage(e.target.value)}
-          style={{ flex: 1 }}
+          className="fresh-discussions-select"
         >
           <option value="maternal">Baby & Maternal</option>
           <option value="adolescent">Adolescent & Young</option>
@@ -31,19 +32,13 @@ const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchE
       </div>
 
       {loadingFeeds ? (
-        <div style={{ textAlign: "center", padding: "2rem", opacity: 0.7 }}>
+        <div className="fresh-discussions-loading">
           Loading fresh discussions…
         </div>
       ) : externalFeeds.length === 0 ? (
-        <div style={{ 
-          padding: "2rem", 
-          textAlign: "center", 
-          background: "rgba(255,255,255,0.02)",
-          borderRadius: "8px",
-          border: "1px dashed rgba(255,255,255,0.1)"
-        }}>
-          <div style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>💬</div>
-          <div style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+        <div className="fresh-discussions-empty">
+          <div className="fresh-discussions-empty-icon">💬</div>
+          <div className="fresh-discussions-empty-text">
             No discussions found. Try connecting more platforms in Discover tab.
           </div>
         </div>
@@ -51,9 +46,9 @@ const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchE
         <div className="feed-items">
           {externalFeeds.slice(0, 5).map((item) => (
             <article key={item.id} className="feed-item">
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+              <div className="fresh-discussions-item-header">
                 <span className="feed-tag">{item.source}</span>
-                <span style={{ fontSize: "0.75rem", opacity: 0.6 }}>
+                <span className="fresh-discussions-item-age">
                   {item.ageLabel}
                 </span>
               </div>
@@ -70,8 +65,7 @@ const FreshDiscussions = ({ stage, setStage, loadingFeeds, externalFeeds, fetchE
           
           {externalFeeds.length > 5 && (
             <button 
-              className="btn small secondary" 
-              style={{ width: "100%", marginTop: "0.5rem" }}
+              className="btn small secondary fresh-discussions-view-all"
               onClick={() => setViewMode("discover")}
             >
               View all {externalFeeds.length} discussions

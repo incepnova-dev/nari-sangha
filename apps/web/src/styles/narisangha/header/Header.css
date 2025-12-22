@@ -1,0 +1,18 @@
+.header-welcome {
+  margin-right: 12px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.header-welcome-name {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.header-actions-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+

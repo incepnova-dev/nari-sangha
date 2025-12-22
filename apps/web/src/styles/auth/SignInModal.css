@@ -1,0 +1,28 @@
+/* Additional styles for SignInModal beyond SignUpModal.css */
+
+.signup-modal-error-inline {
+  padding: 10px;
+  margin-bottom: 16px;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 13px;
+}
+
+.signup-modal-loading-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.signup-modal-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+

@@ -1,0 +1,53 @@
+.fresh-discussions-section {
+  margin-top: 2rem;
+}
+
+.fresh-discussions-filters {
+  margin-bottom: 1rem;
+}
+
+.fresh-discussions-select {
+  flex: 1;
+}
+
+.fresh-discussions-loading {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.7;
+}
+
+.fresh-discussions-empty {
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.fresh-discussions-empty-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fresh-discussions-empty-text {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.fresh-discussions-item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fresh-discussions-item-age {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.fresh-discussions-view-all {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+

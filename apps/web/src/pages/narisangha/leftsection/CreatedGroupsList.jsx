@@ -1,53 +1,47 @@
 import React from "react";
+import "../../../styles/narisangha/leftsection/CreatedGroupsList.css";
 
 const CreatedGroupsList = ({ myCreatedGroups, setViewMode, setMode }) => {
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <h2 style={{ fontSize: "1.5rem", marginBottom: "0.5rem" }}>Communities You Created</h2>
-      <p style={{ opacity: 0.7, marginBottom: "1.5rem" }}>
+    <div className="created-groups-container">
+      <h2 className="created-groups-title">Communities You Created</h2>
+      <p className="created-groups-subtitle">
         Communities you've built across platforms
       </p>
       
       {myCreatedGroups.length === 0 ? (
-        <div style={{ 
-          padding: "2rem", 
-          textAlign: "center", 
-          background: "rgba(255,255,255,0.02)",
-          borderRadius: "12px",
-          border: "1px dashed rgba(255,255,255,0.1)"
-        }}>
-          <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>🌱</div>
-          <div style={{ marginBottom: "0.5rem" }}>No communities created yet</div>
+        <div className="created-groups-empty">
+          <div className="created-groups-empty-icon">🌱</div>
+          <div className="created-groups-empty-text">No communities created yet</div>
           <button 
-            className="btn primary" 
-            style={{ marginTop: "1rem" }}
+            className="btn primary created-groups-empty-button"
             onClick={() => { setViewMode("setup"); setMode("create"); }}
           >
             Create your first community
           </button>
         </div>
       ) : (
-        <div style={{ display: "grid", gap: "1rem" }}>
+        <div className="created-groups-grid">
           {myCreatedGroups.map((group) => (
             <div key={group.id} className="deck-card">
               <div className="deck-header">
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+                  <div className="created-groups-item-header-row">
                     <div className="deck-title">{group.name}</div>
                     <span className="deck-pill">{group.privacy}</span>
                   </div>
                   <div className="deck-subtitle">{group.description}</div>
                 </div>
               </div>
-              <div style={{ padding: "1rem 1.5rem" }}>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+              <div className="created-groups-item-content">
+                <div className="created-groups-item-platforms">
                   {group.platforms?.split(",").map((platform) => (
-                    <div key={platform} className="hero-chip" style={{ fontSize: "0.875rem" }}>
+                    <div key={platform} className="hero-chip created-groups-item-platform-chip">
                       {platform.trim()}
                     </div>
                   ))}
                 </div>
-                <div style={{ display: "flex", gap: "1.5rem", fontSize: "0.875rem", opacity: 0.7 }}>
+                <div className="created-groups-item-meta">
                   <div>📍 {group.location || "Global"}</div>
                   <div>👥 {group.memberCount || 0} members</div>
                   <div>💬 {group.topics}</div>

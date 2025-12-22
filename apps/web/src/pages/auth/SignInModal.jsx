@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/auth/SignUpModal.css";
+import "../../styles/auth/SignInModal.css";
 import { getProperty } from "../../languages";
 import wmhealthpic from "../../images/wmhealthpic.png";
 import { signIn } from "../../services/api";
@@ -100,15 +101,7 @@ const SignInModal = ({ isOpen, onClose, language = "en", onSignInSuccess }) => {
             </h2>
 
             {error && (
-              <div className="signup-modal-error" style={{
-                padding: "10px",
-                marginBottom: "16px",
-                backgroundColor: "rgba(239, 68, 68, 0.1)",
-                border: "1px solid rgba(239, 68, 68, 0.3)",
-                borderRadius: "8px",
-                color: "#ef4444",
-                fontSize: "13px"
-              }}>
+              <div className="signup-modal-error signup-modal-error-inline">
                 {error}
               </div>
             )}
@@ -155,16 +148,8 @@ const SignInModal = ({ isOpen, onClose, language = "en", onSignInSuccess }) => {
                   className="btn primary small signup-modal-button-submit"
                 >
                   {isLoading ? (
-                    <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                      <span style={{
-                        width: "14px",
-                        height: "14px",
-                        border: "2px solid rgba(255,255,255,0.3)",
-                        borderTop: "2px solid white",
-                        borderRadius: "50%",
-                        animation: "spin 0.6s linear infinite",
-                        display: "inline-block"
-                      }}></span>
+                    <span className="signup-modal-loading-container">
+                      <span className="signup-modal-spinner"></span>
                       {getProperty("signin.button.submitting", language) || "Signing in..."}
                     </span>
                   ) : (

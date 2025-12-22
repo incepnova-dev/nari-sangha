@@ -5,6 +5,7 @@ import TopBarCTA from "./TopBarCTA";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { getProperty } from "../../../languages";
 import { signOut } from "../../../services/api";
+import "../../../styles/narisangha/header/Header.css";
 
 const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser, setCurrentUser }) => {
   const handleLogout = async () => {
@@ -21,15 +22,15 @@ const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser
         <Navigation setViewMode={setViewMode} language={language} />
 
         {currentUser && (
-          <div className="header-welcome" style={{ marginRight: "12px", fontSize: "13px", color: "var(--text-soft)" }}>
+          <div className="header-welcome">
             {getProperty("header.welcome", language)},{" "}
-            <span style={{ color: "var(--text-main)", fontWeight: 500 }}>
+            <span className="header-welcome-name">
               {userName}
             </span>
           </div>
         )}
 
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginLeft: "auto" }}>
+        <div className="header-actions-container">
           <TopBarCTA
             setMode={setMode}
             language={language}

@@ -1,0 +1,50 @@
+.community-overview-section {
+  margin-top: 2rem;
+}
+
+.community-overview-content {
+  padding: 1rem 0;
+}
+
+.community-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.community-overview-stat {
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.community-overview-stat-created {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.community-overview-stat-joined {
+  background: rgba(236, 72, 153, 0.1);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+}
+
+.community-overview-stat-platforms {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.community-overview-stat-conversations {
+  background: rgba(251, 146, 60, 0.1);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.community-overview-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.community-overview-stat-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+

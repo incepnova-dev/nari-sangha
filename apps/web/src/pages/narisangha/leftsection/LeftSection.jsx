@@ -7,6 +7,7 @@ import CreatedGroupsList from "./CreatedGroupsList";
 import ExternalGroupsList from "./ExternalGroupsList";
 import ProviderConnections from "./ProviderConnections";
 import LiveConversations from "./LiveConversations";
+import "../../../styles/narisangha/leftsection/LeftSection.css";
 
 const LeftSection = ({
   mode,
@@ -54,7 +55,7 @@ const LeftSection = ({
       )}
 
       {viewMode === "mygroups" && (
-        <div style={{ marginTop: "2rem" }}>
+        <div className="left-section-margin-top">
           <CreatedGroupsList 
             myCreatedGroups={myCreatedGroups}
             setViewMode={setViewMode}
@@ -68,7 +69,7 @@ const LeftSection = ({
       )}
 
       {viewMode === "discover" && (
-        <div style={{ marginTop: "2rem" }}>
+        <div className="left-section-margin-top">
           <ProviderConnections 
             connections={connections}
             connectingProvider={connectingProvider}
