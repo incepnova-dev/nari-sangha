@@ -1,0 +1,18 @@
+rootProject.name = 'NariSangha'
+
+def nativeModulesFile = file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+if (nativeModulesFile.exists()) {
+    apply from: nativeModulesFile
+    try {
+        applyNativeModulesSettingsGradle(settings)
+    } catch (Exception e) {
+        // Function may not be available, continue without it
+    }
+}
+
+include ':app'
+includeBuild('../node_modules/@react-native/gradle-plugin')
+
+
+
+

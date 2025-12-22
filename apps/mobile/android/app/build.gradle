@@ -1,0 +1,87 @@
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
+
+react {
+    /* Autolinking */
+    // Enable New Architecture to build required native libraries
+    newArchEnabled = true
+}
+
+def enableProguardInReleaseBuilds = false
+def jscFlavor = 'org.webkit:android-jsc:+'
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace "com.narisangha"
+    
+    defaultConfig {
+        applicationId "com.narisangha"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        // New Architecture enabled to build required libraries
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "true"
+    }
+    
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src/main/java']
+            }
+        }
+    }
+    
+    packaging {
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+    }
+}
+
+// Ensure autolinking.json exists before build
+task generateAutolinkingJson(type: Exec) {
+    description = 'Generate autolinking.json file'
+    workingDir = rootProject.projectDir.parentFile
+    commandLine = ['node', 'generate-autolinking.js']
+    doFirst {
+        println "Generating autolinking.json..."
+    }
+}
+
+preBuild.dependsOn generateAutolinkingJson
+
+dependencies {
+    implementation("com.facebook.react:react-android")
+
+    if (rootProject.ext.hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+}
+

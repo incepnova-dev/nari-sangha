@@ -1,0 +1,5 @@
+# ninja log v5
+0	10	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
+0	1367	1766395397928821708	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
+1	1557	1766395398120046083	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
+1557	1710	1766395398279344791	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a

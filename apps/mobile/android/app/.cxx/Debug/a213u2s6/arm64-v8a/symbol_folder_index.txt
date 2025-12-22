@@ -1,0 +1,1 @@
+/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/arm64-v8a

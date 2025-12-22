@@ -1,0 +1,42 @@
+{
+  "buildFiles": [
+    "/Users/abhisekbakshi/PetLivAZ/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/abhisekbakshi/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/abhisekbakshi/PetLivAZ/android/app/.cxx/Debug/5s4u4t65/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/abhisekbakshi/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/abhisekbakshi/PetLivAZ/android/app/.cxx/Debug/5s4u4t65/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "appmodules::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "appmodules",
+      "output": "/Users/abhisekbakshi/PetLivAZ/android/app/build/intermediates/cxx/Debug/5s4u4t65/obj/arm64-v8a/libappmodules.so",
+      "runtimeFiles": [
+        "/Users/abhisekbakshi/.gradle/caches/8.13/transforms/eebb435d0fa1db616a6d3eb1ab149109/transformed/jetified-fbjni-0.7.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/abhisekbakshi/.gradle/caches/8.13/transforms/ad30f9a9ae5607eeead570dad744bf4d/transformed/jetified-react-android-0.82.0-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/abhisekbakshi/.gradle/caches/8.13/transforms/ad30f9a9ae5607eeead570dad744bf4d/transformed/jetified-react-android-0.82.0-debug/prefab/modules/reactnative/libs/android.arm64-v8a/libreactnative.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/abhisekbakshi/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/abhisekbakshi/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

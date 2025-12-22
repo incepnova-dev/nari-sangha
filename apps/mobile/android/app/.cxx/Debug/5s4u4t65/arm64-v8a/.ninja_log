@@ -1,0 +1,11 @@
+# ninja log v5
+0	7	0	clean	9cff5c38ca2b2eee
+41	653	1766375509361779333	build.ninja	b0bf604894c99700
+0	10	0	/Users/abhisekbakshi/PetLivAZ/android/app/.cxx/Debug/5s4u4t65/arm64-v8a/CMakeFiles/cmake.verify_globs	7ece23570f6e4434
+1685	1858	1766375240627521624	/Users/abhisekbakshi/PetLivAZ/android/app/build/intermediates/cxx/Debug/5s4u4t65/obj/arm64-v8a/libappmodules.so	780e2381497869bb
+2	1685	1766375240449133416	CMakeFiles/appmodules.dir/OnLoad.cpp.o	e954c03953b9c75f
+2	1543	1766375240308704333	CMakeFiles/appmodules.dir/Users/abhisekbakshi/PetLivAZ/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	dd7881263f599ce
+0	14	0	/Users/abhisekbakshi/PetLivAZ/android/app/.cxx/Debug/5s4u4t65/arm64-v8a/CMakeFiles/cmake.verify_globs	7ece23570f6e4434
+2	2226	1766375511657622083	CMakeFiles/appmodules.dir/Users/abhisekbakshi/PetLivAZ/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	dd7881263f599ce
+2	2457	1766375511889391791	CMakeFiles/appmodules.dir/OnLoad.cpp.o	e954c03953b9c75f
+2457	2645	1766375512080162666	/Users/abhisekbakshi/PetLivAZ/android/app/build/intermediates/cxx/Debug/5s4u4t65/obj/arm64-v8a/libappmodules.so	780e2381497869bb

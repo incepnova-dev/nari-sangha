@@ -1,0 +1,110 @@
+# Node.js / TypeScript (apps + packages)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+dist/
+build/
+.out/
+.next/
+expo/
+.expo/
+.expo-shared/
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# React Native / Mobile (apps/mobile)
+android/.gradle/
+android/.idea/
+android/local.properties
+android/app/build/
+android/build/
+android/.cxx/
+android/.settings/
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcodeproj/project.xcworkspace/
+*.xcuserdatad/
+*.xcuserdata/
+*.mode1v3
+*.mode2v3
+*.pbxuser
+
+# Expo / Metro
+.metro-cache/
+.haul-cache/
+
+# Web app (apps/web) specific
+*.cache/
+.eslintcache
+
+# Python (services/ml-service)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.eggs/
+.python-version
+.venv/
+venv/
+env/
+ENV/
+
+# Python build / test artifacts
+downloads/
+pip-wheel-metadata/
+wheels/
+htmlcov/
+.coverage
+.coverage.*
+.cache/
+pytest_cache/
+.tox/
+.mypy_cache/
+.dmypy.json
+.pytest_cache/
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+# Misc service/worker artifacts
+tmp/
+temp/
+*.tmp
+
+# Monorepo tooling (optional)
+.npm/
+.pnp.*
+.turbo/
+.cache/
+
+
