@@ -370,7 +370,7 @@ footer.site-footer {
 }
 .footer-inner {
   max-width: 1240px; margin: 0 auto;
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: center;
   align-items: center; gap: 10px;
   font-size: 11px; color: var(--text-muted);
 }
