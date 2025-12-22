@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal, flushSync } from "react-dom";
 import { getProperty } from "../../../languages";
 import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
@@ -9,6 +9,7 @@ const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
   const message = getProperty("landing.welcome", language);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const isSigningInRef = useRef(false);
 
   useEffect(() => {
     if (isSignUpModalOpen || isSignInModalOpen) {
@@ -34,16 +35,43 @@ const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
     setIsSignUpModalOpen(false);
   };
 
-  const handleCloseSignInModal = () => {
-    setIsSignInModalOpen(false);
-  };
-
-  const handleSignInSuccess = (userData) => {
-    setIsSignInModalOpen(false);
-    if (onSignInSuccess) {
-      onSignInSuccess(userData);
+  const handleSignInSuccess = useCallback((userData) => {
+    console.log('[UnauthenticatedLanding] handleSignInSuccess called with:', userData);
+    
+    // Prevent multiple calls
+    if (isSigningInRef.current) {
+      console.log('[UnauthenticatedLanding] Already processing sign-in, ignoring duplicate call');
+      return;
     }
-  };
+    isSigningInRef.current = true;
+    
+    console.log('[UnauthenticatedLanding] Calling onSignInSuccess callback...');
+    // Use flushSync to ensure the state update happens synchronously
+    // This forces React to process the state update immediately
+    flushSync(() => {
+      if (onSignInSuccess) {
+        console.log('[UnauthenticatedLanding] onSignInSuccess exists, calling it with:', userData);
+        onSignInSuccess(userData);
+        console.log('[UnauthenticatedLanding] onSignInSuccess called');
+      } else {
+        console.warn('[UnauthenticatedLanding] onSignInSuccess is not provided!');
+      }
+    });
+    
+    console.log('[UnauthenticatedLanding] Closing modal...');
+    // Close the modal after state update is processed
+    setIsSignInModalOpen(false);
+    
+    // Reset the ref after a brief delay
+    setTimeout(() => {
+      isSigningInRef.current = false;
+      console.log('[UnauthenticatedLanding] Reset sign-in ref');
+    }, 100);
+  }, [onSignInSuccess]);
+  
+  const handleSignInModalClose = useCallback(() => {
+    setIsSignInModalOpen(false);
+  }, []);
 
   return (
     <>
@@ -80,7 +108,7 @@ const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
         <>
           <SignInModal
             isOpen={isSignInModalOpen}
-            onClose={handleCloseSignInModal}
+            onClose={handleSignInModalClose}
             language={language}
             onSignInSuccess={handleSignInSuccess}
           />

@@ -38,14 +38,17 @@ const SignInModal = ({ isOpen, onClose, language = "en", onSignInSuccess }) => {
           localStorage.setItem('refreshToken', result.data.refreshToken);
         }
 
+        // Reset form
+        setSignInForm({ email: "", password: "" });
         // Call success callback if provided
+        // If callback is provided, let the parent handle closing the modal
+        // Otherwise, close it here
         if (onSignInSuccess) {
           onSignInSuccess(result.data);
+          // Don't call onClose() here - let the parent component handle it
+        } else {
+          onClose();
         }
-
-        // Reset form and close modal
-        setSignInForm({ email: "", password: "" });
-        onClose();
       } else {
         setError(result.error || "Sign in failed. Please try again.");
       }

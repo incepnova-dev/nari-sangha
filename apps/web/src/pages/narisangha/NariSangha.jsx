@@ -9,6 +9,15 @@ export default function NariSangha() {
   const [language, setLanguage] = useState("en");
   const [currentUser, setCurrentUser] = useState(null);
   
+  // Debug: Log when currentUser changes
+  useEffect(() => {
+  }, [currentUser]);
+  
+  // Wrap setCurrentUser to add debugging
+  const handleSetCurrentUser = (userData) => {
+    setCurrentUser(userData);
+  };
+  
   // External connections and feeds state
   const [connections, setConnections] = useState({
     discord: false,
@@ -109,7 +118,7 @@ export default function NariSangha() {
     }
   };
 
-  const handleFollowExternalGroup = async (group) => {
+  /*const handleFollowExternalGroup = async (group) => {
     try {
       await fetch("/api/community/sync-group", {
         method: "POST",
@@ -123,7 +132,7 @@ export default function NariSangha() {
     } catch (e) {
       console.error("Error syncing group", e);
     }
-  };
+  };*/
 
   const handleCreateChange = (field) => (e) => {
     setCreateForm({ ...createForm, [field]: e.target.value });
@@ -151,13 +160,11 @@ export default function NariSangha() {
 
   const previewCreate = async () => {
     const payload = createForm;
-    console.log("[agent] preview create:", payload);
     await callAgent("/agent/previewCommunity", { mode: "create", ...payload });
   };
 
   const continueCreate = async () => {
     const payload = createForm;
-    console.log("[agent] create community:", payload);
     const result = await callAgent("/agent/createCommunity", { mode: "create", ...payload });
     // Refresh created groups after successful creation
     if (result) {
@@ -168,24 +175,21 @@ export default function NariSangha() {
 
   const previewJoin = async () => {
     const payload = joinForm;
-    console.log("[agent] preview join:", payload);
     await callAgent("/agent/previewCommunities", { mode: "join", ...payload });
   };
 
   const continueJoin = async () => {
     const payload = joinForm;
-    console.log("[agent] search communities:", payload);
     const data = await callAgent("/agent/searchCommunities", {
       mode: "join",
       ...payload
     });
-    console.log("[agent] searchCommunities response:", data);
   };
 
-  const currentModeText =
+ /* const currentModeText =
     mode === "create"
       ? "You're in create mode; the agent will focus on setting up a new space."
-      : "You're in join mode; the agent will search and curate existing communities.";
+      : "You're in join mode; the agent will search and curate existing communities.";*/
 
   return (
     <div className="page-shell">
@@ -196,7 +200,7 @@ export default function NariSangha() {
         setLanguage={setLanguage}
         setViewMode={setViewMode}
         currentUser={currentUser}
-        setCurrentUser={setCurrentUser}
+        setCurrentUser={handleSetCurrentUser}
       />
 
       <MainSection
@@ -224,6 +228,7 @@ export default function NariSangha() {
         loadingFeeds={loadingFeeds}
         externalFeeds={externalFeeds}
         fetchExternalFeeds={fetchExternalFeeds}
+        setCurrentUser={handleSetCurrentUser}
       />
 
       <Footer setViewMode={setViewMode} />
