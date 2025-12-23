@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import Landing from './components/Landing';
-import AuthenticatedLanding from './components/AuthenticatedLanding';
+import Home from './components/Home';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -19,7 +19,7 @@ const App: React.FC = () => {
     <>
       <StatusBar barStyle="light-content" backgroundColor="#030718" />
       {currentUser ? (
-        <AuthenticatedLanding
+        <Home
           user={currentUser}
           onSignOut={handleSignOut}
           language={language}

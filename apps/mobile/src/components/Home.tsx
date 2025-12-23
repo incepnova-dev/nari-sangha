@@ -2,16 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { landingContainer, landingContent, buttons } from '../styles';
 
-interface AuthenticatedLandingProps {
+interface HomeProps {
   user: any;
   onSignOut: () => void;
   language?: string;
 }
 
-const AuthenticatedLanding: React.FC<AuthenticatedLandingProps> = ({
-  user,
-  onSignOut,
-}) => {
+const Home: React.FC<HomeProps> = ({ user, onSignOut }) => {
   const userName =
     user?.user?.name || user?.name || user?.email || 'User';
 
@@ -31,6 +28,6 @@ const AuthenticatedLanding: React.FC<AuthenticatedLandingProps> = ({
   );
 };
 
-export default AuthenticatedLanding;
+export default Home;
 
 
