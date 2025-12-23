@@ -17,7 +17,10 @@ const App: React.FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#030718" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={currentUser ? '#111827' : '#030718'}
+      />
       {currentUser ? (
         <Home
           user={currentUser}
