@@ -248,7 +248,7 @@ describe('UnauthenticatedLanding', () => {
 
       // Wait for modal to open
       await waitFor(() => {
-        expect(getByText('Sign In functionality will be implemented here')).toBeTruthy();
+        expect(getByText('Email')).toBeTruthy();
       });
 
       // Submit Sign In multiple times quickly - find all "Sign In" texts and use the last one

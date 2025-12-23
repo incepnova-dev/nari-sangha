@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import UnauthenticatedLanding from './components/UnauthenticatedLanding';
+import AuthenticatedLanding from './components/AuthenticatedLanding';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [language, setLanguage] = useState<string>('en');
+  const [language] = useState<string>('en');
 
   const handleSignInSuccess = (userData: any) => {
     setCurrentUser(userData);
   };
 
+  const handleSignOut = () => {
+    setCurrentUser(null);
+  };
+
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#030718" />
-      <UnauthenticatedLanding
-        language={language}
-        onSignInSuccess={handleSignInSuccess}
-      />
+      {currentUser ? (
+        <AuthenticatedLanding
+          user={currentUser}
+          onSignOut={handleSignOut}
+          language={language}
+        />
+      ) : (
+        <UnauthenticatedLanding
+          language={language}
+          onSignInSuccess={handleSignInSuccess}
+        />
+      )}
     </>
   );
 };

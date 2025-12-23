@@ -23,3 +23,22 @@ global.cancelAnimationFrame = (id: number) => {
   clearTimeout(id);
 };
 
+// Mock fetch for tests to avoid real network calls
+if (typeof global.fetch === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).fetch = jest.fn(async () => {
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        token: 'test-token',
+        refreshToken: 'test-refresh-token',
+        user: {
+          name: 'Test User',
+          email: 'user@example.com',
+        },
+      }),
+    };
+  });
+}
+
