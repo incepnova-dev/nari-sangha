@@ -67,7 +67,7 @@ android {
 task generateAutolinkingJson(type: Exec) {
     description = 'Generate autolinking.json file'
     workingDir = rootProject.projectDir.parentFile
-    commandLine = ['node', 'generate-autolinking.js']
+    commandLine = ['node', 'scripts/generate-autolinking.js']
     doFirst {
         println "Generating autolinking.json..."
     }

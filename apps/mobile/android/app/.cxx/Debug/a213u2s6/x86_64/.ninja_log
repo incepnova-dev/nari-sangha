@@ -1,14 +1,11 @@
 # ninja log v5
-10	161	1766463503061152124	build.ninja	13af8a513c97134d
-0	9	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
-3	1422	1766425241841336958	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
-3	1287	1766425241707612833	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
-1422	1492	1766425241924906666	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a
-1	14	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
-5	2726	1766463505836050291	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
-5	2919	1766463506026296208	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
-2919	3104	1766463506226086708	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a
-0	9	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
-2	1338	1766463641870041416	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
-2	1468	1766463642000681416	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
-1468	1533	1766463642073725624	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a
+10	165	1766464473093127749	build.ninja	13af8a513c97134d
+0	10	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
+2	1441	1766464355333082083	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
+0	8	0	clean	9cff5c38ca2b2eee
+2	1321	1766464355214710166	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
+1441	1506	1766464355405386083	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a
+1	10	0	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/.cxx/Debug/a213u2s6/x86_64/CMakeFiles/cmake.verify_globs	74b75f612dddcc27
+3	1539	1766464474663298708	CMakeFiles/appmodules.dir/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	905e5f6885e0c6c0
+3	1671	1766464474795977333	CMakeFiles/appmodules.dir/OnLoad.cpp.o	5e3082f18f8e2374
+1671	1737	1766464474866678583	/Users/abhisekbakshi/nari-sangha/apps/mobile/android/app/build/intermediates/cxx/Debug/a213u2s6/obj/x86_64/libappmodules.so	1965125a4065f01a

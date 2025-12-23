@@ -56,7 +56,7 @@ React Native 0.82 was chosen to avoid potential 0.83-specific issues, but both v
 
 ### Option 3: Temporary Workaround
 The autolinking files have been generated with C++20 compatibility headers.
-Run `node generate-autolinking.js` after each clean build.
+Run `node scripts/generate-autolinking.js` after each clean build.
 
 ## Current Status
 - ✅ All Java/Kotlin compilation issues fixed

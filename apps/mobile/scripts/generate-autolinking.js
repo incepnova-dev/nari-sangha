@@ -2,7 +2,7 @@ const {execSync} = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const androidDir = path.join(__dirname, 'android');
+const androidDir = path.join(__dirname, '..', 'android');
 const appDir = path.join(androidDir, 'app');
 const buildDir = path.join(appDir, 'build', 'generated', 'autolinking');
 
