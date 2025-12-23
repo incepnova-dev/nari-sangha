@@ -11,36 +11,36 @@ import {
 } from 'react-native';
 import { getProperty } from '../../i18';
 import { modalStyles, buttons } from '../../styles';
-import { signIn, SignInData } from '../../services/authService';
+import { signIn as login, SignInData as LoginData } from '../../services/authService';
 
-interface SignInModalProps {
+interface LoginModalProps {
   isOpen: boolean;
   language?: string;
   onClose: () => void;
   onSignInSuccess?: (userData: any) => void;
 }
 
-const SignInModal: React.FC<SignInModalProps> = ({
+const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   language = 'en',
   onClose,
   onSignInSuccess,
 }) => {
-  const [signInForm, setSignInForm] = useState({ email: '', password: '' });
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignInChange =
+  const handleLoginChange =
     (field: 'email' | 'password') =>
     (value: string) => {
-      setSignInForm(prev => ({ ...prev, [field]: value }));
+      setLoginForm(prev => ({ ...prev, [field]: value }));
       if (error) setError(null);
     };
 
   const handleClose = useCallback(() => {
     if (isLoading) return;
     setError(null);
-    setSignInForm({ email: '', password: '' });
+    setLoginForm({ email: '', password: '' });
     onClose();
   }, [isLoading, onClose]);
 
@@ -51,33 +51,33 @@ const SignInModal: React.FC<SignInModalProps> = ({
     setIsLoading(true);
 
     try {
-      const trimmedEmail = signInForm.email.trim();
-      const result = await signIn({
+      const trimmedEmail = loginForm.email.trim();
+      const result = await login({
         email: trimmedEmail,
-        password: signInForm.password,
+        password: loginForm.password,
       });
 
       if (!result.success) {
         setError(
           result.error ||
-            getProperty('signin.error.generic', language) ||
-            'Sign in failed. Please try again.'
+            getProperty('login.error.generic', language) ||
+            'Login failed. Please try again.'
         );
         return;
       }
 
       if (onSignInSuccess) {
-        onSignInSuccess(result.data as SignInData);
+        onSignInSuccess(result.data as LoginData);
       }
     } catch (e) {
       setError(
-        getProperty('signin.error.generic', language) ||
-          'Sign in failed. Please try again.'
+        getProperty('login.error.generic', language) ||
+          'Login failed. Please try again.'
       );
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, language, onSignInSuccess, signInForm.email]);
+  }, [isLoading, language, onSignInSuccess, loginForm.email]);
 
   return (
     <Modal
@@ -92,7 +92,7 @@ const SignInModal: React.FC<SignInModalProps> = ({
       >
         <View style={modalStyles.modalContent}>
           <Text style={modalStyles.modalTitle}>
-            {getProperty('signin.title', language)}
+            {getProperty('login.title', language)}
           </Text>
 
           {error ? <Text style={modalStyles.errorText}>{error}</Text> : null}
@@ -100,12 +100,12 @@ const SignInModal: React.FC<SignInModalProps> = ({
           <View style={modalStyles.form}>
             <View style={modalStyles.field}>
               <Text style={modalStyles.label}>
-                {getProperty('signin.email.label', language)}
+                {getProperty('login.email.label', language)}
               </Text>
               <TextInput
-                value={signInForm.email}
-                onChangeText={handleSignInChange('email')}
-                placeholder={getProperty('signin.email.placeholder', language)}
+                value={loginForm.email}
+                onChangeText={handleLoginChange('email')}
+                placeholder={getProperty('login.email.placeholder', language)}
                 placeholderTextColor={modalStyles.modalPlaceholder.color}
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -117,13 +117,13 @@ const SignInModal: React.FC<SignInModalProps> = ({
 
             <View style={modalStyles.field}>
               <Text style={modalStyles.label}>
-                {getProperty('signin.password.label', language)}
+                {getProperty('login.password.label', language)}
               </Text>
               <TextInput
-                value={signInForm.password}
-                onChangeText={handleSignInChange('password')}
+                value={loginForm.password}
+                onChangeText={handleLoginChange('password')}
                 placeholder={getProperty(
-                  'signin.password.placeholder',
+                  'login.password.placeholder',
                   language
                 )}
                 placeholderTextColor={modalStyles.modalPlaceholder.color}
@@ -141,7 +141,7 @@ const SignInModal: React.FC<SignInModalProps> = ({
               disabled={isLoading}
             >
               <Text style={buttons.secondaryButtonText}>
-                {getProperty('signin.button.cancel', language)}
+                {getProperty('login.button.cancel', language)}
               </Text>
             </TouchableOpacity>
 
@@ -154,13 +154,13 @@ const SignInModal: React.FC<SignInModalProps> = ({
                 <View style={modalStyles.loadingContainer}>
                   <ActivityIndicator size="small" color="#ffffff" />
                   <Text style={buttons.primaryButtonText}>
-                    {getProperty('signin.button.submitting', language) ||
-                      getProperty('signin.button.submit', language)}
+                    {getProperty('login.button.submitting', language) ||
+                      getProperty('login.button.submit', language)}
                   </Text>
                 </View>
               ) : (
                 <Text style={buttons.primaryButtonText}>
-                  {getProperty('signin.button.submit', language)}
+                  {getProperty('login.button.submit', language)}
                 </Text>
               )}
             </TouchableOpacity>
@@ -171,6 +171,6 @@ const SignInModal: React.FC<SignInModalProps> = ({
   );
 };
 
-export default SignInModal;
+export default LoginModal;
 
 

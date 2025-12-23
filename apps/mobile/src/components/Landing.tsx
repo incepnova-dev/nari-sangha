@@ -7,7 +7,7 @@ import {
   landingActions,
   buttons,
 } from '../styles';
-import SignInModal from './auth/SignInModal';
+import LoginModal from './auth/LoginModal';
 import SignUpModal from './auth/SignUpModal';
 
 interface LandingProps {
@@ -94,7 +94,7 @@ const Landing: React.FC<LandingProps> = ({
         </View>
       </View>
 
-      <SignInModal
+      <LoginModal
         isOpen={isSignInModalOpen}
         onClose={handleSignInModalClose}
         language={language}
