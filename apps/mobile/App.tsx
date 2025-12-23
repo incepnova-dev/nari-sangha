@@ -1,52 +1,25 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  StatusBar,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StatusBar } from 'react-native';
+import UnauthenticatedLanding from './src/components/UnauthenticatedLanding';
 
 const App: React.FC = () => {
-  console.log('App is running');
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [language, setLanguage] = useState<string>('en');
+
+  const handleSignInSuccess = (userData: any) => {
+    setCurrentUser(userData);
+  };
+
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#f0f0f0" />
-      <Text style={styles.title}>Welcome to NariSangha</Text>
-      <Text style={styles.subtitle}>Your React Native Android App</Text>
-      <Text style={styles.debugText}>✓ React Native is working!</Text>
-    </View>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#030718" />
+      <UnauthenticatedLanding
+        language={language}
+        onSignInSuccess={handleSignInSuccess}
+      />
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f0f0f0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 18,
-    color: '#666',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  debugText: {
-    fontSize: 14,
-    color: '#4CAF50',
-    marginTop: 20,
-    textAlign: 'center',
-    fontWeight: '600',
-  },
-});
 
 export default App;
 
