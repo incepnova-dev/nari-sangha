@@ -1,9 +1,9 @@
 // Language utility - dynamically loads properties based on language code
 
-import englishProperties from './english';
-import hindiProperties from './hindi';
-import kannadaProperties from './kannada';
-import bengaliProperties from './bengali';
+import englishProperties from './en';
+import hindiProperties from './hi';
+import kannadaProperties from './kn';
+import bengaliProperties from './bn';
 
 // Language property maps
 const languageMaps: Record<string, Record<string, string>> = {

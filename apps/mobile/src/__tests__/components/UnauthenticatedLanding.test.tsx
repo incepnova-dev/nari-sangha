@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import UnauthenticatedLanding from '../../components/UnauthenticatedLanding';
 
-// Mock the languages module
+// Mock the i18 (languages) module
 const mockProperties: Record<string, Record<string, string>> = {
   en: {
     'landing.welcome': 'Welcome to NariSangha',
@@ -31,7 +31,7 @@ const mockProperties: Record<string, Record<string, string>> = {
   },
 };
 
-jest.mock('../../languages', () => ({
+jest.mock('../../i18', () => ({
   getProperty: (key: string, lang: string = 'en') => {
     return mockProperties[lang]?.[key] || key;
   },

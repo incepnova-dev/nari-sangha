@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { getProperty } from '../languages';
+import { getProperty } from '../i18';
 import {
   landingContainer,
   landingContent,

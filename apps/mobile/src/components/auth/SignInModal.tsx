@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import { getProperty } from '../../languages';
+import { getProperty } from '../../i18';
 import { modalStyles, buttons } from '../../styles';
 import { signIn, SignInData } from '../../services/authService';
 
