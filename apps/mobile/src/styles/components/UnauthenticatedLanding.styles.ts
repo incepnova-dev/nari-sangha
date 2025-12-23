@@ -91,5 +91,36 @@ export const modalStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  form: {
+    marginTop: spacing.sm,
+  },
+  field: {
+    marginBottom: spacing.lg,
+  },
+  label: {
+    fontSize: typography.fontSize.sm,
+    color: colors.text.primary,
+    marginBottom: spacing.xs,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.border.light,
+    borderRadius: spacing.sm,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    backgroundColor: colors.background.primary,
+    color: colors.text.primary,
+  },
+  errorText: {
+    fontSize: typography.fontSize.sm,
+    color: '#f97373',
+    marginBottom: spacing.md,
+    textAlign: 'center',
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 

@@ -6,6 +6,8 @@ import {
   Modal,
   KeyboardAvoidingView,
   Platform,
+  TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import { getProperty } from '../languages';
 import {
@@ -28,6 +30,9 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
   const message = getProperty('landing.welcome', language);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+   const [signInForm, setSignInForm] = useState({ email: '', password: '' });
+   const [isLoading, setIsLoading] = useState(false);
+   const [error, setError] = useState<string | null>(null);
   const isSigningInRef = useRef(false);
 
   const handleSignUpClick = () => {
@@ -41,6 +46,15 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
   const handleCloseSignUpModal = () => {
     setIsSignUpModalOpen(false);
   };
+
+  const handleSignInChange =
+    (field: 'email' | 'password') =>
+    (value: string) => {
+      setSignInForm(prev => ({ ...prev, [field]: value }));
+      if (error) {
+        setError(null);
+      }
+    };
 
   const handleSignInSuccess = useCallback(
     (userData: any) => {
@@ -65,8 +79,43 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
   );
 
   const handleSignInModalClose = useCallback(() => {
+    if (isLoading) {
+      return;
+    }
+    setError(null);
+    setSignInForm({ email: '', password: '' });
     setIsSignInModalOpen(false);
-  }, []);
+  }, [isLoading]);
+
+  const handleSignInSubmit = useCallback(async () => {
+    if (isLoading) {
+      return;
+    }
+
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      // TODO: Wire this up to real mobile sign-in API when available
+      const trimmedEmail = signInForm.email.trim();
+
+      const userData = {
+        user: {
+          name: trimmedEmail || 'Test User',
+          email: trimmedEmail || 'user@example.com',
+        },
+      };
+
+      handleSignInSuccess(userData);
+    } catch (e) {
+      setError(
+        getProperty('signin.error.generic', language) ||
+          'Sign in failed. Please try again.'
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }, [handleSignInSuccess, language, signInForm, isLoading]);
 
   return (
     <View style={landingContainer.container}>
@@ -115,13 +164,52 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
             <Text style={modalStyles.modalTitle}>
               {getProperty('signin.title', language)}
             </Text>
-            <Text style={modalStyles.modalPlaceholder}>
-              Sign In functionality will be implemented here
-            </Text>
+            {error ? (
+              <Text style={modalStyles.errorText}>{error}</Text>
+            ) : null}
+            <View style={modalStyles.form}>
+              <View style={modalStyles.field}>
+                <Text style={modalStyles.label}>
+                  {getProperty('signin.email.label', language)}
+                </Text>
+                <TextInput
+                  value={signInForm.email}
+                  onChangeText={handleSignInChange('email')}
+                  placeholder={getProperty(
+                    'signin.email.placeholder',
+                    language
+                  )}
+                  placeholderTextColor={modalStyles.modalPlaceholder.color}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  editable={!isLoading}
+                  style={modalStyles.input}
+                />
+              </View>
+              <View style={modalStyles.field}>
+                <Text style={modalStyles.label}>
+                  {getProperty('signin.password.label', language)}
+                </Text>
+                <TextInput
+                  value={signInForm.password}
+                  onChangeText={handleSignInChange('password')}
+                  placeholder={getProperty(
+                    'signin.password.placeholder',
+                    language
+                  )}
+                  placeholderTextColor={modalStyles.modalPlaceholder.color}
+                  secureTextEntry
+                  editable={!isLoading}
+                  style={modalStyles.input}
+                />
+              </View>
+            </View>
             <View style={modalStyles.modalButtons}>
               <TouchableOpacity
                 style={[buttons.button, buttons.secondaryButton, { marginRight: 12 }]}
                 onPress={handleSignInModalClose}
+                disabled={isLoading}
               >
                 <Text style={buttons.secondaryButtonText}>
                   {getProperty('signin.button.cancel', language)}
@@ -129,14 +217,22 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
               </TouchableOpacity>
               <TouchableOpacity
                 style={[buttons.button, buttons.primaryButton]}
-                onPress={() => {
-                  // TODO: Implement actual sign in
-                  handleSignInSuccess({ user: { name: 'Test User' } });
-                }}
+                onPress={handleSignInSubmit}
+                disabled={isLoading}
               >
-                <Text style={buttons.primaryButtonText}>
-                  {getProperty('signin.button.submit', language)}
-                </Text>
+                {isLoading ? (
+                  <View style={modalStyles.loadingContainer}>
+                    <ActivityIndicator size="small" color="#ffffff" />
+                    <Text style={buttons.primaryButtonText}>
+                      {getProperty('signin.button.submitting', language) ||
+                        getProperty('signin.button.submit', language)}
+                    </Text>
+                  </View>
+                ) : (
+                  <Text style={buttons.primaryButtonText}>
+                    {getProperty('signin.button.submit', language)}
+                  </Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>

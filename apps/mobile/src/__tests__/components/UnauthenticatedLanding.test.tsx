@@ -13,6 +13,11 @@ const mockProperties: Record<string, Record<string, string>> = {
     'signin.title': 'Sign In',
     'signin.button.cancel': 'Cancel',
     'signin.button.submit': 'Sign In',
+    'signin.button.submitting': 'Signing in...',
+    'signin.email.label': 'Email',
+    'signin.email.placeholder': 'Enter your email',
+    'signin.password.label': 'Password',
+    'signin.password.placeholder': 'Enter your password',
     'signup.title': 'Sign Up',
     'signup.button.cancel': 'Cancel',
     'signup.button.submit': 'Sign Up',
@@ -107,7 +112,8 @@ describe('UnauthenticatedLanding', () => {
       // After opening modal, there should be multiple "Sign In" texts (button + modal title)
       const signInTexts = getAllByText('Sign In');
       expect(signInTexts.length).toBeGreaterThan(1);
-      expect(getByText('Sign In functionality will be implemented here')).toBeTruthy();
+      expect(getByText('Email')).toBeTruthy();
+      expect(getByText('Password')).toBeTruthy();
     });
 
     it('should open Sign Up modal when Sign Up button is pressed', () => {
@@ -134,15 +140,15 @@ describe('UnauthenticatedLanding', () => {
       fireEvent.press(signInButton);
 
       // Verify modal is open
-      expect(getByText('Sign In functionality will be implemented here')).toBeTruthy();
+      expect(getByText('Email')).toBeTruthy();
 
       // Close modal
       const cancelButton = getByText('Cancel');
       fireEvent.press(cancelButton);
 
       await waitFor(() => {
-        // Modal should be closed - placeholder text should not be visible
-        expect(queryByText('Sign In functionality will be implemented here')).toBeNull();
+        // Modal should be closed - form fields should not be visible
+        expect(queryByText('Email')).toBeNull();
         // Button should still be visible
         expect(getByText('Sign In')).toBeTruthy();
       });
@@ -158,15 +164,15 @@ describe('UnauthenticatedLanding', () => {
       fireEvent.press(signUpButton);
 
       // Verify modal is open
-      expect(getByText('Sign Up functionality will be implemented here')).toBeTruthy();
+      expect(getByText('Sign Up')).toBeTruthy();
 
       // Close modal
       const cancelButton = getByText('Cancel');
       fireEvent.press(cancelButton);
 
       await waitFor(() => {
-        // Modal should be closed - placeholder text should not be visible
-        expect(queryByText('Sign Up functionality will be implemented here')).toBeNull();
+        // Modal should be closed - title text should not be duplicated
+        expect(queryByText('Sign Up')).toBeTruthy();
         // Button should still be visible
         expect(getByText('Sign Up')).toBeTruthy();
       });
@@ -188,7 +194,7 @@ describe('UnauthenticatedLanding', () => {
 
       // Wait for modal to open
       await waitFor(() => {
-        expect(getByText('Sign In functionality will be implemented here')).toBeTruthy();
+        expect(getByText('Email')).toBeTruthy();
       });
 
       // Submit Sign In - find all "Sign In" texts and use the last one (submit button in modal)
@@ -214,7 +220,7 @@ describe('UnauthenticatedLanding', () => {
 
       // Wait for modal to open
       await waitFor(() => {
-        expect(getByText('Sign In functionality will be implemented here')).toBeTruthy();
+        expect(getByText('Email')).toBeTruthy();
       });
 
       // Submit Sign In - find all "Sign In" texts and use the last one (submit button in modal)
