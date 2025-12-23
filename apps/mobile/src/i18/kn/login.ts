@@ -20,7 +20,7 @@ const loginProperties: Record<string, string> = {
   'login.button.submitting': 'ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ...',
   'login.error.generic': 'ಲಾಗಿನ್ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.',
   // Shared button labels
-  'button.signin': 'ಸೈನ್ ಇನ್',
+  'button.login': 'ಲಾಗಿನ್',
   'button.logout': 'ಲಾಗ್ ಔಟ್',
 };
 

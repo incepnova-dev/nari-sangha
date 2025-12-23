@@ -79,7 +79,7 @@ const Landing: React.FC<LandingProps> = ({
               onPress={handleSignInClick}
             >
               <Text style={buttons.secondaryButtonText}>
-                {getProperty('button.signin', language)}
+                {getProperty('button.login', language)}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -98,7 +98,7 @@ const Landing: React.FC<LandingProps> = ({
         isOpen={isSignInModalOpen}
         onClose={handleSignInModalClose}
         language={language}
-        onSignInSuccess={handleSignInSuccess}
+        onLogInSuccess={handleSignInSuccess}
       />
 
       <SignUpModal

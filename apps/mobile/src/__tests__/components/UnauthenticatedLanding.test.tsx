@@ -8,7 +8,7 @@ const mockProperties: Record<string, Record<string, string>> = {
     'landing.welcome': 'Welcome to NariSangha',
     'landing.subtitle': 'Join our community',
     'landing.explore': 'Explore',
-    'button.signin': 'Sign In',
+    'button.login': 'Log In',
     'button.signup': 'Sign Up',
     'signin.title': 'Sign In',
     'signin.button.cancel': 'Cancel',
@@ -35,7 +35,7 @@ const mockProperties: Record<string, Record<string, string>> = {
     'landing.welcome': 'नारीसंघ में आपका स्वागत है',
     'landing.subtitle': 'हमारे समुदाय में शामिल हों',
     'landing.explore': 'अन्वेषण करें',
-    'button.signin': 'साइन इन',
+    'button.login': 'लॉग इन',
     'button.signup': 'साइन अप',
   },
 };

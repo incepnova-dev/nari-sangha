@@ -20,7 +20,7 @@ const loginProperties: Record<string, string> = {
   'login.button.submitting': 'সাইন ইন হচ্ছে...',
   'login.error.generic': 'লগইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।',
   // Shared button labels
-  'button.signin': 'সাইন ইন',
+  'button.login': 'লগ ইন',
   'button.logout': 'লগ আউট',
 };
 

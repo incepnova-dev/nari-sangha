@@ -20,7 +20,7 @@ const loginProperties: Record<string, string> = {
   'login.button.submitting': 'साइन इन हो रहा है...',
   'login.error.generic': 'लॉगिन असफल रहा। कृपया दोबारा प्रयास करें।',
   // Shared button labels
-  'button.signin': 'साइन इन करें',
+  'button.login': 'लॉग इन',
   'button.logout': 'लॉग आउट',
 };
 

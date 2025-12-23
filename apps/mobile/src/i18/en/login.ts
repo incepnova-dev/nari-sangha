@@ -20,7 +20,7 @@ const loginProperties: Record<string, string> = {
   'login.button.submitting': 'Signing in...',
   'login.error.generic': 'Login failed. Please try again.',
   // Shared button labels
-  'button.signin': 'Sign In',
+  'button.login': 'Log In',
   'button.logout': 'Logout',
 };
 

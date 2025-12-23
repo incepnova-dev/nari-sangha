@@ -17,14 +17,14 @@ interface LoginModalProps {
   isOpen: boolean;
   language?: string;
   onClose: () => void;
-  onSignInSuccess?: (userData: any) => void;
+  onLogInSuccess?: (userData: any) => void;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   language = 'en',
   onClose,
-  onSignInSuccess,
+  onLogInSuccess,
 }) => {
   const [loginForm, setLoginForm] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
@@ -66,8 +66,8 @@ const LoginModal: React.FC<LoginModalProps> = ({
         return;
       }
 
-      if (onSignInSuccess) {
-        onSignInSuccess(result.data as LoginData);
+      if (onLogInSuccess) {
+        onLogInSuccess(result.data as LoginData);
       }
     } catch (e) {
       setError(
@@ -77,7 +77,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, language, onSignInSuccess, loginForm.email]);
+  }, [isLoading, language, onLogInSuccess, loginForm]);
 
   return (
     <Modal
