@@ -10,12 +10,12 @@ import {
 import SignInModal from './auth/SignInModal';
 import SignUpModal from './auth/SignUpModal';
 
-interface UnauthenticatedLandingProps {
+interface LandingProps {
   language?: string;
   onSignInSuccess?: (userData: any) => void;
 }
 
-const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
+const Landing: React.FC<LandingProps> = ({
   language = 'en',
   onSignInSuccess,
 }) => {
@@ -110,5 +110,6 @@ const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({
   );
 };
 
-export default UnauthenticatedLanding;
+export default Landing;
+
 

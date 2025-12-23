@@ -4,7 +4,7 @@ import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
 
 /**
- * Component-specific styles for UnauthenticatedLanding
+ * Component-specific styles for Landing
  */
 export const landingContainer = StyleSheet.create({
   container: {
@@ -123,4 +123,5 @@ export const modalStyles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
 

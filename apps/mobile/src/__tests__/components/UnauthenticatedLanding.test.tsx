@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import UnauthenticatedLanding from '../../components/UnauthenticatedLanding';
+import Landing from '../../components/Landing';
 
 // Mock the i18 (languages) module
 const mockProperties: Record<string, Record<string, string>> = {
@@ -37,7 +37,7 @@ jest.mock('../../i18', () => ({
   },
 }));
 
-describe('UnauthenticatedLanding', () => {
+describe('Landing', () => {
   const mockOnSignInSuccess = jest.fn();
 
   beforeEach(() => {
@@ -46,37 +46,27 @@ describe('UnauthenticatedLanding', () => {
 
   describe('Rendering', () => {
     it('should render the component without crashing', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
 
     it('should render welcome message', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
 
     it('should render subtitle', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Join our community')).toBeTruthy();
     });
 
     it('should render explore text', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Explore')).toBeTruthy();
     });
 
     it('should render Sign In button', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Sign In')).toBeTruthy();
     });
 
@@ -88,23 +78,19 @@ describe('UnauthenticatedLanding', () => {
     });
 
     it('should render with default language (en) when language prop is not provided', () => {
-      const { getByText } = render(<UnauthenticatedLanding />);
+      const { getByText } = render(<Landing />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
 
     it('should render with Hindi language when language prop is "hi"', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="hi" />
-      );
+      const { getByText } = render(<Landing language="hi" />);
       expect(getByText('नारीसंघ में आपका स्वागत है')).toBeTruthy();
     });
   });
 
   describe('Button Interactions', () => {
     it('should open Sign In modal when Sign In button is pressed', () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       const signInButton = getByText('Sign In');
       fireEvent.press(signInButton);
@@ -117,9 +103,7 @@ describe('UnauthenticatedLanding', () => {
     });
 
     it('should open Sign Up modal when Sign Up button is pressed', () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       const signUpButton = getByText('Sign Up');
       fireEvent.press(signUpButton);
@@ -132,7 +116,7 @@ describe('UnauthenticatedLanding', () => {
 
     it('should close Sign In modal when Cancel button is pressed', async () => {
       const { getByText, queryByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
+        <Landing language="en" />
       );
 
       // Open modal
@@ -155,9 +139,7 @@ describe('UnauthenticatedLanding', () => {
     });
 
     it('should close Sign Up modal when Cancel button is pressed', async () => {
-      const { getByText, queryByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, queryByText } = render(<Landing language="en" />);
 
       // Open modal
       const signUpButton = getByText('Sign Up');
@@ -182,10 +164,7 @@ describe('UnauthenticatedLanding', () => {
   describe('Sign In Success Callback', () => {
     it('should call onSignInSuccess when Sign In is successful', async () => {
       const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding
-          language="en"
-          onSignInSuccess={mockOnSignInSuccess}
-        />
+        <Landing language="en" onSignInSuccess={mockOnSignInSuccess} />
       );
 
       // Open Sign In modal
@@ -210,9 +189,7 @@ describe('UnauthenticatedLanding', () => {
     });
 
     it('should not call onSignInSuccess if prop is not provided', async () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       // Open Sign In modal
       const signInButton = getByText('Sign In');
@@ -236,10 +213,7 @@ describe('UnauthenticatedLanding', () => {
 
     it('should prevent multiple calls to onSignInSuccess', async () => {
       const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding
-          language="en"
-          onSignInSuccess={mockOnSignInSuccess}
-        />
+        <Landing language="en" onSignInSuccess={mockOnSignInSuccess} />
       );
 
       // Open Sign In modal
@@ -267,9 +241,7 @@ describe('UnauthenticatedLanding', () => {
 
   describe('Modal Behavior', () => {
     it('should show Sign In modal when isSignInModalOpen is true', () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       const signInButton = getByText('Sign In');
       fireEvent.press(signInButton);
@@ -312,24 +284,18 @@ describe('UnauthenticatedLanding', () => {
 
   describe('Language Support', () => {
     it('should display text in English when language is "en"', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
       expect(getByText('Join our community')).toBeTruthy();
     });
 
     it('should display text in Hindi when language is "hi"', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="hi" />
-      );
+      const { getByText } = render(<Landing language="hi" />);
       expect(getByText('नारीसंघ में आपका स्वागत है')).toBeTruthy();
     });
 
     it('should fallback to key when translation is missing', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="unknown" />
-      );
+      const { getByText } = render(<Landing language="unknown" />);
       // Should still render something
       expect(getByText('landing.welcome')).toBeTruthy();
     });
@@ -337,44 +303,33 @@ describe('UnauthenticatedLanding', () => {
 
   describe('Component Props', () => {
     it('should accept language prop', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
 
     it('should accept onSignInSuccess callback prop', () => {
       const { getByText } = render(
-        <UnauthenticatedLanding
-          language="en"
-          onSignInSuccess={mockOnSignInSuccess}
-        />
+        <Landing language="en" onSignInSuccess={mockOnSignInSuccess} />
       );
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
 
     it('should work without onSignInSuccess prop', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Welcome to NariSangha')).toBeTruthy();
     });
   });
 
   describe('Accessibility', () => {
     it('should render all interactive elements', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
 
       expect(getByText('Sign In')).toBeTruthy();
       expect(getByText('Sign Up')).toBeTruthy();
     });
 
     it('should have proper button labels', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
 
       const signInButton = getByText('Sign In');
       const signUpButton = getByText('Sign Up');

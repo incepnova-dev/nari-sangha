@@ -14,5 +14,5 @@ export * from './common/layout';
 export * from './common/typography';
 
 // Component-specific styles
-export * from './components/UnauthenticatedLanding.styles';
+export * from './components/Landing.styles';
 

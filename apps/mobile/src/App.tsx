@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
-import UnauthenticatedLanding from './components/UnauthenticatedLanding';
+import Landing from './components/Landing';
 import AuthenticatedLanding from './components/AuthenticatedLanding';
 
 const App: React.FC = () => {
@@ -25,10 +25,7 @@ const App: React.FC = () => {
           language={language}
         />
       ) : (
-        <UnauthenticatedLanding
-          language={language}
-          onSignInSuccess={handleSignInSuccess}
-        />
+        <Landing language={language} onSignInSuccess={handleSignInSuccess} />
       )}
     </>
   );
