@@ -9,7 +9,7 @@ This document provides an overview of the component test suite for the mobile ap
 ```
 src/__tests__/
 ├── components/
-│   ├── UnauthenticatedLanding.test.tsx
+│   ├── Landing.test.tsx
 │   └── index.test.ts
 ├── setup.ts
 ├── test-suite.ts
@@ -20,8 +20,8 @@ src/__tests__/
 
 ### Components Tested
 
-#### UnauthenticatedLanding
-- **Location**: `src/__tests__/components/UnauthenticatedLanding.test.tsx`
+#### Landing
+- **Location**: `src/__tests__/components/Landing.test.tsx`
 - **Test Cases**: 20+ test cases covering:
   - Component rendering (7 tests)
   - Button interactions (4 tests)

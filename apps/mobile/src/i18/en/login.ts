@@ -10,14 +10,14 @@ const loginProperties: Record<string, string> = {
   'signin.button.cancel': 'Cancel',
   'signin.button.submit': 'Sign In',
   // Login modal specific keys
-  'login.title': 'Sign In',
+  'login.title': 'Log In',
   'login.email.label': 'Email',
   'login.email.placeholder': 'Enter your email',
   'login.password.label': 'Password',
   'login.password.placeholder': 'Enter your password',
   'login.button.cancel': 'Cancel',
-  'login.button.submit': 'Sign In',
-  'login.button.submitting': 'Signing in...',
+  'login.button.submit': 'Log In',
+  'login.button.submitting': 'Logging in...',
   'login.error.generic': 'Login failed. Please try again.',
   // Shared button labels
   'button.login': 'Log In',

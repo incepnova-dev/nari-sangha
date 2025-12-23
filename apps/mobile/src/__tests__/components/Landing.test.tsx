@@ -80,9 +80,7 @@ describe('Landing', () => {
     });
 
     it('should render Sign Up button', () => {
-      const { getByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText } = render(<Landing language="en" />);
       expect(getByText('Sign Up')).toBeTruthy();
     });
 
@@ -262,9 +260,7 @@ describe('Landing', () => {
     });
 
     it('should show Sign Up modal when isSignUpModalOpen is true', () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       const signUpButton = getByText('Sign Up');
       fireEvent.press(signUpButton);
@@ -276,9 +272,7 @@ describe('Landing', () => {
     });
 
     it('should close modal when onRequestClose is called', async () => {
-      const { getByText, getAllByText } = render(
-        <UnauthenticatedLanding language="en" />
-      );
+      const { getByText, getAllByText } = render(<Landing language="en" />);
 
       // Open modal
       const signInButton = getByText('Sign In');
@@ -348,4 +342,5 @@ describe('Landing', () => {
     });
   });
 });
+
 

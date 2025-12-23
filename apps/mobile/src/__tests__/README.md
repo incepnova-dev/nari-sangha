@@ -7,7 +7,7 @@ This directory contains all test cases for components in the `src/components/` f
 ```
 src/__tests__/
 ├── components/
-│   ├── UnauthenticatedLanding.test.tsx
+│   ├── Landing.test.tsx
 │   └── index.test.ts
 ├── setup.ts
 ├── test-suite.ts
@@ -33,7 +33,7 @@ npm test -- --coverage
 
 ### Run Specific Test File
 ```bash
-npm test -- UnauthenticatedLanding.test.tsx
+npm test -- Landing.test.tsx
 ```
 
 ### Run Tests Matching a Pattern

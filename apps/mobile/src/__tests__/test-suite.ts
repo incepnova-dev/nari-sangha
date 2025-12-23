@@ -6,7 +6,7 @@
  */
 
 // Import all test files to ensure they're included in the test run
-import './components/UnauthenticatedLanding.test';
+import './components/Landing.test';
 
 /**
  * Test Suite Configuration
@@ -21,7 +21,7 @@ import './components/UnauthenticatedLanding.test';
 
 export const testSuiteConfig = {
   components: [
-    'UnauthenticatedLanding',
+    'Landing',
   ],
   testLocation: 'src/__tests__/components/',
   testPattern: '*.test.tsx',

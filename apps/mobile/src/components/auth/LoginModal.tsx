@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { getProperty } from '../../i18';
 import { modalStyles, buttons } from '../../styles';
-import { signIn as login, SignInData as LoginData } from '../../services/authService';
+import { signIn as login, SignInData as LoginData } from '../../services';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -154,8 +154,18 @@ const LoginModal: React.FC<LoginModalProps> = ({
                 <View style={modalStyles.loadingContainer}>
                   <ActivityIndicator size="small" color="#ffffff" />
                   <Text style={buttons.primaryButtonText}>
-                    {getProperty('login.button.submitting', language) ||
-                      getProperty('login.button.submit', language)}
+                    {(() => {
+                      const submitting = getProperty(
+                        'login.button.submitting',
+                        language
+                      );
+                      // If key is missing, getProperty will return the key string itself.
+                      // In that case, fall back to the submit label.
+                      if (submitting === 'login.button.submitting') {
+                        return getProperty('login.button.submit', language);
+                      }
+                      return submitting;
+                    })()}
                   </Text>
                 </View>
               ) : (
