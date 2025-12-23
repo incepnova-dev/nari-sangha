@@ -57,7 +57,7 @@ echo $ANDROID_SDK_ROOT
 Navigate to the project directory and install all npm dependencies:
 
 ```bash
-cd /Users/abhisekbakshi/PetLivAZ
+cd apps/mobile
 npm install
 ```
 
@@ -130,7 +130,7 @@ emulator-5554   device
 In a **new terminal window**, navigate to the project directory and start the Metro bundler:
 
 ```bash
-cd /Users/abhisekbakshi/PetLivAZ
+cd apps/mobile
 npm start
 ```
 
@@ -146,7 +146,7 @@ npm start -- --reset-cache
 In **another new terminal window**, run the Android build command:
 
 ```bash
-cd /Users/abhisekbakshi/PetLivAZ
+cd apps/mobile
 npm run android
 ```
 
@@ -167,14 +167,14 @@ If you already have everything set up, you can run these commands in sequence:
 
 ```bash
 # Terminal 1: Start Metro bundler
-cd /Users/abhisekbakshi/PetLivAZ
+cd apps/mobile
 npm start
 
 # Terminal 2: Start emulator (if not already running)
 emulator -avd Pixel_5_API_34
 
 # Terminal 3: Build and run the app
-cd /Users/abhisekbakshi/PetLivAZ
+cd apps/mobile
 npm run android
 ```
 
@@ -191,26 +191,55 @@ You can also run the app directly from Android Studio:
 ## Project Structure
 
 ```
-PetLivAZ/
-├── android/              # Android native code
+apps/mobile/
+├── android/                    # Android native code
 │   ├── app/
 │   │   └── src/main/
-│   │       ├── java/com/petlivaz/
+│   │       ├── java/com/narisangha/
 │   │       └── res/
 │   ├── build.gradle
 │   └── settings.gradle
-├── App.js               # Main React component
-├── index.js             # Entry point
-├── package.json         # Dependencies and scripts
-├── .babelrc.js          # Babel configuration
-└── metro.config.js      # Metro bundler configuration
+├── src/                        # React Native source code
+│   ├── components/            # React components
+│   │   ├── auth/              # Authentication components
+│   │   ├── Home.tsx           # Home screen (post-login)
+│   │   └── Landing.tsx        # Landing screen (pre-login)
+│   ├── services/              # API services
+│   │   ├── apiClient.ts       # HTTP client
+│   │   └── authService.ts     # Authentication service
+│   ├── config/                # Configuration
+│   │   └── env.ts             # Environment variables
+│   ├── i18/                   # Internationalization
+│   │   ├── en/                # English translations
+│   │   ├── hi/                # Hindi translations
+│   │   ├── bn/                # Bengali translations
+│   │   └── kn/                # Kannada translations
+│   ├── styles/                # Stylesheets
+│   │   ├── components/         # Component-specific styles
+│   │   ├── common/            # Shared styles
+│   │   └── theme/             # Theme constants
+│   ├── __tests__/             # Test files
+│   └── App.tsx                # Main React component
+├── scripts/                   # Utility scripts
+├── docs/                      # Documentation
+├── index.ts                   # Entry point (TypeScript)
+├── index.js                   # Entry point (JavaScript wrapper)
+├── package.json               # Dependencies and scripts
+├── babel.config.js            # Babel configuration
+├── metro.config.js            # Metro bundler configuration
+├── jest.config.js             # Jest test configuration
+└── tsconfig.json              # TypeScript configuration
 ```
 
 ## Features
 
-- ✅ Modern React Native setup
-- ✅ Counter example with increment/decrement/reset
-- ✅ Beautiful UI with Material Design
+- ✅ Modern React Native setup with TypeScript
+- ✅ Authentication flow (Login/Sign Up)
+- ✅ Multi-language support (English, Hindi, Bengali, Kannada)
+- ✅ API integration with centralized services
+- ✅ Component-based architecture
+- ✅ Organized stylesheet system
+- ✅ Comprehensive test suite
 - ✅ SafeAreaView for proper screen handling
 - ✅ Ready for Android development
 
@@ -264,9 +293,11 @@ For detailed test execution summary, see [Test Suite Summary](docs/TEST_SUITE_SU
 
 ### Making Changes
 
-1. Edit `App.js` to modify the main component
-2. The app will automatically reload when you save changes
-3. Press `R` twice in the Metro bundler terminal to reload manually
+1. Edit `src/App.tsx` to modify the main component
+2. Components are located in `src/components/`
+3. Services and API calls are in `src/services/`
+4. The app will automatically reload when you save changes
+5. Press `R` twice in the Metro bundler terminal to reload manually
 
 ## Troubleshooting
 
