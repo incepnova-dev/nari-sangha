@@ -45,3 +45,12 @@ allprojects {
     }
 }
 
+// Task to generate test summary in docs directory
+task generateTestSummary(type: Exec) {
+    description = 'Generate test summary from test results and save to docs directory'
+    group = 'verification'
+    workingDir = projectDir
+    executable = 'bash'
+    args = ['generate-test-summary.sh']
+}
+

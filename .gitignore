@@ -40,11 +40,13 @@ Thumbs.db
 
 # React Native / Mobile (apps/mobile)
 android/.gradle/
+**/.gradle/
 android/.idea/
 android/local.properties
 android/app/build/
 android/build/
 android/.cxx/
+**/.cxx/
 android/.settings/
 ios/Pods/
 ios/build/

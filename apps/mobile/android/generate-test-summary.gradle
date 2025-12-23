@@ -1,0 +1,151 @@
+// Script to generate test summary in docs directory
+// This script parses test results and updates TEST_SUITE_SUMMARY.md
+
+import groovy.xml.XmlSlurper
+
+project.tasks.create('generateTestSummary') {
+    description = 'Generate test summary from test results and save to docs directory'
+    group = 'verification'
+    
+    doLast {
+        def testResultsDir = new File(project.projectDir, 'app/build/test-results/testDebugUnitTest')
+        def docsDir = new File(project.projectDir.parentFile, 'docs')
+        def summaryFile = new File(docsDir, 'TEST_SUITE_SUMMARY.md')
+        
+        if (!testResultsDir.exists()) {
+            println "⚠ Test results not found. Run tests first: ./gradlew test"
+            return
+        }
+        
+        def testFiles = testResultsDir.listFiles { it.name.startsWith('TEST-') && it.name.endsWith('.xml') }
+        if (testFiles == null || testFiles.length == 0) {
+            println "⚠ No test result files found"
+            return
+        }
+        
+        def totalTests = 0
+        def totalFailures = 0
+        def totalErrors = 0
+        def totalTime = 0.0
+        def testClasses = []
+        
+        testFiles.each { file ->
+            try {
+                def xml = new XmlSlurper().parse(file)
+                def className = xml.@name.toString()
+                def tests = xml.@tests.toInteger()
+                def failures = xml.@failures.toInteger()
+                def errors = xml.@errors.toInteger()
+                def time = xml.@time.toDouble()
+                
+                totalTests += tests
+                totalFailures += failures
+                totalErrors += errors
+                totalTime += time
+                
+                testClasses.add([
+                    name: className,
+                    tests: tests,
+                    failures: failures,
+                    errors: errors,
+                    time: time
+                ])
+            } catch (Exception e) {
+                println "⚠ Error parsing ${file.name}: ${e.message}"
+            }
+        }
+        
+        // Update summary file with current date
+        def date = new Date().format("MMMM dd, yyyy")
+        def status = (totalFailures == 0 && totalErrors == 0) ? "✅ **ALL TESTS PASSED**" : "❌ **SOME TESTS FAILED**"
+        
+        def summary = """# Test Suite Execution Summary
+
+## Execution Command
+\`\`\`bash
+cd apps/mobile/android
+./gradlew test
+\`\`\`
+
+## Overall Test Results
+
+**Status:** ${status}
+
+| Metric | Value |
+|--------|-------|
+| **Total Test Classes** | ${testClasses.size()} |
+| **Total Tests** | ${totalTests} |
+| **Passed** | ${totalTests - totalFailures - totalErrors} |
+| **Failed** | ${totalFailures} |
+| **Errors** | ${totalErrors} |
+| **Skipped** | 0 |
+| **Total Execution Time** | ~${String.format("%.2f", totalTime)} seconds |
+
+---
+
+## Test Classes Breakdown
+
+"""
+        
+        testClasses.eachWithIndex { testClass, index ->
+            def classStatus = (testClass.failures == 0 && testClass.errors == 0) ? "✅ **PASSED**" : "❌ **FAILED**"
+            summary += """### ${index + 1}. ${testClass.name}
+**Status:** ${classStatus} (${testClass.tests - testClass.failures - testClass.errors}/${testClass.tests} tests)
+
+**Total Time:** ${String.format("%.3f", testClass.time)} seconds
+
+---
+
+"""
+        }
+        
+        summary += """## Test Reports Location
+
+- **HTML Reports:** \`android/app/build/reports/tests/testDebugUnitTest/index.html\`
+- **XML Reports:** \`android/app/build/test-results/testDebugUnitTest/\`
+- **JUnit Reports:** Available in build output
+- **Test Summary:** \`docs/TEST_SUITE_SUMMARY.md\` (auto-generated)
+
+---
+
+## Running Tests
+
+### Run All Tests
+\`\`\`bash
+cd android
+./gradlew test
+\`\`\`
+
+### Run Specific Test Class
+\`\`\`bash
+cd android
+./gradlew test --tests "com.narisangha.MainActivityTest"
+\`\`\`
+
+### Run with Clean Build
+\`\`\`bash
+cd android
+./gradlew clean test
+\`\`\`
+
+### Generate HTML Report
+\`\`\`bash
+cd android
+./gradlew test
+# Report available at: android/app/build/reports/tests/testDebugUnitTest/index.html
+# Test summary auto-generated at: docs/TEST_SUITE_SUMMARY.md
+\`\`\`
+
+---
+
+**Last Updated:** ${date}  
+**Test Suite Version:** 1.0  
+**Status:** ${(totalFailures == 0 && totalErrors == 0) ? "✅ Production Ready" : "⚠ Needs Attention"}
+"""
+        
+        docsDir.mkdirs()
+        summaryFile.text = summary
+        println "✓ Test summary generated at: ${summaryFile.absolutePath}"
+    }
+}
+

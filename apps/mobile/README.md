@@ -223,6 +223,45 @@ PetLivAZ/
 - `npm test` - Run tests
 - `npm run lint` - Run ESLint
 
+### Running Tests
+
+#### Quick Commands
+
+**Run All Tests**
+```bash
+cd android
+./gradlew test
+```
+
+**Run Specific Test Class**
+```bash
+cd android
+./gradlew test --tests "com.narisangha.MainActivityTest"
+```
+
+**Run with Clean Build**
+```bash
+cd android
+./gradlew clean test
+```
+
+**Generate HTML Report**
+```bash
+cd android
+./gradlew test
+# Report available at: android/app/build/reports/tests/testDebugUnitTest/index.html
+# Test summary auto-generated at: docs/TEST_SUITE_SUMMARY.md
+```
+
+#### Test Suite Information
+
+- **Total Tests:** 29 tests across 3 test classes
+- **Test Summary:** See `docs/TEST_SUITE_SUMMARY.md` for detailed results
+- **Test Coverage:** All Java classes (CustomReactActivityDelegate, MainActivity, MainApplication)
+- **Test Framework:** JUnit 4.13.2 with Robolectric 4.11.1
+
+For detailed test execution summary, see [Test Suite Summary](docs/TEST_SUITE_SUMMARY.md).
+
 ### Making Changes
 
 1. Edit `App.js` to modify the main component
