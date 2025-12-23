@@ -1,6 +1,7 @@
-// Sign In properties for English
+// Login properties for English
 
-const signinProperties: Record<string, string> = {
+const loginProperties: Record<string, string> = {
+  // Kept in sync with legacy signin keys for now
   'signin.title': 'Sign In',
   'signin.email.label': 'Email',
   'signin.email.placeholder': 'Enter your email',
@@ -8,7 +9,7 @@ const signinProperties: Record<string, string> = {
   'signin.password.placeholder': 'Enter your password',
   'signin.button.cancel': 'Cancel',
   'signin.button.submit': 'Sign In',
-  // Login modal specific keys (alias to sign-in text for now)
+  // Login modal specific keys
   'login.title': 'Sign In',
   'login.email.label': 'Email',
   'login.email.placeholder': 'Enter your email',
@@ -17,10 +18,12 @@ const signinProperties: Record<string, string> = {
   'login.button.cancel': 'Cancel',
   'login.button.submit': 'Sign In',
   'login.button.submitting': 'Signing in...',
+  'login.error.generic': 'Login failed. Please try again.',
   // Shared button labels
   'button.signin': 'Sign In',
   'button.logout': 'Logout',
 };
 
-export default signinProperties;
+export default loginProperties;
+
 

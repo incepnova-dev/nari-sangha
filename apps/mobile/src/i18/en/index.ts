@@ -1,13 +1,13 @@
 // English language properties
 
 import brandProperties from './brand';
-import signinProperties from './signin';
+import loginProperties from './login';
 import signupProperties from './signup';
 import navigationProperties from './navigation';
 
 const properties: Record<string, string> = {
   ...signupProperties,
-  ...signinProperties,
+  ...loginProperties,
   ...brandProperties,
   ...navigationProperties,
 };

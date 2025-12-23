@@ -1,6 +1,7 @@
-// Sign In properties for Kannada
+// Login properties for Kannada
 
-const signinProperties: Record<string, string> = {
+const loginProperties: Record<string, string> = {
+  // Kept in sync with legacy signin keys for now
   'signin.title': 'ಸೈನ್ ಇನ್',
   'signin.email.label': 'ಇಮೇಲ್',
   'signin.email.placeholder': 'ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ',
@@ -8,7 +9,7 @@ const signinProperties: Record<string, string> = {
   'signin.password.placeholder': 'ನಿಮ್ಮ ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ',
   'signin.button.cancel': 'ರದ್ದುಮಾಡಿ',
   'signin.button.submit': 'ಸೈನ್ ಇನ್',
-  // Login modal specific keys (alias to sign-in text for now)
+  // Login modal specific keys
   'login.title': 'ಸೈನ್ ಇನ್',
   'login.email.label': 'ಇಮೇಲ್',
   'login.email.placeholder': 'ನಿಮ್ಮ ಇಮೇಲ್ ನಮೂದಿಸಿ',
@@ -17,9 +18,12 @@ const signinProperties: Record<string, string> = {
   'login.button.cancel': 'ರದ್ದುಮಾಡಿ',
   'login.button.submit': 'ಸೈನ್ ಇನ್',
   'login.button.submitting': 'ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದೆ...',
+  'login.error.generic': 'ಲಾಗಿನ್ ವಿಫಲವಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ.',
+  // Shared button labels
   'button.signin': 'ಸೈನ್ ಇನ್',
   'button.logout': 'ಲಾಗ್ ಔಟ್',
 };
 
-export default signinProperties;
+export default loginProperties;
+
 
