@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
-import UnauthenticatedLanding from './src/components/UnauthenticatedLanding';
+import UnauthenticatedLanding from './components/UnauthenticatedLanding';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<any>(null);
