@@ -7,12 +7,13 @@ import {
 } from '../styles';
 import TopMenuBar from './TopMenuBar';
 import BottomMenuBar from './BottomMenuBar';
+import CreatePostIcon from './discussions/CreatePostIcon';
 
 interface DiscussionsProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => void;
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost') => void;
 }
 
 const Discussions: React.FC<DiscussionsProps> = ({
@@ -47,6 +48,9 @@ const Discussions: React.FC<DiscussionsProps> = ({
         activeScreen="discussions"
         onNavigate={onNavigate}
       />
+
+      {/* Floating create post button - only visible in Discussions screen */}
+      <CreatePostIcon onPress={() => onNavigate('createPost')} />
     </View>
   );
 };

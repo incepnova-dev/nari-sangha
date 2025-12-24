@@ -13,7 +13,7 @@ interface CreateCommunityProps {
   onSignOut: () => void;
   language?: string;
   onNavigate: (
-    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity'
+    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost'
   ) => void;
 }
 

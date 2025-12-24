@@ -22,4 +22,6 @@ export * from './components/Home.styles';
 export * from './components/TopMenuBar.styles';
 export * from './components/BottomMenuBar.styles';
 export * from './components/Profile.styles';
+export * from './components/Community.styles';
+export * from './components/Discussions.styles';
 

@@ -15,7 +15,7 @@ interface ProfileProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => void;
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost') => void;
 }
 
 const Profile: React.FC<ProfileProps> = ({ user, onSignOut, onNavigate }) => {

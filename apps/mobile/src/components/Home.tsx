@@ -12,6 +12,8 @@ import Community from './Community';
 import Discussions from './Discussions';
 import ProductListing from './ProductListing';
 import KnowledgeHub from './KnowledgeHub';
+import CreateCommunity from './CreateCommunity';
+import CreatePost from './CreatePost';
 
 interface HomeProps {
   user: any;
@@ -20,11 +22,11 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ user, onSignOut }) => {
-  const [activeScreen, setActiveScreen] = useState<'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub'>('home');
+  const [activeScreen, setActiveScreen] = useState<'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost'>('home');
   const userName =
     user?.user?.name || user?.name || user?.email || 'User';
 
-  const handleNavigate = (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => {
+  const handleNavigate = (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost') => {
     setActiveScreen(screen);
   };
 
@@ -71,6 +73,26 @@ const Home: React.FC<HomeProps> = ({ user, onSignOut }) => {
   if (activeScreen === 'knowledgehub') {
     return (
       <KnowledgeHub
+        user={user}
+        onSignOut={onSignOut}
+        onNavigate={handleNavigate}
+      />
+    );
+  }
+
+  if (activeScreen === 'createCommunity') {
+    return (
+      <CreateCommunity
+        user={user}
+        onSignOut={onSignOut}
+        onNavigate={handleNavigate}
+      />
+    );
+  }
+
+  if (activeScreen === 'createPost') {
+    return (
+      <CreatePost
         user={user}
         onSignOut={onSignOut}
         onNavigate={handleNavigate}

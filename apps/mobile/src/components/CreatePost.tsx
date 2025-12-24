@@ -7,16 +7,17 @@ import {
 } from '../styles';
 import TopMenuBar from './TopMenuBar';
 import BottomMenuBar from './BottomMenuBar';
-import CreatePostIcon from './community/CreatePostIcon';
 
-interface CommunityProps {
+interface CreatePostProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost') => void;
+  onNavigate: (
+    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost'
+  ) => void;
 }
 
-const Community: React.FC<CommunityProps> = ({
+const CreatePost: React.FC<CreatePostProps> = ({
   user,
   onSignOut,
   onNavigate,
@@ -37,23 +38,20 @@ const Community: React.FC<CommunityProps> = ({
         contentContainerStyle={scrollStyles.scrollContent}
       >
         <View style={landingContent.contentContainer}>
-          <Text style={landingContent.title}>Community</Text>
+          <Text style={landingContent.title}>Create Post</Text>
           <Text style={landingContent.subtitle}>
-            Coming soon...
+            Create a new discussion post here...
           </Text>
         </View>
       </ScrollView>
 
       <BottomMenuBar
-        activeScreen="community"
+        activeScreen="discussions"
         onNavigate={onNavigate}
       />
-
-      {/* Floating create post button - only visible in Community screen */}
-      <CreatePostIcon onPress={() => onNavigate('createCommunity')} />
     </View>
   );
 };
 
-export default Community;
+export default CreatePost;
 

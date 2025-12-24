@@ -30,6 +30,12 @@ const productsIconInactive = require('../../assets/images/products-icon-inactive
 const knowledgehubIconActive = require('../../assets/images/knowledgehub-icon-active.png');
 const knowledgehubIconInactive = require('../../assets/images/knowledgehub-icon-inactive.png');
 
+// Import create community icon image
+const createCommunityIcon = require('../../assets/images/create-community-icon.png');
+
+// Import create post icon image
+const createPostIcon = require('../../assets/images/create-post-icon.png');
+
 /**
  * Common styles for bottom menu icon components
  */
@@ -108,6 +114,14 @@ export const menuIconStyles = StyleSheet.create({
     width: 32,
     height: 32,
   },
+  createCommunityIcon: {
+    width: 56,
+    height: 56,
+  },
+  createPostIcon: {
+    width: 56,
+    height: 56,
+  },
 });
 
 /**
@@ -172,4 +186,14 @@ export const knowledgehubIconSources = {
   active: knowledgehubIconActive,
   inactive: knowledgehubIconInactive,
 };
+
+/**
+ * Create community icon image source
+ */
+export const createCommunityIconSource = createCommunityIcon;
+
+/**
+ * Create post icon image source
+ */
+export const createPostIconSource = createPostIcon;
 

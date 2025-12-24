@@ -13,7 +13,7 @@ interface KnowledgeHubProps {
   onSignOut: () => void;
   language?: string;
   onNavigate: (
-    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub'
+    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub' | 'createCommunity' | 'createPost'
   ) => void;
 }
 
