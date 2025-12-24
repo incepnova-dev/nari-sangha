@@ -5,9 +5,10 @@
     "noImplicitAny": true,
     "baseUrl": ".",
     "paths": {
-      "@narisangha/api-client": ["../../packages/api-client/src"]
+      "@narisangha/api-client": ["../../packages/api-client/src"],
+      "@narisangha/shared-i18": ["../../packages/shared-i18/src"]
     }
   },
-  "include": ["./*.ts", "./*.tsx", "./src/**/*.ts", "./src/**/*.tsx", "./android/app/src/main/java", "./**/*.d.ts", "../../packages/api-client/src/**/*.ts"]
+  "include": ["./*.ts", "./*.tsx", "./src/**/*.ts", "./src/**/*.tsx", "./android/app/src/main/java", "./**/*.d.ts", "../../packages/api-client/src/**/*.ts", "../../packages/shared-i18/src/**/*.ts"]
 }
 

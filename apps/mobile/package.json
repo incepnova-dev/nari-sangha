@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@narisangha/api-client": "*",
+    "@narisangha/shared-i18": "*",
     "react": "19.1.1",
     "react-native": "0.82.0"
   },

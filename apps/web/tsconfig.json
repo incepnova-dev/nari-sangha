@@ -16,7 +16,8 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "styles/*": ["styles/*"]
+      "styles/*": ["styles/*"],
+      "@narisangha/shared-i18": ["../../packages/shared-i18/src"]
     }
   },
   "include": ["src"]

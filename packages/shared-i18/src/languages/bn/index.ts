@@ -1,14 +1,14 @@
-// Kannada language properties
+// Bengali language properties
 
 import brandProperties from './brand';
-import loginProperties from './login';
+import authProperties from './auth';
 import signupProperties from './signup';
 import navigationProperties from './navigation';
 
 const properties: Record<string, string> = {
-  ...signupProperties,
-  ...loginProperties,
   ...brandProperties,
+  ...authProperties,
+  ...signupProperties,
   ...navigationProperties,
 };
 

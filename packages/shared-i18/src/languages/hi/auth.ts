@@ -1,7 +1,19 @@
-// Login properties for Hindi
+// Unified authentication properties for Hindi
+// Merges signin and login keys for backward compatibility
 
-const loginProperties: Record<string, string> = {
-  // Kept in sync with legacy signin keys for now
+const authProperties: Record<string, string> = {
+  // Primary standardized keys (for future use)
+  'auth.title': 'साइन इन करें',
+  'auth.email.label': 'ईमेल',
+  'auth.email.placeholder': 'अपना ईमेल दर्ज करें',
+  'auth.password.label': 'पासवर्ड',
+  'auth.password.placeholder': 'अपना पासवर्ड दर्ज करें',
+  'auth.button.cancel': 'रद्द करें',
+  'auth.button.submit': 'साइन इन करें',
+  'auth.button.submitting': 'साइन इन हो रहा है...',
+  'auth.error.generic': 'साइन इन असफल रहा। कृपया दोबारा प्रयास करें।',
+
+  // Backward compatibility: signin keys (used by web)
   'signin.title': 'साइन इन करें',
   'signin.email.label': 'ईमेल',
   'signin.email.placeholder': 'अपना ईमेल दर्ज करें',
@@ -9,7 +21,9 @@ const loginProperties: Record<string, string> = {
   'signin.password.placeholder': 'अपना पासवर्ड दर्ज करें',
   'signin.button.cancel': 'रद्द करें',
   'signin.button.submit': 'साइन इन करें',
-  // Login modal specific keys
+  'button.signin': 'साइन इन करें',
+
+  // Backward compatibility: login keys (used by mobile)
   'login.title': 'साइन इन करें',
   'login.email.label': 'ईमेल',
   'login.email.placeholder': 'अपना ईमेल दर्ज करें',
@@ -19,11 +33,11 @@ const loginProperties: Record<string, string> = {
   'login.button.submit': 'साइन इन करें',
   'login.button.submitting': 'साइन इन हो रहा है...',
   'login.error.generic': 'लॉगिन असफल रहा। कृपया दोबारा प्रयास करें।',
-  // Shared button labels
   'button.login': 'लॉग इन',
+
+  // Shared button labels
   'button.logout': 'लॉग आउट',
 };
 
-export default loginProperties;
-
+export default authProperties;
 
