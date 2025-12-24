@@ -12,7 +12,7 @@ interface DiscussionsProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'createCommunity') => void;
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => void;
 }
 
 const Discussions: React.FC<DiscussionsProps> = ({

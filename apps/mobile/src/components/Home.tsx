@@ -10,6 +10,7 @@ import BottomMenuBar from './BottomMenuBar';
 import Profile from './Profile';
 import Community from './Community';
 import Discussions from './Discussions';
+import ProductListing from './ProductListing';
 import CreateCommunity from './CreateCommunity';
 
 interface HomeProps {
@@ -19,11 +20,11 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ user, onSignOut }) => {
-  const [activeScreen, setActiveScreen] = useState<'home' | 'community' | 'profile' | 'discussions' | 'createCommunity'>('home');
+  const [activeScreen, setActiveScreen] = useState<'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity'>('home');
   const userName =
     user?.user?.name || user?.name || user?.email || 'User';
 
-  const handleNavigate = (screen: 'home' | 'community' | 'profile' | 'discussions' | 'createCommunity') => {
+  const handleNavigate = (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => {
     setActiveScreen(screen);
   };
 
@@ -50,6 +51,16 @@ const Home: React.FC<HomeProps> = ({ user, onSignOut }) => {
   if (activeScreen === 'discussions') {
     return (
       <Discussions
+        user={user}
+        onSignOut={onSignOut}
+        onNavigate={handleNavigate}
+      />
+    );
+  }
+
+  if (activeScreen === 'products') {
+    return (
+      <ProductListing
         user={user}
         onSignOut={onSignOut}
         onNavigate={handleNavigate}

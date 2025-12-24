@@ -15,7 +15,8 @@ const config = {
   },
   watchFolders: [],
   resolver: {
-    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'json'],
+    sourceExts: ['jsx', 'js', 'ts', 'tsx', 'json', 'png', 'jpg', 'jpeg'],
+    assetExts: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
   },
 };
 

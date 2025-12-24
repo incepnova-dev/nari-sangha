@@ -4,11 +4,12 @@ import { bottomMenuBarStyles } from '../styles';
 import HomeIcon from './bottomMenu/HomeIcon';
 import CommunityIcon from './bottomMenu/CommunityIcon';
 import DiscussionsIcon from './bottomMenu/DiscussionsIcon';
+import ProductsIcon from './bottomMenu/ProductsIcon';
 import CreateCommunityIcon from './bottomMenu/CreateCommunityIcon';
 
 interface BottomMenuBarProps {
-  activeScreen?: 'home' | 'community' | 'profile' | 'discussions' | 'createCommunity';
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'createCommunity') => void;
+  activeScreen?: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity';
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => void;
 }
 
 const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
@@ -30,6 +31,11 @@ const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
       <DiscussionsIcon
         isActive={activeScreen === 'discussions'}
         onPress={() => onNavigate('discussions')}
+      />
+
+      <ProductsIcon
+        isActive={activeScreen === 'products'}
+        onPress={() => onNavigate('products')}
       />
 
       <CreateCommunityIcon

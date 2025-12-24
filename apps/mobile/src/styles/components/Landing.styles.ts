@@ -122,6 +122,68 @@ export const modalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  alertModalContent: {
+    backgroundColor: colors.background.secondary,
+    borderRadius: spacing.lg,
+    width: '85%',
+    maxWidth: 350,
+    maxHeight: '70%',
+    borderWidth: 1,
+    borderColor: colors.border.light,
+    overflow: 'hidden',
+  },
+  alertModalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border.light,
+  },
+  alertModalTitle: {
+    fontSize: typography.fontSize.lg,
+    fontWeight: typography.fontWeight.bold,
+    color: colors.text.primary,
+  },
+  alertModalClose: {
+    fontSize: typography.fontSize.xl,
+    color: colors.text.secondary,
+    padding: spacing.xs,
+  },
+  alertModalBody: {
+    maxHeight: 400,
+  },
+  alertModalEmpty: {
+    padding: spacing.xxl,
+    alignItems: 'center',
+  },
+  alertModalEmptyText: {
+    fontSize: typography.fontSize.base,
+    color: colors.text.secondary,
+  },
+  alertItem: {
+    padding: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border.light,
+  },
+  alertItemContent: {
+    flex: 1,
+  },
+  alertItemTitle: {
+    fontSize: typography.fontSize.base,
+    fontWeight: typography.fontWeight.semibold,
+    color: colors.text.primary,
+    marginBottom: spacing.xs,
+  },
+  alertItemMessage: {
+    fontSize: typography.fontSize.sm,
+    color: colors.text.secondary,
+    marginBottom: spacing.xs,
+  },
+  alertItemTime: {
+    fontSize: typography.fontSize.xs,
+    color: colors.text.secondary,
+  },
 });
 
 

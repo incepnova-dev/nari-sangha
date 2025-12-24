@@ -1,24 +1,24 @@
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
-import { menuIconStyles, communityIconSources } from '../../styles';
+import { menuIconStyles, productsIconSources } from '../../styles';
 
-interface CommunityIconProps {
+interface ProductsIconProps {
   isActive: boolean;
   onPress: () => void;
 }
 
-const CommunityIcon: React.FC<CommunityIconProps> = ({ isActive, onPress }) => {
+const ProductsIcon: React.FC<ProductsIconProps> = ({ isActive, onPress }) => {
   // Get the appropriate icon source and style based on isActive prop
-  const iconSource = isActive ? communityIconSources.active : communityIconSources.inactive;
+  const iconSource = isActive ? productsIconSources.active : productsIconSources.inactive;
   const iconStyle = isActive 
-    ? menuIconStyles.communityIconActive 
-    : menuIconStyles.communityIconInactive;
+    ? menuIconStyles.productsIconActive 
+    : menuIconStyles.productsIconInactive;
 
   return (
     <TouchableOpacity
       style={[menuIconStyles.menuItem, isActive && menuIconStyles.menuItemActive]}
       onPress={onPress}
-      accessibilityLabel="Navigate to Community"
+      accessibilityLabel="Navigate to Products"
     >
       <Image
         source={iconSource}
@@ -29,5 +29,5 @@ const CommunityIcon: React.FC<CommunityIconProps> = ({ isActive, onPress }) => {
   );
 };
 
-export default CommunityIcon;
+export default ProductsIcon;
 

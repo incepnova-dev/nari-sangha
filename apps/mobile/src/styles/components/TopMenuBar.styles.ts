@@ -36,6 +36,19 @@ export const topMenuBarStyles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 12,
   },
+  alertIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#374151',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 12,
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   profileIconText: {
     fontSize: 20,
   },

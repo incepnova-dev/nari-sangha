@@ -13,7 +13,7 @@ interface ProfileProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'createCommunity') => void;
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => void;
 }
 
 const Profile: React.FC<ProfileProps> = ({ user, onSignOut, onNavigate }) => {
@@ -29,6 +29,7 @@ const Profile: React.FC<ProfileProps> = ({ user, onSignOut, onNavigate }) => {
       <TopMenuBar
         userName={userName}
         onProfilePress={() => onNavigate('profile')}
+        isProfileActive={true}
       />
 
       {/* Scrollable content area */}
