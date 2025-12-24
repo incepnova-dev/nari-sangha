@@ -15,7 +15,7 @@ jest.mock('../../../services/api', () => ({
 }));
 
 // Mock the language utility
-jest.mock('../../../languages', () => ({
+jest.mock('../../../i18', () => ({
   getProperty: (key, lang) => {
     const properties = {
       'signin.title': 'Sign In',

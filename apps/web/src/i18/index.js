@@ -1,16 +1,16 @@
 // Language utility - dynamically loads properties based on language code
 
-import englishProperties from "./english";
-import hindiProperties from "./hindi";
-import kannadaProperties from "./kannada";
-import bengaliProperties from "./bengali";
+import enProperties from "./en";
+import hiProperties from "./hi";
+import knProperties from "./kn";
+import bnProperties from "./bn";
 
 // Language property maps
 const languageMaps = {
-  en: englishProperties,
-  hi: hindiProperties,
-  kn: kannadaProperties,
-  bn: bengaliProperties,
+  en: enProperties,
+  hi: hiProperties,
+  kn: knProperties,
+  bn: bnProperties,
 };
 
 // Get properties for a specific language

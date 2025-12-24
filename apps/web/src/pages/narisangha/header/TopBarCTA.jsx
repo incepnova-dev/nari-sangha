@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
-import { getProperty } from "../../../languages";
+import { getProperty } from "../../../i18";
 
 const TopBarCTA = ({
   setMode,

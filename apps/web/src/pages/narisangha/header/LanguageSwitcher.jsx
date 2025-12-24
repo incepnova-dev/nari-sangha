@@ -1,5 +1,5 @@
 import React from "react";
-import { languageOptions } from "../../../languages";
+import { languageOptions } from "../../../i18";
 
 const LanguageSwitcher = ({ language, setLanguage }) => {
   return (

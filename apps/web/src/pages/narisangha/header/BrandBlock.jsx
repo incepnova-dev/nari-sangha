@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getProperty } from "../../../languages";
+import { getProperty } from "../../../i18";
 import logoSvg from "../../../assets/logo.svg";
 
 const BrandBlock = ({ language = "en" }) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "styles/auth";
-import { getProperty } from "../../languages";
+import { getProperty } from "../../i18";
 import wmhealthpic from "../../images/wmhealthpic.png";
 import { signIn } from "../../services/api";
 

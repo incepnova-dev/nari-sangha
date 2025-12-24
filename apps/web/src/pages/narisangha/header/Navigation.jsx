@@ -1,5 +1,5 @@
 import React from "react";
-import { getProperty } from "../../../languages";
+import { getProperty } from "../../../i18";
 
 const Navigation = ({ setViewMode, language = "en" }) => {
   return (

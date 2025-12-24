@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { createPortal, flushSync } from "react-dom";
-import { getProperty } from "../../../languages";
+import { getProperty } from "../../../i18";
 import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
 import "styles/narisangha";

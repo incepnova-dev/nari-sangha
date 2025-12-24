@@ -3,7 +3,7 @@ import BrandBlock from "./BrandBlock";
 import Navigation from "./Navigation";
 import TopBarCTA from "./TopBarCTA";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { getProperty } from "../../../languages";
+import { getProperty } from "../../../i18";
 import { signOut } from "../../../services/api";
 import "styles/narisangha/header";
 
