@@ -2,8 +2,12 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "strict": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "paths": {
+      "@narisangha/api-client": ["../../packages/api-client/src"]
+    }
   },
-  "include": ["./*.ts", "./*.tsx", "./src/**/*.ts", "./src/**/*.tsx", "./android/app/src/main/java", "./**/*.d.ts"]
+  "include": ["./*.ts", "./*.tsx", "./src/**/*.ts", "./src/**/*.tsx", "./android/app/src/main/java", "./**/*.d.ts", "../../packages/api-client/src/**/*.ts"]
 }
 

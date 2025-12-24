@@ -9,7 +9,7 @@ import {
 } from '../styles';
 import TopMenuBar from './TopMenuBar';
 import BottomMenuBar from './BottomMenuBar';
-import { getProfile, UserProfile } from '../services/profileService';
+import { getProfile, UserProfile } from '../services';
 
 interface ProfileProps {
   user: any;

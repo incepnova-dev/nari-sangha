@@ -6,6 +6,11 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  *
  * @type {import('metro-config').MetroConfig}
  */
+const path = require('path');
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(projectRoot, '../..');
+const apiClientPackage = path.resolve(workspaceRoot, 'packages/api-client');
+
 const config = {
   server: {
     port: 8081,
@@ -13,10 +18,17 @@ const config = {
       return middleware;
     },
   },
-  watchFolders: [],
+  watchFolders: [workspaceRoot, apiClientPackage],
   resolver: {
     sourceExts: ['jsx', 'js', 'ts', 'tsx', 'json', 'png', 'jpg', 'jpeg'],
     assetExts: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'],
+    nodeModulesPaths: [
+      path.resolve(projectRoot, 'node_modules'),
+      path.resolve(workspaceRoot, 'node_modules'),
+    ],
+    extraNodeModules: {
+      '@narisangha/api-client': apiClientPackage,
+    },
   },
 };
 
