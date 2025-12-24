@@ -4,25 +4,25 @@
  * Handles request/response interceptors, error handling, and token management
  */
 
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig } from 'axios';
 import getApiConfig from '../../config/api.config';
 
 // Create axios instance with default config
-const apiClient = axios.create(getApiConfig());
+const apiClient: AxiosInstance = axios.create(getApiConfig());
 
 // Request interceptor - Add auth token if available
 apiClient.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     // Get token from localStorage or sessionStorage
     const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
     
-    if (token) {
+    if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     
     return config;
   },
-  (error) => {
+  (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
@@ -32,11 +32,12 @@ apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
+  (error: AxiosError) => {
     // Handle common error cases
     if (error.response) {
       // Server responded with error status
       const { status, data } = error.response;
+      const errorData = data as { message?: string; error?: string };
       
       switch (status) {
         case 401:
@@ -47,18 +48,18 @@ apiClient.interceptors.response.use(
           break;
         case 403:
           // Forbidden
-          console.error('Access forbidden:', data?.message || 'Forbidden');
+          console.error('Access forbidden:', errorData?.message || 'Forbidden');
           break;
         case 404:
           // Not found
-          console.error('Resource not found:', data?.message || 'Not found');
+          console.error('Resource not found:', errorData?.message || 'Not found');
           break;
         case 500:
           // Server error
-          console.error('Server error:', data?.message || 'Internal server error');
+          console.error('Server error:', errorData?.message || 'Internal server error');
           break;
         default:
-          console.error('API error:', data?.message || error.message);
+          console.error('API error:', errorData?.message || error.message);
       }
     } else if (error.request) {
       // Request made but no response received

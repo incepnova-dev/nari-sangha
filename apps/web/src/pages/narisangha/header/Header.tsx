@@ -7,7 +7,25 @@ import { getProperty } from "../../../i18";
 import { signOut } from "../../../services/api";
 import "styles/narisangha/header";
 
-const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser, setCurrentUser }) => {
+interface HeaderProps {
+  mode: string;
+  setMode: (mode: string) => void;
+  language: string;
+  setLanguage: (language: string) => void;
+  setViewMode: (mode: string) => void;
+  currentUser: any;
+  setCurrentUser: (user: any) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ 
+  mode: _mode,
+  setMode: _setMode,
+  language, 
+  setLanguage, 
+  setViewMode, 
+  currentUser, 
+  setCurrentUser 
+}) => {
   const handleLogout = async () => {
     await signOut();
     setCurrentUser(null);
@@ -32,7 +50,6 @@ const Header = ({ mode, setMode, language, setLanguage, setViewMode, currentUser
 
         <div className="header-actions-container">
           <TopBarCTA
-            setMode={setMode}
             language={language}
             currentUser={currentUser}
             onSignInSuccess={setCurrentUser}

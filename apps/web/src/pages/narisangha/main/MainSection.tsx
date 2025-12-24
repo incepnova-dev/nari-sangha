@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
-import AuthenticatedMainLayout from "./AuthenticatedMainLayout";
+import AuthenticatedMainLayout, { AuthenticatedMainLayoutProps } from "./AuthenticatedMainLayout";
 import UnauthenticatedLanding from "./UnauthenticatedLanding";
 
-const MainSection = (props) => {
+interface MainSectionProps extends AuthenticatedMainLayoutProps {
+  currentUser: any;
+  language?: string;
+  setCurrentUser: (user: any) => void;
+}
+
+const MainSection: React.FC<MainSectionProps> = (props) => {
   const { currentUser, language = "en", setCurrentUser } = props;
 
   useEffect(() => {

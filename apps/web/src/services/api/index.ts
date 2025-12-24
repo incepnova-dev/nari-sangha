@@ -4,5 +4,6 @@
  */
 
 export { signIn, signUp, signOut, getCurrentUser, refreshToken } from './authService';
+export type { SignInCredentials, SignUpData, AuthResponse } from './authService';
 export { default as apiClient } from './apiClient';
 

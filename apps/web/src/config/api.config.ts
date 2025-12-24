@@ -3,11 +3,19 @@
  * Environment-based server configuration
  */
 
-const getApiConfig = () => {
+export interface ApiConfig {
+  baseURL: string;
+  timeout: number;
+  headers: {
+    'Content-Type': string;
+  };
+}
+
+const getApiConfig = (): ApiConfig => {
   const env = process.env.NODE_ENV || 'development';
   const apiUrl = process.env.REACT_APP_API_URL || '';
   
-  const configs = {
+  const configs: Record<string, ApiConfig> = {
     development: {
       baseURL: apiUrl || 'http://localhost:3001/api',
       timeout: 10000,

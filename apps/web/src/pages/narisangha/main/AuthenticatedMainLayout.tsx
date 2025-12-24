@@ -1,0 +1,106 @@
+import React from "react";
+import LeftSection from "../leftsection/LeftSection";
+import RightSection from "../rightsection/RightSection";
+import { CreateForm } from "../leftsection/CreateCard";
+import { JoinForm } from "../leftsection/JoinCard";
+import { CreatedGroup } from "../leftsection/CreatedGroupsList";
+import { ExternalGroup } from "../leftsection/ExternalGroupsList";
+import { ExternalFeedItem } from "../leftsection/LiveConversations";
+import { Connections } from "../leftsection/ProviderConnections";
+
+export interface AuthenticatedMainLayoutProps {
+  mode: string;
+  setMode: (mode: string) => void;
+  viewMode: string;
+  setViewMode: (mode: string) => void;
+  createForm: CreateForm;
+  handleCreateChange: (field: keyof CreateForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  previewCreate: () => void;
+  continueCreate: () => void;
+  joinForm: JoinForm;
+  handleJoinChange: (field: keyof JoinForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  previewJoin: () => void;
+  continueJoin: () => void;
+  myCreatedGroups: CreatedGroup[];
+  myExternalGroups: ExternalGroup[];
+  connections: Connections;
+  connectingProvider: string | null;
+  handleConnectProvider: (provider: string) => void;
+  stage: string;
+  setStage: (stage: string) => void;
+  loadingFeeds: boolean;
+  externalFeeds: ExternalFeedItem[];
+  fetchExternalFeeds: (stage: string) => void;
+}
+
+const AuthenticatedMainLayout: React.FC<AuthenticatedMainLayoutProps> = (props) => {
+  const {
+    mode,
+    setMode,
+    viewMode,
+    setViewMode,
+    createForm,
+    handleCreateChange,
+    previewCreate,
+    continueCreate,
+    joinForm,
+    handleJoinChange,
+    previewJoin,
+    continueJoin,
+    myCreatedGroups,
+    myExternalGroups,
+    connections,
+    connectingProvider,
+    handleConnectProvider,
+    stage,
+    setStage,
+    loadingFeeds,
+    externalFeeds,
+    fetchExternalFeeds,
+  } = props;
+
+  return (
+    <main className="main">
+      <div className="content-wrap" id="start">
+        <LeftSection
+          mode={mode}
+          setMode={setMode}
+          viewMode={viewMode}
+          setViewMode={setViewMode}
+          createForm={createForm}
+          handleCreateChange={handleCreateChange}
+          previewCreate={previewCreate}
+          continueCreate={continueCreate}
+          joinForm={joinForm}
+          handleJoinChange={handleJoinChange}
+          previewJoin={previewJoin}
+          continueJoin={continueJoin}
+          myCreatedGroups={myCreatedGroups}
+          myExternalGroups={myExternalGroups}
+          connections={connections}
+          connectingProvider={connectingProvider}
+          handleConnectProvider={handleConnectProvider}
+          stage={stage}
+          setStage={setStage}
+          loadingFeeds={loadingFeeds}
+          externalFeeds={externalFeeds}
+        />
+
+        <RightSection
+          stage={stage}
+          setStage={setStage}
+          externalFeeds={externalFeeds}
+          loadingFeeds={loadingFeeds}
+          fetchExternalFeeds={fetchExternalFeeds}
+          myCreatedGroups={myCreatedGroups}
+          myExternalGroups={myExternalGroups}
+          connections={connections}
+          setViewMode={setViewMode}
+        />
+      </div>
+    </main>
+  );
+};
+
+export default AuthenticatedMainLayout;
+

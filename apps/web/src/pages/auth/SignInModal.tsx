@@ -1,24 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import "styles/auth";
 import { getProperty } from "../../i18";
 import wmhealthpic from "../../images/wmhealthpic.png";
 import { signIn } from "../../services/api";
 
-const SignInModal = ({ isOpen, onClose, language = "en", onSignInSuccess }) => {
-  const [signInForm, setSignInForm] = useState({
+interface SignInModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  language?: string;
+  onSignInSuccess?: (data: any) => void;
+}
+
+interface SignInForm {
+  email: string;
+  password: string;
+}
+
+const SignInModal: React.FC<SignInModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  language = "en", 
+  onSignInSuccess 
+}) => {
+  const [signInForm, setSignInForm] = useState<SignInForm>({
     email: "",
     password: ""
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
-  const handleSignInChange = (field) => (e) => {
+  const handleSignInChange = (field: keyof SignInForm) => (e: ChangeEvent<HTMLInputElement>) => {
     setSignInForm({ ...signInForm, [field]: e.target.value });
     // Clear error when user starts typing
     if (error) setError("");
   };
 
-  const handleSignInSubmit = async (e) => {
+  const handleSignInSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);

@@ -4,15 +4,21 @@ import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
 import { getProperty } from "../../../i18";
 
-const TopBarCTA = ({
-  setMode,
+interface TopBarCTAProps {
+  language?: string;
+  currentUser: any;
+  onSignInSuccess?: (data: any) => void;
+  onLogout?: () => void;
+}
+
+const TopBarCTA: React.FC<TopBarCTAProps> = ({
   language = "en",
   currentUser,
   onSignInSuccess,
   onLogout,
 }) => {
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (isSignUpModalOpen || isSignInModalOpen) {

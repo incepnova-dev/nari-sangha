@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { getProperty } from "../../../i18";
 import logoSvg from "../../../assets/logo.svg";
 
-const BrandBlock = ({ language = "en" }) => {
+interface BrandBlockProps {
+  language?: string;
+}
+
+const BrandBlock: React.FC<BrandBlockProps> = ({ language = "en" }) => {
   return (
     <div className="brand-block">
       <Link to="/narisangha" className="brand-logo-link">

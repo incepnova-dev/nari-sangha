@@ -5,11 +5,19 @@ import SignUpModal from "../../auth/SignUpModal";
 import SignInModal from "../../auth/SignInModal";
 import "styles/narisangha";
 
-const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
+interface UnauthenticatedLandingProps {
+  language?: string;
+  onSignInSuccess?: (data: any) => void;
+}
+
+const UnauthenticatedLanding: React.FC<UnauthenticatedLandingProps> = ({ 
+  language = "en", 
+  onSignInSuccess 
+}) => {
   const message = getProperty("landing.welcome", language);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const isSigningInRef = useRef(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
+  const isSigningInRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (isSignUpModalOpen || isSignInModalOpen) {
@@ -35,7 +43,7 @@ const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
     setIsSignUpModalOpen(false);
   };
 
-  const handleSignInSuccess = useCallback((userData) => {
+  const handleSignInSuccess = useCallback((userData: any) => {
     console.log('[UnauthenticatedLanding] handleSignInSuccess called with:', userData);
     
     // Prevent multiple calls
@@ -125,5 +133,4 @@ const UnauthenticatedLanding = ({ language = "en", onSignInSuccess }) => {
 };
 
 export default UnauthenticatedLanding;
-
 

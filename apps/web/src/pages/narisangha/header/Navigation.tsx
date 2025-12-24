@@ -1,7 +1,12 @@
 import React from "react";
 import { getProperty } from "../../../i18";
 
-const Navigation = ({ setViewMode, language = "en" }) => {
+interface NavigationProps {
+  setViewMode: (mode: string) => void;
+  language?: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ setViewMode, language = "en" }) => {
   return (
     <nav className="nav-links">
       {/* <a href="#start">Start</a> */}
