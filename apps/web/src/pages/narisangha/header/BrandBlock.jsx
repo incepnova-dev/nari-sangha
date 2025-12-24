@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getProperty } from "../../../languages";
+import logoSvg from "../../../assets/logo.svg";
 
 const BrandBlock = ({ language = "en" }) => {
   return (
     <div className="brand-block">
       <Link to="/narisangha" className="brand-logo-link">
-        <div className="brand-logo">NS</div>
+        <img src={logoSvg} alt="NariSangha Logo" className="brand-logo" />
       </Link>
       <div className="brand-text">
         <Link to="/narisangha" className="brand-title-link">
