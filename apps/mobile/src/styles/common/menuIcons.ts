@@ -23,8 +23,12 @@ const alertIconActive = require('../../assets/images/alert-icon-active.png');
 const alertIconInactive = require('../../assets/images/alert-icon-inactive.png');
 
 // Import products icon images
-const productsIconActive = require('../../assets/images/products-icon-active.png');
-const productsIconInactive = require('../../assets/images/products-icon-inactive.png');
+const productsIconActive = require('../../assets/images/products-icon-active1.png');
+const productsIconInactive = require('../../assets/images/products-icon-inactive1.png');
+
+// Import knowledgehub icon images
+const knowledgehubIconActive = require('../../assets/images/knowledgehub-icon-active.png');
+const knowledgehubIconInactive = require('../../assets/images/knowledgehub-icon-inactive.png');
 
 /**
  * Common styles for bottom menu icon components
@@ -34,7 +38,7 @@ export const menuIconStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.sm,
+    paddingVertical: spacing.md,
     borderRadius: spacing.sm,
   },
   menuItemActive: {
@@ -45,32 +49,32 @@ export const menuIconStyles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   menuIconImage: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   homeIconActive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   homeIconInactive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   discussionsIconActive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   discussionsIconInactive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   communityIconActive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   communityIconInactive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   profileIconActive: {
     width: 24,
@@ -89,12 +93,20 @@ export const menuIconStyles = StyleSheet.create({
     height: 24,
   },
   productsIconActive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
   },
   productsIconInactive: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
+  },
+  knowledgehubIconActive: {
+    width: 32,
+    height: 32,
+  },
+  knowledgehubIconInactive: {
+    width: 32,
+    height: 32,
   },
 });
 
@@ -150,5 +162,14 @@ export const alertIconSources = {
 export const productsIconSources = {
   active: productsIconActive,
   inactive: productsIconInactive,
+};
+
+/**
+ * KnowledgeHub icon image sources
+ * These are exported separately as StyleSheet cannot contain image sources
+ */
+export const knowledgehubIconSources = {
+  active: knowledgehubIconActive,
+  inactive: knowledgehubIconInactive,
 };
 

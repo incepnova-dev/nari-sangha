@@ -8,14 +8,16 @@ import {
 import TopMenuBar from './TopMenuBar';
 import BottomMenuBar from './BottomMenuBar';
 
-interface ProductListingProps {
+interface KnowledgeHubProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => void;
+  onNavigate: (
+    screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub'
+  ) => void;
 }
 
-const ProductListing: React.FC<ProductListingProps> = ({
+const KnowledgeHub: React.FC<KnowledgeHubProps> = ({
   user,
   onSignOut,
   onNavigate,
@@ -23,11 +25,11 @@ const ProductListing: React.FC<ProductListingProps> = ({
   const userName =
     user?.user?.name || user?.name || user?.email || 'User';
 
-  // Sample product data - replace with actual data from your API/state
-  const products = [
-    { id: '1', name: 'Product 1', price: '$29.99', description: 'Description of product 1' },
-    { id: '2', name: 'Product 2', price: '$39.99', description: 'Description of product 2' },
-    { id: '3', name: 'Product 3', price: '$49.99', description: 'Description of product 3' },
+  // Sample knowledge hub content - replace with actual data from your API/state
+  const knowledgeItems = [
+    { id: '1', title: 'Article 1', description: 'Description of article 1', category: 'Health' },
+    { id: '2', title: 'Article 2', description: 'Description of article 2', category: 'Wellness' },
+    { id: '3', title: 'Article 3', description: 'Description of article 3', category: 'Education' },
   ];
 
   return (
@@ -43,16 +45,16 @@ const ProductListing: React.FC<ProductListingProps> = ({
         contentContainerStyle={scrollStyles.scrollContent}
       >
         <View style={landingContent.contentContainer}>
-          <Text style={landingContent.title}>Products</Text>
+          <Text style={landingContent.title}>Knowledge Hub</Text>
           
-          {products.length === 0 ? (
+          {knowledgeItems.length === 0 ? (
             <Text style={landingContent.subtitle}>
-              No products available
+              No content available
             </Text>
           ) : (
-            products.map((product) => (
+            knowledgeItems.map((item) => (
               <View
-                key={product.id}
+                key={item.id}
                 style={{
                   backgroundColor: '#1f2937',
                   padding: 16,
@@ -64,23 +66,23 @@ const ProductListing: React.FC<ProductListingProps> = ({
               >
                 <Text
                   style={{
+                    fontSize: 12,
+                    color: '#9146ff',
+                    marginBottom: 8,
+                    fontWeight: '600',
+                  }}
+                >
+                  {item.category}
+                </Text>
+                <Text
+                  style={{
                     fontSize: 18,
                     fontWeight: '600',
                     color: '#ffffff',
                     marginBottom: 8,
                   }}
                 >
-                  {product.name}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                    color: '#9146ff',
-                    marginBottom: 4,
-                  }}
-                >
-                  {product.price}
+                  {item.title}
                 </Text>
                 <Text
                   style={{
@@ -88,7 +90,7 @@ const ProductListing: React.FC<ProductListingProps> = ({
                     color: '#9CA3AF',
                   }}
                 >
-                  {product.description}
+                  {item.description}
                 </Text>
               </View>
             ))
@@ -97,12 +99,12 @@ const ProductListing: React.FC<ProductListingProps> = ({
       </ScrollView>
 
       <BottomMenuBar
-        activeScreen="products"
+        activeScreen="knowledgehub"
         onNavigate={onNavigate}
       />
     </View>
   );
 };
 
-export default ProductListing;
+export default KnowledgeHub;
 

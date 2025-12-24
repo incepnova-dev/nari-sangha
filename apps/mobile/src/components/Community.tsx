@@ -12,7 +12,7 @@ interface CommunityProps {
   user: any;
   onSignOut: () => void;
   language?: string;
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => void;
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => void;
 }
 
 const Community: React.FC<CommunityProps> = ({

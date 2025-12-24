@@ -5,11 +5,11 @@ import HomeIcon from './bottomMenu/HomeIcon';
 import CommunityIcon from './bottomMenu/CommunityIcon';
 import DiscussionsIcon from './bottomMenu/DiscussionsIcon';
 import ProductsIcon from './bottomMenu/ProductsIcon';
-import CreateCommunityIcon from './bottomMenu/CreateCommunityIcon';
+import KnowledgeHubIcon from './bottomMenu/KnowledgeHubIcon';
 
 interface BottomMenuBarProps {
-  activeScreen?: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity';
-  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'createCommunity') => void;
+  activeScreen?: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub';
+  onNavigate: (screen: 'home' | 'community' | 'profile' | 'discussions' | 'products' | 'knowledgehub') => void;
 }
 
 const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
@@ -38,9 +38,9 @@ const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
         onPress={() => onNavigate('products')}
       />
 
-      <CreateCommunityIcon
-        isActive={activeScreen === 'createCommunity'}
-        onPress={() => onNavigate('createCommunity')}
+      <KnowledgeHubIcon
+        isActive={activeScreen === 'knowledgehub'}
+        onPress={() => onNavigate('knowledgehub')}
       />
     </View>
   );
