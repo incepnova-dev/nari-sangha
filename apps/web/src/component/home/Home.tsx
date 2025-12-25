@@ -22,10 +22,14 @@ const Home: React.FC = () => {
   // Check authentication on mount
   useEffect(() => {
     const checkAuth = async () => {
+      // Add a small delay to ensure token is stored after navigation
+      await new Promise(resolve => setTimeout(resolve, 50));
+      
       const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
       
       if (!token) {
         // No token found, redirect to landing page
+        console.log('[Home] No token found, redirecting to /');
         navigate("/");
         return;
       }
@@ -33,14 +37,15 @@ const Home: React.FC = () => {
       // Try to get current user
       const result = await getCurrentUser();
       if (result.success && result.data) {
+        console.log('[Home] Authentication successful, setting current user');
         setCurrentUser(result.data);
+        setIsCheckingAuth(false);
       } else {
         // Authentication failed, redirect to landing page
+        console.log('[Home] Authentication failed, redirecting to /');
         navigate("/");
         return;
       }
-      
-      setIsCheckingAuth(false);
     };
     
     checkAuth();

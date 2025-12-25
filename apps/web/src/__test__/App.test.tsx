@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 
 // Mock react-router-dom to avoid requiring the real package in Jest
 jest.mock('react-router-dom', () => ({
