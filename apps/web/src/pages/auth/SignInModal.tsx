@@ -2,7 +2,7 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 import "styles/auth";
 import { getProperty } from "../../i18";
 import wmhealthpic from "../../images/wmhealthpic.png";
-import { signIn } from "../../services/api";
+import { signIn } from "../../services";
 
 interface SignInModalProps {
   isOpen: boolean;

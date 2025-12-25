@@ -6,12 +6,17 @@ module.exports = function override(config, env) {
   const projectRoot = __dirname;
   const workspaceRoot = path.resolve(projectRoot, '../..');
   const sharedI18Package = path.resolve(workspaceRoot, 'packages/shared-i18');
+  const apiClientPackage = path.resolve(workspaceRoot, 'packages/api-client');
 
   // Configure resolve aliases (similar to Metro's extraNodeModules)
   config.resolve = config.resolve || {};
   config.resolve.alias = config.resolve.alias || {};
   config.resolve.alias['@narisangha/shared-i18'] = path.resolve(
     sharedI18Package,
+    'src'
+  );
+  config.resolve.alias['@narisangha/api-client'] = path.resolve(
+    apiClientPackage,
     'src'
   );
 
@@ -28,7 +33,7 @@ module.exports = function override(config, env) {
     );
   }
 
-  // Configure babel-loader to process TypeScript files from shared-i18 package
+  // Configure babel-loader to process TypeScript files from workspace packages
   // Create React App uses babel-loader to process TypeScript files
   const oneOfRule = config.module.rules.find((rule) => rule.oneOf);
   if (oneOfRule) {
@@ -39,22 +44,26 @@ module.exports = function override(config, env) {
         (rule.test.toString().includes('tsx?') ||
           rule.test.toString().includes('ts'))
       ) {
-        // Add shared-i18 package to the include paths
-        // Preserve existing includes (typically src/) and add the shared package
+        // Add workspace packages to the include paths
+        // Preserve existing includes (typically src/) and add the shared packages
         const srcPath = path.resolve(projectRoot, 'src');
+        const packagesToInclude = [sharedI18Package, apiClientPackage];
+        
         if (rule.include) {
           if (Array.isArray(rule.include)) {
-            // Add shared package if not already included
-            if (!rule.include.some((inc) => inc.includes('shared-i18'))) {
-              rule.include.push(sharedI18Package);
-            }
+            // Add packages if not already included
+            packagesToInclude.forEach((pkg) => {
+              if (!rule.include.some((inc) => inc.includes(path.basename(pkg)))) {
+                rule.include.push(pkg);
+              }
+            });
           } else {
-            // Convert single include to array and add shared package
-            rule.include = [rule.include, sharedI18Package];
+            // Convert single include to array and add packages
+            rule.include = [rule.include, ...packagesToInclude];
           }
         } else {
-          // If no include specified, add both src and shared package
-          rule.include = [srcPath, sharedI18Package];
+          // If no include specified, add both src and packages
+          rule.include = [srcPath, ...packagesToInclude];
         }
       }
     });

@@ -24,10 +24,11 @@
     "baseUrl": "src",
     "paths": {
       "styles/*": ["styles/*"],
-      "@narisangha/shared-i18": ["../../packages/shared-i18/src"]
+      "@narisangha/shared-i18": ["../../packages/shared-i18/src"],
+      "@narisangha/api-client": ["../../packages/api-client/src"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../../packages/api-client/src", "../../packages/shared-i18/src"]
 }
 
 

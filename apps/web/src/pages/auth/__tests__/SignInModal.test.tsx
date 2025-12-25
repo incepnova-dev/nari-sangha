@@ -7,10 +7,10 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SignInModal from '../SignInModal';
-import { signIn } from '../../../services/api';
+import { signIn } from '../../../services';
 
 // Mock the API service
-jest.mock('../../../services/api', () => ({
+jest.mock('../../../services', () => ({
   signIn: jest.fn(),
 }));
 

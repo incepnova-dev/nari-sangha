@@ -4,7 +4,7 @@ import Navigation from "./Navigation";
 import TopBarCTA from "./TopBarCTA";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { getProperty } from "../../../i18";
-import { signOut } from "../../../services/api";
+import { signOut } from "../../../services";
 import "styles/narisangha/header";
 
 interface HeaderProps {
