@@ -1,12 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NariSangha from "./pages/narisangha/NariSangha";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./component/routes/Routes";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/narisangha" element={<NariSangha />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
