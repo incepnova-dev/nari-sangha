@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import { topMenuBarStyles, menuIconStyles, profileIconSources } from '../../styles';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 interface ProfileIconProps {
   onPress: () => void;
@@ -8,26 +7,56 @@ interface ProfileIconProps {
 }
 
 const ProfileIcon: React.FC<ProfileIconProps> = ({ onPress, isActive = false }) => {
-  // Get the appropriate icon source and style based on isActive prop
-  const iconSource = isActive ? profileIconSources.active : profileIconSources.inactive;
-  const iconStyle = isActive 
-    ? menuIconStyles.profileIconActive 
-    : menuIconStyles.profileIconInactive;
-
   return (
     <TouchableOpacity
-      style={topMenuBarStyles.profileIcon}
+      style={[styles.container, isActive && styles.containerActive]}
       onPress={onPress}
+      activeOpacity={0.7}
       accessibilityLabel="Navigate to profile"
     >
-      <Image
-        source={iconSource}
-        style={iconStyle}
-        resizeMode="contain"
-      />
+      <View style={[styles.iconCircle, isActive && styles.iconCircleActive]}>
+        <Text style={styles.iconText}>👤</Text>
+      </View>
     </TouchableOpacity>
   );
 };
 
-export default ProfileIcon;
+const styles = StyleSheet.create({
+  container: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  containerActive: {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: 'white',
+    borderWidth: 2,
+  },
+  iconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconCircleActive: {
+    backgroundColor: 'white',
+    shadowColor: '#E91E63',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  iconText: {
+    fontSize: 18,
+    color: '#E91E63',
+  },
+});
 
+export default ProfileIcon;

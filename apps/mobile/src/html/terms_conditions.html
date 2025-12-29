@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Nari Swasthya Samuday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFE4E1 100%);
+            font-family: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #111;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 0 0 14px #222,
+                0 40px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FFF5F7 0%, #FFFFFF 100%);
+            border-radius: 28px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 99, 0.3);
+            border-radius: 2px;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 102;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .top-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            position: sticky;
+            top: 44px;
+            background: white;
+            z-index: 101;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(255, 182, 193, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .header-title {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-right: 40px;
+        }
+        
+        .btn {
+            width: 100%;
+            height: 56px;
+            border-radius: 28px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #E91E63, #FF4081);
+            color: white;
+            box-shadow: 0 8px 24px rgba(233, 30, 99, 0.3);
+        }
+        
+        .terms-screen {
+            flex: 1;
+            padding: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .terms-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #E91E63, #FF4081);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 20px auto;
+            box-shadow: 0 8px 32px rgba(233, 30, 99, 0.3);
+        }
+        
+        .terms-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .terms-subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .terms-content {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .terms-section {
+            margin-bottom: 24px;
+        }
+        
+        .terms-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #E91E63;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .terms-section-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        
+        .terms-list {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+        
+        .terms-list li {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        
+        .acceptance-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 24px;
+        }
+        
+        .acceptance-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #E0E0E0;
+            transition: all 0.3s ease;
+        }
+        
+        .acceptance-card.active {
+            border-color: #E91E63;
+            background: linear-gradient(135deg, #FFF5F7, #FFFFFF);
+        }
+        
+        .acceptance-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            border: 2px solid #E91E63;
+            appearance: none;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .checkbox:checked {
+            background: #E91E63;
+        }
+        
+        .checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .acceptance-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .acceptance-text {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .acceptance-link {
+            color: #E91E63;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .button-container {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, white 0%, rgba(255, 255, 255, 0.95) 80%, transparent 100%);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+        <div class="status-bar">
+            <span>11:30 AM</span>
+            <div class="status-icons">
+                <span>📶</span>
+                <span>🔋 100%</span>
+            </div>
+        </div>
+        
+        <div class="top-header">
+            <button class="back-btn">←</button>
+            <div class="header-title">Terms & Privacy</div>
+        </div>
+        
+        <div class="terms-screen">
+            <div class="terms-icon">📋</div>
+            <div class="terms-title">Terms of Service</div>
+            <div class="terms-subtitle">Please review and accept our terms to continue</div>
+            
+            <div class="terms-content">
+                <div class="terms-section">
+                    <div class="terms-section-title">🔒 Privacy & Data Protection</div>
+                    <div class="terms-section-text">
+                        Your health data is encrypted and securely stored. We never share your personal information without explicit consent.
+                    </div>
+                    <ul class="terms-list">
+                        <li>End-to-end encryption for all communications</li>
+                        <li>Anonymous browsing in community forums</li>
+                        <li>Complete control over data sharing</li>
+                        <li>HIPAA compliant data storage</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-section">
+                    <div class="terms-section-title">💬 Community Guidelines</div>
+                    <div class="terms-section-text">
+                        Maintain a respectful, supportive environment for all members:
+                    </div>
+                    <ul class="terms-list">
+                        <li>No harassment or discrimination</li>
+                        <li>Respect privacy and confidentiality</li>
+                        <li>Share experiences, not medical advice</li>
+                        <li>Report inappropriate content</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-section">
+                    <div class="terms-section-title">⚕️ Medical Disclaimer</div>
+                    <div class="terms-section-text">
+                        This app provides health information and connects you with medical professionals, but does not replace professional medical advice, diagnosis, or treatment.
+                    </div>
+                </div>
+                
+                <div class="terms-section">
+                    <div class="terms-section-title">🔔 Notifications & Alerts</div>
+                    <div class="terms-section-text">
+                        We'll send you important health reminders, vaccination alerts, and screening notifications. You can customize these in settings.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="acceptance-cards">
+                <div class="acceptance-card active">
+                    <div class="acceptance-header">
+                        <input type="checkbox" class="checkbox" checked>
+                        <div>
+                            <div class="acceptance-title">I accept the Terms of Service</div>
+                            <div class="acceptance-text">
+                                I have read and agree to the <a href="#" class="acceptance-link">Terms of Service</a> and understand the guidelines for using this platform.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="acceptance-card active">
+                    <div class="acceptance-header">
+                        <input type="checkbox" class="checkbox" checked>
+                        <div>
+                            <div class="acceptance-title">I accept the Privacy Policy</div>
+                            <div class="acceptance-text">
+                                I consent to the collection and processing of my health data as described in the <a href="#" class="acceptance-link">Privacy Policy</a> and understand my data rights.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="acceptance-card">
+                    <div class="acceptance-header">
+                        <input type="checkbox" class="checkbox">
+                        <div>
+                            <div class="acceptance-title">Send me health tips & updates (Optional)</div>
+                            <div class="acceptance-text">
+                                Receive personalized health tips, wellness articles, and community updates via email.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                <button class="btn btn-primary">Accept & Continue</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
+

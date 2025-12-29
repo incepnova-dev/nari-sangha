@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import { topMenuBarStyles, menuIconStyles, alertIconSources } from '../../styles';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 interface AlertIconProps {
   onPress: () => void;
@@ -8,26 +7,68 @@ interface AlertIconProps {
 }
 
 const AlertIcon: React.FC<AlertIconProps> = ({ onPress, isActive = false }) => {
-  // Get the appropriate icon source and style based on isActive prop
-  const iconSource = isActive ? alertIconSources.active : alertIconSources.inactive;
-  const iconStyle = isActive 
-    ? menuIconStyles.alertIconActive 
-    : menuIconStyles.alertIconInactive;
-
   return (
     <TouchableOpacity
-      style={topMenuBarStyles.alertIcon}
+      style={[styles.container, isActive && styles.containerActive]}
       onPress={onPress}
-      accessibilityLabel="Open alerts"
+      activeOpacity={0.7}
+      accessibilityLabel="View notifications"
     >
-      <Image
-        source={iconSource}
-        style={iconStyle}
-        resizeMode="contain"
-      />
+      <View style={[styles.iconCircle, isActive && styles.iconCircleActive]}>
+        <Text style={styles.iconText}>🔔</Text>
+        {isActive && <View style={styles.notificationBadge} />}
+      </View>
     </TouchableOpacity>
   );
 };
 
-export default AlertIcon;
+const styles = StyleSheet.create({
+  container: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  containerActive: {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: 'white',
+    borderWidth: 2,
+  },
+  iconCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  iconCircleActive: {
+    backgroundColor: 'white',
+    shadowColor: '#E91E63',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  iconText: {
+    fontSize: 18,
+  },
+  notificationBadge: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FF4081',
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+});
 
+export default AlertIcon;

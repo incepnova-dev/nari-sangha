@@ -1,24 +1,24 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
-interface ProductsIconProps {
+interface DiscoverIconProps {
   isActive: boolean;
   onPress: () => void;
 }
 
-const ProductsIcon: React.FC<ProductsIconProps> = ({ isActive, onPress }) => {
+const DiscoverIcon: React.FC<DiscoverIconProps> = ({ isActive, onPress }) => {
   return (
     <TouchableOpacity
       style={styles.navItem}
       onPress={onPress}
       activeOpacity={0.7}
-      accessibilityLabel="Navigate to Products"
+      accessibilityLabel="Navigate to Discover"
     >
       <Text style={[styles.navIcon, isActive && styles.navIconActive]}>
-        🛍️
+        🔍
       </Text>
       <Text style={[styles.navLabel, isActive && styles.navLabelActive]}>
-        Products
+        Discover
       </Text>
     </TouchableOpacity>
   );
@@ -46,4 +46,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductsIcon;
+export default DiscoverIcon;
+

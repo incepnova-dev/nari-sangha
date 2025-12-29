@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home / Landing Page - Nari Swasthya Samuday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFE4E1 100%);
+            font-family: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #111;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 0 0 14px #222,
+                0 40px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FFF5F7 0%, #FFFFFF 100%);
+            border-radius: 28px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 99, 0.3);
+            border-radius: 2px;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .home-screen {
+            flex: 1;
+            padding-bottom: 20px;
+        }
+        
+        .home-header {
+            background: linear-gradient(135deg, #E91E63, #FF4081);
+            padding: 20px;
+            padding-top: 10px;
+            border-radius: 0 0 30px 30px;
+            color: white;
+        }
+        
+        .welcome-section {
+            margin-bottom: 20px;
+        }
+        
+        .welcome-text {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .welcome-name {
+            font-size: 28px;
+            font-weight: 800;
+        }
+        
+        .search-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            color: #333;
+        }
+        
+        .search-icon {
+            font-size: 20px;
+            color: #E91E63;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .quick-action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 16px 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .quick-action-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+        
+        .quick-action-text {
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .content-section {
+            padding: 24px 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333;
+        }
+        
+        .see-all {
+            font-size: 14px;
+            color: #E91E63;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #FFE4EC, #FFF5F7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            position: relative;
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #FF4081;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .product-info {
+            padding: 12px;
+        }
+        
+        .product-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        
+        .product-brand {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        
+        .product-pricing {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #E91E63;
+        }
+        
+        .product-original-price {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .platform-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .platform-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: #F5F5F5;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .insurance-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .insurance-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .insurance-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .insurance-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .insurance-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #FFE4EC, #FFF5F7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+        
+        .insurance-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .insurance-provider {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .insurance-features {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .insurance-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+        
+        .feature-check {
+            color: #4CAF50;
+        }
+        
+        .insurance-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #F0F0F0;
+        }
+        
+        .insurance-amount {
+            font-size: 20px;
+            font-weight: 800;
+            color: #E91E63;
+        }
+        
+        .insurance-period {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .conditions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .condition-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .condition-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        .condition-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .condition-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #FFE4EC, #FFF5F7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        
+        .condition-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .condition-snippet {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        .condition-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .condition-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        .tag-symptom {
+            background: #FFE4EC;
+            color: #E91E63;
+        }
+        
+        .tag-prevention {
+            background: #E8F5E9;
+            color: #4CAF50;
+        }
+        
+        .tag-cause {
+            background: #FFF3E0;
+            color: #FF9800;
+        }
+        
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            flex-shrink: 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            color: #999;
+        }
+        
+        .nav-item.active .nav-icon {
+            color: #E91E63;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+        }
+        
+        .nav-item.active .nav-label {
+            color: #E91E63;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+        <div class="home-screen">
+            <div class="status-bar">
+                <span>11:30 AM</span>
+                <div class="status-icons">
+                    <span>📶</span>
+                    <span>🔋 100%</span>
+                </div>
+            </div>
+            
+            <div class="home-header">
+                <div class="welcome-section">
+                    <div class="welcome-text">Welcome back,</div>
+                    <div class="welcome-name">Priya 👋</div>
+                </div>
+                
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Search products, conditions, doctors...">
+                </div>
+                
+                <div class="quick-actions">
+                    <div class="quick-action-btn">
+                        <div class="quick-action-icon">🛍️</div>
+                        <div class="quick-action-text">Shop</div>
+                    </div>
+                    <div class="quick-action-btn">
+                        <div class="quick-action-icon">🏥</div>
+                        <div class="quick-action-text">Hospitals</div>
+                    </div>
+                    <div class="quick-action-btn">
+                        <div class="quick-action-icon">👩‍⚕️</div>
+                        <div class="quick-action-text">Doctors</div>
+                    </div>
+                    <div class="quick-action-btn">
+                        <div class="quick-action-icon">📅</div>
+                        <div class="quick-action-text">Calendar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-title">Healthcare Products</div>
+                    <div class="see-all">See All →</div>
+                </div>
+                
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">
+                            🧴
+                            <div class="discount-badge">30% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Prenatal Vitamins</div>
+                            <div class="product-brand">HealthPlus</div>
+                            <div class="product-pricing">
+                                <div class="product-price">₹349</div>
+                                <div class="product-original-price">₹499</div>
+                            </div>
+                            <div class="platform-tags">
+                                <div class="platform-tag">🛒 Amazon</div>
+                                <div class="platform-tag">💊 1mg</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            🩺
+                            <div class="discount-badge">25% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Menstrual Pain Relief</div>
+                            <div class="product-brand">WellnessRx</div>
+                            <div class="product-pricing">
+                                <div class="product-price">₹225</div>
+                                <div class="product-original-price">₹300</div>
+                            </div>
+                            <div class="platform-tags">
+                                <div class="platform-tag">📦 Flipkart</div>
+                                <div class="platform-tag">💊 Netmeds</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">🧘‍♀️</div>
+                        <div class="product-info">
+                            <div class="product-name">Yoga Mat Premium</div>
+                            <div class="product-brand">FitLife</div>
+                            <div class="product-pricing">
+                                <div class="product-price">₹799</div>
+                                <div class="product-original-price">₹999</div>
+                            </div>
+                            <div class="platform-tags">
+                                <div class="platform-tag">🛒 Amazon</div>
+                                <div class="platform-tag">🏃 Decathlon</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image">
+                            💊
+                            <div class="discount-badge">40% OFF</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Iron Supplements</div>
+                            <div class="product-brand">NutriCare</div>
+                            <div class="product-pricing">
+                                <div class="product-price">₹299</div>
+                                <div class="product-original-price">₹499</div>
+                            </div>
+                            <div class="platform-tags">
+                                <div class="platform-tag">💊 PharmEasy</div>
+                                <div class="platform-tag">💊 Apollo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insurance Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-title">Insurance Plans</div>
+                    <div class="see-all">See All →</div>
+                </div>
+                
+                <div class="insurance-list">
+                    <div class="insurance-card">
+                        <div class="insurance-header">
+                            <div class="insurance-icon">🛡️</div>
+                            <div>
+                                <div class="insurance-title">Women's Health Shield</div>
+                                <div class="insurance-provider">Star Health Insurance</div>
+                            </div>
+                        </div>
+                        <div class="insurance-features">
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Maternity coverage up to ₹2L</span>
+                            </div>
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Cancer treatment covered</span>
+                            </div>
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Annual health checkup included</span>
+                            </div>
+                        </div>
+                        <div class="insurance-price">
+                            <div>
+                                <div class="insurance-amount">₹8,999</div>
+                                <div class="insurance-period">per year</div>
+                            </div>
+                            <button class="btn btn-secondary" style="width: auto; height: 40px; padding: 0 20px; font-size: 14px;">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="insurance-card">
+                        <div class="insurance-header">
+                            <div class="insurance-icon">💝</div>
+                            <div>
+                                <div class="insurance-title">Maternity Care Plus</div>
+                                <div class="insurance-provider">ICICI Lombard</div>
+                            </div>
+                        </div>
+                        <div class="insurance-features">
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Pre & post natal coverage</span>
+                            </div>
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Newborn baby cover (90 days)</span>
+                            </div>
+                            <div class="insurance-feature">
+                                <span class="feature-check">✓</span>
+                                <span>Ambulance charges covered</span>
+                            </div>
+                        </div>
+                        <div class="insurance-price">
+                            <div>
+                                <div class="insurance-amount">₹12,499</div>
+                                <div class="insurance-period">per year</div>
+                            </div>
+                            <button class="btn btn-secondary" style="width: auto; height: 40px; padding: 0 20px; font-size: 14px;">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health Conditions Section -->
+            <div class="content-section">
+                <div class="section-header">
+                    <div class="section-title">Health Conditions Guide</div>
+                    <div class="see-all">View All 20 →</div>
+                </div>
+                
+                <div class="conditions-list">
+                    <div class="condition-card">
+                        <div class="condition-header">
+                            <div class="condition-icon">🩺</div>
+                            <div class="condition-name">Polycystic Ovary Syndrome (PCOS)</div>
+                        </div>
+                        <div class="condition-snippet">
+                            Hormonal disorder causing enlarged ovaries with small cysts. Affects 1 in 10 women of childbearing age.
+                        </div>
+                        <div class="condition-tags">
+                            <div class="condition-tag tag-symptom">Irregular periods</div>
+                            <div class="condition-tag tag-prevention">Lifestyle changes</div>
+                            <div class="condition-tag tag-cause">Hormonal imbalance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-header">
+                            <div class="condition-icon">🎀</div>
+                            <div class="condition-name">Breast Cancer</div>
+                        </div>
+                        <div class="condition-snippet">
+                            Cancer that forms in breast cells. Early detection through regular screening significantly improves outcomes.
+                        </div>
+                        <div class="condition-tags">
+                            <div class="condition-tag tag-symptom">Breast lump</div>
+                            <div class="condition-tag tag-prevention">Regular screening</div>
+                            <div class="condition-tag tag-cause">Genetic factors</div>
+                        </div>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-header">
+                            <div class="condition-icon">🤰</div>
+                            <div class="condition-name">Endometriosis</div>
+                        </div>
+                        <div class="condition-snippet">
+                            Tissue similar to uterine lining grows outside the uterus, causing pain and fertility issues.
+                        </div>
+                        <div class="condition-tags">
+                            <div class="condition-tag tag-symptom">Pelvic pain</div>
+                            <div class="condition-tag tag-prevention">Early diagnosis</div>
+                            <div class="condition-tag tag-cause">Unknown origin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-header">
+                            <div class="condition-icon">💔</div>
+                            <div class="condition-name">Osteoporosis</div>
+                        </div>
+                        <div class="condition-snippet">
+                            Bone disease that weakens bones, making them fragile. More common in postmenopausal women.
+                        </div>
+                        <div class="condition-tags">
+                            <div class="condition-tag tag-symptom">Bone fractures</div>
+                            <div class="condition-tag tag-prevention">Calcium & Vit D</div>
+                            <div class="condition-tag tag-cause">Low bone density</div>
+                        </div>
+                    </div>
+                    
+                    <div class="condition-card">
+                        <div class="condition-header">
+                            <div class="condition-icon">🔴</div>
+                            <div class="condition-name">Anemia</div>
+                        </div>
+                        <div class="condition-snippet">
+                            Lack of healthy red blood cells to carry adequate oxygen. Very common in women due to menstruation.
+                        </div>
+                        <div class="condition-tags">
+                            <div class="condition-tag tag-symptom">Fatigue</div>
+                            <div class="condition-tag tag-prevention">Iron-rich diet</div>
+                            <div class="condition-tag tag-cause">Iron deficiency</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="height: 80px;"></div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">💬</div>
+                <div class="nav-label">Community</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">📊</div>
+                <div class="nav-label">Health</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
+

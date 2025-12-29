@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import { menuIconStyles, homeIconSources } from '../../styles';
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 interface HomeIconProps {
   isActive: boolean;
@@ -8,26 +7,43 @@ interface HomeIconProps {
 }
 
 const HomeIcon: React.FC<HomeIconProps> = ({ isActive, onPress }) => {
-  // Get the appropriate icon source and style based on isActive prop
-  const iconSource = isActive ? homeIconSources.active : homeIconSources.inactive;
-  const iconStyle = isActive 
-    ? menuIconStyles.homeIconActive 
-    : menuIconStyles.homeIconInactive;
-
   return (
     <TouchableOpacity
-      style={[menuIconStyles.menuItem, isActive && menuIconStyles.menuItemActive]}
+      style={styles.navItem}
       onPress={onPress}
+      activeOpacity={0.7}
       accessibilityLabel="Navigate to Home"
     >
-      <Image
-        source={iconSource}
-        style={iconStyle}
-        resizeMode="contain"
-      />
+      <Text style={[styles.navIcon, isActive && styles.navIconActive]}>
+        🏠
+      </Text>
+      <Text style={[styles.navLabel, isActive && styles.navLabelActive]}>
+        Home
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export default HomeIcon;
+const styles = StyleSheet.create({
+  navItem: {
+    alignItems: 'center',
+    gap: 4,
+  },
+  navIcon: {
+    fontSize: 24,
+    color: '#999',
+  },
+  navIconActive: {
+    color: '#E91E63',
+  },
+  navLabel: {
+    fontSize: 11,
+    color: '#999',
+    fontWeight: '600',
+  },
+  navLabelActive: {
+    color: '#E91E63',
+  },
+});
 
+export default HomeIcon;

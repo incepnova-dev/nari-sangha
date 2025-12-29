@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Profile Setup - Nari Swasthya Samuday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #E91E63 0%, #F48FB1 50%, #FCE4EC 100%);
+            font-family: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #111;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 0 0 14px #222,
+                0 40px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 28px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 99, 0.3);
+            border-radius: 2px;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 20px 8px;
+            font-size: 13px;
+            color: #333;
+            position: sticky;
+            top: 0;
+            z-index: 102;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .screen-header {
+            background: linear-gradient(135deg, #C2185B 0%, #E91E63 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+            position: sticky;
+            top: 44px;
+            z-index: 101;
+        }
+        
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 0 80px 0;
+            background: #F8F8F8;
+        }
+        
+        .progress-indicator {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .profile-option {
+            margin: 15px 20px;
+            padding: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .option-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .option-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #FCE4EC, #F8BBD0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .option-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .toggle-switch {
+            width: 50px;
+            height: 28px;
+            background: #DDD;
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .toggle-switch.active {
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+        
+        .toggle-switch.active::after {
+            left: 24px;
+        }
+        
+        .condition-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px;
+        }
+        
+        .condition-tag {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .action-button {
+            margin: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            width: calc(100% - 40px);
+        }
+        
+        .skip-button {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>📶 📡 🔋</span>
+            </div>
+            
+            <div class="screen-header">
+                <div class="header-title">Nari Swasthya Samuday</div>
+                <div class="header-subtitle">Women's Health Community</div>
+            </div>
+            
+            <div class="content-area">
+                <div class="progress-indicator">
+                    <span style="color: #E91E63; font-weight: 700;">⚫</span> 4 of 4
+                </div>
+                
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 22px; font-weight: 700; color: #333; margin-bottom: 10px;">
+                        Health Profile (Optional)
+                    </div>
+                    <div style="font-size: 14px; color: #666;">
+                        Help us personalize your experience
+                    </div>
+                </div>
+                
+                <div class="profile-option">
+                    <div class="option-left">
+                        <div class="option-icon">🌸</div>
+                        <div class="option-text">Track Menstrual Cycle</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+                
+                <div class="profile-option">
+                    <div class="option-left">
+                        <div class="option-icon">🤰</div>
+                        <div class="option-text">Pregnancy Tracking</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+                
+                <div class="profile-option">
+                    <div class="option-left">
+                        <div class="option-icon">💉</div>
+                        <div class="option-text">Vaccination Reminders</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+                
+                <div class="profile-option">
+                    <div class="option-left">
+                        <div class="option-icon">🛡️</div>
+                        <div class="option-text">Insurance Information</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+                
+                <div class="profile-option">
+                    <div class="option-left">
+                        <div class="option-icon">💊</div>
+                        <div class="option-text">Chronic Conditions</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+                
+                <div class="condition-tags">
+                    <div class="condition-tag">PCOS</div>
+                    <div class="condition-tag">Thyroid</div>
+                    <div class="condition-tag">Diabetes</div>
+                    <div class="condition-tag">Nutrition</div>
+                    <div class="condition-tag">Fitness</div>
+                    <div class="condition-tag">Mental Health</div>
+                </div>
+                
+                <button class="action-button">Complete Setup</button>
+                <div class="skip-button">Skip for now</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

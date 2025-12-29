@@ -1,10 +1,18 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+// Determine React Native location (monorepo root or local)
+def rootNodeModules = file("$rootDir/../../../node_modules")
+def localNodeModules = file("$rootDir/../../node_modules")
+def nodeModulesBase = rootNodeModules.exists() ? rootNodeModules : localNodeModules
+def reactNativeDirPath = file("${nodeModulesBase}/react-native")
+
 react {
     /* Autolinking */
     // Enable New Architecture to build required native libraries
     newArchEnabled = true
+    // Configure React Native directory for monorepo
+    reactNativeDir.set(reactNativeDirPath)
 }
 
 def enableProguardInReleaseBuilds = false

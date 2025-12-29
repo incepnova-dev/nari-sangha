@@ -1,6 +1,32 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = 'NariSangha'
 
-def nativeModulesFile = file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+// IMPORTANT: includeBuild must happen BEFORE other includes
+// Conditionally include React Native Gradle plugin if it exists
+// Check both root (monorepo) and local node_modules
+// From apps/mobile/android, root is 3 levels up: ../../../node_modules
+def reactNativeGradlePluginRoot = file('../../../node_modules/@react-native/gradle-plugin')
+def reactNativeGradlePluginLocal = file('../node_modules/@react-native/gradle-plugin')
+def reactNativeGradlePlugin = reactNativeGradlePluginRoot.exists() ? reactNativeGradlePluginRoot : reactNativeGradlePluginLocal
+
+if (reactNativeGradlePlugin.exists()) {
+    includeBuild(reactNativeGradlePlugin)
+}
+
+// In a monorepo, node_modules might be at the root level
+// From apps/mobile/android, root is 3 levels up: ../../../node_modules
+def rootNodeModules = file('../../../node_modules')
+def localNodeModules = file('../node_modules')
+def nodeModulesDir = rootNodeModules.exists() ? rootNodeModules : localNodeModules
+
+def nativeModulesFile = file("${nodeModulesDir}/@react-native-community/cli-platform-android/native_modules.gradle")
 if (nativeModulesFile.exists()) {
     apply from: nativeModulesFile
     try {
@@ -11,7 +37,6 @@ if (nativeModulesFile.exists()) {
 }
 
 include ':app'
-includeBuild('../node_modules/@react-native/gradle-plugin')
 
 
 
