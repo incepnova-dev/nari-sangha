@@ -161,7 +161,20 @@ const DiseaseListing: React.FC<DiseaseListingProps> = ({
                   ))}
                 </View>
               </View>
-              <TouchableOpacity style={styles.learnMoreBtn} activeOpacity={0.8}>
+              <TouchableOpacity
+                style={styles.learnMoreBtn}
+                activeOpacity={0.8}
+                onPress={() => {
+                  navigation?.navigate('DiseaseDetails', {
+                    diseaseId: disease.id,
+                    diseaseName: disease.name,
+                    diseaseCategory: disease.category,
+                    diseaseDescription: disease.description,
+                    diseaseSymptoms: disease.symptoms,
+                    diseasePrevalence: disease.prevalence,
+                  });
+                }}
+              >
                 <Text style={styles.learnMoreBtnText}>Learn More</Text>
               </TouchableOpacity>
             </TouchableOpacity>

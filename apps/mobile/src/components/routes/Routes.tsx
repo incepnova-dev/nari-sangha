@@ -28,6 +28,7 @@ import ClinicListing from '../ClinicListing';
 import DoctorListing from '../DoctorListing';
 import HospitalListing from '../HospitalListing';
 import DiseaseListing from '../DiseaseListing';
+import DiseaseDetails from '../DiseaseDetails';
 
 type RouteName =
   | 'Welcome'
@@ -57,7 +58,8 @@ type RouteName =
   | 'ClinicListing'
   | 'DoctorListing'
   | 'HospitalListing'
-  | 'DiseaseListing';
+  | 'DiseaseListing'
+  | 'DiseaseDetails';
 
 interface RoutesProps {
   initialRoute?: RouteName;
@@ -128,6 +130,7 @@ const Routes: React.FC<RoutesProps> = ({
         DoctorListing: 'DiscoverOptions',
         HospitalListing: 'DiscoverOptions',
         DiseaseListing: 'DiscoverOptions',
+        DiseaseDetails: 'DiseaseListing',
       };
       setCurrentRoute(backRoutes[currentRoute] || 'Welcome');
     },
@@ -405,6 +408,19 @@ const Routes: React.FC<RoutesProps> = ({
           <DiseaseListing
             navigation={navigation}
             user={user}
+          />
+        );
+      case 'DiseaseDetails':
+        return (
+          <DiseaseDetails
+            navigation={navigation}
+            user={user}
+            diseaseId={routeParams.diseaseId}
+            diseaseName={routeParams.diseaseName}
+            diseaseCategory={routeParams.diseaseCategory}
+            diseaseDescription={routeParams.diseaseDescription}
+            diseaseSymptoms={routeParams.diseaseSymptoms}
+            diseasePrevalence={routeParams.diseasePrevalence}
           />
         );
       default:

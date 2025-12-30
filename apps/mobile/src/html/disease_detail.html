@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Detail View - Nari Swasthya Samuday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 50%, #FFE4E1 100%);
+            font-family: 'Segoe UI', 'Roboto', -apple-system, sans-serif;
+            padding: 40px 20px;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #111;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 0 0 14px #222,
+                0 40px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #FFF5F7 0%, #FFFFFF 100%);
+            border-radius: 28px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .phone-screen::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .phone-screen::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 99, 0.3);
+            border-radius: 2px;
+        }
+        
+        .status-bar {
+            height: 44px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 102;
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .top-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            position: sticky;
+            top: 44px;
+            background: white;
+            z-index: 101;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(255, 182, 193, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        
+        .header-title {
+            flex: 1;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-right: 40px;
+        }
+        
+        .btn {
+            width: 100%;
+            height: 56px;
+            border-radius: 28px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #E91E63, #FF4081);
+            color: white;
+            box-shadow: 0 8px 24px rgba(233, 30, 99, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #E91E63;
+            border: 2px solid #E91E63;
+        }
+        
+        .bottom-nav {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #F0F0F0;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            flex-shrink: 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+            color: #999;
+        }
+        
+        .nav-item.active .nav-icon {
+            color: #E91E63;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+        }
+        
+        .nav-item.active .nav-label {
+            color: #E91E63;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="phone-screen">
+        <div class="status-bar">
+            <span>11:30 AM</span>
+            <div class="status-icons">
+                <span>📶</span>
+                <span>🔋 100%</span>
+            </div>
+        </div>
+        
+        <div class="top-header">
+            <button class="back-btn">←</button>
+            <div class="header-title">PCOS Details</div>
+        </div>
+        
+        <div style="flex: 1; padding: 20px; padding-bottom: 20px;">
+            <div style="background: linear-gradient(135deg, #E91E63, #FF4081); border-radius: 24px; padding: 24px; color: white; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(233, 30, 99, 0.3);">
+                <div style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">🩺 Polycystic Ovary Syndrome</div>
+                <div style="font-size: 14px; opacity: 0.95; line-height: 1.6;">
+                    A common hormonal disorder affecting women of reproductive age, characterized by irregular menstrual periods, excess androgen levels, and polycystic ovaries.
+                </div>
+            </div>
+            
+            <!-- Symptoms -->
+            <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                <div style="font-size: 18px; font-weight: 700; color: #E91E63; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    🔍 Common Symptoms
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFE4EC; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">📅</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Irregular Periods</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Infrequent, irregular, or prolonged menstrual cycles</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFE4EC; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">💇</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Excess Hair Growth</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Hirsutism - excess facial and body hair</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFE4EC; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🎯</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Weight Gain</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Difficulty losing weight or unexplained weight gain</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFE4EC; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🌟</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Acne & Oily Skin</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Severe acne or excessively oily skin</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFE4EC; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🌓</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Dark Skin Patches</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Darkening of skin in body creases (neck, armpits)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Causes -->
+            <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                <div style="font-size: 18px; font-weight: 700; color: #FF9800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    ⚡ Root Causes
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFF3E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">⚖️</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Insulin Resistance</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Excess insulin may increase androgen production</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFF3E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🧬</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Genetic Factors</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Family history increases likelihood of PCOS</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFF3E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🔬</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Hormonal Imbalance</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Excess androgens (male hormones) in women</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #FFF3E0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🔥</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Low-grade Inflammation</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Chronic inflammation may trigger insulin resistance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prevention & Management -->
+            <div style="background: white; border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                <div style="font-size: 18px; font-weight: 700; color: #4CAF50; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                    ✅ Prevention & Management
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #E8F5E9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🥗</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Healthy Diet</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Low-GI foods, whole grains, lean proteins, fruits & vegetables</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #E8F5E9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">🏃‍♀️</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Regular Exercise</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">150 minutes/week of moderate activity improves insulin sensitivity</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #E8F5E9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">⚖️</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Weight Management</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Even 5-10% weight loss can significantly improve symptoms</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #E8F5E9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">💊</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Medical Treatment</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Birth control pills, metformin, or fertility medications as prescribed</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <div style="width: 32px; height: 32px; border-radius: 16px; background: #E8F5E9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">😌</div>
+                        <div>
+                            <div style="font-size: 14px; font-weight: 700; color: #333; margin-bottom: 4px;">Stress Management</div>
+                            <div style="font-size: 13px; color: #666; line-height: 1.5;">Yoga, meditation, adequate sleep to reduce cortisol levels</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="margin-bottom: 12px;">
+                📞 Consult a Specialist
+            </button>
+            <button class="btn btn-secondary">
+                💬 Join PCOS Support Group
+            </button>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">💬</div>
+                <div class="nav-label">Community</div>
+            </div>
+            <div class="nav-item active">
+                <div class="nav-icon">📊</div>
+                <div class="nav-label">Health</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
+
