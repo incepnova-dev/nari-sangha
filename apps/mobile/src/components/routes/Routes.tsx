@@ -11,7 +11,6 @@ import ProfileSetup from '../ProfileSetup';
 import RegionSelection from '../RegionSelection';
 import SignIn from '../SignIn';
 import HealthProfileSetup from '../HealthProfileSetup';
-import LandingHome from '../LandingHome';
 import HomeLanding from '../HomeLanding';
 import TermsConditions from '../TermsConditions';
 import SuccessAccountRecovery from '../SuccessAccountRecovery';
@@ -21,6 +20,14 @@ import HealthProducts from '../HealthProducts';
 import Insurance from '../Insurance';
 import WomensInsuranceListing from '../WomensInsuranceListing';
 import InsuranceComparison from '../InsuranceComparison';
+import WomenProductListing from '../WomenProductListing';
+import ProductComparison from '../ProductComparison';
+import AboutUs from '../AboutUs';
+import DiscoverOptions from '../DiscoverOptions';
+import ClinicListing from '../ClinicListing';
+import DoctorListing from '../DoctorListing';
+import HospitalListing from '../HospitalListing';
+import DiseaseListing from '../DiseaseListing';
 
 type RouteName =
   | 'Welcome'
@@ -34,7 +41,6 @@ type RouteName =
   | 'RegionSelection'
   | 'SignIn'
   | 'HealthProfileSetup'
-  | 'LandingHome'
   | 'HomeLanding'
   | 'TermsConditions'
   | 'SuccessAccountRecovery'
@@ -43,7 +49,15 @@ type RouteName =
   | 'HealthProducts'
   | 'Insurance'
   | 'WomensInsuranceListing'
-  | 'InsuranceComparison';
+  | 'InsuranceComparison'
+  | 'WomenProductListing'
+  | 'ProductComparison'
+  | 'AboutUs'
+  | 'DiscoverOptions'
+  | 'ClinicListing'
+  | 'DoctorListing'
+  | 'HospitalListing'
+  | 'DiseaseListing';
 
 interface RoutesProps {
   initialRoute?: RouteName;
@@ -97,7 +111,6 @@ const Routes: React.FC<RoutesProps> = ({
         RegionSelection: 'Welcome',
         SignIn: 'Welcome',
         HealthProfileSetup: 'Success',
-        LandingHome: 'HealthProfileSetup',
         HomeLanding: 'HealthProfileSetup',
         TermsConditions: 'PasswordPinSetup',
         SuccessAccountRecovery: 'PasswordPinSetup',
@@ -107,6 +120,14 @@ const Routes: React.FC<RoutesProps> = ({
         Insurance: 'ProductsOption',
         WomensInsuranceListing: 'ProductsOption',
         InsuranceComparison: 'WomensInsuranceListing',
+        WomenProductListing: 'ProductsOption',
+        ProductComparison: 'WomenProductListing',
+        AboutUs: 'HomeLanding',
+        DiscoverOptions: 'HomeLanding',
+        ClinicListing: 'DiscoverOptions',
+        DoctorListing: 'DiscoverOptions',
+        HospitalListing: 'DiscoverOptions',
+        DiseaseListing: 'DiscoverOptions',
       };
       setCurrentRoute(backRoutes[currentRoute] || 'Welcome');
     },
@@ -241,14 +262,6 @@ const Routes: React.FC<RoutesProps> = ({
             }}
           />
         );
-      case 'LandingHome':
-        return (
-          <HomeLanding
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
       case 'HomeLanding':
         return (
           <HomeLanding
@@ -328,6 +341,70 @@ const Routes: React.FC<RoutesProps> = ({
             navigation={navigation}
             user={user}
             selectedPlanIds={routeParams.selectedPlanIds || []}
+          />
+        );
+      case 'WomenProductListing':
+        return (
+          <WomenProductListing
+            navigation={navigation}
+            user={user}
+          />
+        );
+      case 'ProductComparison':
+        return (
+          <ProductComparison
+            navigation={navigation}
+            user={user}
+            productId={routeParams.productId}
+            productName={routeParams.productName}
+            productPrice={routeParams.productPrice}
+            productDescription={routeParams.productDescription}
+            productCategory={routeParams.productCategory}
+          />
+        );
+      case 'AboutUs':
+        return (
+          <AboutUs
+            navigation={navigation}
+            user={user}
+          />
+        );
+      case 'DiscoverOptions':
+        return (
+          <DiscoverOptions
+            navigation={navigation}
+            user={user}
+            onContinue={(option) => {
+              console.log('Discover option selected:', option);
+            }}
+          />
+        );
+      case 'ClinicListing':
+        return (
+          <ClinicListing
+            navigation={navigation}
+            user={user}
+          />
+        );
+      case 'DoctorListing':
+        return (
+          <DoctorListing
+            navigation={navigation}
+            user={user}
+          />
+        );
+      case 'HospitalListing':
+        return (
+          <HospitalListing
+            navigation={navigation}
+            user={user}
+          />
+        );
+      case 'DiseaseListing':
+        return (
+          <DiseaseListing
+            navigation={navigation}
+            user={user}
           />
         );
       default:

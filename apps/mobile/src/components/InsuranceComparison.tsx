@@ -7,8 +7,10 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
+import BottomMenuBar from './BottomMenuBar';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -21,6 +23,7 @@ interface InsurancePlan {
   price: string;
   rating: number;
   coverage: string[];
+  buyLink: string;
 }
 
 interface InsuranceComparisonProps {
@@ -54,6 +57,7 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
         'Annual health checkups',
         'No waiting period for accidents',
       ],
+      buyLink: 'https://www.careinsurance.com',
     },
     {
       id: '2',
@@ -69,6 +73,7 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
         'No claim bonus',
         'Wellness benefits included',
       ],
+      buyLink: 'https://www.starhealth.in',
     },
     {
       id: '3',
@@ -82,6 +87,7 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
         'Health checkups',
         'Preventive care benefits',
       ],
+      buyLink: 'https://www.maxbupa.com',
     },
   ];
 
@@ -98,10 +104,32 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
 
   // Calculate responsive column widths
   const firstColumnWidth = Math.max(140, SCREEN_WIDTH * 0.35);
-  const planColumnWidth = Math.max(180, SCREEN_WIDTH * 0.65);
+  const planColumnWidth = Math.max(180, SCREEN_WIDTH * 0.5);
   const tableMinWidth = firstColumnWidth + (plansToCompare.length * planColumnWidth);
   // Ensure minimum width is greater than screen width for scrolling
   const tableWidth = Math.max(SCREEN_WIDTH + 1, tableMinWidth);
+
+  const handleBuyNow = async (url: string) => {
+    try {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+      }
+    } catch (error: unknown) {
+      console.error('Error opening URL:', error);
+    }
+  };
+
+  const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
+    if (screen === 'products') {
+      navigation?.navigate('ProductsOption');
+    } else if (screen === 'home') {
+      navigation?.navigate('HomeLanding');
+    } else {
+      // Handle other navigation logic here if needed
+      console.log('Navigate to:', screen);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -133,29 +161,28 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
         <Text style={styles.scrollHintText}>← Swipe to compare plans →</Text>
       </View>
 
-      {/* Vertical Scroll Container */}
+      {/* Horizontal Scroll Container - Outer */}
       <ScrollView
-        style={styles.verticalScroll}
-        contentContainerStyle={styles.verticalScrollContent}
-        showsVerticalScrollIndicator={true}
-        nestedScrollEnabled={true}
+        horizontal
+        showsHorizontalScrollIndicator={true}
+        style={styles.horizontalScroll}
+        contentContainerStyle={[
+          styles.horizontalScrollContent,
+          { width: tableWidth },
+        ]}
+        bounces={true}
+        decelerationRate="normal"
+        scrollEnabled={true}
         scrollEventThrottle={16}
+        directionalLockEnabled={true}
       >
-        {/* Horizontal Scroll Container */}
+        {/* Vertical Scroll Container - Inner */}
         <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={true}
-          style={styles.horizontalScroll}
-          contentContainerStyle={[
-            styles.horizontalScrollContent,
-            { width: tableWidth },
-          ]}
-          bounces={true}
-          decelerationRate="normal"
-          scrollEnabled={true}
+          style={[styles.verticalScroll, { width: tableWidth }]}
+          contentContainerStyle={styles.verticalScrollContent}
+          showsVerticalScrollIndicator={true}
           nestedScrollEnabled={true}
           scrollEventThrottle={16}
-          directionalLockEnabled={false}
         >
           <View style={[
             styles.comparisonTable,
@@ -257,14 +284,11 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
               {plansToCompare.map((plan) => (
                 <View key={plan.id} style={[styles.planColumn, { width: planColumnWidth }]}>
                   <TouchableOpacity
-                    style={styles.viewDetailsBtn}
+                    style={styles.buyBtn}
                     activeOpacity={0.8}
-                    onPress={() => {
-                      // Handle view details
-                      console.log('View details for:', plan.providerName);
-                    }}
+                    onPress={() => handleBuyNow(plan.buyLink)}
                   >
-                    <Text style={styles.viewDetailsBtnText}>View Details</Text>
+                    <Text style={styles.buyBtnText}>Buy Now</Text>
                   </TouchableOpacity>
                 </View>
               ))}
@@ -272,6 +296,12 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
           </View>
         </ScrollView>
       </ScrollView>
+
+      {/* BottomMenuBar */}
+      <BottomMenuBar
+        activeScreen="products"
+        onNavigate={handleNavigate}
+      />
     </View>
   );
 };
@@ -319,19 +349,17 @@ const styles = StyleSheet.create({
   headerSpacer: {
     width: 35,
   },
+  horizontalScroll: {
+    flex: 1,
+  },
+  horizontalScrollContent: {
+    minWidth: SCREEN_WIDTH,
+  },
   verticalScroll: {
     flex: 1,
   },
   verticalScrollContent: {
-    paddingBottom: 20,
-  },
-  horizontalScroll: {
-    width: SCREEN_WIDTH,
-  },
-  horizontalScrollContent: {
-    paddingBottom: 20,
-    paddingRight: 20,
-    flexGrow: 1,
+    paddingBottom: 100,
   },
   comparisonTable: {
     flexDirection: 'column',
@@ -469,8 +497,8 @@ const styles = StyleSheet.create({
   actionRow: {
     paddingVertical: 15,
   },
-  viewDetailsBtn: {
-    backgroundColor: '#E91E63',
+  buyBtn: {
+    backgroundColor: '#4CAF50',
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20,
@@ -478,9 +506,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  viewDetailsBtnText: {
+  buyBtnText: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '700',
     color: 'white',
   },
   bottomSpacer: {

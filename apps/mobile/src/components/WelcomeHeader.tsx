@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import { View, Text, Platform, StatusBar, StyleSheet } from 'react-native';
 import ProfileIcon from './topMenu/ProfileIcon';
 import AlertIcon from './topMenu/AlertIcon';
+import HamburgerMenu from './topMenu/HamburgerMenu';
 import AlertModal from './AlertModal';
 
 interface WelcomeHeaderProps {
   userName: string;
   navigation?: any;
   onProfilePress?: () => void;
+  onMenuPress?: () => void;
   showProfileIcon?: boolean;
   isProfileActive?: boolean;
+  isMenuActive?: boolean;
 }
 
 const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
   userName,
   onProfilePress,
+  onMenuPress,
   showProfileIcon = true,
   isProfileActive = false,
+  isMenuActive = false,
 }) => {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
 
@@ -36,9 +41,15 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
   return (
     <>
       <View style={[styles.container, { paddingTop }]}>
-        <View style={styles.welcomeSection}>
-          <Text style={styles.welcomeText}>Welcome back,</Text>
-          <Text style={styles.welcomeName}>{userName} 👋</Text>
+        <View style={styles.leftSection}>
+          <HamburgerMenu 
+            onPress={onMenuPress || (() => console.log('Menu pressed'))} 
+            isActive={isMenuActive} 
+          />
+          <View style={styles.welcomeSection}>
+            <Text style={styles.welcomeText}>Welcome back,</Text>
+            <Text style={styles.welcomeName}>{userName} 👋</Text>
+          </View>
         </View>
         <View style={styles.iconsContainer}>
           <AlertIcon 
@@ -64,9 +75,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  leftSection: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  hamburgerPlaceholder: {
+    width: 40,
+    height: 40,
+  },
   welcomeSection: {
     flex: 1,
-    marginRight: 12,
+    marginLeft: 12,
   },
   welcomeText: {
     fontSize: 16,

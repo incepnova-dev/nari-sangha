@@ -7,6 +7,7 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
+import BottomMenuBar from './BottomMenuBar';
 
 interface ProductsOptionProps {
   navigation?: any;
@@ -24,9 +25,20 @@ const ProductsOption: React.FC<ProductsOptionProps> = ({
   const handleContinue = () => {
     onContinue?.(selectedOption);
     if (selectedOption === 'healthProducts') {
-      navigation?.navigate('HealthProducts');
+      navigation?.navigate('WomenProductListing');
     } else {
       navigation?.navigate('WomensInsuranceListing');
+    }
+  };
+
+  const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
+    if (screen === 'products') {
+      // Already on products screen
+      return;
+    } else if (screen === 'home') {
+      navigation?.navigate('HomeLanding');
+    } else {
+      console.log('Navigate to:', screen);
     }
   };
 
@@ -123,6 +135,12 @@ const ProductsOption: React.FC<ProductsOptionProps> = ({
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      {/* BottomMenuBar */}
+      <BottomMenuBar
+        activeScreen="products"
+        onNavigate={handleNavigate}
+      />
     </View>
   );
 };
@@ -138,6 +156,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: 20,
     paddingTop: 60,
+    paddingBottom: 100,
   },
   header: {
     flexDirection: 'row',

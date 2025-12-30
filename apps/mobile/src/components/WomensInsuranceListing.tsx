@@ -7,8 +7,10 @@ import {
   ScrollView,
   StatusBar,
   TextInput,
+  Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
+import BottomMenuBar from './BottomMenuBar';
 
 interface InsurancePlan {
   id: string;
@@ -19,7 +21,15 @@ interface InsurancePlan {
   price: string;
   rating: number;
   coverage: string[];
-  isSelected: boolean;
+  details?: {
+    coverage: string;
+    waitingPeriod: string;
+    networkHospitals: string;
+    claimSettlement: string;
+    additionalBenefits: string[];
+    terms: string;
+  };
+  buyLink: string;
 }
 
 interface WomensInsuranceListingProps {
@@ -35,6 +45,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [selectedPlans, setSelectedPlans] = useState<Set<string>>(new Set());
 
   const insurancePlans: InsurancePlan[] = [
@@ -52,7 +63,20 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
         'Annual health checkups',
         'No waiting period for accidents',
       ],
-      isSelected: false,
+      details: {
+        coverage: '₹5,00,000',
+        waitingPeriod: '12 months for maternity',
+        networkHospitals: '10,000+ hospitals',
+        claimSettlement: 'Cashless treatment available',
+        additionalBenefits: [
+          'Pre and post hospitalization coverage',
+          'Day care procedures covered',
+          'Domiciliary hospitalization',
+          'Organ donor expenses covered',
+        ],
+        terms: 'Subject to policy terms and conditions. Premium may vary based on age and medical history.',
+      },
+      buyLink: 'https://www.caresupreme.in',
     },
     {
       id: '2',
@@ -68,7 +92,20 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
         'No claim bonus',
         'Wellness benefits included',
       ],
-      isSelected: false,
+      details: {
+        coverage: '₹7,00,000',
+        waitingPeriod: '9 months for maternity',
+        networkHospitals: '8,500+ hospitals',
+        claimSettlement: 'Quick claim processing',
+        additionalBenefits: [
+          'Newborn coverage from day 1',
+          'Vaccination expenses covered',
+          'Post-delivery complications',
+          'Lactation consultation',
+        ],
+        terms: 'Subject to policy terms and conditions. Premium may vary based on age and medical history.',
+      },
+      buyLink: 'https://www.starhealth.in',
     },
     {
       id: '3',
@@ -82,9 +119,26 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
         'Health checkups',
         'Preventive care benefits',
       ],
-      isSelected: false,
+      details: {
+        coverage: '₹3,00,000',
+        waitingPeriod: '24 months for maternity',
+        networkHospitals: '12,000+ hospitals',
+        claimSettlement: '24/7 claim support',
+        additionalBenefits: [
+          'Mental health counseling sessions',
+          'Fertility treatment coverage',
+          'Alternative medicine coverage',
+          'Wellness program benefits',
+        ],
+        terms: 'Subject to policy terms and conditions. Premium may vary based on age and medical history.',
+      },
+      buyLink: 'https://www.maxbupa.com',
     },
   ];
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
 
   const togglePlanSelection = (planId: string) => {
     const newSelected = new Set(selectedPlans);
@@ -94,6 +148,35 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
       newSelected.add(planId);
     }
     setSelectedPlans(newSelected);
+  };
+
+  const handleBuyNow = async (url: string) => {
+    try {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+      }
+    } catch (error: unknown) {
+      console.error('Error opening URL:', error);
+    }
+  };
+
+  const handleCompareSelected = () => {
+    if (selectedPlans.size > 0) {
+      navigation?.navigate('InsuranceComparison', {
+        selectedPlanIds: Array.from(selectedPlans),
+      });
+    }
+  };
+
+  const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
+    if (screen === 'products') {
+      navigation?.navigate('ProductsOption');
+    } else if (screen === 'home') {
+      navigation?.navigate('HomeLanding');
+    } else {
+      console.log('Navigate to:', screen);
+    }
   };
 
   const filteredPlans = insurancePlans.filter((plan) =>
@@ -142,7 +225,8 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
 
         {/* Insurance Cards */}
         <View style={styles.cardsContainer}>
-          {filteredPlans.map((plan) => {
+          {filteredPlans.map((plan, index) => {
+            const isExpanded = expandedIndex === index;
             const isSelected = selectedPlans.has(plan.id);
             return (
               <View key={plan.id} style={styles.insuranceCard}>
@@ -167,8 +251,9 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
 
                 <View style={styles.priceRow}>
                   <TouchableOpacity
-                    style={styles.checkbox}
+                    style={[styles.checkbox, isSelected && styles.checkboxSelected]}
                     onPress={() => togglePlanSelection(plan.id)}
+                    activeOpacity={0.7}
                   >
                     {isSelected && <Text style={styles.checkmark}>✓</Text>}
                   </TouchableOpacity>
@@ -180,46 +265,96 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
                 </View>
 
                 <View style={styles.coverageList}>
-                  {plan.coverage.map((item, index) => (
-                    <View key={index} style={styles.coverageItem}>
+                  {plan.coverage.map((item, cIndex) => (
+                    <View key={cIndex} style={styles.coverageItem}>
                       <Text style={styles.coverageCheck}>✓</Text>
                       <Text style={styles.coverageText}>{item}</Text>
                     </View>
                   ))}
                 </View>
 
-                <View style={styles.actionButtons}>
-                  <TouchableOpacity style={styles.btnPrimary} activeOpacity={0.8}>
-                    <Text style={styles.btnPrimaryText}>View Details</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.btnIcon} activeOpacity={0.8}>
-                    <Text style={styles.btnIconText}>Compare</Text>
-                  </TouchableOpacity>
-                </View>
+                {/* Expandable Details Section */}
+                {isExpanded && plan.details && (
+                  <View style={styles.expandedDetails}>
+                    <View style={styles.detailsSection}>
+                      <Text style={styles.detailsTitle}>Coverage Details</Text>
+                      <View style={styles.detailRow}>
+                        <Text style={styles.detailLabel}>Sum Insured:</Text>
+                        <Text style={styles.detailValue}>{plan.details.coverage}</Text>
+                      </View>
+                      <View style={styles.detailRow}>
+                        <Text style={styles.detailLabel}>Waiting Period:</Text>
+                        <Text style={styles.detailValue}>{plan.details.waitingPeriod}</Text>
+                      </View>
+                      <View style={styles.detailRow}>
+                        <Text style={styles.detailLabel}>Network Hospitals:</Text>
+                        <Text style={styles.detailValue}>{plan.details.networkHospitals}</Text>
+                      </View>
+                      <View style={styles.detailRow}>
+                        <Text style={styles.detailLabel}>Claim Settlement:</Text>
+                        <Text style={styles.detailValue}>{plan.details.claimSettlement}</Text>
+                      </View>
+                    </View>
+
+                    <View style={styles.detailsSection}>
+                      <Text style={styles.detailsTitle}>Additional Benefits</Text>
+                      {plan.details.additionalBenefits.map((benefit, bIndex) => (
+                        <View key={bIndex} style={styles.benefitItem}>
+                          <Text style={styles.benefitCheck}>✓</Text>
+                          <Text style={styles.benefitText}>{benefit}</Text>
+                        </View>
+                      ))}
+                    </View>
+
+                    <View style={styles.termsSection}>
+                      <Text style={styles.termsText}>{plan.details.terms}</Text>
+                    </View>
+
+                    <TouchableOpacity
+                      style={styles.buyNowBtn}
+                      activeOpacity={0.8}
+                      onPress={() => handleBuyNow(plan.buyLink)}
+                    >
+                      <Text style={styles.buyNowBtnText}>Buy Now from {plan.providerName}</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+
+                {/* View Details Button - Full Width */}
+                <TouchableOpacity
+                  style={styles.viewDetailsBtn}
+                  activeOpacity={0.8}
+                  onPress={() => toggleExpand(index)}
+                >
+                  <Text style={styles.viewDetailsBtnText}>
+                    {isExpanded ? 'Hide Details' : 'View Details'}
+                  </Text>
+                </TouchableOpacity>
               </View>
             );
           })}
         </View>
 
-        {/* Compare Button */}
+        {/* Compare Selected Button */}
         <TouchableOpacity
-          style={styles.actionButton}
+          style={[styles.compareButton, selectedPlans.size === 0 && styles.compareButtonDisabled]}
           activeOpacity={0.8}
-          onPress={() => {
-            if (selectedPlans.size > 0) {
-              navigation?.navigate('InsuranceComparison', {
-                selectedPlanIds: Array.from(selectedPlans),
-              });
-            }
-          }}
+          onPress={handleCompareSelected}
+          disabled={selectedPlans.size === 0}
         >
-          <Text style={styles.actionButtonText}>
+          <Text style={styles.compareButtonText}>
             Compare Selected ({selectedPlans.size})
           </Text>
         </TouchableOpacity>
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
+
+      {/* BottomMenuBar */}
+      <BottomMenuBar
+        activeScreen="products"
+        onNavigate={handleNavigate}
+      />
     </View>
   );
 };
@@ -233,7 +368,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 80,
+    paddingBottom: 100,
   },
   header: {
     flexDirection: 'row',
@@ -370,8 +505,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  checkboxSelected: {
+    backgroundColor: '#E91E63',
+  },
   checkmark: {
-    color: '#E91E63',
+    color: 'white',
     fontSize: 14,
     fontWeight: '700',
   },
@@ -412,39 +550,97 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#555',
   },
-  actionButtons: {
-    flexDirection: 'row',
-    gap: 10,
+  expandedDetails: {
+    marginTop: 12,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
   },
-  btnPrimary: {
+  detailsSection: {
+    marginBottom: 16,
+  },
+  detailsTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#E91E63',
+    marginBottom: 12,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  detailLabel: {
+    fontSize: 13,
+    color: '#666',
     flex: 1,
-    paddingVertical: 12,
-    backgroundColor: '#E91E63',
-    borderRadius: 12,
+  },
+  detailValue: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#333',
+    flex: 1,
+    textAlign: 'right',
+  },
+  benefitItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+    gap: 8,
+  },
+  benefitCheck: {
+    color: '#4CAF50',
+    fontSize: 13,
+    fontWeight: '700',
+    marginTop: 2,
+  },
+  benefitText: {
+    fontSize: 13,
+    color: '#555',
+    flex: 1,
+  },
+  termsSection: {
+    backgroundColor: '#FFF5F7',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+  },
+  termsText: {
+    fontSize: 11,
+    color: '#666',
+    lineHeight: 16,
+    fontStyle: 'italic',
+  },
+  buyNowBtn: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 8,
   },
-  btnPrimaryText: {
-    fontSize: 14,
+  buyNowBtnText: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: 'white',
+  },
+  viewDetailsBtn: {
+    backgroundColor: '#E91E63',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: 8,
+  },
+  viewDetailsBtnText: {
+    fontSize: 15,
     fontWeight: '600',
     color: 'white',
   },
-  btnIcon: {
-    paddingVertical: 12,
-    paddingHorizontal: 15,
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#E91E63',
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnIconText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#E91E63',
-  },
-  actionButton: {
+  compareButton: {
     margin: 20,
     marginTop: 10,
     paddingVertical: 15,
@@ -458,7 +654,10 @@ const styles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 4,
   },
-  actionButtonText: {
+  compareButtonDisabled: {
+    opacity: 0.6,
+  },
+  compareButtonText: {
     fontSize: 16,
     fontWeight: '600',
     color: 'white',
