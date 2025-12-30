@@ -8,19 +8,25 @@ import {
   StatusBar,
 } from 'react-native';
 import BottomMenuBar from './BottomMenuBar';
+import WelcomeHeader from './WelcomeHeader';
 
 interface ProductsOptionProps {
   navigation?: any;
+  user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
   onContinue?: (option: 'healthProducts' | 'insurance') => void;
 }
 
 const ProductsOption: React.FC<ProductsOptionProps> = ({
   navigation,
+  user,
+  onSignOut,
   onBack,
   onContinue,
 }) => {
   const [selectedOption, setSelectedOption] = useState<'healthProducts' | 'insurance'>('healthProducts');
+  const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
   const handleContinue = () => {
     onContinue?.(selectedOption);
@@ -37,14 +43,27 @@ const ProductsOption: React.FC<ProductsOptionProps> = ({
       return;
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
+      
+      <WelcomeHeader
+        userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
+        onProfilePress={() => {
+          navigation?.navigate('Profile');
+        }}
+      />
+
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -155,7 +174,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
-    paddingTop: 60,
+    paddingTop: 0,
     paddingBottom: 100,
   },
   header: {

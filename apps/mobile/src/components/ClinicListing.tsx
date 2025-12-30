@@ -26,12 +26,14 @@ interface Clinic {
 interface ClinicListingProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
 }
 
 const ClinicListing: React.FC<ClinicListingProps> = ({
   navigation,
   user,
+  onSignOut,
   onBack,
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
@@ -85,8 +87,8 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
       navigation?.navigate('HomeLanding');
     } else if (screen === 'products') {
       navigation?.navigate('ProductsOption');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -102,6 +104,9 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
 
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}

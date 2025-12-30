@@ -160,8 +160,10 @@ const AboutUs: React.FC<AboutUsProps> = ({
       navigation?.navigate('ProductsOption');
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -175,6 +177,9 @@ const AboutUs: React.FC<AboutUsProps> = ({
       
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}

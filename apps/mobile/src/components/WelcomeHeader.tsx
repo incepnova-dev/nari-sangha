@@ -4,10 +4,13 @@ import ProfileIcon from './topMenu/ProfileIcon';
 import AlertIcon from './topMenu/AlertIcon';
 import HamburgerMenu from './topMenu/HamburgerMenu';
 import AlertModal from './AlertModal';
+import SideMenu from './SideMenu';
 
 interface WelcomeHeaderProps {
   userName: string;
   navigation?: any;
+  user?: any;
+  onSignOut?: () => void;
   onProfilePress?: () => void;
   onMenuPress?: () => void;
   showProfileIcon?: boolean;
@@ -17,6 +20,9 @@ interface WelcomeHeaderProps {
 
 const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
   userName,
+  navigation,
+  user,
+  onSignOut,
   onProfilePress,
   onMenuPress,
   showProfileIcon = true,
@@ -24,6 +30,7 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
   isMenuActive = false,
 }) => {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   // Get status bar height for Android, use safe default for iOS
   const statusBarHeight =
@@ -38,13 +45,24 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
     setIsAlertModalOpen(false);
   };
 
+  const handleMenuPress = () => {
+    if (onMenuPress) {
+      onMenuPress();
+    } else {
+      setIsSideMenuOpen(true);
+    }
+  };
+
+  // Determine if menu is active (either from prop or internal state)
+  const menuActive = isMenuActive || isSideMenuOpen;
+
   return (
     <>
       <View style={[styles.container, { paddingTop }]}>
         <View style={styles.leftSection}>
           <HamburgerMenu 
-            onPress={onMenuPress || (() => console.log('Menu pressed'))} 
-            isActive={isMenuActive} 
+            onPress={handleMenuPress} 
+            isActive={menuActive} 
           />
           <View style={styles.welcomeSection}>
             <Text style={styles.welcomeText}>Welcome back,</Text>
@@ -62,6 +80,15 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
         </View>
       </View>
       <AlertModal isOpen={isAlertModalOpen} onClose={handleCloseAlert} />
+      {navigation && user && (
+        <SideMenu
+          isOpen={isSideMenuOpen}
+          onClose={() => setIsSideMenuOpen(false)}
+          navigation={navigation}
+          user={user}
+          onSignOut={onSignOut}
+        />
+      )}
     </>
   );
 };

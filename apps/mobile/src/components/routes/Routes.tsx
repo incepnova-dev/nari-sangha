@@ -29,6 +29,10 @@ import DoctorListing from '../DoctorListing';
 import HospitalListing from '../HospitalListing';
 import DiseaseListing from '../DiseaseListing';
 import DiseaseDetails from '../DiseaseDetails';
+import TrackOptions from '../TrackOptions';
+import VaccineTracking from '../VaccineTracking';
+import ScreeningTracking from '../ScreeningTracking';
+import CycleTracking from '../CycleTracking';
 
 type RouteName =
   | 'Welcome'
@@ -59,7 +63,11 @@ type RouteName =
   | 'DoctorListing'
   | 'HospitalListing'
   | 'DiseaseListing'
-  | 'DiseaseDetails';
+  | 'DiseaseDetails'
+  | 'TrackOptions'
+  | 'VaccineTracking'
+  | 'ScreeningTracking'
+  | 'CycleTracking';
 
 interface RoutesProps {
   initialRoute?: RouteName;
@@ -131,6 +139,10 @@ const Routes: React.FC<RoutesProps> = ({
         HospitalListing: 'DiscoverOptions',
         DiseaseListing: 'DiscoverOptions',
         DiseaseDetails: 'DiseaseListing',
+        TrackOptions: 'HomeLanding',
+        VaccineTracking: 'TrackOptions',
+        ScreeningTracking: 'TrackOptions',
+        CycleTracking: 'TrackOptions',
       };
       setCurrentRoute(backRoutes[currentRoute] || 'Welcome');
     },
@@ -312,6 +324,8 @@ const Routes: React.FC<RoutesProps> = ({
         return (
           <ProductsOption
             navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
             onContinue={(option) => {
               console.log('Product option selected:', option);
             }}
@@ -336,6 +350,7 @@ const Routes: React.FC<RoutesProps> = ({
           <WomensInsuranceListing
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
           />
         );
       case 'InsuranceComparison':
@@ -343,6 +358,7 @@ const Routes: React.FC<RoutesProps> = ({
           <InsuranceComparison
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
             selectedPlanIds={routeParams.selectedPlanIds || []}
           />
         );
@@ -351,6 +367,7 @@ const Routes: React.FC<RoutesProps> = ({
           <WomenProductListing
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
           />
         );
       case 'ProductComparison':
@@ -358,6 +375,7 @@ const Routes: React.FC<RoutesProps> = ({
           <ProductComparison
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
             productId={routeParams.productId}
             productName={routeParams.productName}
             productPrice={routeParams.productPrice}
@@ -370,6 +388,7 @@ const Routes: React.FC<RoutesProps> = ({
           <AboutUs
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
           />
         );
       case 'DiscoverOptions':
@@ -377,6 +396,7 @@ const Routes: React.FC<RoutesProps> = ({
           <DiscoverOptions
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
             onContinue={(option) => {
               console.log('Discover option selected:', option);
             }}
@@ -408,6 +428,7 @@ const Routes: React.FC<RoutesProps> = ({
           <DiseaseListing
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
           />
         );
       case 'DiseaseDetails':
@@ -415,12 +436,48 @@ const Routes: React.FC<RoutesProps> = ({
           <DiseaseDetails
             navigation={navigation}
             user={user}
+            onSignOut={handleSignOut}
             diseaseId={routeParams.diseaseId}
             diseaseName={routeParams.diseaseName}
             diseaseCategory={routeParams.diseaseCategory}
             diseaseDescription={routeParams.diseaseDescription}
             diseaseSymptoms={routeParams.diseaseSymptoms}
             diseasePrevalence={routeParams.diseasePrevalence}
+          />
+        );
+      case 'TrackOptions':
+        return (
+          <TrackOptions
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
+            onContinue={(option) => {
+              console.log('Track option selected:', option);
+            }}
+          />
+        );
+      case 'VaccineTracking':
+        return (
+          <VaccineTracking
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
+          />
+        );
+      case 'ScreeningTracking':
+        return (
+          <ScreeningTracking
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
+          />
+        );
+      case 'CycleTracking':
+        return (
+          <CycleTracking
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
           />
         );
       default:

@@ -24,12 +24,14 @@ interface Disease {
 interface DiseaseListingProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
 }
 
 const DiseaseListing: React.FC<DiseaseListingProps> = ({
   navigation,
   user,
+  onSignOut,
   onBack,
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
@@ -87,8 +89,8 @@ const DiseaseListing: React.FC<DiseaseListingProps> = ({
       navigation?.navigate('HomeLanding');
     } else if (screen === 'products') {
       navigation?.navigate('ProductsOption');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -96,12 +98,15 @@ const DiseaseListing: React.FC<DiseaseListingProps> = ({
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
-      <WelcomeHeader
-        userName={userName}
-        onProfilePress={() => {
-          navigation?.navigate('Profile');
-        }}
-      />
+          <WelcomeHeader
+            userName={userName}
+            navigation={navigation}
+            user={user}
+            onSignOut={onSignOut}
+            onProfilePress={() => {
+              navigation?.navigate('Profile');
+            }}
+          />
 
       <ScrollView
         style={styles.scrollView}

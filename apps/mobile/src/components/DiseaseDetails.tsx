@@ -170,8 +170,8 @@ const DiseaseDetails: React.FC<DiseaseDetailsProps> = ({
       navigation?.navigate('HomeLanding');
     } else if (screen === 'products') {
       navigation?.navigate('ProductsOption');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -190,12 +190,15 @@ const DiseaseDetails: React.FC<DiseaseDetailsProps> = ({
     <View style={styles.container}>
       <StatusBar barStyle="light-content" />
 
-      <WelcomeHeader
-        userName={userName}
-        onProfilePress={() => {
-          navigation?.navigate('Profile');
-        }}
-      />
+          <WelcomeHeader
+            userName={userName}
+            navigation={navigation}
+            user={user}
+            onSignOut={onSignOut}
+            onProfilePress={() => {
+              navigation?.navigate('Profile');
+            }}
+          />
 
       <ScrollView
         style={styles.scrollView}

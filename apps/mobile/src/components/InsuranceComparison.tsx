@@ -29,6 +29,7 @@ interface InsurancePlan {
 interface InsuranceComparisonProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   selectedPlanIds?: string[];
   onBack?: () => void;
 }
@@ -36,6 +37,7 @@ interface InsuranceComparisonProps {
 const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
   navigation,
   user,
+  onSignOut,
   selectedPlanIds = [],
   onBack,
 }) => {
@@ -125,9 +127,10 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
       navigation?.navigate('ProductsOption');
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
-    } else {
-      // Handle other navigation logic here if needed
-      console.log('Navigate to:', screen);
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -137,6 +140,9 @@ const InsuranceComparison: React.FC<InsuranceComparisonProps> = ({
       
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}

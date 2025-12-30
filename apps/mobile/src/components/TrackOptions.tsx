@@ -10,22 +10,22 @@ import {
 import BottomMenuBar from './BottomMenuBar';
 import WelcomeHeader from './WelcomeHeader';
 
-interface DiscoverOptionsProps {
+interface TrackOptionsProps {
   navigation?: any;
   user?: any;
   onSignOut?: () => void;
   onBack?: () => void;
-  onContinue?: (option: 'clinics' | 'doctors' | 'hospitals' | 'diseases') => void;
+  onContinue?: (option: 'vaccine' | 'screening' | 'cycle') => void;
 }
 
-const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
+const TrackOptions: React.FC<TrackOptionsProps> = ({
   navigation,
   user,
   onSignOut,
   onBack,
   onContinue,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<'clinics' | 'doctors' | 'hospitals' | 'diseases'>('clinics');
+  const [selectedOption, setSelectedOption] = useState<'vaccine' | 'screening' | 'cycle'>('vaccine');
 
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
@@ -33,17 +33,14 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
     onContinue?.(selectedOption);
     // Navigate to appropriate screen based on selection
     switch (selectedOption) {
-      case 'clinics':
-        navigation?.navigate('ClinicListing');
+      case 'vaccine':
+        navigation?.navigate('VaccineTracking');
         break;
-      case 'doctors':
-        navigation?.navigate('DoctorListing');
+      case 'screening':
+        navigation?.navigate('ScreeningTracking');
         break;
-      case 'hospitals':
-        navigation?.navigate('HospitalListing');
-        break;
-      case 'diseases':
-        navigation?.navigate('DiseaseListing');
+      case 'cycle':
+        navigation?.navigate('CycleTracking');
         break;
       default:
         console.log('Selected option:', selectedOption);
@@ -51,15 +48,15 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
   };
 
   const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
-    if (screen === 'discover') {
-      // Already on discover screen
+    if (screen === 'track') {
+      // Already on track screen
       return;
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
     } else if (screen === 'products') {
       navigation?.navigate('ProductsOption');
-    } else if (screen === 'track') {
-      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -87,138 +84,107 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
           <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
             <Text style={styles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Discover</Text>
+          <Text style={styles.headerTitle}>Track</Text>
           <View style={styles.headerSpacer} />
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>What are you looking for?</Text>
+        <Text style={styles.sectionTitle}>What would you like to track?</Text>
         <Text style={styles.sectionSubtitle}>
-          Choose the type of healthcare service you want to explore
+          Choose the type of health tracking you want to manage
         </Text>
 
         {/* Option Cards */}
         <View style={styles.optionCards}>
-          {/* Clinics */}
+          {/* Vaccine */}
           <TouchableOpacity
             style={[
               styles.optionCard,
-              selectedOption === 'clinics' && styles.optionCardSelected,
+              selectedOption === 'vaccine' && styles.optionCardSelected,
             ]}
-            onPress={() => setSelectedOption('clinics')}
+            onPress={() => setSelectedOption('vaccine')}
           >
             <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>🏥</Text>
+              <Text style={styles.optionIcon}>💉</Text>
               <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Clinics</Text>
-                <Text style={styles.optionSubtext}>Medical Clinics & Centers</Text>
+                <Text style={styles.optionName}>Vaccine</Text>
+                <Text style={styles.optionSubtext}>Vaccination Schedule & Records</Text>
               </View>
             </View>
             <View style={styles.optionFeatures}>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>General Practice Clinics</Text>
+                <Text style={styles.featureText}>Track vaccination history</Text>
               </View>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Specialty Clinics</Text>
+                <Text style={styles.featureText}>Get reminders for upcoming vaccines</Text>
               </View>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Women's Health Centers</Text>
+                <Text style={styles.featureText}>Maintain vaccination records</Text>
               </View>
             </View>
           </TouchableOpacity>
 
-          {/* Doctors */}
+          {/* Screening */}
           <TouchableOpacity
             style={[
               styles.optionCard,
-              selectedOption === 'doctors' && styles.optionCardSelected,
+              selectedOption === 'screening' && styles.optionCardSelected,
             ]}
-            onPress={() => setSelectedOption('doctors')}
-          >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>👩‍⚕️</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Doctors</Text>
-                <Text style={styles.optionSubtext}>Find Healthcare Professionals</Text>
-              </View>
-            </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Gynecologists</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>General Practitioners</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Specialists</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          {/* Hospitals */}
-          <TouchableOpacity
-            style={[
-              styles.optionCard,
-              selectedOption === 'hospitals' && styles.optionCardSelected,
-            ]}
-            onPress={() => setSelectedOption('hospitals')}
-          >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>🏨</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Hospitals</Text>
-                <Text style={styles.optionSubtext}>Multi-Specialty Hospitals</Text>
-              </View>
-            </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Emergency Services</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Maternity Wards</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Specialized Care Units</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          {/* Diseases */}
-          <TouchableOpacity
-            style={[
-              styles.optionCard,
-              selectedOption === 'diseases' && styles.optionCardSelected,
-            ]}
-            onPress={() => setSelectedOption('diseases')}
+            onPress={() => setSelectedOption('screening')}
           >
             <View style={styles.optionHeader}>
               <Text style={styles.optionIcon}>🩺</Text>
               <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Diseases</Text>
-                <Text style={styles.optionSubtext}>Health Conditions & Information</Text>
+                <Text style={styles.optionName}>Screening</Text>
+                <Text style={styles.optionSubtext}>Health Screening & Checkups</Text>
               </View>
             </View>
             <View style={styles.optionFeatures}>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Women's Health Conditions</Text>
+                <Text style={styles.featureText}>Schedule health screenings</Text>
               </View>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Symptoms & Diagnosis</Text>
+                <Text style={styles.featureText}>Track screening results</Text>
               </View>
               <View style={styles.featureItem}>
                 <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Treatment Information</Text>
+                <Text style={styles.featureText}>Get reminders for checkups</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          {/* Cycle */}
+          <TouchableOpacity
+            style={[
+              styles.optionCard,
+              selectedOption === 'cycle' && styles.optionCardSelected,
+            ]}
+            onPress={() => setSelectedOption('cycle')}
+          >
+            <View style={styles.optionHeader}>
+              <Text style={styles.optionIcon}>📅</Text>
+              <View style={styles.optionInfo}>
+                <Text style={styles.optionName}>Cycle</Text>
+                <Text style={styles.optionSubtext}>Menstrual Cycle Tracking</Text>
+              </View>
+            </View>
+            <View style={styles.optionFeatures}>
+              <View style={styles.featureItem}>
+                <Text style={styles.featureIcon}>✓</Text>
+                <Text style={styles.featureText}>Track menstrual cycles</Text>
+              </View>
+              <View style={styles.featureItem}>
+                <Text style={styles.featureIcon}>✓</Text>
+                <Text style={styles.featureText}>Monitor cycle patterns</Text>
+              </View>
+              <View style={styles.featureItem}>
+                <Text style={styles.featureIcon}>✓</Text>
+                <Text style={styles.featureText}>Predict periods and ovulation</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -233,7 +199,7 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
       </ScrollView>
 
       <BottomMenuBar
-        activeScreen="discover"
+        activeScreen="track"
         onNavigate={handleNavigate}
       />
     </View>
@@ -370,5 +336,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DiscoverOptions;
+export default TrackOptions;
 

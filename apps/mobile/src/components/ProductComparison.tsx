@@ -25,6 +25,7 @@ interface Retailer {
 interface ProductComparisonProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   productId?: string;
   productName?: string;
   productPrice?: string;
@@ -36,6 +37,7 @@ interface ProductComparisonProps {
 const ProductComparison: React.FC<ProductComparisonProps> = ({
   navigation,
   user,
+  onSignOut,
   productId,
   productName = 'Birth Control Pills (Oral Contraceptive - 21 tablets)',
   productPrice = 'From ₹145',
@@ -94,8 +96,10 @@ const ProductComparison: React.FC<ProductComparisonProps> = ({
       navigation?.navigate('ProductsOption');
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -116,6 +120,9 @@ const ProductComparison: React.FC<ProductComparisonProps> = ({
       
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}

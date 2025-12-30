@@ -11,7 +11,6 @@ import {
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
 import SearchAndQuickActions from './SearchAndQuickActions';
-import SideMenu from './SideMenu';
 import AgenticPlayground from './AgenticPlayground';
 
 interface HomeLandingProps {
@@ -70,7 +69,6 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 }) => {
   const [activeNav, setActiveNav] = useState<'home'>('home');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isAgenticPlaygroundOpen, setIsAgenticPlaygroundOpen] = useState(false);
 
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'Priya';
@@ -245,6 +243,8 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       navigation?.navigate('ProductsOption');
     } else if (screen === 'discover') {
       navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     } else if (screen === 'home') {
       setActiveNav('home');
     } else {
@@ -266,21 +266,12 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       
       <WelcomeHeader
         userName={userName}
-        onMenuPress={() => {
-          setIsSideMenuOpen(true);
-        }}
-        isMenuActive={isSideMenuOpen}
-        onProfilePress={() => {
-          navigation?.navigate('Profile');
-        }}
-      />
-
-      <SideMenu
-        isOpen={isSideMenuOpen}
-        onClose={() => setIsSideMenuOpen(false)}
         navigation={navigation}
         user={user}
         onSignOut={onSignOut}
+        onProfilePress={() => {
+          navigation?.navigate('Profile');
+        }}
       />
 
       <AgenticPlayground

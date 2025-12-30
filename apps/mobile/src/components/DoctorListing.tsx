@@ -27,12 +27,14 @@ interface Doctor {
 interface DoctorListingProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
 }
 
 const DoctorListing: React.FC<DoctorListingProps> = ({
   navigation,
   user,
+  onSignOut,
   onBack,
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
@@ -89,8 +91,8 @@ const DoctorListing: React.FC<DoctorListingProps> = ({
       navigation?.navigate('HomeLanding');
     } else if (screen === 'products') {
       navigation?.navigate('ProductsOption');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -106,6 +108,9 @@ const DoctorListing: React.FC<DoctorListingProps> = ({
 
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}

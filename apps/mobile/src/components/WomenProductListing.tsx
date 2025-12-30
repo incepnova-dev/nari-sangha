@@ -25,12 +25,14 @@ interface Product {
 interface WomenProductListingProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
 }
 
 const WomenProductListing: React.FC<WomenProductListingProps> = ({
   navigation,
   user,
+  onSignOut,
   onBack,
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
@@ -119,8 +121,10 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
       navigation?.navigate('ProductsOption');
     } else if (screen === 'home') {
       navigation?.navigate('HomeLanding');
-    } else {
-      console.log('Navigate to:', screen);
+    } else if (screen === 'discover') {
+      navigation?.navigate('DiscoverOptions');
+    } else if (screen === 'track') {
+      navigation?.navigate('TrackOptions');
     }
   };
 
@@ -158,6 +162,9 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
       
       <WelcomeHeader
         userName={userName}
+        navigation={navigation}
+        user={user}
+        onSignOut={onSignOut}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
