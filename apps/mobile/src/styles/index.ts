@@ -8,7 +8,6 @@ export * from './theme/colors';
 export * from './theme/spacing';
 export * from './theme/typography';
 export * from './theme/icons';
-export * from './theme/icons';
 
 // Common styles
 export * from './common/buttons';
@@ -35,15 +34,12 @@ export * from './common/actionButtons';
 export * from './common/iconContainers';
 export * from './common/cardHeaders';
 export * from './common/listContainers';
+export * from './common/modals';
 
 // Component-specific styles
-export * from './components/Landing.styles';
-export * from './components/Home.styles';
 export * from './components/TopMenuBar.styles';
 export * from './components/BottomMenuBar.styles';
 export * from './components/Profile.styles';
-export * from './components/Community.styles';
-export * from './components/Discussions.styles';
 export * from './components/Insurance.styles';
 export * from './components/SignIn.styles';
 export * from './components/OTPVerification.styles';

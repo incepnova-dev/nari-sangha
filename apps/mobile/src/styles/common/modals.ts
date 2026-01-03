@@ -4,59 +4,9 @@ import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
 
 /**
- * Component-specific styles for Landing
+ * Common modal styles
+ * Used across: LoginModal, SignUpModal
  */
-export const landingContainer = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: spacing.containerPadding,
-    backgroundColor: colors.background.primary,
-  },
-});
-
-export const landingContent = StyleSheet.create({
-  contentContainer: {
-    maxWidth: 960,
-    width: '100%',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: typography.fontSize.xxl,
-    fontWeight: typography.fontWeight.bold,
-    marginBottom: spacing.lg,
-    color: colors.text.primary,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: typography.fontSize.lg,
-    color: colors.text.primary,
-    marginBottom: spacing.xxxl,
-    textAlign: 'center',
-    paddingHorizontal: spacing.containerPadding,
-  },
-});
-
-export const landingActions = StyleSheet.create({
-  actionsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    marginTop: spacing.xxxl,
-  },
-  exploreText: {
-    fontSize: typography.fontSize.lg,
-    color: colors.text.primary,
-    marginRight: spacing.lg,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});
-
 export const modalStyles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
@@ -185,5 +135,4 @@ export const modalStyles = StyleSheet.create({
     color: colors.text.secondary,
   },
 });
-
 

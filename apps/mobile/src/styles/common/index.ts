@@ -25,4 +25,5 @@ export * from './actionButtons';
 export * from './iconContainers';
 export * from './cardHeaders';
 export * from './listContainers';
+export * from './modals';
 
