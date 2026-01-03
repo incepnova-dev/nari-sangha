@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { detailStyles } from '../common';
 
 /**
  * Component-specific styles for Insurance
@@ -90,19 +91,15 @@ export const insuranceStyles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    ...detailStyles.detailRow,
     marginBottom: spacing.sm,
   },
   detailLabel: {
-    fontSize: 13,
-    color: colors.text.secondary,
+    ...detailStyles.detailLabel,
     flex: 1,
   },
   detailValue: {
-    fontSize: 13,
-    fontWeight: typography.fontWeight.semibold,
-    color: colors.text.primary,
+    ...detailStyles.detailValue,
     flex: 1,
     textAlign: 'right',
   },

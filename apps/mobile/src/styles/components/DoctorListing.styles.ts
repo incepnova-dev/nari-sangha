@@ -2,40 +2,23 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { searchStyles, ratingStyles, detailStyles, actionButtonStyles, iconContainerStyles, cardHeaderStyles, listContainerStyles, statusBadgeStyles } from '../common';
 
 /**
  * Component-specific styles for DoctorListing
  */
 export const doctorListingStyles = StyleSheet.create({
   searchBar: {
+    ...searchStyles.searchBar,
     marginHorizontal: spacing.xl,
     marginTop: 15,
     padding: spacing.md,
     paddingHorizontal: 15,
-    backgroundColor: colors.background.white,
-    borderRadius: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: 10,
-    shadowColor: colors.shadow.default,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
   },
-  searchIcon: {
-    fontSize: 18,
-    color: colors.text.tertiary,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: typography.fontSize.sm,
-    color: colors.text.primary,
-  },
-  doctorsContainer: {
-    padding: spacing.xl,
-    gap: 15,
-  },
+  searchIcon: searchStyles.searchIcon,
+  searchInput: searchStyles.searchInput,
+  doctorsContainer: listContainerStyles.listContainer,
   doctorCard: {
     backgroundColor: colors.background.white,
     borderRadius: 16,
@@ -46,29 +29,15 @@ export const doctorListingStyles = StyleSheet.create({
     shadowRadius: 15,
     elevation: 5,
   },
-  doctorHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-    gap: 15,
-  },
+  doctorHeader: cardHeaderStyles.cardHeader,
   doctorIcon: {
-    width: 70,
-    height: 70,
-    backgroundColor: colors.accent.pinkVeryLight,
-    borderRadius: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...iconContainerStyles.iconContainer,
+    ...iconContainerStyles.iconContainerMedium,
   },
-  doctorIconText: {
-    fontSize: 35,
-  },
-  doctorInfo: {
-    flex: 1,
-  },
+  doctorIconText: iconContainerStyles.iconTextMedium,
+  doctorInfo: cardHeaderStyles.cardInfo,
   doctorName: {
-    fontSize: 20,
-    fontWeight: typography.fontWeight.bold,
+    ...cardHeaderStyles.cardTitleLarge,
     color: colors.text.primary,
     marginBottom: 4,
   },
@@ -78,57 +47,15 @@ export const doctorListingStyles = StyleSheet.create({
     fontWeight: typography.fontWeight.semibold,
     marginBottom: 5,
   },
-  rating: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  stars: {
-    fontSize: typography.fontSize.sm,
-  },
-  ratingText: {
-    fontSize: 12,
-    color: colors.text.secondary,
-  },
-  detailsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: spacing.sm,
-  },
-  detailLabel: {
-    fontSize: 13,
-    color: colors.text.secondary,
-  },
-  detailValue: {
-    fontSize: 13,
-    color: colors.text.primary,
-    fontWeight: typography.fontWeight.semibold,
-  },
-  availabilityBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: colors.story.pregnancy,
-    paddingVertical: 6,
-    paddingHorizontal: spacing.md,
-    borderRadius: 15,
-    marginTop: 10,
-    marginBottom: 15,
-  },
-  availabilityText: {
-    fontSize: 12,
-    color: colors.button.success,
-    fontWeight: typography.fontWeight.semibold,
-  },
-  bookAppointmentBtn: {
-    backgroundColor: colors.primary,
-    paddingVertical: spacing.md,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bookAppointmentBtnText: {
-    color: colors.text.white,
-    fontSize: typography.fontSize.sm,
-    fontWeight: typography.fontWeight.semibold,
-  },
+  rating: ratingStyles.rating,
+  stars: ratingStyles.stars,
+  ratingText: ratingStyles.ratingText,
+  detailsRow: detailStyles.detailRow,
+  detailLabel: detailStyles.detailLabel,
+  detailValue: detailStyles.detailValue,
+  availabilityBadge: statusBadgeStyles.availabilityBadge,
+  availabilityText: statusBadgeStyles.availabilityText,
+  bookAppointmentBtn: actionButtonStyles.bookAppointmentBtn,
+  bookAppointmentBtnText: actionButtonStyles.bookAppointmentBtnText,
 });
 

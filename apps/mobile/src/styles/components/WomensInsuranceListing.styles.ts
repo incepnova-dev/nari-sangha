@@ -2,35 +2,25 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { searchStyles, ratingStyles, detailStyles, checkboxStyles } from '../common';
 
 /**
  * Component-specific styles for WomensInsuranceListing
  */
 export const womensInsuranceListingStyles = StyleSheet.create({
   searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.background.white,
+    ...searchStyles.searchBar,
     margin: 15,
     marginTop: spacing.xl,
     paddingHorizontal: 15,
     paddingVertical: spacing.md,
-    borderRadius: 25,
-    shadowColor: colors.shadow.default,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
     elevation: 4,
   },
   searchIcon: {
-    fontSize: 18,
+    ...searchStyles.searchIcon,
     marginRight: 10,
   },
-  searchInput: {
-    flex: 1,
-    fontSize: typography.fontSize.sm,
-    color: colors.text.primary,
-  },
+  searchInput: searchStyles.searchInput,
   cardsContainer: {
     paddingHorizontal: spacing.xl,
   },
@@ -95,42 +85,21 @@ export const womensInsuranceListingStyles = StyleSheet.create({
     gap: 10,
     marginBottom: 10,
   },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 2,
-    borderColor: colors.primary,
-    borderRadius: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxSelected: {
-    backgroundColor: colors.primary,
-  },
-  checkmark: {
-    color: colors.text.white,
-    fontSize: typography.fontSize.sm,
-    fontWeight: typography.fontWeight.bold,
-  },
+  checkbox: checkboxStyles.checkbox,
+  checkboxSelected: checkboxStyles.checkboxSelected,
+  checkmark: checkboxStyles.checkmark,
   price: {
     fontSize: 20,
     fontWeight: typography.fontWeight.bold,
     color: colors.primary,
     flex: 1,
   },
-  rating: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
+  rating: ratingStyles.rating,
   stars: {
+    ...ratingStyles.stars,
     color: '#FFB300',
-    fontSize: typography.fontSize.sm,
   },
-  ratingText: {
-    fontSize: 12,
-    color: colors.text.secondary,
-  },
+  ratingText: ratingStyles.ratingText,
   coverageList: {
     marginBottom: spacing.md,
   },
@@ -165,19 +134,15 @@ export const womensInsuranceListingStyles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    ...detailStyles.detailRow,
     marginBottom: spacing.sm,
   },
   detailLabel: {
-    fontSize: 13,
-    color: colors.text.secondary,
+    ...detailStyles.detailLabel,
     flex: 1,
   },
   detailValue: {
-    fontSize: 13,
-    fontWeight: typography.fontWeight.semibold,
-    color: colors.text.primary,
+    ...detailStyles.detailValue,
     flex: 1,
     textAlign: 'right',
   },

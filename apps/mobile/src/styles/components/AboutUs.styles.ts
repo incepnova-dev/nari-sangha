@@ -2,34 +2,27 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { heroStyles, summaryCardStyles } from '../common';
 
 /**
  * Component-specific styles for AboutUs
  */
 export const aboutUsStyles = StyleSheet.create({
   heroSection: {
+    ...heroStyles.heroSection,
     backgroundColor: colors.primary,
-    padding: spacing.xl * 2,
     paddingVertical: spacing.xl * 2,
-    alignItems: 'center',
   },
-  heroEmoji: {
-    fontSize: 80,
-    marginBottom: spacing.xl,
-  },
+  heroEmoji: heroStyles.heroEmoji,
   heroTitle: {
-    fontSize: 28,
-    fontWeight: typography.fontWeight.bold,
+    ...heroStyles.heroTitle,
     color: colors.text.white,
     marginBottom: 15,
-    textAlign: 'center',
   },
   heroSubtitle: {
-    fontSize: typography.fontSize.base,
+    ...heroStyles.heroSubtitle,
     color: colors.text.white,
     opacity: 0.95,
-    lineHeight: 24,
-    textAlign: 'center',
   },
   missionBox: {
     backgroundColor: colors.accent.pinkVeryLight,
@@ -69,19 +62,16 @@ export const aboutUsStyles = StyleSheet.create({
     gap: spacing.xl,
   },
   statItem: {
+    ...summaryCardStyles.statItem,
     width: '47%',
-    alignItems: 'center',
   },
   statNumber: {
+    ...summaryCardStyles.statNumber,
     fontSize: 36,
-    fontWeight: typography.fontWeight.bold,
-    color: colors.text.white,
-    marginBottom: 5,
   },
   statLabel: {
+    ...summaryCardStyles.statLabel,
     fontSize: typography.fontSize.sm,
-    color: colors.text.white,
-    opacity: 0.9,
   },
   servicesHeader: {
     fontSize: 24,

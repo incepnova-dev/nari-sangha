@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { searchStyles } from '../common';
 
 /**
  * Component-specific styles for SearchAndQuickActions
@@ -15,27 +16,23 @@ export const searchAndQuickActionsStyles = StyleSheet.create({
     borderBottomRightRadius: 30,
   },
   searchBar: {
-    backgroundColor: colors.background.white,
+    ...searchStyles.searchBar,
     borderRadius: 20,
     padding: 14,
     paddingHorizontal: spacing.xl,
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: spacing.md,
-    shadowColor: colors.shadow.default,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
     shadowRadius: 20,
     elevation: 4,
   },
   searchIcon: {
+    ...searchStyles.searchIcon,
     fontSize: 20,
     color: colors.primary,
   },
   searchInput: {
-    flex: 1,
+    ...searchStyles.searchInput,
     fontSize: 15,
-    color: colors.text.primary,
   },
   quickActionsContainer: {
     marginTop: spacing.xl,

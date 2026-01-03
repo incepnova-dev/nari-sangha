@@ -2,63 +2,34 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { heroStyles, filterStyles, tagStyles } from '../common';
 
 /**
  * Component-specific styles for WomenStories
  */
 export const womenStoriesStyles = StyleSheet.create({
   heroSection: {
+    ...heroStyles.heroSection,
     backgroundColor: '#FFE5EE',
-    padding: spacing.xl * 2,
-    paddingHorizontal: spacing.xl,
-    alignItems: 'center',
   },
-  heroIcon: {
-    fontSize: 80,
-    marginBottom: spacing.xl,
-  },
+  heroIcon: heroStyles.heroIcon,
   heroTitle: {
+    ...heroStyles.heroTitle,
     fontSize: 32,
-    fontWeight: typography.fontWeight.bold,
     color: colors.text.primary,
     marginBottom: 15,
-    textAlign: 'center',
   },
   heroSubtitle: {
-    fontSize: typography.fontSize.base,
+    ...heroStyles.heroSubtitle,
     color: colors.text.secondary,
-    lineHeight: 24,
-    textAlign: 'center',
     maxWidth: 400,
   },
-  filterSection: {
-    marginBottom: 10,
-  },
-  filterContent: {
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.xl,
-    gap: 10,
-  },
-  filterPill: {
-    backgroundColor: colors.background.white,
-    borderWidth: 2,
-    borderColor: colors.border.medium,
-    paddingVertical: 10,
-    paddingHorizontal: spacing.xl,
-    borderRadius: 25,
-  },
-  filterPillActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  filterPillText: {
-    fontSize: typography.fontSize.sm,
-    fontWeight: typography.fontWeight.semibold,
-    color: colors.text.secondary,
-  },
-  filterPillTextActive: {
-    color: colors.text.white,
-  },
+  filterSection: filterStyles.filterSection,
+  filterContent: filterStyles.filterContent,
+  filterPill: filterStyles.filterPill,
+  filterPillActive: filterStyles.filterPillActive,
+  filterPillText: filterStyles.filterPillText,
+  filterPillTextActive: filterStyles.filterPillTextActive,
   contentSection: {
     padding: spacing.xl,
     paddingTop: 10,
@@ -191,39 +162,16 @@ export const womenStoriesStyles = StyleSheet.create({
     gap: spacing.sm,
     marginBottom: 15,
   },
-  tag: {
-    paddingVertical: 6,
-    paddingHorizontal: spacing.sm,
-    borderRadius: 15,
-  },
-  tagPink: {
-    backgroundColor: colors.accent.pinkVeryLight,
-  },
-  tagPurple: {
-    backgroundColor: '#F3E5F5',
-  },
-  tagBlue: {
-    backgroundColor: colors.accent.lightBlue,
-  },
-  tagGreen: {
-    backgroundColor: colors.story.pregnancy,
-  },
-  tagText: {
-    fontSize: 12,
-    fontWeight: typography.fontWeight.semibold,
-  },
-  tagTextPink: {
-    color: colors.primary,
-  },
-  tagTextPurple: {
-    color: '#9C27B0',
-  },
-  tagTextBlue: {
-    color: colors.status.info,
-  },
-  tagTextGreen: {
-    color: colors.button.success,
-  },
+  tag: tagStyles.tag,
+  tagPink: tagStyles.tagPink,
+  tagPurple: tagStyles.tagPurple,
+  tagBlue: tagStyles.tagBlue,
+  tagGreen: tagStyles.tagGreen,
+  tagText: tagStyles.tagText,
+  tagTextPink: tagStyles.tagTextPink,
+  tagTextPurple: tagStyles.tagTextPurple,
+  tagTextBlue: tagStyles.tagTextBlue,
+  tagTextGreen: tagStyles.tagTextGreen,
   storyFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',

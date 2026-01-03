@@ -2,34 +2,27 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { heroStyles, tagStyles } from '../common';
 
 /**
  * Component-specific styles for ResearchArticles
  */
 export const researchArticlesStyles = StyleSheet.create({
   heroSection: {
+    ...heroStyles.heroSection,
     backgroundColor: '#667eea',
-    padding: spacing.xl * 2,
-    paddingHorizontal: spacing.xl,
-    alignItems: 'center',
   },
-  heroIcon: {
-    fontSize: 80,
-    marginBottom: spacing.xl,
-  },
+  heroIcon: heroStyles.heroIcon,
   heroTitle: {
+    ...heroStyles.heroTitle,
     fontSize: 32,
-    fontWeight: typography.fontWeight.bold,
     color: colors.text.white,
     marginBottom: 15,
-    textAlign: 'center',
   },
   heroSubtitle: {
-    fontSize: typography.fontSize.base,
+    ...heroStyles.heroSubtitle,
     color: colors.text.white,
     opacity: 0.95,
-    lineHeight: 24,
-    textAlign: 'center',
     maxWidth: 400,
   },
   contentSection: {
@@ -285,41 +278,21 @@ export const researchArticlesStyles = StyleSheet.create({
     marginBottom: 15,
   },
   tag: {
-    paddingVertical: 6,
+    ...tagStyles.tag,
     paddingHorizontal: spacing.md,
-    borderRadius: 15,
   },
-  tagPink: {
-    backgroundColor: colors.accent.pinkVeryLight,
-  },
-  tagPurple: {
-    backgroundColor: '#F3E5F5',
-  },
-  tagBlue: {
-    backgroundColor: colors.accent.lightBlue,
-  },
-  tagGreen: {
-    backgroundColor: colors.story.pregnancy,
-  },
+  tagPink: tagStyles.tagPink,
+  tagPurple: tagStyles.tagPurple,
+  tagBlue: tagStyles.tagBlue,
+  tagGreen: tagStyles.tagGreen,
   tagOrange: {
     backgroundColor: colors.accent.lightOrange,
   },
-  tagText: {
-    fontSize: 12,
-    fontWeight: typography.fontWeight.semibold,
-  },
-  tagTextPink: {
-    color: colors.primary,
-  },
-  tagTextPurple: {
-    color: '#9C27B0',
-  },
-  tagTextBlue: {
-    color: colors.status.info,
-  },
-  tagTextGreen: {
-    color: colors.button.success,
-  },
+  tagText: tagStyles.tagText,
+  tagTextPink: tagStyles.tagTextPink,
+  tagTextPurple: tagStyles.tagTextPurple,
+  tagTextBlue: tagStyles.tagTextBlue,
+  tagTextGreen: tagStyles.tagTextGreen,
   tagTextOrange: {
     color: colors.status.warning,
   },

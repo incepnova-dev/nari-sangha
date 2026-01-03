@@ -2,36 +2,22 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
+import { searchStyles } from '../common';
 
 /**
  * Component-specific styles for KnowledgeHub
  */
 export const knowledgeHubStyles = StyleSheet.create({
   searchBar: {
+    ...searchStyles.searchBar,
     marginHorizontal: spacing.xl,
     marginTop: 15,
     padding: spacing.md,
     paddingHorizontal: 15,
-    backgroundColor: colors.background.white,
-    borderRadius: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
     gap: 10,
-    shadowColor: colors.shadow.default,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
   },
-  searchIcon: {
-    fontSize: 18,
-    color: colors.text.tertiary,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: typography.fontSize.sm,
-    color: colors.text.primary,
-  },
+  searchIcon: searchStyles.searchIcon,
+  searchInput: searchStyles.searchInput,
   diseasesContainer: {
     padding: spacing.xl,
     gap: 15,
