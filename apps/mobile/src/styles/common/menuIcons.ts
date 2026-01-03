@@ -26,10 +26,6 @@ const alertIconInactive = require('../../assets/images/alert-icon-inactive.png')
 const productsIconActive = require('../../assets/images/products-icon-active1.png');
 const productsIconInactive = require('../../assets/images/products-icon-inactive1.png');
 
-// Import knowledgehub icon images
-const knowledgehubIconActive = require('../../assets/images/knowledgehub-icon-active.png');
-const knowledgehubIconInactive = require('../../assets/images/knowledgehub-icon-inactive.png');
-
 // Import create community icon image
 const createCommunityIcon = require('../../assets/images/create-community-icon.png');
 
@@ -106,14 +102,6 @@ export const menuIconStyles = StyleSheet.create({
     width: 32,
     height: 32,
   },
-  knowledgehubIconActive: {
-    width: 32,
-    height: 32,
-  },
-  knowledgehubIconInactive: {
-    width: 32,
-    height: 32,
-  },
   createCommunityIcon: {
     width: 56,
     height: 56,
@@ -176,15 +164,6 @@ export const alertIconSources = {
 export const productsIconSources = {
   active: productsIconActive,
   inactive: productsIconInactive,
-};
-
-/**
- * KnowledgeHub icon image sources
- * These are exported separately as StyleSheet cannot contain image sources
- */
-export const knowledgehubIconSources = {
-  active: knowledgehubIconActive,
-  inactive: knowledgehubIconInactive,
 };
 
 /**

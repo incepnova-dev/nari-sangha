@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StatusBar, Platform } from 'react-native';
-import LoginModal from './auth/LoginModal';
-import SignUpModal from './auth/SignUpModal';
 import { welcomeStyles, buttons } from '../styles';
 
 type RouteName = 'Welcome' | 'Home' | 'SignUpIndiaPhone' | 'SignUpGlobalEmail' | 'Success';
@@ -20,15 +18,10 @@ const Welcome: React.FC<WelcomeProps> = ({
   onSignInSuccess,
   navigation,
 }) => {
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = React.useState(false);
-  const [isSignInModalOpen, setIsSignInModalOpen] = React.useState(false);
-
   const handleGetStarted = () => {
     // Navigate to region selection screen
     if (navigation) {
       navigation.navigate('RegionSelection');
-    } else {
-      setIsSignUpModalOpen(true);
     }
   };
 
@@ -36,23 +29,6 @@ const Welcome: React.FC<WelcomeProps> = ({
     // Navigate to sign in screen
     if (navigation) {
       navigation.navigate('SignIn');
-    } else {
-      setIsSignInModalOpen(true);
-    }
-  };
-
-  const handleCloseSignUpModal = () => {
-    setIsSignUpModalOpen(false);
-  };
-
-  const handleCloseSignInModal = () => {
-    setIsSignInModalOpen(false);
-  };
-
-  const handleSignInSuccess = (userData: any) => {
-    setIsSignInModalOpen(false);
-    if (onSignInSuccess) {
-      onSignInSuccess(userData);
     }
   };
 
@@ -110,19 +86,6 @@ const Welcome: React.FC<WelcomeProps> = ({
         <View style={welcomeStyles.decorativeCircle1} />
         <View style={welcomeStyles.decorativeCircle2} />
       </View>
-
-      <LoginModal
-        isOpen={isSignInModalOpen}
-        onClose={handleCloseSignInModal}
-        language={language}
-        onLogInSuccess={handleSignInSuccess}
-      />
-
-      <SignUpModal
-        isOpen={isSignUpModalOpen}
-        onClose={handleCloseSignUpModal}
-        language={language}
-      />
     </>
   );
 };
