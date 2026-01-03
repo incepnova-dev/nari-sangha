@@ -12,6 +12,7 @@ import {
   headerStyles,
   healthProductsStyles,
 } from '../styles';
+import { mockProducts, Product } from '../__mocks__/HealthProducts.mock';
 
 interface HealthProductsProps {
   navigation?: any;
@@ -26,43 +27,7 @@ const HealthProducts: React.FC<HealthProductsProps> = ({
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
-  const products = [
-    {
-      icon: '🧴',
-      name: 'Prenatal Vitamins',
-      brand: 'HealthPlus',
-      price: '₹349',
-      originalPrice: '₹499',
-      discount: '30% OFF',
-      platforms: ['🛒 Amazon', '💊 1mg'],
-    },
-    {
-      icon: '🩺',
-      name: 'Menstrual Pain Relief',
-      brand: 'WellnessRx',
-      price: '₹225',
-      originalPrice: '₹300',
-      discount: '25% OFF',
-      platforms: ['📦 Flipkart', '💊 Netmeds'],
-    },
-    {
-      icon: '🧘‍♀️',
-      name: 'Yoga Mat Premium',
-      brand: 'FitLife',
-      price: '₹799',
-      originalPrice: '₹999',
-      platforms: ['🛒 Amazon', '🏃 Decathlon'],
-    },
-    {
-      icon: '💊',
-      name: 'Iron Supplements',
-      brand: 'NutriCare',
-      price: '₹299',
-      originalPrice: '₹499',
-      discount: '40% OFF',
-      platforms: ['💊 PharmEasy', '💊 Apollo'],
-    },
-  ];
+  const products: Product[] = mockProducts;
 
   return (
     <View style={containerStyles.container}>

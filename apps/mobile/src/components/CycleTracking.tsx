@@ -13,14 +13,7 @@ import {
   headerStyles,
   cycleTrackingStyles,
 } from '../styles';
-
-interface CycleEntry {
-  id: string;
-  date: string;
-  duration: number;
-  flow: 'light' | 'medium' | 'heavy';
-  symptoms: string[];
-}
+import { mockCycleData } from '../__mocks__/CycleTracking.mock';
 
 interface CycleTrackingProps {
   navigation?: any;
@@ -38,37 +31,7 @@ const CycleTracking: React.FC<CycleTrackingProps> = ({
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
   const [selectedMonth, setSelectedMonth] = useState(new Date().toLocaleString('default', { month: 'long', year: 'numeric' }));
 
-  // Sample cycle data
-  const cycleData = {
-    averageCycleLength: 28,
-    averagePeriodLength: 5,
-    lastPeriod: '2024-01-15',
-    nextPeriodPredicted: '2024-02-12',
-    nextOvulationPredicted: '2024-01-29',
-    recentCycles: [
-      {
-        id: '1',
-        date: '2024-01-15',
-        duration: 5,
-        flow: 'medium' as const,
-        symptoms: ['Cramps', 'Bloating'],
-      },
-      {
-        id: '2',
-        date: '2023-12-18',
-        duration: 4,
-        flow: 'light' as const,
-        symptoms: ['Mild cramps'],
-      },
-      {
-        id: '3',
-        date: '2023-11-20',
-        duration: 6,
-        flow: 'heavy' as const,
-        symptoms: ['Cramps', 'Headache', 'Fatigue'],
-      },
-    ],
-  };
+  const cycleData = mockCycleData;
 
   const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
     if (screen === 'track') {

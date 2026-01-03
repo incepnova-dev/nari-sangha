@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { sideMenuStyles, icons } from '../styles';
+import { mockMenuItems, MenuItem } from '../__mocks__/SideMenu.mock';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const MENU_WIDTH = SCREEN_WIDTH * 0.75; // 75% of screen width
@@ -19,14 +20,6 @@ interface SideMenuProps {
   navigation?: any;
   user?: any;
   onSignOut?: () => void;
-}
-
-interface MenuItem {
-  id: string;
-  label: string;
-  icon: string;
-  route?: string;
-  onPress?: () => void;
 }
 
 const SideMenu: React.FC<SideMenuProps> = ({
@@ -71,32 +64,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
 
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
-  const menuItems: MenuItem[] = [
-    {
-      id: 'home',
-      label: 'Home',
-      icon: icons.home,
-      route: 'HomeLanding',
-    },
-    {
-      id: 'products',
-      label: 'Products',
-      icon: icons.products,
-      route: 'ProductsOption',
-    },
-    {
-      id: 'profile',
-      label: 'Profile',
-      icon: icons.profile,
-      route: 'Profile',
-    },
-    {
-      id: 'about',
-      label: 'About Us',
-      icon: icons.about,
-      route: 'AboutUs',
-    },
-  ];
+  const menuItems: MenuItem[] = mockMenuItems;
 
   const handleMenuItemPress = (item: MenuItem) => {
     if (item.route) {
