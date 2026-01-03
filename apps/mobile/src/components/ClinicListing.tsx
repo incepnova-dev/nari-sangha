@@ -14,6 +14,7 @@ import {
   headerStyles,
   clinicListingStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface Clinic {
@@ -48,7 +49,7 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
     {
       id: '1',
       name: 'Women\'s Health Clinic',
-      icon: '🏥',
+      icon: icons.hospital,
       rating: 4.7,
       reviewCount: 234,
       address: '123 Health Street, City',
@@ -59,7 +60,7 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
     {
       id: '2',
       name: 'Wellness Care Center',
-      icon: '💊',
+      icon: icons.pill,
       rating: 4.5,
       reviewCount: 189,
       address: '456 Wellness Avenue',
@@ -70,7 +71,7 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
     {
       id: '3',
       name: 'Maternity Care Clinic',
-      icon: '🤰',
+      icon: icons.pregnancy,
       rating: 4.8,
       reviewCount: 312,
       address: '789 Maternity Road',
@@ -136,7 +137,7 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
 
         {/* Search Bar */}
         <View style={clinicListingStyles.searchBar}>
-          <Text style={clinicListingStyles.searchIcon}>🔍</Text>
+          <Text style={clinicListingStyles.searchIcon}>{icons.search}</Text>
           <TextInput
             style={clinicListingStyles.searchInput}
             placeholder="Search clinics by name or specialty..."

@@ -15,6 +15,7 @@ import {
   headerStyles,
   womensInsuranceListingStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface InsurancePlan {
@@ -59,7 +60,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
     {
       id: '1',
       providerName: 'Care Supreme',
-      providerIcon: '🏥',
+      providerIcon: icons.hospital,
       badge: 'Best Value',
       badgeType: 'bestValue',
       price: '₹15,000/year',
@@ -88,7 +89,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
     {
       id: '2',
       providerName: 'Star Health',
-      providerIcon: '🏦',
+      providerIcon: icons.bank,
       badge: 'Most Popular',
       badgeType: 'popular',
       price: '₹18,500/year',
@@ -117,7 +118,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
     {
       id: '3',
       providerName: 'Max Bupa',
-      providerIcon: '💼',
+      providerIcon: icons.briefcase,
       price: '₹12,000/year',
       rating: 4.3,
       coverage: [
@@ -225,7 +226,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
 
         {/* Search Bar */}
         <View style={womensInsuranceListingStyles.searchBar}>
-          <Text style={womensInsuranceListingStyles.searchIcon}>🔍</Text>
+          <Text style={womensInsuranceListingStyles.searchIcon}>{icons.search}</Text>
           <TextInput
             style={womensInsuranceListingStyles.searchInput}
             placeholder="Search insurance plans"
@@ -279,7 +280,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
                 <View style={womensInsuranceListingStyles.coverageList}>
                   {plan.coverage.map((item, cIndex) => (
                     <View key={cIndex} style={womensInsuranceListingStyles.coverageItem}>
-                      <Text style={womensInsuranceListingStyles.coverageCheck}>✓</Text>
+                      <Text style={womensInsuranceListingStyles.coverageCheck}>{icons.checkmark}</Text>
                       <Text style={womensInsuranceListingStyles.coverageText}>{item}</Text>
                     </View>
                   ))}
@@ -312,7 +313,7 @@ const WomensInsuranceListing: React.FC<WomensInsuranceListingProps> = ({
                       <Text style={womensInsuranceListingStyles.detailsTitle}>Additional Benefits</Text>
                       {plan.details.additionalBenefits.map((benefit, bIndex) => (
                         <View key={bIndex} style={womensInsuranceListingStyles.benefitItem}>
-                          <Text style={womensInsuranceListingStyles.benefitCheck}>✓</Text>
+                          <Text style={womensInsuranceListingStyles.benefitCheck}>{icons.checkmark}</Text>
                           <Text style={womensInsuranceListingStyles.benefitText}>{benefit}</Text>
                         </View>
                       ))}

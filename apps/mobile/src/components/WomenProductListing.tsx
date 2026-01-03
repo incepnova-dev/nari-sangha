@@ -14,6 +14,7 @@ import {
   headerStyles,
   womenProductListingStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface Product {
@@ -47,7 +48,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
   const products: Product[] = [
     {
       id: '1',
-      icon: '💊',
+      icon: icons.pill,
       name: 'Folic Acid Tablets',
       description: 'Essential supplement for pregnant women. Helps prevent neural tube defects. 90 tablets pack.',
       rating: 4.7,
@@ -57,7 +58,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
     },
     {
       id: '2',
-      icon: '🧴',
+      icon: icons.bottle,
       name: 'Prenatal Vitamins',
       description: 'Complete multivitamin for pregnancy. Contains DHA, Iron, and essential nutrients. 60 capsules.',
       rating: 4.5,
@@ -67,7 +68,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
     },
     {
       id: '3',
-      icon: '🩹',
+      icon: icons.bandage,
       name: 'Menstrual Pain Relief',
       description: 'Fast-acting pain relief for menstrual cramps. Non-drowsy formula. 20 tablets.',
       rating: 4.8,
@@ -77,7 +78,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
     },
     {
       id: '4',
-      icon: '💊',
+      icon: icons.pill,
       name: 'Iron Supplements',
       description: 'High-potency iron tablets for anemia prevention. Gentle on stomach. 60 tablets.',
       rating: 4.6,
@@ -87,7 +88,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
     },
     {
       id: '5',
-      icon: '🧴',
+      icon: icons.bottle,
       name: 'Calcium + Vitamin D3',
       description: 'Bone health support for women. Reduces risk of osteoporosis. 60 tablets.',
       rating: 4.4,
@@ -194,7 +195,7 @@ const WomenProductListing: React.FC<WomenProductListingProps> = ({
 
         {/* Search Bar */}
         <View style={womenProductListingStyles.searchBar}>
-          <Text style={womenProductListingStyles.searchIcon}>🔍</Text>
+          <Text style={womenProductListingStyles.searchIcon}>{icons.search}</Text>
           <TextInput
             style={womenProductListingStyles.searchInput}
             placeholder="Search products (medicines, supplements...)"

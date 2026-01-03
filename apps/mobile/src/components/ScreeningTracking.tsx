@@ -13,6 +13,7 @@ import {
   headerStyles,
   screeningTrackingStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface Screening {
@@ -45,7 +46,7 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     {
       id: '1',
       name: 'Pap Smear / Cervical Cancer Screening',
-      icon: '🩺',
+      icon: icons.screening,
       description: 'Screening for cervical cancer and abnormal cells',
       recommendedFrequency: 'Every 3 years (21-65 years)',
       lastScreening: '2023-06-15',
@@ -55,7 +56,7 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     {
       id: '2',
       name: 'Mammogram',
-      icon: '💗',
+      icon: icons.heart,
       description: 'Breast cancer screening using X-ray imaging',
       recommendedFrequency: 'Every 1-2 years (40+ years)',
       lastScreening: '2023-09-20',
@@ -65,7 +66,7 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     {
       id: '3',
       name: 'Bone Density Test',
-      icon: '🦴',
+      icon: icons.bone,
       description: 'Osteoporosis screening for bone health',
       recommendedFrequency: 'Every 2 years (65+ years)',
       nextDueDate: '2024-05-10',
@@ -74,7 +75,7 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     {
       id: '4',
       name: 'Blood Pressure Check',
-      icon: '🩸',
+      icon: icons.blood,
       description: 'Regular blood pressure monitoring',
       recommendedFrequency: 'Annually',
       lastScreening: '2023-12-01',
@@ -84,7 +85,7 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     {
       id: '5',
       name: 'Cholesterol Screening',
-      icon: '🧪',
+      icon: icons.testTube,
       description: 'Lipid profile and cholesterol levels',
       recommendedFrequency: 'Every 5 years (20+ years)',
       lastScreening: '2022-03-10',

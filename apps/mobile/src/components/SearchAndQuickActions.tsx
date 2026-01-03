@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { searchAndQuickActionsStyles } from '../styles';
+import { searchAndQuickActionsStyles, icons } from '../styles';
 
 interface SearchAndQuickActionsProps {
   searchQuery: string;
@@ -20,10 +20,10 @@ const SearchAndQuickActions: React.FC<SearchAndQuickActionsProps> = ({
   onQuickActionPress,
 }) => {
   const quickActions = [
-    { icon: '🛍️', label: 'Shop', id: 'shop' },
-    { icon: '🏥', label: 'Hospitals', id: 'hospitals' },
-    { icon: '👩‍⚕️', label: 'Doctors', id: 'doctors' },
-    { icon: '📅', label: 'Calendar', id: 'calendar' },
+    { icon: icons.products, label: 'Shop', id: 'shop' },
+    { icon: icons.hospital, label: 'Hospitals', id: 'hospitals' },
+    { icon: icons.doctor, label: 'Doctors', id: 'doctors' },
+    { icon: icons.calendar, label: 'Calendar', id: 'calendar' },
   ];
 
   const handleQuickAction = (actionId: string) => {
@@ -34,7 +34,7 @@ const SearchAndQuickActions: React.FC<SearchAndQuickActionsProps> = ({
     <View style={searchAndQuickActionsStyles.container}>
       {/* Search Bar */}
       <View style={searchAndQuickActionsStyles.searchBar}>
-        <Text style={searchAndQuickActionsStyles.searchIcon}>🔍</Text>
+        <Text style={searchAndQuickActionsStyles.searchIcon}>{icons.search}</Text>
         <TextInput
           style={searchAndQuickActionsStyles.searchInput}
           placeholder="Search products, conditions, doctors..."

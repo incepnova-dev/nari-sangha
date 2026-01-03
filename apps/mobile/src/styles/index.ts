@@ -8,6 +8,7 @@ export * from './theme/colors';
 export * from './theme/spacing';
 export * from './theme/typography';
 export * from './theme/icons';
+export * from './theme/icons';
 
 // Common styles
 export * from './common/buttons';

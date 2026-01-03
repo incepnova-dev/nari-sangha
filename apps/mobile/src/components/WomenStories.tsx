@@ -11,6 +11,7 @@ import BottomMenuBar from './BottomMenuBar';
 import {
   containerStyles,
   womenStoriesStyles,
+  icons,
 } from '../styles';
 
 interface Story {
@@ -171,7 +172,7 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
   const featuredStory: Story = {
     id: 'featured',
     authorName: 'Anonymous',
-    authorAvatar: '⭐',
+    authorAvatar: icons.star,
     date: '1 week ago',
     readTime: '8 min read',
     title: 'From Diagnosis to Dancing: My PCOS Journey',
@@ -251,7 +252,7 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
       >
         {/* Hero Section */}
         <View style={womenStoriesStyles.heroSection}>
-          <Text style={womenStoriesStyles.heroIcon}>💖</Text>
+          <Text style={womenStoriesStyles.heroIcon}>{icons.heartEmoji}</Text>
           <Text style={womenStoriesStyles.heroTitle}>Real Stories, Real Strength</Text>
           <Text style={womenStoriesStyles.heroSubtitle}>
             Inspiring journeys of women who overcame health challenges and found their strength

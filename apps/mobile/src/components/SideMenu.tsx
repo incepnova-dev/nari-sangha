@@ -8,7 +8,7 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import { sideMenuStyles } from '../styles';
+import { sideMenuStyles, icons } from '../styles';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const MENU_WIDTH = SCREEN_WIDTH * 0.75; // 75% of screen width
@@ -75,25 +75,25 @@ const SideMenu: React.FC<SideMenuProps> = ({
     {
       id: 'home',
       label: 'Home',
-      icon: '🏠',
+      icon: icons.home,
       route: 'HomeLanding',
     },
     {
       id: 'products',
       label: 'Products',
-      icon: '🛍️',
+      icon: icons.products,
       route: 'ProductsOption',
     },
     {
       id: 'profile',
       label: 'Profile',
-      icon: '👤',
+      icon: icons.profile,
       route: 'Profile',
     },
     {
       id: 'about',
       label: 'About Us',
-      icon: 'ℹ️',
+      icon: icons.about,
       route: 'AboutUs',
     },
   ];
@@ -154,7 +154,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
             {/* User Profile Section */}
             <View style={sideMenuStyles.profileSection}>
               <View style={sideMenuStyles.profileIcon}>
-                <Text style={sideMenuStyles.profileIconText}>👤</Text>
+                <Text style={sideMenuStyles.profileIconText}>{icons.profile}</Text>
               </View>
               <Text style={sideMenuStyles.userName}>{userName}</Text>
               <Text style={sideMenuStyles.userEmail}>{user?.email || 'user@example.com'}</Text>
@@ -185,7 +185,7 @@ const SideMenu: React.FC<SideMenuProps> = ({
               onPress={handleSignOut}
               activeOpacity={0.7}
             >
-              <Text style={sideMenuStyles.signOutIcon}>🚪</Text>
+              <Text style={sideMenuStyles.signOutIcon}>{icons.signOut}</Text>
               <Text style={sideMenuStyles.signOutLabel}>Sign Out</Text>
             </TouchableOpacity>
           </ScrollView>

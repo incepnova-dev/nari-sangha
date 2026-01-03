@@ -12,6 +12,7 @@ import {
   containerStyles,
   headerStyles,
   aboutUsStyles,
+  icons,
 } from '../styles';
 
 interface AboutUsProps {
@@ -56,7 +57,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
 
   const services: Service[] = [
     {
-      icon: '🛍️',
+      icon: icons.products,
       title: 'Product Search & Comparison',
       description: 'Find the best healthcare products tailored to your needs with intelligent search and price comparison.',
       features: [
@@ -67,7 +68,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
       ],
     },
     {
-      icon: '🏥',
+      icon: icons.hospital,
       title: 'Health Insurance Guidance',
       description: 'Navigate health insurance options with personalized recommendations and coverage insights.',
       features: [
@@ -78,7 +79,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
       ],
     },
     {
-      icon: '📚',
+      icon: icons.knowledgeHub,
       title: 'Knowledge Hub',
       description: 'Comprehensive information on women-focused diseases, conditions, and health topics.',
       features: [
@@ -91,7 +92,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
       ],
     },
     {
-      icon: '💉',
+      icon: icons.vaccine,
       title: 'Vaccination & Screening Guidelines',
       description: 'Stay up-to-date with personalized vaccination schedules and screening recommendations.',
       features: [
@@ -103,7 +104,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
       ],
     },
     {
-      icon: '🤖',
+      icon: icons.ai,
       title: 'AI Health Assistant',
       description: 'Get instant answers to your health questions with our intelligent 24/7 AI assistant.',
       features: [
@@ -115,7 +116,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
       ],
     },
     {
-      icon: '❓',
+      icon: icons.faq,
       title: "Women's Health FAQs",
       description: 'Quick answers to the most common women\'s health questions from trusted experts.',
       features: [
@@ -130,32 +131,32 @@ const AboutUs: React.FC<AboutUsProps> = ({
 
   const whyItems: WhyItem[] = [
     {
-      icon: '🎯',
+      icon: icons.target,
       title: 'Women-Centric Approach',
       text: 'Designed specifically for women\'s unique health needs across all life stages',
     },
     {
-      icon: '👩‍⚕️',
+      icon: icons.doctor,
       title: 'Expert Medical Team',
       text: 'Access to board-certified specialists in obstetrics, gynecology, and women\'s health',
     },
     {
-      icon: '🔒',
+      icon: icons.lock,
       title: 'Privacy & Confidentiality',
       text: 'Your health information is protected with industry-leading security measures',
     },
     {
-      icon: '🌐',
+      icon: icons.globe,
       title: 'Accessible Anywhere',
       text: 'Get quality healthcare guidance from the comfort of your home, anytime',
     },
     {
-      icon: '💰',
+      icon: icons.money,
       title: 'Affordable Care',
       text: 'Best prices, insurance support, and transparent pricing with no hidden costs',
     },
     {
-      icon: '🔬',
+      icon: icons.microscope,
       title: 'Evidence-Based',
       text: 'All information backed by latest medical research and clinical guidelines',
     },
@@ -207,7 +208,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
 
         {/* Hero Section */}
         <View style={aboutUsStyles.heroSection}>
-          <Text style={aboutUsStyles.heroEmoji}>💖</Text>
+          <Text style={aboutUsStyles.heroEmoji}>{icons.heartEmoji}</Text>
           <Text style={aboutUsStyles.heroTitle}>Women's Health Hub</Text>
           <Text style={aboutUsStyles.heroSubtitle}>
             Empowering women with comprehensive healthcare solutions, expert guidance, and compassionate support at every life stage
@@ -249,7 +250,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
                 <View style={aboutUsStyles.serviceFeatures}>
                   {service.features.map((feature, fIndex) => (
                     <View key={fIndex} style={aboutUsStyles.featureItem}>
-                      <Text style={aboutUsStyles.featureCheck}>✓</Text>
+                      <Text style={aboutUsStyles.featureCheck}>{icons.checkmark}</Text>
                       <Text style={aboutUsStyles.featureText}>{feature}</Text>
                     </View>
                   ))}
@@ -290,7 +291,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
           {/* Footer */}
           <View style={aboutUsStyles.footer}>
             <Text style={aboutUsStyles.footerText}>© 2025 Women's Health Hub. All rights reserved.</Text>
-            <Text style={aboutUsStyles.footerText}>Empowering women's health, one step at a time 💖</Text>
+            <Text style={aboutUsStyles.footerText}>Empowering women's health, one step at a time {icons.heartEmoji}</Text>
           </View>
         </View>
       </ScrollView>

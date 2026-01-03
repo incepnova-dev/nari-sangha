@@ -13,6 +13,7 @@ import {
   headerStyles,
   vaccineTrackingStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface Vaccine {
@@ -45,7 +46,7 @@ const VaccineTracking: React.FC<VaccineTrackingProps> = ({
     {
       id: '1',
       name: 'HPV Vaccine',
-      icon: '💉',
+      icon: icons.vaccine,
       description: 'Protects against Human Papillomavirus, which can cause cervical cancer',
       recommendedAge: '9-26 years',
       doses: '2-3 doses',
@@ -55,7 +56,7 @@ const VaccineTracking: React.FC<VaccineTrackingProps> = ({
     {
       id: '2',
       name: 'Tetanus, Diphtheria, Pertussis (Tdap)',
-      icon: '🛡️',
+      icon: icons.shield,
       description: 'Booster vaccine recommended every 10 years',
       recommendedAge: 'Adults',
       doses: '1 dose',
@@ -65,7 +66,7 @@ const VaccineTracking: React.FC<VaccineTrackingProps> = ({
     {
       id: '3',
       name: 'Influenza (Flu)',
-      icon: '🤧',
+      icon: icons.flu,
       description: 'Annual flu vaccine recommended for all adults',
       recommendedAge: 'All ages',
       doses: '1 dose annually',
@@ -75,7 +76,7 @@ const VaccineTracking: React.FC<VaccineTrackingProps> = ({
     {
       id: '4',
       name: 'COVID-19',
-      icon: '🦠',
+      icon: icons.virus,
       description: 'COVID-19 vaccine and booster shots',
       recommendedAge: 'All ages',
       doses: '2-3 doses + boosters',

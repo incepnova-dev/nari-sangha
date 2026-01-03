@@ -14,6 +14,7 @@ import {
   buttons,
   trackOptionsStyles,
   colors,
+  icons,
 } from '../styles';
 
 interface TrackOptionsProps {
@@ -111,7 +112,7 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             onPress={() => setSelectedOption('vaccine')}
           >
             <View style={trackOptionsStyles.optionHeader}>
-              <Text style={trackOptionsStyles.optionIcon}>💉</Text>
+              <Text style={trackOptionsStyles.optionIcon}>{icons.vaccine}</Text>
               <View style={trackOptionsStyles.optionInfo}>
                 <Text style={trackOptionsStyles.optionName}>Vaccine</Text>
                 <Text style={trackOptionsStyles.optionSubtext}>Vaccination Schedule & Records</Text>
@@ -119,15 +120,15 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             </View>
             <View style={trackOptionsStyles.optionFeatures}>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Track vaccination history</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Get reminders for upcoming vaccines</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Maintain vaccination records</Text>
               </View>
             </View>
@@ -142,7 +143,7 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             onPress={() => setSelectedOption('screening')}
           >
             <View style={trackOptionsStyles.optionHeader}>
-              <Text style={trackOptionsStyles.optionIcon}>🩺</Text>
+              <Text style={trackOptionsStyles.optionIcon}>{icons.screening}</Text>
               <View style={trackOptionsStyles.optionInfo}>
                 <Text style={trackOptionsStyles.optionName}>Screening</Text>
                 <Text style={trackOptionsStyles.optionSubtext}>Health Screening & Checkups</Text>
@@ -150,15 +151,15 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             </View>
             <View style={trackOptionsStyles.optionFeatures}>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Schedule health screenings</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Track screening results</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Get reminders for checkups</Text>
               </View>
             </View>
@@ -173,7 +174,7 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             onPress={() => setSelectedOption('cycle')}
           >
             <View style={trackOptionsStyles.optionHeader}>
-              <Text style={trackOptionsStyles.optionIcon}>📅</Text>
+              <Text style={trackOptionsStyles.optionIcon}>{icons.calendar}</Text>
               <View style={trackOptionsStyles.optionInfo}>
                 <Text style={trackOptionsStyles.optionName}>Cycle</Text>
                 <Text style={trackOptionsStyles.optionSubtext}>Menstrual Cycle Tracking</Text>
@@ -181,15 +182,15 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
             </View>
             <View style={trackOptionsStyles.optionFeatures}>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Track menstrual cycles</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Monitor cycle patterns</Text>
               </View>
               <View style={trackOptionsStyles.featureItem}>
-                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureIcon}>{icons.checkmark}</Text>
                 <Text style={trackOptionsStyles.featureText}>Predict periods and ovulation</Text>
               </View>
             </View>
