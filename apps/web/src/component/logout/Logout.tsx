@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../../services";
+import { ROUTES } from "../routes/Routes";
 
 const Logout: React.FC = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Logout: React.FC = () => {
       // localStorage.clear();
       
       // Redirect to landing page
-      navigate("/", { replace: true });
+      navigate(ROUTES.LANDING, { replace: true });
     };
 
     performLogout();

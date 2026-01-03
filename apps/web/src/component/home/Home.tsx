@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "styles/narisangha";
+import { ROUTES } from "../routes/Routes";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import MainSection from "../main/MainSection";
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
       if (!token) {
         // No token found, redirect to landing page
         console.log('[Home] No token found, redirecting to /');
-        navigate("/");
+        navigate(ROUTES.LANDING);
         return;
       }
       
@@ -43,7 +44,7 @@ const Home: React.FC = () => {
       } else {
         // Authentication failed, redirect to landing page
         console.log('[Home] Authentication failed, redirecting to /');
-        navigate("/");
+        navigate(ROUTES.LANDING);
         return;
       }
     };

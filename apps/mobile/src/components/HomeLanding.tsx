@@ -18,6 +18,7 @@ import {
   buttons,
   homeLandingStyles,
 } from '../styles';
+import { ROUTES } from './routes/Routes';
 import {
   mockStories,
   mockResearch,
@@ -54,11 +55,11 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 
   const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
     if (screen === 'products') {
-      navigation?.navigate('ProductsOption');
+      navigation?.navigate(ROUTES.PRODUCTS_OPTION);
     } else if (screen === 'discover') {
-      navigation?.navigate('DiscoverOptions');
+      navigation?.navigate(ROUTES.DISCOVER_OPTIONS);
     } else if (screen === 'track') {
-      navigation?.navigate('TrackOptions');
+      navigation?.navigate(ROUTES.TRACK_OPTIONS);
     } else if (screen === 'home') {
       setActiveNav('home');
     } else {
@@ -71,7 +72,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
   };
 
   const handleProductsOption = () => {
-    navigation?.navigate('ProductsOption');
+    navigation?.navigate(ROUTES.PRODUCTS_OPTION);
   };
 
   const handleOpenUrl = async (url: string) => {
@@ -110,7 +111,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
         user={user}
         onSignOut={onSignOut}
         onProfilePress={() => {
-          navigation?.navigate('Profile');
+          navigation?.navigate(ROUTES.PROFILE);
         }}
       />
 
@@ -127,9 +128,9 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           if (actionId === 'shop') {
             handleProductsOption();
           } else if (actionId === 'hospitals') {
-            navigation?.navigate('HospitalListing');
+            navigation?.navigate(ROUTES.HOSPITAL_LISTING);
           } else if (actionId === 'doctors') {
-            navigation?.navigate('DoctorListing');
+            navigation?.navigate(ROUTES.DOCTOR_LISTING);
           }
         }}
       />
@@ -153,7 +154,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Women's Health Stories */}
           <View style={headerStyles.sectionHeader}>
             <Text style={headerStyles.sectionTitle}>Women's Health Stories</Text>
-            <TouchableOpacity onPress={() => navigation?.navigate('WomenStories')}>
+            <TouchableOpacity onPress={() => navigation?.navigate(ROUTES.WOMEN_STORIES)}>
               <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
@@ -174,7 +175,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Latest Research */}
           <View style={headerStyles.sectionHeader}>
             <Text style={headerStyles.sectionTitle}>Latest Research 📚</Text>
-            <TouchableOpacity onPress={() => navigation?.navigate('ResearchArticles')}>
+            <TouchableOpacity onPress={() => navigation?.navigate(ROUTES.RESEARCH_ARTICLES)}>
               <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
@@ -195,7 +196,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Expert Gynecologist Videos */}
           <View style={headerStyles.sectionHeader}>
             <Text style={headerStyles.sectionTitle}>Expert Advice 🎥</Text>
-            <TouchableOpacity onPress={() => navigation?.navigate('ExpertAdviceListing')}>
+            <TouchableOpacity onPress={() => navigation?.navigate(ROUTES.EXPERT_ADVICE_LISTING)}>
               <Text style={headerStyles.seeAllBtn}>Explore</Text>
             </TouchableOpacity>
           </View>
@@ -260,7 +261,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Insurance Plans */}
           <View style={headerStyles.sectionHeader}>
             <Text style={headerStyles.sectionTitle}>Insurance Plans 🛡️</Text>
-            <TouchableOpacity onPress={() => navigation?.navigate('ProductsOption')}>
+            <TouchableOpacity onPress={() => navigation?.navigate(ROUTES.PRODUCTS_OPTION)}>
               <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
@@ -270,7 +271,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
               key={index}
               style={cardStyles.card}
               activeOpacity={0.8}
-              onPress={() => navigation?.navigate('WomensInsuranceListing')}
+              onPress={() => navigation?.navigate(ROUTES.WOMENS_INSURANCE_LISTING)}
             >
               <View style={homeLandingStyles.insuranceHeader}>
                 <View style={homeLandingStyles.insuranceIcon}>
@@ -304,7 +305,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Health Conditions Guide */}
           <View style={headerStyles.sectionHeader}>
             <Text style={headerStyles.sectionTitle}>Health Knowledge Hub</Text>
-            <TouchableOpacity onPress={() => navigation?.navigate('KnowledgeHub')}>
+            <TouchableOpacity onPress={() => navigation?.navigate(ROUTES.KNOWLEDGE_HUB)}>
               <Text style={headerStyles.seeAllBtn}>Explore</Text>
             </TouchableOpacity>
           </View>

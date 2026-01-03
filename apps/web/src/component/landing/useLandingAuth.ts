@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { flushSync } from "react-dom";
+import { ROUTES } from "../routes/Routes";
 
 interface UseLandingAuthProps {
   onSignInSuccess?: (data: any) => void;
@@ -107,7 +108,7 @@ export const useLandingAuth = ({ onSignInSuccess }: UseLandingAuthProps) => {
           console.log("[Landing] Verifying token before navigation:", verifyToken ? "Found" : "Not found");
           if (verifyToken) {
             console.log("[Landing] Token verified, navigating to /home");
-            navigate("/home", { replace: true });
+            navigate(ROUTES.HOME, { replace: true });
           } else {
             console.error("[Landing] Token not found before navigation, retrying in 100ms");
             // Retry once more
@@ -115,7 +116,7 @@ export const useLandingAuth = ({ onSignInSuccess }: UseLandingAuthProps) => {
               const retryToken = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
               if (retryToken) {
                 console.log("[Landing] Token found on retry, navigating to /home");
-                navigate("/home", { replace: true });
+                navigate(ROUTES.HOME, { replace: true });
               } else {
                 console.error("[Landing] Token still not found, aborting navigation");
                 isSigningInRef.current = false;

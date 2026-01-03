@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import SignUpModal from "../auth/SignUpModal";
 import SignInModal from "../auth/SignInModal";
 import { getProperty } from "../../i18";
+import { ROUTES } from "../routes/Routes";
 
 interface TopBarCTAProps {
   language?: string;
@@ -50,7 +51,7 @@ const TopBarCTA: React.FC<TopBarCTAProps> = ({
 
   const handleLogoutClick = () => {
     // Navigate to /logout route which will handle cleanup and redirect
-    navigate("/logout");
+    navigate(ROUTES.LOGOUT);
   };
 
   return (

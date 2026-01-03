@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Welcome from '../Welcome';
 import SignUpIndiaPhone from '../SignUpIndiaPhone';
@@ -37,43 +37,74 @@ import CycleTracking from '../CycleTracking';
 import WomenStories from '../WomenStories';
 import ResearchArticles from '../ResearchArticles';
 
-type RouteName =
-  | 'Welcome'
-  | 'SignUpIndiaPhone'
-  | 'SignUpGlobalEmail'
-  | 'Success'
-  | 'AccountRecovery'
-  | 'OTPVerification'
-  | 'PasswordPinSetup'
-  | 'ProfileSetup'
-  | 'RegionSelection'
-  | 'SignIn'
-  | 'HealthProfileSetup'
-  | 'HomeLanding'
-  | 'TermsConditions'
-  | 'SuccessAccountRecovery'
-  | 'Profile'
-  | 'ProductsOption'
-  | 'HealthProducts'
-  | 'Insurance'
-  | 'WomensInsuranceListing'
-  | 'InsuranceComparison'
-  | 'WomenProductListing'
-  | 'ProductComparison'
-  | 'AboutUs'
-  | 'DiscoverOptions'
-  | 'ClinicListing'
-  | 'DoctorListing'
-  | 'HospitalListing'
-  | 'KnowledgeHub'
-  | 'KnowledgeArticle'
-  | 'ExpertAdviceListing'
-  | 'TrackOptions'
-  | 'VaccineTracking'
-  | 'ScreeningTracking'
-  | 'CycleTracking'
-  | 'WomenStories'
-  | 'ResearchArticles';
+// Centralized route name constants
+export const ROUTES = {
+  WELCOME: 'Welcome',
+  SIGN_UP_INDIA_PHONE: 'SignUpIndiaPhone',
+  SIGN_UP_GLOBAL_EMAIL: 'SignUpGlobalEmail',
+  SUCCESS: 'Success',
+  ACCOUNT_RECOVERY: 'AccountRecovery',
+  OTP_VERIFICATION: 'OTPVerification',
+  PASSWORD_PIN_SETUP: 'PasswordPinSetup',
+  PROFILE_SETUP: 'ProfileSetup',
+  REGION_SELECTION: 'RegionSelection',
+  SIGN_IN: 'SignIn',
+  HEALTH_PROFILE_SETUP: 'HealthProfileSetup',
+  HOME_LANDING: 'HomeLanding',
+  TERMS_CONDITIONS: 'TermsConditions',
+  SUCCESS_ACCOUNT_RECOVERY: 'SuccessAccountRecovery',
+  PROFILE: 'Profile',
+  PRODUCTS_OPTION: 'ProductsOption',
+  HEALTH_PRODUCTS: 'HealthProducts',
+  INSURANCE: 'Insurance',
+  WOMENS_INSURANCE_LISTING: 'WomensInsuranceListing',
+  INSURANCE_COMPARISON: 'InsuranceComparison',
+  WOMEN_PRODUCT_LISTING: 'WomenProductListing',
+  PRODUCT_COMPARISON: 'ProductComparison',
+  ABOUT_US: 'AboutUs',
+  DISCOVER_OPTIONS: 'DiscoverOptions',
+  CLINIC_LISTING: 'ClinicListing',
+  DOCTOR_LISTING: 'DoctorListing',
+  HOSPITAL_LISTING: 'HospitalListing',
+  KNOWLEDGE_HUB: 'KnowledgeHub',
+  KNOWLEDGE_ARTICLE: 'KnowledgeArticle',
+  EXPERT_ADVICE_LISTING: 'ExpertAdviceListing',
+  TRACK_OPTIONS: 'TrackOptions',
+  VACCINE_TRACKING: 'VaccineTracking',
+  SCREENING_TRACKING: 'ScreeningTracking',
+  CYCLE_TRACKING: 'CycleTracking',
+  WOMEN_STORIES: 'WomenStories',
+  RESEARCH_ARTICLES: 'ResearchArticles',
+} as const;
+
+// Route name type derived from constants
+export type RouteName = typeof ROUTES[keyof typeof ROUTES];
+
+// Route component props factory type
+type RouteComponentPropsFactory = (props: {
+  navigation: any;
+  user?: any;
+  language?: string;
+  routeParams?: any;
+  flow?: 'signup' | 'reset' | null;
+  handlers: {
+    handleSignInSuccess: (userData: any) => void;
+    handleSignOut: () => void;
+    handleSignUpContinue: (data: any) => void;
+    setCurrentRoute: (route: RouteName) => void;
+  };
+}) => React.ReactElement;
+
+// Route definition interface
+interface RouteDefinition {
+  name: RouteName;
+  component: React.ComponentType<any>;
+  backRoute: RouteName;
+  requiresAuth?: boolean;
+  flow?: 'signup' | 'reset' | null;
+  defaultParams?: Record<string, any>;
+  renderProps: RouteComponentPropsFactory;
+}
 
 interface RoutesProps {
   initialRoute?: RouteName;
@@ -84,7 +115,7 @@ interface RoutesProps {
 }
 
 const Routes: React.FC<RoutesProps> = ({
-  initialRoute = 'Welcome',
+  initialRoute = ROUTES.WELCOME,
   currentUser,
   language = 'en',
   onSignInSuccess,
@@ -95,17 +126,15 @@ const Routes: React.FC<RoutesProps> = ({
   const [flow, setFlow] = useState<'signup' | 'reset' | null>(null);
   const [routeParams, setRouteParams] = useState<any>({});
 
-  const navigation = {
+  // Navigation object
+  const navigation = useMemo(() => ({
     navigate: (route: RouteName | string, params?: any) => {
       const target = route as RouteName;
 
-      // Track which flow the user is in (signup vs password reset)
-      if (target === 'SignUpIndiaPhone' || target === 'SignUpGlobalEmail') {
-        setFlow('signup');
-      } else if (target === 'AccountRecovery') {
-        setFlow('reset');
-      } else if (target === 'Welcome') {
-        setFlow(null);
+      // Get route definition to check flow
+      const routeDef = routeRegistryMap.get(target);
+      if (routeDef?.flow !== undefined) {
+        setFlow(routeDef.flow);
       }
 
       if (params) {
@@ -114,414 +143,587 @@ const Routes: React.FC<RoutesProps> = ({
       setCurrentRoute(target);
     },
     goBack: () => {
-      // Simple back navigation - can be enhanced with a navigation stack
-      const backRoutes: Record<RouteName, RouteName> = {
-        Welcome: 'Welcome',
-        SignUpIndiaPhone: 'RegionSelection',
-        SignUpGlobalEmail: 'RegionSelection',
-        Success: 'TermsConditions',
-        AccountRecovery: 'SignIn',
-        OTPVerification: 'AccountRecovery',
-        PasswordPinSetup: 'OTPVerification',
-        ProfileSetup: 'PasswordPinSetup',
-        RegionSelection: 'Welcome',
-        SignIn: 'Welcome',
-        HealthProfileSetup: 'Success',
-        HomeLanding: 'HealthProfileSetup',
-        TermsConditions: 'PasswordPinSetup',
-        SuccessAccountRecovery: 'PasswordPinSetup',
-        Profile: 'HomeLanding',
-        ProductsOption: 'HomeLanding',
-        HealthProducts: 'ProductsOption',
-        Insurance: 'ProductsOption',
-        WomensInsuranceListing: 'ProductsOption',
-        InsuranceComparison: 'WomensInsuranceListing',
-        WomenProductListing: 'ProductsOption',
-        ProductComparison: 'WomenProductListing',
-        AboutUs: 'HomeLanding',
-        DiscoverOptions: 'HomeLanding',
-        ClinicListing: 'DiscoverOptions',
-        DoctorListing: 'DiscoverOptions',
-        HospitalListing: 'DiscoverOptions',
-        KnowledgeHub: 'DiscoverOptions',
-        KnowledgeArticle: 'KnowledgeHub',
-        ExpertAdviceListing: 'HomeLanding',
-        TrackOptions: 'HomeLanding',
-        VaccineTracking: 'TrackOptions',
-        ScreeningTracking: 'TrackOptions',
-        CycleTracking: 'TrackOptions',
-        WomenStories: 'HomeLanding',
-        ResearchArticles: 'HomeLanding',
-      };
-      setCurrentRoute(backRoutes[currentRoute] || 'Welcome');
+      const routeDef = routeRegistryMap.get(currentRoute);
+      const backRoute = routeDef?.backRoute || ROUTES.WELCOME;
+      setCurrentRoute(backRoute);
     },
-  };
+  }), [currentRoute]);
 
   const handleSignInSuccess = (userData: any) => {
     setUser(userData);
     onSignInSuccess?.(userData);
-    // Don't set route here - let SignIn component handle navigation to HomeLanding
   };
 
   const handleSignOut = () => {
     setUser(null);
     onSignOut?.();
-    setCurrentRoute('Welcome');
+    setCurrentRoute(ROUTES.WELCOME);
   };
 
   const handleSignUpContinue = (data: any) => {
-    // Handle signup data - you can process it here
     console.log('Signup data:', data);
   };
 
+  // Route registry with complete metadata
+  const routeRegistry: RouteDefinition[] = [
+    {
+      name: ROUTES.WELCOME,
+      component: Welcome,
+      backRoute: ROUTES.WELCOME,
+      flow: null,
+      renderProps: ({ navigation, language, handlers }) => (
+        <Welcome
+          language={language}
+          onSignInSuccess={handlers.handleSignInSuccess}
+          navigation={navigation}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SIGN_UP_INDIA_PHONE,
+      component: SignUpIndiaPhone,
+      backRoute: ROUTES.REGION_SELECTION,
+      flow: 'signup',
+      renderProps: ({ navigation, handlers }) => (
+        <SignUpIndiaPhone
+          navigation={navigation}
+          onContinue={handlers.handleSignUpContinue}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SIGN_UP_GLOBAL_EMAIL,
+      component: SignUpGlobalEmail,
+      backRoute: ROUTES.REGION_SELECTION,
+      flow: 'signup',
+      renderProps: ({ navigation, handlers }) => (
+        <SignUpGlobalEmail
+          navigation={navigation}
+          onContinue={handlers.handleSignUpContinue}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SUCCESS,
+      component: Success,
+      backRoute: ROUTES.TERMS_CONDITIONS,
+      renderProps: ({ navigation, user, handlers }) => (
+        <Success
+          navigation={navigation}
+          onContinue={() => {
+            if (user) {
+              handlers.setCurrentRoute(ROUTES.HOME_LANDING);
+            } else {
+              handlers.setCurrentRoute(ROUTES.WELCOME);
+            }
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.ACCOUNT_RECOVERY,
+      component: AccountRecovery,
+      backRoute: ROUTES.SIGN_IN,
+      flow: 'reset',
+      renderProps: ({ navigation }) => (
+        <AccountRecovery
+          navigation={navigation}
+          onContinue={(method) => {
+            console.log('Recovery method:', method);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.OTP_VERIFICATION,
+      component: OTPVerification,
+      backRoute: ROUTES.ACCOUNT_RECOVERY,
+      renderProps: ({ navigation }) => (
+        <OTPVerification
+          navigation={navigation}
+          onVerify={(otp) => {
+            console.log('OTP verified:', otp);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.PASSWORD_PIN_SETUP,
+      component: PasswordPinSetup,
+      backRoute: ROUTES.OTP_VERIFICATION,
+      renderProps: ({ navigation, flow }) => (
+        <PasswordPinSetup
+          navigation={navigation}
+          flow={flow}
+          onComplete={(data) => {
+            console.log('Password/PIN setup:', data);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.PROFILE_SETUP,
+      component: ProfileSetup,
+      backRoute: ROUTES.PASSWORD_PIN_SETUP,
+      renderProps: ({ navigation }) => (
+        <ProfileSetup
+          navigation={navigation}
+          onComplete={(data) => {
+            console.log('Profile setup:', data);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.REGION_SELECTION,
+      component: RegionSelection,
+      backRoute: ROUTES.WELCOME,
+      renderProps: ({ navigation }) => (
+        <RegionSelection
+          navigation={navigation}
+          onContinue={(region) => {
+            console.log('Region selected:', region);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SIGN_IN,
+      component: SignIn,
+      backRoute: ROUTES.WELCOME,
+      renderProps: ({ navigation, handlers }) => (
+        <SignIn
+          navigation={navigation}
+          onSignIn={(data) => {
+            console.log('Sign in:', data);
+            handlers.handleSignInSuccess({ email: data.email, phone: data.phone });
+          }}
+          onSignInWithOTP={() => {
+            console.log('Sign in with OTP');
+          }}
+          onForgotPassword={() => {
+            console.log('Forgot password');
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.HEALTH_PROFILE_SETUP,
+      component: HealthProfileSetup,
+      backRoute: ROUTES.SUCCESS,
+      renderProps: ({ navigation }) => (
+        <HealthProfileSetup
+          navigation={navigation}
+          onComplete={(data) => {
+            console.log('Health profile setup:', data);
+          }}
+          onSkip={() => {
+            console.log('Health profile skipped');
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.HOME_LANDING,
+      component: HomeLanding,
+      backRoute: ROUTES.HEALTH_PROFILE_SETUP,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <HomeLanding
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.TERMS_CONDITIONS,
+      component: TermsConditions,
+      backRoute: ROUTES.PASSWORD_PIN_SETUP,
+      renderProps: ({ navigation }) => (
+        <TermsConditions
+          navigation={navigation}
+          onAccept={(data) => {
+            console.log('Terms accepted:', data);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SUCCESS_ACCOUNT_RECOVERY,
+      component: SuccessAccountRecovery,
+      backRoute: ROUTES.PASSWORD_PIN_SETUP,
+      renderProps: ({ navigation }) => (
+        <SuccessAccountRecovery
+          navigation={navigation}
+          onLogin={() => {
+            console.log('Navigate to login');
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.PROFILE,
+      component: Profile,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <Profile
+          user={user}
+          onSignOut={() => {
+            handlers.handleSignOut();
+            navigation.navigate(ROUTES.WELCOME);
+          }}
+          onNavigate={(screen) => {
+            if (screen === 'home') {
+              navigation.navigate(ROUTES.HOME_LANDING);
+            } else {
+              navigation.navigate(screen as RouteName);
+            }
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.PRODUCTS_OPTION,
+      component: ProductsOption,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <ProductsOption
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          onContinue={(option) => {
+            console.log('Product option selected:', option);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.HEALTH_PRODUCTS,
+      component: HealthProducts,
+      backRoute: ROUTES.PRODUCTS_OPTION,
+      requiresAuth: true,
+      renderProps: ({ navigation, user }) => (
+        <HealthProducts
+          navigation={navigation}
+          user={user}
+        />
+      ),
+    },
+    {
+      name: ROUTES.INSURANCE,
+      component: Insurance,
+      backRoute: ROUTES.PRODUCTS_OPTION,
+      requiresAuth: true,
+      renderProps: ({ navigation, user }) => (
+        <Insurance
+          navigation={navigation}
+          user={user}
+        />
+      ),
+    },
+    {
+      name: ROUTES.WOMENS_INSURANCE_LISTING,
+      component: WomensInsuranceListing,
+      backRoute: ROUTES.PRODUCTS_OPTION,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <WomensInsuranceListing
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.INSURANCE_COMPARISON,
+      component: InsuranceComparison,
+      backRoute: ROUTES.WOMENS_INSURANCE_LISTING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers, routeParams }) => (
+        <InsuranceComparison
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          selectedPlanIds={routeParams.selectedPlanIds || []}
+        />
+      ),
+    },
+    {
+      name: ROUTES.WOMEN_PRODUCT_LISTING,
+      component: WomenProductListing,
+      backRoute: ROUTES.PRODUCTS_OPTION,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <WomenProductListing
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.PRODUCT_COMPARISON,
+      component: ProductComparison,
+      backRoute: ROUTES.WOMEN_PRODUCT_LISTING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers, routeParams }) => (
+        <ProductComparison
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          productId={routeParams.productId}
+          productName={routeParams.productName}
+          productPrice={routeParams.productPrice}
+          productDescription={routeParams.productDescription}
+          productCategory={routeParams.productCategory}
+        />
+      ),
+    },
+    {
+      name: ROUTES.ABOUT_US,
+      component: AboutUs,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <AboutUs
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.DISCOVER_OPTIONS,
+      component: DiscoverOptions,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <DiscoverOptions
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          onContinue={(option) => {
+            console.log('Discover option selected:', option);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.CLINIC_LISTING,
+      component: ClinicListing,
+      backRoute: ROUTES.DISCOVER_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user }) => (
+        <ClinicListing
+          navigation={navigation}
+          user={user}
+        />
+      ),
+    },
+    {
+      name: ROUTES.DOCTOR_LISTING,
+      component: DoctorListing,
+      backRoute: ROUTES.DISCOVER_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user }) => (
+        <DoctorListing
+          navigation={navigation}
+          user={user}
+        />
+      ),
+    },
+    {
+      name: ROUTES.HOSPITAL_LISTING,
+      component: HospitalListing,
+      backRoute: ROUTES.DISCOVER_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user }) => (
+        <HospitalListing
+          navigation={navigation}
+          user={user}
+        />
+      ),
+    },
+    {
+      name: ROUTES.KNOWLEDGE_HUB,
+      component: KnowledgeHub,
+      backRoute: ROUTES.DISCOVER_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <KnowledgeHub
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.KNOWLEDGE_ARTICLE,
+      component: KnowledgeArticle,
+      backRoute: ROUTES.KNOWLEDGE_HUB,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers, routeParams }) => (
+        <KnowledgeArticle
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          diseaseId={routeParams.diseaseId}
+          diseaseName={routeParams.diseaseName}
+          diseaseCategory={routeParams.diseaseCategory}
+          diseaseDescription={routeParams.diseaseDescription}
+          diseaseSymptoms={routeParams.diseaseSymptoms}
+          diseasePrevalence={routeParams.diseasePrevalence}
+        />
+      ),
+    },
+    {
+      name: ROUTES.EXPERT_ADVICE_LISTING,
+      component: ExpertAdviceListing,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <ExpertAdviceListing
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.TRACK_OPTIONS,
+      component: TrackOptions,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <TrackOptions
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+          onContinue={(option) => {
+            console.log('Track option selected:', option);
+          }}
+        />
+      ),
+    },
+    {
+      name: ROUTES.VACCINE_TRACKING,
+      component: VaccineTracking,
+      backRoute: ROUTES.TRACK_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <VaccineTracking
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.SCREENING_TRACKING,
+      component: ScreeningTracking,
+      backRoute: ROUTES.TRACK_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <ScreeningTracking
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.CYCLE_TRACKING,
+      component: CycleTracking,
+      backRoute: ROUTES.TRACK_OPTIONS,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <CycleTracking
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.WOMEN_STORIES,
+      component: WomenStories,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <WomenStories
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+    {
+      name: ROUTES.RESEARCH_ARTICLES,
+      component: ResearchArticles,
+      backRoute: ROUTES.HOME_LANDING,
+      requiresAuth: true,
+      renderProps: ({ navigation, user, handlers }) => (
+        <ResearchArticles
+          navigation={navigation}
+          user={user}
+          onSignOut={handlers.handleSignOut}
+        />
+      ),
+    },
+  ];
+
+  // Convert registry array to Map for O(1) lookup
+  const routeRegistryMap = useMemo(() => {
+    const map = new Map<RouteName, RouteDefinition>();
+    routeRegistry.forEach((route) => {
+      map.set(route.name, route);
+    });
+    return map;
+  }, []);
+
+  // Handlers object for route components
+  const handlers = useMemo(() => ({
+    handleSignInSuccess,
+    handleSignOut,
+    handleSignUpContinue,
+    setCurrentRoute,
+  }), []);
+
+  // Render current route dynamically using registry
   const renderRoute = () => {
-    switch (currentRoute) {
-      case 'Welcome':
-        return (
-          <Welcome
-            language={language}
-            onSignInSuccess={handleSignInSuccess}
-            navigation={navigation}
-          />
-        );
-      case 'SignUpIndiaPhone':
-        return (
-          <SignUpIndiaPhone
-            navigation={navigation}
-            onContinue={handleSignUpContinue}
-          />
-        );
-      case 'SignUpGlobalEmail':
-        return (
-          <SignUpGlobalEmail
-            navigation={navigation}
-            onContinue={handleSignUpContinue}
-          />
-        );
-      case 'Success':
-        return (
-          <Success
-            navigation={navigation}
-            onContinue={() => {
-              if (user) {
-                setCurrentRoute('HomeLanding');
-              } else {
-                setCurrentRoute('Welcome');
-              }
-            }}
-          />
-        );
-      case 'AccountRecovery':
-        return (
-          <AccountRecovery
-            navigation={navigation}
-            onContinue={(method) => {
-              console.log('Recovery method:', method);
-            }}
-          />
-        );
-      case 'OTPVerification':
-        return (
-          <OTPVerification
-            navigation={navigation}
-            onVerify={(otp) => {
-              console.log('OTP verified:', otp);
-            }}
-          />
-        );
-      case 'PasswordPinSetup':
-        return (
-          <PasswordPinSetup
-            navigation={navigation}
-            flow={flow}
-            onComplete={(data) => {
-              console.log('Password/PIN setup:', data);
-            }}
-          />
-        );
-      case 'ProfileSetup':
-        return (
-          <ProfileSetup
-            navigation={navigation}
-            onComplete={(data) => {
-              console.log('Profile setup:', data);
-            }}
-          />
-        );
-      case 'RegionSelection':
-        return (
-          <RegionSelection
-            navigation={navigation}
-            onContinue={(region) => {
-              console.log('Region selected:', region);
-            }}
-          />
-        );
-      case 'SignIn':
-        return (
-          <SignIn
-            navigation={navigation}
-            onSignIn={(data) => {
-              console.log('Sign in:', data);
-              handleSignInSuccess({ email: data.email, phone: data.phone });
-              // Navigation to HomeLanding is handled in SignIn component
-            }}
-            onSignInWithOTP={() => {
-              console.log('Sign in with OTP');
-            }}
-            onForgotPassword={() => {
-              console.log('Forgot password');
-            }}
-          />
-        );
-      case 'HealthProfileSetup':
-        return (
-          <HealthProfileSetup
-            navigation={navigation}
-            onComplete={(data) => {
-              console.log('Health profile setup:', data);
-            }}
-            onSkip={() => {
-              console.log('Health profile skipped');
-            }}
-          />
-        );
-      case 'HomeLanding':
-        return (
-          <HomeLanding
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'TermsConditions':
-        return (
-          <TermsConditions
-            navigation={navigation}
-            onAccept={(data) => {
-              console.log('Terms accepted:', data);
-            }}
-          />
-        );
-      case 'SuccessAccountRecovery':
-        return (
-          <SuccessAccountRecovery
-            navigation={navigation}
-            onLogin={() => {
-              console.log('Navigate to login');
-            }}
-          />
-        );
-      case 'Profile':
-        return (
-          <Profile
-            user={user}
-            onSignOut={() => {
-              onSignOut?.();
-              navigation.navigate('Welcome');
-            }}
-            onNavigate={(screen) => {
-              if (screen === 'home') {
-                navigation.navigate('HomeLanding');
-              } else {
-                navigation.navigate(screen as RouteName);
-              }
-            }}
-          />
-        );
-      case 'ProductsOption':
-        return (
-          <ProductsOption
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            onContinue={(option) => {
-              console.log('Product option selected:', option);
-            }}
-          />
-        );
-      case 'HealthProducts':
-        return (
-          <HealthProducts
-            navigation={navigation}
-            user={user}
-          />
-        );
-      case 'Insurance':
-        return (
-          <Insurance
-            navigation={navigation}
-            user={user}
-          />
-        );
-      case 'WomensInsuranceListing':
-        return (
-          <WomensInsuranceListing
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'InsuranceComparison':
-        return (
-          <InsuranceComparison
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            selectedPlanIds={routeParams.selectedPlanIds || []}
-          />
-        );
-      case 'WomenProductListing':
-        return (
-          <WomenProductListing
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'ProductComparison':
-        return (
-          <ProductComparison
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            productId={routeParams.productId}
-            productName={routeParams.productName}
-            productPrice={routeParams.productPrice}
-            productDescription={routeParams.productDescription}
-            productCategory={routeParams.productCategory}
-          />
-        );
-      case 'AboutUs':
-        return (
-          <AboutUs
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'DiscoverOptions':
-        return (
-          <DiscoverOptions
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            onContinue={(option) => {
-              console.log('Discover option selected:', option);
-            }}
-          />
-        );
-      case 'ClinicListing':
-        return (
-          <ClinicListing
-            navigation={navigation}
-            user={user}
-          />
-        );
-      case 'DoctorListing':
-        return (
-          <DoctorListing
-            navigation={navigation}
-            user={user}
-          />
-        );
-      case 'HospitalListing':
-        return (
-          <HospitalListing
-            navigation={navigation}
-            user={user}
-          />
-        );
-      case 'KnowledgeHub':
-        return (
-          <KnowledgeHub
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'KnowledgeArticle':
-        return (
-          <KnowledgeArticle
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            diseaseId={routeParams.diseaseId}
-            diseaseName={routeParams.diseaseName}
-            diseaseCategory={routeParams.diseaseCategory}
-            diseaseDescription={routeParams.diseaseDescription}
-            diseaseSymptoms={routeParams.diseaseSymptoms}
-            diseasePrevalence={routeParams.diseasePrevalence}
-          />
-        );
-      case 'ExpertAdviceListing':
-        return (
-          <ExpertAdviceListing
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'TrackOptions':
-        return (
-          <TrackOptions
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-            onContinue={(option) => {
-              console.log('Track option selected:', option);
-            }}
-          />
-        );
-      case 'VaccineTracking':
-        return (
-          <VaccineTracking
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'ScreeningTracking':
-        return (
-          <ScreeningTracking
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'CycleTracking':
-        return (
-          <CycleTracking
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'WomenStories':
-        return (
-          <WomenStories
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      case 'ResearchArticles':
-        return (
-          <ResearchArticles
-            navigation={navigation}
-            user={user}
-            onSignOut={handleSignOut}
-          />
-        );
-      default:
-        return (
-          <Welcome
-            language={language}
-            onSignInSuccess={handleSignInSuccess}
-            navigation={navigation}
-          />
-        );
+    const routeDef = routeRegistryMap.get(currentRoute);
+
+    if (!routeDef) {
+      // Fallback to Welcome if route not found
+      const defaultRoute = routeRegistryMap.get(ROUTES.WELCOME)!;
+      return defaultRoute.renderProps({
+        navigation,
+        language,
+        handlers,
+      });
     }
+
+    // Check authentication requirement
+    if (routeDef.requiresAuth && !user) {
+      const defaultRoute = routeRegistryMap.get(ROUTES.WELCOME)!;
+      return defaultRoute.renderProps({
+        navigation,
+        language,
+        handlers,
+      });
+    }
+
+    return routeDef.renderProps({
+      navigation,
+      user,
+      language,
+      routeParams,
+      flow,
+      handlers,
+    });
   };
 
   return <View style={styles.container}>{renderRoute()}</View>;
@@ -534,4 +736,3 @@ const styles = StyleSheet.create({
 });
 
 export default Routes;
-

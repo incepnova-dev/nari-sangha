@@ -15,6 +15,7 @@ import {
   signInStyles,
   iconStyles,
 } from '../styles';
+import { ROUTES } from './routes/Routes';
 
 interface SignInProps {
   navigation?: any;
@@ -40,21 +41,21 @@ const SignIn: React.FC<SignInProps> = ({
   const handleSignIn = () => {
     if (activeTab === 'phone' && phone.trim() && password.trim()) {
       onSignIn?.({ phone: phone.trim(), password });
-      navigation?.navigate('HomeLanding');
+      navigation?.navigate(ROUTES.HOME_LANDING);
     } else if (activeTab === 'email' && email.trim() && password.trim()) {
       onSignIn?.({ email: email.trim(), password });
-      navigation?.navigate('HomeLanding');
+      navigation?.navigate(ROUTES.HOME_LANDING);
     }
   };
 
   const handleSignInWithOTP = () => {
     onSignInWithOTP?.();
-    navigation?.navigate('OTPVerification');
+    navigation?.navigate(ROUTES.OTP_VERIFICATION);
   };
 
   const handleForgotPassword = () => {
     onForgotPassword?.();
-    navigation?.navigate('AccountRecovery');
+    navigation?.navigate(ROUTES.ACCOUNT_RECOVERY);
   };
 
   return (
@@ -199,7 +200,7 @@ const SignIn: React.FC<SignInProps> = ({
         {/* Sign Up Link */}
         <Text style={signInStyles.termsText}>
           Don't have an account?{' '}
-          <Text style={signInStyles.termsLink} onPress={() => navigation?.navigate('RegionSelection')}>
+          <Text style={signInStyles.termsLink} onPress={() => navigation?.navigate(ROUTES.REGION_SELECTION)}>
             Sign Up
           </Text>
         </Text>
