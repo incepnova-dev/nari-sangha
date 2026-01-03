@@ -3,13 +3,16 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  researchArticlesStyles,
+} from '../styles';
 
 interface Video {
   id: string;
@@ -311,70 +314,70 @@ const ResearchArticles: React.FC<ResearchArticlesProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Hero Section */}
-        <View style={styles.heroSection}>
-          <Text style={styles.heroIcon}>🔬</Text>
-          <Text style={styles.heroTitle}>Cutting-Edge Research</Text>
-          <Text style={styles.heroSubtitle}>
+        <View style={researchArticlesStyles.heroSection}>
+          <Text style={researchArticlesStyles.heroIcon}>🔬</Text>
+          <Text style={researchArticlesStyles.heroTitle}>Cutting-Edge Research</Text>
+          <Text style={researchArticlesStyles.heroSubtitle}>
             Stay informed with the latest breakthroughs in women's health research and medical advances
           </Text>
         </View>
 
         {/* Content Section */}
-        <View style={styles.contentSection}>
+        <View style={researchArticlesStyles.contentSection}>
           {/* Video Section */}
-          <View style={styles.videoSection}>
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionIcon}>🎥</Text>
-              <Text style={styles.sectionTitle}>Expert Insights</Text>
+          <View style={researchArticlesStyles.videoSection}>
+            <View style={researchArticlesStyles.sectionHeader}>
+              <Text style={researchArticlesStyles.sectionIcon}>🎥</Text>
+              <Text style={researchArticlesStyles.sectionTitle}>Expert Insights</Text>
             </View>
 
             {videos.map((video) => (
               <TouchableOpacity
                 key={video.id}
-                style={styles.videoCard}
+                style={researchArticlesStyles.videoCard}
                 activeOpacity={0.8}
                 onPress={() => video.url && handleOpenUrl(video.url)}
               >
-                <View style={styles.videoThumbnail}>
-                  <Text style={styles.videoThumbnailIcon}>▶</Text>
-                  <Text style={styles.videoThumbnailText}>🎥</Text>
+                <View style={researchArticlesStyles.videoThumbnail}>
+                  <Text style={researchArticlesStyles.videoThumbnailIcon}>▶</Text>
+                  <Text style={researchArticlesStyles.videoThumbnailText}>🎥</Text>
                 </View>
-                <View style={styles.videoInfo}>
-                  <Text style={styles.videoTitle}>{video.title}</Text>
-                  <View style={styles.videoMeta}>
-                    <Text style={styles.videoMetaText}>📅 {video.date}</Text>
-                    <Text style={styles.videoMetaText}>•</Text>
-                    <Text style={styles.videoMetaText}>⏱️ {video.duration}</Text>
-                    <Text style={styles.videoMetaText}>•</Text>
-                    <Text style={styles.videoMetaText}>👁️ {video.views}</Text>
+                <View style={researchArticlesStyles.videoInfo}>
+                  <Text style={researchArticlesStyles.videoTitle}>{video.title}</Text>
+                  <View style={researchArticlesStyles.videoMeta}>
+                    <Text style={researchArticlesStyles.videoMetaText}>📅 {video.date}</Text>
+                    <Text style={researchArticlesStyles.videoMetaText}>•</Text>
+                    <Text style={researchArticlesStyles.videoMetaText}>⏱️ {video.duration}</Text>
+                    <Text style={researchArticlesStyles.videoMetaText}>•</Text>
+                    <Text style={researchArticlesStyles.videoMetaText}>👁️ {video.views}</Text>
                   </View>
-                  <Text style={styles.videoDescription}>{video.description}</Text>
-                  <View style={styles.doctorInfo}>
-                    <View style={styles.doctorAvatar}>
-                      <Text style={styles.doctorAvatarText}>{video.doctorAvatar}</Text>
+                  <Text style={researchArticlesStyles.videoDescription}>{video.description}</Text>
+                  <View style={researchArticlesStyles.doctorInfo}>
+                    <View style={researchArticlesStyles.doctorAvatar}>
+                      <Text style={researchArticlesStyles.doctorAvatarText}>{video.doctorAvatar}</Text>
                     </View>
-                    <View style={styles.doctorDetails}>
-                      <Text style={styles.doctorName}>{video.doctorName}</Text>
-                      <Text style={styles.doctorSpecialty}>{video.doctorSpecialty}</Text>
+                    <View style={researchArticlesStyles.doctorDetails}>
+                      <Text style={researchArticlesStyles.doctorName}>{video.doctorName}</Text>
+                      <Text style={researchArticlesStyles.doctorSpecialty}>{video.doctorSpecialty}</Text>
                     </View>
                   </View>
                 </View>
@@ -386,23 +389,23 @@ const ResearchArticles: React.FC<ResearchArticlesProps> = ({
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            style={styles.categoryTabs}
-            contentContainerStyle={styles.categoryTabsContent}
+            style={researchArticlesStyles.categoryTabs}
+            contentContainerStyle={researchArticlesStyles.categoryTabsContent}
           >
             {categories.map((category) => (
               <TouchableOpacity
                 key={category}
                 style={[
-                  styles.categoryTab,
-                  activeCategory === category && styles.categoryTabActive,
+                  researchArticlesStyles.categoryTab,
+                  activeCategory === category && researchArticlesStyles.categoryTabActive,
                 ]}
                 onPress={() => setActiveCategory(category)}
                 activeOpacity={0.7}
               >
                 <Text
                   style={[
-                    styles.categoryTabText,
-                    activeCategory === category && styles.categoryTabTextActive,
+                    researchArticlesStyles.categoryTabText,
+                    activeCategory === category && researchArticlesStyles.categoryTabTextActive,
                   ]}
                 >
                   {category}
@@ -412,56 +415,56 @@ const ResearchArticles: React.FC<ResearchArticlesProps> = ({
           </ScrollView>
 
           {/* Featured Research */}
-          <View style={styles.featuredResearch}>
-            <View style={styles.featuredBadgeWhite}>
-              <Text style={styles.featuredBadgeWhiteText}>{featuredArticle.badge}</Text>
+          <View style={researchArticlesStyles.featuredResearch}>
+            <View style={researchArticlesStyles.featuredBadgeWhite}>
+              <Text style={researchArticlesStyles.featuredBadgeWhiteText}>{featuredArticle.badge}</Text>
             </View>
-            <Text style={styles.featuredResearchTitle}>{featuredArticle.title}</Text>
-            <Text style={styles.featuredResearchAuthors}>{featuredArticle.authors}</Text>
-            <Text style={styles.featuredResearchJournal}>{featuredArticle.journal}</Text>
-            <Text style={styles.featuredResearchAbstract}>{featuredArticle.abstract}</Text>
-            <TouchableOpacity style={styles.featuredReadFullBtn} activeOpacity={0.8}>
-              <Text style={styles.featuredReadFullBtnText}>Read Full Study →</Text>
+            <Text style={researchArticlesStyles.featuredResearchTitle}>{featuredArticle.title}</Text>
+            <Text style={researchArticlesStyles.featuredResearchAuthors}>{featuredArticle.authors}</Text>
+            <Text style={researchArticlesStyles.featuredResearchJournal}>{featuredArticle.journal}</Text>
+            <Text style={researchArticlesStyles.featuredResearchAbstract}>{featuredArticle.abstract}</Text>
+            <TouchableOpacity style={researchArticlesStyles.featuredReadFullBtn} activeOpacity={0.8}>
+              <Text style={researchArticlesStyles.featuredReadFullBtnText}>Read Full Study →</Text>
             </TouchableOpacity>
           </View>
 
           {/* Research Categories */}
           {Object.entries(groupedArticles).map(([category, categoryArticles]) => (
             <View key={category}>
-              <View style={styles.sectionHeader}>
-                <Text style={styles.sectionIcon}>
+              <View style={researchArticlesStyles.sectionHeader}>
+                <Text style={researchArticlesStyles.sectionIcon}>
                   {category.includes('PCOS') ? '🔬' :
                    category.includes('Cancer') ? '🩺' :
                    category.includes('Pregnancy') ? '🤰' :
                    category.includes('Menopause') ? '🌸' :
                    category.includes('Fertility') ? '🧬' : '📚'}
                 </Text>
-                <Text style={styles.sectionTitle}>{category}</Text>
+                <Text style={researchArticlesStyles.sectionTitle}>{category}</Text>
               </View>
               {categoryArticles.map((article) => (
-                <View key={article.id} style={styles.researchCard}>
-                  <View style={styles.researchBadge}>
-                    <Text style={styles.researchBadgeText}>{article.badge}</Text>
+                <View key={article.id} style={researchArticlesStyles.researchCard}>
+                  <View style={researchArticlesStyles.researchBadge}>
+                    <Text style={researchArticlesStyles.researchBadgeText}>{article.badge}</Text>
                   </View>
-                  <Text style={styles.researchTitle}>{article.title}</Text>
-                  <Text style={styles.researchAuthors}>{article.authors}</Text>
-                  <Text style={styles.researchJournal}>{article.journal}</Text>
-                  <Text style={styles.researchAbstract}>{article.abstract}</Text>
-                  <View style={styles.researchTags}>
+                  <Text style={researchArticlesStyles.researchTitle}>{article.title}</Text>
+                  <Text style={researchArticlesStyles.researchAuthors}>{article.authors}</Text>
+                  <Text style={researchArticlesStyles.researchJournal}>{article.journal}</Text>
+                  <Text style={researchArticlesStyles.researchAbstract}>{article.abstract}</Text>
+                  <View style={researchArticlesStyles.researchTags}>
                     {article.tags.map((tag, index) => (
-                      <View key={index} style={[styles.tag, getTagStyle(tag.type)]}>
-                        <Text style={[styles.tagText, getTagTextStyle(tag.type)]}>
+                      <View key={index} style={[researchArticlesStyles.tag, getTagStyle(tag.type)]}>
+                        <Text style={[researchArticlesStyles.tagText, getTagTextStyle(tag.type)]}>
                           {tag.text}
                         </Text>
                       </View>
                     ))}
                   </View>
-                  <View style={styles.researchFooter}>
-                    <TouchableOpacity style={styles.readFullBtn} activeOpacity={0.8}>
-                      <Text style={styles.readFullBtnText}>Read Full Article</Text>
+                  <View style={researchArticlesStyles.researchFooter}>
+                    <TouchableOpacity style={researchArticlesStyles.readFullBtn} activeOpacity={0.8}>
+                      <Text style={researchArticlesStyles.readFullBtnText}>Read Full Article</Text>
                     </TouchableOpacity>
-                    <View style={styles.researchStats}>
-                      <Text style={styles.researchStatsText}>📊 Impact Factor: {article.impactFactor}</Text>
+                    <View style={researchArticlesStyles.researchStats}>
+                      <Text style={researchArticlesStyles.researchStatsText}>📊 Impact Factor: {article.impactFactor}</Text>
                     </View>
                   </View>
                 </View>
@@ -478,362 +481,6 @@ const ResearchArticles: React.FC<ResearchArticlesProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  heroSection: {
-    backgroundColor: '#667eea',
-    padding: 40,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  heroIcon: {
-    fontSize: 80,
-    marginBottom: 20,
-  },
-  heroTitle: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  heroSubtitle: {
-    fontSize: 16,
-    color: 'white',
-    opacity: 0.95,
-    lineHeight: 24,
-    textAlign: 'center',
-    maxWidth: 400,
-  },
-  contentSection: {
-    padding: 20,
-    paddingTop: 10,
-  },
-  videoSection: {
-    marginBottom: 35,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 20,
-  },
-  sectionIcon: {
-    fontSize: 28,
-  },
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#333',
-  },
-  videoCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginBottom: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  videoThumbnail: {
-    width: '100%',
-    height: 200,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-  },
-  videoThumbnailIcon: {
-    position: 'absolute',
-    fontSize: 60,
-    color: 'white',
-    zIndex: 1,
-  },
-  videoThumbnailText: {
-    fontSize: 80,
-    opacity: 0.3,
-  },
-  videoInfo: {
-    padding: 20,
-  },
-  videoTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 10,
-    lineHeight: 25,
-  },
-  videoMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 12,
-  },
-  videoMetaText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  videoDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  doctorInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingTop: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-  },
-  doctorAvatar: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#E91E63',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  doctorAvatarText: {
-    fontSize: 24,
-  },
-  doctorDetails: {
-    flex: 1,
-  },
-  doctorName: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 3,
-  },
-  doctorSpecialty: {
-    fontSize: 13,
-    color: '#999',
-  },
-  categoryTabs: {
-    marginBottom: 10,
-  },
-  categoryTabsContent: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    gap: 10,
-  },
-  categoryTab: {
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#ddd',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-  },
-  categoryTabActive: {
-    backgroundColor: '#E91E63',
-    borderColor: '#E91E63',
-  },
-  categoryTabText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#666',
-  },
-  categoryTabTextActive: {
-    color: 'white',
-  },
-  featuredResearch: {
-    backgroundColor: '#667eea',
-    borderRadius: 20,
-    padding: 30,
-    marginBottom: 30,
-    shadowColor: '#667eea',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  featuredBadgeWhite: {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignSelf: 'flex-start',
-    paddingVertical: 6,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    marginBottom: 15,
-  },
-  featuredBadgeWhiteText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  featuredResearchTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    lineHeight: 32,
-  },
-  featuredResearchAuthors: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
-    fontStyle: 'italic',
-    marginBottom: 10,
-  },
-  featuredResearchJournal: {
-    fontSize: 13,
-    color: 'rgba(255, 255, 255, 0.9)',
-    marginBottom: 15,
-  },
-  featuredResearchAbstract: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: 22,
-    marginBottom: 20,
-  },
-  featuredReadFullBtn: {
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
-  },
-  featuredReadFullBtnText: {
-    color: '#667eea',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  researchCard: {
-    backgroundColor: 'white',
-    borderLeftWidth: 5,
-    borderLeftColor: '#E91E63',
-    borderRadius: 12,
-    padding: 25,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 2,
-  },
-  researchBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#FFE5F0',
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-  researchBadgeText: {
-    color: '#E91E63',
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  researchTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 12,
-    lineHeight: 27,
-  },
-  researchAuthors: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
-    fontStyle: 'italic',
-  },
-  researchJournal: {
-    fontSize: 13,
-    color: '#999',
-    marginBottom: 15,
-  },
-  researchAbstract: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 15,
-  },
-  researchTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 15,
-  },
-  tag: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-  },
-  tagPink: {
-    backgroundColor: '#FFE5F0',
-  },
-  tagPurple: {
-    backgroundColor: '#F3E5F5',
-  },
-  tagBlue: {
-    backgroundColor: '#E3F2FD',
-  },
-  tagGreen: {
-    backgroundColor: '#E8F5E9',
-  },
-  tagOrange: {
-    backgroundColor: '#FFF3E0',
-  },
-  tagText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  tagTextPink: {
-    color: '#E91E63',
-  },
-  tagTextPurple: {
-    color: '#9C27B0',
-  },
-  tagTextBlue: {
-    color: '#2196F3',
-  },
-  tagTextGreen: {
-    color: '#4CAF50',
-  },
-  tagTextOrange: {
-    color: '#FF9800',
-  },
-  researchFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-  },
-  readFullBtn: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 10,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-  },
-  readFullBtnText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  researchStats: {
-    flexDirection: 'row',
-    gap: 15,
-  },
-  researchStatsText: {
-    fontSize: 13,
-    color: '#999',
-  },
-});
 
 export default ResearchArticles;
 

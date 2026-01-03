@@ -3,13 +3,18 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   TextInput,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  headerStyles,
+  clinicListingStyles,
+  colors,
+} from '../styles';
 
 interface Clinic {
   id: string;
@@ -99,78 +104,78 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerWithBackground}>
+          <TouchableOpacity style={headerStyles.backButtonOnPrimary} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonTextWhite}>←</Text>
           </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Clinics</Text>
-            <Text style={styles.headerSubtitle}>Find nearby medical clinics</Text>
+          <View style={headerStyles.headerContent}>
+            <Text style={headerStyles.headerTitleWhite}>Clinics</Text>
+            <Text style={headerStyles.headerSubtitle}>Find nearby medical clinics</Text>
           </View>
-          <View style={styles.headerSpacer} />
+          <View style={headerStyles.headerSpacerSmall} />
         </View>
 
         {/* Search Bar */}
-        <View style={styles.searchBar}>
-          <Text style={styles.searchIcon}>🔍</Text>
+        <View style={clinicListingStyles.searchBar}>
+          <Text style={clinicListingStyles.searchIcon}>🔍</Text>
           <TextInput
-            style={styles.searchInput}
+            style={clinicListingStyles.searchInput}
             placeholder="Search clinics by name or specialty..."
-            placeholderTextColor="#999"
+            placeholderTextColor={colors.text.tertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
         </View>
 
         {/* Clinic Cards */}
-        <View style={styles.clinicsContainer}>
+        <View style={clinicListingStyles.clinicsContainer}>
           {filteredClinics.map((clinic) => (
-            <TouchableOpacity key={clinic.id} style={styles.clinicCard} activeOpacity={0.8}>
-              <View style={styles.clinicHeader}>
-                <View style={styles.clinicIcon}>
-                  <Text style={styles.clinicIconText}>{clinic.icon}</Text>
+            <TouchableOpacity key={clinic.id} style={clinicListingStyles.clinicCard} activeOpacity={0.8}>
+              <View style={clinicListingStyles.clinicHeader}>
+                <View style={clinicListingStyles.clinicIcon}>
+                  <Text style={clinicListingStyles.clinicIconText}>{clinic.icon}</Text>
                 </View>
-                <View style={styles.clinicInfo}>
-                  <Text style={styles.clinicName}>{clinic.name}</Text>
-                  <View style={styles.rating}>
-                    <Text style={styles.stars}>{renderStars(clinic.rating)}</Text>
-                    <Text style={styles.ratingText}>
+                <View style={clinicListingStyles.clinicInfo}>
+                  <Text style={clinicListingStyles.clinicName}>{clinic.name}</Text>
+                  <View style={clinicListingStyles.rating}>
+                    <Text style={clinicListingStyles.stars}>{renderStars(clinic.rating)}</Text>
+                    <Text style={clinicListingStyles.ratingText}>
                       {clinic.rating} ({clinic.reviewCount} reviews)
                     </Text>
                   </View>
                 </View>
               </View>
-              <Text style={styles.address}>📍 {clinic.address}</Text>
-              <Text style={styles.distance}>📏 {clinic.distance} away</Text>
-              <View style={styles.specialties}>
+              <Text style={clinicListingStyles.address}>📍 {clinic.address}</Text>
+              <Text style={clinicListingStyles.distance}>📏 {clinic.distance} away</Text>
+              <View style={clinicListingStyles.specialties}>
                 {clinic.specialties.map((specialty, index) => (
-                  <View key={index} style={styles.specialtyTag}>
-                    <Text style={styles.specialtyText}>{specialty}</Text>
+                  <View key={index} style={clinicListingStyles.specialtyTag}>
+                    <Text style={clinicListingStyles.specialtyText}>{specialty}</Text>
                   </View>
                 ))}
               </View>
-              <Text style={styles.timings}>🕐 {clinic.timings}</Text>
-              <TouchableOpacity style={styles.viewDetailsBtn} activeOpacity={0.8}>
-                <Text style={styles.viewDetailsBtnText}>View Details</Text>
+              <Text style={clinicListingStyles.timings}>🕐 {clinic.timings}</Text>
+              <TouchableOpacity style={clinicListingStyles.viewDetailsBtn} activeOpacity={0.8}>
+                <Text style={clinicListingStyles.viewDetailsBtnText}>View Details</Text>
               </TouchableOpacity>
             </TouchableOpacity>
           ))}
@@ -184,181 +189,6 @@ const ClinicListing: React.FC<ClinicListingProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F8F8',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#E91E63',
-    padding: 20,
-    paddingTop: 20,
-    marginBottom: 0,
-  },
-  backButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: 'white',
-  },
-  headerContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 5,
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.9,
-  },
-  headerSpacer: {
-    width: 35,
-  },
-  searchBar: {
-    marginHorizontal: 20,
-    marginTop: 15,
-    padding: 12,
-    paddingHorizontal: 15,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  searchIcon: {
-    fontSize: 18,
-    color: '#999',
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 14,
-    color: '#333',
-  },
-  clinicsContainer: {
-    padding: 20,
-    gap: 15,
-  },
-  clinicCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#E91E63',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 15,
-    elevation: 5,
-  },
-  clinicHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-    gap: 15,
-  },
-  clinicIcon: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#FCE4EC',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  clinicIconText: {
-    fontSize: 30,
-  },
-  clinicInfo: {
-    flex: 1,
-  },
-  clinicName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 5,
-  },
-  rating: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  stars: {
-    fontSize: 14,
-  },
-  ratingText: {
-    fontSize: 12,
-    color: '#666',
-  },
-  address: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 5,
-  },
-  distance: {
-    fontSize: 13,
-    color: '#4CAF50',
-    marginBottom: 10,
-    fontWeight: '600',
-  },
-  specialties: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 10,
-  },
-  specialtyTag: {
-    backgroundColor: '#FFF5F7',
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#E91E63',
-  },
-  specialtyText: {
-    fontSize: 11,
-    color: '#E91E63',
-    fontWeight: '600',
-  },
-  timings: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 15,
-  },
-  viewDetailsBtn: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewDetailsBtnText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
 
 export default ClinicListing;
 

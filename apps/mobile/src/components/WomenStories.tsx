@@ -3,12 +3,15 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  womenStoriesStyles,
+} from '../styles';
 
 interface Story {
   id: string;
@@ -215,42 +218,42 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
   const getTagStyle = (type: string) => {
     switch (type) {
       case 'pink':
-        return styles.tagPink;
+        return womenStoriesStyles.tagPink;
       case 'purple':
-        return styles.tagPurple;
+        return womenStoriesStyles.tagPurple;
       case 'blue':
-        return styles.tagBlue;
+        return womenStoriesStyles.tagBlue;
       case 'green':
-        return styles.tagGreen;
+        return womenStoriesStyles.tagGreen;
       default:
-        return styles.tagPink;
+        return womenStoriesStyles.tagPink;
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Hero Section */}
-        <View style={styles.heroSection}>
-          <Text style={styles.heroIcon}>💖</Text>
-          <Text style={styles.heroTitle}>Real Stories, Real Strength</Text>
-          <Text style={styles.heroSubtitle}>
+        <View style={womenStoriesStyles.heroSection}>
+          <Text style={womenStoriesStyles.heroIcon}>💖</Text>
+          <Text style={womenStoriesStyles.heroTitle}>Real Stories, Real Strength</Text>
+          <Text style={womenStoriesStyles.heroSubtitle}>
             Inspiring journeys of women who overcame health challenges and found their strength
           </Text>
         </View>
@@ -259,23 +262,23 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={styles.filterSection}
-          contentContainerStyle={styles.filterContent}
+          style={womenStoriesStyles.filterSection}
+          contentContainerStyle={womenStoriesStyles.filterContent}
         >
           {filters.map((filter) => (
             <TouchableOpacity
               key={filter}
               style={[
-                styles.filterPill,
-                activeFilter === filter && styles.filterPillActive,
+                womenStoriesStyles.filterPill,
+                activeFilter === filter && womenStoriesStyles.filterPillActive,
               ]}
               onPress={() => setActiveFilter(filter)}
               activeOpacity={0.7}
             >
               <Text
                 style={[
-                  styles.filterPillText,
-                  activeFilter === filter && styles.filterPillTextActive,
+                  womenStoriesStyles.filterPillText,
+                  activeFilter === filter && womenStoriesStyles.filterPillTextActive,
                 ]}
               >
                 {filter}
@@ -285,64 +288,64 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
         </ScrollView>
 
         {/* Content Section */}
-        <View style={styles.contentSection}>
+        <View style={womenStoriesStyles.contentSection}>
           {/* Featured Story */}
-          <View style={styles.featuredStory}>
-            <View style={styles.featuredBadge}>
-              <Text style={styles.featuredBadgeText}>⭐ Featured Story</Text>
+          <View style={womenStoriesStyles.featuredStory}>
+            <View style={womenStoriesStyles.featuredBadge}>
+              <Text style={womenStoriesStyles.featuredBadgeText}>⭐ Featured Story</Text>
             </View>
-            <Text style={styles.featuredStoryTitle}>{featuredStory.title}</Text>
-            <Text style={styles.featuredStoryExcerpt}>{featuredStory.excerpt}</Text>
-            <TouchableOpacity style={styles.featuredReadMoreBtn} activeOpacity={0.8}>
-              <Text style={styles.featuredReadMoreBtnText}>Read Full Story →</Text>
+            <Text style={womenStoriesStyles.featuredStoryTitle}>{featuredStory.title}</Text>
+            <Text style={womenStoriesStyles.featuredStoryExcerpt}>{featuredStory.excerpt}</Text>
+            <TouchableOpacity style={womenStoriesStyles.featuredReadMoreBtn} activeOpacity={0.8}>
+              <Text style={womenStoriesStyles.featuredReadMoreBtnText}>Read Full Story →</Text>
             </TouchableOpacity>
           </View>
 
           {/* Story Categories */}
           {Object.entries(groupedStories).map(([category, categoryStories]) => (
             <View key={category}>
-              <View style={styles.categoryTitleContainer}>
-                <Text style={styles.categoryTitle}>{category}</Text>
+              <View style={womenStoriesStyles.categoryTitleContainer}>
+                <Text style={womenStoriesStyles.categoryTitle}>{category}</Text>
               </View>
               {categoryStories.map((story) => (
-                <View key={story.id} style={styles.storyCard}>
-                  <View style={styles.storyHeader}>
-                    <View style={styles.authorAvatar}>
-                      <Text style={styles.authorAvatarText}>{story.authorAvatar}</Text>
+                <View key={story.id} style={womenStoriesStyles.storyCard}>
+                  <View style={womenStoriesStyles.storyHeader}>
+                    <View style={womenStoriesStyles.authorAvatar}>
+                      <Text style={womenStoriesStyles.authorAvatarText}>{story.authorAvatar}</Text>
                     </View>
-                    <View style={styles.authorInfo}>
-                      <Text style={styles.authorName}>{story.authorName}</Text>
-                      <View style={styles.storyMeta}>
-                        <Text style={styles.storyMetaText}>🗓️ {story.date}</Text>
-                        <Text style={styles.storyMetaText}>•</Text>
-                        <Text style={styles.storyMetaText}>{story.readTime}</Text>
+                    <View style={womenStoriesStyles.authorInfo}>
+                      <Text style={womenStoriesStyles.authorName}>{story.authorName}</Text>
+                      <View style={womenStoriesStyles.storyMeta}>
+                        <Text style={womenStoriesStyles.storyMetaText}>🗓️ {story.date}</Text>
+                        <Text style={womenStoriesStyles.storyMetaText}>•</Text>
+                        <Text style={womenStoriesStyles.storyMetaText}>{story.readTime}</Text>
                       </View>
                     </View>
                   </View>
-                  <Text style={styles.storyTitle}>{story.title}</Text>
-                  <Text style={styles.storyExcerpt}>{story.excerpt}</Text>
-                  <View style={styles.storyTags}>
+                  <Text style={womenStoriesStyles.storyTitle}>{story.title}</Text>
+                  <Text style={womenStoriesStyles.storyExcerpt}>{story.excerpt}</Text>
+                  <View style={womenStoriesStyles.storyTags}>
                     {story.tags.map((tag, index) => (
-                      <View key={index} style={[styles.tag, getTagStyle(tag.type)]}>
+                      <View key={index} style={[womenStoriesStyles.tag, getTagStyle(tag.type)]}>
                         <Text style={[
-                          styles.tagText,
-                          tag.type === 'pink' && styles.tagTextPink,
-                          tag.type === 'purple' && styles.tagTextPurple,
-                          tag.type === 'blue' && styles.tagTextBlue,
-                          tag.type === 'green' && styles.tagTextGreen,
+                          womenStoriesStyles.tagText,
+                          tag.type === 'pink' && womenStoriesStyles.tagTextPink,
+                          tag.type === 'purple' && womenStoriesStyles.tagTextPurple,
+                          tag.type === 'blue' && womenStoriesStyles.tagTextBlue,
+                          tag.type === 'green' && womenStoriesStyles.tagTextGreen,
                         ]}>
                           {tag.text}
                         </Text>
                       </View>
                     ))}
                   </View>
-                  <View style={styles.storyFooter}>
-                    <TouchableOpacity style={styles.readMoreBtn} activeOpacity={0.8}>
-                      <Text style={styles.readMoreBtnText}>Read More</Text>
+                  <View style={womenStoriesStyles.storyFooter}>
+                    <TouchableOpacity style={womenStoriesStyles.readMoreBtn} activeOpacity={0.8}>
+                      <Text style={womenStoriesStyles.readMoreBtnText}>Read More</Text>
                     </TouchableOpacity>
-                    <View style={styles.storyStats}>
-                      <Text style={styles.statItem}>❤️ {story.likes}</Text>
-                      <Text style={styles.statItem}>💬 {story.comments}</Text>
+                    <View style={womenStoriesStyles.storyStats}>
+                      <Text style={womenStoriesStyles.statItem}>❤️ {story.likes}</Text>
+                      <Text style={womenStoriesStyles.statItem}>💬 {story.comments}</Text>
                     </View>
                   </View>
                 </View>
@@ -359,263 +362,6 @@ const WomenStories: React.FC<WomenStoriesProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  heroSection: {
-    backgroundColor: '#FFE5EE',
-    padding: 40,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  heroIcon: {
-    fontSize: 80,
-    marginBottom: 20,
-  },
-  heroTitle: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  heroSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-    textAlign: 'center',
-    maxWidth: 400,
-  },
-  filterSection: {
-    marginBottom: 10,
-  },
-  filterContent: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    gap: 10,
-  },
-  filterPill: {
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#ddd',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-  },
-  filterPillActive: {
-    backgroundColor: '#E91E63',
-    borderColor: '#E91E63',
-  },
-  filterPillText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#666',
-  },
-  filterPillTextActive: {
-    color: 'white',
-  },
-  contentSection: {
-    padding: 20,
-    paddingTop: 10,
-  },
-  featuredStory: {
-    backgroundColor: '#667eea',
-    borderRadius: 20,
-    padding: 30,
-    marginBottom: 30,
-    shadowColor: '#667eea',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-  featuredBadge: {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignSelf: 'flex-start',
-    paddingVertical: 6,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    marginBottom: 15,
-  },
-  featuredBadgeText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  featuredStoryTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    lineHeight: 32,
-  },
-  featuredStoryExcerpt: {
-    fontSize: 15,
-    color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: 24,
-    marginBottom: 20,
-  },
-  featuredReadMoreBtn: {
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
-  },
-  featuredReadMoreBtnText: {
-    color: '#667eea',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  categoryTitleContainer: {
-    marginTop: 30,
-    marginBottom: 20,
-    paddingLeft: 10,
-    borderLeftWidth: 4,
-    borderLeftColor: '#E91E63',
-  },
-  categoryTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-  },
-  storyCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 25,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  storyHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 20,
-  },
-  authorAvatar: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#E91E63',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  authorAvatarText: {
-    fontSize: 28,
-  },
-  authorInfo: {
-    flex: 1,
-  },
-  authorName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 5,
-  },
-  storyMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  storyMetaText: {
-    fontSize: 13,
-    color: '#999',
-  },
-  storyTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 15,
-    lineHeight: 28,
-  },
-  storyExcerpt: {
-    fontSize: 15,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 20,
-  },
-  storyTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginBottom: 15,
-  },
-  tag: {
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 15,
-  },
-  tagPink: {
-    backgroundColor: '#FFE5F0',
-  },
-  tagPurple: {
-    backgroundColor: '#F3E5F5',
-  },
-  tagBlue: {
-    backgroundColor: '#E3F2FD',
-  },
-  tagGreen: {
-    backgroundColor: '#E8F5E9',
-  },
-  tagText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  tagTextPink: {
-    color: '#E91E63',
-  },
-  tagTextPurple: {
-    color: '#9C27B0',
-  },
-  tagTextBlue: {
-    color: '#2196F3',
-  },
-  tagTextGreen: {
-    color: '#4CAF50',
-  },
-  storyFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-  },
-  readMoreBtn: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 10,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-  },
-  readMoreBtnText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  storyStats: {
-    flexDirection: 'row',
-    gap: 15,
-  },
-  statItem: {
-    fontSize: 14,
-    color: '#999',
-  },
-});
 
 export default WomenStories;
 

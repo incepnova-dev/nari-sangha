@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Platform, StatusBar, StyleSheet } from 'react-native';
+import { View, Text, Platform, StatusBar } from 'react-native';
 import ProfileIcon from './topMenu/ProfileIcon';
 import AlertIcon from './topMenu/AlertIcon';
 import HamburgerMenu from './topMenu/HamburgerMenu';
 import AlertModal from './AlertModal';
 import SideMenu from './SideMenu';
+import { welcomeHeaderStyles } from '../styles';
 
 interface WelcomeHeaderProps {
   userName: string;
@@ -58,18 +59,18 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
 
   return (
     <>
-      <View style={[styles.container, { paddingTop }]}>
-        <View style={styles.leftSection}>
+      <View style={[welcomeHeaderStyles.container, { paddingTop }]}>
+        <View style={welcomeHeaderStyles.leftSection}>
           <HamburgerMenu 
             onPress={handleMenuPress} 
             isActive={menuActive} 
           />
-          <View style={styles.welcomeSection}>
-            <Text style={styles.welcomeText}>Welcome back,</Text>
-            <Text style={styles.welcomeName}>{userName} 👋</Text>
+          <View style={welcomeHeaderStyles.welcomeSection}>
+            <Text style={welcomeHeaderStyles.welcomeText}>Welcome back,</Text>
+            <Text style={welcomeHeaderStyles.welcomeName}>{userName} 👋</Text>
           </View>
         </View>
-        <View style={styles.iconsContainer}>
+        <View style={welcomeHeaderStyles.iconsContainer}>
           <AlertIcon 
             onPress={handleAlertPress} 
             isActive={isAlertModalOpen}
@@ -92,46 +93,6 @@ const WelcomeHeader: React.FC<WelcomeHeaderProps> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#E91E63',
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  leftSection: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  hamburgerPlaceholder: {
-    width: 40,
-    height: 40,
-  },
-  welcomeSection: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  welcomeText: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.9)',
-    marginBottom: 4,
-  },
-  welcomeName: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: 'white',
-  },
-  iconsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-});
 
 export default WelcomeHeader;
 

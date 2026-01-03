@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { bottomMenuBarStyles } from '../styles';
 import HomeIcon from './bottomMenu/HomeIcon';
 import DiscoverIcon from './bottomMenu/DiscoverIcon';
@@ -16,7 +16,7 @@ const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
   onNavigate,
 }) => {
   return (
-    <View style={[bottomMenuBarStyles.bottomBar, styles.bottomBar]}>
+    <View style={bottomMenuBarStyles.bottomBar}>
       <HomeIcon
         isActive={activeScreen === 'home'}
         onPress={() => onNavigate('home')}
@@ -36,21 +36,5 @@ const BottomMenuBar: React.FC<BottomMenuBarProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  bottomBar: {
-    backgroundColor: 'white',
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 20,
-    elevation: 5,
-  },
-});
 
 export default BottomMenuBar;

@@ -3,12 +3,18 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
 import BottomMenuBar from './BottomMenuBar';
 import WelcomeHeader from './WelcomeHeader';
+import {
+  containerStyles,
+  headerStyles,
+  buttons,
+  productsOptionStyles,
+  colors,
+} from '../styles';
 
 interface ProductsOptionProps {
   navigation?: any;
@@ -51,106 +57,106 @@ const ProductsOption: React.FC<ProductsOptionProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[containerStyles.container, { backgroundColor: colors.background.primary }]}>
       <StatusBar barStyle="light-content" />
       
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={[containerStyles.scrollContent, { paddingTop: 0 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerNoBackground}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Select Product Type</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitleNoBackground}>Select Product Type</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>What are you looking for?</Text>
-        <Text style={styles.sectionSubtitle}>
+        <Text style={headerStyles.sectionTitleLarge}>What are you looking for?</Text>
+        <Text style={headerStyles.sectionSubtitle}>
           Choose the type of products you want to explore
         </Text>
 
         {/* Option Cards */}
-        <View style={styles.optionCards}>
+        <View style={productsOptionStyles.optionCards}>
           <TouchableOpacity
             style={[
-              styles.optionCard,
-              selectedOption === 'healthProducts' && styles.optionCardSelected,
+              productsOptionStyles.optionCard,
+              selectedOption === 'healthProducts' && productsOptionStyles.optionCardSelected,
             ]}
             onPress={() => setSelectedOption('healthProducts')}
           >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>💊</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Health Products</Text>
-                <Text style={styles.optionSubtext}>Wellness & Healthcare</Text>
+            <View style={productsOptionStyles.optionHeader}>
+              <Text style={productsOptionStyles.optionIcon}>💊</Text>
+              <View style={productsOptionStyles.optionInfo}>
+                <Text style={productsOptionStyles.optionName}>Health Products</Text>
+                <Text style={productsOptionStyles.optionSubtext}>Wellness & Healthcare</Text>
               </View>
             </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Vitamins & Supplements</Text>
+            <View style={productsOptionStyles.optionFeatures}>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Vitamins & Supplements</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Personal Care Items</Text>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Personal Care Items</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Wellness Products</Text>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Wellness Products</Text>
               </View>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[
-              styles.optionCard,
-              selectedOption === 'insurance' && styles.optionCardSelected,
+              productsOptionStyles.optionCard,
+              selectedOption === 'insurance' && productsOptionStyles.optionCardSelected,
             ]}
             onPress={() => setSelectedOption('insurance')}
           >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>🛡️</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Insurance</Text>
-                <Text style={styles.optionSubtext}>Health & Maternity Plans</Text>
+            <View style={productsOptionStyles.optionHeader}>
+              <Text style={productsOptionStyles.optionIcon}>🛡️</Text>
+              <View style={productsOptionStyles.optionInfo}>
+                <Text style={productsOptionStyles.optionName}>Insurance</Text>
+                <Text style={productsOptionStyles.optionSubtext}>Health & Maternity Plans</Text>
               </View>
             </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Women's Health Insurance</Text>
+            <View style={productsOptionStyles.optionFeatures}>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Women's Health Insurance</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Maternity Coverage</Text>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Maternity Coverage</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Comprehensive Plans</Text>
+              <View style={productsOptionStyles.featureItem}>
+                <Text style={productsOptionStyles.featureIcon}>✓</Text>
+                <Text style={productsOptionStyles.featureText}>Comprehensive Plans</Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
 
         {/* Button */}
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={[styles.btn, styles.btnPrimary]} onPress={handleContinue}>
-            <Text style={styles.btnText}>Continue</Text>
+        <View style={productsOptionStyles.btnContainer}>
+          <TouchableOpacity style={[buttons.buttonFullWidth, buttons.primaryButton]} onPress={handleContinue}>
+            <Text style={buttons.primaryButtonText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -163,136 +169,6 @@ const ProductsOption: React.FC<ProductsOptionProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF5F7',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 0,
-    paddingBottom: 100,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#333',
-    marginBottom: 12,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 40,
-  },
-  optionCards: {
-    gap: 16,
-  },
-  optionCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 24,
-    borderWidth: 3,
-    borderColor: 'transparent',
-  },
-  optionCardSelected: {
-    borderColor: '#E91E63',
-    backgroundColor: '#FFF5F7',
-  },
-  optionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    marginBottom: 12,
-  },
-  optionIcon: {
-    fontSize: 40,
-  },
-  optionInfo: {
-    flex: 1,
-  },
-  optionName: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 4,
-  },
-  optionSubtext: {
-    fontSize: 14,
-    color: '#666',
-  },
-  optionFeatures: {
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 8,
-  },
-  featureIcon: {
-    color: '#4CAF50',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  featureText: {
-    fontSize: 14,
-    color: '#555',
-  },
-  btnContainer: {
-    marginTop: 20,
-    paddingTop: 20,
-  },
-  btn: {
-    width: '100%',
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnPrimary: {
-    backgroundColor: '#E91E63',
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: 'white',
-  },
-});
 
 export default ProductsOption;
 

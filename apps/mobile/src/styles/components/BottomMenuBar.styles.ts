@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 
 /**
@@ -6,16 +7,17 @@ import { spacing } from '../theme/spacing';
  */
 export const bottomMenuBarStyles = StyleSheet.create({
   bottomBar: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.containerPadding * 3, // Increased horizontal padding for wider appearance
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#374151',
-    backgroundColor: '#111827',
+    backgroundColor: colors.background.white,
+    borderTopWidth: 1,
+    borderTopColor: colors.border.light,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%', // Ensure full width
-    minHeight: 80, // Increased minimum height for better visual presence
+    paddingVertical: spacing.md,
+    shadowColor: colors.shadow.default,
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 20,
+    elevation: 5,
   },
 });
 

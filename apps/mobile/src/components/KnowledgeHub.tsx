@@ -3,13 +3,18 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   TextInput,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  headerStyles,
+  knowledgeHubStyles,
+  colors,
+} from '../styles';
 
 interface Disease {
   id: string;
@@ -95,79 +100,79 @@ const KnowledgeHub: React.FC<KnowledgeHubProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
 
           <WelcomeHeader
             userName={userName}
             navigation={navigation}
             user={user}
-            onSignOut={onSignOut}
+            {...(onSignOut ? { onSignOut } : {})}
             onProfilePress={() => {
               navigation?.navigate('Profile');
             }}
           />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerWithBackground}>
+          <TouchableOpacity style={headerStyles.backButtonOnPrimary} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonTextWhite}>←</Text>
           </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Health Knowledge Hub</Text>
-            <Text style={styles.headerSubtitle}>Health information and resources</Text>
+          <View style={headerStyles.headerContent}>
+            <Text style={[headerStyles.headerTitleWhite, { fontSize: 22 }]}>Health Knowledge Hub</Text>
+            <Text style={headerStyles.headerSubtitle}>Health information and resources</Text>
           </View>
-          <View style={styles.headerSpacer} />
+          <View style={headerStyles.headerSpacerSmall} />
         </View>
 
         {/* Search Bar */}
-        <View style={styles.searchBar}>
-          <Text style={styles.searchIcon}>🔍</Text>
+        <View style={knowledgeHubStyles.searchBar}>
+          <Text style={knowledgeHubStyles.searchIcon}>🔍</Text>
           <TextInput
-            style={styles.searchInput}
+            style={knowledgeHubStyles.searchInput}
             placeholder="Search diseases, conditions, or symptoms..."
-            placeholderTextColor="#999"
+            placeholderTextColor={colors.text.tertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
         </View>
 
         {/* Disease Cards */}
-        <View style={styles.diseasesContainer}>
+        <View style={knowledgeHubStyles.diseasesContainer}>
           {filteredDiseases.map((disease) => (
-            <TouchableOpacity key={disease.id} style={styles.diseaseCard} activeOpacity={0.8}>
-              <View style={styles.diseaseHeader}>
-                <View style={styles.diseaseIcon}>
-                  <Text style={styles.diseaseIconText}>{disease.icon}</Text>
+            <TouchableOpacity key={disease.id} style={knowledgeHubStyles.diseaseCard} activeOpacity={0.8}>
+              <View style={knowledgeHubStyles.diseaseHeader}>
+                <View style={knowledgeHubStyles.diseaseIcon}>
+                  <Text style={knowledgeHubStyles.diseaseIconText}>{disease.icon}</Text>
                 </View>
-                <View style={styles.diseaseInfo}>
-                  <Text style={styles.diseaseName}>{disease.name}</Text>
-                  <View style={styles.categoryBadge}>
-                    <Text style={styles.categoryText}>{disease.category}</Text>
+                <View style={knowledgeHubStyles.diseaseInfo}>
+                  <Text style={knowledgeHubStyles.diseaseName}>{disease.name}</Text>
+                  <View style={knowledgeHubStyles.categoryBadge}>
+                    <Text style={knowledgeHubStyles.categoryText}>{disease.category}</Text>
                   </View>
                 </View>
               </View>
-              <Text style={styles.description}>{disease.description}</Text>
-              <View style={styles.prevalenceBadge}>
-                <Text style={styles.prevalenceText}>📊 {disease.prevalence}</Text>
+              <Text style={knowledgeHubStyles.description}>{disease.description}</Text>
+              <View style={knowledgeHubStyles.prevalenceBadge}>
+                <Text style={knowledgeHubStyles.prevalenceText}>📊 {disease.prevalence}</Text>
               </View>
-              <View style={styles.symptomsSection}>
-                <Text style={styles.symptomsTitle}>Common Symptoms:</Text>
-                <View style={styles.symptomsList}>
+              <View style={knowledgeHubStyles.symptomsSection}>
+                <Text style={knowledgeHubStyles.symptomsTitle}>Common Symptoms:</Text>
+                <View style={knowledgeHubStyles.symptomsList}>
                   {disease.symptoms.map((symptom, index) => (
-                    <View key={index} style={styles.symptomTag}>
-                      <Text style={styles.symptomText}>• {symptom}</Text>
+                    <View key={index} style={knowledgeHubStyles.symptomTag}>
+                      <Text style={knowledgeHubStyles.symptomText}>• {symptom}</Text>
                     </View>
                   ))}
                 </View>
               </View>
               <TouchableOpacity
-                style={styles.learnMoreBtn}
+                style={knowledgeHubStyles.learnMoreBtn}
                 activeOpacity={0.8}
                 onPress={() => {
                   navigation?.navigate('KnowledgeArticle', {
@@ -180,7 +185,7 @@ const KnowledgeHub: React.FC<KnowledgeHubProps> = ({
                   });
                 }}
               >
-                <Text style={styles.learnMoreBtnText}>Learn More</Text>
+                <Text style={knowledgeHubStyles.learnMoreBtnText}>Learn More</Text>
               </TouchableOpacity>
             </TouchableOpacity>
           ))}
@@ -194,188 +199,6 @@ const KnowledgeHub: React.FC<KnowledgeHubProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F8F8',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#E91E63',
-    padding: 20,
-    paddingTop: 20,
-    marginBottom: 0,
-  },
-  backButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: 'white',
-  },
-  headerContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 5,
-    textAlign: 'center',
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.9,
-  },
-  headerSpacer: {
-    width: 35,
-  },
-  searchBar: {
-    marginHorizontal: 20,
-    marginTop: 15,
-    padding: 12,
-    paddingHorizontal: 15,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  searchIcon: {
-    fontSize: 18,
-    color: '#999',
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 14,
-    color: '#333',
-  },
-  diseasesContainer: {
-    padding: 20,
-    gap: 15,
-  },
-  diseaseCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#E91E63',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 15,
-    elevation: 5,
-  },
-  diseaseHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-    gap: 15,
-  },
-  diseaseIcon: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#FCE4EC',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  diseaseIconText: {
-    fontSize: 30,
-  },
-  diseaseInfo: {
-    flex: 1,
-  },
-  diseaseName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 8,
-  },
-  categoryBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#E3F2FD',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-  },
-  categoryText: {
-    fontSize: 11,
-    color: '#1976D2',
-    fontWeight: '600',
-  },
-  description: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-    marginBottom: 12,
-  },
-  prevalenceBadge: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#FFF3E0',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-    marginBottom: 15,
-  },
-  prevalenceText: {
-    fontSize: 12,
-    color: '#FF9800',
-    fontWeight: '600',
-  },
-  symptomsSection: {
-    marginBottom: 15,
-  },
-  symptomsTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 8,
-  },
-  symptomsList: {
-    gap: 6,
-  },
-  symptomTag: {
-    backgroundColor: '#FFF5F7',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-  },
-  symptomText: {
-    fontSize: 13,
-    color: '#555',
-  },
-  learnMoreBtn: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  learnMoreBtnText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
 
 export default KnowledgeHub;
 

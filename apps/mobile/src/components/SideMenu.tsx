@@ -3,12 +3,12 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   Modal,
   Animated,
   Dimensions,
   ScrollView,
 } from 'react-native';
+import { sideMenuStyles } from '../styles';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const MENU_WIDTH = SCREEN_WIDTH * 0.75; // 75% of screen width
@@ -119,18 +119,18 @@ const SideMenu: React.FC<SideMenuProps> = ({
       animationType="none"
       onRequestClose={onClose}
     >
-      <View style={styles.container}>
+      <View style={sideMenuStyles.container}>
         {/* Overlay */}
         <Animated.View
           style={[
-            styles.overlay,
+            sideMenuStyles.overlay,
             {
               opacity: overlayOpacity,
             },
           ]}
         >
           <TouchableOpacity
-            style={styles.overlayTouchable}
+            style={sideMenuStyles.overlayTouchable}
             activeOpacity={1}
             onPress={onClose}
           />
@@ -139,53 +139,54 @@ const SideMenu: React.FC<SideMenuProps> = ({
         {/* Side Menu */}
         <Animated.View
           style={[
-            styles.menuContainer,
+            sideMenuStyles.menuContainer,
             {
+              width: MENU_WIDTH,
               transform: [{ translateX: slideAnim }],
             },
           ]}
         >
           <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
+            style={sideMenuStyles.scrollView}
+            contentContainerStyle={sideMenuStyles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
             {/* User Profile Section */}
-            <View style={styles.profileSection}>
-              <View style={styles.profileIcon}>
-                <Text style={styles.profileIconText}>👤</Text>
+            <View style={sideMenuStyles.profileSection}>
+              <View style={sideMenuStyles.profileIcon}>
+                <Text style={sideMenuStyles.profileIconText}>👤</Text>
               </View>
-              <Text style={styles.userName}>{userName}</Text>
-              <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
+              <Text style={sideMenuStyles.userName}>{userName}</Text>
+              <Text style={sideMenuStyles.userEmail}>{user?.email || 'user@example.com'}</Text>
             </View>
 
             {/* Menu Items */}
-            <View style={styles.menuItemsContainer}>
+            <View style={sideMenuStyles.menuItemsContainer}>
               {menuItems.map((item) => (
                 <TouchableOpacity
                   key={item.id}
-                  style={styles.menuItem}
+                  style={sideMenuStyles.menuItem}
                   onPress={() => handleMenuItemPress(item)}
                   activeOpacity={0.7}
                 >
-                  <Text style={styles.menuItemIcon}>{item.icon}</Text>
-                  <Text style={styles.menuItemLabel}>{item.label}</Text>
-                  <Text style={styles.menuItemArrow}>›</Text>
+                  <Text style={sideMenuStyles.menuItemIcon}>{item.icon}</Text>
+                  <Text style={sideMenuStyles.menuItemLabel}>{item.label}</Text>
+                  <Text style={sideMenuStyles.menuItemArrow}>›</Text>
                 </TouchableOpacity>
               ))}
             </View>
 
             {/* Divider */}
-            <View style={styles.divider} />
+            <View style={sideMenuStyles.divider} />
 
             {/* Sign Out */}
             <TouchableOpacity
-              style={styles.signOutButton}
+              style={sideMenuStyles.signOutButton}
               onPress={handleSignOut}
               activeOpacity={0.7}
             >
-              <Text style={styles.signOutIcon}>🚪</Text>
-              <Text style={styles.signOutLabel}>Sign Out</Text>
+              <Text style={sideMenuStyles.signOutIcon}>🚪</Text>
+              <Text style={sideMenuStyles.signOutLabel}>Sign Out</Text>
             </TouchableOpacity>
           </ScrollView>
         </Animated.View>
@@ -193,119 +194,6 @@ const SideMenu: React.FC<SideMenuProps> = ({
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  overlayTouchable: {
-    flex: 1,
-  },
-  menuContainer: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: MENU_WIDTH,
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 0 },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    elevation: 10,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 20,
-  },
-  profileSection: {
-    backgroundColor: '#E91E63',
-    padding: 30,
-    paddingTop: 50,
-    alignItems: 'center',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-  profileIcon: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 15,
-  },
-  profileIconText: {
-    fontSize: 40,
-  },
-  userName: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#FFFFFF',
-    marginBottom: 5,
-  },
-  userEmail: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
-  },
-  menuItemsContainer: {
-    paddingTop: 20,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 25,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  menuItemIcon: {
-    fontSize: 24,
-    marginRight: 15,
-    width: 30,
-  },
-  menuItemLabel: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  menuItemArrow: {
-    fontSize: 24,
-    color: '#999',
-    fontWeight: '300',
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#E0E0E0',
-    marginVertical: 10,
-    marginHorizontal: 25,
-  },
-  signOutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 25,
-    marginTop: 10,
-  },
-  signOutIcon: {
-    fontSize: 24,
-    marginRight: 15,
-    width: 30,
-  },
-  signOutLabel: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#E91E63',
-  },
-});
 
 export default SideMenu;
 

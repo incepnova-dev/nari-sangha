@@ -3,17 +3,22 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  headerStyles,
+  aboutUsStyles,
+} from '../styles';
 
 interface AboutUsProps {
   navigation?: any;
   user?: any;
   onBack?: () => void;
+  onSignOut?: () => void;
 }
 
 interface Service {
@@ -38,6 +43,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
   navigation,
   user,
   onBack,
+  onSignOut,
 }) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
@@ -172,7 +178,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
       
       <WelcomeHeader
@@ -186,65 +192,65 @@ const AboutUs: React.FC<AboutUsProps> = ({
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.header}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>About Us</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitle}>About Us</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Hero Section */}
-        <View style={styles.heroSection}>
-          <Text style={styles.heroEmoji}>💖</Text>
-          <Text style={styles.heroTitle}>Women's Health Hub</Text>
-          <Text style={styles.heroSubtitle}>
+        <View style={aboutUsStyles.heroSection}>
+          <Text style={aboutUsStyles.heroEmoji}>💖</Text>
+          <Text style={aboutUsStyles.heroTitle}>Women's Health Hub</Text>
+          <Text style={aboutUsStyles.heroSubtitle}>
             Empowering women with comprehensive healthcare solutions, expert guidance, and compassionate support at every life stage
           </Text>
         </View>
 
         {/* Content Section */}
-        <View style={styles.contentSection}>
+        <View style={containerStyles.contentSection}>
           {/* Mission */}
-          <View style={styles.missionBox}>
-            <Text style={styles.missionTitle}>Our Mission</Text>
-            <Text style={styles.missionText}>
+          <View style={aboutUsStyles.missionBox}>
+            <Text style={aboutUsStyles.missionTitle}>Our Mission</Text>
+            <Text style={aboutUsStyles.missionText}>
               To revolutionize women's healthcare by providing accessible, personalized, and evidence-based health solutions. We believe every woman deserves comprehensive care, timely information, and the support needed to make informed decisions about her health and wellbeing.
             </Text>
           </View>
 
           {/* Stats */}
-          <View style={styles.statsSection}>
-            <Text style={styles.statsTitle}>Making an Impact</Text>
-            <View style={styles.statsGrid}>
+          <View style={aboutUsStyles.statsSection}>
+            <Text style={aboutUsStyles.statsTitle}>Making an Impact</Text>
+            <View style={aboutUsStyles.statsGrid}>
               {stats.map((stat, index) => (
-                <View key={index} style={styles.statItem}>
-                  <Text style={styles.statNumber}>{stat.number}</Text>
-                  <Text style={styles.statLabel}>{stat.label}</Text>
+                <View key={index} style={aboutUsStyles.statItem}>
+                  <Text style={aboutUsStyles.statNumber}>{stat.number}</Text>
+                  <Text style={aboutUsStyles.statLabel}>{stat.label}</Text>
                 </View>
               ))}
             </View>
           </View>
 
           {/* Services */}
-          <Text style={styles.servicesHeader}>Our Services</Text>
+          <Text style={aboutUsStyles.servicesHeader}>Our Services</Text>
           
-          <View style={styles.servicesGrid}>
+          <View style={aboutUsStyles.servicesGrid}>
             {services.map((service, index) => (
-              <View key={index} style={styles.serviceCard}>
-                <Text style={styles.serviceIcon}>{service.icon}</Text>
-                <Text style={styles.serviceTitle}>{service.title}</Text>
-                <Text style={styles.serviceDescription}>{service.description}</Text>
-                <View style={styles.serviceFeatures}>
+              <View key={index} style={aboutUsStyles.serviceCard}>
+                <Text style={aboutUsStyles.serviceIcon}>{service.icon}</Text>
+                <Text style={aboutUsStyles.serviceTitle}>{service.title}</Text>
+                <Text style={aboutUsStyles.serviceDescription}>{service.description}</Text>
+                <View style={aboutUsStyles.serviceFeatures}>
                   {service.features.map((feature, fIndex) => (
-                    <View key={fIndex} style={styles.featureItem}>
-                      <Text style={styles.featureCheck}>✓</Text>
-                      <Text style={styles.featureText}>{feature}</Text>
+                    <View key={fIndex} style={aboutUsStyles.featureItem}>
+                      <Text style={aboutUsStyles.featureCheck}>✓</Text>
+                      <Text style={aboutUsStyles.featureText}>{feature}</Text>
                     </View>
                   ))}
                 </View>
@@ -253,15 +259,15 @@ const AboutUs: React.FC<AboutUsProps> = ({
           </View>
 
           {/* Why Choose Us */}
-          <View style={styles.whyChooseSection}>
-            <Text style={styles.whyTitle}>Why Choose Women's Health Hub?</Text>
-            <View style={styles.whyItems}>
+          <View style={aboutUsStyles.whyChooseSection}>
+            <Text style={aboutUsStyles.whyTitle}>Why Choose Women's Health Hub?</Text>
+            <View style={aboutUsStyles.whyItems}>
               {whyItems.map((item, index) => (
-                <View key={index} style={styles.whyItem}>
-                  <Text style={styles.whyIcon}>{item.icon}</Text>
-                  <View style={styles.whyContent}>
-                    <Text style={styles.whyItemTitle}>{item.title}</Text>
-                    <Text style={styles.whyItemText}>{item.text}</Text>
+                <View key={index} style={aboutUsStyles.whyItem}>
+                  <Text style={aboutUsStyles.whyIcon}>{item.icon}</Text>
+                  <View style={aboutUsStyles.whyContent}>
+                    <Text style={aboutUsStyles.whyItemTitle}>{item.title}</Text>
+                    <Text style={aboutUsStyles.whyItemText}>{item.text}</Text>
                   </View>
                 </View>
               ))}
@@ -269,22 +275,22 @@ const AboutUs: React.FC<AboutUsProps> = ({
           </View>
 
           {/* CTA */}
-          <View style={styles.ctaSection}>
-            <Text style={styles.ctaTitle}>Ready to Take Control of Your Health?</Text>
-            <Text style={styles.ctaText}>Join thousands of women who trust us for their healthcare needs</Text>
+          <View style={aboutUsStyles.ctaSection}>
+            <Text style={aboutUsStyles.ctaTitle}>Ready to Take Control of Your Health?</Text>
+            <Text style={aboutUsStyles.ctaText}>Join thousands of women who trust us for their healthcare needs</Text>
             <TouchableOpacity
-              style={styles.ctaButton}
+              style={aboutUsStyles.ctaButton}
               activeOpacity={0.8}
               onPress={handleGetStarted}
             >
-              <Text style={styles.ctaButtonText}>Get Started Today</Text>
+              <Text style={aboutUsStyles.ctaButtonText}>Get Started Today</Text>
             </TouchableOpacity>
           </View>
 
           {/* Footer */}
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>© 2025 Women's Health Hub. All rights reserved.</Text>
-            <Text style={styles.footerText}>Empowering women's health, one step at a time 💖</Text>
+          <View style={aboutUsStyles.footer}>
+            <Text style={aboutUsStyles.footerText}>© 2025 Women's Health Hub. All rights reserved.</Text>
+            <Text style={aboutUsStyles.footerText}>Empowering women's health, one step at a time 💖</Text>
           </View>
         </View>
       </ScrollView>
@@ -297,269 +303,6 @@ const AboutUs: React.FC<AboutUsProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F8F8',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#E91E63',
-    padding: 20,
-    paddingTop: 20,
-    marginBottom: 0,
-  },
-  backButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: 'white',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-  },
-  headerSpacer: {
-    width: 35,
-  },
-  heroSection: {
-    backgroundColor: '#E91E63',
-    padding: 40,
-    paddingVertical: 40,
-    alignItems: 'center',
-  },
-  heroEmoji: {
-    fontSize: 80,
-    marginBottom: 20,
-  },
-  heroTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  heroSubtitle: {
-    fontSize: 16,
-    color: 'white',
-    opacity: 0.95,
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  contentSection: {
-    padding: 20,
-  },
-  missionBox: {
-    backgroundColor: '#FFF5F7',
-    borderRadius: 20,
-    padding: 30,
-    marginBottom: 30,
-    borderLeftWidth: 5,
-    borderLeftColor: '#E91E63',
-  },
-  missionTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#E91E63',
-    marginBottom: 15,
-  },
-  missionText: {
-    fontSize: 16,
-    color: '#333',
-    lineHeight: 24,
-  },
-  statsSection: {
-    backgroundColor: '#667eea',
-    borderRadius: 20,
-    padding: 30,
-    marginBottom: 30,
-  },
-  statsTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: 'white',
-    textAlign: 'center',
-    marginBottom: 25,
-  },
-  statsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 20,
-  },
-  statItem: {
-    width: '47%',
-    alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: 36,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 5,
-  },
-  statLabel: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.9,
-  },
-  servicesHeader: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 25,
-    textAlign: 'center',
-  },
-  servicesGrid: {
-    gap: 20,
-    marginBottom: 30,
-  },
-  serviceCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 15,
-    elevation: 4,
-  },
-  serviceIcon: {
-    fontSize: 50,
-    marginBottom: 15,
-  },
-  serviceTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#E91E63',
-    marginBottom: 12,
-  },
-  serviceDescription: {
-    fontSize: 15,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  serviceFeatures: {
-    gap: 8,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 8,
-  },
-  featureCheck: {
-    color: '#E91E63',
-    fontSize: 16,
-    fontWeight: '700',
-    marginTop: 2,
-  },
-  featureText: {
-    fontSize: 14,
-    color: '#555',
-    flex: 1,
-    lineHeight: 20,
-  },
-  whyChooseSection: {
-    backgroundColor: '#FFF8FB',
-    borderRadius: 20,
-    padding: 30,
-    marginBottom: 30,
-  },
-  whyTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  whyItems: {
-    gap: 15,
-  },
-  whyItem: {
-    flexDirection: 'row',
-    gap: 15,
-    alignItems: 'flex-start',
-  },
-  whyIcon: {
-    fontSize: 28,
-  },
-  whyContent: {
-    flex: 1,
-  },
-  whyItemTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 5,
-  },
-  whyItemText: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-  },
-  ctaSection: {
-    backgroundColor: '#E91E63',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  ctaTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  ctaText: {
-    fontSize: 16,
-    color: 'white',
-    marginBottom: 25,
-    opacity: 0.95,
-    textAlign: 'center',
-  },
-  ctaButton: {
-    backgroundColor: 'white',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 30,
-  },
-  ctaButtonText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#E91E63',
-  },
-  footer: {
-    backgroundColor: '#333',
-    padding: 30,
-    alignItems: 'center',
-    borderRadius: 20,
-    marginBottom: 20,
-  },
-  footerText: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.8,
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-});
 
 export default AboutUs;
 

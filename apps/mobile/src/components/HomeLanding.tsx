@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   Linking,
@@ -12,6 +11,13 @@ import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
 import SearchAndQuickActions from './SearchAndQuickActions';
 import AgenticPlayground from './AgenticPlayground';
+import {
+  containerStyles,
+  headerStyles,
+  cardStyles,
+  buttons,
+  homeLandingStyles,
+} from '../styles';
 
 interface HomeLandingProps {
   navigation?: any;
@@ -347,20 +353,20 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
   const getStoryThemeStyle = (theme: string) => {
     switch (theme) {
       case 'pregnancy':
-        return styles.storyCardPregnancy;
+        return cardStyles.storyCardPregnancy;
       case 'reproductive':
-        return styles.storyCardReproductive;
+        return cardStyles.storyCardReproductive;
       case 'perimenopause':
-        return styles.storyCardPerimenopause;
+        return cardStyles.storyCardPerimenopause;
       case 'menopause':
-        return styles.storyCardMenopause;
+        return cardStyles.storyCardMenopause;
       default:
         return {};
     }
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.containerTertiary}>
       <StatusBar barStyle="light-content" />
       
       <WelcomeHeader
@@ -394,122 +400,122 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Content Section */}
-        <View style={styles.contentSection}>
+        <View style={containerStyles.contentSection}>
           {/* AI Chatbot Banner */}
-          <TouchableOpacity style={styles.chatbotBanner} onPress={handleChatNow} activeOpacity={0.8}>
-            <Text style={styles.chatbotTitle}>Meet Your AI Health Assistant 🤖</Text>
-            <Text style={styles.chatbotSubtitle}>Get instant answers to your women's health questions, 24/7</Text>
-            <View style={styles.chatNowBtn}>
-              <Text style={styles.chatNowBtnText}>Chat Now</Text>
+          <TouchableOpacity style={homeLandingStyles.chatbotBanner} onPress={handleChatNow} activeOpacity={0.8}>
+            <Text style={homeLandingStyles.chatbotTitle}>Meet Your AI Health Assistant 🤖</Text>
+            <Text style={homeLandingStyles.chatbotSubtitle}>Get instant answers to your women's health questions, 24/7</Text>
+            <View style={homeLandingStyles.chatNowBtn}>
+              <Text style={homeLandingStyles.chatNowBtnText}>Chat Now</Text>
             </View>
           </TouchableOpacity>
 
           {/* Women's Health Stories */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Women's Health Stories</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Women's Health Stories</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('WomenStories')}>
-              <Text style={styles.seeAllBtn}>See All →</Text>
+              <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
           {stories.map((story, index) => (
             <TouchableOpacity
               key={index}
-              style={[styles.storyCard, getStoryThemeStyle(story.theme)]}
+              style={[cardStyles.storyCard, getStoryThemeStyle(story.theme)]}
               activeOpacity={0.8}
             >
-              <Text style={styles.storyIcon}>{story.icon}</Text>
-              <Text style={styles.storyTitle}>{story.title}</Text>
-              <Text style={styles.storySubtitle}>{story.subtitle}</Text>
-              <Text style={styles.storyDescription}>{story.description}</Text>
+              <Text style={homeLandingStyles.storyIcon}>{story.icon}</Text>
+              <Text style={homeLandingStyles.storyTitle}>{story.title}</Text>
+              <Text style={homeLandingStyles.storySubtitle}>{story.subtitle}</Text>
+              <Text style={homeLandingStyles.storyDescription}>{story.description}</Text>
             </TouchableOpacity>
           ))}
 
           {/* Latest Research */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Latest Research 📚</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Latest Research 📚</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('ResearchArticles')}>
-              <Text style={styles.seeAllBtn}>See All →</Text>
+              <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
           {research.map((item, index) => (
             <TouchableOpacity
               key={index}
-              style={styles.researchCard}
+              style={cardStyles.cardWithBorder}
               activeOpacity={0.8}
               onPress={() => item.url && handleOpenUrl(item.url)}
             >
-              <Text style={styles.researchTitle}>{item.title}</Text>
-              <Text style={styles.researchAuthors}>{item.authors}</Text>
-              <Text style={styles.researchJournal}>{item.journal}</Text>
+              <Text style={homeLandingStyles.researchTitle}>{item.title}</Text>
+              <Text style={homeLandingStyles.researchAuthors}>{item.authors}</Text>
+              <Text style={homeLandingStyles.researchJournal}>{item.journal}</Text>
             </TouchableOpacity>
           ))}
 
           {/* Expert Gynecologist Videos */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Expert Advice 🎥</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Expert Advice 🎥</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('ExpertAdviceListing')}>
-              <Text style={styles.seeAllBtn}>Explore</Text>
+              <Text style={headerStyles.seeAllBtn}>Explore</Text>
             </TouchableOpacity>
           </View>
 
           {videos.map((video, index) => (
             <TouchableOpacity
               key={index}
-              style={styles.videoCard}
+              style={homeLandingStyles.videoCard}
               activeOpacity={0.8}
               onPress={() => handleOpenUrl(video.url)}
             >
-              <View style={styles.videoThumbnail}>
-                <Text style={styles.videoThumbnailPlaceholder}>🎥</Text>
-                <View style={styles.playButton}>
-                  <Text style={styles.playButtonText}>▶</Text>
+              <View style={homeLandingStyles.videoThumbnail}>
+                <Text style={homeLandingStyles.videoThumbnailPlaceholder}>🎥</Text>
+                <View style={homeLandingStyles.playButton}>
+                  <Text style={homeLandingStyles.playButtonText}>▶</Text>
                 </View>
               </View>
-              <View style={styles.videoContent}>
-                <Text style={styles.videoTitle}>{video.title}</Text>
-                <Text style={styles.videoChannel}>{video.channel}</Text>
-                <View style={styles.videoStats}>
-                  <Text style={styles.videoStat}>👁️ {video.views}</Text>
-                  <Text style={styles.videoStat}>⏱️ {video.duration}</Text>
+              <View style={homeLandingStyles.videoContent}>
+                <Text style={homeLandingStyles.videoTitle}>{video.title}</Text>
+                <Text style={homeLandingStyles.videoChannel}>{video.channel}</Text>
+                <View style={homeLandingStyles.videoStats}>
+                  <Text style={homeLandingStyles.videoStat}>👁️ {video.views}</Text>
+                  <Text style={homeLandingStyles.videoStat}>⏱️ {video.duration}</Text>
                 </View>
               </View>
             </TouchableOpacity>
           ))}
 
           {/* Healthcare Products */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Healthcare Products 💊</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Healthcare Products 💊</Text>
             <TouchableOpacity onPress={handleProductsOption}>
-              <Text style={styles.seeAllBtn}>See All →</Text>
+              <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
-          <View style={styles.productGrid}>
+          <View style={homeLandingStyles.productGrid}>
             {products.map((product, index) => (
-              <TouchableOpacity key={index} style={styles.productCard} activeOpacity={0.8}>
-                <View style={styles.discountBadge}>
-                  <Text style={styles.discountBadgeText}>{product.discount}</Text>
+              <TouchableOpacity key={index} style={homeLandingStyles.productCard} activeOpacity={0.8}>
+                <View style={homeLandingStyles.discountBadge}>
+                  <Text style={homeLandingStyles.discountBadgeText}>{product.discount}</Text>
                 </View>
-                <View style={styles.productImage}>
-                  <Text style={styles.productImageIcon}>{product.icon}</Text>
+                <View style={homeLandingStyles.productImage}>
+                  <Text style={homeLandingStyles.productImageIcon}>{product.icon}</Text>
                 </View>
-                <Text style={styles.productName}>{product.name}</Text>
-                <Text style={styles.productBrand}>{product.brand}</Text>
-                <View style={styles.productPricing}>
-                  <Text style={styles.productPrice}>{product.price}</Text>
-                  <Text style={styles.productOriginalPrice}>{product.originalPrice}</Text>
+                <Text style={homeLandingStyles.productName}>{product.name}</Text>
+                <Text style={homeLandingStyles.productBrand}>{product.brand}</Text>
+                <View style={homeLandingStyles.productPricing}>
+                  <Text style={homeLandingStyles.productPrice}>{product.price}</Text>
+                  <Text style={homeLandingStyles.productOriginalPrice}>{product.originalPrice}</Text>
                 </View>
                 {product.vendors.map((vendor, vIndex) => (
-                  <View key={vIndex} style={styles.vendorInfo}>
-                    <Text style={styles.vendorIcon}>{vendor.icon}</Text>
-                    <Text style={styles.vendorName}>{vendor.name}</Text>
+                  <View key={vIndex} style={homeLandingStyles.vendorInfo}>
+                    <Text style={homeLandingStyles.vendorIcon}>{vendor.icon}</Text>
+                    <Text style={homeLandingStyles.vendorName}>{vendor.name}</Text>
                   </View>
                 ))}
               </TouchableOpacity>
@@ -517,78 +523,78 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           </View>
 
           {/* Insurance Plans */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Insurance Plans 🛡️</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Insurance Plans 🛡️</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('ProductsOption')}>
-              <Text style={styles.seeAllBtn}>See All →</Text>
+              <Text style={headerStyles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
           {insurancePlans.map((plan, index) => (
             <TouchableOpacity
               key={index}
-              style={styles.insuranceCard}
+              style={cardStyles.card}
               activeOpacity={0.8}
               onPress={() => navigation?.navigate('WomensInsuranceListing')}
             >
-              <View style={styles.insuranceHeader}>
-                <View style={styles.insuranceIcon}>
-                  <Text style={styles.insuranceIconText}>{plan.icon}</Text>
+              <View style={homeLandingStyles.insuranceHeader}>
+                <View style={homeLandingStyles.insuranceIcon}>
+                  <Text style={homeLandingStyles.insuranceIconText}>{plan.icon}</Text>
                 </View>
-                <View style={styles.insuranceTitleSection}>
-                  <Text style={styles.insuranceName}>{plan.name}</Text>
-                  <Text style={styles.insuranceProvider}>{plan.provider}</Text>
+                <View style={homeLandingStyles.insuranceTitleSection}>
+                  <Text style={homeLandingStyles.insuranceName}>{plan.name}</Text>
+                  <Text style={homeLandingStyles.insuranceProvider}>{plan.provider}</Text>
                 </View>
               </View>
-              <View style={styles.insuranceFeatures}>
+              <View style={homeLandingStyles.insuranceFeatures}>
                 {plan.features.map((feature, fIndex) => (
-                  <View key={fIndex} style={styles.featureItem}>
-                    <Text style={styles.featureCheck}>✓</Text>
-                    <Text style={styles.featureText}>{feature}</Text>
+                  <View key={fIndex} style={homeLandingStyles.featureItem}>
+                    <Text style={homeLandingStyles.featureCheck}>✓</Text>
+                    <Text style={homeLandingStyles.featureText}>{feature}</Text>
                   </View>
                 ))}
               </View>
-              <View style={styles.insuranceFooter}>
+              <View style={homeLandingStyles.insuranceFooter}>
                 <View>
-                  <Text style={styles.insurancePrice}>{plan.price}</Text>
-                  <Text style={styles.pricePeriod}>{plan.period}</Text>
+                  <Text style={homeLandingStyles.insurancePrice}>{plan.price}</Text>
+                  <Text style={homeLandingStyles.pricePeriod}>{plan.period}</Text>
                 </View>
-                <TouchableOpacity style={styles.viewDetailsBtn} activeOpacity={0.8}>
-                  <Text style={styles.viewDetailsBtnText}>View Details</Text>
+                <TouchableOpacity style={homeLandingStyles.viewDetailsBtn} activeOpacity={0.8}>
+                  <Text style={homeLandingStyles.viewDetailsBtnText}>View Details</Text>
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
           ))}
 
           {/* Health Conditions Guide */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Health Knowledge Hub</Text>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Health Knowledge Hub</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('KnowledgeHub')}>
-              <Text style={styles.seeAllBtn}>Explore</Text>
+              <Text style={headerStyles.seeAllBtn}>Explore</Text>
             </TouchableOpacity>
           </View>
 
           {conditions.map((condition, index) => (
-            <TouchableOpacity key={index} style={styles.conditionCard} activeOpacity={0.8}>
-              <View style={styles.conditionHeader}>
-                <View style={styles.conditionIcon}>
-                  <Text style={styles.conditionIconText}>{condition.icon}</Text>
+            <TouchableOpacity key={index} style={homeLandingStyles.conditionCard} activeOpacity={0.8}>
+              <View style={homeLandingStyles.conditionHeader}>
+                <View style={homeLandingStyles.conditionIcon}>
+                  <Text style={homeLandingStyles.conditionIconText}>{condition.icon}</Text>
                 </View>
-                <Text style={styles.conditionName}>{condition.name}</Text>
+                <Text style={homeLandingStyles.conditionName}>{condition.name}</Text>
               </View>
-              <Text style={styles.conditionDescription}>{condition.description}</Text>
-              <View style={styles.conditionTags}>
+              <Text style={homeLandingStyles.conditionDescription}>{condition.description}</Text>
+              <View style={homeLandingStyles.conditionTags}>
                 {condition.tags.map((tag, tIndex) => (
                   <View
                     key={tIndex}
                     style={[
-                      styles.tag,
-                      tag.type === 'pink' && styles.tagPink,
-                      tag.type === 'green' && styles.tagGreen,
-                      tag.type === 'orange' && styles.tagOrange,
+                      homeLandingStyles.tag,
+                      tag.type === 'pink' && homeLandingStyles.tagPink,
+                      tag.type === 'green' && homeLandingStyles.tagGreen,
+                      tag.type === 'orange' && homeLandingStyles.tagOrange,
                     ]}
                   >
-                    <Text style={styles.tagText}>{tag.text}</Text>
+                    <Text style={homeLandingStyles.tagText}>{tag.text}</Text>
                   </View>
                 ))}
               </View>
@@ -596,46 +602,46 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           ))}
 
           {/* Footer */}
-          <View style={styles.footer}>
-            <View style={styles.footerSection}>
-              <Text style={styles.footerTitle}>Seva Health Network</Text>
-              <View style={styles.footerInfo}>
-                <View style={styles.footerInfoItem}>
-                  <Text style={styles.footerIcon}>🕐</Text>
-                  <Text style={styles.footerInfoText}>Working Hours: Mon-Sat, 9:00 AM - 6:00 PM</Text>
+          <View style={homeLandingStyles.footer}>
+            <View style={homeLandingStyles.footerSection}>
+              <Text style={homeLandingStyles.footerTitle}>Seva Health Network</Text>
+              <View style={homeLandingStyles.footerInfo}>
+                <View style={homeLandingStyles.footerInfoItem}>
+                  <Text style={homeLandingStyles.footerIcon}>🕐</Text>
+                  <Text style={homeLandingStyles.footerInfoText}>Working Hours: Mon-Sat, 9:00 AM - 6:00 PM</Text>
                 </View>
-                <View style={styles.footerInfoItem}>
-                  <Text style={styles.footerIcon}>📧</Text>
-                  <Text style={styles.footerInfoText}>support@sevahhealth.com</Text>
+                <View style={homeLandingStyles.footerInfoItem}>
+                  <Text style={homeLandingStyles.footerIcon}>📧</Text>
+                  <Text style={homeLandingStyles.footerInfoText}>support@sevahhealth.com</Text>
                 </View>
-                <View style={styles.footerInfoItem}>
-                  <Text style={styles.footerIcon}>📞</Text>
-                  <Text style={styles.footerInfoText}>+91 1800-XXX-XXXX</Text>
+                <View style={homeLandingStyles.footerInfoItem}>
+                  <Text style={homeLandingStyles.footerIcon}>📞</Text>
+                  <Text style={homeLandingStyles.footerInfoText}>+91 1800-XXX-XXXX</Text>
                 </View>
               </View>
             </View>
 
-            <View style={styles.footerSection}>
-              <Text style={styles.footerTitle}>Quick Links</Text>
-              <View style={styles.footerLinks}>
+            <View style={homeLandingStyles.footerSection}>
+              <Text style={homeLandingStyles.footerTitle}>Quick Links</Text>
+              <View style={homeLandingStyles.footerLinks}>
                 <TouchableOpacity>
-                  <Text style={styles.footerLink}>Product Overview</Text>
+                  <Text style={homeLandingStyles.footerLink}>Product Overview</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.footerLink}>Partner with Us</Text>
+                  <Text style={homeLandingStyles.footerLink}>Partner with Us</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.footerLink}>Privacy & Data Security</Text>
+                  <Text style={homeLandingStyles.footerLink}>Privacy & Data Security</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Text style={styles.footerLink}>Compliant with Ayushman Bharat Privacy</Text>
+                  <Text style={homeLandingStyles.footerLink}>Compliant with Ayushman Bharat Privacy</Text>
                 </TouchableOpacity>
               </View>
             </View>
 
-            <View style={styles.footerBottom}>
-              <Text style={styles.footerBottomText}>© 2024 Seva Health Network. All rights reserved.</Text>
-              <Text style={styles.footerBottomText}>Committed to your health and privacy 💗</Text>
+            <View style={homeLandingStyles.footerBottom}>
+              <Text style={homeLandingStyles.footerBottomText}>© 2024 Seva Health Network. All rights reserved.</Text>
+              <Text style={homeLandingStyles.footerBottomText}>Committed to your health and privacy 💗</Text>
             </View>
           </View>
         </View>
@@ -649,483 +655,5 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFE4E9',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  contentSection: {
-    padding: 25,
-    paddingHorizontal: 20,
-  },
-  chatbotBanner: {
-    backgroundColor: '#667eea',
-    borderRadius: 20,
-    padding: 25,
-    marginBottom: 30,
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  chatbotTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 8,
-  },
-  chatbotSubtitle: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.9,
-    marginBottom: 15,
-  },
-  chatNowBtn: {
-    backgroundColor: 'white',
-    paddingVertical: 10,
-    paddingHorizontal: 25,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
-  },
-  chatNowBtnText: {
-    color: '#667eea',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#333',
-  },
-  seeAllBtn: {
-    color: '#E91E63',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  storyCard: {
-    borderRadius: 20,
-    padding: 30,
-    paddingHorizontal: 25,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  storyCardPregnancy: {
-    backgroundColor: '#E8F5E9',
-  },
-  storyCardReproductive: {
-    backgroundColor: '#FFF3E0',
-  },
-  storyCardPerimenopause: {
-    backgroundColor: '#E3F2FD',
-  },
-  storyCardMenopause: {
-    backgroundColor: '#F3E5F5',
-  },
-  storyIcon: {
-    fontSize: 50,
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  storyTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  storySubtitle: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-    fontStyle: 'italic',
-    marginBottom: 15,
-  },
-  storyDescription: {
-    fontSize: 15,
-    color: '#555',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  researchCard: {
-    backgroundColor: 'white',
-    borderLeftWidth: 4,
-    borderLeftColor: '#E91E63',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  researchTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 8,
-  },
-  researchAuthors: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 8,
-  },
-  researchJournal: {
-    fontSize: 12,
-    color: '#999',
-  },
-  videoCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  videoThumbnail: {
-    width: '100%',
-    height: 200,
-    backgroundColor: '#FFE5F0',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-  },
-  videoThumbnailPlaceholder: {
-    fontSize: 60,
-  },
-  playButton: {
-    position: 'absolute',
-    width: 60,
-    height: 60,
-    backgroundColor: 'rgba(233, 30, 99, 0.9)',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  playButtonText: {
-    fontSize: 30,
-    color: 'white',
-  },
-  videoContent: {
-    padding: 20,
-  },
-  videoTitle: {
-    fontSize: 17,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 8,
-    lineHeight: 24,
-  },
-  videoChannel: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 8,
-  },
-  videoStats: {
-    flexDirection: 'row',
-    gap: 15,
-  },
-  videoStat: {
-    fontSize: 13,
-    color: '#999',
-  },
-  productGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 15,
-    marginBottom: 30,
-  },
-  productCard: {
-    width: '47%',
-    backgroundColor: '#FFF8FB',
-    borderRadius: 20,
-    padding: 20,
-    paddingHorizontal: 15,
-    position: 'relative',
-  },
-  discountBadge: {
-    position: 'absolute',
-    top: 15,
-    right: 15,
-    backgroundColor: '#E91E63',
-    paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 20,
-    zIndex: 1,
-  },
-  discountBadgeText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  productImage: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 80,
-    marginVertical: 20,
-  },
-  productImageIcon: {
-    fontSize: 60,
-  },
-  productName: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 5,
-  },
-  productBrand: {
-    fontSize: 13,
-    color: '#999',
-    marginBottom: 12,
-  },
-  productPricing: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 12,
-  },
-  productPrice: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#E91E63',
-  },
-  productOriginalPrice: {
-    fontSize: 14,
-    color: '#999',
-    textDecorationLine: 'line-through',
-  },
-  vendorInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-    marginBottom: 8,
-  },
-  vendorIcon: {
-    fontSize: 14,
-  },
-  vendorName: {
-    fontSize: 12,
-    color: '#666',
-  },
-  insuranceCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 25,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  insuranceHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 20,
-  },
-  insuranceIcon: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#FFE5F0',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  insuranceIconText: {
-    fontSize: 32,
-  },
-  insuranceTitleSection: {
-    flex: 1,
-  },
-  insuranceName: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 5,
-  },
-  insuranceProvider: {
-    fontSize: 14,
-    color: '#999',
-  },
-  insuranceFeatures: {
-    marginBottom: 20,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 10,
-  },
-  featureCheck: {
-    color: '#4CAF50',
-    fontSize: 18,
-  },
-  featureText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  insuranceFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  insurancePrice: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#E91E63',
-  },
-  pricePeriod: {
-    fontSize: 14,
-    color: '#999',
-  },
-  viewDetailsBtn: {
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#E91E63',
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    borderRadius: 25,
-  },
-  viewDetailsBtnText: {
-    color: '#E91E63',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  conditionCard: {
-    backgroundColor: '#FFF8FB',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  conditionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 15,
-  },
-  conditionIcon: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  conditionIconText: {
-    fontSize: 28,
-  },
-  conditionName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    flex: 1,
-  },
-  conditionDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  conditionTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  tag: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-  },
-  tagPink: {
-    backgroundColor: '#FFE5F0',
-  },
-  tagGreen: {
-    backgroundColor: '#E8F5E9',
-  },
-  tagOrange: {
-    backgroundColor: '#FFF3E0',
-  },
-  tagText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  footer: {
-    backgroundColor: '#2c3e50',
-    padding: 40,
-    paddingTop: 40,
-    paddingBottom: 20,
-    marginTop: 40,
-  },
-  footerSection: {
-    marginBottom: 25,
-  },
-  footerTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 15,
-    color: '#E91E63',
-  },
-  footerInfo: {
-    gap: 10,
-  },
-  footerInfoItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 8,
-  },
-  footerIcon: {
-    fontSize: 16,
-  },
-  footerInfoText: {
-    fontSize: 14,
-    lineHeight: 22,
-    color: '#ecf0f1',
-  },
-  footerLinks: {
-    gap: 10,
-  },
-  footerLink: {
-    color: '#ecf0f1',
-    fontSize: 14,
-    marginBottom: 10,
-  },
-  footerBottom: {
-    paddingTop: 20,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.1)',
-    alignItems: 'center',
-  },
-  footerBottomText: {
-    fontSize: 12,
-    color: '#95a5a6',
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-});
 
 export default HomeLanding;

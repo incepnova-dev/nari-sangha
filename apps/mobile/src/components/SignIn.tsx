@@ -4,10 +4,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {
+  containerStyles,
+  headerStyles,
+  formStyles,
+  buttons,
+  signInStyles,
+  iconStyles,
+} from '../styles';
 
 interface SignInProps {
   navigation?: any;
@@ -51,50 +58,50 @@ const SignIn: React.FC<SignInProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="dark-content" />
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContentSmall}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.header}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Sign In</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitle}>Sign In</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Sign In Header */}
-        <View style={styles.signinHeader}>
-          <View style={styles.signinIcon}>
-            <Text style={styles.signinIconText}>🌸</Text>
+        <View style={signInStyles.signinHeader}>
+          <View style={iconStyles.iconContainerLarge}>
+            <Text style={iconStyles.iconTextLarge}>🌸</Text>
           </View>
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>Welcome back!</Text>
-        <Text style={styles.sectionSubtitle}>
+        <Text style={headerStyles.sectionTitleLarge}>Welcome back!</Text>
+        <Text style={headerStyles.sectionSubtitle}>
           Sign in to continue to your account
         </Text>
 
         {/* Tab Switcher */}
-        <View style={styles.tabSwitcher}>
+        <View style={signInStyles.tabSwitcher}>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'phone' && styles.tabActive]}
+            style={[signInStyles.tab, activeTab === 'phone' && signInStyles.tabActive]}
             onPress={() => setActiveTab('phone')}
           >
-            <Text style={[styles.tabText, activeTab === 'phone' && styles.tabTextActive]}>
+            <Text style={[signInStyles.tabText, activeTab === 'phone' && signInStyles.tabTextActive]}>
               Phone
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'email' && styles.tabActive]}
+            style={[signInStyles.tab, activeTab === 'email' && signInStyles.tabActive]}
             onPress={() => setActiveTab('email')}
           >
-            <Text style={[styles.tabText, activeTab === 'email' && styles.tabTextActive]}>
+            <Text style={[signInStyles.tabText, activeTab === 'email' && signInStyles.tabTextActive]}>
               Email
             </Text>
           </TouchableOpacity>
@@ -102,14 +109,14 @@ const SignIn: React.FC<SignInProps> = ({
 
         {/* Form */}
         {activeTab === 'phone' ? (
-          <View style={styles.formGroup}>
-            <Text style={styles.formLabel}>Mobile Number</Text>
-            <View style={styles.phoneInputContainer}>
-              <View style={styles.countryCode}>
-                <Text style={styles.countryCodeText}>🇮🇳 +91</Text>
+          <View style={formStyles.formGroup}>
+            <Text style={formStyles.formLabel}>Mobile Number</Text>
+            <View style={formStyles.phoneInputContainer}>
+              <View style={formStyles.countryCode}>
+                <Text style={formStyles.countryCodeText}>🇮🇳 +91</Text>
               </View>
               <TextInput
-                style={styles.formInput}
+                style={formStyles.formInput}
                 placeholder="Enter mobile number"
                 placeholderTextColor="#999"
                 value={phone}
@@ -119,10 +126,10 @@ const SignIn: React.FC<SignInProps> = ({
             </View>
           </View>
         ) : (
-          <View style={styles.formGroup}>
-            <Text style={styles.formLabel}>Email Address</Text>
+          <View style={formStyles.formGroup}>
+            <Text style={formStyles.formLabel}>Email Address</Text>
             <TextInput
-              style={styles.formInput}
+              style={formStyles.formInput}
               placeholder="your.email@example.com"
               placeholderTextColor="#999"
               value={email}
@@ -133,11 +140,11 @@ const SignIn: React.FC<SignInProps> = ({
           </View>
         )}
 
-        <View style={styles.formGroup}>
-          <Text style={styles.formLabel}>Password</Text>
-          <View style={styles.passwordInputContainer}>
+        <View style={formStyles.formGroup}>
+          <Text style={formStyles.formLabel}>Password</Text>
+          <View style={formStyles.passwordInputContainer}>
             <TextInput
-              style={styles.formInput}
+              style={formStyles.formInput}
               placeholder="Enter password"
               placeholderTextColor="#999"
               value={password}
@@ -145,7 +152,7 @@ const SignIn: React.FC<SignInProps> = ({
               secureTextEntry={!showPassword}
             />
             <TouchableOpacity
-              style={styles.togglePassword}
+              style={formStyles.togglePassword}
               onPress={() => setShowPassword(!showPassword)}
             >
               <Text>{showPassword ? '🙈' : '👁️'}</Text>
@@ -153,19 +160,19 @@ const SignIn: React.FC<SignInProps> = ({
           </View>
         </View>
 
-        <View style={styles.forgotPassword}>
+        <View style={signInStyles.forgotPassword}>
           <TouchableOpacity onPress={handleForgotPassword}>
-            <Text style={styles.forgotLink}>Forgot Password?</Text>
+            <Text style={signInStyles.forgotLink}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
 
         {/* Button */}
         <TouchableOpacity
           style={[
-            styles.btn,
-            styles.btnPrimary,
+            buttons.buttonFullWidth,
+            buttons.primaryButton,
             ((activeTab === 'phone' && !phone.trim()) || (activeTab === 'email' && !email.trim()) || !password.trim()) &&
-              styles.btnDisabled,
+              buttons.disabledButton,
           ]}
           onPress={handleSignIn}
           disabled={
@@ -174,25 +181,25 @@ const SignIn: React.FC<SignInProps> = ({
             !password.trim()
           }
         >
-          <Text style={styles.btnText}>Sign In</Text>
+          <Text style={buttons.primaryButtonText}>Sign In</Text>
         </TouchableOpacity>
 
         {/* Divider */}
-        <View style={styles.divider}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>OR</Text>
-          <View style={styles.dividerLine} />
+        <View style={formStyles.divider}>
+          <View style={formStyles.dividerLine} />
+          <Text style={formStyles.dividerText}>OR</Text>
+          <View style={formStyles.dividerLine} />
         </View>
 
         {/* Sign In with OTP */}
-        <TouchableOpacity style={[styles.btn, styles.btnSecondary]} onPress={handleSignInWithOTP}>
-          <Text style={styles.btnSecondaryText}>Sign In with OTP</Text>
+        <TouchableOpacity style={[buttons.buttonFullWidth, buttons.secondaryButton]} onPress={handleSignInWithOTP}>
+          <Text style={buttons.secondaryButtonText}>Sign In with OTP</Text>
         </TouchableOpacity>
 
         {/* Sign Up Link */}
-        <Text style={styles.termsText}>
+        <Text style={signInStyles.termsText}>
           Don't have an account?{' '}
-          <Text style={styles.termsLink} onPress={() => navigation?.navigate('RegionSelection')}>
+          <Text style={signInStyles.termsLink} onPress={() => navigation?.navigate('RegionSelection')}>
             Sign Up
           </Text>
         </Text>
@@ -200,215 +207,6 @@ const SignIn: React.FC<SignInProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF5F7',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 60,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  signinHeader: {
-    alignItems: 'center',
-    marginVertical: 40,
-  },
-  signinIcon: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#E91E63',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  },
-  signinIconText: {
-    fontSize: 40,
-  },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#333',
-    marginBottom: 12,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 40,
-  },
-  tabSwitcher: {
-    flexDirection: 'row',
-    gap: 12,
-    marginBottom: 30,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 16,
-    padding: 4,
-  },
-  tab: {
-    flex: 1,
-    height: 48,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tabActive: {
-    backgroundColor: 'white',
-  },
-  tabText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#666',
-  },
-  tabTextActive: {
-    color: '#E91E63',
-  },
-  formGroup: {
-    marginBottom: 24,
-  },
-  formLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  formInput: {
-    width: '100%',
-    height: 56,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    paddingHorizontal: 20,
-    fontSize: 16,
-    fontWeight: '500',
-    backgroundColor: 'white',
-    color: '#333',
-  },
-  phoneInputContainer: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  countryCode: {
-    width: 100,
-    height: 56,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    paddingHorizontal: 16,
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  countryCodeText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  passwordInputContainer: {
-    position: 'relative',
-  },
-  togglePassword: {
-    position: 'absolute',
-    right: 20,
-    top: 18,
-  },
-  forgotPassword: {
-    alignItems: 'flex-end',
-    marginTop: -12,
-    marginBottom: 24,
-  },
-  forgotLink: {
-    color: '#E91E63',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  btn: {
-    width: '100%',
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 24,
-  },
-  btnPrimary: {
-    backgroundColor: '#E91E63',
-  },
-  btnSecondary: {
-    backgroundColor: 'rgba(233, 30, 99, 0.1)',
-    borderWidth: 2,
-    borderColor: '#E91E63',
-  },
-  btnDisabled: {
-    opacity: 0.5,
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: 'white',
-  },
-  btnSecondaryText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#E91E63',
-  },
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    marginVertical: 24,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#E0E0E0',
-  },
-  dividerText: {
-    fontSize: 14,
-    color: '#999',
-    fontWeight: '500',
-  },
-  termsText: {
-    fontSize: 13,
-    color: '#666',
-    lineHeight: 20,
-    marginTop: 20,
-    textAlign: 'center',
-  },
-  termsLink: {
-    color: '#E91E63',
-    fontWeight: '600',
-  },
-});
 
 export default SignIn;
 

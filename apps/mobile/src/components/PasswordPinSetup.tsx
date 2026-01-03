@@ -4,10 +4,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {
+  containerStyles,
+  headerStyles,
+  buttons,
+  formStyles,
+  passwordPinSetupStyles,
+  colors,
+} from '../styles';
 
 interface PasswordPinSetupProps {
   navigation?: any;
@@ -76,43 +83,43 @@ const PasswordPinSetup: React.FC<PasswordPinSetupProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[containerStyles.container, { backgroundColor: colors.background.primary }]}>
       <StatusBar barStyle="dark-content" />
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={[containerStyles.scrollContentSmall, { paddingTop: 60 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerNoBackground}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Secure Your Account</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitleNoBackground}>Secure Your Account</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>Set up security</Text>
-        <Text style={styles.sectionSubtitle}>
+        <Text style={headerStyles.sectionTitleLarge}>Set up security</Text>
+        <Text style={headerStyles.sectionSubtitle}>
           Choose a password or PIN to protect your account
         </Text>
 
         {/* Tab Switcher */}
-        <View style={styles.tabSwitcher}>
+        <View style={passwordPinSetupStyles.tabSwitcher}>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'password' && styles.tabActive]}
+            style={[passwordPinSetupStyles.tab, activeTab === 'password' && passwordPinSetupStyles.tabActive]}
             onPress={() => setActiveTab('password')}
           >
-            <Text style={[styles.tabText, activeTab === 'password' && styles.tabTextActive]}>
+            <Text style={[passwordPinSetupStyles.tabText, activeTab === 'password' && passwordPinSetupStyles.tabTextActive]}>
               Password
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tab, activeTab === 'pin' && styles.tabActive]}
+            style={[passwordPinSetupStyles.tab, activeTab === 'pin' && passwordPinSetupStyles.tabActive]}
             onPress={() => setActiveTab('pin')}
           >
-            <Text style={[styles.tabText, activeTab === 'pin' && styles.tabTextActive]}>
+            <Text style={[passwordPinSetupStyles.tabText, activeTab === 'pin' && passwordPinSetupStyles.tabTextActive]}>
               4-Digit PIN
             </Text>
           </TouchableOpacity>
@@ -121,42 +128,42 @@ const PasswordPinSetup: React.FC<PasswordPinSetupProps> = ({
         {/* Form */}
         {activeTab === 'password' ? (
           <>
-            <View style={styles.formGroup}>
-              <Text style={styles.formLabel}>Create Password</Text>
-              <View style={styles.passwordInputContainer}>
+            <View style={formStyles.formGroup}>
+              <Text style={formStyles.formLabel}>Create Password</Text>
+              <View style={formStyles.passwordInputContainer}>
                 <TextInput
-                  style={styles.formInput}
+                  style={formStyles.formInput}
                   placeholder="Enter password"
-                  placeholderTextColor="#999"
+                  placeholderTextColor={colors.text.tertiary}
                   value={password}
                   onChangeText={handlePasswordChange}
                   secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity
-                  style={styles.togglePassword}
+                  style={formStyles.togglePassword}
                   onPress={() => setShowPassword(!showPassword)}
                 >
                   <Text>{showPassword ? '🙈' : '👁️'}</Text>
                 </TouchableOpacity>
               </View>
               {password && (
-                <View style={styles.passwordStrength}>
-                  <View style={styles.strengthBar}>
+                <View style={passwordPinSetupStyles.passwordStrength}>
+                  <View style={passwordPinSetupStyles.strengthBar}>
                     <View
                       style={[
-                        styles.strengthFill,
-                        passwordStrength === 'weak' && styles.strengthWeak,
-                        passwordStrength === 'medium' && styles.strengthMedium,
-                        passwordStrength === 'strong' && styles.strengthStrong,
+                        passwordPinSetupStyles.strengthFill,
+                        passwordStrength === 'weak' && passwordPinSetupStyles.strengthWeak,
+                        passwordStrength === 'medium' && passwordPinSetupStyles.strengthMedium,
+                        passwordStrength === 'strong' && passwordPinSetupStyles.strengthStrong,
                       ]}
                     />
                   </View>
                   <Text
                     style={[
-                      styles.strengthText,
-                      passwordStrength === 'weak' && { color: '#F44336' },
-                      passwordStrength === 'medium' && { color: '#FF9800' },
-                      passwordStrength === 'strong' && { color: '#4CAF50' },
+                      passwordPinSetupStyles.strengthText,
+                      passwordStrength === 'weak' && { color: colors.status.error },
+                      passwordStrength === 'medium' && { color: colors.status.warning },
+                      passwordStrength === 'strong' && { color: colors.button.success },
                     ]}
                   >
                     {passwordStrength === 'weak' && 'Weak password'}
@@ -167,19 +174,19 @@ const PasswordPinSetup: React.FC<PasswordPinSetupProps> = ({
               )}
             </View>
 
-            <View style={styles.formGroup}>
-              <Text style={styles.formLabel}>Confirm Password</Text>
-              <View style={styles.passwordInputContainer}>
+            <View style={formStyles.formGroup}>
+              <Text style={formStyles.formLabel}>Confirm Password</Text>
+              <View style={formStyles.passwordInputContainer}>
                 <TextInput
-                  style={styles.formInput}
+                  style={formStyles.formInput}
                   placeholder="Re-enter password"
-                  placeholderTextColor="#999"
+                  placeholderTextColor={colors.text.tertiary}
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   secureTextEntry={!showConfirmPassword}
                 />
                 <TouchableOpacity
-                  style={styles.togglePassword}
+                  style={formStyles.togglePassword}
                   onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   <Text>{showConfirmPassword ? '🙈' : '👁️'}</Text>
@@ -187,35 +194,35 @@ const PasswordPinSetup: React.FC<PasswordPinSetupProps> = ({
               </View>
             </View>
 
-            <View style={styles.securityTips}>
-              <Text style={styles.privacyTitle}>💡 Password Tips</Text>
-              <View style={styles.tipItem}>
-                <View style={styles.tipIcon}>
-                  <Text style={styles.tipIconText}>✓</Text>
+            <View style={passwordPinSetupStyles.securityTips}>
+              <Text style={passwordPinSetupStyles.privacyTitle}>💡 Password Tips</Text>
+              <View style={passwordPinSetupStyles.tipItem}>
+                <View style={passwordPinSetupStyles.tipIcon}>
+                  <Text style={passwordPinSetupStyles.tipIconText}>✓</Text>
                 </View>
-                <Text style={styles.tipText}>Use at least 8 characters</Text>
+                <Text style={passwordPinSetupStyles.tipText}>Use at least 8 characters</Text>
               </View>
-              <View style={styles.tipItem}>
-                <View style={styles.tipIcon}>
-                  <Text style={styles.tipIconText}>✓</Text>
+              <View style={passwordPinSetupStyles.tipItem}>
+                <View style={passwordPinSetupStyles.tipIcon}>
+                  <Text style={passwordPinSetupStyles.tipIconText}>✓</Text>
                 </View>
-                <Text style={styles.tipText}>Include uppercase & lowercase letters</Text>
+                <Text style={passwordPinSetupStyles.tipText}>Include uppercase & lowercase letters</Text>
               </View>
-              <View style={styles.tipItem}>
-                <View style={styles.tipIcon}>
-                  <Text style={styles.tipIconText}>✓</Text>
+              <View style={passwordPinSetupStyles.tipItem}>
+                <View style={passwordPinSetupStyles.tipIcon}>
+                  <Text style={passwordPinSetupStyles.tipIconText}>✓</Text>
                 </View>
-                <Text style={styles.tipText}>Add numbers and special characters</Text>
+                <Text style={passwordPinSetupStyles.tipText}>Add numbers and special characters</Text>
               </View>
             </View>
           </>
         ) : (
-          <View style={styles.formGroup}>
-            <Text style={styles.formLabel}>Enter 4-Digit PIN</Text>
+          <View style={formStyles.formGroup}>
+            <Text style={formStyles.formLabel}>Enter 4-Digit PIN</Text>
             <TextInput
-              style={styles.formInput}
+              style={formStyles.formInput}
               placeholder="0000"
-              placeholderTextColor="#999"
+              placeholderTextColor={colors.text.tertiary}
               value={pin}
               onChangeText={(value) => setPin(value.replace(/[^0-9]/g, '').slice(0, 4))}
               keyboardType="number-pad"
@@ -226,216 +233,19 @@ const PasswordPinSetup: React.FC<PasswordPinSetupProps> = ({
         )}
 
         {/* Button */}
-        <View style={styles.btnContainer}>
+        <View style={passwordPinSetupStyles.btnContainer}>
           <TouchableOpacity
-            style={[styles.btn, styles.btnPrimary, !isFormValid() && styles.btnDisabled]}
+            style={[buttons.buttonFullWidth, buttons.primaryButton, !isFormValid() && buttons.disabledButton]}
             onPress={handleComplete}
             disabled={!isFormValid()}
           >
-            <Text style={styles.btnText}>Complete Setup</Text>
+            <Text style={buttons.primaryButtonText}>Complete Setup</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF5F7',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 60,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#333',
-    marginBottom: 12,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 40,
-  },
-  tabSwitcher: {
-    flexDirection: 'row',
-    gap: 12,
-    marginBottom: 30,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 16,
-    padding: 4,
-  },
-  tab: {
-    flex: 1,
-    height: 48,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tabActive: {
-    backgroundColor: 'white',
-  },
-  tabText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#666',
-  },
-  tabTextActive: {
-    color: '#E91E63',
-  },
-  formGroup: {
-    marginBottom: 24,
-  },
-  formLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 8,
-  },
-  formInput: {
-    width: '100%',
-    height: 56,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    paddingHorizontal: 20,
-    fontSize: 16,
-    fontWeight: '500',
-    backgroundColor: 'white',
-    color: '#333',
-  },
-  passwordInputContainer: {
-    position: 'relative',
-  },
-  togglePassword: {
-    position: 'absolute',
-    right: 20,
-    top: 18,
-  },
-  passwordStrength: {
-    marginTop: 12,
-  },
-  strengthBar: {
-    height: 8,
-    backgroundColor: '#F0F0F0',
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginBottom: 8,
-  },
-  strengthFill: {
-    height: '100%',
-    borderRadius: 4,
-  },
-  strengthWeak: {
-    backgroundColor: '#F44336',
-    width: '33%',
-  },
-  strengthMedium: {
-    backgroundColor: '#FF9800',
-    width: '66%',
-  },
-  strengthStrong: {
-    backgroundColor: '#4CAF50',
-    width: '100%',
-  },
-  strengthText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  securityTips: {
-    backgroundColor: '#FFF5F7',
-    borderRadius: 16,
-    padding: 20,
-    marginTop: 20,
-  },
-  privacyTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 12,
-  },
-  tipItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-    marginBottom: 12,
-  },
-  tipIcon: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: '#4CAF50',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tipIconText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  tipText: {
-    fontSize: 13,
-    color: '#555',
-    lineHeight: 20,
-    flex: 1,
-  },
-  btnContainer: {
-    marginTop: 20,
-    paddingTop: 20,
-  },
-  btn: {
-    width: '100%',
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnPrimary: {
-    backgroundColor: '#E91E63',
-  },
-  btnDisabled: {
-    opacity: 0.5,
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: 'white',
-  },
-});
 
 export default PasswordPinSetup;
 

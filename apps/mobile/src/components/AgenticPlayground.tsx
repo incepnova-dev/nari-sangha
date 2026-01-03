@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   Modal,
   TextInput,
   ScrollView,
@@ -11,6 +10,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
+import { agenticPlaygroundStyles, colors } from '../styles';
 
 interface Message {
   id: string;
@@ -110,65 +110,65 @@ const AgenticPlayground: React.FC<AgenticPlaygroundProps> = ({
       onRequestClose={onClose}
     >
       <KeyboardAvoidingView
-        style={styles.container}
+        style={agenticPlaygroundStyles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
       >
         <StatusBar barStyle="light-content" />
         
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>✕</Text>
+        <View style={agenticPlaygroundStyles.header}>
+          <TouchableOpacity style={agenticPlaygroundStyles.closeButton} onPress={onClose}>
+            <Text style={agenticPlaygroundStyles.closeButtonText}>✕</Text>
           </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>AI Health Assistant</Text>
-            <Text style={styles.headerSubtitle}>Your 24/7 health companion</Text>
+          <View style={agenticPlaygroundStyles.headerContent}>
+            <Text style={agenticPlaygroundStyles.headerTitle}>AI Health Assistant</Text>
+            <Text style={agenticPlaygroundStyles.headerSubtitle}>Your 24/7 health companion</Text>
           </View>
-          <View style={styles.headerSpacer} />
+          <View style={agenticPlaygroundStyles.headerSpacer} />
         </View>
 
         {/* Messages Container */}
         <ScrollView
           ref={scrollViewRef}
-          style={styles.messagesContainer}
-          contentContainerStyle={styles.messagesContent}
+          style={agenticPlaygroundStyles.messagesContainer}
+          contentContainerStyle={agenticPlaygroundStyles.messagesContent}
           showsVerticalScrollIndicator={false}
         >
           {messages.map((message) => (
             <View
               key={message.id}
               style={[
-                styles.messageWrapper,
-                message.sender === 'user' ? styles.userMessageWrapper : styles.assistantMessageWrapper,
+                agenticPlaygroundStyles.messageWrapper,
+                message.sender === 'user' ? agenticPlaygroundStyles.userMessageWrapper : agenticPlaygroundStyles.assistantMessageWrapper,
               ]}
             >
               <View
                 style={[
-                  styles.messageBubble,
-                  message.sender === 'user' ? styles.userMessage : styles.assistantMessage,
+                  agenticPlaygroundStyles.messageBubble,
+                  message.sender === 'user' ? agenticPlaygroundStyles.userMessage : agenticPlaygroundStyles.assistantMessage,
                 ]}
               >
                 <Text
                   style={[
-                    styles.messageText,
-                    message.sender === 'user' ? styles.userMessageText : styles.assistantMessageText,
+                    agenticPlaygroundStyles.messageText,
+                    message.sender === 'user' ? agenticPlaygroundStyles.userMessageText : agenticPlaygroundStyles.assistantMessageText,
                   ]}
                 >
                   {message.text}
                 </Text>
-                <Text style={styles.timestamp}>{formatTime(message.timestamp)}</Text>
+                <Text style={agenticPlaygroundStyles.timestamp}>{formatTime(message.timestamp)}</Text>
               </View>
             </View>
           ))}
           
           {isTyping && (
-            <View style={[styles.messageWrapper, styles.assistantMessageWrapper]}>
-              <View style={[styles.messageBubble, styles.assistantMessage]}>
-                <View style={styles.typingIndicator}>
-                  <View style={styles.typingDot} />
-                  <View style={styles.typingDot} />
-                  <View style={styles.typingDot} />
+            <View style={[agenticPlaygroundStyles.messageWrapper, agenticPlaygroundStyles.assistantMessageWrapper]}>
+              <View style={[agenticPlaygroundStyles.messageBubble, agenticPlaygroundStyles.assistantMessage]}>
+                <View style={agenticPlaygroundStyles.typingIndicator}>
+                  <View style={agenticPlaygroundStyles.typingDot} />
+                  <View style={agenticPlaygroundStyles.typingDot} />
+                  <View style={agenticPlaygroundStyles.typingDot} />
                 </View>
               </View>
             </View>
@@ -176,185 +176,28 @@ const AgenticPlayground: React.FC<AgenticPlaygroundProps> = ({
         </ScrollView>
 
         {/* Input Container */}
-        <View style={styles.inputContainer}>
+        <View style={agenticPlaygroundStyles.inputContainer}>
           <TextInput
-            style={styles.input}
+            style={agenticPlaygroundStyles.input}
             placeholder="Type your message..."
-            placeholderTextColor="#999"
+            placeholderTextColor={colors.text.tertiary}
             value={inputText}
             onChangeText={setInputText}
             multiline
             maxLength={500}
           />
           <TouchableOpacity
-            style={[styles.sendButton, !inputText.trim() && styles.sendButtonDisabled]}
+            style={[agenticPlaygroundStyles.sendButton, !inputText.trim() && agenticPlaygroundStyles.sendButtonDisabled]}
             onPress={handleSend}
             disabled={!inputText.trim() || isTyping}
           >
-            <Text style={styles.sendButtonText}>➤</Text>
+            <Text style={agenticPlaygroundStyles.sendButtonText}>➤</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  header: {
-    backgroundColor: '#E91E63',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 50,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  closeButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  closeButtonText: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: '600',
-  },
-  headerContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 4,
-  },
-  headerSubtitle: {
-    fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
-  },
-  headerSpacer: {
-    width: 35,
-  },
-  messagesContainer: {
-    flex: 1,
-  },
-  messagesContent: {
-    padding: 20,
-    paddingBottom: 10,
-  },
-  messageWrapper: {
-    marginBottom: 15,
-    flexDirection: 'row',
-  },
-  userMessageWrapper: {
-    justifyContent: 'flex-end',
-  },
-  assistantMessageWrapper: {
-    justifyContent: 'flex-start',
-  },
-  messageBubble: {
-    maxWidth: '80%',
-    padding: 15,
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  userMessage: {
-    backgroundColor: '#E91E63',
-    borderBottomRightRadius: 4,
-  },
-  assistantMessage: {
-    backgroundColor: 'white',
-    borderBottomLeftRadius: 4,
-  },
-  messageText: {
-    fontSize: 15,
-    lineHeight: 22,
-    marginBottom: 5,
-  },
-  userMessageText: {
-    color: 'white',
-  },
-  assistantMessageText: {
-    color: '#333',
-  },
-  timestamp: {
-    fontSize: 10,
-    opacity: 0.7,
-    marginTop: 4,
-  },
-  typingIndicator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-  },
-  typingDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#999',
-    opacity: 0.6,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    padding: 15,
-    backgroundColor: 'white',
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
-    alignItems: 'flex-end',
-    gap: 10,
-  },
-  input: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 25,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    fontSize: 15,
-    color: '#333',
-    maxHeight: 100,
-    minHeight: 45,
-  },
-  sendButton: {
-    width: 45,
-    height: 45,
-    borderRadius: 22.5,
-    backgroundColor: '#E91E63',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#E91E63',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  sendButtonDisabled: {
-    backgroundColor: '#CCCCCC',
-    shadowOpacity: 0,
-    elevation: 0,
-  },
-  sendButtonText: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: '600',
-  },
-});
 
 export default AgenticPlayground;
 

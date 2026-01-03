@@ -3,12 +3,18 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
 import BottomMenuBar from './BottomMenuBar';
 import WelcomeHeader from './WelcomeHeader';
+import {
+  containerStyles,
+  headerStyles,
+  buttons,
+  trackOptionsStyles,
+  colors,
+} from '../styles';
 
 interface TrackOptionsProps {
   navigation?: any;
@@ -61,68 +67,68 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[containerStyles.container, { backgroundColor: colors.background.primary }]}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={[containerStyles.scrollContent, { paddingTop: 20 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerNoBackground}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Track</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitleNoBackground}>Track</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>What would you like to track?</Text>
-        <Text style={styles.sectionSubtitle}>
+        <Text style={headerStyles.sectionTitleLarge}>What would you like to track?</Text>
+        <Text style={headerStyles.sectionSubtitle}>
           Choose the type of health tracking you want to manage
         </Text>
 
         {/* Option Cards */}
-        <View style={styles.optionCards}>
+        <View style={trackOptionsStyles.optionCards}>
           {/* Vaccine */}
           <TouchableOpacity
             style={[
-              styles.optionCard,
-              selectedOption === 'vaccine' && styles.optionCardSelected,
+              trackOptionsStyles.optionCard,
+              selectedOption === 'vaccine' && trackOptionsStyles.optionCardSelected,
             ]}
             onPress={() => setSelectedOption('vaccine')}
           >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>💉</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Vaccine</Text>
-                <Text style={styles.optionSubtext}>Vaccination Schedule & Records</Text>
+            <View style={trackOptionsStyles.optionHeader}>
+              <Text style={trackOptionsStyles.optionIcon}>💉</Text>
+              <View style={trackOptionsStyles.optionInfo}>
+                <Text style={trackOptionsStyles.optionName}>Vaccine</Text>
+                <Text style={trackOptionsStyles.optionSubtext}>Vaccination Schedule & Records</Text>
               </View>
             </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Track vaccination history</Text>
+            <View style={trackOptionsStyles.optionFeatures}>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Track vaccination history</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Get reminders for upcoming vaccines</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Get reminders for upcoming vaccines</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Maintain vaccination records</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Maintain vaccination records</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -130,30 +136,30 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
           {/* Screening */}
           <TouchableOpacity
             style={[
-              styles.optionCard,
-              selectedOption === 'screening' && styles.optionCardSelected,
+              trackOptionsStyles.optionCard,
+              selectedOption === 'screening' && trackOptionsStyles.optionCardSelected,
             ]}
             onPress={() => setSelectedOption('screening')}
           >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>🩺</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Screening</Text>
-                <Text style={styles.optionSubtext}>Health Screening & Checkups</Text>
+            <View style={trackOptionsStyles.optionHeader}>
+              <Text style={trackOptionsStyles.optionIcon}>🩺</Text>
+              <View style={trackOptionsStyles.optionInfo}>
+                <Text style={trackOptionsStyles.optionName}>Screening</Text>
+                <Text style={trackOptionsStyles.optionSubtext}>Health Screening & Checkups</Text>
               </View>
             </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Schedule health screenings</Text>
+            <View style={trackOptionsStyles.optionFeatures}>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Schedule health screenings</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Track screening results</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Track screening results</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Get reminders for checkups</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Get reminders for checkups</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -161,39 +167,39 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
           {/* Cycle */}
           <TouchableOpacity
             style={[
-              styles.optionCard,
-              selectedOption === 'cycle' && styles.optionCardSelected,
+              trackOptionsStyles.optionCard,
+              selectedOption === 'cycle' && trackOptionsStyles.optionCardSelected,
             ]}
             onPress={() => setSelectedOption('cycle')}
           >
-            <View style={styles.optionHeader}>
-              <Text style={styles.optionIcon}>📅</Text>
-              <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Cycle</Text>
-                <Text style={styles.optionSubtext}>Menstrual Cycle Tracking</Text>
+            <View style={trackOptionsStyles.optionHeader}>
+              <Text style={trackOptionsStyles.optionIcon}>📅</Text>
+              <View style={trackOptionsStyles.optionInfo}>
+                <Text style={trackOptionsStyles.optionName}>Cycle</Text>
+                <Text style={trackOptionsStyles.optionSubtext}>Menstrual Cycle Tracking</Text>
               </View>
             </View>
-            <View style={styles.optionFeatures}>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Track menstrual cycles</Text>
+            <View style={trackOptionsStyles.optionFeatures}>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Track menstrual cycles</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Monitor cycle patterns</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Monitor cycle patterns</Text>
               </View>
-              <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✓</Text>
-                <Text style={styles.featureText}>Predict periods and ovulation</Text>
+              <View style={trackOptionsStyles.featureItem}>
+                <Text style={trackOptionsStyles.featureIcon}>✓</Text>
+                <Text style={trackOptionsStyles.featureText}>Predict periods and ovulation</Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
 
         {/* Button */}
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={[styles.btn, styles.btnPrimary]} onPress={handleContinue}>
-            <Text style={styles.btnText}>Continue</Text>
+        <View style={trackOptionsStyles.btnContainer}>
+          <TouchableOpacity style={[buttons.buttonFullWidth, buttons.primaryButton]} onPress={handleContinue}>
+            <Text style={buttons.primaryButtonText}>Continue</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -205,136 +211,6 @@ const TrackOptions: React.FC<TrackOptionsProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF5F7',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 20,
-    paddingBottom: 100, // Adjusted for BottomMenuBar
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#333',
-    marginBottom: 12,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: '#666',
-    lineHeight: 24,
-    marginBottom: 40,
-  },
-  optionCards: {
-    gap: 16,
-  },
-  optionCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 24,
-    borderWidth: 3,
-    borderColor: 'transparent',
-  },
-  optionCardSelected: {
-    borderColor: '#E91E63',
-    backgroundColor: '#FFF5F7',
-  },
-  optionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    marginBottom: 12,
-  },
-  optionIcon: {
-    fontSize: 40,
-  },
-  optionInfo: {
-    flex: 1,
-  },
-  optionName: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 4,
-  },
-  optionSubtext: {
-    fontSize: 14,
-    color: '#666',
-  },
-  optionFeatures: {
-    marginTop: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 8,
-  },
-  featureIcon: {
-    color: '#4CAF50',
-    fontSize: 14,
-    fontWeight: '700',
-  },
-  featureText: {
-    fontSize: 14,
-    color: '#555',
-  },
-  btnContainer: {
-    marginTop: 20,
-    paddingTop: 20,
-  },
-  btn: {
-    width: '100%',
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnPrimary: {
-    backgroundColor: '#E91E63',
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: 'white',
-  },
-});
 
 export default TrackOptions;
 

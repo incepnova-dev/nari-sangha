@@ -3,13 +3,16 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  expertAdviceListingStyles,
+} from '../styles';
 
 interface Video {
   id: string;
@@ -158,29 +161,29 @@ const ExpertAdviceListing: React.FC<ExpertAdviceListingProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.containerSecondary}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Hero Section */}
-        <View style={styles.heroSection}>
-          <Text style={styles.heroIcon}>🎥</Text>
-          <Text style={styles.heroTitle}>Expert Advice</Text>
-          <Text style={styles.heroSubtitle}>
+        <View style={expertAdviceListingStyles.heroSection}>
+          <Text style={expertAdviceListingStyles.heroIcon}>🎥</Text>
+          <Text style={expertAdviceListingStyles.heroTitle}>Expert Advice</Text>
+          <Text style={expertAdviceListingStyles.heroSubtitle}>
             Learn from leading healthcare professionals about women's health topics
           </Text>
         </View>
@@ -189,23 +192,23 @@ const ExpertAdviceListing: React.FC<ExpertAdviceListingProps> = ({
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={styles.categoryTabs}
-          contentContainerStyle={styles.categoryTabsContent}
+          style={expertAdviceListingStyles.categoryTabs}
+          contentContainerStyle={expertAdviceListingStyles.categoryTabsContent}
         >
           {categories.map((category) => (
             <TouchableOpacity
               key={category}
               style={[
-                styles.categoryTab,
-                activeCategory === category && styles.categoryTabActive,
+                expertAdviceListingStyles.categoryTab,
+                activeCategory === category && expertAdviceListingStyles.categoryTabActive,
               ]}
               onPress={() => setActiveCategory(category)}
               activeOpacity={0.7}
             >
               <Text
                 style={[
-                  styles.categoryTabText,
-                  activeCategory === category && styles.categoryTabTextActive,
+                  expertAdviceListingStyles.categoryTabText,
+                  activeCategory === category && expertAdviceListingStyles.categoryTabTextActive,
                 ]}
               >
                 {category}
@@ -215,47 +218,47 @@ const ExpertAdviceListing: React.FC<ExpertAdviceListingProps> = ({
         </ScrollView>
 
         {/* Content Section */}
-        <View style={styles.contentSection}>
+        <View style={expertAdviceListingStyles.contentSection}>
           {/* Video Cards */}
           {filteredVideos.map((video) => (
             <TouchableOpacity
               key={video.id}
-              style={styles.videoCard}
+              style={expertAdviceListingStyles.videoCard}
               activeOpacity={0.8}
               onPress={() => handleOpenUrl(video.url)}
             >
-              <View style={styles.videoThumbnail}>
-                <Text style={styles.videoThumbnailPlaceholder}>🎥</Text>
-                <View style={styles.playButton}>
-                  <Text style={styles.playButtonText}>▶</Text>
+              <View style={expertAdviceListingStyles.videoThumbnail}>
+                <Text style={expertAdviceListingStyles.videoThumbnailPlaceholder}>🎥</Text>
+                <View style={expertAdviceListingStyles.playButton}>
+                  <Text style={expertAdviceListingStyles.playButtonText}>▶</Text>
                 </View>
               </View>
-              <View style={styles.videoInfo}>
-                <Text style={styles.videoTitle}>{video.title}</Text>
-                <Text style={styles.videoChannel}>{video.channel}</Text>
-                <View style={styles.videoMeta}>
+              <View style={expertAdviceListingStyles.videoInfo}>
+                <Text style={expertAdviceListingStyles.videoTitle}>{video.title}</Text>
+                <Text style={expertAdviceListingStyles.videoChannel}>{video.channel}</Text>
+                <View style={expertAdviceListingStyles.videoMeta}>
                   {video.date && (
                     <>
-                      <Text style={styles.videoMetaText}>📅 {video.date}</Text>
-                      <Text style={styles.videoMetaText}>•</Text>
+                      <Text style={expertAdviceListingStyles.videoMetaText}>📅 {video.date}</Text>
+                      <Text style={expertAdviceListingStyles.videoMetaText}>•</Text>
                     </>
                   )}
-                  <Text style={styles.videoMetaText}>⏱️ {video.duration}</Text>
-                  <Text style={styles.videoMetaText}>•</Text>
-                  <Text style={styles.videoMetaText}>👁️ {video.views}</Text>
+                  <Text style={expertAdviceListingStyles.videoMetaText}>⏱️ {video.duration}</Text>
+                  <Text style={expertAdviceListingStyles.videoMetaText}>•</Text>
+                  <Text style={expertAdviceListingStyles.videoMetaText}>👁️ {video.views}</Text>
                 </View>
                 {video.description && (
-                  <Text style={styles.videoDescription}>{video.description}</Text>
+                  <Text style={expertAdviceListingStyles.videoDescription}>{video.description}</Text>
                 )}
                 {video.doctorName && (
-                  <View style={styles.doctorInfo}>
-                    <View style={styles.doctorAvatar}>
-                      <Text style={styles.doctorAvatarText}>{video.doctorAvatar || '👩‍⚕️'}</Text>
+                  <View style={expertAdviceListingStyles.doctorInfo}>
+                    <View style={expertAdviceListingStyles.doctorAvatar}>
+                      <Text style={expertAdviceListingStyles.doctorAvatarText}>{video.doctorAvatar || '👩‍⚕️'}</Text>
                     </View>
-                    <View style={styles.doctorDetails}>
-                      <Text style={styles.doctorName}>{video.doctorName}</Text>
+                    <View style={expertAdviceListingStyles.doctorDetails}>
+                      <Text style={expertAdviceListingStyles.doctorName}>{video.doctorName}</Text>
                       {video.doctorSpecialty && (
-                        <Text style={styles.doctorSpecialty}>{video.doctorSpecialty}</Text>
+                        <Text style={expertAdviceListingStyles.doctorSpecialty}>{video.doctorSpecialty}</Text>
                       )}
                     </View>
                   </View>
@@ -273,175 +276,6 @@ const ExpertAdviceListing: React.FC<ExpertAdviceListingProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  heroSection: {
-    backgroundColor: '#667eea',
-    padding: 40,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-  },
-  heroIcon: {
-    fontSize: 80,
-    marginBottom: 20,
-  },
-  heroTitle: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  heroSubtitle: {
-    fontSize: 16,
-    color: 'white',
-    opacity: 0.95,
-    lineHeight: 24,
-    textAlign: 'center',
-    maxWidth: 400,
-  },
-  categoryTabs: {
-    marginBottom: 10,
-  },
-  categoryTabsContent: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    gap: 10,
-  },
-  categoryTab: {
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#ddd',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-  },
-  categoryTabActive: {
-    backgroundColor: '#E91E63',
-    borderColor: '#E91E63',
-  },
-  categoryTabText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#666',
-  },
-  categoryTabTextActive: {
-    color: 'white',
-  },
-  contentSection: {
-    padding: 20,
-    paddingTop: 10,
-  },
-  videoCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginBottom: 25,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  videoThumbnail: {
-    width: '100%',
-    height: 200,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-  },
-  videoThumbnailPlaceholder: {
-    fontSize: 80,
-    opacity: 0.3,
-  },
-  playButton: {
-    position: 'absolute',
-    width: 60,
-    height: 60,
-    backgroundColor: 'rgba(233, 30, 99, 0.9)',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  playButtonText: {
-    fontSize: 30,
-    color: 'white',
-  },
-  videoInfo: {
-    padding: 20,
-  },
-  videoTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 10,
-    lineHeight: 25,
-  },
-  videoChannel: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 12,
-  },
-  videoMeta: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 12,
-  },
-  videoMetaText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  videoDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  doctorInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingTop: 15,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-  },
-  doctorAvatar: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#E91E63',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  doctorAvatarText: {
-    fontSize: 24,
-  },
-  doctorDetails: {
-    flex: 1,
-  },
-  doctorName: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 3,
-  },
-  doctorSpecialty: {
-    fontSize: 13,
-    color: '#999',
-  },
-});
 
 export default ExpertAdviceListing;
 

@@ -3,12 +3,19 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
   Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
+import {
+  containerStyles,
+  headerStyles,
+  cardStyles,
+  iconStyles,
+  buttons,
+  insuranceStyles,
+} from '../styles';
 
 interface InsuranceProps {
   navigation?: any;
@@ -121,7 +128,7 @@ const Insurance: React.FC<InsuranceProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
       
       <WelcomeHeader
@@ -132,108 +139,108 @@ const Insurance: React.FC<InsuranceProps> = ({
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContentMedium}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.header}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Insurance Plans</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitle}>Insurance Plans</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Insurance Section */}
-        <View style={styles.contentSection}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Insurance Plans</Text>
+        <View style={containerStyles.contentSection}>
+          <View style={headerStyles.sectionHeader}>
+            <Text style={headerStyles.sectionTitle}>Insurance Plans</Text>
           </View>
 
-          <View style={styles.insuranceList}>
+          <View style={insuranceStyles.insuranceList}>
             {insurancePlans.map((plan, index) => {
               const isExpanded = expandedIndex === index;
               return (
-                <View key={index} style={styles.insuranceCard}>
-                  <View style={styles.insuranceHeader}>
-                    <View style={styles.insuranceIcon}>
-                      <Text style={styles.insuranceIconText}>{plan.icon}</Text>
+                <View key={index} style={insuranceStyles.insuranceCard}>
+                  <View style={insuranceStyles.insuranceHeader}>
+                    <View style={iconStyles.iconContainer}>
+                      <Text style={iconStyles.iconText}>{plan.icon}</Text>
                     </View>
-                    <View style={styles.insuranceInfo}>
-                      <Text style={styles.insuranceTitle}>{plan.title}</Text>
-                      <Text style={styles.insuranceProvider}>{plan.provider}</Text>
+                    <View style={insuranceStyles.insuranceInfo}>
+                      <Text style={insuranceStyles.insuranceTitle}>{plan.title}</Text>
+                      <Text style={insuranceStyles.insuranceProvider}>{plan.provider}</Text>
                     </View>
                   </View>
-                  <View style={styles.insuranceFeatures}>
+                  <View style={insuranceStyles.insuranceFeatures}>
                     {plan.features.map((feature, fIndex) => (
-                      <View key={fIndex} style={styles.insuranceFeature}>
-                        <Text style={styles.featureCheck}>✓</Text>
-                        <Text style={styles.featureText}>{feature}</Text>
+                      <View key={fIndex} style={insuranceStyles.insuranceFeature}>
+                        <Text style={insuranceStyles.featureCheck}>✓</Text>
+                        <Text style={insuranceStyles.featureText}>{feature}</Text>
                       </View>
                     ))}
                   </View>
-                  <View style={styles.insurancePrice}>
+                  <View style={insuranceStyles.insurancePrice}>
                     <View>
-                      <Text style={styles.insuranceAmount}>{plan.price}</Text>
-                      <Text style={styles.insurancePeriod}>{plan.period}</Text>
+                      <Text style={insuranceStyles.insuranceAmount}>{plan.price}</Text>
+                      <Text style={insuranceStyles.insurancePeriod}>{plan.period}</Text>
                     </View>
                   </View>
                   
                   {/* Expandable Details Section */}
                   {isExpanded && plan.details && (
-                    <View style={styles.expandedDetails}>
-                      <View style={styles.detailsSection}>
-                        <Text style={styles.detailsTitle}>Coverage Details</Text>
-                        <View style={styles.detailRow}>
-                          <Text style={styles.detailLabel}>Sum Insured:</Text>
-                          <Text style={styles.detailValue}>{plan.details.coverage}</Text>
+                    <View style={insuranceStyles.expandedDetails}>
+                      <View style={insuranceStyles.detailsSection}>
+                        <Text style={insuranceStyles.detailsTitle}>Coverage Details</Text>
+                        <View style={insuranceStyles.detailRow}>
+                          <Text style={insuranceStyles.detailLabel}>Sum Insured:</Text>
+                          <Text style={insuranceStyles.detailValue}>{plan.details.coverage}</Text>
                         </View>
-                        <View style={styles.detailRow}>
-                          <Text style={styles.detailLabel}>Waiting Period:</Text>
-                          <Text style={styles.detailValue}>{plan.details.waitingPeriod}</Text>
+                        <View style={insuranceStyles.detailRow}>
+                          <Text style={insuranceStyles.detailLabel}>Waiting Period:</Text>
+                          <Text style={insuranceStyles.detailValue}>{plan.details.waitingPeriod}</Text>
                         </View>
-                        <View style={styles.detailRow}>
-                          <Text style={styles.detailLabel}>Network Hospitals:</Text>
-                          <Text style={styles.detailValue}>{plan.details.networkHospitals}</Text>
+                        <View style={insuranceStyles.detailRow}>
+                          <Text style={insuranceStyles.detailLabel}>Network Hospitals:</Text>
+                          <Text style={insuranceStyles.detailValue}>{plan.details.networkHospitals}</Text>
                         </View>
-                        <View style={styles.detailRow}>
-                          <Text style={styles.detailLabel}>Claim Settlement:</Text>
-                          <Text style={styles.detailValue}>{plan.details.claimSettlement}</Text>
+                        <View style={insuranceStyles.detailRow}>
+                          <Text style={insuranceStyles.detailLabel}>Claim Settlement:</Text>
+                          <Text style={insuranceStyles.detailValue}>{plan.details.claimSettlement}</Text>
                         </View>
                       </View>
 
-                      <View style={styles.detailsSection}>
-                        <Text style={styles.detailsTitle}>Additional Benefits</Text>
+                      <View style={insuranceStyles.detailsSection}>
+                        <Text style={insuranceStyles.detailsTitle}>Additional Benefits</Text>
                         {plan.details.additionalBenefits.map((benefit, bIndex) => (
-                          <View key={bIndex} style={styles.benefitItem}>
-                            <Text style={styles.benefitCheck}>✓</Text>
-                            <Text style={styles.benefitText}>{benefit}</Text>
+                          <View key={bIndex} style={insuranceStyles.benefitItem}>
+                            <Text style={insuranceStyles.benefitCheck}>✓</Text>
+                            <Text style={insuranceStyles.benefitText}>{benefit}</Text>
                           </View>
                         ))}
                       </View>
 
-                      <View style={styles.termsSection}>
-                        <Text style={styles.termsText}>{plan.details.terms}</Text>
+                      <View style={insuranceStyles.termsSection}>
+                        <Text style={insuranceStyles.termsText}>{plan.details.terms}</Text>
                       </View>
 
                       <TouchableOpacity
-                        style={styles.buyNowBtn}
+                        style={buttons.buyNowButton}
                         activeOpacity={0.8}
                         onPress={() => handleBuyNow(plan.buyLink)}
                       >
-                        <Text style={styles.buyNowBtnText}>Buy Now from {plan.provider}</Text>
+                        <Text style={buttons.buyNowButtonText}>Buy Now from {plan.provider}</Text>
                       </TouchableOpacity>
                     </View>
                   )}
 
                   {/* View Details Button - Full Width */}
                   <TouchableOpacity
-                    style={styles.viewDetailsBtn}
+                    style={buttons.viewDetailsButton}
                     activeOpacity={0.8}
                     onPress={() => toggleExpand(index)}
                   >
-                    <Text style={styles.viewDetailsBtnText}>
+                    <Text style={buttons.viewDetailsButtonText}>
                       {isExpanded ? 'Hide Details' : 'View Details'}
                     </Text>
                   </TouchableOpacity>
@@ -246,228 +253,6 @@ const Insurance: React.FC<InsuranceProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F8F8',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 80,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 20,
-    paddingTop: 20,
-    marginBottom: 10,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  contentSection: {
-    padding: 24,
-    paddingHorizontal: 20,
-  },
-  sectionHeader: {
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '800',
-    color: '#E91E63',
-  },
-  insuranceList: {
-    gap: 16,
-  },
-  insuranceCard: {
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 20,
-    elevation: 4,
-  },
-  insuranceHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-    marginBottom: 12,
-  },
-  insuranceIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#FFF5F7',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  insuranceIconText: {
-    fontSize: 30,
-  },
-  insuranceInfo: {
-    flex: 1,
-  },
-  insuranceTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 4,
-  },
-  insuranceProvider: {
-    fontSize: 13,
-    color: '#666',
-  },
-  insuranceFeatures: {
-    gap: 8,
-    marginBottom: 12,
-  },
-  insuranceFeature: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  featureCheck: {
-    color: '#4CAF50',
-    fontSize: 13,
-    fontWeight: '700',
-  },
-  featureText: {
-    fontSize: 13,
-    color: '#555',
-  },
-  insurancePrice: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 12,
-    marginBottom: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-  },
-  insuranceAmount: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#E91E63',
-  },
-  insurancePeriod: {
-    fontSize: 12,
-    color: '#999',
-  },
-  expandedDetails: {
-    marginTop: 12,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
-  },
-  detailsSection: {
-    marginBottom: 16,
-  },
-  detailsTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#E91E63',
-    marginBottom: 12,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-  detailLabel: {
-    fontSize: 13,
-    color: '#666',
-    flex: 1,
-  },
-  detailValue: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#333',
-    flex: 1,
-    textAlign: 'right',
-  },
-  benefitItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 8,
-    gap: 8,
-  },
-  benefitCheck: {
-    color: '#4CAF50',
-    fontSize: 13,
-    fontWeight: '700',
-    marginTop: 2,
-  },
-  benefitText: {
-    fontSize: 13,
-    color: '#555',
-    flex: 1,
-  },
-  termsSection: {
-    backgroundColor: '#FFF5F7',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  termsText: {
-    fontSize: 11,
-    color: '#666',
-    lineHeight: 16,
-    fontStyle: 'italic',
-  },
-  buyNowBtn: {
-    backgroundColor: '#4CAF50',
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-  },
-  buyNowBtnText: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: 'white',
-  },
-  viewDetailsBtn: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-    marginTop: 8,
-  },
-  viewDetailsBtnText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: 'white',
-  },
-});
 
 export default Insurance;
 

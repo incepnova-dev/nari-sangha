@@ -3,12 +3,17 @@ import {
   View,
   Text,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
+import {
+  containerStyles,
+  headerStyles,
+  screeningTrackingStyles,
+  colors,
+} from '../styles';
 
 interface Screening {
   id: string;
@@ -129,95 +134,95 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
 
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
         user={user}
-        onSignOut={onSignOut}
+        {...(onSignOut ? { onSignOut } : {})}
         onProfilePress={() => {
           navigation?.navigate('Profile');
         }}
       />
 
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.headerWithBackground}>
+          <TouchableOpacity style={headerStyles.backButtonOnPrimary} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonTextWhite}>←</Text>
           </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Screening Tracking</Text>
-            <Text style={styles.headerSubtitle}>Manage your health screenings</Text>
+          <View style={headerStyles.headerContent}>
+            <Text style={[headerStyles.headerTitleWhite, { fontSize: 24 }]}>Screening Tracking</Text>
+            <Text style={headerStyles.headerSubtitle}>Manage your health screenings</Text>
           </View>
-          <View style={styles.headerSpacer} />
+          <View style={headerStyles.headerSpacerSmall} />
         </View>
 
         {/* Summary Card */}
-        <View style={styles.summaryCard}>
-          <Text style={styles.summaryTitle}>Screening Summary</Text>
-          <View style={styles.summaryStats}>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>{screenings.filter(s => s.status === 'completed').length}</Text>
-              <Text style={styles.statLabel}>Completed</Text>
+        <View style={screeningTrackingStyles.summaryCard}>
+          <Text style={screeningTrackingStyles.summaryTitle}>Screening Summary</Text>
+          <View style={screeningTrackingStyles.summaryStats}>
+            <View style={screeningTrackingStyles.statItem}>
+              <Text style={screeningTrackingStyles.statNumber}>{screenings.filter(s => s.status === 'completed').length}</Text>
+              <Text style={screeningTrackingStyles.statLabel}>Completed</Text>
             </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>{screenings.filter(s => s.status === 'upcoming').length}</Text>
-              <Text style={styles.statLabel}>Upcoming</Text>
+            <View style={screeningTrackingStyles.statItem}>
+              <Text style={screeningTrackingStyles.statNumber}>{screenings.filter(s => s.status === 'upcoming').length}</Text>
+              <Text style={screeningTrackingStyles.statLabel}>Upcoming</Text>
             </View>
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>{screenings.filter(s => s.status === 'overdue').length}</Text>
-              <Text style={styles.statLabel}>Overdue</Text>
+            <View style={screeningTrackingStyles.statItem}>
+              <Text style={screeningTrackingStyles.statNumber}>{screenings.filter(s => s.status === 'overdue').length}</Text>
+              <Text style={screeningTrackingStyles.statLabel}>Overdue</Text>
             </View>
           </View>
         </View>
 
         {/* Screening Cards */}
-        <View style={styles.screeningsContainer}>
+        <View style={screeningTrackingStyles.screeningsContainer}>
           {screenings.map((screening) => (
-            <View key={screening.id} style={styles.screeningCard}>
-              <View style={styles.screeningHeader}>
-                <View style={styles.screeningIcon}>
-                  <Text style={styles.screeningIconText}>{screening.icon}</Text>
+            <View key={screening.id} style={screeningTrackingStyles.screeningCard}>
+              <View style={screeningTrackingStyles.screeningHeader}>
+                <View style={screeningTrackingStyles.screeningIcon}>
+                  <Text style={screeningTrackingStyles.screeningIconText}>{screening.icon}</Text>
                 </View>
-                <View style={styles.screeningInfo}>
-                  <Text style={styles.screeningName}>{screening.name}</Text>
-                  <View style={[styles.statusBadge, { backgroundColor: getStatusColor(screening.status) + '20' }]}>
-                    <Text style={[styles.statusText, { color: getStatusColor(screening.status) }]}>
+                <View style={screeningTrackingStyles.screeningInfo}>
+                  <Text style={screeningTrackingStyles.screeningName}>{screening.name}</Text>
+                  <View style={[screeningTrackingStyles.statusBadge, { backgroundColor: getStatusColor(screening.status) + '20' }]}>
+                    <Text style={[screeningTrackingStyles.statusText, { color: getStatusColor(screening.status) }]}>
                       {getStatusText(screening.status)}
                     </Text>
                   </View>
                 </View>
               </View>
-              <Text style={styles.screeningDescription}>{screening.description}</Text>
-              <View style={styles.screeningDetails}>
-                <View style={styles.detailRow}>
-                  <Text style={styles.detailLabel}>Frequency:</Text>
-                  <Text style={styles.detailValue}>{screening.recommendedFrequency}</Text>
+              <Text style={screeningTrackingStyles.screeningDescription}>{screening.description}</Text>
+              <View style={screeningTrackingStyles.screeningDetails}>
+                <View style={screeningTrackingStyles.detailRow}>
+                  <Text style={screeningTrackingStyles.detailLabel}>Frequency:</Text>
+                  <Text style={screeningTrackingStyles.detailValue}>{screening.recommendedFrequency}</Text>
                 </View>
                 {screening.lastScreening && (
-                  <View style={styles.detailRow}>
-                    <Text style={styles.detailLabel}>Last Screening:</Text>
-                    <Text style={styles.detailValue}>{screening.lastScreening}</Text>
+                  <View style={screeningTrackingStyles.detailRow}>
+                    <Text style={screeningTrackingStyles.detailLabel}>Last Screening:</Text>
+                    <Text style={screeningTrackingStyles.detailValue}>{screening.lastScreening}</Text>
                   </View>
                 )}
                 {screening.nextDueDate && (
-                  <View style={styles.detailRow}>
-                    <Text style={styles.detailLabel}>Next Due:</Text>
-                    <Text style={[styles.detailValue, { color: getStatusColor(screening.status), fontWeight: '700' }]}>
+                  <View style={screeningTrackingStyles.detailRow}>
+                    <Text style={screeningTrackingStyles.detailLabel}>Next Due:</Text>
+                    <Text style={[screeningTrackingStyles.detailValue, { color: getStatusColor(screening.status), fontWeight: '700' }]}>
                       {screening.nextDueDate}
                     </Text>
                   </View>
                 )}
               </View>
-              <TouchableOpacity style={styles.actionButton} activeOpacity={0.8}>
-                <Text style={styles.actionButtonText}>
+              <TouchableOpacity style={screeningTrackingStyles.actionButton} activeOpacity={0.8}>
+                <Text style={screeningTrackingStyles.actionButtonText}>
                   {screening.status === 'completed' ? 'View Results' : 'Schedule Screening'}
                 </Text>
               </TouchableOpacity>
@@ -233,178 +238,6 @@ const ScreeningTracking: React.FC<ScreeningTrackingProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F8F8F8',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: 100,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#E91E63',
-    padding: 20,
-    paddingTop: 20,
-    marginBottom: 0,
-  },
-  backButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: 'white',
-  },
-  headerContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 5,
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: 'white',
-    opacity: 0.9,
-  },
-  headerSpacer: {
-    width: 35,
-  },
-  summaryCard: {
-    backgroundColor: '#E91E63',
-    borderRadius: 20,
-    padding: 20,
-    margin: 20,
-    marginBottom: 15,
-    shadowColor: '#E91E63',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 5,
-  },
-  summaryTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: 'white',
-    marginBottom: 15,
-  },
-  summaryStats: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  statItem: {
-    alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: 32,
-    fontWeight: '800',
-    color: 'white',
-    marginBottom: 5,
-  },
-  statLabel: {
-    fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
-    fontWeight: '600',
-  },
-  screeningsContainer: {
-    padding: 20,
-    gap: 15,
-  },
-  screeningCard: {
-    backgroundColor: 'white',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: '#E91E63',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 15,
-    elevation: 5,
-  },
-  screeningHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-    gap: 15,
-  },
-  screeningIcon: {
-    width: 60,
-    height: 60,
-    backgroundColor: '#FCE4EC',
-    borderRadius: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  screeningIconText: {
-    fontSize: 30,
-  },
-  screeningInfo: {
-    flex: 1,
-  },
-  screeningName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 6,
-  },
-  statusBadge: {
-    alignSelf: 'flex-start',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-  },
-  statusText: {
-    fontSize: 11,
-    fontWeight: '700',
-  },
-  screeningDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-    marginBottom: 15,
-  },
-  screeningDetails: {
-    marginBottom: 15,
-    gap: 8,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  detailLabel: {
-    fontSize: 13,
-    color: '#666',
-  },
-  detailValue: {
-    fontSize: 13,
-    color: '#333',
-    fontWeight: '600',
-  },
-  actionButton: {
-    backgroundColor: '#E91E63',
-    paddingVertical: 12,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  actionButtonText: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
 
 export default ScreeningTracking;
 

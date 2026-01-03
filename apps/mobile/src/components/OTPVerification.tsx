@@ -4,10 +4,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   StatusBar,
 } from 'react-native';
+import {
+  containerStyles,
+  headerStyles,
+  formStyles,
+  buttons,
+  iconStyles,
+  otpVerificationStyles,
+} from '../styles';
 
 interface OTPVerificationProps {
   navigation?: any;
@@ -73,48 +80,48 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.container}>
       <StatusBar barStyle="dark-content" />
       <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        style={containerStyles.scrollView}
+        contentContainerStyle={containerStyles.scrollContentSmall}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack || (() => navigation?.goBack())}>
-            <Text style={styles.backButtonText}>←</Text>
+        <View style={headerStyles.header}>
+          <TouchableOpacity style={headerStyles.backButton} onPress={onBack || (() => navigation?.goBack())}>
+            <Text style={headerStyles.backButtonText}>←</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Verify OTP</Text>
-          <View style={styles.headerSpacer} />
+          <Text style={headerStyles.headerTitle}>Verify OTP</Text>
+          <View style={headerStyles.headerSpacer} />
         </View>
 
         {/* Progress Bar */}
-        <View style={styles.progressBar}>
-          <View style={[styles.progressFill, { width: '66%' }]} />
+        <View style={formStyles.progressBar}>
+          <View style={[formStyles.progressFill, { width: '66%' }]} />
         </View>
 
         {/* OTP Illustration */}
-        <View style={styles.otpIllustration}>
-          <View style={styles.otpIcon}>
-            <Text style={styles.otpIconText}>📱</Text>
+        <View style={otpVerificationStyles.otpIllustration}>
+          <View style={iconStyles.iconContainerExtraLarge}>
+            <Text style={iconStyles.iconTextExtraLarge}>📱</Text>
           </View>
         </View>
 
         {/* Title */}
-        <Text style={styles.sectionTitle}>Enter verification code</Text>
-        <Text style={styles.otpMessage}>
+        <Text style={headerStyles.sectionTitleLarge}>Enter verification code</Text>
+        <Text style={otpVerificationStyles.otpMessage}>
           We've sent a 6-digit code to{'\n'}
-          <Text style={styles.otpNumber}>{phoneNumber}</Text>
+          <Text style={otpVerificationStyles.otpNumber}>{phoneNumber}</Text>
         </Text>
 
         {/* OTP Inputs */}
-        <View style={styles.otpInputs}>
+        <View style={formStyles.otpInputs}>
           {otp.map((digit, index) => (
             <TextInput
               key={index}
               ref={(ref) => (inputRefs.current[index] = ref)}
-              style={styles.otpDigit}
+              style={formStyles.otpDigit}
               value={digit}
               onChangeText={(value) => handleOtpChange(value, index)}
               onKeyPress={(e) => handleKeyPress(e, index)}
@@ -126,176 +133,33 @@ const OTPVerification: React.FC<OTPVerificationProps> = ({
         </View>
 
         {/* Resend Section */}
-        <View style={styles.resendSection}>
-          <Text style={styles.resendText}>Didn't receive the code?</Text>
+        <View style={otpVerificationStyles.resendSection}>
+          <Text style={otpVerificationStyles.resendText}>Didn't receive the code?</Text>
           <TouchableOpacity onPress={handleResend} disabled={resendTimer > 0}>
-            <Text style={[styles.resendBtn, resendTimer > 0 && styles.resendBtnDisabled]}>
+            <Text style={[otpVerificationStyles.resendBtn, resendTimer > 0 && otpVerificationStyles.resendBtnDisabled]}>
               Resend OTP {resendTimer > 0 ? `(00:${resendTimer.toString().padStart(2, '0')})` : ''}
             </Text>
           </TouchableOpacity>
         </View>
 
         {/* Button */}
-        <View style={styles.btnContainer}>
+        <View style={otpVerificationStyles.btnContainer}>
           <TouchableOpacity
             style={[
-              styles.btn,
-              styles.btnPrimary,
-              otp.join('').length !== 6 && styles.btnDisabled,
+              buttons.buttonFullWidth,
+              buttons.primaryButton,
+              otp.join('').length !== 6 && buttons.disabledButton,
             ]}
             onPress={() => handleVerify()}
             disabled={otp.join('').length !== 6}
           >
-            <Text style={styles.btnText}>Verify & Continue</Text>
+            <Text style={buttons.primaryButtonText}>Verify & Continue</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF5F7',
-  },
-  scrollView: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: 20,
-    paddingTop: 60,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F5F5F5',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  backButtonText: {
-    fontSize: 20,
-    color: '#333',
-  },
-  headerTitle: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  headerSpacer: {
-    width: 40,
-  },
-  progressBar: {
-    height: 4,
-    backgroundColor: '#F0F0F0',
-    borderRadius: 2,
-    marginBottom: 30,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#E91E63',
-    borderRadius: 2,
-  },
-  otpIllustration: {
-    alignItems: 'center',
-    marginVertical: 40,
-  },
-  otpIcon: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: '#E91E63',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  },
-  otpIconText: {
-    fontSize: 60,
-  },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#333',
-    marginBottom: 12,
-  },
-  otpMessage: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: 40,
-  },
-  otpNumber: {
-    color: '#E91E63',
-    fontWeight: '700',
-  },
-  otpInputs: {
-    flexDirection: 'row',
-    gap: 12,
-    justifyContent: 'center',
-    marginVertical: 40,
-  },
-  otpDigit: {
-    width: 56,
-    height: 64,
-    borderRadius: 16,
-    borderWidth: 2,
-    borderColor: '#E0E0E0',
-    textAlign: 'center',
-    fontSize: 24,
-    fontWeight: '700',
-    backgroundColor: 'white',
-    color: '#333',
-  },
-  resendSection: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  resendText: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 12,
-  },
-  resendBtn: {
-    color: '#E91E63',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  resendBtnDisabled: {
-    opacity: 0.5,
-  },
-  btnContainer: {
-    marginTop: 20,
-    paddingTop: 20,
-  },
-  btn: {
-    width: '100%',
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnPrimary: {
-    backgroundColor: '#E91E63',
-  },
-  btnDisabled: {
-    opacity: 0.5,
-  },
-  btnText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: 'white',
-  },
-});
 
 export default OTPVerification;
 
