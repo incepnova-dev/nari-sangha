@@ -43,7 +43,7 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
         navigation?.navigate('HospitalListing');
         break;
       case 'diseases':
-        navigation?.navigate('DiseaseListing');
+        navigation?.navigate('KnowledgeHub');
         break;
       default:
         console.log('Selected option:', selectedOption);
@@ -203,7 +203,7 @@ const DiscoverOptions: React.FC<DiscoverOptionsProps> = ({
             <View style={styles.optionHeader}>
               <Text style={styles.optionIcon}>🩺</Text>
               <View style={styles.optionInfo}>
-                <Text style={styles.optionName}>Diseases</Text>
+                <Text style={styles.optionName}>Health Knowledge Hub</Text>
                 <Text style={styles.optionSubtext}>Health Conditions & Information</Text>
               </View>
             </View>

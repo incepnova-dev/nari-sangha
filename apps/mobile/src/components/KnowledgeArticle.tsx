@@ -10,9 +10,10 @@ import {
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
 
-interface DiseaseDetailsProps {
+interface KnowledgeArticleProps {
   navigation?: any;
   user?: any;
+  onSignOut?: () => void;
   onBack?: () => void;
   diseaseId?: string;
   diseaseName?: string;
@@ -22,9 +23,10 @@ interface DiseaseDetailsProps {
   diseasePrevalence?: string;
 }
 
-const DiseaseDetails: React.FC<DiseaseDetailsProps> = ({
+const KnowledgeArticle: React.FC<KnowledgeArticleProps> = ({
   navigation,
   user,
+  onSignOut,
   onBack,
   diseaseId,
   diseaseName = 'Polycystic Ovary Syndrome (PCOS)',
@@ -647,5 +649,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DiseaseDetails;
+export default KnowledgeArticle;
 

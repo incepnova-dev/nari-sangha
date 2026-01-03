@@ -27,12 +27,15 @@ import DiscoverOptions from '../DiscoverOptions';
 import ClinicListing from '../ClinicListing';
 import DoctorListing from '../DoctorListing';
 import HospitalListing from '../HospitalListing';
-import DiseaseListing from '../DiseaseListing';
-import DiseaseDetails from '../DiseaseDetails';
+import KnowledgeHub from '../KnowledgeHub';
+import KnowledgeArticle from '../KnowledgeArticle';
+import ExpertAdviceListing from '../ExpertAdviceListing';
 import TrackOptions from '../TrackOptions';
 import VaccineTracking from '../VaccineTracking';
 import ScreeningTracking from '../ScreeningTracking';
 import CycleTracking from '../CycleTracking';
+import WomenStories from '../WomenStories';
+import ResearchArticles from '../ResearchArticles';
 
 type RouteName =
   | 'Welcome'
@@ -62,12 +65,15 @@ type RouteName =
   | 'ClinicListing'
   | 'DoctorListing'
   | 'HospitalListing'
-  | 'DiseaseListing'
-  | 'DiseaseDetails'
+  | 'KnowledgeHub'
+  | 'KnowledgeArticle'
+  | 'ExpertAdviceListing'
   | 'TrackOptions'
   | 'VaccineTracking'
   | 'ScreeningTracking'
-  | 'CycleTracking';
+  | 'CycleTracking'
+  | 'WomenStories'
+  | 'ResearchArticles';
 
 interface RoutesProps {
   initialRoute?: RouteName;
@@ -137,12 +143,15 @@ const Routes: React.FC<RoutesProps> = ({
         ClinicListing: 'DiscoverOptions',
         DoctorListing: 'DiscoverOptions',
         HospitalListing: 'DiscoverOptions',
-        DiseaseListing: 'DiscoverOptions',
-        DiseaseDetails: 'DiseaseListing',
+        KnowledgeHub: 'DiscoverOptions',
+        KnowledgeArticle: 'KnowledgeHub',
+        ExpertAdviceListing: 'HomeLanding',
         TrackOptions: 'HomeLanding',
         VaccineTracking: 'TrackOptions',
         ScreeningTracking: 'TrackOptions',
         CycleTracking: 'TrackOptions',
+        WomenStories: 'HomeLanding',
+        ResearchArticles: 'HomeLanding',
       };
       setCurrentRoute(backRoutes[currentRoute] || 'Welcome');
     },
@@ -423,17 +432,17 @@ const Routes: React.FC<RoutesProps> = ({
             user={user}
           />
         );
-      case 'DiseaseListing':
+      case 'KnowledgeHub':
         return (
-          <DiseaseListing
+          <KnowledgeHub
             navigation={navigation}
             user={user}
             onSignOut={handleSignOut}
           />
         );
-      case 'DiseaseDetails':
+      case 'KnowledgeArticle':
         return (
-          <DiseaseDetails
+          <KnowledgeArticle
             navigation={navigation}
             user={user}
             onSignOut={handleSignOut}
@@ -443,6 +452,14 @@ const Routes: React.FC<RoutesProps> = ({
             diseaseDescription={routeParams.diseaseDescription}
             diseaseSymptoms={routeParams.diseaseSymptoms}
             diseasePrevalence={routeParams.diseasePrevalence}
+          />
+        );
+      case 'ExpertAdviceListing':
+        return (
+          <ExpertAdviceListing
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
           />
         );
       case 'TrackOptions':
@@ -475,6 +492,22 @@ const Routes: React.FC<RoutesProps> = ({
       case 'CycleTracking':
         return (
           <CycleTracking
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
+          />
+        );
+      case 'WomenStories':
+        return (
+          <WomenStories
+            navigation={navigation}
+            user={user}
+            onSignOut={handleSignOut}
+          />
+        );
+      case 'ResearchArticles':
+        return (
+          <ResearchArticles
             navigation={navigation}
             user={user}
             onSignOut={handleSignOut}

@@ -21,14 +21,14 @@ interface Disease {
   prevalence: string;
 }
 
-interface DiseaseListingProps {
+interface KnowledgeHubProps {
   navigation?: any;
   user?: any;
   onSignOut?: () => void;
   onBack?: () => void;
 }
 
-const DiseaseListing: React.FC<DiseaseListingProps> = ({
+const KnowledgeHub: React.FC<KnowledgeHubProps> = ({
   navigation,
   user,
   onSignOut,
@@ -119,7 +119,7 @@ const DiseaseListing: React.FC<DiseaseListingProps> = ({
             <Text style={styles.backButtonText}>←</Text>
           </TouchableOpacity>
           <View style={styles.headerContent}>
-            <Text style={styles.headerTitle}>Diseases & Conditions</Text>
+            <Text style={styles.headerTitle}>Health Knowledge Hub</Text>
             <Text style={styles.headerSubtitle}>Health information and resources</Text>
           </View>
           <View style={styles.headerSpacer} />
@@ -170,7 +170,7 @@ const DiseaseListing: React.FC<DiseaseListingProps> = ({
                 style={styles.learnMoreBtn}
                 activeOpacity={0.8}
                 onPress={() => {
-                  navigation?.navigate('DiseaseDetails', {
+                  navigation?.navigate('KnowledgeArticle', {
                     diseaseId: disease.id,
                     diseaseName: disease.name,
                     diseaseCategory: disease.category,
@@ -377,5 +377,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DiseaseListing;
+export default KnowledgeHub;
 

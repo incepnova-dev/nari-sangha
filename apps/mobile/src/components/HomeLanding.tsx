@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
-  TextInput,
+  Linking,
 } from 'react-native';
 import WelcomeHeader from './WelcomeHeader';
 import BottomMenuBar from './BottomMenuBar';
@@ -21,25 +21,27 @@ interface HomeLandingProps {
 }
 
 interface Story {
-  category: string;
   icon: string;
   title: string;
+  subtitle: string;
   description: string;
-  author: string;
-  readTime: string;
-}
-
-interface Condition {
-  icon: string;
-  name: string;
-  description: string;
-  tags: { text: string; type: 'pink' | 'green' | 'orange' }[];
+  theme: 'pregnancy' | 'reproductive' | 'perimenopause' | 'menopause';
 }
 
 interface Research {
   title: string;
   authors: string;
   journal: string;
+  url?: string;
+}
+
+interface Video {
+  title: string;
+  channel: string;
+  views: string;
+  duration: string;
+  thumbnail: string;
+  url: string;
 }
 
 interface Product {
@@ -61,6 +63,13 @@ interface Insurance {
   period: string;
 }
 
+interface Condition {
+  icon: string;
+  name: string;
+  description: string;
+  tags: { text: string; type: 'pink' | 'green' | 'orange' }[];
+}
+
 const HomeLanding: React.FC<HomeLandingProps> = ({
   navigation,
   user,
@@ -75,20 +84,197 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 
   const stories: Story[] = [
     {
-      category: 'Wellness',
-      icon: '🌸',
-      title: 'PCOS Management: A Holistic Approach',
-      description: 'Understanding polycystic ovary syndrome and effective lifestyle strategies for better hormone balance...',
-      author: 'Dr. Priya Sharma',
-      readTime: '6 min read',
+      icon: '🤰',
+      title: 'Pregnancy Journey',
+      subtitle: 'Nurturing new life, embracing transformation',
+      description: '"Every kick, every flutter reminds me of the miracle within. Pregnancy isn\'t just about growing a baby—it\'s about discovering strength you never knew you had. From morning sickness to that first heartbeat, every moment is precious. You\'re not just expecting a baby; you\'re becoming a superhero."',
+      theme: 'pregnancy',
     },
     {
-      category: 'Pregnancy',
+      icon: '🌸',
+      title: 'Reproductive Health',
+      subtitle: 'Understanding your body, owning your choices',
+      description: '"Your reproductive health is your power. Whether managing PCOS, planning a family, or simply understanding your cycle better—knowledge is empowerment. Regular checkups, honest conversations with your doctor, and listening to your body are acts of self-love. You deserve care, understanding, and respect."',
+      theme: 'reproductive',
+    },
+    {
+      icon: '🌅',
+      title: 'Perimenopause Transition',
+      subtitle: 'The bridge to a new chapter of vitality',
+      description: '"Hot flashes? Mood swings? Welcome to the transition that no one talks about enough! Perimenopause is your body\'s way of preparing for wisdom years. It\'s not an ending—it\'s a transformation. Stay active, eat well, seek support, and remember: this phase brings clarity, confidence, and freedom you\'ve been working toward your whole life."',
+      theme: 'perimenopause',
+    },
+    {
+      icon: '🦋',
+      title: 'Menopause & Beyond',
+      subtitle: 'Celebrating wisdom, strength, and new beginnings',
+      description: '"Menopause is your body\'s way of saying: \'You\'ve done enough caregiving for others—now it\'s YOUR time!\' No more periods, no pregnancy worries, just pure freedom to focus on YOU. This is when many women start businesses, travel the world, or finally pursue that dream. Bone health, heart health, and mental wellness become priorities. You\'re not aging—you\'re ascending!"',
+      theme: 'menopause',
+    },
+  ];
+
+  const research: Research[] = [
+    {
+      title: 'Advances in Management of Obesity, Menopause, and Osteoporosis',
+      authors: 'JAMA Network Research Team',
+      journal: 'JAMA Women\'s Health • 2025',
+      url: 'https://jamanetwork.com/collections/42139/womens-health',
+    },
+    {
+      title: 'New Directions For Women\'s Health: Expanding Understanding and Research',
+      authors: 'Health Affairs Research Initiative',
+      journal: 'Health Affairs • January 2025',
+      url: 'https://www.healthaffairs.org/doi/10.1377/hlthaff.2024.01004',
+    },
+    {
+      title: 'Closing the Women\'s Health Gap: Diagnostic Delays and Tailored Treatments',
+      authors: 'American Society for Microbiology',
+      journal: 'ASM Research • May 2025',
+      url: 'https://asm.org/articles/2025/may/closing-the-women-s-health-gap',
+    },
+    {
+      title: 'A New Vision for Women\'s Health Research Across NIH',
+      authors: 'National Academies of Sciences',
+      journal: 'National Academies Press • December 2024',
+      url: 'https://www.nationalacademies.org/projects/HMD-BPH-23-04/publication/28586',
+    },
+    {
+      title: 'Single-Dose HPV Vaccine: Breakthrough in Cervical Cancer Prevention',
+      authors: 'Gates Foundation Research',
+      journal: 'Women\'s Health Technology • 2024',
+    },
+  ];
+
+  const videos: Video[] = [
+    {
+      title: 'The Science of Women\'s Health: Ob/Gyn Reveals 10 Truths You Need to Know',
+      channel: 'Mel Robbins • Expert Interview',
+      views: '210K views',
+      duration: '1:07:13',
+      thumbnail: 'https://i.ytimg.com/vi/7KX2x0d42EE/hq720.jpg',
+      url: 'https://www.youtube.com/watch?v=7KX2x0d42EE',
+    },
+    {
+      title: '5 Things Your Gynecologist Wants You To Know: Getting Pregnant',
+      channel: 'Mama Doctor Jones • Board Certified ObGyn',
+      views: '1.2M views',
+      duration: '10:29',
+      thumbnail: 'https://i.ytimg.com/vi/EkqVrsrIgAI/hq720.jpg',
+      url: 'https://www.youtube.com/watch?v=EkqVrsrIgAI',
+    },
+  ];
+
+  const products: Product[] = [
+    {
+      icon: '💊',
+      name: 'Prenatal Vitamins',
+      brand: 'HealthPlus',
+      price: '₹349',
+      originalPrice: '₹499',
+      discount: '30% OFF',
+      vendors: [
+        { icon: '🛒', name: 'Amazon' },
+        { icon: '🏥', name: '1mg' },
+      ],
+    },
+    {
+      icon: '💊',
+      name: 'Menstrual Pain Relief',
+      brand: 'WellnessRx',
+      price: '₹225',
+      originalPrice: '₹300',
+      discount: '25% OFF',
+      vendors: [
+        { icon: '🛒', name: 'Flipkart' },
+        { icon: '🏥', name: 'Netmeds' },
+      ],
+    },
+    {
+      icon: '🧘‍♀️',
+      name: 'Yoga Mat Premium',
+      brand: 'FitLife',
+      price: '₹599',
+      originalPrice: '₹999',
+      discount: '40% OFF',
+      vendors: [
+        { icon: '🛒', name: 'Amazon' },
+        { icon: '👗', name: 'Myntra' },
+      ],
+    },
+    {
+      icon: '💊',
+      name: 'Iron Supplements',
+      brand: 'NutriCare',
+      price: '₹299',
+      originalPrice: '₹459',
+      discount: '35% OFF',
+      vendors: [
+        { icon: '🏥', name: '1mg' },
+        { icon: '🏥', name: 'PharmEasy' },
+      ],
+    },
+    {
+      icon: '🌡️',
+      name: 'Digital Thermometer',
+      brand: 'MediTech',
+      price: '₹399',
+      originalPrice: '₹499',
+      discount: '20% OFF',
+      vendors: [
+        { icon: '🛒', name: 'Amazon' },
+        { icon: '🏥', name: '1mg' },
+      ],
+    },
+    {
+      icon: '🩸',
+      name: 'Calcium + Vitamin D',
+      brand: 'BoneStrong',
+      price: '₹349',
+      originalPrice: '₹635',
+      discount: '45% OFF',
+      vendors: [
+        { icon: '🏥', name: 'Netmeds' },
+        { icon: '🏥', name: 'PharmEasy' },
+      ],
+    },
+  ];
+
+  const insurancePlans: Insurance[] = [
+    {
+      icon: '🏥',
+      name: "Women's Health Shield",
+      provider: 'Star Health Insurance',
+      features: [
+        'Maternity coverage up to ₹2L',
+        'Cancer treatment covered',
+        'Annual health checkup included',
+      ],
+      price: '₹8,999',
+      period: 'per year',
+    },
+    {
       icon: '🤰',
-      title: 'Navigating Your First Trimester: Expert Tips',
-      description: 'Essential nutrition, wellness practices, and what to expect during your first 12 weeks of pregnancy...',
-      author: 'Dr. Sarah Williams',
-      readTime: '8 min read',
+      name: 'Maternity Care Plus',
+      provider: 'ICICI Lombard',
+      features: [
+        'Pre & post natal coverage',
+        'Newborn baby cover (90 days)',
+        'Ambulance charges covered',
+      ],
+      price: '₹12,499',
+      period: 'per year',
+    },
+    {
+      icon: '🩺',
+      name: "Complete Women's Wellness",
+      provider: 'Max Bupa Health Insurance',
+      features: [
+        'PCOS & Thyroid treatment covered',
+        'Fertility consultations included',
+        'Mental health support covered',
+      ],
+      price: '₹10,999',
+      period: 'per year',
     },
   ];
 
@@ -104,7 +290,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       ],
     },
     {
-      icon: '🎀',
+      icon: '🎗️',
       name: 'Breast Cancer',
       description: 'Cancer that forms in breast cells. Early detection through regular screening significantly improves outcomes.',
       tags: [
@@ -114,7 +300,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       ],
     },
     {
-      icon: '🤰',
+      icon: '💢',
       name: 'Endometriosis',
       description: 'Tissue similar to uterine lining grows outside the uterus, causing pain and fertility issues.',
       tags: [
@@ -124,119 +310,6 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
       ],
     },
   ];
-
-  const trendingTopics = [
-    'Endometriosis',
-    'Breast Health',
-    'Fertility',
-    'Thyroid Disorders',
-    'Prenatal Care',
-    'Menstrual Health',
-    'Bone Health',
-    'Reproductive Rights',
-  ];
-
-  const research: Research[] = [
-    {
-      title: 'Impact of Mediterranean Diet on PCOS Outcomes',
-      authors: 'Johnson M., et al.',
-      journal: 'Journal of Women\'s Health • Dec 2024',
-    },
-    {
-      title: 'Novel Biomarkers for Early Detection of Ovarian Cancer',
-      authors: 'Chen L., Rodriguez A., Singh K.',
-      journal: 'Nature Medicine • Nov 2024',
-    },
-    {
-      title: 'Postpartum Depression: AI-Assisted Screening Models',
-      authors: 'Williams R., Thompson S.',
-      journal: 'JAMA Psychiatry • Dec 2024',
-    },
-    {
-      title: 'Exercise Interventions for Menopausal Bone Health',
-      authors: 'Davis K., et al.',
-      journal: 'The Lancet • Nov 2024',
-    },
-  ];
-
-  const products: Product[] = [
-    {
-      icon: '🧴',
-      name: 'Prenatal Vitamins',
-      brand: 'HealthPlus',
-      price: '₹349',
-      originalPrice: '₹499',
-      discount: '30% OFF',
-      vendors: [
-        { icon: '🛒', name: 'Amazon' },
-        { icon: '📞', name: '1mg' },
-      ],
-    },
-    {
-      icon: '🩺',
-      name: 'Menstrual Pain Relief',
-      brand: 'WellnessRx',
-      price: '₹225',
-      originalPrice: '₹300',
-      discount: '25% OFF',
-      vendors: [
-        { icon: '🛒', name: 'Flipkart' },
-        { icon: '📞', name: 'Netmeds' },
-      ],
-    },
-    {
-      icon: '🧘‍♀️',
-      name: 'Yoga Mat Premium',
-      brand: 'FitLife',
-      price: '₹599',
-      originalPrice: '₹999',
-      discount: '40% OFF',
-      vendors: [
-        { icon: '🛒', name: 'Amazon' },
-        { icon: '📞', name: 'Myntra' },
-      ],
-    },
-    {
-      icon: '💊',
-      name: 'Iron Supplements',
-      brand: 'NutriCare',
-      price: '₹299',
-      originalPrice: '₹459',
-      discount: '35% OFF',
-      vendors: [
-        { icon: '🛒', name: '1mg' },
-        { icon: '📞', name: 'PharmEasy' },
-      ],
-    },
-  ];
-
-  const insurancePlans: Insurance[] = [
-    {
-      icon: '🛡️',
-      name: "Women's Health Shield",
-      provider: 'Star Health Insurance',
-      features: [
-        'Maternity coverage up to ₹2L',
-        'Cancer treatment covered',
-        'Annual health checkup included',
-      ],
-      price: '₹8,999',
-      period: 'per year',
-    },
-    {
-      icon: '💖',
-      name: 'Maternity Care Plus',
-      provider: 'ICICI Lombard',
-      features: [
-        'Pre & post natal coverage',
-        'Newborn baby cover (90 days)',
-        'Ambulance charges covered',
-      ],
-      price: '₹12,499',
-      period: 'per year',
-    },
-  ];
-
 
   const handleNavigate = (screen: 'home' | 'discover' | 'track' | 'products') => {
     if (screen === 'products') {
@@ -258,6 +331,32 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 
   const handleProductsOption = () => {
     navigation?.navigate('ProductsOption');
+  };
+
+  const handleOpenUrl = async (url: string) => {
+    try {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+      }
+    } catch (error) {
+      console.error('Error opening URL:', error);
+    }
+  };
+
+  const getStoryThemeStyle = (theme: string) => {
+    switch (theme) {
+      case 'pregnancy':
+        return styles.storyCardPregnancy;
+      case 'reproductive':
+        return styles.storyCardReproductive;
+      case 'perimenopause':
+        return styles.storyCardPerimenopause;
+      case 'menopause':
+        return styles.storyCardMenopause;
+      default:
+        return {};
+    }
   };
 
   return (
@@ -286,8 +385,11 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
         onQuickActionPress={(actionId) => {
           if (actionId === 'shop') {
             handleProductsOption();
+          } else if (actionId === 'hospitals') {
+            navigation?.navigate('HospitalListing');
+          } else if (actionId === 'doctors') {
+            navigation?.navigate('DoctorListing');
           }
-          // Handle other actions as needed
         }}
       />
 
@@ -296,7 +398,6 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-
         {/* Content Section */}
         <View style={styles.contentSection}>
           {/* AI Chatbot Banner */}
@@ -311,96 +412,80 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
           {/* Women's Health Stories */}
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Women's Health Stories</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation?.navigate('WomenStories')}>
               <Text style={styles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
           {stories.map((story, index) => (
-            <TouchableOpacity key={index} style={styles.storyCard} activeOpacity={0.8}>
-              <View style={styles.storyCategory}>
-                <Text style={styles.storyCategoryText}>{story.category}</Text>
-              </View>
-              <View style={styles.storyContent}>
-                <Text style={styles.storyIcon}>{story.icon}</Text>
-                <View style={styles.storyText}>
-                  <Text style={styles.storyTitle}>{story.title}</Text>
-                  <Text style={styles.storyDescription}>{story.description}</Text>
-                  <View style={styles.storyFooter}>
-                    <Text style={styles.storyAuthor}>{story.author}</Text>
-                    <Text style={styles.storyReadTime}>⏱ {story.readTime}</Text>
-                  </View>
-                </View>
-              </View>
+            <TouchableOpacity
+              key={index}
+              style={[styles.storyCard, getStoryThemeStyle(story.theme)]}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.storyIcon}>{story.icon}</Text>
+              <Text style={styles.storyTitle}>{story.title}</Text>
+              <Text style={styles.storySubtitle}>{story.subtitle}</Text>
+              <Text style={styles.storyDescription}>{story.description}</Text>
             </TouchableOpacity>
           ))}
-
-          {/* Health Conditions Guide */}
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Health Conditions Guide</Text>
-            <TouchableOpacity>
-              <Text style={styles.seeAllBtn}>View All 20 →</Text>
-            </TouchableOpacity>
-          </View>
-
-          {conditions.map((condition, index) => (
-            <TouchableOpacity key={index} style={styles.conditionCard} activeOpacity={0.8}>
-              <View style={styles.conditionHeader}>
-                <View style={styles.conditionIcon}>
-                  <Text style={styles.conditionIconText}>{condition.icon}</Text>
-                </View>
-                <Text style={styles.conditionName}>{condition.name}</Text>
-              </View>
-              <Text style={styles.conditionDescription}>{condition.description}</Text>
-              <View style={styles.conditionTags}>
-                {condition.tags.map((tag, tIndex) => (
-                  <View
-                    key={tIndex}
-                    style={[
-                      styles.tag,
-                      tag.type === 'pink' && styles.tagPink,
-                      tag.type === 'green' && styles.tagGreen,
-                      tag.type === 'orange' && styles.tagOrange,
-                    ]}
-                  >
-                    <Text style={styles.tagText}>{tag.text}</Text>
-                  </View>
-                ))}
-              </View>
-            </TouchableOpacity>
-          ))}
-
-          {/* Trending Library Topics */}
-          <View style={styles.libraryTopics}>
-            <Text style={styles.libraryHeader}>🔥 Trending Library Topics</Text>
-            <View style={styles.topicChips}>
-              {trendingTopics.map((topic, index) => (
-                <TouchableOpacity key={index} style={styles.topicChip} activeOpacity={0.7}>
-                  <Text style={styles.topicChipText}>{topic}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
 
           {/* Latest Research */}
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Latest Research 📚</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation?.navigate('ResearchArticles')}>
               <Text style={styles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
           </View>
 
           {research.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.researchCard} activeOpacity={0.8}>
+            <TouchableOpacity
+              key={index}
+              style={styles.researchCard}
+              activeOpacity={0.8}
+              onPress={() => item.url && handleOpenUrl(item.url)}
+            >
               <Text style={styles.researchTitle}>{item.title}</Text>
               <Text style={styles.researchAuthors}>{item.authors}</Text>
               <Text style={styles.researchJournal}>{item.journal}</Text>
             </TouchableOpacity>
           ))}
 
+          {/* Expert Gynecologist Videos */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Expert Advice 🎥</Text>
+            <TouchableOpacity onPress={() => navigation?.navigate('ExpertAdviceListing')}>
+              <Text style={styles.seeAllBtn}>Explore</Text>
+            </TouchableOpacity>
+          </View>
+
+          {videos.map((video, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.videoCard}
+              activeOpacity={0.8}
+              onPress={() => handleOpenUrl(video.url)}
+            >
+              <View style={styles.videoThumbnail}>
+                <Text style={styles.videoThumbnailPlaceholder}>🎥</Text>
+                <View style={styles.playButton}>
+                  <Text style={styles.playButtonText}>▶</Text>
+                </View>
+              </View>
+              <View style={styles.videoContent}>
+                <Text style={styles.videoTitle}>{video.title}</Text>
+                <Text style={styles.videoChannel}>{video.channel}</Text>
+                <View style={styles.videoStats}>
+                  <Text style={styles.videoStat}>👁️ {video.views}</Text>
+                  <Text style={styles.videoStat}>⏱️ {video.duration}</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
+
           {/* Healthcare Products */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Healthcare Products</Text>
+            <Text style={styles.sectionTitle}>Healthcare Products 💊</Text>
             <TouchableOpacity onPress={handleProductsOption}>
               <Text style={styles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
@@ -433,7 +518,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 
           {/* Insurance Plans */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Insurance Plans</Text>
+            <Text style={styles.sectionTitle}>Insurance Plans 🛡️</Text>
             <TouchableOpacity onPress={() => navigation?.navigate('ProductsOption')}>
               <Text style={styles.seeAllBtn}>See All →</Text>
             </TouchableOpacity>
@@ -471,6 +556,41 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
                 <TouchableOpacity style={styles.viewDetailsBtn} activeOpacity={0.8}>
                   <Text style={styles.viewDetailsBtnText}>View Details</Text>
                 </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          ))}
+
+          {/* Health Conditions Guide */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Health Knowledge Hub</Text>
+            <TouchableOpacity onPress={() => navigation?.navigate('KnowledgeHub')}>
+              <Text style={styles.seeAllBtn}>Explore</Text>
+            </TouchableOpacity>
+          </View>
+
+          {conditions.map((condition, index) => (
+            <TouchableOpacity key={index} style={styles.conditionCard} activeOpacity={0.8}>
+              <View style={styles.conditionHeader}>
+                <View style={styles.conditionIcon}>
+                  <Text style={styles.conditionIconText}>{condition.icon}</Text>
+                </View>
+                <Text style={styles.conditionName}>{condition.name}</Text>
+              </View>
+              <Text style={styles.conditionDescription}>{condition.description}</Text>
+              <View style={styles.conditionTags}>
+                {condition.tags.map((tag, tIndex) => (
+                  <View
+                    key={tIndex}
+                    style={[
+                      styles.tag,
+                      tag.type === 'pink' && styles.tagPink,
+                      tag.type === 'green' && styles.tagGreen,
+                      tag.type === 'orange' && styles.tagOrange,
+                    ]}
+                  >
+                    <Text style={styles.tagText}>{tag.text}</Text>
+                  </View>
+                ))}
               </View>
             </TouchableOpacity>
           ))}
@@ -515,7 +635,7 @@ const HomeLanding: React.FC<HomeLandingProps> = ({
 
             <View style={styles.footerBottom}>
               <Text style={styles.footerBottomText}>© 2024 Seva Health Network. All rights reserved.</Text>
-              <Text style={styles.footerBottomText}>Committed to your health and privacy</Text>
+              <Text style={styles.footerBottomText}>Committed to your health and privacy 💗</Text>
             </View>
           </View>
         </View>
@@ -594,9 +714,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   storyCard: {
-    backgroundColor: '#FFF5F7',
     borderRadius: 20,
-    padding: 25,
+    padding: 30,
+    paddingHorizontal: 25,
     marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -604,150 +724,42 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 4,
   },
-  storyCategory: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#E91E63',
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    marginBottom: 15,
-  },
-  storyCategoryText: {
-    color: 'white',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  storyContent: {
-    flexDirection: 'row',
-    gap: 20,
-    alignItems: 'flex-start',
-  },
-  storyIcon: {
-    fontSize: 48,
-  },
-  storyText: {
-    flex: 1,
-  },
-  storyTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#333',
-    marginBottom: 10,
-    lineHeight: 24,
-  },
-  storyDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 12,
-  },
-  storyFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 12,
-  },
-  storyAuthor: {
-    fontSize: 13,
-    color: '#666',
-    fontWeight: '500',
-  },
-  storyReadTime: {
-    fontSize: 12,
-    color: '#999',
-  },
-  conditionCard: {
-    backgroundColor: '#FFF8FB',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  conditionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 15,
-    marginBottom: 15,
-  },
-  conditionIcon: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  conditionIconText: {
-    fontSize: 28,
-  },
-  conditionName: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-    flex: 1,
-  },
-  conditionDescription: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 22,
-    marginBottom: 15,
-  },
-  conditionTags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  tag: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-  },
-  tagPink: {
-    backgroundColor: '#FFE5F0',
-  },
-  tagGreen: {
+  storyCardPregnancy: {
     backgroundColor: '#E8F5E9',
   },
-  tagOrange: {
+  storyCardReproductive: {
     backgroundColor: '#FFF3E0',
   },
-  tagText: {
-    fontSize: 12,
-    fontWeight: '600',
+  storyCardPerimenopause: {
+    backgroundColor: '#E3F2FD',
   },
-  libraryTopics: {
-    backgroundColor: '#FFF8FB',
-    borderRadius: 20,
-    padding: 25,
-    marginBottom: 30,
+  storyCardMenopause: {
+    backgroundColor: '#F3E5F5',
   },
-  libraryHeader: {
-    fontSize: 20,
+  storyIcon: {
+    fontSize: 50,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  storyTitle: {
+    fontSize: 22,
     fontWeight: '700',
     color: '#333',
-    marginBottom: 20,
+    marginBottom: 12,
+    textAlign: 'center',
   },
-  topicChips: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10,
-  },
-  topicChip: {
-    backgroundColor: 'white',
-    borderWidth: 2,
-    borderColor: '#E91E63',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-  },
-  topicChipText: {
-    color: '#E91E63',
+  storySubtitle: {
     fontSize: 14,
-    fontWeight: '600',
+    color: '#666',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    marginBottom: 15,
+  },
+  storyDescription: {
+    fontSize: 15,
+    color: '#555',
+    lineHeight: 24,
+    textAlign: 'center',
   },
   researchCard: {
     backgroundColor: 'white',
@@ -775,6 +787,64 @@ const styles = StyleSheet.create({
   },
   researchJournal: {
     fontSize: 12,
+    color: '#999',
+  },
+  videoCard: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    overflow: 'hidden',
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 4,
+  },
+  videoThumbnail: {
+    width: '100%',
+    height: 200,
+    backgroundColor: '#FFE5F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  videoThumbnailPlaceholder: {
+    fontSize: 60,
+  },
+  playButton: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    backgroundColor: 'rgba(233, 30, 99, 0.9)',
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  playButtonText: {
+    fontSize: 30,
+    color: 'white',
+  },
+  videoContent: {
+    padding: 20,
+  },
+  videoTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#333',
+    marginBottom: 8,
+    lineHeight: 24,
+  },
+  videoChannel: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 8,
+  },
+  videoStats: {
+    flexDirection: 'row',
+    gap: 15,
+  },
+  videoStat: {
+    fontSize: 13,
     color: '#999',
   },
   productGrid: {
@@ -938,6 +1008,69 @@ const styles = StyleSheet.create({
   viewDetailsBtnText: {
     color: '#E91E63',
     fontSize: 14,
+    fontWeight: '600',
+  },
+  conditionCard: {
+    backgroundColor: '#FFF8FB',
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  conditionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+    marginBottom: 15,
+  },
+  conditionIcon: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  conditionIconText: {
+    fontSize: 28,
+  },
+  conditionName: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#333',
+    flex: 1,
+  },
+  conditionDescription: {
+    fontSize: 14,
+    color: '#666',
+    lineHeight: 22,
+    marginBottom: 15,
+  },
+  conditionTags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  tag: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 15,
+  },
+  tagPink: {
+    backgroundColor: '#FFE5F0',
+  },
+  tagGreen: {
+    backgroundColor: '#E8F5E9',
+  },
+  tagOrange: {
+    backgroundColor: '#FFF3E0',
+  },
+  tagText: {
+    fontSize: 12,
     fontWeight: '600',
   },
   footer: {
