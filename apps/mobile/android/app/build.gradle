@@ -75,7 +75,14 @@ android {
 task generateAutolinkingJson(type: Exec) {
     description = 'Generate autolinking.json file'
     workingDir = rootProject.projectDir.parentFile
-    commandLine = ['node', 'scripts/generate-autolinking.js']
+
+    // Use configured Node executable if provided, otherwise fall back to 'node'
+    def nodeExecArgs = project.hasProperty("nodeExecutableAndArgs") ?
+            project.property("nodeExecutableAndArgs").toString().split(" ") :
+            ["node"]
+
+    commandLine = nodeExecArgs + ['scripts/generate-autolinking.js']
+
     doFirst {
         println "Generating autolinking.json..."
     }
