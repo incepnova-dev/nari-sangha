@@ -86,34 +86,34 @@ const ResearchArticles: React.FC<ResearchArticlesProps> = ({
   const getTagStyle = (type: string) => {
     switch (type) {
       case 'pink':
-        return styles.tagPink;
+        return researchArticlesStyles.tagPink;
       case 'purple':
-        return styles.tagPurple;
+        return researchArticlesStyles.tagPurple;
       case 'blue':
-        return styles.tagBlue;
+        return researchArticlesStyles.tagBlue;
       case 'green':
-        return styles.tagGreen;
+        return researchArticlesStyles.tagGreen;
       case 'orange':
-        return styles.tagOrange;
+        return researchArticlesStyles.tagOrange;
       default:
-        return styles.tagPink;
+        return researchArticlesStyles.tagPink;
     }
   };
 
   const getTagTextStyle = (type: string) => {
     switch (type) {
       case 'pink':
-        return styles.tagTextPink;
+        return researchArticlesStyles.tagTextPink;
       case 'purple':
-        return styles.tagTextPurple;
+        return researchArticlesStyles.tagTextPurple;
       case 'blue':
-        return styles.tagTextBlue;
+        return researchArticlesStyles.tagTextBlue;
       case 'green':
-        return styles.tagTextGreen;
+        return researchArticlesStyles.tagTextGreen;
       case 'orange':
-        return styles.tagTextOrange;
+        return researchArticlesStyles.tagTextOrange;
       default:
-        return styles.tagTextPink;
+        return researchArticlesStyles.tagTextPink;
     }
   };
 
