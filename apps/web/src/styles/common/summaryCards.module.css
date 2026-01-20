@@ -1,0 +1,62 @@
+/**
+ * Summary card styles - Responsive for mobile and desktop
+ */
+
+.summaryCard {
+  background-color: var(--color-primary);
+  border-radius: 20px;
+  padding: var(--spacing-xl);
+  margin: var(--spacing-xl);
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+}
+
+.summaryTitle {
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-white);
+  margin-bottom: 15px;
+}
+
+.summaryStats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 80px;
+}
+
+.statNumber {
+  font-size: 32px;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--text-white);
+  margin-bottom: 5px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .summaryCard {
+    margin: var(--spacing-lg);
+    padding: var(--spacing-lg);
+  }
+
+  .statNumber {
+    font-size: 28px;
+  }
+}
+

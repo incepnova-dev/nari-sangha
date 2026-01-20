@@ -1,0 +1,177 @@
+/**
+ * Form styles - Responsive for mobile and desktop
+ * Converted from apps/mobile/src/styles/common/forms.ts
+ */
+
+.formGroup {
+  margin-bottom: var(--spacing-xl);
+}
+
+.formLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.formInput {
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  border: 2px solid var(--border-medium);
+  padding: 0 var(--spacing-xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--bg-white);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  min-height: 44px; /* Touch-friendly */
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.formInputFocused {
+  border-color: var(--color-primary);
+}
+
+.phoneInputContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+}
+
+.countryCode {
+  width: 100px;
+  height: 56px;
+  border-radius: 16px;
+  border: 2px solid var(--border-medium);
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-white);
+  min-height: 44px;
+}
+
+.countryCodeText {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.passwordInputContainer {
+  position: relative;
+}
+
+.togglePassword {
+  position: absolute;
+  right: var(--spacing-xl);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.otpInputs {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin: calc(var(--spacing-xl) * 2) 0;
+  flex-wrap: wrap;
+}
+
+.otpDigit {
+  width: 56px;
+  height: 64px;
+  border-radius: 16px;
+  border: 2px solid var(--border-medium);
+  text-align: center;
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  background-color: var(--bg-white);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.otpDigit:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: var(--spacing-xl) 0;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-medium);
+}
+
+.dividerText {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+}
+
+.progressBar {
+  height: 4px;
+  background-color: var(--border-light);
+  border-radius: 2px;
+  margin-bottom: calc(var(--spacing-xl) * 2);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .formInput {
+    height: 52px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .otpDigit {
+    width: 48px;
+    height: 56px;
+    font-size: 20px;
+  }
+
+  .phoneInputContainer {
+    flex-direction: column;
+  }
+
+  .countryCode {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .formInput {
+    height: 56px;
+  }
+}
+

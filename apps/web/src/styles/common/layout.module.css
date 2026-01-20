@@ -1,0 +1,41 @@
+/**
+ * Layout utility styles - Responsive for mobile and desktop
+ */
+
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentContainer {
+  max-width: 960px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexRowCenter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexRowEnd {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.flexWrap {
+  flex-wrap: wrap;
+}
+

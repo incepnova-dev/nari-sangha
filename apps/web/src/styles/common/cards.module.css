@@ -1,0 +1,89 @@
+/**
+ * Card styles - Responsive for mobile and desktop
+ * Converted from apps/mobile/src/styles/common/cards.ts
+ */
+
+.card {
+  background-color: var(--bg-white);
+  border-radius: 20px;
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.cardSmall {
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.cardSmall:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.cardWithBorder {
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  border-left: 4px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.cardWithBorder:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.storyCard {
+  border-radius: 20px;
+  padding: var(--spacing-xxl) var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.storyCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.storyCardPregnancy {
+  background-color: var(--story-pregnancy);
+}
+
+.storyCardReproductive {
+  background-color: var(--story-reproductive);
+}
+
+.storyCardPerimenopause {
+  background-color: var(--story-perimenopause);
+}
+
+.storyCardMenopause {
+  background-color: var(--story-menopause);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+  }
+
+  .storyCard {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: var(--spacing-xxl);
+  }
+}
+

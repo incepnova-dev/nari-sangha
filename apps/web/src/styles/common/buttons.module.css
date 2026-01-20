@@ -1,0 +1,183 @@
+/**
+ * Button styles - Responsive for mobile and desktop
+ * Converted from apps/mobile/src/styles/common/buttons.ts
+ */
+
+/* Base button styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md) var(--spacing-xxl);
+  border-radius: var(--radius-sm);
+  min-width: 100px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  text-decoration: none;
+  min-height: 44px; /* Touch-friendly */
+}
+
+.buttonFullWidth {
+  width: 100%;
+  height: 56px;
+  border-radius: 28px;
+  margin-bottom: var(--spacing-xl);
+}
+
+.buttonRounded {
+  border-radius: 25px;
+  padding: 14px var(--spacing-xl);
+}
+
+/* Primary button */
+.primaryButton {
+  background-color: var(--btn-primary);
+  color: var(--text-white);
+}
+
+.primaryButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-primary);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+}
+
+.primaryButtonText {
+  color: var(--text-white);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Secondary button */
+.secondaryButton {
+  background-color: var(--btn-secondary);
+  border: 2px solid var(--btn-border);
+}
+
+.secondaryButton:hover {
+  background-color: var(--bg-card);
+}
+
+.secondaryButtonText {
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Disabled button */
+.disabledButton {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Success button */
+.successButton {
+  background-color: var(--btn-success);
+}
+
+.successButton:hover {
+  background-color: #45a049;
+}
+
+.successButtonText {
+  color: var(--text-white);
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Small button */
+.smallButton {
+  padding: 8px var(--spacing-xl);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+}
+
+.smallButton:hover {
+  box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
+}
+
+.smallButtonText {
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-white);
+}
+
+/* View details button */
+.viewDetailsButton {
+  background-color: var(--color-primary);
+  padding: 14px var(--spacing-xl);
+  border-radius: 25px;
+  width: 100%;
+  margin-top: var(--spacing-sm);
+}
+
+.viewDetailsButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.viewDetailsButtonText {
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-white);
+}
+
+/* Buy now button */
+.buyNowButton {
+  background-color: var(--btn-success);
+  padding: 14px var(--spacing-xl);
+  border-radius: 25px;
+  margin-top: var(--spacing-sm);
+}
+
+.buyNowButton:hover {
+  background-color: #45a049;
+}
+
+.buyNowButtonText {
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-white);
+}
+
+/* Link button */
+.linkButton {
+  background-color: transparent;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  cursor: pointer;
+}
+
+.linkButtonText {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.linkButtonDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .button {
+    min-height: 48px; /* Larger tap target on mobile */
+  }
+
+  .buttonFullWidth {
+    height: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .button:hover {
+    transform: translateY(-2px);
+  }
+}
+

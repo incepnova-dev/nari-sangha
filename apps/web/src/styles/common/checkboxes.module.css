@@ -1,0 +1,46 @@
+/**
+ * Checkbox styles - Responsive for mobile and desktop
+ */
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  min-width: 20px;
+  min-height: 20px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.checkbox:hover {
+  border-color: var(--color-primary-dark);
+}
+
+.checkboxSelected {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkmark {
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+/* Touch-friendly on mobile */
+@media (max-width: 768px) {
+  .checkbox {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+}
+

@@ -1,0 +1,60 @@
+/**
+ * Hero section styles - Responsive for mobile and desktop
+ */
+
+.heroSection {
+  padding: calc(var(--spacing-xl) * 2) var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heroIcon {
+  font-size: 80px;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1;
+}
+
+.heroEmoji {
+  font-size: 80px;
+  margin-bottom: var(--spacing-xl);
+  line-height: 1;
+}
+
+.heroTitle {
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-base);
+  line-height: 24px;
+  text-align: center;
+  max-width: 600px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: var(--spacing-xl);
+  }
+
+  .heroIcon,
+  .heroEmoji {
+    font-size: 60px;
+  }
+
+  .heroTitle {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+}
+

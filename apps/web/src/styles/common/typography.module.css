@@ -1,0 +1,50 @@
+/**
+ * Typography styles - Responsive for mobile and desktop
+ */
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.body {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+}
+
+.caption {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-base);
+  }
+}
+

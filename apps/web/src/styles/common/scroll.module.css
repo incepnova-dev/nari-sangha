@@ -1,0 +1,24 @@
+/**
+ * Scroll styles - Responsive for mobile and desktop
+ */
+
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollContent {
+  padding: var(--spacing-container-padding);
+  padding-bottom: var(--spacing-xxl);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scrollContent {
+    padding: var(--spacing-lg);
+    padding-bottom: var(--spacing-xl);
+  }
+}
+

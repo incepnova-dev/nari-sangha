@@ -1,0 +1,61 @@
+/**
+ * Tag styles - Responsive for mobile and desktop
+ */
+
+.tag {
+  padding: 6px var(--spacing-sm);
+  border-radius: 15px;
+  display: inline-block;
+}
+
+.tagPink {
+  background-color: var(--accent-pink-very-light);
+}
+
+.tagPurple {
+  background-color: var(--accent-purple-light);
+}
+
+.tagBlue {
+  background-color: var(--accent-light-blue);
+}
+
+.tagGreen {
+  background-color: var(--story-pregnancy);
+}
+
+.tagText {
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.tagTextPink {
+  color: var(--color-primary);
+}
+
+.tagTextPurple {
+  color: #9C27B0;
+}
+
+.tagTextBlue {
+  color: var(--status-info);
+}
+
+.tagTextGreen {
+  color: var(--btn-success);
+}
+
+.specialtyTag {
+  background-color: var(--accent-pink-very-light);
+  padding: 4px var(--spacing-md);
+  border-radius: 12px;
+  border: 1px solid var(--color-primary);
+  display: inline-block;
+}
+
+.specialtyText {
+  font-size: 11px;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+

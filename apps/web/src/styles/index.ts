@@ -1,25 +1,76 @@
-// Central CSS imports for the application
-// Import all CSS files here for centralized management
+/**
+ * Central export file for all styles
+ * Matches mobile app structure for easy migration
+ */
 
-// Auth styles
+// Theme constants (already converted to CSS variables in variables.css)
+export * from './theme';
+
+// Common styles (CSS Modules) - explicit exports to avoid conflicts
+export {
+  // CSS Module exports
+  buttonStyles,
+  cardStyles,
+  formStyles,
+  containerStyles,
+  headerStyles,
+  badgeStyles,
+  typographyStyles,
+  searchStyles,
+  ratingStyles,
+  tagStyles,
+  summaryCardStyles,
+  detailStyles,
+  filterStyles,
+  heroStyles,
+  checkboxStyles,
+  statusBadgeStyles,
+  actionButtonStyles,
+  iconContainerStyles,
+  iconStyles,
+  cardHeaderStyles,
+  listContainerStyles,
+  scrollStyles,
+  layoutStyles,
+  menuIconStyles,
+  modalStyles,
+  // Convenience exports
+  buttons,
+  cards,
+  forms,
+  containers,
+  headers,
+  badges,
+  textStyles,
+  search,
+  ratings,
+  tags,
+  summaryCards,
+  details,
+  filters,
+  hero,
+  checkboxes,
+  statusBadges,
+  actionButtons,
+  iconContainers,
+  cardHeaders,
+  listContainers,
+  scroll,
+  layout,
+  menuIcons,
+  modals,
+} from './common';
+
+// Legacy CSS imports (existing web app styles)
 import './auth/SignUpModal.css';
 import './auth/SignInModal.css';
-
-// NariSangha styles
 import './narisangha/narisangha.css';
 import './narisangha/UnauthenticatedLanding.css';
-
-// Header styles
 import './narisangha/header/Header.css';
-
-// Left section styles
 import './narisangha/leftsection/LeftSection.css';
 import './narisangha/leftsection/LiveConversations.css';
 import './narisangha/leftsection/ProviderConnections.css';
 import './narisangha/leftsection/CreatedGroupsList.css';
 import './narisangha/leftsection/ExternalGroupsList.css';
-
-// Right section styles
 import './narisangha/rightsection/FreshDiscussions.css';
 import './narisangha/rightsection/CommunityOverview.css';
-

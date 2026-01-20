@@ -1,0 +1,209 @@
+/**
+ * Modal styles - Responsive for mobile and desktop
+ */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-modal-padding);
+  z-index: var(--z-modal);
+  overflow-y: auto;
+}
+
+.modalContent {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-modal-content-padding);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xl);
+  margin: auto;
+}
+
+.modalTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+}
+
+.modalPlaceholder {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xxl);
+  text-align: center;
+}
+
+.modalButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+}
+
+.form {
+  margin-top: var(--spacing-sm);
+}
+
+.field {
+  margin-bottom: var(--spacing-lg);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  display: block;
+}
+
+.input {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-md) var(--spacing-sm);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  width: 100%;
+  min-height: 44px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.errorText {
+  font-size: var(--font-size-sm);
+  color: #f97373;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.alertModalContent {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  width: 85%;
+  max-width: 350px;
+  max-height: 70%;
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.alertModalHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.alertModalTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.alertModalClose {
+  font-size: var(--font-size-xl);
+  color: var(--text-secondary);
+  padding: var(--spacing-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alertModalClose:hover {
+  color: var(--text-primary);
+}
+
+.alertModalBody {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.alertModalEmpty {
+  padding: var(--spacing-xxl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alertModalEmptyText {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.alertItem {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.alertItem:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.alertItemContent {
+  flex: 1;
+}
+
+.alertItemTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.alertItemMessage {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.alertItemTime {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: var(--spacing-lg);
+  }
+
+  .modalContent {
+    max-width: 100%;
+    padding: var(--spacing-lg);
+  }
+
+  .alertModalContent {
+    width: 95%;
+    max-width: 100%;
+  }
+}
+

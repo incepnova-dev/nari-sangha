@@ -1,0 +1,23 @@
+/**
+ * Menu icon styles - Responsive for mobile and desktop
+ * Note: Image-based icons from mobile are replaced with CSS classes
+ */
+
+.menuIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.menuIcon:hover {
+  opacity: 0.8;
+}
+
+.menuIcon:active {
+  opacity: 0.6;
+}
+

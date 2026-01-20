@@ -1,0 +1,37 @@
+/**
+ * List container styles - Responsive for mobile and desktop
+ */
+
+.listContainer {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.listContainerCompact {
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bottomSpacer {
+  height: var(--spacing-xl);
+}
+
+.bottomSpacerLarge {
+  height: calc(var(--spacing-xl) * 2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .listContainer {
+    padding: var(--spacing-lg);
+  }
+
+  .listContainerCompact {
+    padding: 0 var(--spacing-lg);
+  }
+}
+

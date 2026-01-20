@@ -1,0 +1,104 @@
+/**
+ * Action button styles - Responsive for mobile and desktop
+ */
+
+.actionButton {
+  background-color: var(--color-primary);
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 44px;
+}
+
+.actionButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.actionButtonText {
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.viewDetailsBtn {
+  background-color: var(--color-primary);
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 44px;
+}
+
+.viewDetailsBtn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.viewDetailsBtnText {
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.compareButton {
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.compareButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.compareButtonText {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-white);
+}
+
+.bookAppointmentBtn {
+  background-color: var(--color-primary);
+  padding: var(--spacing-md);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.bookAppointmentBtn:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.bookAppointmentBtnText {
+  color: var(--text-white);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+

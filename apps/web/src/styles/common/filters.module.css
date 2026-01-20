@@ -1,0 +1,113 @@
+/**
+ * Filter styles - Responsive for mobile and desktop
+ */
+
+.filterTabsContainer {
+  margin-bottom: 15px;
+}
+
+.filterTabsContent {
+  padding: 0 var(--spacing-xl);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.filterTabsContent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.filterTab {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--bg-white);
+  border-radius: 20px;
+  margin-right: 10px;
+  box-shadow: var(--shadow-sm);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterTab:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.filterTabActive {
+  background-color: var(--color-primary);
+}
+
+.filterTabText {
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.filterTabTextActive {
+  color: var(--text-white);
+}
+
+.filterSection {
+  margin-bottom: 10px;
+}
+
+.filterContent {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filterPill {
+  background-color: var(--bg-white);
+  border: 2px solid var(--border-medium);
+  padding: 10px var(--spacing-xl);
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterPill:hover {
+  border-color: var(--color-primary);
+}
+
+.filterPillActive {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filterPillText {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.filterPillTextActive {
+  color: var(--text-white);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .filterTabsContent {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .filterContent {
+    padding: var(--spacing-lg);
+  }
+}
+
