@@ -1,0 +1,343 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    perspective: 1200px;
+}
+
+.authContainer {
+    width: 100%;
+    max-width: 1000px;
+    min-height: 620px;
+    background: transparent;
+    border-radius: 40px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.7);
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.authCardFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: #14121C;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.frontFace {
+    z-index: 2;
+    transform: rotateY(0deg);
+    flex-direction: row;
+}
+
+.backFace {
+    transform: rotateY(180deg);
+    flex-direction: row-reverse;
+}
+
+.imagePanel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+@media (max-width: 868px) {
+    .imagePanel {
+        display: none;
+    }
+}
+
+.imagePanel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8) contrast(1.1);
+}
+
+.imageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 15, 40, 0.6), rgba(10, 12, 25, 0.7));
+    transition: background 0.4s ease;
+}
+
+.backFace .imageOverlay {
+    background: linear-gradient(135deg, rgba(30, 15, 40, 0.7), rgba(10, 12, 25, 0.8));
+}
+
+.formPanel {
+    flex: 1.1;
+    padding: 60px 88px 80px;
+    /* Enhanced horizontal padding for 1120px width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(165deg, #1E1B2B, #14121C);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: padding 0.3s ease;
+}
+
+.backFace .formPanel {
+    padding: 40px 88px 40px;
+    /* Reduced vertical padding to fit registration content */
+}
+
+.header {
+    margin-bottom: 12px;
+    /* Pushed Email Address closer to the header */
+}
+
+.backFace .header {
+    margin-bottom: 4px;
+    /* Pulled Full Name closer to Create Account as requested */
+}
+
+.header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+}
+
+.backFace .header h2 {
+    font-size: 28px;
+    /* Subdued for a calmer registration start */
+    opacity: 0.9;
+}
+
+.header p {
+    color: #94A3B8;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.backFace .header p {
+    font-size: 15px;
+    /* Softer introduction */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.backFace .form {
+    gap: 12px;
+    /* Further reduced to ensure footer visibility */
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label {
+    color: #94A3B8;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+}
+
+.input {
+    background: #0F172A;
+    border: 1px solid #1E293B;
+    border-radius: 12px;
+    padding: 13px 18px;
+    color: #F1F5F9;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: rgba(216, 27, 96, 0.5);
+    box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.05);
+    background: #111b2e;
+}
+
+.input::placeholder {
+    color: #334155;
+}
+
+.forgotPassword {
+    align-self: flex-end;
+    color: #D81B60;
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s;
+    opacity: 0.8;
+}
+
+.forgotPassword:hover {
+    text-decoration: underline;
+    opacity: 1;
+    color: #F06292;
+}
+
+.submitButton {
+    background: linear-gradient(135deg, #D81B60 0%, #C2185B 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+}
+
+.backFace .submitButton {
+    margin-top: 8px;
+    /* Slightly reduced for better fit */
+}
+
+.submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(216, 27, 96, 0.4);
+    background: linear-gradient(135deg, #EC1B69 0%, #D81B60 100%);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0 12px;
+    color: #334155;
+}
+
+.backFace .divider {
+    margin: 12px 0 8px;
+    /* Tighter for registration face */
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #1E293B;
+}
+
+.divider span {
+    padding: 0 16px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #475569;
+}
+
+.socialRow {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.socialButton {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    border: 1px solid #1E293B;
+    background: #0F172A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.socialButton:hover {
+    background: #1e293b;
+    border-color: #334155;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.socialButton svg {
+    width: 22px;
+    height: 22px;
+}
+
+.footer {
+    margin-top: 16px;
+    /* Moved closer to the social logos as requested */
+    text-align: center;
+    color: #94A3B8;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.backFace .footer {
+    margin-top: -4px;
+    /* Pulled up closer to the logos/form as requested */
+}
+
+.link {
+    color: #D81B60;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 8px;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link:hover {
+    color: #F06292;
+    text-decoration: underline;
+    transform: translateY(-1px);
+    text-shadow: 0 0 10px rgba(216, 27, 96, 0.3);
+}
+
+/* Animations */
+@keyframes modalReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.97) translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.authContainer {
+    animation: modalReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

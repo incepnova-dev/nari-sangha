@@ -1,8 +1,9 @@
 import React from "react";
 import BrandBlock from "./BrandBlock";
 import TopBarCTA from "./TopBarCTA";
-import LanguageSwitcher from "./LanguageSwitcher";
+import ModernLanguageSelector from "./ModernLanguageSelector";
 import { getProperty } from "../../i18";
+import { languages } from "../../i18n/languages";
 import "styles/narisangha/header";
 
 interface HeaderProps {
@@ -14,13 +15,13 @@ interface HeaderProps {
   setCurrentUser: (user: any) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ 
+const Header: React.FC<HeaderProps> = ({
   mode: _mode,
   setMode: _setMode,
-  language, 
-  setLanguage, 
-  currentUser, 
-  setCurrentUser 
+  language,
+  setLanguage,
+  currentUser,
+  setCurrentUser
 }) => {
   const userName = currentUser?.user?.name || currentUser?.name || "";
 
@@ -44,7 +45,12 @@ const Header: React.FC<HeaderProps> = ({
             currentUser={currentUser}
             onSignInSuccess={setCurrentUser}
           />
-          <LanguageSwitcher language={language} setLanguage={setLanguage} />
+          <ModernLanguageSelector
+            language={language}
+            setLanguage={setLanguage}
+            languages={languages}
+            variant="light"
+          />
         </div>
       </div>
     </header>

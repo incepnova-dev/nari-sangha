@@ -11,50 +11,23 @@ import { CreatedGroup } from "../leftsection/CreatedGroupsList";
 import { ExternalGroup } from "../leftsection/ExternalGroupsList";
 import { ExternalFeedItem } from "../leftsection/LiveConversations";
 import { Connections } from "../leftsection/ProviderConnections";
-import { getCurrentUser } from "../../services";
+import { useAuth } from "../../context/AuthContext";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { user: authUser, isAuthenticated, isLoading } = useAuth();
   const [mode, setMode] = useState<string>("create");
   const [language, setLanguage] = useState<string>("en");
   const [currentUser, setCurrentUser] = useState<any>(null);
-  const [isCheckingAuth, setIsCheckingAuth] = useState<boolean>(true);
   
-  // Check authentication on mount
   useEffect(() => {
-    const checkAuth = async () => {
-      // Add a small delay to ensure token is stored after navigation
-      await new Promise(resolve => setTimeout(resolve, 50));
-      
-      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
-      
-      if (!token) {
-        // No token found, redirect to landing page
-        console.log('[Home] No token found, redirecting to /');
-        navigate(ROUTES.LANDING);
-        return;
-      }
-      
-      // Try to get current user
-      const result = await getCurrentUser();
-      if (result.success && result.data) {
-        console.log('[Home] Authentication successful, setting current user');
-        setCurrentUser(result.data);
-        setIsCheckingAuth(false);
-      } else {
-        // Authentication failed, redirect to landing page
-        console.log('[Home] Authentication failed, redirecting to /');
-        navigate(ROUTES.LANDING);
-        return;
-      }
-    };
-    
-    checkAuth();
-  }, [navigate]);
-  
-  // Debug: Log when currentUser changes
-  useEffect(() => {
-  }, [currentUser]);
+    if (isLoading) return;
+    if (!isAuthenticated) {
+      navigate(ROUTES.LANDING);
+      return;
+    }
+    setCurrentUser(authUser);
+  }, [authUser, isAuthenticated, isLoading, navigate]);
   
   // Wrap setCurrentUser to add debugging
   const handleSetCurrentUser = (userData: any) => {
@@ -95,13 +68,13 @@ const Home: React.FC = () => {
 
   // Fetch external data on mount and stage change (only when authenticated)
   useEffect(() => {
-    if (!isCheckingAuth && currentUser) {
+    if (!isLoading && currentUser) {
       fetchConnections();
       fetchExternalFeeds(stage);
       fetchMyExternalGroups();
       fetchMyCreatedGroups();
     }
-  }, [stage, isCheckingAuth, currentUser]);
+  }, [stage, isLoading, currentUser]);
 
   const fetchConnections = async () => {
     try {
@@ -215,8 +188,8 @@ const Home: React.FC = () => {
     });
   };
 
-  // Show loading state while checking authentication
-  if (isCheckingAuth) {
+  // Show loading state while restoring session
+  if (isLoading) {
     return null; // or a loading spinner
   }
 

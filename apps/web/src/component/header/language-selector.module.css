@@ -1,0 +1,163 @@
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: #14121C;
+    /* Dark background default */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.variantLight .trigger {
+    background: #FCE4EC;
+    /* Soft pink brand background */
+    border-color: #F1C1D3;
+    /* Subtle brand border */
+    color: #D81B60;
+    /* Primary brand pink */
+}
+
+.trigger:hover {
+    background: #1E1B2B;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.variantLight .trigger:hover {
+    background: #F8BBD0;
+    border-color: #D81B60;
+}
+
+.triggerActive {
+    border-color: #D81B60;
+    box-shadow: 0 0 0 2px rgba(216, 27, 96, 0.1);
+}
+
+.code {
+    letter-spacing: 0.04em;
+}
+
+.chevron {
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+    transform: rotate(180deg);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 68px;
+    /* Narrow vertical strip */
+    max-height: 240px;
+    /* Prevents overwhelming the screen */
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    overflow-y: auto;
+    /* Enables scrolling for many languages */
+    overflow-x: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    animation: dropdownReveal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom Lean Scrollbar */
+.dropdown::-webkit-scrollbar {
+    width: 4px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+    background: rgba(216, 27, 96, 0.2);
+    border-radius: 10px;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+    background: rgba(216, 27, 96, 0.4);
+}
+
+.dropdown {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(216, 27, 96, 0.2) transparent;
+}
+
+@keyframes dropdownReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menuList {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.liItem {
+    width: 100%;
+}
+
+.menuItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 0;
+    /* Ultra-compact vertical rhythm */
+    border: none;
+    background: transparent;
+    color: #475569;
+    font-size: 11px;
+    /* Smaller, sharper typography */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    letter-spacing: 0.05em;
+}
+
+.menuItem:hover {
+    background: #FCE4EC;
+    color: #D81B60;
+}
+
+.menuItemActive {
+    color: #D81B60;
+    background: #fff;
+    font-weight: 700;
+}
+
+.checkIcon {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    color: #22c55e;
+    /* Vibrant green check */
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}

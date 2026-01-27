@@ -1,42 +1,41 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import SignInModal from "../auth/SignInModal";
-import SignUpModal from "../auth/SignUpModal";
+import AuthModal from "../auth/AuthModal";
 
 interface LandingModalsProps {
   isSignInModalOpen: boolean;
   isSignUpModalOpen: boolean;
-  language: string;
   onSignInClose: () => void;
   onSignUpClose: () => void;
   onSignInSuccess: (userData: any) => void;
+  onSignUpClick: () => void;
+  onSignInClick: () => void;
 }
 
 const LandingModals: React.FC<LandingModalsProps> = ({
   isSignInModalOpen,
   isSignUpModalOpen,
-  language,
   onSignInClose,
   onSignUpClose,
   onSignInSuccess,
 }) => {
+  // Determine if any modal is open and which mode to start with
+  const isOpen = isSignInModalOpen || isSignUpModalOpen;
+  const initialMode = isSignUpModalOpen ? 'signup' : 'signin';
+  const handleClose = isSignUpModalOpen ? onSignUpClose : onSignInClose;
+
   return createPortal(
-    <>
-      <SignInModal
-        isOpen={isSignInModalOpen}
-        onClose={onSignInClose}
-        language={language}
-        onSignInSuccess={onSignInSuccess}
-      />
-      <SignUpModal
-        isOpen={isSignUpModalOpen}
-        onClose={onSignUpClose}
-        language={language}
-      />
-    </>,
+    <AuthModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      initialMode={initialMode}
+      onSignInSuccess={onSignInSuccess}
+    />,
     document.body
   );
 };
 
 export default LandingModals;
+
+
 

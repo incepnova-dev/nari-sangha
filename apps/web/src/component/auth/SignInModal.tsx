@@ -2,7 +2,7 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 import "styles/auth";
 import { getProperty } from "../../i18";
 import loginImage from "../../assets/login.png";
-import { signIn } from "../../services";
+import { useAuth } from "../../context/AuthContext";
 
 interface SignInModalProps {
   isOpen: boolean;
@@ -22,6 +22,7 @@ const SignInModal: React.FC<SignInModalProps> = ({
   language = "en", 
   onSignInSuccess 
 }) => {
+  const { signIn } = useAuth();
   const [signInForm, setSignInForm] = useState<SignInForm>({
     email: "",
     password: ""
@@ -41,33 +42,25 @@ const SignInModal: React.FC<SignInModalProps> = ({
     setIsLoading(true);
 
     try {
-      const result = await signIn({
+      const success = await signIn({
         email: signInForm.email.trim(),
         password: signInForm.password
       });
 
-      if (result.success) {
-        // Store token if provided
-        if (result.data?.token) {
-          localStorage.setItem('authToken', result.data.token);
-        }
-        if (result.data?.refreshToken) {
-          localStorage.setItem('refreshToken', result.data.refreshToken);
-        }
-
+      if (success) {
         // Reset form
         setSignInForm({ email: "", password: "" });
         // Call success callback if provided
         // If callback is provided, let the parent handle closing the modal
         // Otherwise, close it here
         if (onSignInSuccess) {
-          onSignInSuccess(result.data);
+          onSignInSuccess({});
           // Don't call onClose() here - let the parent component handle it
         } else {
           onClose();
         }
       } else {
-        setError(result.error || "Sign in failed. Please try again.");
+        setError("Sign in failed. Please try again.");
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");

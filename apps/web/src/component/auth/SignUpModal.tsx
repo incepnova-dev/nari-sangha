@@ -2,6 +2,7 @@ import React, { useState, FormEvent, ChangeEvent } from "react";
 import "styles/auth";
 import { getProperty } from "../../i18";
 import loginImage from "../../assets/login.png";
+import { useAuth } from "../../context/AuthContext";
 
 interface SignUpModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ interface SignUpForm {
 }
 
 const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, language = "en" }) => {
+  const { signUp } = useAuth();
   const [signUpForm, setSignUpForm] = useState<SignUpForm>({
     name: "",
     email: "",
@@ -28,13 +30,18 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, language = "
     setSignUpForm({ ...signUpForm, [field]: e.target.value });
   };
 
-  const handleSignUpSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSignUpSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle sign up logic here
-    console.log("Sign up form submitted:", signUpForm);
-    onClose();
-    // Reset form
-    setSignUpForm({ name: "", email: "", password: "", confirmPassword: "" });
+    const success = await signUp({
+      fullName: signUpForm.name,
+      email: signUpForm.email,
+      password: signUpForm.password,
+      confirmPassword: signUpForm.confirmPassword,
+    });
+    if (success) {
+      onClose();
+      setSignUpForm({ name: "", email: "", password: "", confirmPassword: "" });
+    }
   };
 
   if (!isOpen) return null;

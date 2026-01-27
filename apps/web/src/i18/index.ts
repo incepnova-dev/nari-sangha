@@ -1,8 +1,4 @@
-// Re-export from shared i18 package
-// This adapter allows the web app to use the shared package
-// while maintaining the same import path
-// webpack is configured via config-overrides.js to resolve @narisangha/shared-i18
-// using aliases (similar to Metro's extraNodeModules in mobile app)
-
-export * from '@narisangha/shared-i18';
+// Re-export from shared i18 package.
+// Use a relative source import to avoid IDE/tsserver path-alias resolution issues in monorepos.
+export * from '../../../../packages/shared-i18/src';
 

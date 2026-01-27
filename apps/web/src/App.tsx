@@ -1,31 +1,25 @@
-import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./component/mobile-routes/AppRoutes";
+import Routes from "./component/routes/Routes";
+import { AuthProvider } from "./context/AuthContext";
+import { I18nProvider } from "./i18n/index";
+import { CartProvider } from "./context/CartContext";
+import CartDrawer from "./component/shared/CartDrawer";
 import "./styles/global/index.css";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<any>(null);
-  const [language] = useState<string>('en');
-
-  const handleSignInSuccess = (userData: any) => {
-    setCurrentUser(userData);
-  };
-
-  const handleSignOut = () => {
-    setCurrentUser(null);
-  };
-
   return (
-    <BrowserRouter>
-      <div className="app-container">
-        <AppRoutes
-          currentUser={currentUser}
-          language={language}
-          onSignInSuccess={handleSignInSuccess}
-          onSignOut={handleSignOut}
-        />
-      </div>
-    </BrowserRouter>
+    <I18nProvider>
+      <CartProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <div className="app-container">
+              <Routes />
+              <CartDrawer />
+            </div>
+          </BrowserRouter>
+        </AuthProvider>
+      </CartProvider>
+    </I18nProvider>
   );
 }
 

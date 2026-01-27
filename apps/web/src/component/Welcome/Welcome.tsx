@@ -61,13 +61,13 @@ const Welcome: React.FC<WelcomeProps> = () => {
       <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
         <div className={styles.headerContent}>
           <div className={styles.logoSection}>
-            <a href="#" className={styles.logoLink} aria-label="Nari Swasthya Samuday">
+            <a href="#" className={styles.logoLink} aria-label="NARI SANGHA">
               <div className={styles.logo}>
                 <span className={styles.logoEmoji}>🌸</span>
-                <span className={styles.logoText}>Nari Swasthya Samuday</span>
+                <span className={styles.logoText}>NARI SANGHA</span>
               </div>
             </a>
-            
+
             {/* Desktop Navigation */}
             <nav className={styles.desktopNav} aria-label="Main navigation">
               <ul className={styles.navList}>
@@ -109,8 +109,8 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.heroImages}>
             <div className={`${styles.heroImageCard} ${styles.imageCard1}`}>
               <div className={styles.imageWrapper}>
-                <img 
-                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&q=80"
                   alt="Women's healthcare professional consultation"
                   className={styles.heroImage}
                   loading="lazy"
@@ -121,8 +121,8 @@ const Welcome: React.FC<WelcomeProps> = () => {
             </div>
             <div className={`${styles.heroImageCard} ${styles.imageCard2}`}>
               <div className={styles.imageWrapper}>
-                <img 
-                  src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=400&fit=crop&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=400&fit=crop&q=80"
                   alt="Pregnant woman receiving prenatal care"
                   className={styles.heroImage}
                   loading="lazy"
@@ -133,8 +133,8 @@ const Welcome: React.FC<WelcomeProps> = () => {
             </div>
             <div className={`${styles.heroImageCard} ${styles.imageCard3}`}>
               <div className={styles.imageWrapper}>
-                <img 
-                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=400&fit=crop&q=80"
                   alt="Women's wellness and self-care"
                   className={styles.heroImage}
                   loading="lazy"
@@ -155,10 +155,10 @@ const Welcome: React.FC<WelcomeProps> = () => {
               <span className={styles.headlineAccent}> Every Step of the Way</span>
             </h1>
             <p className={styles.heroDescription}>
-              Join a safe, supportive community for women's health, wellness, and empowerment. 
+              Join a safe, supportive community for women's health, wellness, and empowerment.
               Find meaningful connections with healthcare providers, products, and knowledge that ignite confidence and joy.
             </p>
-            
+
             <div className={styles.heroActions}>
               <button
                 className={styles.primaryCtaButton}
@@ -204,8 +204,8 @@ const Welcome: React.FC<WelcomeProps> = () => {
         </div>
         <div className={styles.featuresGrid}>
           {features.map((feature, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`${styles.featureCard} ${styles[`featureCard${feature.color}`]}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -231,7 +231,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.missionText}>
             <h2 className={styles.missionTitle}>Join Our Community</h2>
             <p className={styles.missionDescription}>
-              Help shape the future of women's health by joining our community. 
+              Help shape the future of women's health by joining our community.
               Share experiences, support others, and access expert advice through our platform.
             </p>
             <button className={styles.secondaryCtaButton} onClick={handleGetStarted}>
@@ -247,7 +247,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.serviceIcon}>{icons.products}</div>
           <h3 className={styles.serviceTitle}>Health Products</h3>
           <p className={styles.serviceDescription}>
-            Whether you're looking for supplements, wellness products, or health essentials, 
+            Whether you're looking for supplements, wellness products, or health essentials,
             we make it easy to find trusted products tailored to your needs.
           </p>
           <button className={styles.serviceLink} onClick={() => navigation.navigate(ROUTES.PRODUCTS_OPTION)}>
@@ -259,7 +259,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.serviceIcon}>{icons.hospital}</div>
           <h3 className={styles.serviceTitle}>Healthcare Providers</h3>
           <p className={styles.serviceDescription}>
-            Whether you've moved to a new city or need a specialist, 
+            Whether you've moved to a new city or need a specialist,
             find trusted doctors, clinics, and hospitals that match your healthcare needs.
           </p>
           <button className={styles.serviceLink} onClick={() => navigation.navigate(ROUTES.DISCOVER_OPTIONS)}>
@@ -316,7 +316,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.footerSection}>
             <div className={styles.footerLogo}>
               <span className={styles.logoEmoji}>🌸</span>
-              <span className={styles.footerLogoText}>Nari Swasthya Samuday</span>
+              <span className={styles.footerLogoText}>NARI SANGHA</span>
             </div>
             <p className={styles.footerTagline}>
               Your Trusted Women's Health Community
@@ -351,7 +351,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
         </div>
         <div className={styles.footerBottom}>
           <p className={styles.copyright}>
-            © 2025 Nari Swasthya Samuday. All rights reserved.
+            © 2025 NARI SANGHA. All rights reserved.
           </p>
         </div>
       </footer>

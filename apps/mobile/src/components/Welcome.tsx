@@ -48,7 +48,7 @@ const Welcome: React.FC<WelcomeProps> = ({
               <Text style={welcomeStyles.logoEmoji}>🌸</Text>
             </View>
             <Text style={welcomeStyles.appName}>
-              Nari Swasthya{'\n'}Samuday
+              Nari Sangha{'\n'}Samuday
             </Text>
             <Text style={welcomeStyles.appTagline}>
               Your Trusted Women's Health Community

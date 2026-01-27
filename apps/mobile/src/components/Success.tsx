@@ -28,7 +28,7 @@ const Success: React.FC<SuccessProps> = ({ navigation, onContinue }) => {
         </View>
         <Text style={successStyles.successTitle}>Account Created!</Text>
         <Text style={successStyles.successMessage}>
-          Welcome to Nari Swasthya Samuday!{'\n'}
+          Welcome to Nari Sangha Samuday!{'\n'}
           Your account has been successfully created and secured.
         </Text>
         <TouchableOpacity style={successStyles.btn} onPress={handleContinue}>

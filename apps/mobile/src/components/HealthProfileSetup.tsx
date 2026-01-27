@@ -80,7 +80,7 @@ const HealthProfileSetup: React.FC<HealthProfileSetupProps> = ({
     <View style={containerStyles.container}>
       <StatusBar barStyle="dark-content" />
       <View style={healthProfileSetupStyles.screenHeader}>
-        <Text style={healthProfileSetupStyles.headerTitle}>Nari Swasthya Samuday</Text>
+        <Text style={healthProfileSetupStyles.headerTitle}>Nari Sangha Samuday</Text>
         <Text style={healthProfileSetupStyles.headerSubtitle}>Women's Health Community</Text>
       </View>
       <ScrollView

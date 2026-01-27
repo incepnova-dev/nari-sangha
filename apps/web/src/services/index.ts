@@ -30,6 +30,13 @@ function getToken(): string | undefined {
   return localStorage.getItem('authToken') || sessionStorage.getItem('authToken') || undefined;
 }
 
+export function getStoredTokens() {
+  return {
+    token: localStorage.getItem('authToken') || sessionStorage.getItem('authToken') || undefined,
+    refreshToken: localStorage.getItem('refreshToken') || undefined,
+  };
+}
+
 // Helper function to store tokens
 function storeTokens(data: any): void {
   if (data?.token) {
@@ -75,57 +82,21 @@ export interface AuthResponse {
 }
 
 export const signUp = async (userData: SignUpData): Promise<AuthResponse> => {
-  const token = getToken();
-  
   try {
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
+    const response = await apiClient.post('/auth/register', userData);
 
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
+    if (!response.ok) {
+      const status = response.status;
+      const message = response.error || 'Sign up failed. Please try again.';
+      if (status === 401) clearTokens();
+      return { success: false, error: message, status };
     }
 
-    const response = await fetch(`${apiConfig.baseURL}/auth/signup`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(userData),
-    });
-
-    const status = response.status;
-    const ok = response.ok;
-
-    let parsed: any = undefined;
-    try {
-      parsed = await response.json();
-    } catch {
-      // ignore JSON parse errors
+    if (response.data) {
+      storeTokens(response.data);
     }
 
-    if (!ok) {
-      const message =
-        parsed?.message || parsed?.error || 'Sign up failed. Please try again.';
-
-      if (status === 401) {
-        clearTokens();
-      }
-
-      return {
-        success: false,
-        error: message,
-        status,
-      };
-    }
-
-    if (parsed) {
-      storeTokens(parsed);
-    }
-
-    return {
-      success: true,
-      data: parsed,
-      status,
-    };
+    return { success: true, data: response.data, status: response.status };
   } catch (error: any) {
     return {
       success: false,

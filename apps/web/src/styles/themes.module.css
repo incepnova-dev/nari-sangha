@@ -1,0 +1,50 @@
+/* Inner Page Color Themes */
+/* Using :root so variables are available globally when the module is imported */
+
+:root {
+    /* DEFAULT / FALLBACK (Purple) */
+    --theme-hero-start: #667eea;
+    --theme-hero-end: #764ba2;
+    --theme-nav-active: #D81B60;
+    --theme-bg-accent: #f8f0ff;
+}
+
+/* THEME: Lavender (Journeys) */
+:global(.theme-lavender) {
+    --theme-hero-start: #E1BEE7;
+    --theme-hero-end: #BA68C8;
+    --theme-nav-active: #8E24AA;
+    --theme-bg-accent: #F3E5F5;
+}
+
+/* THEME: Pink (Products) */
+:global(.theme-pink) {
+    --theme-hero-start: #F8BBD0;
+    --theme-hero-end: #F06292;
+    --theme-nav-active: #C2185B;
+    --theme-bg-accent: #FCE4EC;
+}
+
+/* THEME: Mint (Consult/Appointments) */
+:global(.theme-mint) {
+    --theme-hero-start: #B2DFDB;
+    --theme-hero-end: #4DB6AC;
+    --theme-nav-active: #00796B;
+    --theme-bg-accent: #E0F2F1;
+}
+
+/* THEME: Peach (Community) */
+:global(.theme-peach) {
+    --theme-hero-start: #FFE0B2;
+    --theme-hero-end: #FFB74D;
+    --theme-nav-active: #EF6C00;
+    --theme-bg-accent: #FFF3E0;
+}
+
+/* THEME: Blue (Symptoms) */
+:global(.theme-blue) {
+    --theme-hero-start: #B3E5FC;
+    --theme-hero-end: #4FC3F7;
+    --theme-nav-active: #0288D1;
+    --theme-bg-accent: #E1F5FE;
+}

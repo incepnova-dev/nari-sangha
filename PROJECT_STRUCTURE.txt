@@ -1,0 +1,159 @@
+Nari Sangha Repository Structure
+
+.
+├── README.md                                - Monorepo overview and setup
+├── package.json                             - Root npm workspaces config
+├── package-lock.json                        - Root lockfile
+├── start-all.sh                             - Orchestrates API/Web/Mobile/emulator startup
+├── CODEBASE_DOCUMENTATION.md                - Technical documentation
+├── apps/                                    - Application projects
+│   ├── api/                                 - Express + TS + Prisma API
+│   │   ├── README.md                        - API-specific docs
+│   │   ├── package.json                     - API dependencies/scripts
+│   │   ├── tsconfig.json                    - TS config
+│   │   ├── tsconfig.test.json               - TS config for tests
+│   │   ├── jest.config.js                   - Jest config
+│   │   ├── prisma/                          - Prisma schema & migrations
+│   │   │   └── schema.prisma                - User model definition
+│   │   ├── scripts/                         - Utility scripts
+│   │   │   ├── generate-jwt-secret.sh       - Generate random JWT secret
+│   │   │   ├── seed-database.ts             - Seed sample users
+│   │   │   └── setup-database.sh            - Create DB/user via env DATABASE_URL
+│   │   └── src/                             - API source
+│   │       ├── server.ts                    - Express bootstrap & middleware
+│   │       ├── jest.setup.ts                - Jest setup
+│   │       ├── config/                      - Configuration
+│   │       │   ├── env.ts                   - Zod-validated env loader
+│   │       │   └── database.ts              - Prisma client instance
+│   │       ├── routes/                      - Route registration
+│   │       │   ├── index.ts                 - Mount /auth, /health
+│   │       │   └── auth.routes.ts           - Auth endpoints
+│   │       ├── controllers/                 - Controllers
+│   │       │   └── auth.controller.ts       - Register/login/profile logic
+│   │       ├── middleware/                  - Express middleware
+│   │       │   ├── auth.ts                  - JWT auth guard
+│   │       │   ├── validation.ts            - Zod request validation
+│   │       │   └── errorHandler.ts          - Global error handler
+│   │       ├── utils/                       - Helpers
+│   │       │   ├── jwt.ts                   - JWT sign/verify
+│   │       │   └── password.ts              - bcrypt hash/compare
+│   │       ├── validators/                  - Zod schemas
+│   │       │   └── auth.validator.ts        - Auth request schemas
+│   │       └── __tests__/                   - API tests
+│   │           └── auth.test.ts             - Auth flow tests (Supertest)
+│   ├── web/                                 - React (CRA) web app
+│   │   ├── README.md                        - CRA default docs
+│   │   ├── package.json                     - Web dependencies/scripts
+│   │   ├── tsconfig.json                    - TS config
+│   │   ├── config-overrides.js              - CRA config overrides
+│   │   ├── PORTING_GUIDE.md                 - Porting notes
+│   │   ├── STYLES_MIGRATION.md              - Styles migration guide
+│   │   ├── API_INTEGRATION.md               - API integration notes
+│   │   ├── public/                          - Static assets
+│   │   │   ├── index.html                   - Root HTML
+│   │   │   ├── favicon.ico                  - Favicon
+│   │   │   ├── icon-192.png                 - PWA icon
+│   │   │   ├── icon-512.png                 - PWA icon
+│   │   │   └── apple-touch-icon.png         - iOS icon
+│   │   └── src/                             - Web source
+│   │       ├── index.tsx                    - React entry
+│   │       ├── App.tsx                      - App shell & router wrapper
+│   │       ├── config/                      - Config files
+│   │       │   ├── api.config.ts            - API base URL selection
+│   │       │   └── README.md                - Config docs
+│   │       ├── services/                    - API service wiring
+│   │       │   └── index.ts                 - Shared api-client setup
+│   │       ├── component/                   - UI components
+│   │       │   ├── routes/Routes.tsx        - Main route definitions
+│   │       │   ├── mobile-routes/           - Alt routing shell (AppRoutes.tsx)
+│   │       │   ├── landing/                 - Landing page & auth modals
+│   │       │   │   ├── Landing.tsx          - Landing container
+│   │       │   │   ├── LandingModals.tsx    - Sign-in/up modal wrapper
+│   │       │   │   └── useLandingAuth.ts    - Auth modal/controller hook
+│   │       │   ├── auth/                    - Auth UI
+│   │       │   │   ├── SignInModal.tsx      - Sign-in modal logic
+│   │       │   │   └── SignUpModal.tsx      - Sign-up modal
+│   │       │   ├── home/Home.tsx            - Authenticated home page
+│   │       │   ├── main/AuthenticatedMainLayout.tsx - Main layout composition
+│   │       │   ├── header/, footer/, etc.   - Page sections
+│   │       ├── styles/                      - CSS modules and themes
+│   │       ├── i18/                         - Frontend i18n wiring
+│   │       ├── data/                        - Static JSON datasets
+│   │       ├── types/                       - Type declarations (css, images)
+│   │       └── __test__/                    - Jest tests for web components
+│   └── mobile/                              - React Native Android app
+│       ├── README.md                        - RN app docs
+│       ├── package.json                     - Mobile deps/scripts
+│       ├── tsconfig.json                    - TS config
+│       ├── babel.config.js                  - Babel config
+│       ├── metro.config.js                  - Metro bundler config
+│       ├── jest.config.js                   - Jest config
+│       ├── react-native.config.js           - RN config
+│       ├── app.json                         - App metadata
+│       ├── index.ts                         - RN entry (registerComponent)
+│       ├── index.js                         - JS wrapper entry
+│       ├── docs/                            - Android/RN notes
+│       │   ├── C++20_FIX.md                 - NDK build note
+│       │   ├── NDK_INSTALL_INSTRUCTIONS.md  - NDK setup
+│       │   └── TEST_SUITE_SUMMARY.md        - Native test summary
+│       ├── scripts/                         - RN helper scripts
+│       │   ├── generate-test-summary.sh     - Summarize tests
+│       │   ├── (other .sh/.js)              - Utility scripts
+│       ├── src/                             - Mobile source
+│       │   ├── App.tsx                      - App shell / status bar / routes
+│       │   ├── config/env.ts                - API host/port for RN
+│       │   ├── services/index.ts            - Shared api-client setup for mobile
+│       │   ├── components/routes/Routes.tsx - Custom route state machine
+│       │   ├── components/...               - RN screens (welcome, signup, flows)
+│       │   └── __tests__/                   - RN tests (if present)
+│       └── android/                         - Native Android project
+│           ├── app/                         - Java/res sources
+│           ├── build.gradle                 - App build config
+│           ├── settings.gradle              - Gradle settings
+│           ├── gradle/ gradle.properties    - Gradle wrapper/config
+│           └── gradlew / gradlew.bat        - Gradle wrapper scripts
+├── packages/                                - Shared packages
+│   ├── api-client/                          - Shared fetch client/services
+│   │   ├── README.md                        - Usage docs
+│   │   ├── package.json                     - Package config
+│   │   ├── tsconfig.json                    - TS config
+│   │   ├── MIGRATION.md                     - Migration notes
+│   │   └── src/                             - Source
+│   │       ├── apiClient.ts                 - Fetch wrapper (get/post)
+│   │       └── services/                    - API services
+│   │           ├── authService.ts           - signIn -> /auth/login
+│   │           ├── profileService.ts        - getProfile -> /auth/profile
+│   │           └── index.ts                 - Barrel exports
+│   ├── shared-i18/                          - Shared translations
+│   │   ├── README.md                        - Usage/docs
+│   │   ├── MIGRATION.md                     - Migration notes
+│   │   ├── package.json                     - Package config
+│   │   ├── tsconfig.json                    - TS config
+│   │   └── src/                             - Language bundles & helpers
+│   │       ├── index.ts                     - getProperty, languageOptions
+│   │       └── languages/                   - en/hi/bn/kn translation files
+│   ├── shared-types/                        - Placeholder for shared types
+│   │   └── README.md                        - Notes
+│   ├── ui-components/                       - Placeholder for shared UI
+│   │   └── README.md                        - Notes
+│   └── utils/                               - Placeholder for shared utils
+│       └── README.md                        - Notes
+└── services/                                - Future backend services
+    ├── README.md                            - Services overview (skeleton)
+    ├── ml-service/                          - ML service skeleton
+    │   └── README.md                        - Placeholder
+    └── worker/                              - Worker service skeleton
+        └── README.md                        - Placeholder
+
+Important Configs
+- Root: package.json (workspaces), start-all.sh (orchestration).
+- API: .env.example (not committed but referenced), tsconfig.json, jest.config.js, prisma/schema.prisma.
+- Web: .env (user-provided), tsconfig.json, config-overrides.js, API_INTEGRATION.md, api.config.ts.
+- Mobile: app.json, tsconfig.json, babel.config.js, metro.config.js, react-native.config.js, android/build.gradle, android/gradle.properties.
+- Shared: packages/api-client/tsconfig.json, package.json.
+
+Scripts (key)
+- Root: npm run build:api-client; npm run watch:api-client; start-all.sh.
+- API: npm run dev; build; start; prisma:generate; prisma:migrate; prisma:studio; db:setup; db:seed; test; test:watch; test:coverage; scripts/generate-jwt-secret.sh; scripts/setup-database.sh; scripts/seed-database.ts.
+- Web: npm start; build; test; eject.
+- Mobile: npm start (Metro); npm run android; npm test; npm run lint; android/gradlew tasks (assembleRelease, test); scripts/generate-test-summary.sh.
