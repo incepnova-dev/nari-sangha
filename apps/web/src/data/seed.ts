@@ -10,6 +10,7 @@ export interface Product {
     vendors: string[];
     badge?: string;
     imageIcon: string;
+    benefits?: string[];  // For Quick View popup
 }
 
 export interface InsurancePlan {

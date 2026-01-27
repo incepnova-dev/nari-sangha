@@ -1,0 +1,160 @@
+.insuranceCard {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: all 0.3s ease;
+    min-height: 320px;
+}
+
+.insuranceCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(216, 27, 96, 0.12);
+    border-color: rgba(216, 27, 96, 0.15);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.badge {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    color: #1565C0;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: 0.5px;
+}
+
+.planName {
+    font-size: 22px;
+    font-weight: 800;
+    color: #2A2A2A;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.provider {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    font-weight: 600;
+}
+
+.featuresList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.featuresList li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.checkIcon {
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.moreFeatures {
+    color: var(--pink, #E91E63);
+    font-weight: 700;
+    font-size: 14px;
+    padding-left: 30px;
+}
+
+.cardFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid #F0F0F0;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.price {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--pink, #E91E63);
+}
+
+.period {
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+}
+
+.ctaButton {
+    background: var(--pink, #E91E63);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.ctaButton:hover {
+    background: #C2185B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .insuranceCard {
+        padding: 24px;
+        min-height: auto;
+    }
+
+    .planName {
+        font-size: 20px;
+    }
+
+    .cardFooter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ctaButton {
+        width: 100%;
+    }
+}

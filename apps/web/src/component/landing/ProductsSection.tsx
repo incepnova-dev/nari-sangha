@@ -4,12 +4,15 @@ import { useI18n } from "../../hooks/useI18n";
 import { products, insurancePlans } from "../../data/seed";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+import InsuranceCard from "../shared/InsuranceCard";
 
 const ProductsSection: React.FC = () => {
     const { t } = useI18n();
 
     // Show only first 4 products on Home page as a teaser
     const featuredProducts = products.slice(0, 4);
+    // Show only first 3 insurance plans as preview
+    const featuredInsurance = insurancePlans.slice(0, 3);
 
     return (
         <section className={styles.productsSection}>
@@ -65,19 +68,34 @@ const ProductsSection: React.FC = () => {
                         <h3>{t("products.insurance.title") || "Insurance Plans"}</h3>
                         <p>{t("products.insurance.subtitle") || "Coverage designed for women."}</p>
                     </div>
-                    <div className={styles.insuranceList}>
-                        {insurancePlans.map(plan => (
-                            <div key={plan.id} className={styles.insuranceCard}>
-                                <h4>{plan.name}</h4>
-                                <p className={styles.provider}>{plan.provider}</p>
-                                <ul className={styles.featuresList}>
-                                    {plan.features.slice(0, 2).map((feature, idx) => (
-                                        <li key={idx}>• {feature}</li>
-                                    ))}
-                                </ul>
-                                <div className={styles.planPrice}>₹{plan.priceYearly}/yr</div>
-                            </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: '24px'
+                    }}>
+                        {featuredInsurance.map(plan => (
+                            <InsuranceCard key={plan.id} plan={plan} isPreview />
                         ))}
+                    </div>
+
+                    {/* CTA to explore all insurance */}
+                    <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                        <Link to={`${ROUTES.PRODUCTS}#insurance`}>
+                            <button className={styles.primaryCta} style={{
+                                background: '#1565C0',
+                                color: 'white',
+                                padding: '14px 32px',
+                                fontSize: '16px',
+                                borderRadius: '999px',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontWeight: '700',
+                                boxShadow: '0 4px 16px rgba(21, 101, 192, 0.2)',
+                                transition: 'all 0.3s ease'
+                            }}>
+                                Explore All Insurance Plans →
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

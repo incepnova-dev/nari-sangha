@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styles from "../landing/landing.module.css";
-import { products } from "../../data/seed";
+import { products, insurancePlans, Product } from "../../data/seed";
 import InnerPageHero from "../shared/InnerPageHero";
 import { useCart } from "../../context/CartContext";
+import InsuranceCard from "../shared/InsuranceCard";
+import ProductQuickView from "../shared/ProductQuickView";
 
 const Products: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
-    const [addedProductId, setAddedProductId] = useState<string | null>(null);
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
     const { addToCart } = useCart();
 
-    const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care"];
+    const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care", "Insurance"];
 
     const filteredProducts = selectedCategory === "All"
         ? products
@@ -22,13 +25,21 @@ const Products: React.FC = () => {
         { icon: "↩️", title: "Easy Returns", desc: "Hassle-free 30 day policy" },
     ];
 
-    const handleAddToCart = (product: typeof products[0]) => {
-        addToCart(product);
-        setAddedProductId(product.id);
-        // Clear the "Added" feedback after 2 seconds
-        setTimeout(() => {
-            setAddedProductId(null);
-        }, 2000);
+    const handleCardClick = (product: Product) => {
+        setSelectedProduct(product);
+        setIsQuickViewOpen(true);
+    };
+
+    const handleCloseQuickView = () => {
+        setIsQuickViewOpen(false);
+        setSelectedProduct(null);
+    };
+
+    const handleAddToCartFromPopup = (product: Product, quantity: number) => {
+        // Add product multiple times based on quantity
+        for (let i = 0; i < quantity; i++) {
+            addToCart(product);
+        }
     };
 
     return (
@@ -72,70 +83,158 @@ const Products: React.FC = () => {
                             <div
                                 key={product.id}
                                 className={styles.productCard}
+                                onClick={() => handleCardClick(product)}
                                 style={{
-                                    textAlign: 'left',
-                                    alignItems: 'flex-start',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    height: '400px'
+                                    height: '400px',
+                                    cursor: 'pointer',
+                                    position: 'relative',
+                                    transition: 'all 0.3s ease'
                                 }}
                             >
-                                <div style={{
-                                    width: '100%',
-                                    aspectRatio: '1/1',
-                                    background: '#fafafa',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    borderRadius: '16px',
-                                    marginBottom: '16px',
-                                    fontSize: '60px'
-                                }}>
-                                    {product.imageIcon}
-                                </div>
-
+                                {/* Top Badge */}
                                 {product.badge && (
                                     <span style={{
-                                        background: '#FFF3E0',
+                                        position: 'absolute',
+                                        top: '16px',
+                                        left: '16px',
+                                        background: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)',
                                         color: '#E65100',
-                                        fontSize: '11px',
+                                        fontSize: '10px',
                                         fontWeight: '800',
-                                        padding: '4px 10px',
+                                        padding: '6px 12px',
                                         borderRadius: '8px',
-                                        marginBottom: '8px',
-                                        display: 'inline-block'
+                                        zIndex: 1,
+                                        letterSpacing: '0.5px',
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
                                     }}>
                                         {product.badge.toUpperCase()}
                                     </span>
                                 )}
 
-                                <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '4px', lineHeight: '1.3' }}>{product.name}</h3>
-                                <div style={{ fontSize: '13px', color: '#777', marginBottom: '12px' }}>{product.category}</div>
-
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                                    <span style={{ fontSize: '20px', fontWeight: '800', color: 'var(--pink)' }}>₹{product.price}</span>
-                                    {product.originalPrice && (
-                                        <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>₹{product.originalPrice}</span>
-                                    )}
+                                {/* Fixed Height Image Container */}
+                                <div style={{
+                                    width: '100%',
+                                    height: '200px',
+                                    background: '#FAFAFA',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderRadius: '16px',
+                                    marginBottom: '16px',
+                                    fontSize: '80px',
+                                    flexShrink: 0
+                                }}>
+                                    {product.imageIcon}
                                 </div>
 
-                                <button
-                                    className={styles.primaryCta}
-                                    onClick={() => handleAddToCart(product)}
-                                    style={{
+                                {/* Content Wrapper with flex: 1 */}
+                                <div style={{
+                                    flex: 1,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    textAlign: 'left',
+                                    minHeight: 0
+                                }}>
+                                    {/* Category */}
+                                    <div style={{
+                                        fontSize: '12px',
+                                        color: '#999',
+                                        marginBottom: '6px',
+                                        fontWeight: '600',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.5px',
+                                        flexShrink: 0
+                                    }}>
+                                        {product.category}
+                                    </div>
+
+                                    {/* Product Name - Max 2 Lines */}
+                                    <h3 style={{
+                                        fontSize: '17px',
+                                        fontWeight: '700',
+                                        marginBottom: '8px',
+                                        lineHeight: '1.3',
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                        flexShrink: 0,
+                                        height: '44px'
+                                    }}>
+                                        {product.name}
+                                    </h3>
+
+                                    {/* Description - Max 1 Line */}
+                                    <p style={{
+                                        fontSize: '13px',
+                                        color: '#666',
+                                        marginBottom: '12px',
+                                        lineHeight: '1.4',
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 1,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                        flexShrink: 0,
+                                        height: '18px'
+                                    }}>
+                                        {product.description}
+                                    </p>
+
+                                    {/* Price Row - Pinned to Bottom */}
+                                    <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
                                         width: '100%',
-                                        borderRadius: '12px',
-                                        fontSize: '15px',
                                         marginTop: 'auto',
-                                        background: addedProductId === product.id ? '#4CAF50' : undefined,
-                                        transition: 'all 0.3s ease'
-                                    }}
-                                >
-                                    {addedProductId === product.id ? '✓ Added' : 'Add to Cart'}
-                                </button>
+                                        flexShrink: 0
+                                    }}>
+                                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                                            <span style={{ fontSize: '22px', fontWeight: '900', color: 'var(--pink)' }}>₹{product.price}</span>
+                                            {product.originalPrice && (
+                                                <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>₹{product.originalPrice}</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
+
+                    {/* Insurance Section */}
+                    {(selectedCategory === 'All' || selectedCategory === 'Insurance') && (
+                        <div id="insurance" style={{ marginTop: '80px' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                                <span style={{
+                                    background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
+                                    color: '#1565C0',
+                                    fontSize: '12px',
+                                    fontWeight: '800',
+                                    padding: '6px 16px',
+                                    borderRadius: '999px',
+                                    display: 'inline-block',
+                                    marginBottom: '16px',
+                                    letterSpacing: '0.5px'
+                                }}>PROTECT YOUR HEALTH</span>
+                                <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '12px' }}>Insurance Plans</h2>
+                                <p style={{ fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+                                    Comprehensive coverage designed specifically for women's healthcare needs
+                                </p>
+                            </div>
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                                gap: '32px',
+                                marginBottom: '40px'
+                            }}>
+                                {insurancePlans.map(plan => (
+                                    <InsuranceCard key={plan.id} plan={plan} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     {/* Why Shop With Us */}
                     <div style={{ marginTop: '100px', textAlign: 'center' }}>
@@ -153,6 +252,14 @@ const Products: React.FC = () => {
 
                 </div>
             </div>
+
+            {/* Quick View Popup */}
+            <ProductQuickView
+                product={selectedProduct}
+                isOpen={isQuickViewOpen}
+                onClose={handleCloseQuickView}
+                onAddToCart={handleAddToCartFromPopup}
+            />
         </div>
     );
 };

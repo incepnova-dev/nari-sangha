@@ -57,16 +57,19 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
           ))}
         </nav>
         <div className={styles.navRight}>
-          <button
-            className={styles.cartTrigger}
-            onClick={() => setIsCartOpen(true)}
-            aria-label={`Open cart with ${cartCount} items`}
-          >
-            <span>🛒</span>
-            {cartCount > 0 && (
-              <span className={styles.cartBadge}>{cartCount}</span>
-            )}
-          </button>
+          {/* Cart icon only visible on Products page */}
+          {location.pathname === ROUTES.PRODUCTS && (
+            <button
+              className={styles.cartTrigger}
+              onClick={() => setIsCartOpen(true)}
+              aria-label={`Open cart with ${cartCount} items`}
+            >
+              <span>🛒</span>
+              {cartCount > 0 && (
+                <span className={styles.cartBadge}>{cartCount}</span>
+              )}
+            </button>
+          )}
           <ModernLanguageSelector
             language={language}
             setLanguage={setLanguage}

@@ -1,0 +1,353 @@
+/* Backdrop */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal */
+.modal {
+    background: white;
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Close Button */
+.closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #F5F5F5;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.closeBtn:hover {
+    background: #E0E0E0;
+    transform: rotate(90deg);
+}
+
+/* Content Container */
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 60px 40px 40px;
+}
+
+/* Image Column */
+.imageColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+}
+
+.mainImage {
+    background: #FAFAFA;
+    border-radius: 20px;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.productEmoji {
+    font-size: 120px;
+    line-height: 1;
+}
+
+.modalBadge {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+    color: #E65100;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 6px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: 0.5px;
+}
+
+/* Details Column */
+.detailsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header {
+    border-bottom: 1px solid #F0F0F0;
+    padding-bottom: 16px;
+}
+
+.productName {
+    font-size: 28px;
+    font-weight: 800;
+    color: #2A2A2A;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.category {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Price Section */
+.priceSection {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+}
+
+.currentPrice {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--pink, #E91E63);
+}
+
+.originalPrice {
+    font-size: 18px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.discount {
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+/* Rating */
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.stars {
+    color: #FFA000;
+    font-weight: 700;
+}
+
+.reviews {
+    color: #666;
+}
+
+/* Description */
+.description {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Benefits List */
+.benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.benefits li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.checkIcon {
+    background: #E8F5E9;
+    color: #2E7D32;
+    font-weight: 800;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Quantity Section */
+.quantitySection {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid #F0F0F0;
+}
+
+.quantityLabel {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2A2A2A;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F5F5F5;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.qtyBtn {
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pink, #E91E63);
+}
+
+.qtyBtn:hover:not(:disabled) {
+    background: var(--pink, #E91E63);
+    color: white;
+}
+
+.qtyBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.quantity {
+    font-size: 16px;
+    font-weight: 700;
+    min-width: 32px;
+    text-align: center;
+}
+
+/* Add to Cart Button */
+.addToCartBtn {
+    background: var(--pink, #E91E63);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    width: 100%;
+}
+
+.addToCartBtn:hover:not(:disabled) {
+    background: #C2185B;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.3);
+}
+
+.addToCartBtn:disabled {
+    background: #4CAF50;
+    cursor: default;
+    transform: none;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 50px 24px 24px;
+    }
+
+    .closeBtn {
+        top: 16px;
+        right: 16px;
+    }
+
+    .productEmoji {
+        font-size: 80px;
+    }
+
+    .productName {
+        font-size: 22px;
+    }
+
+    .currentPrice {
+        font-size: 26px;
+    }
+
+    .modal {
+        margin: auto;
+        max-height: 95vh;
+    }
+
+    .backdrop {
+        padding: 10px;
+    }
+}
