@@ -1,182 +1,127 @@
 import React from "react";
-import styles from "../landing/landing.module.css";
+import styles from "./Dashboard.module.css";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 
 const Dashboard: React.FC = () => {
-    // Mock data for dashboard
     const user = { name: "Priya" };
+
     const quickActions = [
-        { title: "Book Appointment", icon: "📅", path: ROUTES.APPOINTMENTS, color: "#e91e63" },
-        { title: "Log Symptoms", icon: "💊", path: ROUTES.SYMPTOM_CHECKER, color: "#d81b60" },
-        { title: "Track Period", icon: "🩸", path: ROUTES.JOURNEYS, color: "#c2185b" },
+        { title: "Book Appointment", icon: "📅", path: ROUTES.TELECONSULTATION, color: "linear-gradient(135deg, #667eea, #764ba2)", desc: "Schedule your next consultation" },
+        { title: "Refill Prescription", icon: "💊", path: ROUTES.PRODUCTS, color: "linear-gradient(135deg, #f093fb, #f5576c)", desc: "Request refills for medications" },
+        { title: "View Test Records", icon: "📋", path: "#", color: "linear-gradient(135deg, #4facfe, #00f2fe)", desc: "Access latest lab reports" },
     ];
 
     const stats = [
-        { label: "Cycle Day", value: "14", sub: "Ovulation Phase", color: "#FCE4EC" },
-        { label: "Wellness Score", value: "92/100", sub: "Improving", color: "#E8EAF6" },
+        { label: "Cycle Day", value: "Day 14", sub: "Peak fertility window", progress: 50, icon: "🗓️" },
+        { label: "Pregnancy Week", value: "Week 22", sub: "Second trimester", progress: 55, icon: "👶" },
+        { label: "Completed Goals", value: "17/20", sub: "85% achievement rate", progress: 85, icon: "🎯" },
+        { label: "Wellness Score", value: "92/100", sub: "Excellent health status", progress: 92, icon: "❤️" },
     ];
 
     const reminders = [
-        { title: "Annual Health Checkup", time: "Tomorrow, 10:00 AM", type: "medical" },
-        { title: "Take Vitamin D", time: "Daily", type: "pill" },
-    ];
-
-    const recentActivity = [
-        { text: "Completed Health Quiz", date: "2 hours ago", icon: "✅" },
-        { text: "Read: 'Understanding Iron Deficiency'", date: "Yesterday", icon: "📖" },
+        { day: "25", month: "FEB", title: "Annual Pap Smear Screening", provider: "Dr. Sarah Johnson", time: "10:00 AM", type: "medical" },
+        { day: "10", month: "MAR", title: "Prenatal Checkup - Week 24", provider: "Maternity Care Clinic", time: "02:30 PM", type: "baby" },
+        { day: "15", month: "MAR", title: "Mammogram Screening", provider: "City Imaging Center", time: "09:00 AM", type: "shield" },
     ];
 
     return (
-        <div className="app-container" style={{ background: "var(--bg-cream)", minHeight: "100vh", paddingBottom: "80px" }}>
-            {/* Header */}
-            <div style={{ background: "linear-gradient(135deg, #F06292 0%, #F8BBD0 100%)", padding: "100px 20px 60px", color: "white" }}>
-                <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-                    <h1 style={{ fontSize: "36px", fontWeight: "900", marginBottom: "8px" }}>Welcome back, {user.name}! 👋</h1>
-                    <p style={{ fontSize: "18px", opacity: 0.9 }}>Your personal health dashboard is ready.</p>
+        <div className={styles.dashboardPage}>
+            <header className={styles.hero}>
+                <div className={styles.container}>
+                    <div className={styles.heroGrid}>
+                        <div>
+                            <h1 className={styles.welcomeTitle}>Welcome back, {user.name}! 👋</h1>
+                            <p className={styles.heroSubtitle}>Your personalized health companion is keeping everything on track. You have 3 upcoming milestones this month.</p>
+                            <div className={styles.badgeRow}>
+                                <span className={styles.badge}>🔔 3 Reminders</span>
+                                <span className={styles.badge}>🌱 2 Active Journeys</span>
+                                <span className={styles.badge}>🎯 85% Goals</span>
+                            </div>
+                        </div>
+                        <div className={styles.heroMedia}>
+                            <img src="https://images.unsplash.com/photo-1543332164-6e82f355bacd?w=800" alt="Dashboard" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </header>
 
-            <div style={{ maxWidth: "1200px", margin: "-40px auto 0", padding: "0 20px", display: "grid", gap: "40px" }}>
-
-                {/* Quick Actions */}
-                <section>
-                    <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", justifyContent: "center" }}>
+            <main className={styles.container}>
+                <section className={styles.section}>
+                    <h2 className={styles.sectionTitle}>🚀 Quick Actions</h2>
+                    <div className={styles.actionGrid}>
                         {quickActions.map((action, idx) => (
-                            <Link
-                                key={idx}
-                                to={action.path}
-                                style={{
-                                    background: "white",
-                                    padding: "20px 32px",
-                                    borderRadius: "20px",
-                                    boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    textDecoration: "none",
-                                    flex: "1",
-                                    minWidth: "160px",
-                                    transition: "transform 0.2s"
-                                }}
-                            >
-                                <div style={{
-                                    background: action.color,
-                                    width: "48px",
-                                    height: "48px",
-                                    borderRadius: "50%",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    fontSize: "24px",
-                                    marginBottom: "12px",
-                                    color: "white"
-                                }}>{action.icon}</div>
-                                <span style={{ color: "#333", fontWeight: "700", fontSize: "15px" }}>{action.title}</span>
+                            <Link key={idx} to={action.path} className={styles.actionCard}>
+                                <div className={styles.actionIcon} style={{ background: action.color }}>{action.icon}</div>
+                                <h3>{action.title}</h3>
+                                <p>{action.desc}</p>
+                                <span className={styles.actionBtn}>Select Action</span>
                             </Link>
                         ))}
                     </div>
                 </section>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px" }}>
-
-                    {/* Health Stats */}
-                    <section style={{ background: "white", padding: "32px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                        <h3 style={{ fontSize: "20px", fontWeight: "800", marginBottom: "24px", display: "flex", alignItems: "center", gap: "8px" }}>
-                            📊 Your Health Stats
-                        </h3>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-                            {stats.map((stat, idx) => (
-                                <div key={idx} style={{ background: stat.color, padding: "20px", borderRadius: "16px" }}>
-                                    <div style={{ fontSize: "13px", color: "#555", marginBottom: "4px", textTransform: "uppercase", fontWeight: "700" }}>{stat.label}</div>
-                                    <div style={{ fontSize: "28px", fontWeight: "900", color: "#333", marginBottom: "4px" }}>{stat.value}</div>
-                                    <div style={{ fontSize: "13px", color: "#777" }}>{stat.sub}</div>
+                <section className={styles.section}>
+                    <h2 className={styles.sectionTitle}>📊 Your Health Metrics</h2>
+                    <div className={styles.statsGrid}>
+                        {stats.map((stat, idx) => (
+                            <div key={idx} className={styles.statCard}>
+                                <div className={styles.statHeader}>
+                                    <span className={styles.statLabel}>{stat.label}</span>
+                                    <span className={styles.statIcon}>{stat.icon}</span>
                                 </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    {/* Reminders */}
-                    <section style={{ background: "white", padding: "32px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                        <h3 style={{ fontSize: "20px", fontWeight: "800", marginBottom: "24px", display: "flex", alignItems: "center", gap: "8px" }}>
-                            🔔 Upcoming Reminders
-                        </h3>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                            {reminders.map((reminder, idx) => (
-                                <div key={idx} style={{ display: "flex", alignItems: "center", gap: "16px", padding: "16px", background: "#FAFAFA", borderRadius: "16px", border: "1px solid #EEE" }}>
-                                    <div style={{
-                                        width: "8px",
-                                        height: "40px",
-                                        borderRadius: "4px",
-                                        background: reminder.type === "medical" ? "#7B1FA2" : "#D81B60"
-                                    }} />
-                                    <div>
-                                        <div style={{ fontWeight: "700", color: "#333" }}>{reminder.title}</div>
-                                        <div style={{ fontSize: "14px", color: "#777" }}>{reminder.time}</div>
-                                    </div>
-                                    <button style={{ marginLeft: "auto", border: "none", background: "white", padding: "8px 16px", borderRadius: "20px", fontSize: "12px", fontWeight: "700", boxShadow: "0 2px 8px rgba(0,0,0,0.1)", cursor: "pointer" }}>Done</button>
+                                <div className={styles.statValue}>{stat.value}</div>
+                                <div className={styles.progressBar}>
+                                    <div className={styles.progressFill} style={{ width: `${stat.progress}%` }}></div>
                                 </div>
-                            ))}
-                        </div>
-                    </section>
-
-                </div>
-
-                {/* Active Journey */}
-                <section style={{ background: "white", padding: "32px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                    <h3 style={{ fontSize: "20px", fontWeight: "800", marginBottom: "24px" }}>🌱 Your Active Journeys</h3>
-                    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "40px", padding: "30px", background: "linear-gradient(to right, #FFF3E0, #FFE0B2)", borderRadius: "20px" }}>
-                        <div style={{ flex: 1, minWidth: "280px" }}>
-                            <div style={{
-                                display: "inline-block",
-                                padding: "6px 12px",
-                                background: "white",
-                                borderRadius: "20px",
-                                fontSize: "12px",
-                                fontWeight: "800",
-                                color: "#F57C00",
-                                marginBottom: "12px"
-                            }}>pregnancy-journey-week-22</div>
-                            <h2 style={{ fontSize: "24px", marginBottom: "8px", fontWeight: "800" }}>Pregnancy • Week 22</h2>
-                            <p style={{ marginBottom: "20px", opacity: 0.8 }}>You're doing great! Baby is the size of a coconut.</p>
-                            <div style={{ background: "rgba(255,255,255,0.5)", height: "8px", borderRadius: "4px", overflow: "hidden" }}>
-                                <div style={{ width: "55%", height: "100%", background: "#EF6C00" }} />
-                            </div>
-                            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", fontWeight: "700", marginTop: "8px", opacity: 0.7 }}>
-                                <span>Week 1</span>
-                                <span>Week 40</span>
-                            </div>
-                        </div>
-                        <Link to={ROUTES.PREGNANCY} className={styles.primaryCta} style={{ background: "white", color: "#E65100" }}>
-                            View Daily Update
-                        </Link>
-                    </div>
-                </section>
-
-                {/* Recent Activity */}
-                <section style={{ marginBottom: "40px" }}>
-                    <h3 style={{ fontSize: "20px", fontWeight: "800", marginBottom: "24px", textAlign: "center" }}>Recent Activity</h3>
-                    <div style={{ background: "white", borderRadius: "24px", overflow: "hidden", maxWidth: "800px", margin: "0 auto", boxShadow: "0 4px 20px rgba(0,0,0,0.03)" }}>
-                        {recentActivity.map((act, idx) => (
-                            <div key={idx} style={{
-                                padding: "20px 30px",
-                                borderBottom: idx !== recentActivity.length - 1 ? "1px solid #F5F5F5" : "none",
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "16px"
-                            }}>
-                                <span style={{ fontSize: "20px" }}>{act.icon}</span>
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ fontWeight: "600", color: "#333" }}>{act.text}</div>
-                                    <div style={{ fontSize: "12px", color: "#999" }}>{act.date}</div>
-                                </div>
-                                <button style={{ color: "var(--pink)", fontWeight: "700", background: "none", border: "none", cursor: "pointer" }}>Details</button>
+                                <p className={styles.statSub}>{stat.sub}</p>
                             </div>
                         ))}
                     </div>
                 </section>
 
-            </div>
+                <div className={styles.mainGrid}>
+                    <section className={styles.remindersSection}>
+                        <h2 className={styles.sectionTitle}>🔔 Upcoming Milestones</h2>
+                        <div className={styles.reminderList}>
+                            {reminders.map((rem, idx) => (
+                                <div key={idx} className={styles.reminderItem}>
+                                    <div className={styles.reminderDate}>
+                                        <span className={styles.day}>{rem.day}</span>
+                                        <span className={styles.month}>{rem.month}</span>
+                                    </div>
+                                    <div className={styles.reminderContent}>
+                                        <h3>{rem.title}</h3>
+                                        <p>📍 {rem.provider}</p>
+                                        <p>🕒 {rem.time}</p>
+                                    </div>
+                                    <button className={styles.btnReminder}>Reschedule</button>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    <aside className={styles.sidePanel}>
+                        <div className={styles.journeyCard}>
+                            <div className={styles.journeyHeader}>
+                                <h3>👶 Pregnancy Journey</h3>
+                                <span className={styles.activeBadge}>Active</span>
+                            </div>
+                            <p>Week 22: Baby is the size of a coconut!</p>
+                            <div className={styles.progressBar} style={{ height: '10px' }}>
+                                <div className={styles.progressFill} style={{ width: '55%', background: '#ff9800' }}></div>
+                            </div>
+                            <Link to={ROUTES.PREGNANCY} className={styles.btnLink}>Continue Journey →</Link>
+                        </div>
+
+                        <div className={styles.recommendationCard}>
+                            <h3>💡 Recommended for You</h3>
+                            <p>"Second Trimester Nutrition: Essential Vitamins for Baby's Growth"</p>
+                            <a href="#" className={styles.btnLinkSmall}>Read Article</a>
+                        </div>
+                    </aside>
+                </div>
+            </main>
         </div>
     );
 };

@@ -4,11 +4,27 @@
     "strict": true,
     "noImplicitAny": true,
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "jsx": "react-native",
+    "skipLibCheck": true,
     "paths": {
-      "@narisangha/api-client": ["../../packages/api-client/src"],
-      "@narisangha/shared-i18": ["../../packages/shared-i18/src"]
+      "@narisangha/api-client": [
+        "../../packages/api-client/src"
+      ],
+      "@narisangha/shared-i18": [
+        "../../packages/shared-i18/src"
+      ]
     }
   },
-  "include": ["./*.ts", "./*.tsx", "./src/**/*.ts", "./src/**/*.tsx", "./android/app/src/main/java", "./**/*.d.ts", "../../packages/api-client/src/**/*.ts", "../../packages/shared-i18/src/**/*.ts"]
+  "include": [
+    "./*.ts",
+    "./*.tsx",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./android/app/src/main/java",
+    "./**/*.d.ts",
+    "../../packages/api-client/src/**/*.ts",
+    "../../packages/shared-i18/src/**/*.ts"
+  ]
 }
-

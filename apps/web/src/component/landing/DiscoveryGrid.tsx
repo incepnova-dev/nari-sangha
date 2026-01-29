@@ -11,8 +11,8 @@ const DiscoveryGrid: React.FC = () => {
         { title: "Symptom Checker", subtitle: "AI-powered triage", path: ROUTES.SYMPTOM_CHECKER },
         { title: "Teleconsultation", subtitle: "Connect with doctors", path: ROUTES.APPOINTMENTS },
         { title: "Specialists", subtitle: "Find expert care", path: ROUTES.APPOINTMENTS },
-        { title: "Screening", subtitle: "Preventive health checks", path: ROUTES.HEALTH_HUB },
-        { title: "Vaccination", subtitle: "Stay protected", path: ROUTES.HEALTH_HUB },
+        { title: "Screening", subtitle: "Preventive health checks", path: ROUTES.PREVENTIVE_HEALTH },
+        { title: "Vaccination", subtitle: "Stay protected", path: ROUTES.PREVENTIVE_HEALTH },
     ];
 
     return (

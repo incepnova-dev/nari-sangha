@@ -6,7 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 import PublicLayout from "../layout/PublicLayout";
 
 import Community from "../pages/Community";
-import HealthHub from "../pages/HealthHub";
 import Appointments from "../pages/Appointments";
 import Safety from "../pages/Safety";
 import Support from "../pages/Support";
@@ -14,7 +13,6 @@ import Stories from "../pages/Stories";
 import Journeys from "../pages/Journeys";
 import PregnancyJourney from "../pages/PregnancyJourney";
 import FertilityJourney from "../pages/FertilityJourney";
-import MenopauseJourney from "../pages/MenopauseJourney";
 import PreventiveHealthJourney from "../pages/PreventiveHealthJourney";
 import MenstrualHealthJourney from "../pages/MenstrualHealthJourney";
 import ChronicConditionsJourney from "../pages/ChronicConditionsJourney";
@@ -23,7 +21,19 @@ import PostpartumJourney from "../pages/PostpartumJourney";
 import AdolescentHealthJourney from "../pages/AdolescentHealthJourney";
 import SymptomChecker from "../pages/SymptomChecker";
 import Products from "../pages/Products";
-import Vaccination from "../pages/Vaccination";
+import MenopauseJourney from "../pages/MenopauseJourney";
+import PerinatalJourney from "../pages/PerinatalJourney";
+import About from "../pages/About";
+import GovernmentSchemes from "../pages/GovernmentSchemes";
+import ResearchHub from "../pages/ResearchHub";
+import CosmeticSurgeryGuide from "../pages/CosmeticSurgeryGuide";
+import PerinatalFamilyGuide from "../pages/PerinatalFamilyGuide";
+import FindDoctors from "../pages/FindDoctors";
+import Teleconsultation from "../pages/Teleconsultation";
+import ScreeningGuide from "../pages/ScreeningGuide";
+import VaccinationGuide from "../pages/VaccinationGuide";
+import Services from "../pages/Services";
+import InsuranceGuide from "../pages/InsuranceGuide";
 
 // Centralized route paths
 export const ROUTES = {
@@ -33,22 +43,32 @@ export const ROUTES = {
   JOURNEYS: "/journeys",
   PREGNANCY: "/journeys/pregnancy",
   FERTILITY: "/journeys/fertility",
-  MENOPAUSE: "/journeys/menopause",
   PREVENTIVE_HEALTH: "/journeys/preventive-health",
   MENSTRUAL_HEALTH: "/journeys/menstrual-health",
   CHRONIC_CONDITIONS: "/journeys/chronic-conditions",
   MENTAL_WELLNESS: "/journeys/mental-wellness",
   POSTPARTUM: "/journeys/postpartum",
   ADOLESCENT_HEALTH: "/journeys/adolescent-health",
+  MENOPAUSE: "/journeys/menopause",
   PRODUCTS: "/products",
   APPOINTMENTS: "/appointments",
   COMMUNITY: "/community",
   SYMPTOM_CHECKER: "/symptom-checker",
-  HEALTH_HUB: "/health-hub", // Resources
   SAFETY: "/safety",
   SUPPORT: "/support",
   STORIES: "/stories",
+  ABOUT: "/about",
+  PERINATAL: "/journeys/perinatal",
+  GOVERNMENT_SCHEMES: "/government-schemes",
+  RESEARCH: "/research",
+  COSMETIC_SURGERY: "/cosmetic-surgery",
+  PERINATAL_FAMILY: "/perinatal-family-guide",
+  TELECONSULTATION: "/teleconsultation",
+  FIND_DOCTORS: "/find-doctors",
+  SCREENING: "/screening",
   VACCINATION: "/vaccination",
+  SERVICES: "/services",
+  INSURANCE_GUIDE: "/insurance-guide",
 } as const;
 
 const AppRoutes = () => {
@@ -64,7 +84,7 @@ const AppRoutes = () => {
       <Route element={<PublicLayout />}>
         <Route path={ROUTES.LANDING} element={<Landing />} />
         <Route path={ROUTES.COMMUNITY} element={<Community />} />
-        <Route path={ROUTES.HEALTH_HUB} element={<HealthHub />} />
+        <Route path="/health-hub" element={<Navigate to={ROUTES.JOURNEYS} replace />} />
         <Route path={ROUTES.APPOINTMENTS} element={<Appointments />} />
         <Route path={ROUTES.SAFETY} element={<Safety />} />
         <Route path={ROUTES.SUPPORT} element={<Support />} />
@@ -72,7 +92,6 @@ const AppRoutes = () => {
         <Route path={ROUTES.JOURNEYS} element={<Journeys />} />
         <Route path={ROUTES.PREGNANCY} element={<PregnancyJourney />} />
         <Route path={ROUTES.FERTILITY} element={<FertilityJourney />} />
-        <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourney />} />
         <Route path={ROUTES.PREVENTIVE_HEALTH} element={<PreventiveHealthJourney />} />
         <Route path={ROUTES.MENSTRUAL_HEALTH} element={<MenstrualHealthJourney />} />
         <Route path={ROUTES.CHRONIC_CONDITIONS} element={<ChronicConditionsJourney />} />
@@ -81,7 +100,19 @@ const AppRoutes = () => {
         <Route path={ROUTES.ADOLESCENT_HEALTH} element={<AdolescentHealthJourney />} />
         <Route path={ROUTES.SYMPTOM_CHECKER} element={<SymptomChecker />} />
         <Route path={ROUTES.PRODUCTS} element={<Products />} />
-        <Route path={ROUTES.VACCINATION} element={<Vaccination />} />
+        <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourney />} />
+        <Route path={ROUTES.PERINATAL} element={<PerinatalJourney />} />
+        <Route path={ROUTES.ABOUT} element={<About />} />
+        <Route path={ROUTES.GOVERNMENT_SCHEMES} element={<GovernmentSchemes />} />
+        <Route path={ROUTES.RESEARCH} element={<ResearchHub />} />
+        <Route path={ROUTES.COSMETIC_SURGERY} element={<CosmeticSurgeryGuide />} />
+        <Route path={ROUTES.PERINATAL_FAMILY} element={<PerinatalFamilyGuide />} />
+        <Route path={ROUTES.TELECONSULTATION} element={<Teleconsultation />} />
+        <Route path={ROUTES.FIND_DOCTORS} element={<FindDoctors />} />
+        <Route path={ROUTES.SCREENING} element={<ScreeningGuide />} />
+        <Route path={ROUTES.VACCINATION} element={<VaccinationGuide />} />
+        <Route path={ROUTES.SERVICES} element={<Services />} />
+        <Route path={ROUTES.INSURANCE_GUIDE} element={<InsuranceGuide />} />
       </Route>
 
       <Route path={ROUTES.HOME} element={renderHome()} />

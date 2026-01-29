@@ -1,0 +1,74 @@
+.timeline {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.timelineItem {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 0;
+}
+
+.timelineMarker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+}
+
+.markerCircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--theme-primary, #e30b5d) 0%, var(--theme-secondary, #7c3aed) 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+}
+
+.markerLine {
+    flex-grow: 1;
+    width: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 5px 0;
+}
+
+.timelineContent {
+    padding-bottom: 40px;
+    text-align: left;
+}
+
+.itemTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.itemDescription {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+    .timelineItem {
+        gap: 20px;
+    }
+
+    .markerCircle {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .timelineMarker {
+        width: 40px;
+    }
+}

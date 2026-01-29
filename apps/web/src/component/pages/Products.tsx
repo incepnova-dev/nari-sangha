@@ -41,13 +41,20 @@ const Products: React.FC = () => {
 
     const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care", "Insurance"];
 
+    const categoryGrid = [
+        { name: "Pregnancy & Prenatal", icon: "💊", desc: "Prenatal vitamins, maternity wear, body pillows, stretch mark creams", color: "linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)" },
+        { name: "Fertility Support", icon: "🌸", desc: "Ovulation kits, fertility supplements, basal thermometers, tracking apps", color: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" },
+        { name: "Period Care", icon: "🩸", desc: "Menstrual cups, organic pads, heating pads, PMS relief supplements", color: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" },
+        { name: "Wellness & Self-Care", icon: "🧘", desc: "Yoga mats, meditation apps, essential oils, wellness journals", color: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)" },
+    ];
+
     const filteredProducts = selectedCategory === "All"
         ? products
         : products.filter(p => p.category === selectedCategory);
 
     const benefits = [
-        { icon: "👩‍⚕️", title: "Expert Curated", desc: "Approved by medical professionals" },
-        { icon: "🎖️", title: "Quality Assured", desc: "Tested for safety and efficacy" },
+        { icon: "👨‍⚕️", title: "Expert Curated", desc: "Approved by medical professionals" },
+        { icon: "🛡️", title: "Quality Assured", desc: "Tested for safety and efficacy" },
         { icon: "🚚", title: "Fast Delivery", desc: "Ships within 24 hours" },
         { icon: "↩️", title: "Easy Returns", desc: "Hassle-free 30 day policy" },
     ];
@@ -79,10 +86,59 @@ const Products: React.FC = () => {
             />
 
             <div style={{ maxWidth: '100vw', background: 'var(--theme-bg-accent)' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 80px' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px 80px' }}>
 
-                    {/* Categories */}
-                    <div style={{ margin: '50px 0 50px', display: 'flex', gap: '12px', overflowX: 'auto', padding: '10px 0', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    {/* Shop by Category GRID */}
+                    <div style={{ marginBottom: '80px' }}>
+                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span style={{ fontSize: '24px' }}>📂</span> Shop by Category
+                        </h2>
+                        <p style={{ color: '#666', marginBottom: '32px' }}>Find exactly what you need for your health journey.</p>
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+                            {categoryGrid.map((cat, idx) => (
+                                <div
+                                    key={idx}
+                                    onClick={() => {
+                                        const mapping: Record<string, string> = {
+                                            "Pregnancy & Prenatal": "Pregnancy",
+                                            "Fertility Support": "Fertility",
+                                            "Period Care": "Period Care",
+                                            "Wellness & Self-Care": "Wellness"
+                                        };
+                                        setSelectedCategory(mapping[cat.name] || "All");
+                                        window.scrollTo({ top: 800, behavior: 'smooth' });
+                                    }}
+                                    style={{
+                                        background: cat.color,
+                                        padding: '32px',
+                                        borderRadius: '24px',
+                                        color: 'white',
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                        boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+                                    }}
+                                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.15)'; }}
+                                    onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)'; }}
+                                >
+                                    <div style={{ fontSize: '40px', marginBottom: '16px' }}>{cat.icon}</div>
+                                    <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '12px' }}>{cat.name}</h3>
+                                    <p style={{ fontSize: '14px', opacity: 0.9, lineHeight: '1.5' }}>{cat.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Filters Header */}
+                    <div style={{ marginBottom: '32px' }}>
+                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span style={{ fontSize: '24px' }}>✨</span> Featured Products
+                        </h2>
+                        <p style={{ color: '#666' }}>Best-selling and expert-recommended items for women's health.</p>
+                    </div>
+
+                    {/* Categories Filter Pills */}
+                    <div style={{ margin: '0 0 40px', display: 'flex', gap: '12px', overflowX: 'auto', padding: '10px 0', flexWrap: 'wrap' }}>
                         {categories.map((cat) => (
                             <button
                                 key={cat}
@@ -208,6 +264,20 @@ const Products: React.FC = () => {
                                     }}>
                                         {product.description}
                                     </p>
+
+                                    {/* Ratings */}
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '12px', fontSize: '13px', color: '#F39C12' }}>
+                                        {"★".repeat(5)} <span style={{ color: '#999', marginLeft: '4px' }}>(4.8)</span>
+                                    </div>
+
+                                    {/* Vendor Tags */}
+                                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
+                                        {["Amazon", "1mg"].map(v => (
+                                            <span key={v} style={{ fontSize: '10px', background: '#f5f5f5', padding: '2px 8px', borderRadius: '4px', fontWeight: '600', color: '#666' }}>
+                                                🛒 {v}
+                                            </span>
+                                        ))}
+                                    </div>
 
                                     {/* Price Row - Pinned to Bottom */}
                                     <div style={{

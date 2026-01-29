@@ -1,0 +1,192 @@
+.pregnancyPage {
+    background: #fffafa;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 80px 20px;
+    width: 100%;
+}
+
+.sectionAlt {
+    background-color: #fce4ec;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sectionTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1A1A2E;
+    margin-bottom: 12px;
+}
+
+.sectionSubtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 48px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.cardTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #1A1A2E;
+}
+
+.cardList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 16px;
+}
+
+.cardList li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #444;
+}
+
+.cardMeta {
+    font-size: 14px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.alertGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.alertCard {
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.warning {
+    background-color: #fff3f3;
+    border: 1px solid #ffcdd2;
+}
+
+.info {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+}
+
+.alertIcon {
+    font-size: 2rem;
+}
+
+.warning .alertIcon {
+    color: #d32f2f;
+}
+
+.info .alertIcon {
+    color: #1976d2;
+}
+
+.alertContent h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+}
+
+.alertContent ul {
+    padding-left: 20px;
+}
+
+.alertContent li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.checklistGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+}
+
+.nextSteps {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.primaryBtn,
+.outlineBtn,
+.ghostBtn {
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.primaryBtn {
+    background: linear-gradient(135deg, #e30b5d 0%, #7c3aed 100%);
+    color: white;
+}
+
+.outlineBtn {
+    border: 2px solid #e30b5d;
+    color: #e30b5d;
+}
+
+.ghostBtn {
+    color: #666;
+}
+
+.primaryBtn:hover,
+.outlineBtn:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+
+    .alertGrid,
+    .checklistGrid {
+        grid-template-columns: 1fr;
+    }
+}

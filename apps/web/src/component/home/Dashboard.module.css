@@ -1,0 +1,303 @@
+/* Dashboard.module.css */
+.dashboardPage {
+    background: #faf8f6;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+    padding: 120px 0 80px;
+    color: white;
+    margin-bottom: -40px;
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.welcomeTitle {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 16px;
+    line-height: 1.1;
+}
+
+.heroSubtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    max-width: 600px;
+}
+
+.heroMedia img {
+    width: 100%;
+    border-radius: 30px;
+    transform: perspective(1000px) rotateY(-10deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.badgeRow {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+}
+
+/* Sections */
+.section {
+    padding: 60px 0 20px;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 32px;
+    color: #2d3436;
+}
+
+.actionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.actionCard {
+    background: white;
+    padding: 40px 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.actionCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.actionIcon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: white;
+}
+
+.actionBtn {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ec407a;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+/* Stats */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.statCard {
+    background: white;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+}
+
+.statHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.statLabel {
+    color: #636e72;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statValue {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #2d3436;
+    margin-bottom: 16px;
+}
+
+.progressBar {
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progressFill {
+    height: 100%;
+    background: #ec407a;
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.statSub {
+    font-size: 0.85rem;
+    color: #b2bec3;
+    font-weight: 600;
+}
+
+/* Main Content Split */
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.reminderList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.reminderItem {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border-left: 6px solid #ec407a;
+}
+
+.reminderDate {
+    background: #ec407a;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 70px;
+}
+
+.reminderDate .day {
+    font-size: 1.8rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+}
+
+.reminderDate .month {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.reminderContent {
+    flex: 1;
+}
+
+.reminderContent h3 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.reminderContent p {
+    font-size: 0.85rem;
+    color: #636e72;
+    margin: 2px 0;
+}
+
+.btnReminder {
+    padding: 8px 16px;
+    border: 2px solid #ec407a;
+    background: transparent;
+    color: #ec407a;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* Side Panel */
+.journeyCard {
+    background: white;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 24px;
+}
+
+.activeBadge {
+    background: #e8f5e9;
+    color: #27ae60;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.btnLink {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ec407a;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.recommendationCard {
+    background: #fff5fa;
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px dashed #ec407a;
+}
+
+.btnLinkSmall {
+    display: inline-block;
+    margin-top: 12px;
+    color: #d81b60;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .heroMedia {
+        display: none;
+    }
+
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+}

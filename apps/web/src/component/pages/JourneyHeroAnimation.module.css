@@ -1,0 +1,56 @@
+.animationContainer {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroSvg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 40px rgba(227, 11, 93, 0.2));
+}
+
+.hubCenter {
+    animation: hubPulse 3s ease-in-out infinite;
+}
+
+@keyframes hubPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        transform-origin: center;
+    }
+
+    50% {
+        transform: scale(1.05);
+        transform-origin: center;
+    }
+}
+
+.orbitItem {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.orbitItem:hover {
+    filter: url(#glow);
+}
+
+.connectionLines {
+    pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+    .animationContainer {
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 640px) {
+    .animationContainer {
+        max-width: 300px;
+    }
+}

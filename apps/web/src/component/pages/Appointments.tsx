@@ -36,7 +36,7 @@ const Appointments: React.FC = () => {
             {/* Keeping the feature tags but placing them below hero if needed, or removing if strictly following "NO additional elements" constraint. User said: "Hero Structure (must be identical across pages): ... NO additional elements." So I will remove the extra tags from the hero area. */}
 
             <div style={{ background: 'var(--theme-bg-accent)' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 80px' }}>
+                <div style={{ maxWidth: '1200px', margin: '40px auto 0', padding: '0 20px 80px' }}>
 
                     {/* How it works */}
                     <div style={{ textAlign: 'center', margin: '60px 0' }}>

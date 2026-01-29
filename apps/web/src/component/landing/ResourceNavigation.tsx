@@ -10,7 +10,7 @@ const ResourceNavigation: React.FC = () => {
             title: "HealthCare Products",
             description: "Discover curated healthcare products designed for women’s needs.",
             cta: "Explore Products",
-            path: ROUTES.HEALTH_HUB,
+            path: ROUTES.PRODUCTS,
             icon: <ShoppingBag size={24} />,
         },
         {

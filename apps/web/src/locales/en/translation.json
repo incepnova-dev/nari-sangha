@@ -1,10 +1,12 @@
 {
   "hero.nav.home": "Home",
   "hero.nav.journeys": "Journeys",
+  "hero.nav.healthHub": "Health Hub",
   "hero.nav.products": "Products",
   "hero.nav.consult": "Consult",
   "hero.nav.community": "Community",
   "hero.nav.symptoms": "Symptoms",
+  "hero.nav.about": "About Us",
   "hero.nav.signIn": "Sign In",
   "hero.nav.language": "Language",
   "hero.brand": "NARI SANGHA",

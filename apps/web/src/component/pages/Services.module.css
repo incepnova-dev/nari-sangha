@@ -1,0 +1,160 @@
+/* Services.module.css */
+.servicesPage {
+    background: #fdfbfd;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.categoryCard {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.categoryCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.cardHero {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+
+.cardBody {
+    padding: 32px;
+}
+
+.cardBody h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #2d3436;
+}
+
+.catDesc {
+    font-size: 0.9rem;
+    color: #636e72;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.itemList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+}
+
+.itemList li {
+    padding: 10px 0 10px 24px;
+    position: relative;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.itemList li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #ec407a;
+}
+
+.btnExplore {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 2px solid #ec407a;
+    color: #ec407a;
+    border-radius: 50px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btnExplore:hover {
+    background: #ec407a;
+    color: white;
+}
+
+.callout {
+    background: white;
+    padding: 60px;
+    border-radius: 32px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.callout h2 {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    font-weight: 900;
+}
+
+.callout p {
+    font-size: 1.1rem;
+    color: #636e72;
+    max-width: 600px;
+    margin: 0 auto 32px;
+}
+
+.btnRow {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.btnPrimary {
+    padding: 16px 32px;
+    background: #ec407a;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btnOutline {
+    padding: 16px 32px;
+    background: transparent;
+    border: 2px solid #ec407a;
+    color: #ec407a;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .callout {
+        padding: 32px;
+    }
+
+    .btnRow {
+        flex-direction: column;
+    }
+}

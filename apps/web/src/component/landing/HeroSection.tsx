@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./landing.module.css";
 import { useI18n } from "../../hooks/useI18n";
 
+import heroImg from "../../assets/hero_premium.png";
+
 interface HeroSectionProps {
   onSignInClick: () => void;
 }
@@ -19,6 +21,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSignInClick }) => {
           <button className={styles.primaryCta} onClick={onSignInClick}>{t("hero.cta.primary")}</button>
           <button className={styles.secondaryCta}>{t("hero.cta.secondary")}</button>
         </div>
+      </div>
+      <div className={styles.heroMedia}>
+        <img src={heroImg} alt="Nari Sangha Community" className={styles.heroImage} />
       </div>
     </section>
   );

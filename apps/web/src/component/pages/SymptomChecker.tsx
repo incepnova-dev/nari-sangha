@@ -5,8 +5,10 @@ import { ROUTES } from "../routes/Routes";
 import InnerPageHero from "../shared/InnerPageHero";
 
 const SymptomChecker: React.FC = () => {
-    const [selectedSymptom, setSelectedSymptom] = useState<string | null>(null);
-    const [duration, setDuration] = useState<string>("today");
+    const [selectedSymptom, setSelectedSymptom] = useState<string>("");
+    const [severity, setSeverity] = useState<string>("");
+    const [duration, setDuration] = useState<string>("");
+    const [showResult, setShowResult] = useState(false);
 
     // Emergency Warning List
     const emergencySigns = [
@@ -14,45 +16,45 @@ const SymptomChecker: React.FC = () => {
         "Heavy bleeding (soaking a pad in an hour)",
         "Dizziness/fainting, shoulder pain (possible ectopic pregnancy)",
         "High fever with pelvic pain",
+        "Pregnancy: severe headache, vision changes, sudden swelling",
         "Chest pain or breathing difficulty"
     ];
 
-    const symptoms = [
-        { id: "pain", label: "Pelvic / Abdominal Pain", severity: "moderate" },
-        { id: "bleeding", label: "Abnormal Bleeding", severity: "severe" },
-        { id: "discharge", label: "Unusual Discharge", severity: "mild" },
-        { id: "mood", label: "Severe Mood Swings", severity: "mild" },
-        { id: "nausea", label: "Nausea / Vomiting", severity: "moderate" },
-        { id: "headache", label: "Persistent Headache", severity: "warning" },
+    const symptomOptions = [
+        { id: "period", label: "Irregular periods / heavy bleeding" },
+        { id: "pain", label: "Pelvic / lower abdominal pain" },
+        { id: "discharge", label: "Unusual discharge / itching" },
+        { id: "breast", label: "Breast lump / pain / discharge" },
+        { id: "pregnancy", label: "Pregnancy concern (bleeding, pain, movements)" },
+        { id: "urinary", label: "Burning / frequent urination" },
     ];
 
-    const getTriageResult = (symptomId: string) => {
-        // Simple mock logic
-        const results: Record<string, any> = {
-            pain: {
-                level: "amber", // Moderate
-                heading: "Moderate symptoms",
-                advice: "Schedule a consult within 24-72 hours, especially if symptoms persist.",
-                action: "Book Consult"
-            },
-            bleeding: {
-                level: "red", // Severe
-                heading: "Severe symptoms",
-                advice: "Seek urgent care immediately. Use teleconsultation only if emergency care isn't accessible.",
-                action: "Find Urgent Care"
-            },
-            discharge: {
-                level: "green", // Mild
-                heading: "Mild symptoms",
-                advice: "Hydration, rest, and monitor. Likely a minor infection but consult if it continues for 3 days.",
-                action: "Read Guide"
-            }
-        };
-        // Default fallback
-        return results[symptomId] || results["pain"];
+    const getTriageResult = () => {
+        if (!selectedSymptom || !severity || !duration) return null;
+
+        let level = "green";
+        let heading = "Self-care + monitor";
+        let msg = "Your answers suggest starting with self-care and monitoring. If symptoms persist, book a consult.";
+        let action = "Read Care Guide";
+
+        if (severity === "moderate") {
+            level = "amber";
+            heading = "Consult recommended";
+            msg = "Your answers suggest you should consult a clinician soon (24–72 hours). Teleconsultation is a fast first step.";
+            action = "Book Teleconsult";
+        }
+
+        if (severity === "severe" || (duration === "today" && (selectedSymptom === "pregnancy" || selectedSymptom === "pain"))) {
+            level = "red";
+            heading = "Urgent care";
+            msg = "Your answers suggest urgent evaluation. If you feel unsafe or symptoms are worsening, seek emergency care immediately.";
+            action = "Find Urgent Care";
+        }
+
+        return { level, heading, msg, action };
     };
 
-    const result = selectedSymptom ? getTriageResult(selectedSymptom) : null;
+    const result = showResult ? getTriageResult() : null;
 
     const getLevelStyle = (level: string) => {
         switch (level) {
@@ -70,9 +72,15 @@ const SymptomChecker: React.FC = () => {
                 title="Women's Health Symptom Checker"
                 subtitle="Quick triage and condition education to help you understand symptoms and decide when to seek medical care."
                 badge="AI Triage"
-            />
+            >
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🩺 Quick Triage</span>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>📚 Practical Guidance</span>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🛡️ Private by Design</span>
+                </div>
+            </InnerPageHero>
 
-            <div style={{ background: 'var(--theme-bg-accent)', minHeight: '100vh', marginTop: '60px', paddingTop: '0px' }}>
+            <div style={{ background: 'var(--theme-bg-accent)', minHeight: '100vh', marginTop: '40px', paddingTop: '0px' }}>
                 <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 20px 80px' }}>
 
                     {/* 2-Column Layout */}
@@ -82,15 +90,29 @@ const SymptomChecker: React.FC = () => {
                         <div className={styles.card} style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
                             <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '24px' }}>📋 Tell us what's happening</h3>
 
-                            <div style={{ marginBottom: '24px' }}>
+                            <div style={{ marginBottom: '20px' }}>
                                 <label style={{ display: 'block', fontWeight: '700', marginBottom: '8px', color: '#555' }}>Primary Symptom</label>
                                 <select
                                     style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #ddd', fontSize: '16px' }}
-                                    onChange={(e) => setSelectedSymptom(e.target.value)}
-                                    value={selectedSymptom || ""}
+                                    onChange={(e) => { setSelectedSymptom(e.target.value); setShowResult(false); }}
+                                    value={selectedSymptom}
                                 >
                                     <option value="" disabled>Select...</option>
-                                    {symptoms.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                                    {symptomOptions.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                                </select>
+                            </div>
+
+                            <div style={{ marginBottom: '20px' }}>
+                                <label style={{ display: 'block', fontWeight: '700', marginBottom: '8px', color: '#555' }}>Severity</label>
+                                <select
+                                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #ddd', fontSize: '16px' }}
+                                    onChange={(e) => { setSeverity(e.target.value); setShowResult(false); }}
+                                    value={severity}
+                                >
+                                    <option value="" disabled>Select...</option>
+                                    <option value="mild">Mild</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="severe">Severe</option>
                                 </select>
                             </div>
 
@@ -99,8 +121,9 @@ const SymptomChecker: React.FC = () => {
                                 <select
                                     style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #ddd', fontSize: '16px' }}
                                     value={duration}
-                                    onChange={(e) => setDuration(e.target.value)}
+                                    onChange={(e) => { setDuration(e.target.value); setShowResult(false); }}
                                 >
+                                    <option value="" disabled>Select...</option>
                                     <option value="today">Started today</option>
                                     <option value="days">Few days</option>
                                     <option value="weeks">Weeks+</option>
@@ -110,7 +133,8 @@ const SymptomChecker: React.FC = () => {
                             <button
                                 className={styles.primaryCta}
                                 style={{ width: '100%', textAlign: 'center', borderRadius: '12px' }}
-                                disabled={!selectedSymptom}
+                                disabled={!selectedSymptom || !severity || !duration}
+                                onClick={() => setShowResult(true)}
                             >
                                 Get Assessment
                             </button>
@@ -128,15 +152,13 @@ const SymptomChecker: React.FC = () => {
                                                     {style.icon} {result.heading.toUpperCase()}
                                                 </div>
                                                 <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '12px' }}>{result.heading}</h3>
-                                                <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#555', marginBottom: '24px' }}>{result.advice}</p>
+                                                <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#555', marginBottom: '24px' }}>{result.msg}</p>
 
-                                                <div style={{ display: 'flex', gap: '12px' }}>
-                                                    <Link to={ROUTES.APPOINTMENTS} className={styles.primaryCta} style={{ flex: 1, background: style.btn, textAlign: 'center', fontSize: '14px' }}>
+                                                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                                                    <Link to={ROUTES.APPOINTMENTS} className={styles.primaryCta} style={{ flex: 1, background: style.btn, textAlign: 'center', fontSize: '14px', minWidth: '150px' }}>
                                                         {result.action}
                                                     </Link>
-                                                    {result.level !== 'red' && (
-                                                        <button className={styles.secondaryCta} style={{ flex: 1, textAlign: 'center', fontSize: '14px' }}>Save Log</button>
-                                                    )}
+                                                    <button className={styles.secondaryCta} style={{ flex: 1, textAlign: 'center', fontSize: '14px', minWidth: '150px' }}>Save Log</button>
                                                 </div>
                                             </>
                                         );
@@ -163,6 +185,26 @@ const SymptomChecker: React.FC = () => {
                     </div>
 
                 </div>
+
+                {/* Triage Overview Cards */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '60px' }}>
+                    <div style={{ background: 'white', padding: '24px', borderRadius: '20px', border: '1px solid #E8F5E9', boxShadow: '0 2px 12px rgba(0,0,0,0.03)' }}>
+                        <div style={{ display: 'inline-flex', padding: '4px 12px', background: '#E8F5E9', color: '#2E7D32', borderRadius: '20px', fontWeight: '800', fontSize: '12px', marginBottom: '12px' }}>🟢 SELF-CARE</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Mild Symptoms</h4>
+                        <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.6' }}>Hydration, rest, warm compress, OTC relief. Monitor for changes over 24-48 hours.</p>
+                    </div>
+                    <div style={{ background: 'white', padding: '24px', borderRadius: '20px', border: '1px solid #FFF8E1', boxShadow: '0 2px 12px rgba(0,0,0,0.03)' }}>
+                        <div style={{ display: 'inline-flex', padding: '4px 12px', background: '#FFF8E1', color: '#F57C00', borderRadius: '20px', fontWeight: '800', fontSize: '12px', marginBottom: '12px' }}>🟡 CONSULT</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Moderate Symptoms</h4>
+                        <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.6' }}>Schedule a consult within 24–72 hours. Teleconsultation is recommended for rapid guidance.</p>
+                    </div>
+                    <div style={{ background: 'white', padding: '24px', borderRadius: '20px', border: '1px solid #FFEBEE', boxShadow: '0 2px 12px rgba(0,0,0,0.03)' }}>
+                        <div style={{ display: 'inline-flex', padding: '4px 12px', background: '#FFEBEE', color: '#D32F2F', borderRadius: '20px', fontWeight: '800', fontSize: '12px', marginBottom: '12px' }}>🔴 URGENT</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Severe Symptoms</h4>
+                        <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.6' }}>Seek urgent care immediately. Use teleconsultation only if emergency care isn’t accessible.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

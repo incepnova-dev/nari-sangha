@@ -1,0 +1,179 @@
+/* InsuranceGuide.module.css */
+.insurancePage {
+    background: #fdfbfd;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.basicsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.basicCard {
+    background: white;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    border: 1px solid #f0f0f0;
+}
+
+.icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.basicCard h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.basicCard p {
+    font-size: 0.9rem;
+    color: #636e72;
+    line-height: 1.5;
+}
+
+.checklistSplit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.panel {
+    padding: 48px;
+    border-radius: 32px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+    font-weight: 900;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+}
+
+.checklist li {
+    padding: 16px 0 16px 36px;
+    position: relative;
+    font-weight: 600;
+    color: #444;
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.checklist li::before {
+    content: '✅';
+    position: absolute;
+    left: 0;
+}
+
+.questionList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.questionItem {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    border: 1px solid #eee;
+}
+
+.qNum {
+    background: #ec407a;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.questionItem p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.ctaBox {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.ctaBox h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.ctaBox p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.btnRow {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btnSecondary {
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+}
+
+.btnWhite {
+    padding: 16px 32px;
+    background: white;
+    color: #ec407a;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+@media (max-width: 900px) {
+    .checklistSplit {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 24px;
+    }
+
+    .btnRow {
+        flex-direction: column;
+    }
+}

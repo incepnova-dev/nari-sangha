@@ -51,6 +51,20 @@ const MentalWellnessJourney: React.FC = () => {
         "Birth control can influence mood for some women"
     ];
 
+    const brainChemistry = [
+        { name: "Serotonin", icon: "💎", color: "#00bcd4", desc: "The 'Stability' molecule. Regulates mood, sleep, and appetite." },
+        { name: "Oxytocin", icon: "❤️", color: "#e91e63", desc: "The 'Connection' hormone. Vital for bonding and reducing stress." },
+        { name: "GABA", icon: "🧘", color: "#9c27b0", desc: "The 'Calm' molecule. Helps quiet the mind and reduce anxiety." },
+        { name: "Cortisol", icon: "⚡", color: "#ff5722", desc: "The 'Stress' hormone. Useful for survival but harmful when chronically high." },
+    ];
+
+    const severityScale = [
+        { level: "Mild", color: "#4caf50", cases: ["Baby blues", "Occasional worry"], action: "Self-care + Group support" },
+        { level: "Moderate", color: "#ff9800", cases: ["Persistent fatigue", "Anxiety affecting sleep"], action: "Counseling + Routine" },
+        { level: "Serious", color: "#9c27b0", cases: ["Intense sadness", "Difficulty bonding"], action: "Specialized Therapy" },
+        { level: "Critical", color: "#f44336", cases: ["Self-harm thoughts", "Hallucinations"], action: "Urgent Medical Care" },
+    ];
+
     const whenToSeek = [
         "Persistent sadness or hopelessness lasting 2+ weeks",
         "Loss of interest in activities you once enjoyed",
@@ -63,10 +77,16 @@ const MentalWellnessJourney: React.FC = () => {
     return (
         <div className="app-container">
             <InnerPageHero
-                title="Mental Wellness"
-                subtitle="Your mental health matters. Find tools, support, and resources to nurture your emotional wellbeing."
+                title="Mental Wellness & Mood"
+                subtitle="Your mental health is a journey, not a destination. Find tools, support, and resources to nurture your emotional wellbeing."
                 badge="Mental Health Support"
-            />
+            >
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🥗 Holistic Approach</span>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🧪 Science-Backed</span>
+                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🤝 Family Guide</span>
+                </div>
+            </InnerPageHero>
 
             {/* Back Button */}
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
@@ -139,13 +159,51 @@ const MentalWellnessJourney: React.FC = () => {
                 <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '30px' }}>
                     Healthy Coping Strategies
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '60px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '80px' }}>
                     {copingStrategies.map((item, idx) => (
-                        <div key={idx} className={styles.productCard} style={{ alignItems: 'flex-start', textAlign: 'left' }}>
-                            <h4 style={{ fontSize: '16px', color: 'var(--pink)', marginBottom: '8px' }}>{item.strategy}</h4>
-                            <p style={{ fontSize: '14px', color: '#666' }}>{item.benefit}</p>
+                        <div key={idx} className={styles.productCard} style={{ alignItems: 'flex-start', textAlign: 'left', padding: '24px' }}>
+                            <h4 style={{ fontSize: '16px', color: 'var(--pink)', marginBottom: '8px', fontWeight: '800' }}>{item.strategy}</h4>
+                            <p style={{ fontSize: '14px', color: '#666', lineHeight: '1.5' }}>{item.benefit}</p>
                         </div>
                     ))}
+                </div>
+
+                {/* Brain Chemistry Visual */}
+                <div style={{ background: 'white', padding: '60px 40px', borderRadius: '40px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', marginBottom: '80px' }}>
+                    <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>🧪 Understanding Your Chemistry</h2>
+                    <p style={{ color: '#666', textAlign: 'center', marginBottom: '40px' }}>Mood is often a reflection of biological balances we can support.</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
+                        {brainChemistry.map(c => (
+                            <div key={c.name} style={{ textAlign: 'center', padding: '32px', borderRadius: '24px', background: c.color + '08', border: `1px solid ${c.color}22` }}>
+                                <div style={{ fontSize: '40px', marginBottom: '16px' }}>{c.icon}</div>
+                                <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px', color: c.color }}>{c.name}</h3>
+                                <p style={{ fontSize: '13px', color: '#555', lineHeight: '1.6' }}>{c.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Severity Guide */}
+                <div style={{ marginBottom: '80px' }}>
+                    <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>📊 Emotional Severity Scale</h2>
+                    <p style={{ color: '#666', textAlign: 'center', marginBottom: '40px' }}>Understand where you are and what care you might need.</p>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+                        {severityScale.map(s => (
+                            <div key={s.level} style={{ background: 'white', padding: '32px', borderRadius: '24px', border: `1px solid ${s.color}44`, position: 'relative' }}>
+                                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '6px', background: s.color, borderRadius: '24px 24px 0 0' }}></div>
+                                <h3 style={{ fontSize: '20px', fontWeight: '900', color: s.color, marginBottom: '16px' }}>{s.level}</h3>
+                                <div style={{ marginBottom: '20px' }}>
+                                    <p style={{ fontSize: '12px', fontWeight: '800', color: '#999', textTransform: 'uppercase', marginBottom: '8px' }}>Common Signs</p>
+                                    <ul style={{ paddingLeft: '16px', margin: 0, fontSize: '13px', color: '#555' }}>
+                                        {s.cases.map(c => <li key={c}>{c}</li>)}
+                                    </ul>
+                                </div>
+                                <div style={{ background: s.color + '11', padding: '12px', borderRadius: '12px', textAlign: 'center' }}>
+                                    <p style={{ fontSize: '13px', fontWeight: '700', color: s.color, margin: 0 }}>{s.action}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Hormonal Connection */}
@@ -202,25 +260,56 @@ const MentalWellnessJourney: React.FC = () => {
                     </div>
                 </div>
 
+                {/* Family Guide CTA */}
+                <div style={{
+                    marginBottom: '80px',
+                    padding: '60px 40px',
+                    background: 'linear-gradient(135deg, #1A237E 0%, #311B92 100%)',
+                    borderRadius: '40px',
+                    color: 'white',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                    gap: '40px',
+                    alignItems: 'center'
+                }}>
+                    <div>
+                        <span style={{ background: 'rgba(255,255,255,0.2)', padding: '4px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: '800', marginBottom: '16px', display: 'inline-block' }}>FOR PARTNERS & FAMILY</span>
+                        <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '20px' }}>How to be a lifeline</h2>
+                        <p style={{ fontSize: '16px', opacity: 0.9, lineHeight: '1.6', marginBottom: '24px' }}>
+                            Supporting a loved one through mental health challenges can be difficult. Our family guide helps you understand, communicate, and support without burnout.
+                        </p>
+                        <button style={{ background: 'white', color: '#1A237E', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '800', cursor: 'pointer' }}>Get Family Guide</button>
+                    </div>
+                    <div style={{ background: 'rgba(255,255,255,0.05)', padding: '32px', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                        <h4 style={{ marginBottom: '20px', fontSize: '18px', fontWeight: '800' }}>Quick Tips for Support:</h4>
+                        <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '15px', opacity: 0.9, lineHeight: '2' }}>
+                            <li>Listen without trying to "fix" immediately</li>
+                            <li>Help with daily chores to reduce stress</li>
+                            <li>Validate her feelings as real and biologically rooted</li>
+                            <li>Encourage professional help gently</li>
+                        </ul>
+                    </div>
+                </div>
+
                 {/* Support CTA */}
                 <div style={{
                     textAlign: 'center',
-                    padding: '40px',
+                    padding: '60px 40px',
                     background: 'linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%)',
-                    borderRadius: '24px'
+                    borderRadius: '40px'
                 }}>
-                    <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '12px', color: '#2A2A2A' }}>
-                        Talk to a Mental Health Professional
+                    <h3 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', color: '#2A2A2A' }}>
+                        Talk to a Women's Health Therapist
                     </h3>
-                    <p style={{ fontSize: '15px', color: '#666', marginBottom: '24px' }}>
-                        Connect with therapists and counselors who specialize in women's mental health.
+                    <p style={{ fontSize: '17px', color: '#555', marginBottom: '32px', maxWidth: '600px', margin: '0 auto 32px' }}>
+                        Connect with specialized therapists and counselors who understand the unique intersection of hormonal health and mental wellness.
                     </p>
                     <button
                         onClick={() => navigate(ROUTES.APPOINTMENTS)}
                         className={styles.primaryCta}
-                        style={{ padding: '14px 28px', fontSize: '15px' }}
+                        style={{ padding: '18px 40px', fontSize: '18px' }}
                     >
-                        Find Support
+                        Book a Private Session
                     </button>
                 </div>
 

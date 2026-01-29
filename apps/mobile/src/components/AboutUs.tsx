@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   View,
   Text,
@@ -35,7 +35,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
   user,
   onBack,
   onSignOut,
-}) => {
+}: AboutUsProps) => {
   const userName = user?.name || user?.displayName || user?.email?.split('@')[0] || 'User';
 
   const stats: Stat[] = mockStats;
@@ -61,7 +61,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
   return (
     <View style={containerStyles.container}>
       <StatusBar barStyle="light-content" />
-      
+
       <WelcomeHeader
         userName={userName}
         navigation={navigation}
@@ -120,7 +120,7 @@ const AboutUs: React.FC<AboutUsProps> = ({
 
           {/* Services */}
           <Text style={aboutUsStyles.servicesHeader}>Our Services</Text>
-          
+
           <View style={aboutUsStyles.servicesGrid}>
             {services.map((service, index) => (
               <View key={index} style={aboutUsStyles.serviceCard}>

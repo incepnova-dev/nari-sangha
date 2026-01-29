@@ -1,0 +1,317 @@
+/* ResearchHub.module.css */
+.researchPage {
+    background: #fdfbfd;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.journeyHeader {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.journeyHeader h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.sub {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Anatomical Journey */
+.anatomicalJourney {
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 700px;
+}
+
+.anatomyVisualization {
+    background: #fcf8fa;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.eduControls {
+    margin-bottom: 30px;
+}
+
+.controlHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.pulseDot {
+    width: 10px;
+    height: 10px;
+    background: #ec407a;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#activeModeLabel {
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.controlButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.modeBtn {
+    padding: 10px 18px;
+    border: 1px solid #eee;
+    background: white;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modeBtn:hover {
+    border-color: #ec407a;
+    color: #ec407a;
+}
+
+.modeBtnActive {
+    background: #ec407a;
+    color: white;
+    border-color: #ec407a;
+}
+
+.enhancedSvg {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    filter: drop-shadow(0 10px 30px rgba(176, 0, 90, 0.05));
+}
+
+.eduDescBox {
+    margin-top: auto;
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #ec407a;
+}
+
+.eduDescBox strong {
+    color: #ec407a;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Right Content Info */
+.topicsScroll {
+    padding: 40px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.topicSection {
+    margin-bottom: 60px;
+}
+
+.topicSection h3 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+.researchList {
+    display: grid;
+    gap: 20px;
+}
+
+.researchCard {
+    background: #fdfbfd;
+    padding: 24px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.researchCard:hover {
+    background: white;
+    transform: translateX(10px);
+    border-color: #fce4ec;
+    box-shadow: 0 10px 30px rgba(236, 64, 122, 0.05);
+}
+
+/* Cancer Section */
+.cancer2col {
+    grid-template-columns: 450px 1fr !important;
+}
+
+.cancerViz {
+    padding: 30px !important;
+}
+
+.cancerSelector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.cancerTab {
+    flex: 1;
+    padding: 16px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.cancerTabActive {
+    border-color: #ec407a;
+    background: #fff5f8;
+    box-shadow: 0 8px 20px rgba(236, 64, 122, 0.1);
+}
+
+.cancerInfoGrid {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.infoCol {
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #f5f5f5;
+}
+
+.infoCol h4 {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: #ec407a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.infoCol ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.infoCol li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: #555;
+}
+
+/* Stage Intel */
+.stageIntelPanel {
+    background: #333;
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.statRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+
+.survivalBarBg {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.survivalBarFill {
+    height: 100%;
+    background: #ec407a;
+    transition: width 0.6s ease;
+}
+
+.stageTitleText {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stageDescText {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.vizLabel {
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.vizSub {
+    font-family: inherit;
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+    .anatomicalJourney {
+        grid-template-columns: 1fr;
+    }
+
+    .cancer2col {
+        grid-template-columns: 1fr !important;
+    }
+}

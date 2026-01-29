@@ -1,0 +1,199 @@
+/* VaccinationGuide.module.css */
+.vaccinationPage {
+    background: #fdfbfd;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tabContainer {
+    background: white;
+    border-radius: 32px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.tabHeader {
+    display: flex;
+    background: #fcfcfc;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.tabBtn {
+    flex: 1;
+    padding: 24px;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tabBtnActive {
+    color: #ec407a;
+    background: white;
+    box-shadow: 0 -4px 0 #ec407a inset;
+}
+
+.tabContent {
+    padding: 48px;
+}
+
+.overviewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.vaccineCard {
+    background: #fafafa;
+    padding: 32px;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.vaccineCard:hover {
+    transform: translateY(-5px);
+    background: white;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.04);
+}
+
+.vIcon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.vaccineCard h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.vaccineCard p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.vBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #fff5fa;
+    color: #ec407a;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    margin-top: 12px;
+}
+
+.pregnancyPlan h2 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.timelineList {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.timelineItem {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.timeLabel {
+    background: #ec407a;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 800;
+    min-width: 120px;
+    text-align: center;
+}
+
+.timeContent h4 {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.timeContent p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.schedulerInterface {
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.formRow {
+    display: flex;
+    gap: 16px;
+    margin: 32px 0;
+}
+
+.input,
+.select {
+    flex: 1;
+    padding: 16px;
+    border: 2px solid #f0f0f0;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.btnAction {
+    padding: 16px 32px;
+    background: #ec407a;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.alertCard {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 768px) {
+    .overviewGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tabContent {
+        padding: 24px;
+    }
+
+    .timelineItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .formRow {
+        flex-direction: column;
+    }
+}

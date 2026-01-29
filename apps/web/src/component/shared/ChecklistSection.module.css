@@ -1,0 +1,55 @@
+.checklistCard {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.checklistTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.checklistIcon {
+    color: var(--theme-primary, #e30b5d);
+    font-size: 1.5rem;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checklistItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    color: var(--theme-primary, #e30b5d);
+    font-weight: 900;
+    font-size: 14px;
+}
