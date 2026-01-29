@@ -1,0 +1,83 @@
+.trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: var(--footer-bg, #fce8f3);
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* CLAYMORPHISM OUTER */
+    box-shadow:
+        8px 8px 16px 0 rgba(0, 0, 0, 0.08),
+        -8px -8px 16px 0 rgba(255, 255, 255, 0.8);
+}
+
+.trigger:hover {
+    transform: scale(1.05) translateY(-2px);
+}
+
+.iconWrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+
+    /* CLAYMORPHISM INNER */
+    box-shadow:
+        inset 4px 4px 10px 0 rgba(255, 255, 255, 0.9),
+        inset -4px -4px 10px 0 rgba(0, 0, 0, 0.04);
+}
+
+.icon {
+    font-size: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.trigger.active {
+    background: white;
+}
+
+.pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--theme-nav-active, #d81b60);
+    opacity: 0.15;
+    z-index: 1;
+    animation: pulse 3s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .trigger {
+        width: 52px;
+        height: 52px;
+        bottom: 20px;
+        right: 20px;
+    }
+}

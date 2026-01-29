@@ -7,6 +7,8 @@
     --theme-hero-end: #764ba2;
     --theme-nav-active: #D81B60;
     --theme-bg-accent: #f8f0ff;
+    --footer-bg: linear-gradient(135deg, #f5ecfc 0%, #fce8f3 100%);
+    --footer-accent: rgba(118, 75, 162, 0.1);
 }
 
 /* THEME: Lavender (Journeys) */
@@ -15,6 +17,9 @@
     --theme-hero-end: #BA68C8;
     --theme-nav-active: #8E24AA;
     --theme-bg-accent: #F3E5F5;
+    --footer-bg: #EEDFF2;
+    /* Deeper lavender */
+    --footer-accent: rgba(186, 104, 200, 0.15);
 }
 
 /* THEME: Pink (Products) */
@@ -23,6 +28,9 @@
     --theme-hero-end: #F06292;
     --theme-nav-active: #C2185B;
     --theme-bg-accent: #FCE4EC;
+    --footer-bg: #F9D8E4;
+    /* Muted blush */
+    --footer-accent: rgba(240, 98, 146, 0.15);
 }
 
 /* THEME: Mint (Consult/Appointments) */
@@ -31,6 +39,9 @@
     --theme-hero-end: #4DB6AC;
     --theme-nav-active: #00796B;
     --theme-bg-accent: #E0F2F1;
+    --footer-bg: #D1EAE7;
+    /* Soft sage */
+    --footer-accent: rgba(77, 182, 172, 0.15);
 }
 
 /* THEME: Peach (Community) */
@@ -39,6 +50,9 @@
     --theme-hero-end: #FFB74D;
     --theme-nav-active: #EF6C00;
     --theme-bg-accent: #FFF3E0;
+    --footer-bg: #FEE8CB;
+    /* Warm beige */
+    --footer-accent: rgba(255, 183, 77, 0.15);
 }
 
 /* THEME: Blue (Symptoms) */
@@ -47,4 +61,7 @@
     --theme-hero-end: #4FC3F7;
     --theme-nav-active: #0288D1;
     --theme-bg-accent: #E1F5FE;
+    --footer-bg: #D4EFFD;
+    /* Muted blue */
+    --footer-accent: rgba(79, 195, 247, 0.15);
 }

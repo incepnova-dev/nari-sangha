@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    .auth-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+    .auth-panel{background:white;border-radius:16px;box-shadow:var(--shadow-xl);padding:2rem}
+    .auth-panel .sub{margin-bottom:1.25rem}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-weight:600;margin-bottom:.4rem;color:var(--gray-700)}
+    .form-group input{width:100%;padding:.85rem 1rem;border-radius:12px;border:1px solid var(--gray-200);transition:var(--transition);font-family:inherit}
+    .form-group input:focus{border-color:var(--primary)}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:.75rem 0 1.25rem}
+    .tiny{color:var(--gray-600);font-size:.95rem}
+    .btn-block{width:100%;justify-content:center}
+    .divider{display:flex;align-items:center;gap:1rem;margin:1.25rem 0;color:var(--gray-600)}
+    .divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--gray-200)}
+    .benefits{display:grid;gap:1rem}
+    .benefit{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:1rem;backdrop-filter: blur(10px)}
+    @media (max-width: 900px){ .auth-wrap{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <header class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="container">
+      <div class="grid">
+        <div>
+          <h1>Welcome back</h1>
+          <p>Log in to access your Dashboard, reminders, and next best steps across journeys.</p>
+          <div class="chiprow">
+            <span class="chip"><i class="fa-solid fa-bell"></i> Reminders</span>
+            <span class="chip"><i class="fa-solid fa-chart-line"></i> Progress</span>
+            <span class="chip"><i class="fa-solid fa-lock"></i> Privacy-first</span>
+          </div>
+        </div>
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=1200" alt="Login"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="auth-wrap">
+          <div class="auth-panel">
+            <h2 style="text-align:left;margin-bottom:.25rem">Log in</h2>
+            <p class="sub" style="text-align:left;margin-bottom:1.25rem">Redirects to your Dashboard (front-end flow).</p>
+
+            <form id="loginForm">
+              <div class="form-group">
+                <label><i class="fa-solid fa-envelope"></i> Email</label>
+                <input type="email" placeholder="your@email.com" required>
+              </div>
+
+              <div class="form-group">
+                <label><i class="fa-solid fa-lock"></i> Password</label>
+                <input type="password" placeholder="••••••••" required>
+              </div>
+
+              <div class="row">
+                <label class="tiny" style="display:flex;align-items:center;gap:.5rem">
+                  <input type="checkbox" style="width:auto"> Remember me
+                </label>
+                <a class="tiny" href="#" style="text-decoration:none;color:var(--primary);font-weight:600">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-right-to-bracket"></i> Log In
+              </button>
+
+              <div class="divider">or</div>
+
+              <button type="button" class="btn btn-outline btn-block">
+                <i class="fa-brands fa-google"></i> Continue with Google
+              </button>
+
+              <p class="tiny" style="margin-top:1rem">
+                New here? <a href="journeys.html" style="color:var(--primary);font-weight:700;text-decoration:none">Start with Journeys</a>
+                or <a href="index.html" style="color:var(--primary);font-weight:700;text-decoration:none">go Home</a>.
+              </p>
+            </form>
+          </div>
+
+          <div class="benefits">
+            <div class="benefit">
+              <h3 style="margin-bottom:.35rem"><i class="fa-solid fa-gauge-high"></i> Dashboard</h3>
+              <p style="margin-bottom:0;opacity:.95">Central place for reminders, actions, and personalized recommendations.</p>
+            </div>
+            <div class="benefit">
+              <h3 style="margin-bottom:.35rem"><i class="fa-solid fa-clipboard-check"></i> Prevention plans</h3>
+              <p style="margin-bottom:0;opacity:.95">Combine Vaccination + Screening into a clear checklist.</p>
+            </div>
+            <div class="benefit">
+              <h3 style="margin-bottom:.35rem"><i class="fa-solid fa-user-doctor"></i> Care access</h3>
+              <p style="margin-bottom:0;opacity:.95">Use Find Specialists or Teleconsultation when you need help now.</p>
+            </div>
+            <a class="btn btn-ghost" href="dashboard.html"><i class="fa-solid fa-arrow-right"></i> Preview Dashboard</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Next Best Steps</h2>
+        <p class="sub">Login → Dashboard → choose a Journey.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+          <a class="btn btn-outline" href="index.html"><i class="fa-solid fa-arrow-left"></i> Previous: Home</a>
+          <a class="btn btn-primary" href="dashboard.html">Next: Dashboard <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn btn-ghost" href="journeys.html"><i class="fa-solid fa-route"></i> Browse Journeys</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+
+    // Front-end redirect flow
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

@@ -225,7 +225,7 @@
 
 .hero {
   padding: 80px 20px 160px;
-  background: var(--pink-primary);
+  background: linear-gradient(180deg, #D81B60 0%, #E91E63 50%, #F8BBD0 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -233,23 +233,67 @@
   gap: 40px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  /* Protect foreground */
 }
 
-.hero::before {
-  content: "WOMEN SAFETY";
+.hero::before,
+.hero::after {
+  content: "";
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 11vw;
-  font-weight: 950;
-  color: rgba(255, 255, 255, 0.06);
+  inset: -10%;
   pointer-events: none;
-  line-height: 1;
-  z-index: 0;
-  white-space: nowrap;
-  letter-spacing: -4px;
+  z-index: -1;
+  /* Place behind content */
 }
+
+/* Layer 2: Abstract Wellness Forms (Fluid, Rounded, Low-Opacity) */
+.hero::before {
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 35%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.07) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 15%, rgba(255, 255, 255, 0.06) 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 85%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+  filter: blur(60px);
+  animation: wellnessFloat 25s ease-in-out infinite alternate;
+}
+
+/* Layer 3: Journey Motif (Subtle Flowing Paths) */
+.hero::after {
+  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-100,200 C150,150 350,350 600,300 S850,150 1100,200 M-100,500 C150,450 350,650 600,600 S850,450 1100,500 M-100,800 C150,750 350,950 600,900 S850,750 1100,800' stroke='rgba(255,255,255,0.03)' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+  background-size: cover;
+  opacity: 0.8;
+  animation: journeyDrift 40s linear infinite;
+}
+
+@keyframes wellnessFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(3%, 3%) scale(1.08);
+  }
+}
+
+@keyframes journeyDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(30px, 15px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hero::before,
+  .hero::after {
+    animation: none;
+  }
+}
+
 
 .heroContent {
   max-width: 900px;

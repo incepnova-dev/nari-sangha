@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "../landing/landing.module.css";
 import { products, insurancePlans, Product } from "../../data/seed";
 import InnerPageHero from "../shared/InnerPageHero";
@@ -11,6 +12,32 @@ const Products: React.FC = () => {
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
     const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
     const { addToCart } = useCart();
+    const location = useLocation();
+
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+        if (location.hash === "#insurance-plans") {
+            const scrollToInsurance = () => {
+                const section = document.getElementById("insurance-plans");
+                if (section) {
+                    const navbarOffset = 100; // Account for sticky navbar
+                    const elementPosition = section.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            };
+
+            // Small delay to ensure content is rendered
+            timer = setTimeout(scrollToInsurance, 100);
+        }
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [location]);
 
     const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care", "Insurance"];
 
@@ -205,7 +232,7 @@ const Products: React.FC = () => {
 
                     {/* Insurance Section */}
                     {(selectedCategory === 'All' || selectedCategory === 'Insurance') && (
-                        <div id="insurance" style={{ marginTop: '80px' }}>
+                        <div id="insurance-plans" style={{ marginTop: '80px' }}>
                             <div style={{ textAlign: 'center', marginBottom: '50px' }}>
                                 <span style={{
                                     background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',

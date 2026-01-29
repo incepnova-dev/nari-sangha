@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Insurance - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+    .panel{background:white;border-radius:16px;box-shadow:var(--shadow-md);padding:1.5rem}
+    .panel h3{margin-bottom:.5rem}
+    .checklist{margin:.75rem 0 0;list-style:none}
+    .checklist li{display:flex;gap:.75rem;align-items:flex-start;margin:.6rem 0;color:var(--gray-700)}
+    .checklist i{color:var(--success);margin-top:.15rem}
+    .q{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:14px;padding:1rem;margin:.8rem 0}
+    @media (max-width: 900px){ .two-col{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <header class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="container">
+      <div class="grid">
+        <div>
+          <h1>Insurance & Coverage Guidance</h1>
+          <p>Understand coverage basics, prepare questions for clinics, and reduce out-of-pocket surprises—especially for screening, pregnancy care, and specialist visits.</p>
+          <div class="chiprow">
+            <span class="chip"><i class="fa-solid fa-shield"></i> Coverage-ready</span>
+            <span class="chip"><i class="fa-solid fa-receipt"></i> Cost clarity</span>
+            <span class="chip"><i class="fa-solid fa-file-medical"></i> Documentation</span>
+          </div>
+        </div>
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?w=1200" alt="Insurance"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section">
+      <div class="container">
+        <h2>Coverage basics (quick)</h2>
+        <p class="sub">A clear mental model before you book an appointment.</p>
+
+        <div class="grid-cards">
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-id-card"></i></div>
+            <h3>Plan type</h3>
+            <p>HMO/PPO/EPO affects provider network and referrals.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h3>In-network vs out-of-network</h3>
+            <p>In-network typically costs less and has simpler claims.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+            <h3>Deductible & copay</h3>
+            <p>Know what you pay before coverage kicks in and per visit.</p>
+          </div>
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <h3>Prior authorization</h3>
+            <p>Some labs, imaging, or specialists may require approval.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Before you book: checklist</h2>
+        <p class="sub">Use this before Teleconsultation or Find Specialists.</p>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3><i class="fa-solid fa-list-check"></i> What to verify</h3>
+            <ul class="checklist">
+              <li><i class="fa-regular fa-square-check"></i> Clinic/doctor is in-network</li>
+              <li><i class="fa-regular fa-square-check"></i> Referral needed? (common in HMOs)</li>
+              <li><i class="fa-regular fa-square-check"></i> Teleconsultation coverage (video visits)</li>
+              <li><i class="fa-regular fa-square-check"></i> Lab/ultrasound coverage and location</li>
+              <li><i class="fa-regular fa-square-check"></i> Maternity coverage details (prenatal, delivery)</li>
+              <li><i class="fa-regular fa-square-check"></i> Preventive screening coverage (Pap, mammogram)</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3><i class="fa-solid fa-phone-volume"></i> What to ask (copy/paste)</h3>
+            <div class="q"><strong>1)</strong> Are you in-network for my plan and tier?</div>
+            <div class="q"><strong>2)</strong> What is my estimated patient responsibility for this visit?</div>
+            <div class="q"><strong>3)</strong> Do you bill as “office visit” or “telehealth”?</div>
+            <div class="q"><strong>4)</strong> Are labs/imaging billed separately?</div>
+            <div class="q"><strong>5)</strong> Do you need prior authorization or referral?</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">
+          <a class="btn btn-outline" href="find-doctors.html"><i class="fa-solid fa-user-doctor"></i> Find Specialists</a>
+          <a class="btn btn-primary" href="teleconsultation.html"><i class="fa-solid fa-video"></i> Teleconsultation</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Where Insurance connects in your flow</h2>
+        <p class="sub">So users always know what to do next.</p>
+
+        <div class="timeline" style="max-width:980px;margin:0 auto">
+          <div class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-stethoscope"></i></div>
+            <div class="timeline-content">
+              <h3>Symptoms</h3>
+              <p>Start with <a href="symptom-checker.html" style="color:var(--primary);font-weight:700;text-decoration:none">Symptom Checker</a> → decide self-care vs consult vs urgent care.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-user-doctor"></i></div>
+            <div class="timeline-content">
+              <h3>Specialist selection</h3>
+              <p>Use <a href="find-doctors.html" style="color:var(--primary);font-weight:700;text-decoration:none">Find Specialists</a> and verify network coverage before booking.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div class="timeline-content">
+              <h3>Prevention planning</h3>
+              <p>Pair insurance preparation with <a href="screening.html" style="color:var(--primary);font-weight:700;text-decoration:none">Screening</a> + <a href="vaccination.html" style="color:var(--primary);font-weight:700;text-decoration:none">Vaccination</a> schedules.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Next Best Steps</h2>
+        <p class="sub">Move from coverage clarity → booking → follow-ups.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+          <a class="btn btn-outline" href="research.html"><i class="fa-solid fa-arrow-left"></i> Previous: Research</a>
+          <a class="btn btn-primary" href="government-schemes.html">Next: Government Schemes <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn btn-ghost" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+  </script>
+</body>
+</html>

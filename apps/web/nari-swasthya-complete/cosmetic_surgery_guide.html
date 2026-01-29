@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmetic Surgery Guide - Interactive Exploration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --rose-primary: #d81b60;
+      --rose-soft: #ec407a;
+      --rose-light: #f8bbd0;
+      --rose-pale: #fce4ec;
+      --lavender: #e1bee7;
+      --lavender-light: #f3e5f5;
+      --cream: #faf8f6;
+      --beige: #f5f1ed;
+      --charcoal: #2a2a2a;
+      --gray: #5a5a5a;
+      --gray-light: #8a8a8a;
+      --white: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --shadow-strong: rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    /* HEADER */
+    .site-header {
+      background: linear-gradient(135deg, var(--white) 0%, var(--rose-pale) 100%);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: '✦';
+      font-size: 1.5rem;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--gray);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--rose-primary);
+      transition: width 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: var(--rose-primary);
+    }
+
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-nav {
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+
+    .btn-nav.primary {
+      background: var(--rose-primary);
+      color: white;
+    }
+
+    .btn-nav.primary:hover {
+      background: var(--rose-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(216, 27, 96, 0.3);
+    }
+
+    .btn-nav.outline {
+      border: 2px solid var(--rose-primary);
+      color: var(--rose-primary);
+      background: transparent;
+    }
+
+    .btn-nav.outline:hover {
+      background: var(--rose-primary);
+      color: white;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1400px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .hero-content .accent {
+      color: var(--rose-primary);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--rose-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--rose-soft);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(216, 27, 96, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--rose-primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid var(--rose-primary);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: var(--rose-primary);
+      color: white;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .body-silhouette {
+      width: 250px;
+      height: 450px;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .body-point {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--rose-primary);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 0 0 0 rgba(216, 27, 96, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(216, 27, 96, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(216, 27, 96, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(216, 27, 96, 0);
+      }
+    }
+
+    .body-point:hover {
+      transform: scale(1.5);
+      background: var(--rose-soft);
+    }
+
+    .body-point.chest { top: 25%; left: 50%; transform: translate(-50%, -50%); }
+    .body-point.abdomen { top: 45%; left: 50%; transform: translate(-50%, -50%); }
+    .body-point.face { top: 10%; left: 50%; transform: translate(-50%, -50%); }
+    .body-point.eyes { top: 8%; left: 50%; transform: translate(-50%, -50%); }
+    .body-point.hips { top: 55%; left: 50%; transform: translate(-50%, -50%); }
+
+    .point-label {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 15px);
+      transform: translateY(-50%);
+      background: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+      white-space: nowrap;
+      box-shadow: 0 4px 12px var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .body-point:hover .point-label {
+      opacity: 1;
+    }
+
+    /* MAIN CONTENT */
+    .main-content {
+      max-width: 1400px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 5rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+    }
+
+    /* PROCEDURE CARDS */
+    .procedure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .procedure-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px var(--shadow);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .procedure-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 60px var(--shadow-strong);
+    }
+
+    .procedure-header {
+      background: linear-gradient(135deg, var(--rose-primary) 0%, var(--rose-soft) 100%);
+      padding: 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .procedure-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: shimmer 8s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .procedure-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .procedure-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .procedure-subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .procedure-body {
+      padding: 2rem;
+    }
+
+    .severity-levels {
+      margin-bottom: 1.5rem;
+    }
+
+    .severity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--beige);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+
+    .severity-item:hover {
+      background: var(--lavender-light);
+      transform: translateX(5px);
+    }
+
+    .severity-badge {
+      background: var(--rose-primary);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .severity-badge.mild { background: #4caf50; }
+    .severity-badge.moderate { background: #ff9800; }
+    .severity-badge.critical { background: #f44336; }
+
+    .severity-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .procedure-footer {
+      padding: 0 2rem 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-simulate {
+      flex: 1;
+      background: var(--rose-primary);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .btn-simulate:hover {
+      background: var(--rose-soft);
+      transform: scale(1.05);
+    }
+
+    .btn-learn-more {
+      flex: 1;
+      background: transparent;
+      color: var(--rose-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      border: 2px solid var(--rose-primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .btn-learn-more:hover {
+      background: var(--rose-primary);
+      color: white;
+    }
+
+    /* SIMULATOR SECTION */
+    .simulator-container {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem;
+      box-shadow: 0 15px 50px var(--shadow);
+      margin-bottom: 4rem;
+    }
+
+    .simulator-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .simulator-title {
+      font-size: 2rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .simulator-subtitle {
+      color: var(--gray);
+    }
+
+    .simulator-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .control-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .control-select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      border: 2px solid var(--lavender);
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .control-select:focus {
+      outline: none;
+      border-color: var(--rose-primary);
+      box-shadow: 0 0 0 4px rgba(216, 27, 96, 0.1);
+    }
+
+    .slider-control {
+      width: 100%;
+    }
+
+    .slider-input {
+      width: 100%;
+      height: 6px;
+      border-radius: 5px;
+      background: var(--lavender);
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--rose-primary);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slider-input::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 8px rgba(216, 27, 96, 0.2);
+    }
+
+    .slider-input::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--rose-primary);
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .slider-value {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+    }
+
+    .simulator-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .simulation-view {
+      background: var(--beige);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .view-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--rose-primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .simulation-canvas {
+      width: 100%;
+      max-width: 300px;
+      height: 350px;
+      position: relative;
+      margin-top: 2rem;
+    }
+
+    /* INFO PANEL */
+    .info-panel {
+      background: linear-gradient(135deg, var(--lavender-light) 0%, var(--rose-pale) 100%);
+      border-radius: 24px;
+      padding: 3rem;
+      margin: 3rem 0;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 25px var(--shadow);
+    }
+
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+
+    .info-text {
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* RECOVERY TIMELINE */
+    .timeline-container {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--rose-primary), var(--lavender));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 2rem;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: -2.5rem;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--rose-primary);
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 0 4px var(--rose-pale);
+    }
+
+    .timeline-content {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 25px var(--shadow);
+    }
+
+    .timeline-title {
+      font-size: 1.2rem;
+      color: var(--rose-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-description {
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 3rem;
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--beige);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: var(--rose-primary);
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+
+    .modal-section {
+      margin-bottom: 2rem;
+    }
+
+    .modal-section-title {
+      font-size: 1.3rem;
+      color: var(--rose-primary);
+      margin-bottom: 1rem;
+    }
+
+    .question-list {
+      list-style: none;
+    }
+
+    .question-item {
+      padding: 1rem;
+      background: var(--beige);
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+
+    .question-item::before {
+      content: '?';
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--rose-primary);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px var(--shadow-strong);
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      z-index: 3000;
+      animation: toastSlideIn 0.3s ease-out;
+    }
+
+    @keyframes toastSlideIn {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .toast.active {
+      display: flex;
+    }
+
+    .toast-icon {
+      font-size: 1.5rem;
+    }
+
+    .toast-message {
+      color: var(--charcoal);
+      font-weight: 500;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-visual {
+        height: 400px;
+      }
+
+      .simulator-display {
+        grid-template-columns: 1fr;
+      }
+
+      .main-nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .procedure-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .modal-content {
+        padding: 2rem;
+      }
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--beige);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--rose-primary);
+      border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--rose-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="logo">Nari Shakti</a>
+      <nav class="main-nav">
+        <a href="#procedures">Procedures</a>
+        <a href="#simulator">Simulator</a>
+        <a href="#recovery">Recovery</a>
+        <a href="#consultation">Consultation</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#" class="btn-nav primary">Book Consultation</a>
+        <a href="#" class="btn-nav outline">Learn More</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your Journey to <span class="accent">Confidence</span> Starts Here</h1>
+      <p class="hero-subtitle">
+        Explore evidence-based cosmetic procedures with interactive tools designed to help you make informed, empowered decisions about your body and wellbeing.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">15+</span>
+          <span class="stat-label">Procedures</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3D</span>
+          <span class="stat-label">Simulators</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Informed</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="scrollToSimulator()">
+          Try Simulator ✨
+        </button>
+        <button class="btn-secondary" onclick="scrollToProcedures()">
+          Explore Procedures
+        </button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="body-silhouette">
+        <svg viewBox="0 0 200 400" style="width: 100%; height: 100%;">
+          <!-- Body outline -->
+          <ellipse cx="100" cy="40" rx="25" ry="30" fill="var(--lavender-light)" opacity="0.6"/>
+          <ellipse cx="100" cy="100" rx="35" ry="40" fill="var(--rose-pale)" opacity="0.6"/>
+          <ellipse cx="100" cy="180" rx="40" ry="55" fill="var(--lavender-light)" opacity="0.6"/>
+          <ellipse cx="100" cy="280" rx="35" ry="60" fill="var(--rose-pale)" opacity="0.6"/>
+        </svg>
+        
+        <div class="body-point face" data-procedure="Facelift">
+          <span class="point-label">Face</span>
+        </div>
+        <div class="body-point eyes" data-procedure="Blepharoplasty">
+          <span class="point-label">Eyes</span>
+        </div>
+        <div class="body-point chest" data-procedure="Breast">
+          <span class="point-label">Breast</span>
+        </div>
+        <div class="body-point abdomen" data-procedure="Abdominoplasty">
+          <span class="point-label">Abdomen</span>
+        </div>
+        <div class="body-point hips" data-procedure="Liposuction">
+          <span class="point-label">Body Contouring</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    
+    <!-- PROCEDURES SECTION -->
+    <section id="procedures" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Explore Procedures</h2>
+        <p class="section-subtitle">Comprehensive information about each procedure, indications, and expected outcomes</p>
+      </div>
+
+      <div class="procedure-grid">
+        
+        <!-- Breast Augmentation -->
+        <div class="procedure-card" data-procedure="breast-augmentation">
+          <div class="procedure-header">
+            <div class="procedure-icon">💎</div>
+            <h3 class="procedure-name">Breast Augmentation</h3>
+            <p class="procedure-subtitle">Volume enhancement with implants</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Clothing fit issues, minor asymmetry</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Significant size disparity, self-consciousness</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Severe psychological distress, congenital absence</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('breast-augmentation')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('breast-augmentation')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Breast Lift -->
+        <div class="procedure-card" data-procedure="breast-lift">
+          <div class="procedure-header">
+            <div class="procedure-icon">🌺</div>
+            <h3 class="procedure-name">Breast Lift (Mastopexy)</h3>
+            <p class="procedure-subtitle">Restore youthful breast position</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Nipples forward, slight descent</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Nipples at breast fold, empty upper breast</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Severe drooping, rashes, back pain</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('breast-lift')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('breast-lift')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Breast Reduction -->
+        <div class="procedure-card" data-procedure="breast-reduction">
+          <div class="procedure-header">
+            <div class="procedure-icon">🦋</div>
+            <h3 class="procedure-name">Breast Reduction</h3>
+            <p class="procedure-subtitle">Relief from large breasts</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Bra strap grooving, occasional discomfort</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Chronic pain, difficulty exercising, rashes</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Severe pain, postural problems, skin breakdown</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('breast-reduction')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('breast-reduction')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Abdominoplasty -->
+        <div class="procedure-card" data-procedure="abdominoplasty">
+          <div class="procedure-header">
+            <div class="procedure-icon">✨</div>
+            <h3 class="procedure-name">Abdominoplasty (Tummy Tuck)</h3>
+            <p class="procedure-subtitle">Restore flat, toned abdomen</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Loose skin resistant to exercise</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Abdominal "apron", diastasis recti</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Core dysfunction, infections, incontinence</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('abdominoplasty')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('abdominoplasty')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Liposuction -->
+        <div class="procedure-card" data-procedure="liposuction">
+          <div class="procedure-header">
+            <div class="procedure-icon">💫</div>
+            <h3 class="procedure-name">Liposuction</h3>
+            <p class="procedure-subtitle">Targeted fat removal</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Minor contour irregularities</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Disproportionate fat distribution</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Lipedema, severe contour deformities</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('liposuction')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('liposuction')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Facelift -->
+        <div class="procedure-card" data-procedure="facelift">
+          <div class="procedure-header">
+            <div class="procedure-icon">🌸</div>
+            <h3 class="procedure-name">Facelift (Rhytidectomy)</h3>
+            <p class="procedure-subtitle">Address facial aging</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Early jowling, slight neck laxity</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Pronounced folds, marionette lines</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Severe tissue descent, functional issues</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('facelift')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('facelift')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Blepharoplasty -->
+        <div class="procedure-card" data-procedure="blepharoplasty">
+          <div class="procedure-header">
+            <div class="procedure-icon">👁️</div>
+            <h3 class="procedure-name">Eyelid Surgery (Blepharoplasty)</h3>
+            <p class="procedure-subtitle">Refresh tired eyes</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Slight hooding, minor puffiness</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Skin touching lashes, tired appearance</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Vision obstruction (may be covered by insurance)</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('blepharoplasty')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('blepharoplasty')">Learn More</button>
+          </div>
+        </div>
+
+        <!-- Labiaplasty -->
+        <div class="procedure-card" data-procedure="labiaplasty">
+          <div class="procedure-header">
+            <div class="procedure-icon">🌹</div>
+            <h3 class="procedure-name">Labiaplasty</h3>
+            <p class="procedure-subtitle">Vaginal rejuvenation</p>
+          </div>
+          <div class="procedure-body">
+            <div class="severity-levels">
+              <div class="severity-item">
+                <span class="severity-badge mild">Mild</span>
+                <span class="severity-text">Minor cosmetic concern</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge moderate">Moderate</span>
+                <span class="severity-text">Discomfort with clothing, exercise, intercourse</span>
+              </div>
+              <div class="severity-item">
+                <span class="severity-badge critical">Critical</span>
+                <span class="severity-text">Chronic pain, infections, functional interference</span>
+              </div>
+            </div>
+          </div>
+          <div class="procedure-footer">
+            <button class="btn-simulate" onclick="openSimulator('labiaplasty')">Simulate</button>
+            <button class="btn-learn-more" onclick="openModal('labiaplasty')">Learn More</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SIMULATOR SECTION -->
+    <section id="simulator" class="section">
+      <div class="simulator-container">
+        <div class="simulator-header">
+          <h2 class="simulator-title">Interactive Procedure Simulator</h2>
+          <p class="simulator-subtitle">Visualize potential outcomes with our interactive tool</p>
+        </div>
+
+        <div class="simulator-controls">
+          <div class="control-group">
+            <label class="control-label">Select Procedure</label>
+            <select id="procedureSelect" class="control-select" onchange="updateSimulator()">
+              <option value="">Choose a procedure...</option>
+              <option value="breast-augmentation">Breast Augmentation</option>
+              <option value="breast-lift">Breast Lift</option>
+              <option value="breast-reduction">Breast Reduction</option>
+              <option value="abdominoplasty">Abdominoplasty (Tummy Tuck)</option>
+              <option value="liposuction">Liposuction</option>
+              <option value="facelift">Facelift</option>
+              <option value="blepharoplasty">Blepharoplasty (Eyelid Surgery)</option>
+              <option value="labiaplasty">Labiaplasty</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Intensity Level</label>
+            <input type="range" id="intensitySlider" class="slider-input slider-control" min="1" max="10" value="5" oninput="updateSimulator()">
+            <div class="slider-value" id="intensityValue">5 / 10</div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">View Angle</label>
+            <select id="angleSelect" class="control-select" onchange="updateSimulator()">
+              <option value="front">Front View</option>
+              <option value="side">Side View</option>
+              <option value="profile">Profile View</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="simulator-display">
+          <div class="simulation-view">
+            <span class="view-label">Before</span>
+            <div class="simulation-canvas" id="beforeCanvas">
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--gray); font-size: 1.1rem;">
+                Select a procedure to begin simulation
+              </div>
+            </div>
+          </div>
+          <div class="simulation-view">
+            <span class="view-label">After (Simulated)</span>
+            <div class="simulation-canvas" id="afterCanvas">
+              <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--gray); font-size: 1.1rem;">
+                Results will appear here
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--rose-pale); border-radius: 16px;">
+          <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.7;">
+            <strong>Note:</strong> This simulator provides general visualizations only. Actual results vary based on individual anatomy, surgeon technique, and healing. Always consult with a board-certified plastic surgeon for personalized assessments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO PANEL -->
+    <section class="section">
+      <div class="info-panel">
+        <div class="section-header">
+          <h2 class="section-title" style="color: var(--charcoal);">Why Choose Us?</h2>
+          <p class="section-subtitle" style="color: var(--gray);">Comprehensive care at every step of your journey</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">🏥</div>
+            <h3 class="info-title">Board-Certified Surgeons</h3>
+            <p class="info-text">
+              Our team consists of highly qualified, board-certified plastic surgeons with extensive experience in cosmetic and reconstructive procedures.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🔬</div>
+            <h3 class="info-title">Evidence-Based Approach</h3>
+            <p class="info-text">
+              Every procedure is backed by clinical research and proven techniques, ensuring the highest standards of safety and efficacy.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">💝</div>
+            <h3 class="info-title">Personalized Care</h3>
+            <p class="info-text">
+              We understand that each person's journey is unique. Our team provides individualized treatment plans tailored to your specific goals and anatomy.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🌟</div>
+            <h3 class="info-title">Comprehensive Support</h3>
+            <p class="info-text">
+              From initial consultation through post-operative care, we're with you every step of the way to ensure optimal results and recovery.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">🔒</div>
+            <h3 class="info-title">Safety First</h3>
+            <p class="info-text">
+              All procedures are performed in accredited facilities with state-of-the-art equipment and rigorous safety protocols.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">📊</div>
+            <h3 class="info-title">Transparent Outcomes</h3>
+            <p class="info-text">
+              We provide realistic expectations, detailed before/after galleries, and honest discussions about potential risks and benefits.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOVERY TIMELINE -->
+    <section id="recovery" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Recovery Timeline</h2>
+        <p class="section-subtitle">Understanding what to expect during your healing journey</p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Days 1-7: Immediate Post-Operative</h3>
+              <p class="timeline-description">
+                Rest is crucial. Arrange help for daily tasks, wear compression garments as directed, take prescribed medications, and watch for any signs of infection. Gentle walking is encouraged to prevent blood clots.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Weeks 2-6: Early Recovery</h3>
+              <p class="timeline-description">
+                Gradually increase activity levels. Light walking can progress to normal daily activities. Avoid heavy lifting (over 5kg). Begin scar treatments when approved. Swelling peaks around week 2-3.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Months 2-3: Returning to Normal</h3>
+              <p class="timeline-description">
+                Resume exercise gradually, starting with low-impact activities. Most patients can return to full activities by month 3-6. Continue scar care and sun protection.
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <h3 class="timeline-title">Months 6-12: Final Results</h3>
+              <p class="timeline-description">
+                Results become fully visible by 6 months, with final settling at 12-18 months. Scars continue to fade and soften. Maintain stable weight and healthy lifestyle for longevity of results.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONSULTATION CTA -->
+    <section id="consultation" class="section">
+      <div style="background: linear-gradient(135deg, var(--rose-primary) 0%, var(--rose-soft) 100%); border-radius: 24px; padding: 4rem; text-align: center; color: white;">
+        <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Playfair Display', serif;">Ready to Take the Next Step?</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">
+          Schedule a confidential consultation with our board-certified surgeons to discuss your goals and explore your options.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <button class="btn-primary" style="background: white; color: var(--rose-primary);" onclick="showToast('Booking system coming soon!')">
+            Book Consultation
+          </button>
+          <button class="btn-secondary" style="border-color: white; color: white;" onclick="openModal('questions')">
+            Questions to Ask Your Doctor
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div id="modalBody">
+        <!-- Content will be dynamically inserted -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message" id="toastMessage"></span>
+  </div>
+
+  <script>
+    // GLOBAL STATE
+    let currentProcedure = '';
+    let currentIntensity = 5;
+    let currentAngle = 'front';
+
+    // SCROLL FUNCTIONS
+    function scrollToSimulator() {
+      document.getElementById('simulator').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scrollToProcedures() {
+      document.getElementById('procedures').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // SIMULATOR FUNCTIONS
+    function openSimulator(procedure) {
+      document.getElementById('procedureSelect').value = procedure;
+      scrollToSimulator();
+      setTimeout(() => updateSimulator(), 500);
+    }
+
+    function updateSimulator() {
+      const procedureSelect = document.getElementById('procedureSelect');
+      const intensitySlider = document.getElementById('intensitySlider');
+      const angleSelect = document.getElementById('angleSelect');
+      const intensityValue = document.getElementById('intensityValue');
+
+      currentProcedure = procedureSelect.value;
+      currentIntensity = intensitySlider.value;
+      currentAngle = angleSelect.value;
+
+      intensityValue.textContent = currentIntensity + ' / 10';
+
+      if (!currentProcedure) {
+        document.getElementById('beforeCanvas').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--gray); font-size: 1.1rem;">Select a procedure to begin simulation</div>';
+        document.getElementById('afterCanvas').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--gray); font-size: 1.1rem;">Results will appear here</div>';
+        return;
+      }
+
+      renderSimulation();
+    }
+
+    function renderSimulation() {
+      const beforeCanvas = document.getElementById('beforeCanvas');
+      const afterCanvas = document.getElementById('afterCanvas');
+
+      // Generate SVG visualizations based on procedure type
+      const simulations = {
+        'breast-augmentation': renderBreastAugmentation,
+        'breast-lift': renderBreastLift,
+        'breast-reduction': renderBreastReduction,
+        'abdominoplasty': renderAbdominoplasty,
+        'liposuction': renderLiposuction,
+        'facelift': renderFacelift,
+        'blepharoplasty': renderBlepharoplasty,
+        'labiaplasty': renderLabiaplasty
+      };
+
+      const renderFunction = simulations[currentProcedure];
+      if (renderFunction) {
+        const [before, after] = renderFunction(currentIntensity, currentAngle);
+        beforeCanvas.innerHTML = before;
+        afterCanvas.innerHTML = after;
+      }
+    }
+
+    // RENDERING FUNCTIONS FOR EACH PROCEDURE
+    function renderBreastAugmentation(intensity, angle) {
+      const baseSize = 40;
+      const afterSize = baseSize + (intensity * 3);
+      const lift = intensity * 2;
+
+      const before = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="breastGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="70" cy="120" rx="' + baseSize + '" ry="' + (baseSize + 10) + '" fill="url(#breastGrad1)" opacity="0.8"/><ellipse cx="130" cy="120" rx="' + baseSize + '" ry="' + (baseSize + 10) + '" fill="url(#breastGrad1)" opacity="0.8"/><circle cx="70" cy="125" r="6" fill="#d81b60"/><circle cx="130" cy="125" r="6" fill="#d81b60"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="breastGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.4" /></radialGradient></defs><ellipse cx="70" cy="' + (120 - lift) + '" rx="' + afterSize + '" ry="' + (afterSize + 10) + '" fill="url(#breastGrad2)" opacity="0.9"/><ellipse cx="130" cy="' + (120 - lift) + '" rx="' + afterSize + '" ry="' + (afterSize + 10) + '" fill="url(#breastGrad2)" opacity="0.9"/><circle cx="70" cy="' + (120 - lift) + '" r="6" fill="#d81b60"/><circle cx="130" cy="' + (120 - lift) + '" r="6" fill="#d81b60"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderBreastLift(intensity, angle) {
+      const baseDrop = 30;
+      const afterLift = baseDrop - (intensity * 3);
+
+      const before = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="liftGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="70" cy="' + (120 + baseDrop) + '" rx="40" ry="50" fill="url(#liftGrad1)" opacity="0.8"/><ellipse cx="130" cy="' + (120 + baseDrop) + '" rx="40" ry="50" fill="url(#liftGrad1)" opacity="0.8"/><circle cx="70" cy="' + (135 + baseDrop) + '" r="6" fill="#d81b60"/><circle cx="130" cy="' + (135 + baseDrop) + '" r="6" fill="#d81b60"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="liftGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.4" /></radialGradient></defs><ellipse cx="70" cy="' + (120 + afterLift) + '" rx="40" ry="45" fill="url(#liftGrad2)" opacity="0.9"/><ellipse cx="130" cy="' + (120 + afterLift) + '" rx="40" ry="45" fill="url(#liftGrad2)" opacity="0.9"/><circle cx="70" cy="' + (125 + afterLift) + '" r="6" fill="#d81b60"/><circle cx="130" cy="' + (125 + afterLift) + '" r="6" fill="#d81b60"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderBreastReduction(intensity, angle) {
+      const baseSize = 55;
+      const afterSize = baseSize - (intensity * 3);
+      const lift = intensity * 2;
+
+      const before = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="redGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="70" cy="130" rx="' + baseSize + '" ry="' + (baseSize + 15) + '" fill="url(#redGrad1)" opacity="0.8"/><ellipse cx="130" cy="130" rx="' + baseSize + '" ry="' + (baseSize + 15) + '" fill="url(#redGrad1)" opacity="0.8"/><circle cx="70" cy="140" r="7" fill="#d81b60"/><circle cx="130" cy="140" r="7" fill="#d81b60"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="redGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.4" /></radialGradient></defs><ellipse cx="70" cy="' + (120 - lift) + '" rx="' + afterSize + '" ry="' + (afterSize + 8) + '" fill="url(#redGrad2)" opacity="0.9"/><ellipse cx="130" cy="' + (120 - lift) + '" rx="' + afterSize + '" ry="' + (afterSize + 8) + '" fill="url(#redGrad2)" opacity="0.9"/><circle cx="70" cy="' + (120 - lift) + '" r="6" fill="#d81b60"/><circle cx="130" cy="' + (120 - lift) + '" r="6" fill="#d81b60"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderAbdominoplasty(intensity, angle) {
+      const baseBulge = 30;
+      const afterFlat = baseBulge - (intensity * 2.5);
+
+      const before = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="abGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.2" /></radialGradient></defs><ellipse cx="100" cy="150" rx="60" ry="' + (70 + baseBulge) + '" fill="url(#abGrad1)" opacity="0.8"/><path d="M 60 130 Q 100 ' + (140 + baseBulge) + ' 140 130" stroke="#e1bee7" stroke-width="2" fill="none"/><circle cx="100" cy="140" r="4" fill="#d81b60"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="abGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="100" cy="150" rx="55" ry="' + (70 + afterFlat) + '" fill="url(#abGrad2)" opacity="0.9"/><path d="M 60 135 Q 100 ' + (135 + afterFlat/2) + ' 140 135" stroke="#e1bee7" stroke-width="2" fill="none"/><circle cx="100" cy="140" r="4" fill="#d81b60"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderLiposuction(intensity, angle) {
+      const baseWidth = 65;
+      const afterWidth = baseWidth - (intensity * 3);
+
+      const before = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="lipoGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.2" /></radialGradient></defs><ellipse cx="100" cy="180" rx="' + baseWidth + '" ry="80" fill="url(#lipoGrad1)" opacity="0.8"/><ellipse cx="70" cy="180" rx="30" ry="60" fill="#f8bbd0" opacity="0.5"/><ellipse cx="130" cy="180" rx="30" ry="60" fill="#f8bbd0" opacity="0.5"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 300" style="width: 100%; height: 100%;"><defs><radialGradient id="lipoGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="100" cy="180" rx="' + afterWidth + '" ry="75" fill="url(#lipoGrad2)" opacity="0.9"/><ellipse cx="75" cy="180" rx="22" ry="55" fill="#f8bbd0" opacity="0.4"/><ellipse cx="125" cy="180" rx="22" ry="55" fill="#f8bbd0" opacity="0.4"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderFacelift(intensity, angle) {
+      const baseSag = 15;
+      const afterLift = baseSag - (intensity * 1.5);
+
+      const before = '<svg viewBox="0 0 200 250" style="width: 100%; height: 100%;"><defs><radialGradient id="faceGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.2" /></radialGradient></defs><ellipse cx="100" cy="100" rx="50" ry="65" fill="url(#faceGrad1)" opacity="0.8"/><path d="M 65 ' + (95 + baseSag) + ' Q 100 ' + (105 + baseSag) + ' 135 ' + (95 + baseSag) + '" stroke="#e1bee7" stroke-width="2" fill="none" opacity="0.6"/><path d="M 70 ' + (110 + baseSag) + ' Q 100 ' + (118 + baseSag) + ' 130 ' + (110 + baseSag) + '" stroke="#e1bee7" stroke-width="2" fill="none" opacity="0.6"/><circle cx="85" cy="85" r="6" fill="#d81b60" opacity="0.7"/><circle cx="115" cy="85" r="6" fill="#d81b60" opacity="0.7"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 250" style="width: 100%; height: 100%;"><defs><radialGradient id="faceGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="100" cy="95" rx="48" ry="62" fill="url(#faceGrad2)" opacity="0.9"/><path d="M 68 ' + (92 + afterLift) + ' Q 100 ' + (98 + afterLift) + ' 132 ' + (92 + afterLift) + '" stroke="#e1bee7" stroke-width="1.5" fill="none" opacity="0.4"/><path d="M 72 ' + (105 + afterLift) + ' Q 100 ' + (110 + afterLift) + ' 128 ' + (105 + afterLift) + '" stroke="#e1bee7" stroke-width="1.5" fill="none" opacity="0.4"/><circle cx="85" cy="82" r="6" fill="#d81b60" opacity="0.8"/><circle cx="115" cy="82" r="6" fill="#d81b60" opacity="0.8"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderBlepharoplasty(intensity, angle) {
+      const baseHood = 12;
+      const afterHood = baseHood - (intensity * 1.2);
+
+      const before = '<svg viewBox="0 0 200 150" style="width: 100%; height: 100%;"><defs><radialGradient id="eyeGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.2" /></radialGradient></defs><ellipse cx="70" cy="' + (60 + baseHood) + '" rx="22" ry="15" fill="url(#eyeGrad1)" opacity="0.8"/><ellipse cx="130" cy="' + (60 + baseHood) + '" rx="22" ry="15" fill="url(#eyeGrad1)" opacity="0.8"/><path d="M 50 ' + (55 + baseHood) + ' Q 70 ' + (50 + baseHood) + ' 90 ' + (55 + baseHood) + '" stroke="#e1bee7" stroke-width="2" fill="none"/><path d="M 110 ' + (55 + baseHood) + ' Q 130 ' + (50 + baseHood) + ' 150 ' + (55 + baseHood) + '" stroke="#e1bee7" stroke-width="2" fill="none"/><ellipse cx="70" cy="' + (62 + baseHood) + '" rx="8" ry="10" fill="#d81b60" opacity="0.7"/><ellipse cx="130" cy="' + (62 + baseHood) + '" rx="8" ry="10" fill="#d81b60" opacity="0.7"/><circle cx="70" cy="' + (60 + baseHood) + '" r="4" fill="#2a2a2a"/><circle cx="130" cy="' + (60 + baseHood) + '" r="4" fill="#2a2a2a"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 150" style="width: 100%; height: 100%;"><defs><radialGradient id="eyeGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="70" cy="' + (60 + afterHood) + '" rx="22" ry="14" fill="url(#eyeGrad2)" opacity="0.9"/><ellipse cx="130" cy="' + (60 + afterHood) + '" rx="22" ry="14" fill="url(#eyeGrad2)" opacity="0.9"/><path d="M 50 ' + (52 + afterHood) + ' Q 70 ' + (48 + afterHood) + ' 90 ' + (52 + afterHood) + '" stroke="#e1bee7" stroke-width="1.5" fill="none"/><path d="M 110 ' + (52 + afterHood) + ' Q 130 ' + (48 + afterHood) + ' 150 ' + (52 + afterHood) + '" stroke="#e1bee7" stroke-width="1.5" fill="none"/><ellipse cx="70" cy="' + (60 + afterHood) + '" rx="8" ry="10" fill="#d81b60" opacity="0.8"/><ellipse cx="130" cy="' + (60 + afterHood) + '" rx="8" ry="10" fill="#d81b60" opacity="0.8"/><circle cx="70" cy="' + (58 + afterHood) + '" r="4" fill="#2a2a2a"/><circle cx="130" cy="' + (58 + afterHood) + '" r="4" fill="#2a2a2a"/></svg>';
+
+      return [before, after];
+    }
+
+    function renderLabiaplasty(intensity, angle) {
+      const baseSize = 25;
+      const afterSize = baseSize - (intensity * 2);
+
+      const before = '<svg viewBox="0 0 200 250" style="width: 100%; height: 100%;"><defs><radialGradient id="labiaGrad1"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="100" cy="125" rx="35" ry="50" fill="url(#labiaGrad1)" opacity="0.6"/><ellipse cx="85" cy="125" rx="' + baseSize + '" ry="45" fill="#f8bbd0" opacity="0.7"/><ellipse cx="115" cy="125" rx="' + baseSize + '" ry="45" fill="#f8bbd0" opacity="0.7"/></svg>';
+
+      const after = '<svg viewBox="0 0 200 250" style="width: 100%; height: 100%;"><defs><radialGradient id="labiaGrad2"><stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" /><stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.3" /></radialGradient></defs><ellipse cx="100" cy="125" rx="32" ry="45" fill="url(#labiaGrad2)" opacity="0.7"/><ellipse cx="88" cy="125" rx="' + afterSize + '" ry="40" fill="#f8bbd0" opacity="0.6"/><ellipse cx="112" cy="125" rx="' + afterSize + '" ry="40" fill="#f8bbd0" opacity="0.6"/></svg>';
+
+      return [before, after];
+    }
+
+    // MODAL FUNCTIONS
+    function openModal(type) {
+      const modal = document.getElementById('modal');
+      const modalBody = document.getElementById('modalBody');
+      
+      const modalContent = {
+        'breast-augmentation': '<h2 class="modal-title">Breast Augmentation</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Breast augmentation enhances breast size and shape using implants. It can address underdeveloped breasts, asymmetry, or volume loss after pregnancy and breastfeeding.</p></div><div class="modal-section"><h3 class="modal-section-title">Indications</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li><strong>Mild:</strong> Minor clothing fit issues, slight asymmetry</li><li><strong>Moderate:</strong> Significant size disparity between breasts, self-consciousness affecting intimacy</li><li><strong>Critical:</strong> Severe psychological distress, Poland syndrome (congenital breast absence)</li></ul></div><div class="modal-section"><h3 class="modal-section-title">Recovery Timeline</h3><p style="color: var(--gray); line-height: 1.8;"><strong>Week 1-2:</strong> Rest, minimal arm movement, wear surgical bra<br><strong>Week 3-6:</strong> Gradual return to light activities<br><strong>Month 3+:</strong> Resume all activities including chest exercises<br><strong>Final Results:</strong> Visible at 6 months, full settling at 12-18 months</p></div><div class="modal-section"><h3 class="modal-section-title">Important Considerations</h3><p style="color: var(--gray); line-height: 1.8;">Implants may require replacement after 10-15 years. Regular monitoring is essential. Discuss implant type (saline vs silicone), size, and placement with your surgeon.</p></div>',
+        'breast-lift': '<h2 class="modal-title">Breast Lift (Mastopexy)</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>A breast lift restores a more youthful breast contour by removing excess skin and repositioning the nipple-areola complex.</p></div><div class="modal-section"><h3 class="modal-section-title">Best Candidates</h3><p style="color: var(--gray); line-height: 1.8;">Women experiencing breast ptosis (sagging) due to pregnancy, breastfeeding, weight changes, or aging. Ideal candidates have completed childbearing and are at a stable weight.</p></div><div class="modal-section"><h3 class="modal-section-title">Scarring</h3><p style="color: var(--gray); line-height: 1.8;">Scarring patterns depend on the degree of lift needed (periareolar, vertical, or anchor-shaped). Scars fade significantly over 12-24 months with proper care.</p></div>',
+        'breast-reduction': '<h2 class="modal-title">Breast Reduction</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Breast reduction removes excess breast tissue to alleviate physical symptoms associated with macromastia (overly large breasts).</p></div><div class="modal-section"><h3 class="modal-section-title">Medical Benefits</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li>Relief from chronic neck, back, and shoulder pain</li><li>Improved posture and core strength</li><li>Elimination of bra strap grooving and skin irritation</li><li>Enhanced ability to exercise comfortably</li><li>May be covered by insurance if medical criteria are met</li></ul></div>',
+        'abdominoplasty': '<h2 class="modal-title">Abdominoplasty (Tummy Tuck)</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Abdominoplasty removes excess abdominal skin and tightens separated abdominal muscles (diastasis recti), common after pregnancy or significant weight loss.</p></div><div class="modal-section"><h3 class="modal-section-title">Types of Tummy Tucks</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li><strong>Full Abdominoplasty:</strong> Addresses entire abdomen, repositions belly button</li><li><strong>Mini Tummy Tuck:</strong> Focuses on lower abdomen only</li><li><strong>Extended Tummy Tuck:</strong> Includes flanks and lower back</li></ul></div><div class="modal-section"><h3 class="modal-section-title">Recovery</h3><p style="color: var(--gray); line-height: 1.8;">Most intensive recovery period: 2-4 weeks. Drains may be placed temporarily. Compression garment worn for 6 weeks. No core exercises for 8 weeks minimum.</p></div>',
+        'liposuction': '<h2 class="modal-title">Liposuction</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Liposuction removes localized fat deposits that are resistant to diet and exercise, improving body contours.</p></div><div class="modal-section"><h3 class="modal-section-title">Common Treatment Areas</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li>Abdomen and flanks (love handles)</li><li>Thighs (inner, outer, front, back)</li><li>Arms (upper arm fullness)</li><li>Back and bra line</li><li>Chin and neck</li></ul></div><div class="modal-section"><h3 class="modal-section-title">Important Note</h3><p style="color: var(--gray); line-height: 1.8;">Liposuction is not a weight loss procedure. Best results are achieved in patients near their ideal weight with good skin elasticity.</p></div>',
+        'facelift': '<h2 class="modal-title">Facelift (Rhytidectomy)</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>A facelift addresses sagging facial skin, deep creases, jowls, and loss of muscle tone in the face and neck.</p></div><div class="modal-section"><h3 class="modal-section-title">Techniques</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li><strong>Traditional Facelift:</strong> Comprehensive correction of face and neck</li><li><strong>Mini Facelift:</strong> Less invasive, targets lower face</li><li><strong>Neck Lift:</strong> Focuses on neck bands and jowls</li></ul></div><div class="modal-section"><h3 class="modal-section-title">Longevity</h3><p style="color: var(--gray); line-height: 1.8;">Results typically last 7-10 years. Aging continues naturally, but patients generally maintain a more youthful appearance than if they had not had surgery.</p></div>',
+        'blepharoplasty': '<h2 class="modal-title">Blepharoplasty (Eyelid Surgery)</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Blepharoplasty removes excess skin and fat from the upper and/or lower eyelids, addressing drooping lids and under-eye bags.</p></div><div class="modal-section"><h3 class="modal-section-title">Functional vs. Cosmetic</h3><p style="color: var(--gray); line-height: 1.8;"><strong>Functional Blepharoplasty:</strong> When excess skin obstructs vision, may be covered by insurance<br><strong>Cosmetic Blepharoplasty:</strong> Addresses aesthetic concerns like tired appearance or puffiness</p></div><div class="modal-section"><h3 class="modal-section-title">Recovery</h3><p style="color: var(--gray); line-height: 1.8;">Bruising and swelling subside within 1-2 weeks. Most patients return to work within 7-10 days. Scars are typically well-hidden in natural eyelid creases.</p></div>',
+        'labiaplasty': '<h2 class="modal-title">Labiaplasty</h2><div class="modal-section"><h3 class="modal-section-title">Overview</h3><p>Labiaplasty reduces or reshapes the labia minora (inner vaginal lips) to alleviate discomfort or address aesthetic concerns.</p></div><div class="modal-section"><h3 class="modal-section-title">Common Reasons</h3><ul style="list-style-type: disc; margin-left: 1.5rem; color: var(--gray); line-height: 1.8;"><li>Discomfort with exercise, tight clothing, or intercourse</li><li>Asymmetry or enlargement causing self-consciousness</li><li>Chronic irritation or recurrent infections</li></ul></div><div class="modal-section"><h3 class="modal-section-title">Privacy & Sensitivity</h3><p style="color: var(--gray); line-height: 1.8;">This is a highly personal decision. Choose a surgeon experienced in vaginal rejuvenation who creates a comfortable, judgment-free environment.</p></div>',
+        'questions': '<h2 class="modal-title">Essential Questions to Ask Your Surgeon</h2><div class="modal-section"><h3 class="modal-section-title">About the Surgeon</h3><ul class="question-list"><li class="question-item">Are you board-certified in plastic surgery?</li><li class="question-item">How many of these specific procedures do you perform annually?</li><li class="question-item">What is your complication rate for this procedure?</li><li class="question-item">Can I see before/after photos of patients with similar body types?</li><li class="question-item">Do you have operating privileges at accredited hospitals?</li></ul></div><div class="modal-section"><h3 class="modal-section-title">About the Procedure</h3><ul class="question-list"><li class="question-item">What are realistic outcomes for my specific anatomy and goals?</li><li class="question-item">What are the risks and potential complications specific to me?</li><li class="question-item">What is your revision rate?</li><li class="question-item">Where will surgery be performed? Is the facility accredited?</li><li class="question-item">What type of anesthesia will be used? Who administers it?</li></ul></div><div class="modal-section"><h3 class="modal-section-title">About Recovery</h3><ul class="question-list"><li class="question-item">What is the realistic recovery timeline?</li><li class="question-item">What level of pain should I expect? How is it managed?</li><li class="question-item">What restrictions will I have? For how long?</li><li class="question-item">What signs of complications should I watch for?</li><li class="question-item">How many post-op appointments are included?</li></ul></div><div class="modal-section"><h3 class="modal-section-title">About Costs</h3><ul class="question-list"><li class="question-item">What is the total cost including all fees?</li><li class="question-item">What is included in case of complications or revision?</li><li class="question-item">What financing options are available?</li></ul></div>'
+      };
+
+      modalBody.innerHTML = modalContent[type] || '<p>Content not available</p>';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on outside click
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // TOAST NOTIFICATION
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      toastMessage.textContent = message;
+      toast.classList.add('active');
+      
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+
+    // BODY POINT INTERACTIONS
+    document.addEventListener('DOMContentLoaded', function() {
+      const bodyPoints = document.querySelectorAll('.body-point');
+      
+      bodyPoints.forEach(point => {
+        point.addEventListener('click', function() {
+          const procedure = this.getAttribute('data-procedure');
+          showToast('Exploring ' + procedure + ' options...');
+          setTimeout(() => {
+            scrollToProcedures();
+          }, 500);
+        });
+      });
+
+      // Keyboard navigation for modal
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+    });
+
+    console.log('✨ Cosmetic Surgery Guide Initialized');
+    console.log('🎨 Interactive features active');
+    console.log('💫 Simulators ready');
+  </script>
+
+</body>
+</html>

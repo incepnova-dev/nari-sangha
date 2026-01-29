@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Nari Swasthya - Your Complete Women's Health Companion</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Comprehensive women's health platform offering personalized journeys, expert consultations, health tracking, and wellness products."/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    /* Enhanced Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .hero { animation: fadeInUp 0.8s ease; }
+    .hero .media img { animation: float 6s ease-in-out infinite; }
+    .stat { animation: fadeInUp 1s ease; transition: all 0.3s; }
+    /* swapped blue shadow to raspberry */
+    .stat:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(227,11,93,0.22); }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .stat { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18); border-radius: 16px; padding: 1rem 1.1rem; backdrop-filter: blur(10px); }
+    .stat strong { display: block; font-size: 1.4rem; }
+
+    /* Hero CTA */
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .trustbar { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .trustbar .pill { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: .6rem 1rem; display: flex; gap: .6rem; align-items: center; }
+
+    /* Feature Split */
+    .feature-split { display: grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: center; }
+    .feature-split img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow-xl); }
+
+    /* Journey Cards */
+    .journey-rail { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .journey-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow-md); overflow: hidden; transition: var(--transition); }
+    .journey-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+    .journey-card img { width: 100%; height: 200px; object-fit: cover; }
+    .journey-card .pad { padding: 1.25rem; }
+    .journey-card .meta { display: flex; gap: .75rem; flex-wrap: wrap; color: var(--gray-600); font-size: .9rem; margin: .5rem 0 0; }
+
+    /* CTA Band (swapped blue RGBA to raspberry) */
+    .cta-band { background: linear-gradient(135deg, rgba(227,11,93,.12), rgba(122,31,162,.12)); border: 1px solid rgba(227,11,93,.2); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-sm); }
+
+    /* Product Grid */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .product-card-home { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-md); transition: all 0.3s; position: relative; overflow: hidden; }
+    .product-card-home:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+    .product-image-home { font-size: 60px; text-align: center; margin: 1rem 0; }
+    .product-discount { position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
+    .product-price-home { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 0.5rem 0; }
+    .product-old-price { text-decoration: line-through; color: var(--gray-400); font-size: 1rem; margin-left: 0.5rem; }
+
+    /* Video Section */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .video-card-home { background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s; cursor: pointer; }
+    .video-card-home:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+    .video-thumbnail-home { position: relative; width: 100%; height: 180px; overflow: hidden; }
+    .video-thumbnail-home img { width: 100%; height: 100%; object-fit: cover; }
+    .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(227,11,93,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
+    .video-content-home { padding: 1.25rem; }
+
+    /* Insurance Cards (swapped gradient to raspberry/purple) */
+    .insurance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+    .insurance-card-home { background: white; border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-md); transition: all 0.3s; }
+    .insurance-card-home:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+    .insurance-header-home { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .insurance-icon-home { width: 60px; height: 60px; background: linear-gradient(135deg, #E30B5D, #7A1FA2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; }
+    .insurance-features-home { list-style: none; margin: 1rem 0; }
+    .insurance-features-home li { padding: 0.5rem 0; display: flex; align-items: center; gap: 0.5rem; }
+    .insurance-features-home li i { color: #27ae60; }
+    .insurance-price-home { font-size: 2rem; font-weight: 700; color: var(--primary); margin-top: 1rem; }
+
+    /* Story Cards */
+    .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .story-card-home { background: linear-gradient(135deg, #FFE5EE 0%, #FFD5E5 100%); border-radius: 16px; padding: 2rem; box-shadow: var(--shadow-md); transition: all 0.3s; }
+    .story-card-home:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+    .story-icon-home { font-size: 50px; text-align: center; margin-bottom: 1rem; }
+
+    /* AI Assistant Banner (swapped gradient to raspberry/purple) */
+    .ai-assistant-banner { background: linear-gradient(135deg, #E30B5D 0%, #7A1FA2 100%); border-radius: 20px; padding: 2.5rem; color: white; position: relative; overflow: hidden; margin: 3rem 0; }
+    .ai-assistant-banner::before { content: ""; position: absolute; right: -20px; top: -20px; font-size: 150px; opacity: 0.1; }
+
+    @media (max-width: 900px) {
+      .feature-split { grid-template-columns: 1fr; }
+      .product-grid, .video-grid, .insurance-grid, .story-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <header class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="container">
+      <div class="grid">
+        <div>
+          <h1>Your complete women's health companion</h1>
+          <p>Personalized journeys, preventive guides, teleconsultation, community support, and trusted resourcesdesigned to help you take action with confidence at every stage of life.</p>
+
+          <div class="chiprow">
+            <span class="chip"><i class="fa-solid fa-shield-heart"></i> Evidence-based</span>
+            <span class="chip"><i class="fa-solid fa-bell"></i> Smart reminders</span>
+            <span class="chip"><i class="fa-solid fa-user-doctor"></i> Expert access</span>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="journeys.html"><i class="fa-solid fa-route"></i> Start a Journey</a>
+            <a class="btn btn-outline" href="symptom-checker.html"><i class="fa-solid fa-stethoscope"></i> Check Symptoms</a>
+            <a class="btn btn-ghost" href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Log In</a>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat">
+              <strong><i class="fa-solid fa-clipboard-check"></i> Prevent</strong>
+              <span style="opacity:.95">Screening & vaccinesmade simple</span>
+            </div>
+            <div class="stat">
+              <strong><i class="fa-solid fa-heart-pulse"></i> Track</strong>
+              <span style="opacity:.95">Goals, reminders, next steps</span>
+            </div>
+            <div class="stat">
+              <strong><i class="fa-solid fa-users"></i> Support</strong>
+              <span style="opacity:.95">Community + expert insights</span>
+            </div>
+          </div>
+
+          <div class="trustbar">
+            <div class="pill"><i class="fa-solid fa-lock"></i> Private by design</div>
+            <div class="pill"><i class="fa-solid fa-book-medical"></i> Practical guidance</div>
+            <div class="pill"><i class="fa-solid fa-calendar-check"></i> Action-focused plans</div>
+          </div>
+        </div>
+
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=1200" alt="Women's healthcare"/>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="ai-assistant-banner">
+          <h2 style="color: white; margin-bottom: 1rem;">Meet Your AI Health Assistant </h2>
+          <p style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 1.5rem;">Get instant answers to your women's health questions, 24/7. Our AI assistant provides personalized guidance, symptom analysis, and health recommendations based on the latest medical research.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn" style="background: white; color: var(--primary);"><i class="fa-solid fa-comment"></i> Chat Now</button>
+            <button class="btn btn-outline" style="border-color: white; color: white;"><i class="fa-solid fa-info-circle"></i> Learn More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- (rest of your index.html unchanged, preserving structure/content) -->
+    <!-- ... -->
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+  </script>
+</body>
+</html>

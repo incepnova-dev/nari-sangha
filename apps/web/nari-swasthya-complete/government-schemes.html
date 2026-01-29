@@ -1,0 +1,3773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Government Schemes - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    .scheme-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+    }
+    .scheme-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-xl); }
+    
+    .scheme-header {
+      display: flex;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 1.5rem;
+    }
+    
+    .scheme-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    
+    .scheme-features {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    .scheme-features li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .scheme-features li:last-child { border-bottom: none; }
+    .scheme-features i { color: #27ae60; font-size: 1.2rem; }
+    
+    .info-box {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .step-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+    
+    .comparison-table {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    
+    .comparison-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .comparison-table th, .comparison-table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .comparison-table th {
+      background: var(--gray-50);
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .scheme-header { flex-direction: column; text-align: center; }
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+  
+  <main>
+    <header class="hero">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="container">
+        <div class="grid">
+          <div>
+            <h1>Government Health Schemes 🏛️</h1>
+            <p>Discover public programs, benefits, and financial assistance for women's healthcare. Access free or low-cost services designed to support your health journey.</p>
+            <div class="chiprow">
+              <span class="chip"><i class="fa-solid fa-landmark"></i> Public programs</span>
+              <span class="chip"><i class="fa-solid fa-dollar-sign"></i> Financial aid</span>
+              <span class="chip"><i class="fa-solid fa-shield"></i> Comprehensive coverage</span>
+            </div>
+          </div>
+          <div class="media">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" alt="Government Schemes"/>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- KEY PROGRAMS (Raspberry Pink “Quest Mode” redesign) -->
+<section class="section key-programs-quest" id="key-programs">
+  <div class="container">
+
+    <!-- Header / Quest intro -->
+    <div class="kp-hero reveal">
+      <div class="kp-hero__bg"></div>
+      <div class="kp-hero__content">
+        <div class="kp-kicker">
+          <span class="kp-pill kp-pill--soft"><i class="fa-solid fa-shield-heart"></i> Benefits Unlocked</span>
+          <span class="kp-pill kp-pill--soft2"><i class="fa-solid fa-wand-magic-sparkles"></i> Interactive</span>
+        </div>
+
+        <h2 class="kp-title">
+          <i class="fa-solid fa-hospital"></i> Key Government Programs
+        </h2>
+        <p class="kp-sub">
+          Not a static list—this is a <strong>guided “benefit quest”</strong>. Tap a program to unlock
+          coverage, who qualifies, what to bring, and next steps—fast, clear, and memorable.
+        </p>
+      </div>
+
+      <!-- Progress / gamified HUD -->
+      <div class="kp-hud reveal">
+        <div class="kp-hud__item">
+          <div class="kp-hud__icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="kp-hud__txt"><strong>Quest</strong><span>Complete all 4</span></div>
+        </div>
+        <div class="kp-hud__item">
+          <div class="kp-hud__icon"><i class="fa-solid fa-gem"></i></div>
+          <div class="kp-hud__txt"><strong>Saved</strong><span id="kpSavedCount">0</span></div>
+        </div>
+        <div class="kp-hud__item">
+          <div class="kp-hud__icon"><i class="fa-solid fa-bolt"></i></div>
+          <div class="kp-hud__txt"><strong>Unlocked</strong><span id="kpUnlockedCount">0/4</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Filters -->
+    <div class="kp-filters reveal" role="tablist" aria-label="Program filters">
+      <button class="kp-filter active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All</button>
+      <button class="kp-filter" data-filter="pregnancy"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</button>
+      <button class="kp-filter" data-filter="kids"><i class="fa-solid fa-children"></i> Kids</button>
+      <button class="kp-filter" data-filter="family"><i class="fa-solid fa-people-roof"></i> Family</button>
+      <button class="kp-filter" data-filter="preventive"><i class="fa-solid fa-stethoscope"></i> Preventive</button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="kp-grid" id="kpGrid">
+
+      <!-- Medicaid -->
+     <article class="kp-card reveal" data-tags="pregnancy delivery cash" data-program="jsy">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-hospital-user"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Janani Suraksha Yojana (JSY)</h3>
+      <p>Safe motherhood intervention promoting institutional delivery with cash assistance</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-building-columns"></i> Gov. Hospital</span>
+        <span class="kp-badge"><i class="fa-solid fa-hand-holding-dollar"></i> Cash Aid</span>
+        <span class="kp-badge"><i class="fa-solid fa-user-nurse"></i> ASHA Help</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save JSY" data-save="jsy">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Rural Mothers:</strong> ₹1,400 cash assistance for institutional birth</li>
+          <li><strong>Urban Mothers:</strong> ₹1,000 cash assistance for institutional birth</li>
+          <li><strong>BPL Mothers:</strong> ₹500 for home delivery (19+ years)</li>
+          <li><strong>ASHA Support:</strong> Escort to hospital & facilitated admission</li>
+          <li><strong>Post-delivery:</strong> Cash is paid at the center itself</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> All pregnant women (LPA states)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> BPL/SC/ST women (HPA states)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> 19 years of age and above</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Jadav / MCP Card</span>
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">Bank Account Details</span>
+          <span class="kp-chip">BPL Card (if applicable)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Register with ASHA/ANM</li>
+          <li><span>2</span> Get at least 3 ANC checkups</li>
+          <li><span>3</span> Deliver at Govt Facility</li>
+          <li><span>4</span> Receive Bank Transfer</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-magnifying-glass"></i> Check Status</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-file-pdf"></i> Guidelines</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="kids health surgery" data-program="rbsk">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-child-reaching"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>RBSK (Rashtriya Bal Swasthya Karyakram)</h3>
+      <p>Child health screening and early intervention for 30+ health conditions</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Screening</span>
+        <span class="kp-badge"><i class="fa-solid fa-heart-pulse"></i> Surgery</span>
+        <span class="kp-badge"><i class="fa-solid fa-wheelchair"></i> Development</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save RBSK" data-save="rbsk">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Health Screening:</strong> Mobile health teams visit schools/Anganwadis</li>
+          <li><strong>Free Treatment:</strong> Cost of surgery for heart defects, cleft lip, etc.</li>
+          <li><strong>4 D's Coverage:</strong> Defects, Deficiencies, Diseases, Delays</li>
+          <li><strong>Aids:</strong> Free glasses, hearing aids, mobility aids</li>
+          <li><strong>Referral:</strong> Transport to tertiary care centers</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Newborns to 6 years (Anganwadi)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> 6 to 18 years (Govt Schools)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Children with birth defects</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">School ID / Anganwadi reg</span>
+          <span class="kp-chip">Screening Card</span>
+          <span class="kp-chip">Aadhaar (if available)</span>
+          <span class="kp-chip">Referral Slip</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Attend Camp/School Visit</li>
+          <li><span>2</span> Get Screened by Team</li>
+          <li><span>3</span> Receive Referral Card</li>
+          <li><span>4</span> Visit DEIC Center</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-location-dot"></i> Find DEIC</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-book-medical"></i> Services List</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="pregnancy newborn free" data-program="jssk">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-truck-medical"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>JSSK (Janani Shishu Suraksha Karyakram)</h3>
+      <p>Absolute cashless services for pregnant women and sick infants (up to 1 year)</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-ban"></i> Zero Cost</span>
+        <span class="kp-badge"><i class="fa-solid fa-pills"></i> Free Drugs</span>
+        <span class="kp-badge"><i class="fa-solid fa-utensils"></i> Free Diet</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save JSSK" data-save="jssk">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Delivery:</strong> Free normal or C-section delivery</li>
+          <li><strong>Transport:</strong> Free pick-up & drop-back (102 Ambulance)</li>
+          <li><strong>Diagnostics:</strong> Free blood, urine tests & ultrasound</li>
+          <li><strong>Blood:</strong> Free blood transfusion if needed</li>
+          <li><strong>Newborns:</strong> Free treatment for sick infants (up to 1 yr)</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> All Pregnant Women (Govt Facility)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Sick Infants (0-1 year)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> No income criteria</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">MCP Card</span>
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">OPD/IPD Slip</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Call 102 for transport</li>
+          <li><span>2</span> Admit to Govt Hospital</li>
+          <li><span>3</span> Show ID/Registration</li>
+          <li><span>4</span> Avail Cashless Care</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone"></i> Call 102</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-circle-info"></i> Know More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="family planning preventive" data-program="parivar-vikas">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-hands-holding-circle"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Mission Parivar Vikas</h3>
+      <p>High-quality family planning choices and reproductive health services</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-pills"></i> Contraceptives</span>
+        <span class="kp-badge"><i class="fa-solid fa-user-doctor"></i> Counseling</span>
+        <span class="kp-badge"><i class="fa-solid fa-kit-medical"></i> Nayi Pehal</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Parivar Vikas" data-save="parivar-vikas">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Contraceptives:</strong> Free Condoms, OCPs (Mala-N), ECPs</li>
+          <li><strong>Injectables:</strong> 'Antara' (MPA) injections (free)</li>
+          <li><strong>Sterilization:</strong> Compensation for loss of wages</li>
+          <li><strong>Kits:</strong> 'Nayi Pehal' kit for newlyweds (in focus districts)</li>
+          <li><strong>Counseling:</strong> Pre-marriage & family planning guidance</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Eligible Couples (15-49 yrs)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Newlyweds</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Post-partum women</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">Marriage Proof (optional)</span>
+          <span class="kp-chip">Mobile Number</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit PHC/CHC/Sub-center</li>
+          <li><span>2</span> Consult Counsellor</li>
+          <li><span>3</span> Choose Method</li>
+          <li><span>4</span> Receive Supply/Service</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-location-arrow"></i> Find Center</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-video"></i> Tele-Consult</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+  
+  <article class="kp-card reveal" data-tags="work pregnancy insurance" data-program="esic">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-briefcase-medical"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>ESIC Maternity Benefit</h3>
+      <p>Paid maternity leave and medical care for women in organized sector jobs</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-sack-dollar"></i> Paid Leave</span>
+        <span class="kp-badge"><i class="fa-solid fa-calendar-days"></i> 26 Weeks</span>
+        <span class="kp-badge"><i class="fa-solid fa-hospital"></i> Medical Bonus</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save ESIC" data-save="esic">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Full Pay:</strong> 100% of average daily wages for 26 weeks</li>
+          <li><strong>Medical Bonus:</strong> ₹5,000 cash if no medical care provided by employer</li>
+          <li><strong>Miscarriage:</strong> 6 weeks paid leave following miscarriage</li>
+          <li><strong>Sickness:</strong> Extra 1 month leave for pregnancy complications</li>
+          <li><strong>Extension:</strong> Can be extended on medical advice</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Insured Women (IP)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Income &lt; ₹21,000/mo</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Contribution &gt; 70 days</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">ESIC E-Pehchan Card</span>
+          <span class="kp-chip">Form 19 (Claim)</span>
+          <span class="kp-chip">Medical Certificate</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Notify Employer</li>
+          <li><span>2</span> Get Medical Cert</li>
+          <li><span>3</span> Submit to ESIC Branch</li>
+          <li><span>4</span> Receive Bank Transfer</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-globe"></i> ESIC Portal</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-calculator"></i> Calculate Benefit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="kids vaccine health" data-program="indradhanush">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-shield-virus"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Mission Indradhanush (IMI)</h3>
+      <p>Special drive to vaccinate all unvaccinated or partially vaccinated children</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-syringe"></i> 12 Diseases</span>
+        <span class="kp-badge"><i class="fa-solid fa-baby"></i> Free Shots</span>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnant Moms</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Indradhanush" data-save="indradhanush">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Protection:</strong> Polio, TB, Hep-B, Measles, Rubella, etc.</li>
+          <li><strong>Catch-up:</strong> Covers missed doses for drop-outs</li>
+          <li><strong>Availability:</strong> Special camps in remote/high-risk areas</li>
+          <li><strong>Vitamin A:</strong> Doses given along with vaccines</li>
+          <li><strong>Digital Record:</strong> Tracked via U-WIN portal</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Children (0-5 years)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant Women</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Migrant workers' kids</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">MCP Card (if any)</span>
+          <span class="kp-chip">Mobile Number</span>
+          <span class="kp-chip">Aadhaar (optional)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Check Camp Dates</li>
+          <li><span>2</span> Go to Session Site</li>
+          <li><span>3</span> Get Vaccinated</li>
+          <li><span>4</span> Update Card</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-calendar-day"></i> Camp Schedule</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-download"></i> U-WIN App</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="teens health education" data-program="rksk">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-user-graduate"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>RKSK (Rashtriya Kishor Swasthya Karyakram)</h3>
+      <p>Comprehensive health program for adolescents (10-19 years)</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-apple-whole"></i> Nutrition</span>
+        <span class="kp-badge"><i class="fa-solid fa-brain"></i> Mental Health</span>
+        <span class="kp-badge"><i class="fa-solid fa-venus-mars"></i> SRH</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save RKSK" data-save="rksk">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Clinics:</strong> AFHC (Adolescent Friendly Health Clinics)</li>
+          <li><strong>Supplements:</strong> Weekly Iron Folic Acid (WIFS) - Blue Tablet</li>
+          <li><strong>Counseling:</strong> Substance misuse, violence, mental health</li>
+          <li><strong>Menstrual Hygiene:</strong> Sanitary napkins (subsidized/free)</li>
+          <li><strong>Peer Educators:</strong> 'Saathiya' program for guidance</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Boys & Girls (10-19 yrs)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> In-school & Out-of-school</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Unmarried & Married</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">School ID (if student)</span>
+          <span class="kp-chip">Aadhaar (for camps)</span>
+          <span class="kp-chip">None for clinic visit</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit nearest CHC/PHC</li>
+          <li><span>2</span> Look for AFHC Sign</li>
+          <li><span>3</span> Meet Counselor</li>
+          <li><span>4</span> Get Tablets/Advice</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-location-crosshairs"></i> Find AFHC</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-user-group"></i> Saathiya Program</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="community support health" data-program="asha">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-hand-holding-heart"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>ASHA (Accredited Social Health Activist)</h3>
+      <p>Your first port of call for any health-related needs in the village</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-door-open"></i> Doorstep</span>
+        <span class="kp-badge"><i class="fa-solid fa-link"></i> Liaison</span>
+        <span class="kp-badge"><i class="fa-solid fa-pills"></i> Basic Meds</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save ASHA" data-save="asha">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Medicine Kit:</strong> ORS, Iron pills, condoms, basic drugs</li>
+          <li><strong>Guidance:</strong> Advice on birth preparedness & hygiene</li>
+          <li><strong>Escort:</strong> Accompanies pregnant women to hospital</li>
+          <li><strong>Newborn Care:</strong> Home visits (HBNC) for 42 days</li>
+          <li><strong>Testing:</strong> HBNC kits include thermometer, weighing scale</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Every rural household</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant/Lactating moms</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Sick children</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">MCP Card</span>
+          <span class="kp-chip">Aadhaar (for linking)</span>
+          <span class="kp-chip">Just ask locally</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Ask neighbors for ASHA</li>
+          <li><span>2</span> She visits your home</li>
+          <li><span>3</span> Discuss health issue</li>
+          <li><span>4</span> Get referral/pills</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone"></i> Call 104 (Helpline)</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-book-open"></i> Know Her Role</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="finance girlchild future" data-program="ssy">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-piggy-bank"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Sukanya Samriddhi Yojana (SSY)</h3>
+      <p>High-interest government savings scheme specifically for the girl child</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-percent"></i> High Interest</span>
+        <span class="kp-badge"><i class="fa-solid fa-file-invoice-dollar"></i> Tax Free</span>
+        <span class="kp-badge"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save SSY" data-save="ssy">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>High Return:</strong> Interest rate usually higher than PPF/FD</li>
+          <li><strong>Tax Benefit:</strong> Section 80C deduction (EEE status)</li>
+          <li><strong>Low Entry:</strong> Open account with just ₹250</li>
+          <li><strong>Maturity:</strong> 21 years or upon marriage (after 18)</li>
+          <li><strong>Withdrawal:</strong> 50% allowed for higher education at 18</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Girl child &lt; 10 years</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Max 2 girls per family</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Parents/Guardians</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Birth Certificate</span>
+          <span class="kp-chip">Parent's Aadhaar/PAN</span>
+          <span class="kp-chip">Initial Deposit (₹250)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit Post Office/Bank</li>
+          <li><span>2</span> Fill SSY Form</li>
+          <li><span>3</span> Deposit Cash/Cheque</li>
+          <li><span>4</span> Get Passbook</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-building-columns"></i> Find Post Office</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-calculator"></i> Interest Calc</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+
+<article class="kp-card reveal" data-tags="girlchild education awareness" data-program="bbbp">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Beti Bachao Beti Padhao</h3>
+      <p>Campaign to prevent gender-biased sex selection and ensure girl child education</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-scale-balanced"></i> CSR</span>
+        <span class="kp-badge"><i class="fa-solid fa-school"></i> Enrollment</span>
+        <span class="kp-badge"><i class="fa-solid fa-bullhorn"></i> Awareness</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save BBBP" data-save="bbbp">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Protection:</strong> Strict enforcement of PC-PNDT Act (No sex determination)</li>
+          <li><strong>Education:</strong> 100% enrollment drives for girls in schools</li>
+          <li><strong>Infrastructure:</strong> Functional toilets for girls in schools</li>
+          <li><strong>Incentives:</strong> Linkage to local reward schemes for girl children</li>
+          <li><strong>Community:</strong> Guddi-Gudda Boards to track birth ratios</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Girl Children</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Parents & Communities</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Districts with low CSR</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Birth Certificate</span>
+          <span class="kp-chip">School Admission Forms</span>
+          <span class="kp-chip">Aadhaar (Child/Parent)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Contact Anganwadi</li>
+          <li><span>2</span> Enroll girl in school</li>
+          <li><span>3</span> Report violations</li>
+          <li><span>4</span> Join local drives</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-hand-holding-heart"></i> Join Movement</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-phone"></i> Report 1098</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="nutrition health kids" data-program="poshan">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-carrot"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Poshan Abhiyaan</h3>
+      <p>Holistic nutrition program to reduce stunting, undernutrition, and anemia</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-mobile-screen"></i> Tech Tracking</span>
+        <span class="kp-badge"><i class="fa-solid fa-bowl-rice"></i> Diet Diversity</span>
+        <span class="kp-badge"><i class="fa-solid fa-droplet"></i> Anemia Mukt</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Poshan" data-save="poshan">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Monitoring:</strong> Growth tracking via 'Poshan Tracker' app</li>
+          <li><strong>Supplements:</strong> IFA tablets and deworming (Albendazole)</li>
+          <li><strong>Events:</strong> Community Based Events (Godh Bharai, Annaprasan)</li>
+          <li><strong>Fortification:</strong> Access to fortified rice/milk/salt</li>
+          <li><strong>Counseling:</strong> Door-to-door advice on balanced diet</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Children (0-6 yrs)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Adolescent Girls</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant/Lactating Women</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar (for app)</span>
+          <span class="kp-chip">Mobile Number</span>
+          <span class="kp-chip">MCP Card</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit Anganwadi</li>
+          <li><span>2</span> Get height/weight measured</li>
+          <li><span>3</span> Check status on App</li>
+          <li><span>4</span> Get nutrition counseling</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-chart-line"></i> Track Growth</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-calendar-check"></i> Poshan Maah</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="school food kids" data-program="mdm">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-utensils"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>PM POSHAN (Mid-Day Meal)</h3>
+      <p>Free hot cooked lunch for children in government and aided schools</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-fire-burner"></i> Hot Meal</span>
+        <span class="kp-badge"><i class="fa-solid fa-school"></i> Class 1-8</span>
+        <span class="kp-badge"><i class="fa-solid fa-egg"></i> Nutrition</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save MDM" data-save="mdm">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Daily Meal:</strong> Nutritional hot lunch on school days</li>
+          <li><strong>Nutrients:</strong> 450-700 calories & 12-20g protein/day</li>
+          <li><strong>Summer:</strong> Drought-affected areas get meals in summer vacation</li>
+          <li><strong>Health:</strong> Regular check-ups under WIFS linkage</li>
+          <li><strong>Tithi Bhojan:</strong> Special meals on community festivals</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Govt School Students</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Madarsas/Maqtabs (registered)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Class I to VIII</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">School Enrollment</span>
+          <span class="kp-chip">Attendance Record</span>
+          <span class="kp-chip">No ID needed for meal</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Admit child to school</li>
+          <li><span>2</span> Ensure regular attendance</li>
+          <li><span>3</span> Child eats lunch</li>
+          <li><span>4</span> Monitor quality (SMC)</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-school"></i> Locate School</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-message"></i> Feedback</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="education girls residential" data-program="kgbv">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-book-open"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Kasturba Gandhi Balika Vidyalaya</h3>
+      <p>Residential schools for girls belonging to disadvantaged groups</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-bed"></i> Hostel</span>
+        <span class="kp-badge"><i class="fa-solid fa-chalkboard-user"></i> Class 6-12</span>
+        <span class="kp-badge"><i class="fa-solid fa-bowl-food"></i> Free Boarding</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save KGBV" data-save="kgbv">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Education:</strong> Free schooling from Class 6 to 12</li>
+          <li><strong>Stay:</strong> Free hostel, food, and security</li>
+          <li><strong>Stipend:</strong> Small allowance for uniforms/books</li>
+          <li><strong>Skills:</strong> Vocational training (IT, craft, sewing)</li>
+          <li><strong>Safety:</strong> Secure environment for drop-out girls</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> SC/ST/OBC/Minority girls</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Girls in BPL families</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> School drop-outs</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Caste Certificate</span>
+          <span class="kp-chip">BPL Card</span>
+          <span class="kp-chip">Previous School TC (if any)</span>
+          <span class="kp-chip">Aadhaar</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Check local KGBV</li>
+          <li><span>2</span> Apply for admission</li>
+          <li><span>3</span> Verification of category</li>
+          <li><span>4</span> Move to hostel</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-building"></i> Find School</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-list-check"></i> Guidelines</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="women empowerment support" data-program="msk">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-users-rays"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Mahila Shakti Kendra</h3>
+      <p>One-stop convergence centers for empowering rural women</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-hand-holding-dollar"></i> Skill Link</span>
+        <span class="kp-badge"><i class="fa-solid fa-laptop"></i> Digital Lit</span>
+        <span class="kp-badge"><i class="fa-solid fa-gavel"></i> Legal Aid</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save MSK" data-save="msk">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Information:</strong> Knowledge about all govt schemes</li>
+          <li><strong>Training:</strong> Linkage to skill development & employment</li>
+          <li><strong>Health:</strong> Awareness on nutrition & hygiene</li>
+          <li><strong>Support:</strong> Help with applications for services</li>
+          <li><strong>Volunteers:</strong> Student volunteers provide community support</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Rural Women</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Self Help Groups (SHGs)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Women seeking employment</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">Education Proof (optional)</span>
+          <span class="kp-chip">Bank Details (if needed)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit District MSK</li>
+          <li><span>2</span> Ask for scheme list</li>
+          <li><span>3</span> Choose required training</li>
+          <li><span>4</span> Enroll/Apply</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-map-location-dot"></i> Locate Kendra</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-phone"></i> Women Helpline</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="family cooking health" data-program="ujjwala">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-fire-flame-simple"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>PM Ujjwala Yojana (PMUY)</h3>
+      <p>Free LPG gas connection to women of below poverty line households</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-gas-pump"></i> Free Connection</span>
+        <span class="kp-badge"><i class="fa-solid fa-lungs"></i> Smoke Free</span>
+        <span class="kp-badge"><i class="fa-solid fa-rupee-sign"></i> Subsidy</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Ujjwala" data-save="ujjwala">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Deposit Free:</strong> No cost for cylinder & regulator</li>
+          <li><strong>Refill:</strong> First refill is often free (varies by state)</li>
+          <li><strong>Stove:</strong> Free gas stove provided</li>
+          <li><strong>Health:</strong> Protects women from indoor smoke pollution</li>
+          <li><strong>Subsidy:</strong> Direct transfer to bank account on refills</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Adult Woman of BPL family</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> SC/ST/PMAY beneficiaries</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Forest dwellers</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar (Applicant)</span>
+          <span class="kp-chip">Ration Card</span>
+          <span class="kp-chip">Bank Account Number</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit Gas Distributor</li>
+          <li><span>2</span> Fill KYC Form</li>
+          <li><span>3</span> Submit Documents</li>
+          <li><span>4</span> Get Connection</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-file-signature"></i> Download KYC</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-truck-fast"></i> Find Distributor</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="safety violence support" data-program="sakhi">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-shield-cat"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Sakhi (One Stop Centre)</h3>
+      <p>Integrated support for women affected by violence, in private or public spaces</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-gavel"></i> Legal</span>
+        <span class="kp-badge"><i class="fa-solid fa-user-nurse"></i> Medical</span>
+        <span class="kp-badge"><i class="fa-solid fa-bed"></i> Shelter</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Sakhi" data-save="sakhi">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Emergency Response:</strong> Immediate rescue & medical aid</li>
+          <li><strong>Police Assistance:</strong> Help filing FIR/NCR on site</li>
+          <li><strong>Legal Aid:</strong> Free legal counseling and court support</li>
+          <li><strong>Shelter:</strong> Temporary stay (up to 5 days) with food</li>
+          <li><strong>Counseling:</strong> Psycho-social support for trauma</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Any woman facing violence</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> All ages (girls & women)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Domestic/Sexual violence victims</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">None mandatory initially</span>
+          <span class="kp-chip">ID (if available)</span>
+          <span class="kp-chip">Any evidence (if available)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Call 181 (Women Helpline)</li>
+          <li><span>2</span> Go to Sakhi Centre</li>
+          <li><span>3</span> Meet Caseworker</li>
+          <li><span>4</span> Receive Support</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone-volume"></i> Call 181</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-location-dot"></i> Nearest Centre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="livelihood business women" data-program="lakhpati">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Lakhpati Didi (NRLM)</h3>
+      <p>Skill training for SHG women to earn over ₹1 Lakh per year</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-screwdriver-wrench"></i> Skills</span>
+        <span class="kp-badge"><i class="fa-solid fa-drone"></i> Drone Pilot</span>
+        <span class="kp-badge"><i class="fa-solid fa-lightbulb"></i> Startup</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Lakhpati" data-save="lakhpati">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Training:</strong> LED bulb making, plumbing, drone repair, tailoring</li>
+          <li><strong>Loans:</strong> Easy credit access via SHG linkage</li>
+          <li><strong>Market:</strong> Platform to sell products (Saras Mela/GeM)</li>
+          <li><strong>Drones:</strong> Training to become "Drone Didis" for agriculture</li>
+          <li><strong>Financial Lit:</strong> Training on saving and banking</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Women in Self Help Groups</span></div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Rural Entrepreneurs</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Artisans/Farmers</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">SHG Membership</span>
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">Bank Passbook</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Join local SHG</li>
+          <li><span>2</span> Attend cluster meeting</li>
+          <li><span>3</span> Choose skill trade</li>
+          <li><span>4</span> Start business</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-users"></i> Join SHG</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-briefcase"></i> Skill Options</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="pension widow senior" data-program="ignwps">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Widow Pension (IGNWPS)</h3>
+      <p>Monthly financial assistance for widows living below the poverty line</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-calendar-check"></i> Monthly</span>
+        <span class="kp-badge"><i class="fa-solid fa-building-columns"></i> DBT</span>
+        <span class="kp-badge"><i class="fa-solid fa-user-shield"></i> Security</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Pension" data-save="ignwps">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Monthly Cash:</strong> ₹300 to ₹500 (Central) + State top-up</li>
+          <li><strong>Direct Transfer:</strong> Money goes straight to bank/post office</li>
+          <li><strong>Lifetime:</strong> Support continues until death or remarriage</li>
+          <li><strong> अन्नapurna (Annapurna):</strong> Free food grain if pension not received (in some states)</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Widows aged 40-79 years</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Below Poverty Line (BPL)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> 80+ move to Old Age Pension</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Husband's Death Cert</span>
+          <span class="kp-chip">BPL Card</span>
+          <span class="kp-chip">Aadhaar & Bank Details</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit Gram Panchayat/Municipality</li>
+          <li><span>2</span> Fill Pension Form</li>
+          <li><span>3</span> Verification by officer</li>
+          <li><span>4</span> Pension starts</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-file-arrow-down"></i> Download Form</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-building-user"></i> Local Office</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="senior health care" data-program="avyay">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-person-cane"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>AVYAY (Senior Citizen Welfare)</h3>
+      <p>Comprehensive scheme for the care, health, and dignity of senior citizens</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-house-chimney"></i> Old Age Homes</span>
+        <span class="kp-badge"><i class="fa-solid fa-glasses"></i> Rashtriya Vayoshri</span>
+        <span class="kp-badge"><i class="fa-solid fa-phone"></i> Elderline</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save AVYAY" data-save="avyay">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Assisted Living:</strong> Integrated Programme for Senior Citizens (IPSrC)</li>
+          <li><strong>Free Aids:</strong> Wheelchairs, hearing aids, dentures (BPL seniors)</li>
+          <li><strong>Helpline:</strong> 'Elderline' (14567) for abuse/rescue/info</li>
+          <li><strong>Poshan:</strong> Nutrition support for indigent elders</li>
+          <li><strong>Healthcare:</strong> Mobile medicare units for remote areas</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Senior Citizens (60+)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Indigent/Destitute elders</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Age-related disability</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar / Age Proof</span>
+          <span class="kp-chip">BPL Card (for devices)</span>
+          <span class="kp-chip">Medical Certificate</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Call 14567 (Elderline)</li>
+          <li><span>2</span> Register for Vayoshri</li>
+          <li><span>3</span> Assessment Camp</li>
+          <li><span>4</span> Get Devices</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone"></i> Call 14567</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-wheelchair"></i> Apply for Aids</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+
+      <article class="kp-card reveal" data-tags="pregnancy cash family" data-program="pmmvy">
+        <div class="kp-card__top">
+          <div class="kp-emblem">
+            <div class="kp-emblem__orb"><i class="fa-solid fa-person-pregnant"></i></div>
+            <div class="kp-emblem__ring"></div>
+          </div>
+          <div class="kp-head">
+            <h3>PMMVY (Matru Vandana Yojana)</h3>
+            <p>Direct cash transfer scheme for pregnant women and lactating mothers</p>
+            <div class="kp-badges">
+              <span class="kp-badge"><i class="fa-solid fa-rupee-sign"></i> ₹5,000 Cash</span>
+              <span class="kp-badge"><i class="fa-solid fa-baby-carriage"></i> First Child</span>
+              <span class="kp-badge"><i class="fa-solid fa-building-columns"></i> DBT</span>
+            </div>
+          </div>
+
+          <button class="kp-save" type="button" aria-label="Save PMMVY" data-save="pmmvy">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
+
+        <div class="kp-drawer" hidden>
+          <div class="kp-drawer__cols">
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+              <ul class="kp-list">
+                <li><strong>Installment 1:</strong> ₹1,000 on early registration</li>
+                <li><strong>Installment 2:</strong> ₹2,000 after 6 months ANC</li>
+                <li><strong>Installment 3:</strong> ₹2,000 after birth & vaccination</li>
+                <li><strong>Nutrition:</strong> Wage compensation for rest</li>
+                <li><strong>Combination:</strong> Can combine with JSY scheme</li>
+              </ul>
+            </div>
+
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+              <div class="kp-mini">
+                <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant Women (19+ yrs)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> First live birth</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Lactating Mothers</div>
+              </div>
+
+              <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+              <div class="kp-chips">
+                <span class="kp-chip">Aadhaar Card</span>
+                <span class="kp-chip">MCP Card</span>
+                <span class="kp-chip">Bank Passbook</span>
+                <span class="kp-chip">LMP Date</span>
+              </div>
+            </div>
+
+            <div class="kp-panel kp-panel--steps">
+              <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+              <ol class="kp-steps">
+                <li><span>1</span> Visit Anganwadi / ASHA</li>
+                <li><span>2</span> Fill Form 1-A</li>
+                <li><span>3</span> Link Aadhaar to Bank</li>
+                <li><span>4</span> Receive DBT Credit</li>
+              </ol>
+              <div class="kp-actions">
+                <button class="btn btn-primary kp-cta"><i class="fa-solid fa-globe"></i> Visit PMMVY-CAS</button>
+                <button class="btn btn-outline kp-cta"><i class="fa-solid fa-file-contract"></i> Download Forms</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="kp-expand" type="button" aria-expanded="false">
+          <span>Unlock details</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids nutrition preschool" data-program="icds">
+        <div class="kp-card__top">
+          <div class="kp-emblem">
+            <div class="kp-emblem__orb"><i class="fa-solid fa-bowl-food"></i></div>
+            <div class="kp-emblem__ring"></div>
+          </div>
+          <div class="kp-head">
+            <h3>ICDS (Anganwadi Services)</h3>
+            <p>World's largest community program for child development and nutrition</p>
+            <div class="kp-badges">
+              <span class="kp-badge"><i class="fa-solid fa-spoon"></i> Hot Meals</span>
+              <span class="kp-badge"><i class="fa-solid fa-school"></i> Preschool</span>
+              <span class="kp-badge"><i class="fa-solid fa-syringe"></i> Vaccines</span>
+            </div>
+          </div>
+
+          <button class="kp-save" type="button" aria-label="Save ICDS" data-save="icds">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
+
+        <div class="kp-drawer" hidden>
+          <div class="kp-drawer__cols">
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+              <ul class="kp-list">
+                <li><strong>Supplementary Nutrition:</strong> Take-home ration / hot meals</li>
+                <li><strong>Preschool:</strong> Non-formal education (3-6 yrs)</li>
+                <li><strong>Health:</strong> Immunization & check-ups</li>
+                <li><strong>Referral:</strong> Link to PHC for serious issues</li>
+                <li><strong>Education:</strong> Nutrition education for moms</li>
+              </ul>
+            </div>
+
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+              <div class="kp-mini">
+                <div class="kp-mini__item"><span class="kp-dot"></span> Children (0-6 years)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant Women</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Adolescent Girls</div>
+              </div>
+
+              <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+              <div class="kp-chips">
+                <span class="kp-chip">Aadhaar (Child/Parent)</span>
+                <span class="kp-chip">Birth Certificate</span>
+                <span class="kp-chip">Local Address Proof</span>
+              </div>
+            </div>
+
+            <div class="kp-panel kp-panel--steps">
+              <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+              <ol class="kp-steps">
+                <li><span>1</span> Find nearest Anganwadi</li>
+                <li><span>2</span> Meet Anganwadi Worker</li>
+                <li><span>3</span> Register Name</li>
+                <li><span>4</span> Collect Ration/Meal</li>
+              </ol>
+              <div class="kp-actions">
+                <button class="btn btn-primary kp-cta"><i class="fa-solid fa-location-dot"></i> Locate Centre</button>
+                <button class="btn btn-outline kp-cta"><i class="fa-solid fa-phone"></i> Call 1098 (Childline)</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="kp-expand" type="button" aria-expanded="false">
+          <span>Unlock details</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </article>
+
+      <article class="kp-card reveal" data-tags="health insurance family" data-program="pmjay">
+        <div class="kp-card__top">
+          <div class="kp-emblem">
+            <div class="kp-emblem__orb"><i class="fa-solid fa-user-doctor"></i></div>
+            <div class="kp-emblem__ring"></div>
+          </div>
+          <div class="kp-head">
+            <h3>Ayushman Bharat (PM-JAY)</h3>
+            <p>Free health coverage up to ₹5 Lakhs per family per year</p>
+            <div class="kp-badges">
+              <span class="kp-badge"><i class="fa-solid fa-wallet"></i> Cashless</span>
+              <span class="kp-badge"><i class="fa-solid fa-hospital-user"></i> Hospitalization</span>
+              <span class="kp-badge"><i class="fa-solid fa-id-card"></i> Golden Card</span>
+            </div>
+          </div>
+
+          <button class="kp-save" type="button" aria-label="Save PMJAY" data-save="pmjay">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
+
+        <div class="kp-drawer" hidden>
+          <div class="kp-drawer__cols">
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+              <ul class="kp-list">
+                <li><strong>Coverage:</strong> ₹5 Lakhs/year for secondary/tertiary care</li>
+                <li><strong>Maternity:</strong> Covers C-section and delivery risks</li>
+                <li><strong>Medicines:</strong> Included during hospital stay</li>
+                <li><strong>Pre/Post:</strong> Pre & post-hospitalization expenses</li>
+                <li><strong>Network:</strong> Valid at public & private empanelled hospitals</li>
+              </ul>
+            </div>
+
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+              <div class="kp-mini">
+                <div class="kp-mini__item"><span class="kp-dot"></span> SECC Database listed families</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Low income / Occupational</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> No cap on family size</div>
+              </div>
+
+              <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+              <div class="kp-chips">
+                <span class="kp-chip">Aadhaar Card</span>
+                <span class="kp-chip">Ration Card</span>
+                <span class="kp-chip">Mobile Number</span>
+              </div>
+            </div>
+
+            <div class="kp-panel kp-panel--steps">
+              <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+              <ol class="kp-steps">
+                <li><span>1</span> Check name in list</li>
+                <li><span>2</span> Go to CSC / Hospital</li>
+                <li><span>3</span> Do e-KYC</li>
+                <li><span>4</span> Download Card</li>
+              </ol>
+              <div class="kp-actions">
+                <button class="btn btn-primary kp-cta"><i class="fa-solid fa-magnifying-glass"></i> Am I Eligible?</button>
+                <button class="btn btn-outline kp-cta"><i class="fa-solid fa-hospital"></i> Find Hospital</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="kp-expand" type="button" aria-expanded="false">
+          <span>Unlock details</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </article>
+
+      <article class="kp-card reveal" data-tags="food family subsidy" data-program="nfsa">
+        <div class="kp-card__top">
+          <div class="kp-emblem">
+            <div class="kp-emblem__orb"><i class="fa-solid fa-wheat-awn"></i></div>
+            <div class="kp-emblem__ring"></div>
+          </div>
+          <div class="kp-head">
+            <h3>NFSA / Ration Card</h3>
+            <p>Highly subsidized food grains through the Public Distribution System (PDS)</p>
+            <div class="kp-badges">
+              <span class="kp-badge"><i class="fa-solid fa-sack-dollar"></i> Subsidized</span>
+              <span class="kp-badge"><i class="fa-solid fa-shop"></i> Fair Price Shop</span>
+              <span class="kp-badge"><i class="fa-solid fa-users"></i> Antyodaya</span>
+            </div>
+          </div>
+
+          <button class="kp-save" type="button" aria-label="Save NFSA" data-save="nfsa">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
+
+        <div class="kp-drawer" hidden>
+          <div class="kp-drawer__cols">
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+              <ul class="kp-list">
+                <li><strong>Rice:</strong> ₹3 per kg (Priority Households)</li>
+                <li><strong>Wheat:</strong> ₹2 per kg (Priority Households)</li>
+                <li><strong>Coarse Grains:</strong> ₹1 per kg</li>
+                <li><strong>AAY Families:</strong> 35kg grain per family/month</li>
+                <li><strong>One Nation One Card:</strong> Use anywhere in India</li>
+              </ul>
+            </div>
+
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+              <div class="kp-mini">
+                <div class="kp-mini__item"><span class="kp-dot"></span> Priority Households (PHH)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Poorest of poor (AAY)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> BPL Families</div>
+              </div>
+
+              <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+              <div class="kp-chips">
+                <span class="kp-chip">Aadhaar (Head of family)</span>
+                <span class="kp-chip">Income Certificate</span>
+                <span class="kp-chip">Address Proof</span>
+                <span class="kp-chip">Passport Photos</span>
+              </div>
+            </div>
+
+            <div class="kp-panel kp-panel--steps">
+              <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+              <ol class="kp-steps">
+                <li><span>1</span> Apply at Food Dept</li>
+                <li><span>2</span> Verification visit</li>
+                <li><span>3</span> Get Smart Card</li>
+                <li><span>4</span> Visit FPS Shop</li>
+              </ol>
+              <div class="kp-actions">
+                <button class="btn btn-primary kp-cta"><i class="fa-solid fa-laptop"></i> Apply Online</button>
+                <button class="btn btn-outline kp-cta"><i class="fa-solid fa-list"></i> State Portals</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="kp-expand" type="button" aria-expanded="false">
+          <span>Unlock details</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy delivery free" data-program="jssk">
+        <div class="kp-card__top">
+          <div class="kp-emblem">
+            <div class="kp-emblem__orb"><i class="fa-solid fa-truck-medical"></i></div>
+            <div class="kp-emblem__ring"></div>
+          </div>
+          <div class="kp-head">
+            <h3>JSSK (Shishu Suraksha)</h3>
+            <p>Guarantee of free and cashless delivery for pregnant women & sick infants</p>
+            <div class="kp-badges">
+              <span class="kp-badge"><i class="fa-solid fa-ban"></i> Zero Expense</span>
+              <span class="kp-badge"><i class="fa-solid fa-ambulance"></i> Free Transport</span>
+              <span class="kp-badge"><i class="fa-solid fa-pills"></i> Free Drugs</span>
+            </div>
+          </div>
+
+          <button class="kp-save" type="button" aria-label="Save JSSK" data-save="jssk">
+            <i class="fa-solid fa-bookmark"></i>
+          </button>
+        </div>
+
+        <div class="kp-drawer" hidden>
+          <div class="kp-drawer__cols">
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+              <ul class="kp-list">
+                <li><strong>Delivery:</strong> Free C-Section or Normal birth</li>
+                <li><strong>Transport:</strong> Free pick-up & drop-back (102/108)</li>
+                <li><strong>Diet:</strong> Free meals during hospital stay</li>
+                <li><strong>Diagnostics:</strong> Free blood, urine, & ultrasound</li>
+                <li><strong>Infants:</strong> Free treatment for sick newborns (up to 1yr)</li>
+              </ul>
+            </div>
+
+            <div class="kp-panel">
+              <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+              <div class="kp-mini">
+                <div class="kp-mini__item"><span class="kp-dot"></span> All pregnant women (Govt facility)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Sick newborns (up to 30 days/1 yr)</div>
+                <div class="kp-mini__item"><span class="kp-dot"></span> Rural & Urban</div>
+              </div>
+
+              <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+              <div class="kp-chips">
+                <span class="kp-chip">MCP Card</span>
+                <span class="kp-chip">Aadhaar / ID</span>
+                <span class="kp-chip">Referral slip (if any)</span>
+              </div>
+            </div>
+
+            <div class="kp-panel kp-panel--steps">
+              <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+              <ol class="kp-steps">
+                <li><span>1</span> Call 102/108 Ambulance</li>
+                <li><span>2</span> Go to Govt Hospital</li>
+                <li><span>3</span> Show ID/MCP Card</li>
+                <li><span>4</span> Get Cashless Care</li>
+              </ol>
+              <div class="kp-actions">
+                <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone"></i> Call Ambulance</button>
+                <button class="btn btn-outline kp-cta"><i class="fa-solid fa-circle-info"></i> Scheme Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="kp-expand" type="button" aria-expanded="false">
+          <span>Unlock details</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </article>
+
+
+      <article class="kp-card reveal" data-tags="kids working-mom childcare" data-program="palna">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-baby-carriage"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>National Crèche Scheme (Palna)</h3>
+      <p>Daycare facilities for children of working mothers to ensure safety and development</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-clock"></i> Day Care</span>
+        <span class="kp-badge"><i class="fa-solid fa-apple-whole"></i> Nutrition</span>
+        <span class="kp-badge"><i class="fa-solid fa-briefcase"></i> Mom Support</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Palna" data-save="palna">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Daycare:</strong> Safe facility for 7.5 hours a day</li>
+          <li><strong>Nutrition:</strong> Supplementary nutrition provided to kids</li>
+          <li><strong>Health:</strong> Regular health check-ups and immunization</li>
+          <li><strong>Education:</strong> Pre-school education activities (3-6 yrs)</li>
+          <li><strong>Peace of Mind:</strong> Enables mothers to go to work</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Children (6 months - 6 years)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Working Mothers</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Low-income families</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Mother's Employment Proof</span>
+          <span class="kp-chip">Child's Birth Cert</span>
+          <span class="kp-chip">Income Proof</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Locate local Crèche</li>
+          <li><span>2</span> Meet supervisor</li>
+          <li><span>3</span> Submit documents</li>
+          <li><span>4</span> Pay nominal fee</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-map-pin"></i> Find Centre</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-list"></i> Guidelines</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="education girls technology" data-program="pragati">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-laptop-code"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Pragati Scholarship</h3>
+      <p>Financial support for girl students pursuing technical education (Degree/Diploma)</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-graduation-cap"></i> Technical</span>
+        <span class="kp-badge"><i class="fa-solid fa-indian-rupee-sign"></i> ₹50,000/yr</span>
+        <span class="kp-badge"><i class="fa-solid fa-server"></i> AICTE</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Pragati" data-save="pragati">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Scholarship:</strong> ₹50,000 per year for every year of study</li>
+          <li><strong>Usage:</strong> For college fees, books, equipment, or laptop</li>
+          <li><strong>Coverage:</strong> Valid for Degree or Diploma courses</li>
+          <li><strong>Direct:</strong> Amount transferred directly to student bank</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Girl Students (1st year)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Family income &lt; ₹8 Lakh</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> AICTE Colleges</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Admission Letter</span>
+          <span class="kp-chip">Income Certificate</span>
+          <span class="kp-chip">Aadhaar & Bank Details</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Register on NSP Portal</li>
+          <li><span>2</span> Upload documents</li>
+          <li><span>3</span> Institute verifies</li>
+          <li><span>4</span> Receive funds</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-globe"></i> National Scholarship</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-file-lines"></i> Apply Online</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="pregnancy health doctors" data-program="pmsma">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-user-doctor"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>PMSMA (Surakshit Matritva)</h3>
+      <p>Guaranteed antenatal care by specialists on the 9th of every month</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-calendar-day"></i> 9th of Month</span>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Specialist</span>
+        <span class="kp-badge"><i class="fa-solid fa-triangle-exclamation"></i> High Risk</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save PMSMA" data-save="pmsma">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Specialist Care:</strong> Free checkup by OBGYN/MD doctors</li>
+          <li><strong>High Risk:</strong> Early detection of complications (HRP)</li>
+          <li><strong>Tests:</strong> Free ultrasound, blood pressure, sugar tests</li>
+          <li><strong>Tracking:</strong> Red sticker on card for high-risk patients</li>
+          <li><strong>Counseling:</strong> Family planning & nutrition advice</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Pregnant Women (2nd/3rd Trimester)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Rural & Semi-urban</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Private doctors volunteer</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">MCP Card</span>
+          <span class="kp-chip">Previous Reports</span>
+          <span class="kp-chip">Aadhaar Card</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Go to Clinic on 9th</li>
+          <li><span>2</span> Register at PMSMA desk</li>
+          <li><span>3</span> Get examined by Doctor</li>
+          <li><span>4</span> Get Color-coded sticker</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-hospital-user"></i> Find Clinic</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-circle-info"></i> Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="health women hygiene" data-program="suvidha">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-feather"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Suvidha Sanitary Napkins</h3>
+      <p>High-quality oxo-biodegradable sanitary pads at just ₹1 per pad</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-tag"></i> ₹1 / Pad</span>
+        <span class="kp-badge"><i class="fa-solid fa-leaf"></i> Eco Friendly</span>
+        <span class="kp-badge"><i class="fa-solid fa-store"></i> PMBJP</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Suvidha" data-save="suvidha">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Affordability:</strong> Pack of 4 pads for just ₹4</li>
+          <li><strong>Quality:</strong> Good absorbency and hygiene</li>
+          <li><strong>Environment:</strong> Biodegradable materials used</li>
+          <li><strong>Access:</strong> Available at all Jan Aushadhi Kendras</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Adolescent Girls</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Women of reproductive age</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Low-income households</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Cash (₹4 per pack)</span>
+          <span class="kp-chip">No ID required</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Find Jan Aushadhi Store</li>
+          <li><span>2</span> Ask for 'Suvidha' pads</li>
+          <li><span>3</span> Pay Cash</li>
+          <li><span>4</span> Take home</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-location-crosshairs"></i> Locate Store</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-box-open"></i> Product Info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="housing work safety" data-program="sakhiniwas">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-city"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Sakhi Niwas (Working Women Hostel)</h3>
+      <p>Safe and affordable rental housing for women working away from home</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-building-user"></i> Rental</span>
+        <span class="kp-badge"><i class="fa-solid fa-lock"></i> Secure</span>
+        <span class="kp-badge"><i class="fa-solid fa-bus"></i> Transit</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Sakhi Niwas" data-save="sakhiniwas">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Accommodation:</strong> Shared or single rooms on rent</li>
+          <li><strong>Facilities:</strong> Food, electricity, water, security</li>
+          <li><strong>Day Care:</strong> Often includes crèche for children</li>
+          <li><strong>Affordability:</strong> Rent is subsidized/regulated</li>
+          <li><strong>Location:</strong> Usually close to employment hubs</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Single working women</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Women under training</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Income limits apply</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Employment Proof</span>
+          <span class="kp-chip">Salary Slip</span>
+          <span class="kp-chip">ID / Aadhaar</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Search local hostel</li>
+          <li><span>2</span> Visit warden</li>
+          <li><span>3</span> Submit application</li>
+          <li><span>4</span> Get allotment</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-bed"></i> Find Hostel</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-file-contract"></i> Rules</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="business loan women" data-program="standup">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-shop"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Stand-Up India</h3>
+      <p>Bank loans from ₹10 Lakh to ₹1 Crore for women entrepreneurs</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-indian-rupee-sign"></i> High Value</span>
+        <span class="kp-badge"><i class="fa-solid fa-rocket"></i> Startup</span>
+        <span class="kp-badge"><i class="fa-solid fa-building-columns"></i> Bank Loan</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save StandUp" data-save="standup">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Loan Amount:</strong> ₹10 Lakhs to ₹1 Crore</li>
+          <li><strong>Purpose:</strong> Manufacturing, services, or trading</li>
+          <li><strong>Nature:</strong> Composite loan (Term loan + Working capital)</li>
+          <li><strong>Support:</strong> Handholding support for setting up</li>
+          <li><strong>Repayment:</strong> Up to 7 years with moratorium</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Woman Entrepreneur (SC/ST/General)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> 18+ years age</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Greenfield (New) Project</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Project Report</span>
+          <span class="kp-chip">PAN / Aadhaar</span>
+          <span class="kp-chip">Address Proof</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Prepare Project Report</li>
+          <li><span>2</span> Visit Bank Branch</li>
+          <li><span>3</span> Apply for Stand-Up</li>
+          <li><span>4</span> Loan Sanction</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-laptop-file"></i> Apply Online</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-bank"></i> Find Bank</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="finance savings investment" data-program="mssc">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-wallet"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Mahila Samman Savings Certificate</h3>
+      <p>New small savings scheme exclusively for women with attractive interest</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-percent"></i> 7.5% Interest</span>
+        <span class="kp-badge"><i class="fa-solid fa-lock"></i> Safe</span>
+        <span class="kp-badge"><i class="fa-solid fa-calendar-days"></i> 2 Years</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save MSSC" data-save="mssc">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Interest:</strong> Fixed interest rate of 7.5% p.a.</li>
+          <li><strong>Tenure:</strong> Maturity period of 2 years</li>
+          <li><strong>Deposit:</strong> Max limit up to ₹2 Lakhs</li>
+          <li><strong>Withdrawal:</strong> Partial withdrawal allowed after 1 year</li>
+          <li><strong>Compounding:</strong> Interest compounded quarterly</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Any Woman or Girl</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> No age limit</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Guardians for minors</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">PAN Card</span>
+          <span class="kp-chip">Cash/Cheque for deposit</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Go to Post Office/Bank</li>
+          <li><span>2</span> Ask for MSSC Form</li>
+          <li><span>3</span> Submit KYC + Cash</li>
+          <li><span>4</span> Get Certificate</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-building-columns"></i> Visit Post Office</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-calculator"></i> Calculate Return</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="shelter distress support" data-program="swadhar">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-house-chimney-crack"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>Swadhar Greh</h3>
+      <p>Rehabilitation home for women in difficult circumstances without social support</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-bed"></i> Housing</span>
+        <span class="kp-badge"><i class="fa-solid fa-bowl-food"></i> Food</span>
+        <span class="kp-badge"><i class="fa-solid fa-handshake"></i> Rehab</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save Swadhar" data-save="swadhar">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Shelter:</strong> Safe accommodation for longer terms</li>
+          <li><strong>Basic Needs:</strong> Food, clothing, and medical care</li>
+          <li><strong>Counseling:</strong> Legal aid and psychological support</li>
+          <li><strong>Training:</strong> Vocational skills for economic rehab</li>
+          <li><strong>Restoration:</strong> Help to reunite with family (if possible)</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Widows/Deserted women</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Survivors of disaster</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Ex-prisoners/Homeless</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Referral (Police/NGO)</span>
+          <span class="kp-chip">Any ID (if held)</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Contact Women Helpline</li>
+          <li><span>2</span> Assessment of need</li>
+          <li><span>3</span> Admission to Home</li>
+          <li><span>4</span> Rehabilitation plan</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-phone"></i> Call 181</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-search"></i> List of Homes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="science career research" data-program="kiran">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-microscope"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>KIRAN (Women Scientist Scheme)</h3>
+      <p>Bringing women scientists back to career after a break (e.g., maternity)</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-flask"></i> Research</span>
+        <span class="kp-badge"><i class="fa-solid fa-rotate-left"></i> Re-entry</span>
+        <span class="kp-badge"><i class="fa-solid fa-money-bill-1"></i> Stipend</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save KIRAN" data-save="kiran">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Fellowship:</strong> Monthly salary/stipend for 3 years</li>
+          <li><strong>Research Grant:</strong> Funds for equipment and consumables</li>
+          <li><strong>Categories:</strong> WOS-A (Basic Science), WOS-B (Tech), WOS-C (IPR)</li>
+          <li><strong>Mentorship:</strong> Work at a host institute/university</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Women with career break</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Age: 27-57 years</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> PhD/M.Sc/M.Tech qualified</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">Educational Degree</span>
+          <span class="kp-chip">Research Proposal</span>
+          <span class="kp-chip">Break Affidavit</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Write Research Proposal</li>
+          <li><span>2</span> Find Host Institute</li>
+          <li><span>3</span> Apply on DST Portal</li>
+          <li><span>4</span> Presentation & Grant</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-atom"></i> DST Portal</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-file-pen"></i> Guidelines</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+<article class="kp-card reveal" data-tags="pension senior finance" data-program="pmvvy">
+  <div class="kp-card__top">
+    <div class="kp-emblem">
+      <div class="kp-emblem__orb"><i class="fa-solid fa-hands-holding-circle"></i></div>
+      <div class="kp-emblem__ring"></div>
+    </div>
+    <div class="kp-head">
+      <h3>PM Vaya Vandana Yojana (PMVVY)</h3>
+      <p>Pension scheme for senior citizens with assured return and financial security</p>
+      <div class="kp-badges">
+        <span class="kp-badge"><i class="fa-solid fa-umbrella"></i> LIC Managed</span>
+        <span class="kp-badge"><i class="fa-solid fa-calendar-check"></i> Monthly Pay</span>
+        <span class="kp-badge"><i class="fa-solid fa-shield-heart"></i> Assured %</span>
+      </div>
+    </div>
+
+    <button class="kp-save" type="button" aria-label="Save PMVVY" data-save="pmvvy">
+      <i class="fa-solid fa-bookmark"></i>
+    </button>
+  </div>
+
+  <div class="kp-drawer" hidden>
+    <div class="kp-drawer__cols">
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-gift"></i> What you get</h4>
+        <ul class="kp-list">
+          <li><strong>Pension:</strong> Assured pension for 10 years</li>
+          <li><strong>Rate:</strong> Around 7.4% p.a. (subject to reset)</li>
+          <li><strong>Payout:</strong> Monthly, Quarterly, or Yearly options</li>
+          <li><strong>Loan:</strong> Loan available up to 75% of purchase price</li>
+          <li><strong>Death Benefit:</strong> Purchase price returned to nominee</li>
+        </ul>
+      </div>
+
+      <div class="kp-panel">
+        <h4><i class="fa-solid fa-user-check"></i> Who it helps</h4>
+        <div class="kp-mini">
+          <div class="kp-mini__item"><span class="kp-dot"></span> Senior Citizens (60+)</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> No maximum age limit</div>
+          <div class="kp-mini__item"><span class="kp-dot"></span> Investment capacity</div>
+        </div>
+
+        <h4 style="margin-top:.9rem;"><i class="fa-solid fa-clipboard-list"></i> Bring these</h4>
+        <div class="kp-chips">
+          <span class="kp-chip">PAN Card</span>
+          <span class="kp-chip">Aadhaar Card</span>
+          <span class="kp-chip">Cheque for deposit</span>
+        </div>
+      </div>
+
+      <div class="kp-panel kp-panel--steps">
+        <h4><i class="fa-solid fa-map-signs"></i> 60‑second path</h4>
+        <ol class="kp-steps">
+          <li><span>1</span> Visit LIC Office/Agent</li>
+          <li><span>2</span> Choose pension amount</li>
+          <li><span>3</span> Pay lumpsum</li>
+          <li><span>4</span> Pension starts</li>
+        </ol>
+        <div class="kp-actions">
+          <button class="btn btn-primary kp-cta"><i class="fa-solid fa-umbrella"></i> LIC Portal</button>
+          <button class="btn btn-outline kp-cta"><i class="fa-solid fa-calculator"></i> Premium Calc</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="kp-expand" type="button" aria-expanded="false">
+    <span>Unlock details</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</article>
+
+
+    </div>
+
+
+    <!-- Sticky “Saved list” (gamified retention) -->
+    <div class="kp-saved reveal" aria-live="polite">
+      <div class="kp-saved__head">
+        <h3><i class="fa-solid fa-bookmark"></i> Your Saved Programs</h3>
+        <p>Save cards to revisit later. This helps retention + quick decision-making.</p>
+      </div>
+      <div class="kp-saved__list" id="kpSavedList">
+        <span class="kp-empty">No saved programs yet — tap the bookmark on a card.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Raspberry Pink Theme Styles (scoped to this section) -->
+  <style>
+    /* --- Raspberry Pink theme tokens --- */
+    .key-programs-quest{
+      --rp: #e30b5d;         /* raspberry */
+      --rp2:#ff4d8d;         /* bright pink */
+      --rp3:#7c3aed;         /* violet accent */
+      --ink:#1b1b1f;
+      --muted: rgba(0,0,0,.62);
+      --card: rgba(255,255,255,.92);
+      --bd: rgba(0,0,0,.06);
+    }
+
+    .key-programs-quest{
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(900px 400px at 15% 0%, rgba(227,11,93,.12), transparent 55%),
+        radial-gradient(900px 420px at 95% 10%, rgba(255,77,141,.10), transparent 60%);
+    }
+
+    /* Reveal */
+    .key-programs-quest .reveal{ opacity:0; transform: translateY(14px); }
+    .key-programs-quest .reveal.is-visible{ opacity:1; transform:none; transition: .75s ease; }
+
+    /* Hero */
+    .kp-hero{
+      position: relative;
+      border-radius: 22px;
+      padding: 2rem 1.4rem 1.4rem;
+      border: 1px solid var(--bd);
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      box-shadow: 0 20px 60px rgba(0,0,0,.08);
+      margin-bottom: 1.2rem;
+    }
+    .kp-hero__bg{
+      position:absolute; inset:-2px;
+      border-radius: 22px;
+      background: conic-gradient(from 180deg at 50% 50%,
+        rgba(227,11,93,.22),
+        rgba(255,77,141,.18),
+        rgba(124,58,237,.16),
+        rgba(227,11,93,.22));
+      filter: blur(16px);
+      opacity: .45;
+      pointer-events: none;
+      animation: kpHue 10s linear infinite;
+    }
+    @keyframes kpHue { to { filter: blur(16px) hue-rotate(360deg); } }
+
+    .kp-hero__content{ position:relative; z-index:1; }
+    .kp-kicker{ display:flex; flex-wrap:wrap; gap:.55rem; margin-bottom:.7rem; }
+    .kp-pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.38rem .7rem;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: .82rem;
+      background: rgba(227,11,93,.10);
+      border: 1px solid rgba(227,11,93,.18);
+    }
+    .kp-pill--soft{ background: rgba(255,77,141,.10); border-color: rgba(255,77,141,.18); }
+    .kp-pill--soft2{ background: rgba(124,58,237,.09); border-color: rgba(124,58,237,.16); }
+
+    .kp-title{
+      margin: .1rem 0 .55rem;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.55rem, 2.2vw, 2.05rem);
+    }
+    .kp-sub{ margin:0; color: var(--muted); max-width: 78ch; }
+
+    /* HUD */
+    .kp-hud{
+      position: relative; z-index:1;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .85rem;
+      margin-top: 1.2rem;
+    }
+    .kp-hud__item{
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--bd);
+      border-radius: 16px;
+      padding: .85rem;
+      display:flex;
+      gap:.7rem;
+      align-items:center;
+      box-shadow: 0 16px 34px rgba(227,11,93,.08);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .kp-hud__item:hover{ transform: translateY(-4px); box-shadow: 0 22px 46px rgba(227,11,93,.14); }
+    .kp-hud__icon{
+      width:46px; height:46px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff;
+      background: linear-gradient(135deg, var(--rp), var(--rp2));
+      box-shadow: 0 18px 34px rgba(227,11,93,.22);
+      flex: 0 0 auto;
+    }
+    .kp-hud__txt strong{ display:block; font-weight: 950; }
+    .kp-hud__txt span{ display:block; font-size:.9rem; color: rgba(0,0,0,.62); }
+
+    /* Filters */
+    .kp-filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.6rem;
+      margin: 1.1rem 0 1.0rem;
+    }
+    .kp-filter{
+      border: 1px solid rgba(227,11,93,.18);
+      background: rgba(255,255,255,.88);
+      padding:.55rem .85rem;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .kp-filter:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px rgba(227,11,93,.10); }
+    .kp-filter.active{
+      background: linear-gradient(135deg, rgba(227,11,93,.14), rgba(255,77,141,.10));
+      box-shadow: 0 18px 40px rgba(227,11,93,.14);
+    }
+
+    /* Grid */
+    .kp-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    /* Card */
+    .kp-card{
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 20px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.08);
+      overflow:hidden;
+      transform: translateY(0);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      position: relative;
+    }
+    .kp-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 26px 70px rgba(227,11,93,.14);
+      border-color: rgba(227,11,93,.22);
+    }
+    .kp-card__top{
+      display:flex;
+      gap: 1rem;
+      padding: 1.1rem 1.1rem .9rem;
+      align-items:flex-start;
+      position: relative;
+    }
+
+    /* Emblem (gamified orb) */
+    .kp-emblem{ position: relative; width:70px; height:70px; flex: 0 0 auto; }
+    .kp-emblem__orb{
+      width: 70px; height:70px;
+      border-radius: 22px;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--rp), var(--rp2));
+      box-shadow: 0 22px 48px rgba(227,11,93,.25);
+      transform: translateZ(0);
+      animation: kpFloat 3.8s ease-in-out infinite;
+    }
+    .kp-emblem__ring{
+      position:absolute; inset:-10px;
+      border-radius: 26px;
+      border: 2px dashed rgba(227,11,93,.28);
+      opacity: .55;
+      animation: kpSpin 10s linear infinite;
+    }
+    @keyframes kpFloat { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+    @keyframes kpSpin { to{ transform: rotate(360deg);} }
+
+    .kp-head h3{ margin:0; font-size: 1.15rem; letter-spacing: -.01em; }
+    .kp-head p{ margin:.35rem 0 .6rem; color: var(--muted); }
+
+    .kp-badges{ display:flex; flex-wrap:wrap; gap:.45rem; }
+    .kp-badge{
+      font-size: .78rem;
+      font-weight: 900;
+      padding:.32rem .55rem;
+      border-radius: 999px;
+      background: rgba(227,11,93,.09);
+      border: 1px solid rgba(227,11,93,.16);
+    }
+
+    /* Save */
+    .kp-save{
+      margin-left:auto;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.9);
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .kp-save:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px rgba(227,11,93,.12); }
+    .kp-save.is-saved{
+      border-color: rgba(227,11,93,.22);
+      background: linear-gradient(135deg, rgba(227,11,93,.14), rgba(255,77,141,.10));
+    }
+    .kp-save i{ color: rgba(0,0,0,.65); }
+    .kp-save.is-saved i{ color: var(--rp); }
+
+    /* Expand button */
+    .kp-expand{
+      width: 100%;
+      border: 0;
+      background: linear-gradient(135deg, rgba(227,11,93,.10), rgba(124,58,237,.06));
+      padding: .75rem 1.1rem;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      cursor:pointer;
+      font-weight: 950;
+    }
+    .kp-expand i{ transition: transform .2s ease; }
+    .kp-card.is-open .kp-expand i{ transform: rotate(180deg); }
+
+    /* Drawer */
+    .kp-drawer{
+      border-top: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.96);
+      padding: 1rem 1.1rem 1.1rem;
+    }
+    .kp-drawer__cols{
+      display:grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: .9rem;
+    }
+    .kp-panel{
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: .9rem;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 22px rgba(0,0,0,.05);
+    }
+    .kp-panel h4{ margin:0 0 .6rem; display:flex; gap:.5rem; align-items:center; }
+    .kp-list{ margin:0; padding-left: 1.05rem; color: rgba(0,0,0,.74); }
+    .kp-list li{ margin:.35rem 0; }
+    .kp-mini__item{ display:flex; gap:.55rem; align-items:center; margin:.35rem 0; color: rgba(0,0,0,.72); }
+    .kp-dot{ width:10px; height:10px; border-radius: 999px; background: var(--rp); box-shadow: 0 10px 18px rgba(227,11,93,.22); }
+    .kp-chips{ display:flex; flex-wrap:wrap; gap:.45rem; }
+    .kp-chip{
+      font-size:.78rem;
+      font-weight: 900;
+      padding:.28rem .55rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,.035);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+
+    .kp-panel--steps{
+      background: linear-gradient(135deg, rgba(227,11,93,.08), rgba(255,77,141,.06));
+      border-color: rgba(227,11,93,.12);
+    }
+    .kp-steps{
+      list-style:none;
+      padding:0;
+      margin:.1rem 0 .8rem;
+      display:grid;
+      gap:.45rem;
+    }
+    .kp-steps li{
+      display:flex; align-items:center; gap:.6rem;
+      padding:.45rem .55rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.05);
+      font-weight: 900;
+    }
+    .kp-steps li span{
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--rp), var(--rp2));
+      color:#fff;
+      box-shadow: 0 12px 24px rgba(227,11,93,.22);
+      flex: 0 0 auto;
+    }
+    .kp-actions{ display:flex; gap:.6rem; flex-wrap:wrap; }
+
+    /* Saved box */
+    .kp-saved{
+      margin-top: 1.2rem;
+      border: 1px solid rgba(227,11,93,.14);
+      border-radius: 20px;
+      padding: 1.1rem;
+      background: linear-gradient(135deg, rgba(227,11,93,.08), rgba(124,58,237,.05));
+      box-shadow: 0 20px 60px rgba(227,11,93,.10);
+    }
+    .kp-saved__head h3{ margin:0 0 .25rem; }
+    .kp-saved__head p{ margin:0 0 .6rem; color: var(--muted); }
+    .kp-saved__list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.55rem;
+      padding-top:.3rem;
+    }
+    .kp-saved-pill{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.42rem .7rem;
+      border-radius: 999px;
+      font-weight: 950;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .kp-empty{ color: rgba(0,0,0,.62); font-weight: 800; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .kp-grid{ grid-template-columns: 1fr; }
+      .kp-drawer__cols{ grid-template-columns: 1fr; }
+      .kp-hud{ grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .kp-emblem__orb, .kp-emblem__ring, .kp-hero__bg{ animation:none; }
+      .kp-card, .kp-hud__item{ transition:none; }
+      .key-programs-quest .reveal, .key-programs-quest .reveal.is-visible{ opacity:1; transform:none; transition:none; }
+    }
+  </style>
+
+  <!-- Minimal JS: reveal, expand/collapse, filter, save (gamified HUD) -->
+  <script>
+    (function(){
+      const root = document.querySelector('#key-programs');
+      if(!root) return;
+
+      // Reveal on scroll
+      const revealEls = root.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach((el, idx)=>{
+        el.style.transitionDelay = (idx * 70) + 'ms';
+        io.observe(el);
+      });
+
+      // Expand drawers + unlocked count
+      const cards = [...root.querySelectorAll('.kp-card')];
+      const unlockedEl = root.querySelector('#kpUnlockedCount');
+      function updateUnlocked(){
+        const open = cards.filter(c=>c.classList.contains('is-open')).length;
+        unlockedEl.textContent = open + '/4';
+      }
+
+      cards.forEach(card=>{
+        const btn = card.querySelector('.kp-expand');
+        const drawer = card.querySelector('.kp-drawer');
+        btn.addEventListener('click', ()=>{
+          const open = card.classList.toggle('is-open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          drawer.hidden = !open;
+          updateUnlocked();
+        });
+      });
+      updateUnlocked();
+
+      // Filters
+      const filterBtns = [...root.querySelectorAll('.kp-filter')];
+      const grid = root.querySelector('#kpGrid');
+
+      function applyFilter(tag){
+        cards.forEach(card=>{
+          const tags = (card.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
+          const show = (tag === 'all') || tags.includes(tag);
+          card.style.display = show ? '' : 'none';
+        });
+      }
+
+      filterBtns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          filterBtns.forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      // Save (bookmark) + saved list + HUD count
+      const savedCountEl = root.querySelector('#kpSavedCount');
+      const savedListEl  = root.querySelector('#kpSavedList');
+      const saved = new Map(); // key -> title
+
+      function renderSaved(){
+        const count = saved.size;
+        savedCountEl.textContent = String(count);
+        savedListEl.innerHTML = '';
+        if(count === 0){
+          const span = document.createElement('span');
+          span.className = 'kp-empty';
+          span.textContent = 'No saved programs yet — tap the bookmark on a card.';
+          savedListEl.appendChild(span);
+          return;
+        }
+        for(const [key, title] of saved.entries()){
+          const pill = document.createElement('span');
+          pill.className = 'kp-saved-pill';
+          pill.innerHTML = '<i class="fa-solid fa-bookmark" style="color: var(--rp);"></i>' + title;
+          savedListEl.appendChild(pill);
+        }
+      }
+
+      root.querySelectorAll('.kp-save').forEach(saveBtn=>{
+        saveBtn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const key = saveBtn.getAttribute('data-save');
+          const card = saveBtn.closest('.kp-card');
+          const title = card.querySelector('.kp-head h3')?.textContent?.trim() || key;
+
+          const isSaved = !saved.has(key);
+          if(isSaved){
+            saved.set(key, title);
+            saveBtn.classList.add('is-saved');
+          }else{
+            saved.delete(key);
+            saveBtn.classList.remove('is-saved');
+          }
+          renderSaved();
+        });
+      });
+
+      renderSaved();
+    })();
+  </script>
+</section>
+
+
+
+    <!-- Eligibility & Application -->
+    <section class="section alt">
+      <div class="container">
+        <h2><i class="fa-solid fa-clipboard-question"></i> Eligibility & Application Process</h2>
+        <p class="sub">Simple steps to access healthcare benefits.</p>
+        
+        <div class="info-box">
+          <h3 style="margin-bottom: 1.5rem;"><i class="fa-solid fa-circle-info"></i> Who Qualifies?</h3>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+              <h4 style="margin-bottom: 0.75rem;"><i class="fa-solid fa-users"></i> Pregnant Women</h4>
+              <p style="color: var(--gray-700);">Income up to 200% of Federal Poverty Level (varies by state)</p>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+              <h4 style="margin-bottom: 0.75rem;"><i class="fa-solid fa-children"></i> Parents/Caregivers</h4>
+              <p style="color: var(--gray-700);">Low-income families with children under 19</p>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+              <h4 style="margin-bottom: 0.75rem;"><i class="fa-solid fa-id-card"></i> All Women</h4>
+              <p style="color: var(--gray-700);">Title X services regardless of income (sliding scale fees)</p>
+            </div>
+          </div>
+          
+          <h3 style="margin: 2rem 0 1rem;"><i class="fa-solid fa-list-check"></i> How to Apply</h3>
+          
+          <div class="process-steps">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h4>Check Eligibility</h4>
+              <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Verify income and residency requirements</p>
+            </div>
+            
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h4>Gather Documents</h4>
+              <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">ID, proof of income, pregnancy verification</p>
+            </div>
+            
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h4>Submit Application</h4>
+              <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Online, mail, or in-person at local office</p>
+            </div>
+            
+            <div class="step-card">
+              <div class="step-number">4</div>
+              <h4>Receive Determination</h4>
+              <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Decision within 45 days</p>
+            </div>
+            
+            <div class="step-card">
+              <div class="step-number">5</div>
+              <h4>Get Coverage</h4>
+              <p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 0.5rem;">Often backdated to application date</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- INSERT THIS SECTION BETWEEN:
+     1) <!-- Key Programs --> ... </section>
+     and
+     2) <!-- Eligibility & Application --> ... </section>
+-->
+
+<section id="government" class="section wb-gov-section">
+  <div class="container">
+
+    <!-- SECTION HEADER -->
+    <div class="wb-gov-hero">
+      <div class="wb-gov-hero__bg"></div>
+      <div class="wb-gov-hero__content">
+        <div class="wb-gov-kicker">
+          <span class="wb-pill"><i class="fa-solid fa-landmark"></i> West Bengal</span>
+          <span class="wb-pill wb-pill--soft"><i class="fa-solid fa-heart-pulse"></i> Women’s Health</span>
+          <span class="wb-pill wb-pill--soft2"><i class="fa-solid fa-location-dot"></i> District Drives</span>
+        </div>
+        <h2 class="wb-gov-title">Government Healthcare Initiatives in West Bengal</h2>
+        <p class="wb-gov-sub">
+          Explore key programs, district coverage highlights, and mapped healthcare drives—presented in a modern, animated “mission dashboard” format.
+        </p>
+      </div>
+
+      <!-- Quick stat chips -->
+      <div class="wb-gov-stats">
+        <div class="wb-stat">
+          <div class="wb-stat__icon"><i class="fa-solid fa-shield-heart"></i></div>
+          <div class="wb-stat__text">
+            <strong>Coverage</strong>
+            <span>Awareness + Access</span>
+          </div>
+        </div>
+        <div class="wb-stat">
+          <div class="wb-stat__icon"><i class="fa-solid fa-hospital"></i></div>
+          <div class="wb-stat__text">
+            <strong>District Focus</strong>
+            <span>Centers & Camps</span>
+          </div>
+        </div>
+        <div class="wb-stat">
+          <div class="wb-stat__icon"><i class="fa-solid fa-map-location-dot"></i></div>
+          <div class="wb-stat__text">
+            <strong>Interactive</strong>
+            <span>Map + Cards</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KEY INITIATIVES (animated grid) -->
+    <div class="wb-panel wb-panel--glow">
+      <div class="wb-panel__head">
+        <h3 class="wb-panel__title"><i class="fa-solid fa-bullseye"></i> Key Women’s Health Programs</h3>
+        <p class="wb-panel__sub">Tap/hover each card for a micro-animation & focus glow.</p>
+      </div>
+
+      <div class="wb-initiatives-grid">
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-id-card-clip"></i></div>
+            <h4>Swasthya Sathi Scheme</h4>
+          </div>
+          <p>Health cover up to ₹5 lakh per annum for secondary and tertiary care</p>
+          <div class="wb-card__shine"></div>
+        </article>
+
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h4>Kanyashree Prakalpa</h4>
+          </div>
+          <p>Conditional cash transfers for girls’ education and delaying marriage</p>
+          <div class="wb-card__shine"></div>
+        </article>
+
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-seedling"></i></div>
+            <h4>AYUSH Suswasthya Kendra</h4>
+          </div>
+          <p>Health and Wellness Centres across West Bengal</p>
+          <div class="wb-card__shine"></div>
+        </article>
+
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-shield-virus"></i></div>
+            <h4>Triple Elimination Program</h4>
+          </div>
+          <p>Eliminating mother-to-child transmission of HIV, Syphilis, and Hepatitis B</p>
+          <div class="wb-card__shine"></div>
+        </article>
+
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <h4>Mahila Samridhi Yojana (MSY)</h4>
+          </div>
+          <p>Financial assistance for SC women entrepreneurs (Bankura)</p>
+          <div class="wb-card__shine"></div>
+        </article>
+
+        <article class="wb-card reveal">
+          <div class="wb-card__top">
+            <div class="wb-card__badge"><i class="fa-solid fa-ring"></i></div>
+            <h4>Rupashree Prakalpa</h4>
+          </div>
+          <p>₹25,000 grant for marriages of girls from financially backward families</p>
+          <div class="wb-card__shine"></div>
+        </article>
+      </div>
+    </div>
+
+    <!-- MAP (cinematic container with entrance animation) -->
+    <div class="wb-panel wb-panel--map reveal">
+      <div class="wb-panel__head">
+        <h3 class="wb-panel__title"><i class="fa-solid fa-map"></i> Healthcare Drives & Centers (District Map)</h3>
+        <p class="wb-panel__sub">
+          <strong>Districts Highlighted:</strong> Murshidabad, Bankura, Birbhum, Asansol (Paschim Bardhaman), Purulia, Bardhaman (Purba Bardhaman)
+        </p>
+      </div>
+
+      <div class="wb-map-shell">
+        <div class="wb-map-glow"></div>
+        <iframe
+          class="wb-map"
+          src="https://www.google.com/maps/d/embed?mid=10LcqEx9WHKcxQhEku84mG6lJoVGvE-Q"
+          width="100%"
+          height="600"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- DISTRICT CARDS (accordion-like feel with hover lift + stagger) -->
+    <div class="wb-panel wb-panel--districts">
+      <div class="wb-panel__head">
+        <h3 class="wb-panel__title"><i class="fa-solid fa-hospital-user"></i> Key Healthcare Centers by District</h3>
+        <p class="wb-panel__sub">Designed as “mission cards” with subtle motion for quick scanning.</p>
+      </div>
+
+      <div class="wb-district-grid">
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Murshidabad</h4>
+            <span class="wb-tag"><i class="fa-solid fa-stethoscope"></i> Key Hospitals</span>
+          </div>
+          <ul>
+            <li><strong>Murshidabad Medical College & Hospital</strong> - Berhampore</li>
+            <li>District Women & Child Health Centre - Berhampore</li>
+            <li>Community Health Centres in Kandi, Lalgola, Domkal</li>
+          </ul>
+        </div>
+
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Bankura</h4>
+            <span class="wb-tag wb-tag--violet"><i class="fa-solid fa-hand-holding-heart"></i> Support</span>
+          </div>
+          <ul>
+            <li><strong>Bankura Sammilani Medical College</strong> - Bankura</li>
+            <li>Mahila Samridhi Yojana (MSY) Centers</li>
+            <li>AYUSH Suswasthya Kendras across blocks</li>
+          </ul>
+        </div>
+
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Birbhum</h4>
+            <span class="wb-tag wb-tag--teal"><i class="fa-solid fa-shield-heart"></i> Coverage</span>
+          </div>
+          <ul>
+            <li><strong>Rampurhat Government Medical College</strong> - Rampurhat</li>
+            <li>Swasthya Sathi empanelled hospitals</li>
+            <li>Community Health Centres in Bolpur, Suri</li>
+          </ul>
+        </div>
+
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Asansol (Paschim Bardhaman)</h4>
+            <span class="wb-tag wb-tag--amber"><i class="fa-solid fa-syringe"></i> Camps</span>
+          </div>
+          <ul>
+            <li><strong>Asansol District Hospital</strong> - Asansol</li>
+            <li>Durgapur Sub-Divisional Hospital</li>
+            <li>Women’s health camps & screening drives</li>
+          </ul>
+        </div>
+
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Purulia</h4>
+            <span class="wb-tag wb-tag--rose"><i class="fa-solid fa-truck-medical"></i> Outreach</span>
+          </div>
+          <ul>
+            <li><strong>Purulia Government Medical College</strong> - Purulia</li>
+            <li>Muktidhara initiative for tribal women</li>
+            <li>Mobile health vans for rural areas</li>
+          </ul>
+        </div>
+
+        <div class="wb-district reveal">
+          <div class="wb-district__head">
+            <h4>📍 Bardhaman (Purba Bardhaman)</h4>
+            <span class="wb-tag wb-tag--blue"><i class="fa-solid fa-person-pregnant"></i> Maternal</span>
+          </div>
+          <ul>
+            <li><strong>Burdwan Medical College & Hospital</strong> - Bardhaman</li>
+            <li>Maternal health services under Swasthya Ingit</li>
+            <li>District health centres in Katwa, Kalna</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOCAL STYLES + MICRO-ANIMATIONS (kept inside section for easy copy/paste) -->
+  <style>
+    /* --- WB Government: "game changer" motion + visual system --- */
+    .wb-gov-section{ position: relative; overflow: hidden; }
+    .wb-gov-hero{
+      position: relative;
+      border-radius: 22px;
+      padding: 2.2rem 1.6rem 1.6rem;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(102,126,234,.25), transparent 50%),
+                  radial-gradient(900px 450px at 95% 0%, rgba(245,87,108,.22), transparent 55%),
+                  linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.84));
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 18px 60px rgba(0,0,0,.08);
+      margin-bottom: 1.5rem;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: wb-fadeUp .8s ease forwards;
+    }
+    .wb-gov-hero__bg{
+      position:absolute; inset:-2px;
+      border-radius: 22px;
+      background: conic-gradient(from 180deg at 50% 50%,
+        rgba(102,126,234,.25),
+        rgba(118,75,162,.18),
+        rgba(245,87,108,.18),
+        rgba(79,172,254,.20),
+        rgba(102,126,234,.25));
+      filter: blur(18px);
+      opacity: .35;
+      z-index: 0;
+      animation: wb-hue 10s linear infinite;
+    }
+    .wb-gov-hero__content, .wb-gov-stats{ position: relative; z-index: 1; }
+    .wb-gov-kicker{ display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.8rem; }
+    .wb-pill{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.38rem .65rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: .82rem;
+      background: rgba(102,126,234,.12);
+      border: 1px solid rgba(102,126,234,.18);
+    }
+    .wb-pill--soft{ background: rgba(245,87,108,.10); border-color: rgba(245,87,108,.18); }
+    .wb-pill--soft2{ background: rgba(79,172,254,.10); border-color: rgba(79,172,254,.18); }
+
+    .wb-gov-title{
+      margin: .2rem 0 .6rem;
+      font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+      letter-spacing: -0.02em;
+    }
+    .wb-gov-sub{ color: rgba(0,0,0,.68); margin: 0; max-width: 70ch; }
+
+    .wb-gov-stats{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .9rem;
+      margin-top: 1.3rem;
+    }
+    .wb-stat{
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 16px;
+      padding: .9rem;
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .wb-stat:hover{ transform: translateY(-4px); box-shadow: 0 16px 30px rgba(0,0,0,.08); }
+    .wb-stat__icon{
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color:#fff;
+      box-shadow: 0 12px 22px rgba(102,126,234,.20);
+      flex: 0 0 auto;
+    }
+    .wb-stat__text strong{ display:block; font-weight: 900; }
+    .wb-stat__text span{ display:block; font-size:.9rem; color: rgba(0,0,0,.60); }
+
+    .wb-panel{
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 22px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.07);
+      padding: 1.4rem;
+      margin: 1.25rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .wb-panel--glow::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(550px 240px at 15% 0%, rgba(245,87,108,.18), transparent 60%),
+                  radial-gradient(520px 220px at 90% 10%, rgba(79,172,254,.18), transparent 60%);
+      filter: blur(14px);
+      opacity: .55;
+      pointer-events: none;
+    }
+    .wb-panel__head{ position: relative; z-index: 1; }
+    .wb-panel__title{ margin:0; display:flex; gap:.6rem; align-items:center; }
+    .wb-panel__sub{ margin:.35rem 0 0; color: rgba(0,0,0,.62); }
+
+    .wb-initiatives-grid{
+      position: relative; z-index: 1;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .9rem;
+      margin-top: 1rem;
+    }
+    .wb-card{
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,.06);
+      transform: translateY(6px) scale(.99);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      overflow:hidden;
+    }
+    .wb-card:hover{
+      transform: translateY(-6px) scale(1);
+      box-shadow: 0 20px 42px rgba(0,0,0,.10);
+      border-color: rgba(102,126,234,.28);
+    }
+    .wb-card__top{ display:flex; gap:.75rem; align-items:center; margin-bottom:.4rem; }
+    .wb-card__badge{
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, rgba(102,126,234,.18), rgba(245,87,108,.14));
+      border: 1px solid rgba(102,126,234,.18);
+    }
+    .wb-card h4{ margin:0; font-size: 1.02rem; }
+    .wb-card p{ margin:.35rem 0 0; color: rgba(0,0,0,.62); }
+    .wb-card__shine{
+      content:"";
+      position:absolute;
+      inset:-60px -80px auto auto;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), rgba(255,255,255,0) 60%);
+      transform: rotate(25deg);
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events:none;
+    }
+    .wb-card:hover .wb-card__shine{ opacity: .9; }
+
+    .wb-panel--map .wb-map-shell{
+      margin-top: 1rem;
+      border-radius: 18px;
+      overflow:hidden;
+      position: relative;
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 20px 50px rgba(0,0,0,.10);
+      transform: translateY(10px);
+    }
+    .wb-map-glow{
+      position:absolute; inset:-2px;
+      background: radial-gradient(650px 260px at 20% 0%, rgba(79,172,254,.25), transparent 60%),
+                  radial-gradient(650px 260px at 85% 10%, rgba(245,87,108,.22), transparent 60%);
+      filter: blur(14px);
+      opacity: .7;
+      pointer-events:none;
+      z-index: 0;
+    }
+    .wb-map{ position: relative; z-index: 1; }
+
+    .wb-district-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .wb-district{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 12px 26px rgba(0,0,0,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .wb-district:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 22px 44px rgba(0,0,0,.10);
+    }
+    .wb-district__head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: .8rem;
+      margin-bottom: .6rem;
+    }
+    .wb-district h4{ margin:0; }
+    .wb-district ul{ margin:.35rem 0 0; padding-left: 1.1rem; color: rgba(0,0,0,.72); }
+    .wb-district li{ margin:.28rem 0; }
+
+    .wb-tag{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.3rem .55rem;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      background: rgba(102,126,234,.10);
+      border: 1px solid rgba(102,126,234,.18);
+      color: rgba(0,0,0,.72);
+      white-space: nowrap;
+    }
+    .wb-tag--violet{ background: rgba(118,75,162,.10); border-color: rgba(118,75,162,.18); }
+    .wb-tag--teal{ background: rgba(16,185,129,.10); border-color: rgba(16,185,129,.18); }
+    .wb-tag--amber{ background: rgba(245,158,11,.12); border-color: rgba(245,158,11,.18); }
+    .wb-tag--rose{ background: rgba(244,63,94,.10); border-color: rgba(244,63,94,.18); }
+    .wb-tag--blue{ background: rgba(59,130,246,.10); border-color: rgba(59,130,246,.18); }
+
+    /* Reveal animation */
+    .reveal{ opacity: 0; transform: translateY(14px); }
+    .reveal.is-visible{ opacity: 1; transform: translateY(0); transition: opacity .7s ease, transform .7s ease; }
+
+    @keyframes wb-fadeUp{ to{ opacity:1; transform: translateY(0); } }
+    @keyframes wb-hue{ to{ filter: blur(18px) hue-rotate(360deg); } }
+
+    @media (max-width: 980px){
+      .wb-initiatives-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .wb-gov-stats{ grid-template-columns: 1fr; }
+      .wb-district-grid{ grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .wb-gov-hero{ animation: none; opacity:1; transform:none; }
+      .reveal, .reveal.is-visible{ opacity:1; transform:none; transition:none; }
+      .wb-gov-hero__bg{ animation:none; }
+    }
+  </style>
+
+  <!-- Minimal JS for reveal-on-scroll (safe, no dependencies) -->
+  <script>
+    (function(){
+      const items = document.querySelectorAll('#government .reveal');
+      if(!items.length) return;
+
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      items.forEach((el, idx)=>{
+        el.style.transitionDelay = (idx * 70) + 'ms';
+        io.observe(el);
+      });
+    })();
+  </script>
+</section>
+
+
+    <!-- Coverage Comparison -->
+    <section class="section">
+      <div class="container">
+        <h2><i class="fa-solid fa-table"></i> Coverage Comparison</h2>
+        <p class="sub">Compare benefits across different government programs.</p>
+        
+        <div class="comparison-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Medicaid Pregnancy</th>
+                <th>CHIP</th>
+                <th>Title V</th>
+                <th>Title X</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Prenatal Care</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Selected Services</td>
+                <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+              </tr>
+              <tr>
+                <td><strong>Labor & Delivery</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+                <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+              </tr>
+              <tr>
+                <td><strong>Contraception</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Referral Services</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+              </tr>
+              <tr>
+                <td><strong>Cancer Screenings</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Selected Screenings</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+              </tr>
+              <tr>
+                <td><strong>Mental Health</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Selected Services</td>
+                <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+              </tr>
+              <tr>
+                <td><strong>Prescriptions</strong></td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Limited</td>
+                <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Contraceptives Only</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="section alt">
+      <div class="container">
+        <h2><i class="fa-solid fa-phone"></i> Important Contacts & Resources</h2>
+        <p class="sub">Get help applying for benefits and finding services.</p>
+        
+        <div class="grid-cards">
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-headset"></i></div>
+            <h3>Medicaid Helpline</h3>
+            <p style="margin: 1rem 0;"><strong>1-800-MEDICAID</strong></p>
+            <p>Monday-Friday: 8am-8pm EST</p>
+          </div>
+          
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-hospital"></i></div>
+            <h3>Find Health Center</h3>
+            <p style="margin: 1rem 0;"><strong>findahealthcenter.hrsa.gov</strong></p>
+            <p>Locate nearby community health clinics</p>
+          </div>
+          
+          <div class="card">
+            <div class="icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <h3>Title X Clinic Locator</h3>
+            <p style="margin: 1rem 0;"><strong>1-800-230-PLAN</strong></p>
+            <p>Family planning services near you</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="section">
+      <div class="container">
+        <h2>Next Best Steps</h2>
+        <p class="sub">Explore insurance options and preventive care schedules.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;">
+          <a class="btn btn-outline" href="insurance.html"><i class="fa-solid fa-arrow-left"></i> Previous: Insurance</a>
+          <a class="btn btn-primary" href="screening.html">Next: Screening <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn btn-ghost" href="find-doctors.html"><i class="fa-solid fa-location-dot"></i> Find Providers</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <div id="footer"></div>
+  
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+  </script>
+</body>
+</html>

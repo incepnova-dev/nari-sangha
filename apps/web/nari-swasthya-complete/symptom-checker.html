@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Symptom Checker - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    .fadein { animation: fadeInUp .8s ease both; }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .split { display:grid; grid-template-columns: 1.1fr .9fr; gap: 2rem; align-items: start; }
+    .panel { background:#fff; border-radius: 18px; box-shadow: var(--shadow-md); padding: 1.25rem; border: 1px solid var(--gray-200); }
+    .panel h3 { margin: 0 0 .6rem; }
+    .triage { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }
+    .triage .tcard { background:#fff; border-radius: 16px; border: 1px solid var(--gray-200); padding: 1rem; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .triage .tcard:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+    .sev { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .7rem; border-radius: 999px; font-weight: 700; font-size:.85rem; }
+    .sev.red { background: rgba(231,76,60,.12); color:#c0392b; border:1px solid rgba(231,76,60,.25); }
+    .sev.amber { background: rgba(243,156,18,.12); color:#b9770e; border:1px solid rgba(243,156,18,.25); }
+    .sev.green { background: rgba(39,174,96,.12); color:#1e8449; border:1px solid rgba(39,174,96,.25); }
+    .formgrid { display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .formgrid .full { grid-column: 1 / -1; }
+    .input { width:100%; padding:.85rem 1rem; border-radius: 14px; border:1px solid var(--gray-200); font-family: inherit; outline: none; transition: var(--transition); background: #fff; }
+    .input:focus { border-color: rgba(102,126,234,.7); box-shadow: 0 0 0 4px rgba(102,126,234,.12); }
+    .result { display:none; margin-top: 1rem; }
+    .result.show { display:block; animation: fadeInUp .6s ease both; }
+    .notice { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 16px; padding: 1rem; color: var(--gray-700); }
+    .notice strong { color: var(--gray-900); }
+    @media(max-width: 900px){ .split{grid-template-columns:1fr} .formgrid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <main>
+    <header class="hero">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="container">
+        <div class="grid">
+          <div class="fadein">
+            <h1>Women's Health Symptom Checker</h1>
+            <p>Quick triage and condition education to help you understand symptoms and decide when to seek medical care.</p>
+            <div class="chiprow">
+              <span class="chip"><i class="fa-solid fa-stethoscope"></i> Quick triage</span>
+              <span class="chip"><i class="fa-solid fa-book-medical"></i> Practical guidance</span>
+              <span class="chip"><i class="fa-solid fa-shield-halved"></i> Private by design</span>
+            </div>
+            <div style="display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.2rem">
+              <a class="btn btn-primary" href="#start"><i class="fa-solid fa-play"></i> Start assessment</a>
+              <a class="btn btn-outline" href="teleconsultation.html"><i class="fa-solid fa-video"></i> Consult now</a>
+            </div>
+          </div>
+          <div class="media fadein">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200" alt="Symptom Checker"/>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="start">
+      <div class="container">
+        <h2>Fast triage in 60 seconds</h2>
+        <p class="sub">Answer a few questions to get a recommended next step. This is not a diagnosis.</p>
+
+        <div class="split">
+          <div class="panel fadein">
+            <h3><i class="fa-solid fa-clipboard-list"></i> Tell us what’s happening</h3>
+            <div class="formgrid" style="margin-top:1rem">
+              <div>
+                <label style="display:block;font-weight:700;margin-bottom:.35rem;color:var(--gray-700)">Primary symptom</label>
+                <select class="input" id="symptom">
+                  <option value="">Select…</option>
+                  <option value="period">Irregular periods / heavy bleeding</option>
+                  <option value="pain">Pelvic / lower abdominal pain</option>
+                  <option value="discharge">Unusual discharge / itching</option>
+                  <option value="breast">Breast lump / pain / discharge</option>
+                  <option value="pregnancy">Pregnancy concern (bleeding, pain, reduced movements)</option>
+                  <option value="urinary">Burning urination / frequent urination</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-weight:700;margin-bottom:.35rem;color:var(--gray-700)">Severity</label>
+                <select class="input" id="severity">
+                  <option value="">Select…</option>
+                  <option value="mild">Mild</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="severe">Severe</option>
+                </select>
+              </div>
+              <div class="full">
+                <label style="display:block;font-weight:700;margin-bottom:.35rem;color:var(--gray-700)">How long has it been?</label>
+                <select class="input" id="duration">
+                  <option value="">Select…</option>
+                  <option value="today">Today / sudden</option>
+                  <option value="days">A few days</option>
+                  <option value="weeks">Weeks</option>
+                  <option value="months">Months</option>
+                </select>
+              </div>
+              <div class="full">
+                <button class="btn btn-primary" style="width:100%" onclick="runTriage()">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Get next step
+                </button>
+              </div>
+            </div>
+
+            <div id="triageResult" class="result">
+              <div class="notice">
+                <div id="triageBadge" style="margin-bottom:.7rem"></div>
+                <div id="triageText"></div>
+                <div style="display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1rem">
+                  <a class="btn btn-primary" href="teleconsultation.html"><i class="fa-solid fa-video"></i> Teleconsultation</a>
+                  <a class="btn btn-outline" href="find-doctors.html"><i class="fa-solid fa-user-doctor"></i> Find doctors</a>
+                  <a class="btn btn-ghost" href="screening.html"><i class="fa-solid fa-clipboard-check"></i> Screening guide</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel fadein">
+            <h3><i class="fa-solid fa-triangle-exclamation"></i> Emergency warning signs</h3>
+            <p style="color:var(--gray-700)">Seek urgent care if you have any of the following:</p>
+            <ul style="color:var(--gray-700); margin: .75rem 0 0; line-height:1.7">
+              <li>Severe pelvic/abdominal pain that is sudden or worsening</li>
+              <li>Heavy bleeding (soaking a pad in an hour)</li>
+              <li>Dizziness/fainting, shoulder pain (possible ectopic pregnancy)</li>
+              <li>High fever with pelvic pain</li>
+              <li>Pregnancy: severe headache, vision changes, sudden swelling</li>
+              <li>Chest pain or breathing difficulty</li>
+            </ul>
+            <div style="margin-top:1rem" class="notice">
+              <strong>Tip:</strong> If you’re unsure, choose teleconsultation for rapid guidance.
+              <div style="margin-top:.7rem">
+                <a class="btn btn-outline" href="teleconsultation.html"><i class="fa-solid fa-video"></i> Start teleconsultation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="triage" style="margin-top:1.25rem">
+          <div class="tcard fadein">
+            <div class="sev green"><i class="fa-solid fa-leaf"></i> Self‑care</div>
+            <h3 style="margin:.6rem 0 .4rem">Mild symptoms</h3>
+            <p style="color:var(--gray-700)">Hydration, rest, warm compress, OTC relief (if appropriate). Monitor for changes.</p>
+          </div>
+          <div class="tcard fadein">
+            <div class="sev amber"><i class="fa-solid fa-user-doctor"></i> See a clinician</div>
+            <h3 style="margin:.6rem 0 .4rem">Moderate symptoms</h3>
+            <p style="color:var(--gray-700)">Schedule a consult within 24–72 hours, especially if symptoms persist.</p>
+          </div>
+          <div class="tcard fadein">
+            <div class="sev red"><i class="fa-solid fa-ambulance"></i> Urgent</div>
+            <h3 style="margin:.6rem 0 .4rem">Severe symptoms</h3>
+            <p style="color:var(--gray-700)">Seek urgent care immediately. Use teleconsultation only if emergency care isn’t accessible.</p>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:2rem">
+          <a class="btn btn-outline" href="fertility.html"><i class="fa-solid fa-arrow-left"></i> Previous: Fertility</a>
+          <a class="btn btn-primary" href="teleconsultation.html">Next: Teleconsultation <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+
+    function runTriage(){
+      const symptom = document.getElementById('symptom').value;
+      const severity = document.getElementById('severity').value;
+      const duration = document.getElementById('duration').value;
+
+      const box = document.getElementById('triageResult');
+      const badge = document.getElementById('triageBadge');
+      const text = document.getElementById('triageText');
+
+      if(!symptom || !severity || !duration){
+        box.classList.add('show'); box.classList.add('result'); box.classList.add('show');
+        badge.innerHTML = '<span class="sev amber"><i class="fa-solid fa-circle-info"></i> Incomplete</span>';
+        text.innerHTML = '<p style="margin:0;color:var(--gray-700)"><strong>Please select all fields</strong> to get a recommended next step.</p>';
+        box.classList.add('show');
+        return;
+      }
+
+      let level = "green";
+      let heading = "Self-care + monitor";
+      let msg = "Your answers suggest starting with self-care and monitoring. If symptoms persist, book a consult.";
+
+      if(severity === "moderate"){
+        level = "amber";
+        heading = "Consult recommended";
+        msg = "Your answers suggest you should consult a clinician soon (24–72 hours). Teleconsultation is a fast first step.";
+      }
+      if(severity === "severe" || duration === "today" && (symptom === "pregnancy" || symptom === "pain")){
+        level = "red";
+        heading = "Urgent care";
+        msg = "Your answers suggest urgent evaluation. If you feel unsafe or symptoms are worsening, seek emergency care immediately.";
+      }
+
+      badge.innerHTML = `<span class="sev ${level}"><i class="fa-solid fa-bolt"></i> ${heading}</span>`;
+      text.innerHTML = `
+        <p style="margin:.4rem 0 0;color:var(--gray-700)">${msg}</p>
+        <p style="margin:.6rem 0 0;color:var(--gray-600);font-size:.95rem">
+          This tool offers education and next-step guidance, not a medical diagnosis.
+        </p>
+      `;
+
+      box.classList.add('show');
+    }
+  </script>
+</body>
+</html>

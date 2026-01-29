@@ -1,14 +1,18 @@
 .journeysPage {
-    background: #FAFBFC;
+    background: #f8ecfb;
     min-height: 100vh;
 }
 
-/* JOURNEY SECTION */
+/* JOURNEY SECTION - FULL WIDTH BACKGROUND */
 .journeySection {
+    width: 100%;
+    background-color: var(--theme-bg-accent);
+    padding: 60px 20px 80px;
+}
+
+.journeySection>* {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px 80px;
-    background-color: var(--theme-bg-accent);
 }
 
 .sectionHeader {
@@ -165,11 +169,11 @@
     padding: 10px 0;
 }
 
-/* HOW IT WORKS */
+/* HOW IT WORKS - FULL WIDTH BACKGROUND */
 .howItWorks {
+    width: 100%;
     padding: 80px 20px;
     background-color: var(--theme-bg-accent);
-    text-align: center;
 }
 
 .howItWorksInner {
@@ -223,14 +227,16 @@
     line-height: 1.5;
 }
 
-/* SUPPORT CTA */
+/* SUPPORT CTA - FULL PAGE BACKGROUND */
 .supportSection {
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
     padding: 40px 20px 80px;
+    background: #f8ecfb;
 }
 
 .supportCard {
+    max-width: 800px;
+    margin: 0 auto;
     background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
     border-radius: 20px;
     padding: 40px;

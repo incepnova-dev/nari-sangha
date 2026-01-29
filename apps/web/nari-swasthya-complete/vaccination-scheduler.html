@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vaccination Scheduler - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .fadein { animation: fadeInUp .8s ease both; }
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+    .panel{background:#fff;border:1px solid var(--gray-200);border-radius:18px;box-shadow:var(--shadow-md);padding:1.25rem}
+    .input{width:100%;padding:.85rem 1rem;border-radius:14px;border:1px solid var(--gray-200);font-family:inherit;outline:none;transition:var(--transition)}
+    .input:focus{border-color:rgba(102,126,234,.7);box-shadow:0 0 0 4px rgba(102,126,234,.12)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .row .full{grid-column:1/-1}
+    .rem{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:16px;padding:1rem;margin:.8rem 0}
+    .rem strong{display:block}
+    .pill{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.35rem .7rem;font-weight:800;font-size:.85rem}
+    .pill.up{background:rgba(243,156,18,.12);border:1px solid rgba(243,156,18,.25);color:#b9770e}
+    .pill.done{background:rgba(39,174,96,.12);border:1px solid rgba(39,174,96,.25);color:#1e8449}
+    @media(max-width: 900px){ .grid2{grid-template-columns:1fr} .row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <main>
+    <header class="hero">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="container">
+        <div class="grid">
+          <div class="fadein">
+            <h1>Vaccination Scheduler</h1>
+            <p>Create a simple vaccine plan with reminders you can track. Saved locally in your browser.</p>
+            <div class="chiprow">
+              <span class="chip"><i class="fa-solid fa-calendar-check"></i> Plan</span>
+              <span class="chip"><i class="fa-solid fa-bell"></i> Reminders</span>
+              <span class="chip"><i class="fa-solid fa-shield-heart"></i> Preventive care</span>
+            </div>
+            <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+              <a class="btn btn-outline" href="vaccination.html"><i class="fa-solid fa-arrow-left"></i> Back to Vaccination</a>
+              <a class="btn btn-primary" href="screening.html">Next: Screening <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="media fadein">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vaccination_drive_for_COVID_prevention_in_Bhopal,_India.jpg?width=1200"
+                 alt="Vaccination drive in India"/>
+          </div>
+        </div>
+        <p style="margin-top:.6rem;color:rgba(255,255,255,.85);font-size:.95rem">
+          Image source: [Source](https://commons.wikimedia.org/wiki/File:Vaccination_drive_for_COVID_prevention_in_Bhopal,_India.jpg)
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid2">
+          <div class="panel fadein">
+            <h2 style="text-align:left;margin-bottom:.4rem">Your profile</h2>
+            <p style="color:var(--gray-700);margin-top:0">We’ll generate a practical checklist based on life stage.</p>
+
+            <div class="row" style="margin-top:1rem">
+              <div>
+                <label style="display:block;font-weight:800;margin-bottom:.35rem;color:var(--gray-700)">Age</label>
+                <input class="input" type="number" id="age" placeholder="e.g., 28" min="10" max="100"/>
+              </div>
+              <div>
+                <label style="display:block;font-weight:800;margin-bottom:.35rem;color:var(--gray-700)">Life stage</label>
+                <select class="input" id="stage">
+                  <option value="">Select…</option>
+                  <option value="adult">Adult (not pregnant)</option>
+                  <option value="pregnant">Pregnant</option>
+                  <option value="postpartum">Postpartum</option>
+                </select>
+              </div>
+              <div class="full">
+                <label style="display:block;font-weight:800;margin-bottom:.35rem;color:var(--gray-700)">Priority</label>
+                <select class="input" id="priority">
+                  <option value="prevention">Prevention & routine</option>
+                  <option value="pregnancy">Pregnancy safety</option>
+                  <option value="travel">Travel / exposure risk</option>
+                </select>
+              </div>
+
+              <div class="full" style="display:flex;gap:.8rem;flex-wrap:wrap">
+                <button class="btn btn-primary" onclick="generatePlan()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate schedule</button>
+                <button class="btn btn-outline" onclick="clearPlan()"><i class="fa-solid fa-trash"></i> Clear</button>
+              </div>
+            </div>
+
+            <div class="alert-card info" style="margin-top:1rem">
+              <strong>Note:</strong> This scheduler is educational and helps organize reminders. Confirm with your clinician for your medical history.
+            </div>
+          </div>
+
+          <div class="panel fadein">
+            <h2 style="text-align:left;margin-bottom:.4rem">Your reminders</h2>
+            <p style="color:var(--gray-700);margin-top:0">Mark items done — saved locally (localStorage).</p>
+            <div id="reminders"></div>
+          </

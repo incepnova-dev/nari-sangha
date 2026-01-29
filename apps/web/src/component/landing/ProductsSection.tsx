@@ -80,7 +80,7 @@ const ProductsSection: React.FC = () => {
 
                     {/* CTA to explore all insurance */}
                     <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                        <Link to={`${ROUTES.PRODUCTS}#insurance`}>
+                        <Link to={`${ROUTES.PRODUCTS}#insurance-plans`}>
                             <button className={styles.primaryCta} style={{
                                 background: '#1565C0',
                                 color: 'white',

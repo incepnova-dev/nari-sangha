@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vaccination Guide - Nari Swasthya</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/app.css"/>
+  <style>
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .fadein { animation: fadeInUp .8s ease both; }
+    .ctaRow { display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.1rem; }
+    .vband { background: linear-gradient(135deg, rgba(102,126,234,.12), rgba(240,147,251,.12)); border:1px solid rgba(102,126,234,.18); border-radius: 18px; padding: 1.4rem; box-shadow: var(--shadow-sm); }
+    .miniGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .mini{background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:1rem;box-shadow:var(--shadow-sm);transition:var(--transition)}
+    .mini:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <main>
+    <header class="hero">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="container">
+        <div class="grid">
+          <div class="fadein">
+            <h1>Vaccination Schedules & Guidance</h1>
+            <p>Stay protected with recommended vaccines for women through all life stages — including pregnancy and postpartum.</p>
+            <div class="chiprow">
+              <span class="chip"><i class="fa-solid fa-syringe"></i> Life-stage plan</span>
+              <span class="chip"><i class="fa-solid fa-bell"></i> Reminders</span>
+              <span class="chip"><i class="fa-solid fa-shield-virus"></i> Prevention</span>
+            </div>
+
+            <div class="ctaRow">
+              <a class="btn btn-primary" href="vaccination-scheduler.html"><i class="fa-solid fa-calendar-plus"></i> Set my schedule</a>
+              <a class="btn btn-outline" href="screening.html"><i class="fa-solid fa-clipboard-check"></i> Pair with screening</a>
+              <a class="btn btn-ghost" href="find-doctors.html"><i class="fa-solid fa-user-doctor"></i> Find providers</a>
+            </div>
+          </div>
+
+          <div class="media fadein">
+            <!-- Real-life India vaccination image option -->
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vaccination_drive_for_COVID_prevention_in_Bhopal,_India.jpg?width=1200"
+                 alt="Vaccination drive in India"/>
+          </div>
+        </div>
+        <p style="margin-top:.6rem;color:rgba(255,255,255,.85);font-size:.95rem">
+          Image source: [Source](https://commons.wikimedia.org/wiki/File:Vaccination_drive_for_COVID_prevention_in_Bhopal,_India.jpg)
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="vband fadein">
+          <h2 style="text-align:left;margin-bottom:.4rem"><i class="fa-solid fa-bell"></i> Make it actionable</h2>
+          <p style="color:var(--gray-700);margin:0">
+            Use our scheduler to set vaccines by age, pregnancy status, and reminders — then track everything in your dashboard.
+          </p>
+          <div class="ctaRow">
+            <a class="btn btn-primary" href="vaccination-scheduler.html">Open Vaccination Scheduler <i class="fa-solid fa-arrow-right"></i></a>
+            <a class="btn btn-outline" href="dashboard.html"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+          </div>
+        </div>
+
+        <h2 style="margin-top:2rem">Recommended vaccines (overview)</h2>
+        <p class="sub">Use this as guidance; always confirm with your clinician for your personal history.</p>
+
+        <div class="grid-cards">
+          <div class="card fadein">
+            <div class="icon"><i class="fa-solid fa-virus-slash"></i></div>
+            <h3>HPV</h3>
+            <p><strong>Who:</strong> typically 9–26 (catch-up to 45)</p>
+            <p><strong>Why:</strong> reduces risk of cervical cancer</p>
+            <div class="badge success">High impact</div>
+          </div>
+
+          <div class="card fadein">
+            <div class="icon"><i class="fa-solid fa-lungs"></i></div>
+            <h3>Influenza (Flu)</h3>
+            <p><strong>Who:</strong> all adults</p>
+            <p><strong>When:</strong> yearly</p>
+            <div class="badge info">Annual</div>
+          </div>
+
+          <div class="card fadein">
+            <div class="icon"><i class="fa-solid fa-baby"></i></div>
+            <h3>Tdap (Pregnancy)</h3>
+            <p><strong>When:</strong> 27–36 weeks (each pregnancy)</p>
+            <p><strong>Why:</strong> protects baby from whooping cough</p>
+            <div class="badge warning">Pregnancy essential</div>
+          </div>
+
+          <div class="card fadein">
+            <div class="icon"><i class="fa-solid fa-virus-covid"></i></div>
+            <h3>COVID‑19</h3>
+            <p><strong>Who:</strong> all adults</p>
+            <p><strong>When:</strong> per latest recommendations</p>
+            <div class="badge warning">Boosters</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Pregnancy timeline</h2>
+        <p class="sub">Clear trimester-based guidance with safe/unsafe notes.</p>
+
+        <div class="timeline">
+          <div class="timeline-item fadein">
+            <div class="timeline-marker"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="timeline-content">
+              <h3>Before pregnancy</h3>
+              <ul>
+                <li>Confirm immunity: MMR, Varicella (if missing, vaccinate before conception)</li>
+                <li>Consider HPV if eligible and not completed</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item fadein">
+            <div class="timeline-marker"><i class="fa-solid fa-baby"></i></div>
+            <div class="timeline-content">
+              <h3>During pregnancy</h3>
+              <ul>
+                <li>Flu: any trimester (seasonal)</li>
+                <li>Tdap: 27–36 weeks</li>
+                <li>COVID-19: per recommendation</li>
+              </ul>
+              <p class="warning-text"><i class="fa-solid fa-triangle-exclamation"></i> Live vaccines (MMR/Varicella) are not given during pregnancy.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item fadein">
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+            <div class="timeline-content">
+              <h3>Postpartum</h3>
+              <ul>
+                <li>Catch-up vaccines if missed</li>
+                <li>Breastfeeding-safe guidance from your clinician</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="miniGrid" style="margin-top:1.5rem">
+          <div class="mini fadein">
+            <h3><i class="fa-solid fa-list-check"></i> What to bring</h3>
+            <p style="color:var(--gray-700)">Any past vaccine records, pregnancy card, current medications list.</p>
+          </div>
+          <div class="mini fadein">
+            <h3><i class="fa-solid fa-circle-info"></i> Common mild effects</h3>
+            <p style="color:var(--gray-700)">Arm soreness, fatigue, mild fever — typically 1–2 days.</p>
+          </div>
+          <div class="mini fadein">
+            <h3><i class="fa-solid fa-location-dot"></i> Where to get vaccinated</h3>
+            <p style="color:var(--gray-700)">Clinic, hospital, pharmacy, community vaccination drives.</p>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:2rem">
+          <a class="btn btn-outline" href="teleconsultation.html"><i class="fa-solid fa-arrow-left"></i> Previous: Teleconsultation</a>
+          <a class="btn btn-primary" href="vaccination-scheduler.html">Next: Set Schedule <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn btn-ghost" href="screening.html"><i class="fa-solid fa-clipboard-check"></i> Screening</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="assets/app.js"></script>
+  <script>
+    fetch('assets/partials.html').then(r=>r.text()).then(html=>{
+      const wrap=document.createElement('div');wrap.innerHTML=html;
+      document.getElementById('nav').appendChild(wrap.querySelector('nav'));
+      document.getElementById('footer').appendChild(wrap.querySelector('footer'));
+    });
+  </script>
+</body>
+</html>

@@ -5,6 +5,7 @@ import ProductsSection from "./ProductsSection";
 import styles from "./landing.module.css";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+import { useChatbot } from "../../context/ChatbotContext";
 
 interface LandingProps {
   handleSignInClick?: () => void;
@@ -13,6 +14,8 @@ interface LandingProps {
 }
 
 const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
+  const { openChat } = useChatbot();
+
   return (
     <>
       <HeroSection onSignInClick={handleSignInClick || (() => { })} />
@@ -61,17 +64,19 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
             <p style={{ fontSize: "18px", opacity: 0.9, maxWidth: "500px" }}>Get instant, evidence-based answers to any health question, 24/7. Designed specifically for Indian women.</p>
           </div>
           <div>
-            <button style={{
-              background: "white",
-              color: "#6A1B9A",
-              border: "none",
-              padding: "16px 32px",
-              borderRadius: "12px",
-              fontSize: "16px",
-              fontWeight: "800",
-              cursor: "pointer",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
-            }}>Chat Now</button>
+            <button
+              onClick={openChat}
+              style={{
+                background: "white",
+                color: "#6A1B9A",
+                border: "none",
+                padding: "16px 32px",
+                borderRadius: "12px",
+                fontSize: "16px",
+                fontWeight: "800",
+                cursor: "pointer",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
+              }}>Chat Now</button>
           </div>
         </div>
       </section>

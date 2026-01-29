@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./landing.module.css";
 import { useI18n } from "../../hooks/useI18n";
+import { useChatbot } from "../../context/ChatbotContext";
 
 const ExpertAdvice: React.FC = () => {
     const { t } = useI18n();
+    const { openChat } = useChatbot();
 
     return (
         <section className={styles.mission}>
@@ -12,7 +14,7 @@ const ExpertAdvice: React.FC = () => {
                     <span className={styles.chatbotTag}>GUIDANCE</span>
                     <h2>{t("expert.title")}</h2>
                     <p>{t("expert.subtitle")}</p>
-                    <button className={styles.chatbotButton}>{t("hero.nav.support")}</button>
+                    <button className={styles.chatbotButton} onClick={openChat}>{t("hero.nav.support")}</button>
                 </div>
                 <div className={styles.missionCards}>
                     <div className={styles.missionCard}>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Perinatal Journey - Understanding Body & Mind</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="perinatal_journey.css">
+</head>
+<body>
+  
+  <!-- Navigation -->
+  <nav class="floating-nav">
+    <div class="nav-logo">
+      <i class="fas fa-heart-pulse"></i>
+      <span>Perinatal Journey</span>
+    </div>
+    <div class="nav-links">
+      <a href="#journey" class="nav-link active" data-section="journey">
+        <i class="fas fa-route"></i>
+        <span>Journey</span>
+      </a>
+      <a href="#body-map" class="nav-link" data-section="body-map">
+        <i class="fas fa-user"></i>
+        <span>Body Map</span>
+      </a>
+      <a href="#timeline" class="nav-link" data-section="timeline">
+        <i class="fas fa-clock"></i>
+        <span>Timeline</span>
+      </a>
+      <a href="#resources" class="nav-link" data-section="resources">
+        <i class="fas fa-life-ring"></i>
+        <span>Support</span>
+      </a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Hero Section with Immersive Animation -->
+  <section class="hero-immersive" id="journey">
+    <div class="hero-background">
+      <canvas id="flowCanvas"></canvas>
+      <div class="hero-gradient-orb orb-1"></div>
+      <div class="hero-gradient-orb orb-2"></div>
+      <div class="hero-gradient-orb orb-3"></div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        <span>Evidence-Based Education</span>
+      </div>
+      
+      <h1 class="hero-title">
+        Understanding the
+        <span class="title-gradient">Perinatal Journey</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        An interactive exploration of how pregnancy and postpartum transform your body, brain, and emotions—and why these changes matter for mental health.
+      </p>
+      
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-content">
+            <span class="stat-number">1 in 5</span>
+            <span class="stat-label">Experience Depression</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-brain"></i></div>
+          <div class="stat-content">
+            <span class="stat-number">9 Systems</span>
+            <span class="stat-label">Affected in Your Body</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <div class="stat-content">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Treatable with Support</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="scrollToSection('body-map')">
+          <span>Explore Your Body</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn-secondary" onclick="scrollToSection('timeline')">
+          <span>View Timeline</span>
+          <i class="fas fa-calendar-alt"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- Phase Switcher -->
+  <div class="phase-switcher-sticky">
+    <div class="phase-switcher-container">
+      <div class="phase-label">View Phase:</div>
+      <div class="phase-toggle-group">
+        <button class="phase-toggle active" data-phase="prenatal">
+          <i class="fas fa-baby"></i>
+          <span>Prenatal</span>
+          <div class="phase-indicator"></div>
+        </button>
+        <button class="phase-toggle" data-phase="postnatal">
+          <i class="fas fa-child-reaching"></i>
+          <span>Postnatal</span>
+          <div class="phase-indicator"></div>
+        </button>
+      </div>
+      <div class="phase-description" id="phaseDescription">
+        During pregnancy: hormones surge, body adapts
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Body Map Section -->
+  <section class="body-map-section" id="body-map">
+    <div class="section-header">
+      <h2 class="section-title">Interactive Body Systems Map</h2>
+      <p class="section-subtitle">Click on any body system to understand how it changes during pregnancy and postpartum</p>
+    </div>
+    
+    <div class="body-map-container">
+      <!-- Left Panel: Body Illustration -->
+      <div class="body-illustration-panel">
+        <div class="body-silhouette">
+          <svg viewBox="0 0 300 600" class="body-svg">
+            <!-- Brain -->
+            <g class="body-part" data-system="brain" transform="translate(150, 50)">
+              <circle cx="0" cy="0" r="35" class="part-shape brain-shape"/>
+              <circle cx="0" cy="0" r="28" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-brain"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Heart -->
+            <g class="body-part" data-system="heart" transform="translate(150, 130)">
+              <circle cx="0" cy="0" r="30" class="part-shape heart-shape"/>
+              <circle cx="0" cy="0" r="23" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-heart-pulse"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Stomach/Gut -->
+            <g class="body-part" data-system="stomach" transform="translate(150, 220)">
+              <ellipse cx="0" cy="0" rx="35" ry="40" class="part-shape stomach-shape"/>
+              <ellipse cx="0" cy="0" rx="28" ry="33" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-utensils"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Uterus -->
+            <g class="body-part" data-system="uterus" transform="translate(150, 320)">
+              <ellipse cx="0" cy="0" rx="40" ry="45" class="part-shape uterus-shape"/>
+              <ellipse cx="0" cy="0" rx="33" ry="38" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-baby"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Hormones (left side) -->
+            <g class="body-part" data-system="hormones" transform="translate(70, 180)">
+              <circle cx="0" cy="0" r="25" class="part-shape hormones-shape"/>
+              <circle cx="0" cy="0" r="18" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-vial"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Immune (right side) -->
+            <g class="body-part" data-system="immune" transform="translate(230, 180)">
+              <circle cx="0" cy="0" r="25" class="part-shape immune-shape"/>
+              <circle cx="0" cy="0" r="18" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-shield-virus"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Sleep (cloud above head) -->
+            <g class="body-part" data-system="sleep" transform="translate(200, 30)">
+              <ellipse cx="0" cy="0" rx="28" ry="20" class="part-shape sleep-shape"/>
+              <ellipse cx="0" cy="0" rx="21" ry="13" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-bed"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Musculoskeletal (legs area) -->
+            <g class="body-part" data-system="musculoskeletal" transform="translate(150, 450)">
+              <rect x="-30" y="-35" width="60" height="70" rx="8" class="part-shape musculo-shape"/>
+              <rect x="-23" y="-28" width="46" height="56" rx="5" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-bone"></i></div>
+              </foreignObject>
+            </g>
+            
+            <!-- Skin (outline) -->
+            <g class="body-part" data-system="skin" transform="translate(100, 280)">
+              <circle cx="0" cy="0" r="22" class="part-shape skin-shape"/>
+              <circle cx="0" cy="0" r="15" class="part-pulse"/>
+              <foreignObject x="-12" y="-12" width="24" height="24">
+                <div class="part-icon"><i class="fas fa-hand-sparkles"></i></div>
+              </foreignObject>
+            </g>
+          </svg>
+        </div>
+        
+        <div class="body-legend">
+          <div class="legend-item">
+            <div class="legend-dot active"></div>
+            <span>Click to explore</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot"></div>
+            <span>Not yet explored</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Panel: System Details -->
+      <div class="system-details-panel">
+        <div class="system-details-content" id="systemDetailsContent">
+          <!-- Welcome State -->
+          <div class="welcome-state">
+            <div class="welcome-icon">
+              <i class="fas fa-hand-pointer"></i>
+            </div>
+            <h3>Select a Body System</h3>
+            <p>Click on any highlighted area on the body map to learn how that system changes during pregnancy and postpartum, and how it affects mental health.</p>
+            <div class="quick-stats">
+              <div class="quick-stat">
+                <i class="fas fa-lightbulb"></i>
+                <span>9 interconnected systems</span>
+              </div>
+              <div class="quick-stat">
+                <i class="fas fa-link"></i>
+                <span>All affect mental wellness</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section" id="timeline">
+    <div class="section-header">
+      <h2 class="section-title">The Transformation Timeline</h2>
+      <p class="section-subtitle">Track the dramatic changes from pregnancy through postpartum</p>
+    </div>
+    
+    <div class="timeline-container">
+      <div class="timeline-rail"></div>
+      
+      <!-- Prenatal Timeline -->
+      <div class="timeline-phase prenatal-timeline">
+        <div class="phase-header">
+          <h3><i class="fas fa-baby"></i> Pregnancy Journey</h3>
+          <span class="phase-duration">40 weeks</span>
+        </div>
+        
+        <div class="timeline-events">
+          <div class="timeline-event" data-week="0-12">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card">
+              <div class="event-header">
+                <h4>First Trimester</h4>
+                <span class="event-time">Weeks 0-12</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-wave-square"></i>
+                  <strong>Hormone Surge Begins</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-check"></i> HCG triggers morning sickness</li>
+                  <li><i class="fas fa-check"></i> Progesterone causes overwhelming fatigue</li>
+                  <li><i class="fas fa-check"></i> Blood volume starts increasing</li>
+                  <li><i class="fas fa-check"></i> Brain begins restructuring</li>
+                </ul>
+                <div class="event-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">Exhaustion, mood swings, anxiety about pregnancy</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-event" data-week="13-27">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card">
+              <div class="event-header">
+                <h4>Second Trimester</h4>
+                <span class="event-time">Weeks 13-27</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-smile"></i>
+                  <strong>"Honeymoon Period"</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-check"></i> Nausea typically improves</li>
+                  <li><i class="fas fa-check"></i> Energy levels increase</li>
+                  <li><i class="fas fa-check"></i> Baby movements begin (quickening)</li>
+                  <li><i class="fas fa-check"></i> Body changes become visible</li>
+                </ul>
+                <div class="event-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">Often improved mood, but body image concerns may emerge</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-event" data-week="28-40">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card">
+              <div class="event-header">
+                <h4>Third Trimester</h4>
+                <span class="event-time">Weeks 28-40</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-weight-hanging"></i>
+                  <strong>Maximum Physical Load</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-check"></i> Significant discomfort and pain</li>
+                  <li><i class="fas fa-check"></i> Sleep severely disrupted</li>
+                  <li><i class="fas fa-check"></i> Heartburn, swelling, frequent urination</li>
+                  <li><i class="fas fa-check"></i> Anxiety about labor increases</li>
+                </ul>
+                <div class="event-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">Exhaustion, anticipatory anxiety, prenatal depression risk peaks</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Birth Marker -->
+      <div class="birth-marker">
+        <div class="birth-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h4>Birth</h4>
+        <p>Massive hormonal crash begins within 24 hours</p>
+      </div>
+      
+      <!-- Postnatal Timeline -->
+      <div class="timeline-phase postnatal-timeline">
+        <div class="phase-header">
+          <h3><i class="fas fa-child-reaching"></i> Postpartum Journey</h3>
+          <span class="phase-duration">12+ weeks</span>
+        </div>
+        
+        <div class="timeline-events">
+          <div class="timeline-event" data-week="0-2">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card critical">
+              <div class="event-header">
+                <h4>Immediate Postpartum</h4>
+                <span class="event-time">Days 0-14</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-bolt"></i>
+                  <strong>Hormonal Freefall</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-exclamation-circle"></i> Estrogen/progesterone crash 100x faster than menopause</li>
+                  <li><i class="fas fa-exclamation-circle"></i> Massive fluid shifts (night sweats)</li>
+                  <li><i class="fas fa-exclamation-circle"></i> Severe sleep deprivation begins</li>
+                  <li><i class="fas fa-exclamation-circle"></i> Physical pain from birth trauma</li>
+                  <li><i class="fas fa-exclamation-circle"></i> "Baby blues" affect 80% of mothers</li>
+                </ul>
+                <div class="event-impact critical-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">Highest risk period for postpartum depression and psychosis</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-event" data-week="2-6">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card">
+              <div class="event-header">
+                <h4>Early Postpartum</h4>
+                <span class="event-time">Weeks 2-6</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-battery-quarter"></i>
+                  <strong>Survival Mode</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-check"></i> Chronic sleep deprivation continues</li>
+                  <li><i class="fas fa-check"></i> Breastfeeding challenges peak</li>
+                  <li><i class="fas fa-check"></i> Physical healing ongoing</li>
+                  <li><i class="fas fa-check"></i> Identity crisis common</li>
+                </ul>
+                <div class="event-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">PPD symptoms intensify if present; bonding difficulties may emerge</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-event" data-week="6-12">
+            <div class="event-marker">
+              <div class="event-dot"></div>
+              <div class="event-line"></div>
+            </div>
+            <div class="event-card">
+              <div class="event-header">
+                <h4>Extended Recovery</h4>
+                <span class="event-time">Weeks 6-12+</span>
+              </div>
+              <div class="event-content">
+                <div class="event-highlight">
+                  <i class="fas fa-seedling"></i>
+                  <strong>Gradual Stabilization</strong>
+                </div>
+                <ul class="event-changes">
+                  <li><i class="fas fa-check"></i> Baby may begin longer sleep stretches</li>
+                  <li><i class="fas fa-check"></i> Physical healing progresses</li>
+                  <li><i class="fas fa-check"></i> Postpartum hair loss begins (months 3-4)</li>
+                  <li><i class="fas fa-check"></i> "Cleared" for exercise/sex (not always ready)</li>
+                </ul>
+                <div class="event-impact">
+                  <span class="impact-label">Mental Impact:</span>
+                  <span class="impact-text">New normal emerges, but PPD can persist for 12+ months without treatment</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="resources-section" id="resources">
+    <div class="section-header">
+      <h2 class="section-title">You Are Not Alone</h2>
+      <p class="section-subtitle">Professional help and support resources</p>
+    </div>
+    
+    <div class="resources-grid">
+      <div class="resource-card emergency">
+        <div class="resource-icon">
+          <i class="fas fa-phone-volume"></i>
+        </div>
+        <h3>Crisis Support</h3>
+        <p>If you're in crisis or having thoughts of harming yourself or your baby</p>
+        <div class="resource-actions">
+          <a href="tel:988" class="resource-btn primary">
+            <i class="fas fa-phone"></i>
+            Call 988 (US)
+          </a>
+          <a href="https://www.postpartum.net/get-help/help-for-moms/" target="_blank" class="resource-btn">
+            Postpartum Support Hotline
+          </a>
+        </div>
+        <div class="resource-note">
+          <i class="fas fa-shield-alt"></i>
+          <span>Available 24/7 • Confidential</span>
+        </div>
+      </div>
+      
+      <div class="resource-card">
+        <div class="resource-icon">
+          <i class="fas fa-user-md"></i>
+        </div>
+        <h3>When to See a Doctor</h3>
+        <div class="warning-signs">
+          <h4>Seek help if you experience:</h4>
+          <ul>
+            <li><i class="fas fa-check"></i> Persistent sadness or emptiness for 2+ weeks</li>
+            <li><i class="fas fa-check"></i> Loss of interest in activities you used to enjoy</li>
+            <li><i class="fas fa-check"></i> Difficulty bonding with your baby</li>
+            <li><i class="fas fa-check"></i> Severe anxiety or panic attacks</li>
+            <li><i class="fas fa-check"></i> Thoughts of harming yourself or baby</li>
+            <li><i class="fas fa-check"></i> Intrusive, scary thoughts you can't control</li>
+          </ul>
+        </div>
+        <a href="#" class="resource-btn">Find a Specialist</a>
+      </div>
+      
+      <div class="resource-card">
+        <div class="resource-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Support Communities</h3>
+        <p>Connect with others who understand what you're going through</p>
+        <div class="community-links">
+          <a href="https://www.postpartum.net/" target="_blank">
+            <i class="fas fa-external-link-alt"></i>
+            Postpartum Support International
+          </a>
+          <a href="https://www.reddit.com/r/beyondthebump/" target="_blank">
+            <i class="fas fa-external-link-alt"></i>
+            Beyond the Bump Community
+          </a>
+          <a href="https://www.psitraining.com/psi/support-groups/" target="_blank">
+            <i class="fas fa-external-link-alt"></i>
+            Local Support Groups
+          </a>
+        </div>
+      </div>
+      
+      <div class="resource-card">
+        <div class="resource-icon">
+          <i class="fas fa-book-medical"></i>
+        </div>
+        <h3>Treatment Options</h3>
+        <div class="treatment-options">
+          <div class="treatment-item">
+            <i class="fas fa-comments"></i>
+            <div>
+              <strong>Therapy</strong>
+              <span>CBT and IPT are evidence-based treatments</span>
+            </div>
+          </div>
+          <div class="treatment-item">
+            <i class="fas fa-pills"></i>
+            <div>
+              <strong>Medication</strong>
+              <span>Safe options exist, even while breastfeeding</span>
+            </div>
+          </div>
+          <div class="treatment-item">
+            <i class="fas fa-hands-helping"></i>
+            <div>
+              <strong>Support Services</strong>
+              <span>Postpartum doulas, lactation consultants, sleep specialists</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hope-message">
+      <div class="hope-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <h3>Recovery is Possible</h3>
+      <p>With proper treatment and support, postpartum depression is highly treatable. You deserve help, and you will feel better.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-disclaimer">
+        <h4>Medical Disclaimer</h4>
+        <p>This educational resource is based on peer-reviewed research but is not a substitute for professional medical advice. If you're experiencing symptoms of perinatal or postpartum depression, please consult with your healthcare provider.</p>
+      </div>
+      <div class="footer-credits">
+        <p>Created with care to support maternal mental health awareness</p>
+        <p class="footer-year">© 2026 • Built with evidence-based information</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="perinatal_journey.js"></script>
+</body>
+</html>

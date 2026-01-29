@@ -14,6 +14,7 @@ import Stories from "../pages/Stories";
 import Journeys from "../pages/Journeys";
 import PregnancyJourney from "../pages/PregnancyJourney";
 import FertilityJourney from "../pages/FertilityJourney";
+import MenopauseJourney from "../pages/MenopauseJourney";
 import PreventiveHealthJourney from "../pages/PreventiveHealthJourney";
 import MenstrualHealthJourney from "../pages/MenstrualHealthJourney";
 import ChronicConditionsJourney from "../pages/ChronicConditionsJourney";
@@ -22,6 +23,7 @@ import PostpartumJourney from "../pages/PostpartumJourney";
 import AdolescentHealthJourney from "../pages/AdolescentHealthJourney";
 import SymptomChecker from "../pages/SymptomChecker";
 import Products from "../pages/Products";
+import Vaccination from "../pages/Vaccination";
 
 // Centralized route paths
 export const ROUTES = {
@@ -31,6 +33,7 @@ export const ROUTES = {
   JOURNEYS: "/journeys",
   PREGNANCY: "/journeys/pregnancy",
   FERTILITY: "/journeys/fertility",
+  MENOPAUSE: "/journeys/menopause",
   PREVENTIVE_HEALTH: "/journeys/preventive-health",
   MENSTRUAL_HEALTH: "/journeys/menstrual-health",
   CHRONIC_CONDITIONS: "/journeys/chronic-conditions",
@@ -45,6 +48,7 @@ export const ROUTES = {
   SAFETY: "/safety",
   SUPPORT: "/support",
   STORIES: "/stories",
+  VACCINATION: "/vaccination",
 } as const;
 
 const AppRoutes = () => {
@@ -68,6 +72,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.JOURNEYS} element={<Journeys />} />
         <Route path={ROUTES.PREGNANCY} element={<PregnancyJourney />} />
         <Route path={ROUTES.FERTILITY} element={<FertilityJourney />} />
+        <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourney />} />
         <Route path={ROUTES.PREVENTIVE_HEALTH} element={<PreventiveHealthJourney />} />
         <Route path={ROUTES.MENSTRUAL_HEALTH} element={<MenstrualHealthJourney />} />
         <Route path={ROUTES.CHRONIC_CONDITIONS} element={<ChronicConditionsJourney />} />
@@ -76,6 +81,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.ADOLESCENT_HEALTH} element={<AdolescentHealthJourney />} />
         <Route path={ROUTES.SYMPTOM_CHECKER} element={<SymptomChecker />} />
         <Route path={ROUTES.PRODUCTS} element={<Products />} />
+        <Route path={ROUTES.VACCINATION} element={<Vaccination />} />
       </Route>
 
       <Route path={ROUTES.HOME} element={renderHome()} />

@@ -1,0 +1,3673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perinatal & Postnatal Depression – Interactive Neural Journey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">Nari Shakti</a>
+    </div>
+
+    <nav class="main-nav">
+      <a href="products.html">Product</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="stories.html">Stories</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-nav primary">Sign In</a>
+      <a href="contact.html" class="btn-nav outline">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+  <style>
+    /* =========================================
+       CORE VARIABLES
+       ========================================= */
+    :root {
+      --pink: #ec407a;
+      --deep-pink: #d81b60;
+      --lavender: #ede7f6;
+      --bg: #faf5fb;
+      --card-bg: #ffffff;
+      --text-main: #212121;
+      --text-soft: #555;
+      --border-soft: #e0e0e0;
+      --chip-bg: #f3e5f5;
+      --mild: #4caf50;
+      --moderate: #ff9800;
+      --critical: #f44336;
+      --serious: #9c27b0;
+      --neuron-blue: #2196f3;
+      --serotonin: #00bcd4;
+      --oxytocin: #e91e63;
+      --cortisol: #ff5722;
+      --estrogen: #4caf50;
+      --progesterone: #9c27b0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* =========================================
+   HEADER STYLES (From Index)
+   ========================================= */
+.site-header {
+  background: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin-bottom: 2rem;
+}
+
+.nav-container {
+  max-width: 1400px; /* Matches your page-container */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  text-decoration: none;
+  color: var(--deep-pink); /* Using your existing variable */
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: var(--deep-pink);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-nav {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-nav.primary {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.btn-nav.outline {
+  border: 1px solid var(--border-soft);
+  color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+  .main-nav { display: none; }
+}
+
+/* =========================================
+   FAMILY GUIDE BUTTON STYLE
+   ========================================= */
+.btn-family-guide {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--deep-pink), #f06292);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
+  transition: all 0.3s ease;
+  animation: float-btn 3s ease-in-out infinite;
+}
+
+.btn-family-guide:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(216, 27, 96, 0.4);
+}
+
+@keyframes float-btn {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .page-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0 0 0.5rem;
+      font-weight: 700;
+    }
+
+    /* =========================================
+       ENHANCED HERO SECTION - CONSTELLATION
+       ========================================= */
+    .hero-constellation {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #faf5fb 0%, #e8eaf6 50%, #fce4ec 100%);
+      border-radius: 32px;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .constellation-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+
+    .gradient-morph {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, 
+                  rgba(236, 64, 122, 0.12) 0%, 
+                  transparent 60%);
+      animation: morph-pulse 8s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes morph-pulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .hero-content-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    @media (max-width: 968px) {
+      .hero-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--deep-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      animation: pulse-glow 2s infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { 
+        opacity: 1; 
+        transform: scale(1); 
+        box-shadow: 0 0 0 0 rgba(236, 64, 122, 0.7); 
+      }
+      50% { 
+        opacity: 0.7; 
+        transform: scale(1.3); 
+        box-shadow: 0 0 0 10px rgba(236, 64, 122, 0); 
+      }
+    }
+
+    .hero-title-3d {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+      background: linear-gradient(135deg, #212121 0%, #555 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-emphasis {
+      background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      animation: title-shimmer 3s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px rgba(236, 64, 122, 0.3));
+    }
+
+    @keyframes title-shimmer {
+      0%, 100% { filter: brightness(1) drop-shadow(0 2px 8px rgba(236, 64, 122, 0.3)); }
+      50% { filter: brightness(1.3) drop-shadow(0 4px 16px rgba(236, 64, 122, 0.5)); }
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-soft);
+      max-width: 48ch;
+    }
+
+    .badge-constellation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .hero-badge-3d {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(236, 64, 122, 0.2);
+      box-shadow: 0 4px 15px rgba(236, 64, 122, 0.15),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--deep-pink);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+      animation: badge-float 4s ease-in-out infinite;
+    }
+
+    .hero-badge-3d:nth-child(1) { animation-delay: 0s; }
+    .hero-badge-3d:nth-child(2) { animation-delay: 0.5s; }
+    .hero-badge-3d:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes badge-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-badge-3d:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(236, 64, 122, 0.25),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border-color: var(--deep-pink);
+    }
+
+    /* =========================================
+       INTERACTIVE BRAIN VISUALIZATION
+       ========================================= */
+    .hero-right {
+      position: relative;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brain-constellation {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+
+    .brain-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,64,122,0.15) 0%, transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    #brainCanvas {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 10px 40px rgba(236, 64, 122, 0.2));
+    }
+
+    .core-pulse-ring {
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      border: 2px solid rgba(236,64,122,0.2);
+      animation: pulse-ring 3s ease-out infinite;
+    }
+
+    .core-pulse-ring:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .core-pulse-ring:nth-child(3) {
+      animation-delay: 2s;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    /* Hormone Orbs */
+    .hormone-orbs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hormone-orb {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      pointer-events: all;
+      animation: orb-float 4s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .hormone-orb:hover {
+      transform: scale(1.15);
+      z-index: 10;
+    }
+
+    @keyframes orb-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .orb-serotonin {
+      top: 10%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+
+    .orb-oxytocin {
+      top: 10%;
+      right: 15%;
+      animation-delay: 0.5s;
+    }
+
+    .orb-cortisol {
+      bottom: 15%;
+      left: 10%;
+      animation-delay: 1s;
+    }
+
+    .orb-estrogen {
+      bottom: 15%;
+      right: 10%;
+      animation-delay: 1.5s;
+    }
+
+    .orb-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(236, 64, 122, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1),
+                  inset 0 2px 0 rgba(255,255,255,0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      transition: all 0.3s ease;
+    }
+
+    .hormone-orb:hover .orb-content {
+      border-width: 3px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.15),
+                  inset 0 2px 0 rgba(255,255,255,1);
+    }
+
+    .orb-icon {
+      font-size: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .hormone-orb:hover .orb-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    .orb-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--text-main);
+    }
+
+    .orb-glow {
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      opacity: 0;
+      filter: blur(20px);
+      transition: opacity 0.3s;
+    }
+
+    .hormone-orb:hover .orb-glow {
+      opacity: 1;
+      animation: glow-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .orb-serotonin .orb-icon { color: var(--serotonin); }
+    .orb-serotonin .orb-glow { background: var(--serotonin); }
+
+    .orb-oxytocin .orb-icon { color: var(--oxytocin); }
+    .orb-oxytocin .orb-glow { background: var(--oxytocin); }
+
+    .orb-cortisol .orb-icon { color: var(--cortisol); }
+    .orb-cortisol .orb-glow { background: var(--cortisol); }
+
+    .orb-estrogen .orb-icon { color: var(--estrogen); }
+    .orb-estrogen .orb-glow { background: var(--estrogen); }
+
+    /* Hormone Indicators */
+    .hormone-indicators {
+      position: absolute;
+      bottom: -80px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      z-index: 5;
+    }
+
+    .hormone-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .hormone-chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .hormone-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      animation: hormone-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes hormone-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    /* =========================================
+       PREGNANCY PHASE TOGGLE
+       ========================================= */
+    .phase-toggle-section {
+      text-align: center;
+      margin: 4rem 0 3rem;
+    }
+
+    .phase-toggle-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .phase-toggle-subtitle {
+      font-size: 1rem;
+      color: var(--text-soft);
+      margin-bottom: 2rem;
+    }
+
+    .phase-toggles {
+      display: inline-flex;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 6px;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #666;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .toggle-btn:hover {
+      background: rgba(236, 64, 122, 0.1);
+      color: var(--deep-pink);
+    }
+
+    .toggle-btn.active {
+      background: linear-gradient(135deg, var(--deep-pink), #f06292);
+      color: white;
+      box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+    }
+
+    /* =========================================
+       INTERACTIVE SYMPTOM SEVERITY CARDS
+       ========================================= */
+    .section-header {
+      text-align: center;
+      margin: 4rem 0 3rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #212121 0%, #555 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      max-width: 60ch;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .severity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .severity-card {
+      position: relative;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .severity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      transition: height 0.3s ease;
+    }
+
+    .severity-card.mild::before {
+      background: linear-gradient(90deg, var(--mild), #81c784);
+    }
+
+    .severity-card.moderate::before {
+      background: linear-gradient(90deg, var(--moderate), #ffb74d);
+    }
+
+    .severity-card.critical::before {
+      background: linear-gradient(90deg, var(--critical), #ef5350);
+    }
+
+    .severity-card.serious::before {
+      background: linear-gradient(90deg, var(--serious), #ab47bc);
+    }
+
+    .severity-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .severity-card:hover::before {
+      height: 10px;
+    }
+
+    .severity-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .severity-card:hover::after {
+      left: 100%;
+    }
+
+    .severity-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .severity-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .severity-icon::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: icon-shine 3s infinite;
+    }
+
+    @keyframes icon-shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .severity-card.mild .severity-icon {
+      background: linear-gradient(135deg, var(--mild), #81c784);
+    }
+
+    .severity-card.moderate .severity-icon {
+      background: linear-gradient(135deg, var(--moderate), #ffb74d);
+    }
+
+    .severity-card.critical .severity-icon {
+      background: linear-gradient(135deg, var(--critical), #ef5350);
+    }
+
+    .severity-card.serious .severity-icon {
+      background: linear-gradient(135deg, var(--serious), #ab47bc);
+    }
+
+    .severity-title-group h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-main);
+    }
+
+    .severity-score {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      background: rgba(236, 64, 122, 0.1);
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    .symptom-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .symptom-list li {
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    .symptom-list li:hover {
+      padding-left: 0.5rem;
+      background: rgba(236, 64, 122, 0.03);
+    }
+
+    .symptom-list li:last-child {
+      border-bottom: none;
+    }
+
+    .symptom-bullet {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      margin-top: 0.5rem;
+      position: relative;
+    }
+
+    .symptom-bullet::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--deep-pink);
+      opacity: 0;
+      animation: bullet-ping 2s ease-out infinite;
+    }
+
+    @keyframes bullet-ping {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    /* =========================================
+       ENHANCED BRAIN CHEMISTRY SECTION
+       ========================================= */
+    .brain-chemistry-section {
+      background: linear-gradient(135deg, #e8eaf6 0%, #fce4ec 100%);
+      border-radius: 32px;
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brain-chemistry-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(236,64,122,0.1)"/></svg>');
+      opacity: 0.3;
+      animation: bg-drift 60s linear infinite;
+    }
+
+    @keyframes bg-drift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(100px, 100px); }
+    }
+
+    .chemistry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .neurotransmitter-card {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .neurotransmitter-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .neurotransmitter-card.serotonin::before {
+      background: var(--serotonin);
+    }
+
+    .neurotransmitter-card.oxytocin::before {
+      background: var(--oxytocin);
+    }
+
+    .neurotransmitter-card.cortisol::before {
+      background: var(--cortisol);
+    }
+
+    .neurotransmitter-card.gaba::before {
+      background: #9c27b0;
+    }
+
+    .neurotransmitter-card.dopamine::before {
+      background: #ff9800;
+    }
+
+    .neurotransmitter-card.estrogen::before {
+      background: var(--estrogen);
+    }
+
+    .neurotransmitter-card.progesterone::before {
+      background: var(--progesterone);
+    }
+
+    .neurotransmitter-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .neurotransmitter-card:hover::before {
+      height: 6px;
+    }
+
+    .nt-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .nt-icon::after {
+      content: '';
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: 0.2;
+      animation: ripple 2.5s ease-out infinite;
+    }
+
+    @keyframes ripple {
+      0% { transform: scale(1); opacity: 0.3; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .neurotransmitter-card.serotonin .nt-icon {
+      background: linear-gradient(135deg, var(--serotonin), #4dd0e1);
+      color: white;
+    }
+
+    .neurotransmitter-card.oxytocin .nt-icon {
+      background: linear-gradient(135deg, var(--oxytocin), #f06292);
+      color: white;
+    }
+
+    .neurotransmitter-card.cortisol .nt-icon {
+      background: linear-gradient(135deg, var(--cortisol), #ff7043);
+      color: white;
+    }
+
+    .neurotransmitter-card.gaba .nt-icon {
+      background: linear-gradient(135deg, #9c27b0, #ba68c8);
+      color: white;
+    }
+
+    .neurotransmitter-card.dopamine .nt-icon {
+      background: linear-gradient(135deg, #ff9800, #ffb74d);
+      color: white;
+    }
+
+    .neurotransmitter-card.estrogen .nt-icon {
+      background: linear-gradient(135deg, var(--estrogen), #81c784);
+      color: white;
+    }
+
+    .neurotransmitter-card.progesterone .nt-icon {
+      background: linear-gradient(135deg, var(--progesterone), #ba68c8);
+      color: white;
+    }
+
+    .nt-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .nt-role {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .nt-description {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    .nt-level-indicator {
+      margin-top: 1.5rem;
+      padding: 1.2rem;
+      background: rgba(236, 64, 122, 0.05);
+      border-radius: 12px;
+      border-left: 4px solid currentColor;
+      transition: all 0.3s ease;
+    }
+
+    .neurotransmitter-card:hover .nt-level-indicator {
+      background: rgba(236, 64, 122, 0.08);
+      transform: translateX(5px);
+    }
+
+    .nt-level-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+    }
+
+    .nt-level-bar {
+      height: 10px;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nt-level-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nt-level-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .nt-level-percentage {
+      position: absolute;
+      right: 10px;
+      top: -25px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--deep-pink);
+    }
+
+    /* =========================================
+       INTERACTIVE HORMONE TIMELINE
+       ========================================= */
+    .timeline-section {
+      background: linear-gradient(135deg, #e8eaf6 0%, #fce4ec 100%);
+      border-radius: 32px;
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="2" fill="rgba(236,64,122,0.08)"/></svg>');
+      opacity: 0.4;
+    }
+
+    .timeline-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .timeline-btn {
+      padding: 0.6rem 1.2rem;
+      border: 2px solid rgba(236, 64, 122, 0.3);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .timeline-btn:hover {
+      background: var(--deep-pink);
+      color: white;
+      border-color: var(--deep-pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+    }
+
+    .timeline-btn.active {
+      background: var(--deep-pink);
+      color: white;
+      border-color: var(--deep-pink);
+      box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+    }
+
+    .timeline-display {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .timeline-period {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-week-info {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      background: rgba(236, 64, 122, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+
+    .timeline-slider-container {
+      margin: 2rem 0;
+    }
+
+    .timeline-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, 
+        #4fc3f7 0%, 
+        #4fc3f7 25%, 
+        #81c784 50%, 
+        #f06292 75%, 
+        #f06292 100%);
+      outline: none;
+      -webkit-appearance: none;
+      position: relative;
+    }
+
+    .timeline-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 6px 20px rgba(236, 64, 122, 0.6);
+    }
+
+    .timeline-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+    }
+
+    .timeline-label {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .hormone-chart-container {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .hormone-chart {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .hormone-indicator {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hormone-indicator::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      transition: height 0.3s ease;
+    }
+
+    .hormone-indicator:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .hormone-indicator:hover::before {
+      height: 6px;
+    }
+
+    .hormone-indicator.estrogen::before { background: var(--estrogen); }
+    .hormone-indicator.progesterone::before { background: var(--progesterone); }
+    .hormone-indicator.cortisol::before { background: var(--cortisol); }
+    .hormone-indicator.oxytocin::before { background: var(--oxytocin); }
+    .hormone-indicator.serotonin::before { background: var(--serotonin); }
+
+    .hormone-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .hormone-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: white;
+    }
+
+    .hormone-indicator.estrogen .hormone-icon { background: var(--estrogen); }
+    .hormone-indicator.progesterone .hormone-icon { background: var(--progesterone); }
+    .hormone-indicator.cortisol .hormone-icon { background: var(--cortisol); }
+    .hormone-indicator.oxytocin .hormone-icon { background: var(--oxytocin); }
+    .hormone-indicator.serotonin .hormone-icon { background: var(--serotonin); }
+
+    .hormone-level-display {
+      position: relative;
+      height: 120px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .hormone-level-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 12px 12px 0 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 0.5rem;
+      font-weight: 700;
+      color: white;
+      font-size: 1.2rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hormone-indicator.estrogen .hormone-level-bar { 
+      background: linear-gradient(180deg, rgba(76, 175, 80, 0.8), rgba(76, 175, 80, 1)); 
+    }
+    .hormone-indicator.progesterone .hormone-level-bar { 
+      background: linear-gradient(180deg, rgba(156, 39, 176, 0.8), rgba(156, 39, 176, 1)); 
+    }
+    .hormone-indicator.cortisol .hormone-level-bar { 
+      background: linear-gradient(180deg, rgba(255, 87, 34, 0.8), rgba(255, 87, 34, 1)); 
+    }
+    .hormone-indicator.oxytocin .hormone-level-bar { 
+      background: linear-gradient(180deg, rgba(233, 30, 99, 0.8), rgba(233, 30, 99, 1)); 
+    }
+    .hormone-indicator.serotonin .hormone-level-bar { 
+      background: linear-gradient(180deg, rgba(0, 188, 212, 0.8), rgba(0, 188, 212, 1)); 
+    }
+
+    .hormone-description {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+    }
+
+    .timeline-events {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(236, 64, 122, 0.05);
+      border-radius: 16px;
+      border-left: 4px solid var(--deep-pink);
+    }
+
+    .timeline-events h4 {
+      margin: 0 0 1rem;
+      color: var(--text-main);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .timeline-events ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .timeline-events li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .event-bullet {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--deep-pink);
+      margin-top: 0.5rem;
+    }
+
+    .animated-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .animated-wave path {
+      animation: wave-flow 3s ease-in-out infinite;
+    }
+
+    @keyframes wave-flow {
+      0%, 100% { d: path('M0,50 Q25,40 50,50 T100,50 L100,100 L0,100 Z'); }
+      50% { d: path('M0,50 Q25,60 50,50 T100,50 L100,100 L0,100 Z'); }
+    }
+
+    /* =========================================
+       PREGNANCY VS POSTPARTUM COMPARISON
+       ========================================= */
+    .comparison-section {
+      margin: 4rem 0;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 968px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comparison-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .comparison-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+    }
+
+    .comparison-card.prenatal::before {
+      background: linear-gradient(90deg, #2196f3, #4fc3f7);
+    }
+
+    .comparison-card.postnatal::before {
+      background: linear-gradient(90deg, #ec407a, #f06292);
+    }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .comparison-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .comparison-card.prenatal .comparison-icon {
+      background: linear-gradient(135deg, #2196f3, #4fc3f7);
+    }
+
+    .comparison-card.postnatal .comparison-icon {
+      background: linear-gradient(135deg, #ec407a, #f06292);
+    }
+
+    .comparison-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .comparison-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .comparison-content h4 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.8rem;
+      color: var(--text-main);
+    }
+
+    .comparison-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .comparison-list li {
+      padding: 0.6rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+    }
+
+    .comparison-bullet {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 0.5rem;
+    }
+
+    .comparison-card.prenatal .comparison-bullet {
+      background: #2196f3;
+    }
+
+    .comparison-card.postnatal .comparison-bullet {
+      background: #ec407a;
+    }
+
+    /* =========================================
+       INTERACTIVE BODY CHANGES VISUALIZATION
+       ========================================= */
+    .body-changes-section {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* =========================================
+   INTERACTIVE BODY SIMULATION STYLES
+   ========================================= */
+/* =========================================
+   BODY SIMULATION & SCANNER STYLES
+   ========================================= */
+.body-viz-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 968px) {
+  .body-viz-container { grid-template-columns: 1fr; }
+}
+
+/* --- Body Morphing Animation --- */
+.body-silhouette {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  transition: all 0.5s ease;
+}
+
+/* Belly Morph Logic */
+.body-silhouette svg ellipse.belly-shape {
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* PRENATAL STATE (Default) */
+.body-silhouette[data-phase="prenatal"] .belly-shape {
+  rx: 75; /* Pregnant belly width */
+  ry: 85;
+}
+
+/* POSTNATAL STATE (Morphed) */
+.body-silhouette[data-phase="postnatal"] .belly-shape {
+  rx: 50; /* Postpartum belly width */
+  ry: 60;
+  fill: #f8bbd0; /* Slightly darker to indicate healing */
+}
+
+/* --- Interactive Hotspots --- */
+.body-hotspot {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid var(--deep-pink);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  animation: pulse-ring 2s infinite;
+}
+
+.body-hotspot:hover {
+  background: var(--deep-pink);
+  transform: scale(1.3);
+  box-shadow: 0 0 15px var(--deep-pink);
+}
+
+.body-hotspot.active {
+  background: var(--deep-pink);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 5px rgba(236, 64, 122, 0.3);
+}
+
+/* Hotspot Coordinates */
+.hotspot-brain { top: 8%; left: 50%; transform: translateX(-50%); }
+.hotspot-heart { top: 28%; left: 50%; transform: translateX(-50%); }
+.hotspot-stomach { top: 46%; left: 50%; transform: translateX(-50%); }
+.hotspot-uterus { top: 62%; left: 50%; transform: translateX(-50%); }
+
+/* --- Dynamic Info Panel --- */
+.body-info-panel {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+  min-height: 450px;
+  position: relative;
+}
+
+.panel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--chip-bg);
+  padding: 0.5rem;
+  border-radius: 50px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sim-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 40px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-soft);
+  background: transparent;
+}
+
+.sim-btn.active {
+  background: white;
+  color: var(--deep-pink);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Content Transitions */
+.info-content {
+  display: none; /* Hidden by default */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.info-content.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--bg);
+  padding-bottom: 1rem;
+}
+
+.info-icon-box {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--deep-pink), #ff4081);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 10px 20px rgba(233, 30, 99, 0.25);
+}
+
+.impact-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.impact-badge.prenatal { background: #e3f2fd; color: #1976d2; }
+.impact-badge.postnatal { background: #fce4ec; color: #c2185b; }
+
+.clinical-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.clinical-tag {
+  background: var(--bg);
+  color: var(--text-soft);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-soft);
+}
+
+/* Dynamic Info Panel */
+.body-info-panel {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scanning Animation Overlay */
+.scan-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(33, 150, 243, 0.2), transparent);
+  transform: translateY(-100%);
+  transition: none;
+  pointer-events: none;
+  z-index: 5;
+}
+.scan-overlay.scanning {
+  animation: scan-down 1s ease-in-out;
+}
+@keyframes scan-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Empty State */
+.info-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-soft);
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* Active Info Content */
+.info-content {
+  display: none;
+  animation: fade-in-up 0.4s ease forwards;
+}
+.info-content.active { display: block; }
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--bg);
+  padding-bottom: 1rem;
+}
+
+.info-icon-large {
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, var(--deep-pink), #f06292);
+  color: white;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 10px 20px rgba(233, 30, 99, 0.2);
+}
+
+.info-title h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.info-subtitle {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+.comparison-box {
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.phase-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--deep-pink);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.phase-badge.prenatal { background: #2196f3; }
+.phase-badge.postnatal { background: #ec407a; }
+
+.impact-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.symptom-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.symptom-tag {
+  background: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+    @keyframes hotspot-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .body-hotspot:hover {
+      transform: scale(1.3);
+      background: rgba(236, 64, 122, 0.4);
+    }
+
+    /* --- Hotspot Positioning --- */
+
+/* Existing (Adjusted slightly to prevent overlap) */
+.hotspot-brain { top: 4%; left: 50%; transform: translateX(-50%); }
+.hotspot-heart { top: 30%; left: 58%; transform: translateX(-50%); }
+.hotspot-stomach { top: 48%; left: 50%; transform: translateX(-50%); }
+.hotspot-uterus { top: 70%; left: 50%; transform: translateX(-50%); }
+
+/* NEW Hotspots */
+.hotspot-sleep { 
+  top: 10%; 
+  left: 32%; /* Near eyes */
+  transform: translateX(-50%); 
+}
+
+.hotspot-skin { 
+  top: 10%; 
+  left: 68%; /* Face/Cheek */
+  transform: translateX(-50%); 
+}
+
+.hotspot-hormones { 
+  top: 20%; /* Neck / Thyroid area */
+  left: 50%; 
+  transform: translateX(-50%); 
+}
+
+.hotspot-immune { 
+  top: 28%; 
+  left: 35%; /* Lymph nodes/Shoulder area */
+  transform: translateX(-50%); 
+}
+
+.hotspot-musculoskeletal { 
+  top: 58%; 
+  left: 75%; /* Hip/Back joint */
+  transform: translateX(-50%); 
+}
+
+/* Ensure all hotspots respond to hover */
+.body-hotspot:hover {
+  transform: translateX(-50%) scale(1.3); /* Keep horizontal centering on hover */
+  z-index: 20;
+}
+
+
+    .body-changes-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .change-item {
+      background: linear-gradient(135deg, rgba(236, 64, 122, 0.05), rgba(243, 229, 245, 0.5));
+      border-radius: 16px;
+      padding: 1.5rem;
+      border-left: 4px solid var(--deep-pink);
+      transition: all 0.3s ease;
+    }
+
+    .change-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .change-item h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .change-item p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-soft);
+      margin: 0;
+    }
+
+    .change-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--deep-pink), #f06292);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+    @media (max-width: 768px) {
+      .hero-content-wrapper {
+        gap: 2rem;
+      }
+
+      .hero-title-3d {
+        font-size: 2rem;
+      }
+
+      .severity-grid,
+      .chemistry-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hormone-indicators {
+        position: relative;
+        margin-top: 2rem;
+        bottom: 0;
+      }
+
+      .phase-toggles {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .toggle-btn {
+        width: 100%;
+      }
+    }
+
+    /* =========================================
+       SCROLL REVEAL ANIMATIONS
+       ========================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    
+    <!-- =========================================
+         ENHANCED HERO SECTION - CONSTELLATION
+         ========================================= -->
+    <section class="hero-constellation">
+      <div class="constellation-bg">
+        <canvas id="particleCanvas"></canvas>
+      </div>
+      <div class="gradient-morph"></div>
+      
+      <div class="hero-content-wrapper">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="pulse-dot"></span>
+            Mental Health Knowledge Hub
+          </div>
+          
+          <h1 class="hero-title-3d">
+            Understanding <span class="title-emphasis">Perinatal & Postnatal</span> Depression
+          </h1>
+          
+          <p class="hero-description">
+            An interactive, clinically precise journey exploring the neurological, hormonal, and psychological transformations during pregnancy and postpartum. Discover the science behind symptoms, understand brain chemistry changes, and access life-saving support resources.
+          </p>
+          
+         <div class="badge-constellation">
+            <div class="hero-badge-3d">
+              <i class="fas fa-brain"></i>
+              Neural Science
+            </div>
+            <div class="hero-badge-3d">
+              <i class="fas fa-dna"></i>
+              Hormonal Changes
+            </div>
+            <div class="hero-badge-3d">
+              <i class="fas fa-heart-pulse"></i>
+              Evidence-Based
+            </div>
+          </div>
+
+          <a href="perinatal_family_guide.html" class="btn-family-guide">
+            <i class="fas fa-users"></i>
+            Open Family & Partner Guide
+          </a>
+          
+          </div>
+        
+        <div class="hero-right">
+          <div class="brain-constellation">
+            <div class="brain-core">
+              <canvas id="brainCanvas"></canvas>
+              <div class="core-pulse-ring"></div>
+              <div class="core-pulse-ring"></div>
+              <div class="core-pulse-ring"></div>
+            </div>
+            
+            <div class="hormone-orbs">
+              <div class="hormone-orb orb-serotonin">
+                <div class="orb-glow"></div>
+                <div class="orb-content">
+                  <i class="fas fa-smile orb-icon"></i>
+                  <div class="orb-label">Serotonin</div>
+                </div>
+              </div>
+              
+              <div class="hormone-orb orb-oxytocin">
+                <div class="orb-glow"></div>
+                <div class="orb-content">
+                  <i class="fas fa-heart orb-icon"></i>
+                  <div class="orb-label">Oxytocin</div>
+                </div>
+              </div>
+              
+              <div class="hormone-orb orb-cortisol">
+                <div class="orb-glow"></div>
+                <div class="orb-content">
+                  <i class="fas fa-fire orb-icon"></i>
+                  <div class="orb-label">Cortisol</div>
+                </div>
+              </div>
+              
+              <div class="hormone-orb orb-estrogen">
+                <div class="orb-glow"></div>
+                <div class="orb-content">
+                  <i class="fas fa-leaf orb-icon"></i>
+                  <div class="orb-label">Estrogen</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="hormone-indicators">
+            <div class="hormone-chip">
+              <div class="hormone-dot" style="background: var(--serotonin);"></div>
+              Serotonin
+            </div>
+            <div class="hormone-chip">
+              <div class="hormone-dot" style="background: var(--oxytocin);"></div>
+              Oxytocin
+            </div>
+            <div class="hormone-chip">
+              <div class="hormone-dot" style="background: var(--cortisol);"></div>
+              Cortisol
+            </div>
+            <div class="hormone-chip">
+              <div class="hormone-dot" style="background: var(--estrogen);"></div>
+              Estrogen
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         PHASE TOGGLE
+         ========================================= -->
+    <div class="phase-toggle-section reveal">
+      <h2 class="phase-toggle-title">Explore Different Phases</h2>
+      <p class="phase-toggle-subtitle">Switch between prenatal and postnatal to see how hormones and symptoms change</p>
+      <div class="phase-toggles">
+        <button class="toggle-btn active" data-phase="prenatal">
+          <i class="fas fa-baby"></i> Prenatal (During Pregnancy)
+        </button>
+        <button class="toggle-btn" data-phase="postnatal">
+          <i class="fas fa-heart-circle-check"></i> Postnatal (After Birth)
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================================
+         INTERACTIVE HORMONE TIMELINE
+         ========================================= -->
+    <section class="timeline-section reveal">
+      <div class="section-header">
+        <h2 class="section-title" style="color: var(--text-main);">Hormone Journey Timeline</h2>
+        <p class="section-subtitle">
+          Explore week-by-week hormonal fluctuations from pregnancy through 6 months postpartum. Drag the slider or click preset periods to see how hormones change over time.
+        </p>
+      </div>
+
+      <div class="timeline-controls">
+        <button class="timeline-btn" data-week="8">
+          <i class="fas fa-seedling"></i> First Trimester (Week 8)
+        </button>
+        <button class="timeline-btn" data-week="20">
+          <i class="fas fa-baby"></i> Second Trimester (Week 20)
+        </button>
+        <button class="timeline-btn" data-week="36">
+          <i class="fas fa-heart-pulse"></i> Third Trimester (Week 36)
+        </button>
+        <button class="timeline-btn active" data-week="40">
+          <i class="fas fa-star-of-life"></i> Birth (Week 40)
+        </button>
+        <button class="timeline-btn" data-week="42">
+          <i class="fas fa-house-medical"></i> 2 Weeks Postpartum
+        </button>
+        <button class="timeline-btn" data-week="46">
+          <i class="fas fa-calendar-check"></i> 6 Weeks Postpartum
+        </button>
+        <button class="timeline-btn" data-week="52">
+          <i class="fas fa-calendar-days"></i> 3 Months Postpartum
+        </button>
+        <button class="timeline-btn" data-week="64">
+          <i class="fas fa-calendar-week"></i> 6 Months Postpartum
+        </button>
+      </div>
+
+      <div class="timeline-display">
+        <div class="timeline-header">
+          <div class="timeline-period" id="timelinePeriod">Birth & Delivery</div>
+          <div class="timeline-week-info" id="timelineWeekInfo">Week 40</div>
+        </div>
+
+        <div class="timeline-slider-container">
+          <input type="range" min="0" max="64" value="40" class="timeline-slider" id="timelineSlider">
+          <div class="timeline-labels">
+            <div class="timeline-label">Pregnancy<br>Start</div>
+            <div class="timeline-label">1st<br>Trimester</div>
+            <div class="timeline-label">2nd<br>Trimester</div>
+            <div class="timeline-label">3rd<br>Trimester</div>
+            <div class="timeline-label">Birth<br>Week 40</div>
+            <div class="timeline-label">6 Weeks<br>Postpartum</div>
+            <div class="timeline-label">6 Months<br>Postpartum</div>
+          </div>
+        </div>
+
+        <div class="hormone-chart-container">
+          <div class="hormone-chart" id="hormoneChart">
+            <!-- Estrogen -->
+            <div class="hormone-indicator estrogen">
+              <div class="hormone-name">
+                <div class="hormone-icon"><i class="fas fa-leaf"></i></div>
+                Estrogen
+              </div>
+              <div class="hormone-level-display">
+                <div class="hormone-level-bar" id="estrogenBar" style="height: 50%;">50%</div>
+              </div>
+              <div class="hormone-description" id="estrogenDesc">
+                Essential for fetal development and mood regulation
+              </div>
+            </div>
+
+            <!-- Progesterone -->
+            <div class="hormone-indicator progesterone">
+              <div class="hormone-name">
+                <div class="hormone-icon"><i class="fas fa-moon"></i></div>
+                Progesterone
+              </div>
+              <div class="hormone-level-display">
+                <div class="hormone-level-bar" id="progesteroneBar" style="height: 50%;">50%</div>
+              </div>
+              <div class="hormone-description" id="progesteroneDesc">
+                Maintains pregnancy and modulates GABA receptors
+              </div>
+            </div>
+
+            <!-- Cortisol -->
+            <div class="hormone-indicator cortisol">
+              <div class="hormone-name">
+                <div class="hormone-icon"><i class="fas fa-fire"></i></div>
+                Cortisol
+              </div>
+              <div class="hormone-level-display">
+                <div class="hormone-level-bar" id="cortisolBar" style="height: 50%;">50%</div>
+              </div>
+              <div class="hormone-description" id="cortisolDesc">
+                Stress hormone that can suppress mood neurotransmitters
+              </div>
+            </div>
+
+            <!-- Oxytocin -->
+            <div class="hormone-indicator oxytocin">
+              <div class="hormone-name">
+                <div class="hormone-icon"><i class="fas fa-heart"></i></div>
+                Oxytocin
+              </div>
+              <div class="hormone-level-display">
+                <div class="hormone-level-bar" id="oxytocinBar" style="height: 50%;">50%</div>
+              </div>
+              <div class="hormone-description" id="oxytocinDesc">
+                Bonding hormone released during labor and breastfeeding
+              </div>
+            </div>
+
+            <!-- Serotonin -->
+            <div class="hormone-indicator serotonin">
+              <div class="hormone-name">
+                <div class="hormone-icon"><i class="fas fa-smile"></i></div>
+                Serotonin
+              </div>
+              <div class="hormone-level-display">
+                <div class="hormone-level-bar" id="serotoninBar" style="height: 50%;">50%</div>
+              </div>
+              <div class="hormone-description" id="serotoninDesc">
+                Mood stabilizer affected by estrogen levels
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-events" id="timelineEvents">
+          <h4><i class="fas fa-lightbulb"></i> Key Events & Changes</h4>
+          <ul id="eventsList">
+            <li><span class="event-bullet"></span> Labor and delivery trigger massive hormonal shifts</li>
+            <li><span class="event-bullet"></span> Estrogen drops 100-fold within 24 hours</li>
+            <li><span class="event-bullet"></span> Oxytocin surges during delivery and breastfeeding</li>
+            <li><span class="event-bullet"></span> Risk period for postpartum depression begins</li>
+          </ul>
+        </div>
+
+        <svg class="animated-wave" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M0,50 Q25,40 50,50 T100,50 L100,100 L0,100 Z" fill="currentColor" style="color: var(--deep-pink);"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- =========================================
+         COMPARISON SECTION
+         ========================================= -->
+    <section class="comparison-section reveal">
+      <div class="section-header">
+        <h2 class="section-title">Prenatal vs Postnatal Depression</h2>
+        <p class="section-subtitle">
+          Understanding the distinct hormonal, physical, and emotional changes in each phase
+        </p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- Prenatal Card -->
+        <div class="comparison-card prenatal">
+          <div class="comparison-header">
+            <div class="comparison-icon">
+              <i class="fas fa-baby"></i>
+            </div>
+            <div>
+              <h3 class="comparison-title">Prenatal Depression</h3>
+              <p class="comparison-subtitle">During Pregnancy</p>
+            </div>
+          </div>
+          
+          <div class="comparison-content">
+            <h4>Hormonal Changes</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Progesterone surge:</strong> Increases 10-fold, causes fatigue and mood sensitivity</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Estrogen rise:</strong> Multiplies 100-fold by third trimester, affects serotonin</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>hCG elevation:</strong> Triggers nausea, impacts mood regulation</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Cortisol increase:</strong> Stress response heightened throughout pregnancy</span>
+              </li>
+            </ul>
+
+            <h4>Physical Changes</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Rapid body transformation, weight gain, physical discomfort</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Morning sickness, fatigue, sleep disturbances</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Increased blood volume, cardiovascular changes</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Breast tenderness, pelvic pressure, back pain</span>
+              </li>
+            </ul>
+
+            <h4>Emotional Patterns</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Anxiety about baby's health and labor/delivery</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Fear of inadequacy as a future mother</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Mood swings from hormonal fluctuations</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Concerns about relationship changes and identity shift</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Postnatal Card -->
+        <div class="comparison-card postnatal">
+          <div class="comparison-header">
+            <div class="comparison-icon">
+              <i class="fas fa-heart-circle-check"></i>
+            </div>
+            <div>
+              <h3 class="comparison-title">Postnatal Depression</h3>
+              <p class="comparison-subtitle">After Childbirth</p>
+            </div>
+          </div>
+          
+          <div class="comparison-content">
+            <h4>Hormonal Changes</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Estrogen crash:</strong> 100-fold drop within 24 hours postpartum</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Progesterone plunge:</strong> Rapid decline disrupts GABA signaling</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Oxytocin irregularity:</strong> Fluctuates with breastfeeding, affects bonding</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span><strong>Thyroid dysfunction:</strong> 5-10% develop postpartum thyroiditis</span>
+              </li>
+            </ul>
+
+            <h4>Physical Changes</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Severe sleep deprivation (averaging 2-4 hours nightly)</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Physical recovery from childbirth, perineal/cesarean healing</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Breastfeeding challenges, nipple pain, engorgement</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Postpartum bleeding, cramping, physical exhaustion</span>
+              </li>
+            </ul>
+
+            <h4>Emotional Patterns</h4>
+            <ul class="comparison-list">
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Overwhelming responsibility for newborn's survival</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Guilt about lack of bonding or maternal feelings</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Loss of identity, autonomy, and personal time</span>
+              </li>
+              <li>
+                <span class="comparison-bullet"></span>
+                <span>Social isolation, reduced partner intimacy</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         SYMPTOM SEVERITY CARDS
+         ========================================= -->
+    <section class="reveal">
+      <div class="section-header">
+        <h2 class="section-title">Symptom Recognition by Severity</h2>
+        <p class="section-subtitle">
+          Understanding the progression from mild to critical symptoms enables early intervention and appropriate care. Click each card to explore symptoms in detail.
+        </p>
+      </div>
+
+      <div class="severity-grid">
+        <!-- Mild Symptoms Card -->
+        <div class="severity-card mild">
+          <div class="severity-header">
+            <div class="severity-icon">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <div class="severity-title-group">
+              <h3>Mild Symptoms</h3>
+              <div class="severity-score">Edinburgh Score 10-12</div>
+            </div>
+          </div>
+          <ul class="symptom-list">
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Tearfulness occurring 3-4 times weekly, particularly evening hours</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Sleep disturbance beyond infant care needs (difficulty falling asleep after 30+ minutes)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Reduced enjoyment in previously pleasurable activities, appetite changes ±10%</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Intrusive worries about infant health/safety occurring hourly but controllable</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Mild irritability with partner/family, guilt feelings about motherhood competence</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Moderate Symptoms Card -->
+        <div class="severity-card moderate">
+          <div class="severity-header">
+            <div class="severity-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="severity-title-group">
+              <h3>Moderate Symptoms</h3>
+              <div class="severity-score">Edinburgh Score 13-15</div>
+            </div>
+          </div>
+          <ul class="symptom-list">
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Persistent low mood lasting 2+ weeks, daily tearfulness regardless of circumstances</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Early morning wakening (3-4 AM) with inability to return to sleep, total sleep <4 hours/night</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Significant appetite loss or emotional overeating, weight change >5% in 2 weeks</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Concentration impairment affecting infant care tasks (forgetting feeding times)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Pronounced guilt about not bonding with baby, feeling like a bad mother constantly</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Social withdrawal (avoiding friends, declining support offers), reduced self-care</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Critical Symptoms Card -->
+        <div class="severity-card critical">
+          <div class="severity-header">
+            <div class="severity-icon">
+              <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="severity-title-group">
+              <h3>Critical Symptoms</h3>
+              <div class="severity-score">Edinburgh Score 16-19</div>
+            </div>
+          </div>
+          <ul class="symptom-list">
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Pervasive anhedonia (inability to feel joy even during positive infant interactions)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Psychomotor retardation (slowed movements, speech) or agitation (constant restlessness)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Cognitive dulling (decision paralysis about simple tasks, difficulty following conversations)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Intrusive thoughts of infant harm (not acted upon but distressing, recurring multiple times daily)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Feelings of worthlessness, excessive guilt, belief that baby would be better off without mother</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Impaired infant care (delayed response to crying, minimal interaction)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Serious/Suicidal Symptoms Card -->
+        <div class="severity-card serious">
+          <div class="severity-header">
+            <div class="severity-icon">
+              <i class="fas fa-skull-crossbones"></i>
+            </div>
+            <div class="severity-title-group">
+              <h3>Serious/Suicidal</h3>
+              <div class="severity-score">Edinburgh Score 20+</div>
+            </div>
+          </div>
+          <ul class="symptom-list">
+            <li>
+              <span class="symptom-bullet"></span>
+              <span><strong>ANY suicidal ideation: passive (wish to not wake up) or active (specific plan/intent)</strong></span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span><strong>Psychotic features: auditory hallucinations commanding harm to self/infant, delusions</strong></span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Complete emotional detachment from infant (no response to distress cues, absent eye contact)</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span>Severe agitation or catatonic states, inability to perform basic infant care tasks</span>
+            </li>
+            <li>
+              <span class="symptom-bullet"></span>
+              <span><strong>Infanticidal thoughts (recurrent, ego-dystonic thoughts of harming infant)</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         ENHANCED BRAIN CHEMISTRY SECTION
+         ========================================= -->
+    <section class="brain-chemistry-section reveal">
+      <div class="section-header">
+        <h2 class="section-title" style="color: var(--text-main);">Brain Chemistry & Hormonal Changes</h2>
+        <p class="section-subtitle">
+          Perinatal depression involves complex interactions between neurotransmitters and hormones that regulate mood, bonding, stress response, and emotional well-being. Hover over each card to see the impact.
+        </p>
+      </div>
+
+      <div class="chemistry-grid">
+        <!-- Serotonin Card -->
+        <div class="neurotransmitter-card serotonin">
+          <div class="nt-icon">
+            <i class="fas fa-smile"></i>
+          </div>
+          <h3 class="nt-title">Serotonin</h3>
+          <p class="nt-role">Mood Regulator & Emotional Stabilizer</p>
+          <p class="nt-description">
+            Essential for mood stability, sleep regulation, and appetite control. Low serotonin levels are strongly associated with depressive symptoms, anxiety, and obsessive thoughts about infant care. Estrogen withdrawal postpartum directly reduces serotonin receptor sensitivity.
+          </p>
+          <div class="nt-level-indicator" style="border-color: var(--serotonin);">
+            <div class="nt-level-label">Typical Depression Level</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 40%; background: var(--serotonin);"></div>
+              <div class="nt-level-percentage">40%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Oxytocin Card -->
+        <div class="neurotransmitter-card oxytocin">
+          <div class="nt-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3 class="nt-title">Oxytocin</h3>
+          <p class="nt-role">Bonding Hormone & Social Connection</p>
+          <p class="nt-description">
+            Released during breastfeeding and skin-to-skin contact, oxytocin facilitates mother-infant bonding. Reduced oxytocin signaling impairs attachment and increases feelings of detachment from baby. Stress and depression can suppress oxytocin release.
+          </p>
+          <div class="nt-level-indicator" style="border-color: var(--oxytocin);">
+            <div class="nt-level-label">Impaired Bonding Level</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 45%; background: var(--oxytocin);"></div>
+              <div class="nt-level-percentage">45%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cortisol Card -->
+        <div class="neurotransmitter-card cortisol">
+          <div class="nt-icon">
+            <i class="fas fa-fire"></i>
+          </div>
+          <h3 class="nt-title">Cortisol</h3>
+          <p class="nt-role">Stress Hormone & HPA Axis Dysregulation</p>
+          <p class="nt-description">
+            Chronically elevated cortisol from sleep deprivation and postpartum stress suppresses serotonin production. Dysregulated cortisol rhythm contributes to anxiety, hypervigilance, exhaustion, and impaired immune function during the perinatal period.
+          </p>
+          <div class="nt-level-indicator" style="border-color: var(--cortisol);">
+            <div class="nt-level-label">Elevated Stress Level</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 85%; background: var(--cortisol);"></div>
+              <div class="nt-level-percentage">85%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GABA Card -->
+        <div class="neurotransmitter-card gaba">
+          <div class="nt-icon">
+            <i class="fas fa-spa"></i>
+          </div>
+          <h3 class="nt-title">GABA</h3>
+          <p class="nt-role">Calming Neurotransmitter & Anxiety Reducer</p>
+          <p class="nt-description">
+            The primary inhibitory neurotransmitter that reduces neuronal excitability. Low GABA activity contributes to anxiety, panic attacks, and intrusive thoughts common in perinatal depression. Progesterone withdrawal postpartum disrupts GABA receptor function.
+          </p>
+          <div class="nt-level-indicator" style="border-color: #9c27b0;">
+            <div class="nt-level-label">Reduced Calming Activity</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 35%; background: #9c27b0;"></div>
+              <div class="nt-level-percentage">35%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dopamine Card -->
+        <div class="neurotransmitter-card dopamine">
+          <div class="nt-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3 class="nt-title">Dopamine</h3>
+          <p class="nt-role">Motivation & Reward System</p>
+          <p class="nt-description">
+            Drives motivation, pleasure, and reward processing. Dopamine dysfunction leads to anhedonia (inability to feel pleasure), lack of motivation for infant care, reduced interest in activities, and emotional flatness characteristic of severe perinatal depression.
+          </p>
+          <div class="nt-level-indicator" style="border-color: #ff9800;">
+            <div class="nt-level-label">Depleted Motivation</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 30%; background: #ff9800;"></div>
+              <div class="nt-level-percentage">30%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estrogen Card -->
+        <div class="neurotransmitter-card estrogen">
+          <div class="nt-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3 class="nt-title">Estrogen</h3>
+          <p class="nt-role">Neuroplasticity & Serotonin Modulation</p>
+          <p class="nt-description">
+            Estrogen levels plummet dramatically after delivery (100-fold decrease within 24 hours). This rapid withdrawal affects serotonin receptors, GABA signaling, and overall mood regulation, triggering depressive symptoms. Estrogen also influences brain-derived neurotrophic factor (BDNF).
+          </p>
+          <div class="nt-level-indicator" style="border-color: var(--estrogen);">
+            <div class="nt-level-label">Postpartum Decline</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 20%; background: var(--estrogen);"></div>
+              <div class="nt-level-percentage">20%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progesterone Card -->
+        <div class="neurotransmitter-card progesterone">
+          <div class="nt-icon">
+            <i class="fas fa-moon"></i>
+          </div>
+          <h3 class="nt-title">Progesterone</h3>
+          <p class="nt-role">Calming Hormone & GABA Modulator</p>
+          <p class="nt-description">
+            Progesterone's metabolite allopregnanolone acts as a powerful GABA-A receptor modulator, producing calming effects. The rapid postpartum drop in progesterone disrupts this system, contributing to anxiety, insomnia, and mood instability in susceptible women.
+          </p>
+          <div class="nt-level-indicator" style="border-color: var(--progesterone);">
+            <div class="nt-level-label">Postpartum Crash</div>
+            <div class="nt-level-bar">
+              <div class="nt-level-fill" style="width: 25%; background: var(--progesterone);"></div>
+              <div class="nt-level-percentage">25%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         BODY CHANGES VISUALIZATION
+         ========================================= -->
+    <section class="body-changes-section reveal">
+  <div class="section-header">
+    <h2 class="section-title">Interactive Physiology Simulation</h2>
+    <p class="section-subtitle">
+      Click on body areas to run a simulation comparing how <strong>Prenatal</strong> and <strong>Postnatal</strong> states specifically impact maternal physiology and mental health.
+    </p>
+  </div>
+
+  <div class="body-viz-container">
+    <div class="body-silhouette" id="bodyModel" data-phase="prenatal">
+  <svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+        <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <ellipse cx="100" cy="50" rx="35" ry="45" fill="#f8bbd0" stroke="#ec407a" stroke-width="2"/>
+    <rect x="75" y="95" width="50" height="80" rx="25" fill="#f8bbd0" stroke="#ec407a" stroke-width="2"/>
+    <ellipse class="belly-shape" cx="100" cy="200" rx="60" ry="75" fill="#fce4ec" stroke="#ec407a" stroke-width="2"/>
+    <rect x="60" y="270" width="28" height="120" rx="14" fill="#f8bbd0" stroke="#ec407a" stroke-width="2"/>
+    <rect x="112" y="270" width="28" height="120" rx="14" fill="#f8bbd0" stroke="#ec407a" stroke-width="2"/>
+  </svg>
+  
+  <div class="body-hotspot hotspot-brain" onclick="simulateScan('brain')" title="Brain & Mood">
+    <i class="fas fa-brain" style="position:absolute; top:6px; left:7px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-heart" onclick="simulateScan('heart')" title="Heart & Blood">
+    <i class="fas fa-heart" style="position:absolute; top:7px; left:7px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-stomach" onclick="simulateScan('stomach')" title="Digestion & Appetite">
+    <i class="fas fa-utensils" style="position:absolute; top:7px; left:8px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-uterus" onclick="simulateScan('uterus')" title="Reproductive System">
+    <i class="fas fa-baby" style="position:absolute; top:6px; left:8px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+
+  <div class="body-hotspot hotspot-hormones" onclick="simulateScan('hormones')" title="Endocrine System">
+    <i class="fas fa-vial" style="position:absolute; top:7px; left:9px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-immune" onclick="simulateScan('immune')" title="Immune System">
+    <i class="fas fa-shield-virus" style="position:absolute; top:7px; left:8px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-sleep" onclick="simulateScan('sleep')" title="Sleep Architecture">
+    <i class="fas fa-bed" style="position:absolute; top:8px; left:6px; color:white; font-size:12px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-musculoskeletal" onclick="simulateScan('musculoskeletal')" title="Musculoskeletal">
+    <i class="fas fa-bone" style="position:absolute; top:7px; left:8px; color:white; font-size:13px; pointer-events:none;"></i>
+  </div>
+  <div class="body-hotspot hotspot-skin" onclick="simulateScan('skin')" title="Skin & Hair">
+    <i class="fas fa-hand-sparkles" style="position:absolute; top:7px; left:7px; color:white; font-size:14px; pointer-events:none;"></i>
+  </div>
+</div>
+
+    <div class="body-info-panel">
+      <div class="scan-overlay" id="scanOverlay"></div>
+      
+      <div class="info-empty-state" id="infoEmpty">
+        <i class="fas fa-fingerprint" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+        <h3>Select a Body Zone</h3>
+        <p>Click a hotspot on the model to scan for physiological changes impacting mental health.</p>
+      </div>
+
+      <div class="info-content" id="infoContent">
+        <div class="info-header">
+          <div class="info-icon-large" id="panelIcon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="info-title">
+            <h3 id="panelTitle">Brain Restructuring</h3>
+            <span class="info-subtitle" id="panelSubtitle">Neurological System</span>
+          </div>
+        </div>
+
+        <div class="comparison-box">
+          <span class="phase-badge" id="panelBadge">Prenatal</span>
+          <p class="impact-text" id="panelText">
+            Content goes here...
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--text-soft); font-size: 0.9rem; margin-bottom: 0.5rem;">Clinical Symptoms:</h4>
+          <div class="symptom-tags" id="panelTags">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <script>
+    // =========================================
+    // PARTICLE CANVAS ANIMATION
+    // =========================================
+    const particleCanvas = document.getElementById('particleCanvas');
+    const ctx = particleCanvas.getContext('2d');
+    
+    function resizeCanvas() {
+      particleCanvas.width = particleCanvas.offsetWidth;
+      particleCanvas.height = particleCanvas.offsetHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    const particleCount = 100;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * particleCanvas.width;
+        this.y = Math.random() * particleCanvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        if (this.x < 0 || this.x > particleCanvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > particleCanvas.height) this.vy *= -1;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+        ctx.fill();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      connectParticles();
+      
+      requestAnimationFrame(animateParticles);
+    }
+    
+    animateParticles();
+
+    // =========================================
+    // BRAIN CANVAS ANIMATION
+    // =========================================
+    const brainCanvas = document.getElementById('brainCanvas');
+    const brainCtx = brainCanvas.getContext('2d');
+    
+    brainCanvas.width = 200;
+    brainCanvas.height = 200;
+    
+    function drawBrain() {
+      brainCtx.clearRect(0, 0, brainCanvas.width, brainCanvas.height);
+      
+      const centerX = brainCanvas.width / 2;
+      const centerY = brainCanvas.height / 2;
+      
+      // Draw brain outline
+      brainCtx.beginPath();
+      brainCtx.arc(centerX, centerY, 60, 0, Math.PI * 2);
+      brainCtx.fillStyle = 'rgba(236, 64, 122, 0.15)';
+      brainCtx.fill();
+      brainCtx.strokeStyle = 'rgba(236, 64, 122, 0.4)';
+      brainCtx.lineWidth = 2;
+      brainCtx.stroke();
+      
+      // Draw neural connections
+      const time = Date.now() * 0.001;
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2 + time * 0.5;
+        const x1 = centerX + Math.cos(angle) * 30;
+        const y1 = centerY + Math.sin(angle) * 30;
+        const x2 = centerX + Math.cos(angle) * 55;
+        const y2 = centerY + Math.sin(angle) * 55;
+        
+        brainCtx.beginPath();
+        brainCtx.moveTo(x1, y1);
+        brainCtx.lineTo(x2, y2);
+        brainCtx.strokeStyle = `rgba(236, 64, 122, ${0.3 + Math.sin(time + i) * 0.2})`;
+        brainCtx.lineWidth = 2;
+        brainCtx.stroke();
+        
+        // Draw nodes
+        brainCtx.beginPath();
+        brainCtx.arc(x2, y2, 4, 0, Math.PI * 2);
+        brainCtx.fillStyle = 'rgba(236, 64, 122, 0.8)';
+        brainCtx.fill();
+      }
+      
+      requestAnimationFrame(drawBrain);
+    }
+    
+    drawBrain();
+
+    // =========================================
+    // PHASE TOGGLE FUNCTIONALITY
+    // =========================================
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    const cards = document.querySelectorAll('.neurotransmitter-card, .severity-card');
+    
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        toggleBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        const phase = this.dataset.phase;
+        
+        // Update hormone levels based on phase
+        const fills = document.querySelectorAll('.nt-level-fill');
+        fills.forEach(fill => {
+          const currentWidth = parseFloat(fill.style.width);
+          if (phase === 'prenatal') {
+            // Prenatal: higher estrogen/progesterone, moderate stress
+            if (fill.closest('.estrogen')) fill.style.width = '85%';
+            else if (fill.closest('.progesterone')) fill.style.width = '90%';
+            else if (fill.closest('.cortisol')) fill.style.width = '65%';
+            else if (fill.closest('.serotonin')) fill.style.width = '55%';
+            else if (fill.closest('.oxytocin')) fill.style.width = '60%';
+          } else {
+            // Postnatal: crashed estrogen/progesterone, high stress
+            if (fill.closest('.estrogen')) fill.style.width = '20%';
+            else if (fill.closest('.progesterone')) fill.style.width = '25%';
+            else if (fill.closest('.cortisol')) fill.style.width = '85%';
+            else if (fill.closest('.serotonin')) fill.style.width = '40%';
+            else if (fill.closest('.oxytocin')) fill.style.width = '45%';
+          }
+          
+          // Update percentage text
+          const percentage = fill.closest('.nt-level-indicator').querySelector('.nt-level-percentage');
+          if (percentage) {
+            percentage.textContent = fill.style.width;
+          }
+        });
+        
+        // Add animation pulse
+        cards.forEach(card => {
+          card.style.animation = 'none';
+          setTimeout(() => {
+            card.style.animation = '';
+          }, 10);
+        });
+      });
+    });
+
+    // =========================================
+    // GRADIENT MORPH MOUSE TRACKING
+    // =========================================
+    const gradientMorph = document.querySelector('.gradient-morph');
+    const heroConstellation = document.querySelector('.hero-constellation');
+    
+    if (heroConstellation && gradientMorph) {
+      heroConstellation.addEventListener('mousemove', (e) => {
+        const rect = heroConstellation.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        gradientMorph.style.background = `radial-gradient(circle at ${x}% ${y}%, 
+                    rgba(236, 64, 122, 0.12) 0%, 
+                    transparent 60%)`;
+      });
+    }
+
+    // =========================================
+    // SCROLL REVEAL ANIMATION
+    // =========================================
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // =========================================
+    // CARD HOVER SOUND EFFECT (OPTIONAL)
+    // =========================================
+    const hoverCards = document.querySelectorAll('.severity-card, .neurotransmitter-card, .hormone-orb');
+    
+    hoverCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = this.style.transform || '';
+      });
+    });
+
+    // =========================================
+    // INTERACTIVE HORMONE TIMELINE
+    // =========================================
+    const timelineSlider = document.getElementById('timelineSlider');
+    const timelinePeriod = document.getElementById('timelinePeriod');
+    const timelineWeekInfo = document.getElementById('timelineWeekInfo');
+    const timelineButtons = document.querySelectorAll('.timeline-btn');
+    const eventsList = document.getElementById('eventsList');
+
+    // Hormone data structure: week -> hormone levels (0-100)
+    const hormoneData = {
+      // First Trimester
+      0: { estrogen: 20, progesterone: 25, cortisol: 40, oxytocin: 30, serotonin: 55 },
+      8: { estrogen: 35, progesterone: 40, cortisol: 45, oxytocin: 35, serotonin: 50 },
+      12: { estrogen: 50, progesterone: 55, cortisol: 50, oxytocin: 40, serotonin: 48 },
+      // Second Trimester
+      16: { estrogen: 65, progesterone: 70, cortisol: 55, oxytocin: 45, serotonin: 52 },
+      20: { estrogen: 75, progesterone: 80, cortisol: 58, oxytocin: 50, serotonin: 54 },
+      24: { estrogen: 82, progesterone: 85, cortisol: 60, oxytocin: 55, serotonin: 56 },
+      // Third Trimester
+      28: { estrogen: 88, progesterone: 90, cortisol: 62, oxytocin: 58, serotonin: 53 },
+      32: { estrogen: 92, progesterone: 93, cortisol: 65, oxytocin: 60, serotonin: 50 },
+      36: { estrogen: 95, progesterone: 95, cortisol: 68, oxytocin: 65, serotonin: 48 },
+      // Birth
+      40: { estrogen: 98, progesterone: 98, cortisol: 70, oxytocin: 95, serotonin: 45 },
+      // Postpartum - Dramatic drops
+      41: { estrogen: 20, progesterone: 22, cortisol: 85, oxytocin: 70, serotonin: 38 },
+      42: { estrogen: 18, progesterone: 20, cortisol: 88, oxytocin: 65, serotonin: 35 },
+      44: { estrogen: 22, progesterone: 23, cortisol: 82, oxytocin: 60, serotonin: 38 },
+      46: { estrogen: 25, progesterone: 25, cortisol: 75, oxytocin: 58, serotonin: 42 },
+      50: { estrogen: 28, progesterone: 28, cortisol: 68, oxytocin: 55, serotonin: 45 },
+      52: { estrogen: 30, progesterone: 30, cortisol: 62, oxytocin: 52, serotonin: 48 },
+      56: { estrogen: 33, progesterone: 32, cortisol: 58, oxytocin: 50, serotonin: 50 },
+      64: { estrogen: 38, progesterone: 35, cortisol: 50, oxytocin: 48, serotonin: 52 }
+    };
+
+    // Timeline descriptions for each week range
+    const timelineDescriptions = {
+      0: {
+        period: 'Conception & Early Pregnancy',
+        weekInfo: 'Weeks 0-4',
+        events: [
+          'Conception occurs - hormonal cascade begins',
+          'hCG rises rapidly to support corpus luteum',
+          'Estrogen and progesterone start climbing',
+          'Early pregnancy symptoms may begin'
+        ]
+      },
+      8: {
+        period: 'First Trimester',
+        weekInfo: 'Week 8',
+        events: [
+          'Morning sickness peaks due to hCG surge',
+          'Progesterone causes fatigue and mood changes',
+          'Estrogen levels rising steadily',
+          'Emotional sensitivity increases',
+          'Risk period for prenatal depression begins'
+        ]
+      },
+      12: {
+        period: 'End of First Trimester',
+        weekInfo: 'Week 12',
+        events: [
+          'Placenta takes over hormone production',
+          'Morning sickness typically subsides',
+          'Progesterone continues 10-fold increase',
+          'Energy levels may improve slightly',
+          'Mood stabilization for many women'
+        ]
+      },
+      20: {
+        period: 'Second Trimester - "Honeymoon Period"',
+        weekInfo: 'Week 20',
+        events: [
+          'Peak energy and mood for many women',
+          'Estrogen reaches 75% of maximum levels',
+          'Quickening - first fetal movements felt',
+          'Cortisol elevation continues gradually',
+          'Improved serotonin function in many cases'
+        ]
+      },
+      28: {
+        period: 'Third Trimester Begins',
+        weekInfo: 'Week 28',
+        events: [
+          'Physical discomfort increases significantly',
+          'Sleep disruption worsens - affects cortisol',
+          'Hormones near peak levels',
+          'Anxiety about labor/motherhood intensifies',
+          'Depression risk increases again'
+        ]
+      },
+      36: {
+        period: 'Late Third Trimester',
+        weekInfo: 'Week 36',
+        events: [
+          'Maximum physical and emotional stress',
+          'Estrogen and progesterone at 95% peak',
+          'Severe sleep deprivation common',
+          'Cortisol elevation affects mood regulation',
+          'Body preparing for labor'
+        ]
+      },
+      40: {
+        period: 'Birth & Delivery',
+        weekInfo: 'Week 40',
+        events: [
+          'Labor and delivery trigger massive hormonal shifts',
+          'Estrogen drops 100-fold within 24 hours',
+          'Progesterone crashes dramatically',
+          'Oxytocin surges during delivery and breastfeeding',
+          'Highest risk period for postpartum depression begins'
+        ]
+      },
+      42: {
+        period: '2 Weeks Postpartum',
+        weekInfo: 'Week 42 (2 weeks postpartum)',
+        events: [
+          'Hormones at lowest point - critical danger zone',
+          'Estrogen only 20% of pregnancy peak',
+          '"Baby blues" affect 50-80% of mothers',
+          'Severe sleep deprivation elevates cortisol to 88%',
+          'Postpartum depression emerges in 10-20% of women',
+          'Oxytocin fluctuates with breastfeeding'
+        ]
+      },
+      46: {
+        period: '6 Weeks Postpartum',
+        weekInfo: 'Week 46 (6 weeks postpartum)',
+        events: [
+          'Hormones beginning slow recovery',
+          'Physical healing mostly complete',
+          'Cortisol remains elevated from sleep deprivation',
+          'Serotonin still significantly suppressed',
+          'Depression symptoms may persist or worsen',
+          'First postpartum medical checkup typically occurs'
+        ]
+      },
+      52: {
+        period: '3 Months Postpartum',
+        weekInfo: 'Week 52 (3 months postpartum)',
+        events: [
+          'Gradual hormonal stabilization continues',
+          'Estrogen recovering to 30% baseline',
+          'Sleep patterns may improve slightly',
+          'Infant care routines becoming established',
+          'Depression may persist without treatment',
+          'Return to work stress for many mothers'
+        ]
+      },
+      64: {
+        period: '6 Months Postpartum',
+        weekInfo: 'Week 64 (6 months postpartum)',
+        events: [
+          'Hormones approaching pre-pregnancy baseline',
+          'Menstrual cycle may resume (if not breastfeeding)',
+          'Cortisol levels normalizing',
+          'Serotonin function improving',
+          'Untreated depression can become chronic',
+          'Bonding and maternal confidence strengthening'
+        ]
+      }
+    };
+
+    // Interpolate hormone values between data points
+    function getHormoneValues(week) {
+      const weeks = Object.keys(hormoneData).map(Number).sort((a, b) => a - b);
+      
+      // Find surrounding data points
+      let lowerWeek = weeks[0];
+      let upperWeek = weeks[weeks.length - 1];
+      
+      for (let i = 0; i < weeks.length - 1; i++) {
+        if (week >= weeks[i] && week <= weeks[i + 1]) {
+          lowerWeek = weeks[i];
+          upperWeek = weeks[i + 1];
+          break;
+        }
+      }
+      
+      // Exact match
+      if (hormoneData[week]) {
+        return hormoneData[week];
+      }
+      
+      // Linear interpolation
+      const ratio = (week - lowerWeek) / (upperWeek - lowerWeek);
+      const lowerData = hormoneData[lowerWeek];
+      const upperData = hormoneData[upperWeek];
+      
+      return {
+        estrogen: Math.round(lowerData.estrogen + (upperData.estrogen - lowerData.estrogen) * ratio),
+        progesterone: Math.round(lowerData.progesterone + (upperData.progesterone - lowerData.progesterone) * ratio),
+        cortisol: Math.round(lowerData.cortisol + (upperData.cortisol - lowerData.cortisol) * ratio),
+        oxytocin: Math.round(lowerData.oxytocin + (upperData.oxytocin - lowerData.oxytocin) * ratio),
+        serotonin: Math.round(lowerData.serotonin + (upperData.serotonin - lowerData.serotonin) * ratio)
+      };
+    }
+
+    // Get description for current week
+    function getDescription(week) {
+      const descWeeks = Object.keys(timelineDescriptions).map(Number).sort((a, b) => a - b);
+      let closestWeek = descWeeks[0];
+      
+      for (let i = 0; i < descWeeks.length; i++) {
+        if (Math.abs(week - descWeeks[i]) < Math.abs(week - closestWeek)) {
+          closestWeek = descWeeks[i];
+        }
+      }
+      
+      return timelineDescriptions[closestWeek];
+    }
+
+    // Update timeline display
+    function updateTimeline(week) {
+      const values = getHormoneValues(week);
+      const description = getDescription(week);
+      
+      // Update header
+      timelinePeriod.textContent = description.period;
+      timelineWeekInfo.textContent = description.weekInfo;
+      
+      // Update hormone bars
+      document.getElementById('estrogenBar').style.height = values.estrogen + '%';
+      document.getElementById('estrogenBar').textContent = values.estrogen + '%';
+      
+      document.getElementById('progesteroneBar').style.height = values.progesterone + '%';
+      document.getElementById('progesteroneBar').textContent = values.progesterone + '%';
+      
+      document.getElementById('cortisolBar').style.height = values.cortisol + '%';
+      document.getElementById('cortisolBar').textContent = values.cortisol + '%';
+      
+      document.getElementById('oxytocinBar').style.height = values.oxytocin + '%';
+      document.getElementById('oxytocinBar').textContent = values.oxytocin + '%';
+      
+      document.getElementById('serotoninBar').style.height = values.serotonin + '%';
+      document.getElementById('serotoninBar').textContent = values.serotonin + '%';
+      
+      // Update descriptions based on levels
+      updateHormoneDescriptions(week, values);
+      
+      // Update events list
+      eventsList.innerHTML = description.events.map(event => 
+        `<li><span class="event-bullet"></span>${event}</li>`
+      ).join('');
+    }
+
+    // Update hormone descriptions based on current levels
+    function updateHormoneDescriptions(week, values) {
+      const estrogenDesc = document.getElementById('estrogenDesc');
+      const progesteroneDesc = document.getElementById('progesteroneDesc');
+      const cortisolDesc = document.getElementById('cortisolDesc');
+      const oxytocinDesc = document.getElementById('oxytocinDesc');
+      const serotoninDesc = document.getElementById('serotoninDesc');
+      
+      if (week <= 40) {
+        // Pregnancy
+        estrogenDesc.textContent = values.estrogen > 80 ? 
+          'Peak levels supporting fetal development and placental function' :
+          'Rising steadily to support pregnancy and fetal growth';
+        
+        progesteroneDesc.textContent = values.progesterone > 80 ?
+          'Maximum levels - causes fatigue, affects GABA receptors' :
+          'Increasing to maintain pregnancy and prepare for labor';
+        
+        cortisolDesc.textContent = values.cortisol > 60 ?
+          'Elevated stress response - impacts mood and anxiety levels' :
+          'Gradually rising - normal pregnancy stress response';
+        
+        oxytocinDesc.textContent = week >= 36 ?
+          'Rising in preparation for labor and delivery' :
+          'Low levels during pregnancy, will surge during birth';
+        
+        serotoninDesc.textContent = values.serotonin < 50 ?
+          'Suppressed by hormone changes - increases depression risk' :
+          'Relatively stable but affected by estrogen levels';
+      } else {
+        // Postpartum
+        estrogenDesc.textContent = values.estrogen < 30 ?
+          'CRASHED - 100-fold drop disrupts serotonin receptors and mood' :
+          'Slowly recovering but still well below pregnancy levels';
+        
+        progesteroneDesc.textContent = values.progesterone < 30 ?
+          'CRASHED - rapid drop disrupts GABA signaling, increases anxiety' :
+          'Gradually stabilizing toward pre-pregnancy baseline';
+        
+        cortisolDesc.textContent = values.cortisol > 75 ?
+          'SEVERELY ELEVATED - sleep deprivation and stress suppress mood' :
+          values.cortisol > 60 ? 
+            'Still elevated from sleep deprivation and postpartum stress' :
+            'Normalizing as sleep and stress levels improve';
+        
+        oxytocinDesc.textContent = values.oxytocin > 60 ?
+          'Fluctuating with breastfeeding - supports bonding when released' :
+          'Declining but still present with infant care and bonding';
+        
+        serotoninDesc.textContent = values.serotonin < 45 ?
+          'CRITICALLY LOW - major contributor to postpartum depression' :
+          values.serotonin < 50 ?
+            'Still suppressed - mood instability and depression risk remain' :
+            'Recovering as hormones stabilize and sleep improves';
+      }
+    }
+
+    // Slider event listener
+    if (timelineSlider) {
+      timelineSlider.addEventListener('input', function() {
+        const week = parseInt(this.value);
+        updateTimeline(week);
+        
+        // Update active button
+        timelineButtons.forEach(btn => {
+          const btnWeek = parseInt(btn.dataset.week);
+          if (btnWeek === week) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      });
+    }
+
+    // Button event listeners
+    timelineButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const week = parseInt(this.dataset.week);
+        timelineSlider.value = week;
+        updateTimeline(week);
+        
+        // Update active state
+        timelineButtons.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Initialize timeline at birth (week 40)
+    updateTimeline(40);
+
+    // =========================================
+    // BODY HOTSPOT TOOLTIPS
+    // =========================================
+    const hotspots = document.querySelectorAll('.body-hotspot');
+    
+    hotspots.forEach(spot => {
+      spot.addEventListener('click', function() {
+        const title = this.getAttribute('title');
+        /*alert(`${title}: Click to learn more about this body system's changes during pregnancy and postpartum.`);*/
+      });
+    });
+
+    // =========================================
+// BODY SCAN SIMULATION LOGIC
+// =========================================
+
+// Simulation Data: Comparing Prenatal vs Postnatal states
+const bodySimulationData = {
+  brain: {
+    title: "Brain Structure & Chemistry",
+    subtitle: "Neurological & Hormonal Impact",
+    icon: '<i class="fas fa-brain"></i>',
+    prenatal: {
+      text: "Pregnancy triggers profound neurological changes. Hormones cause 'synaptic pruning' in the prefrontal cortex and hippocampus—areas controlling memory and executive function—resulting in the well-documented 'pregnancy brain' or cognitive fog. However, this restructuring isn't deterioration; it's adaptive remodeling that enhances maternal circuitry in regions like the medial prefrontal cortex, which governs empathy and threat detection. High progesterone (up to 10x normal levels) acts as a sedative on GABA receptors, causing profound fatigue. Simultaneously, cortisol levels rise 2-4x normal, creating a paradoxical state of exhaustion and anxiety. For those predisposed to mood disorders, the ratio of protective neurosteroids (like allopregnanolone) may be disrupted, increasing vulnerability to prenatal depression. Thyroid dysfunction, common in pregnancy, can mimic or exacerbate depression symptoms.",
+      tags: ["Brain Fog", "Memory Loss", "Fatigue", "Nesting Instinct", "Anxiety", "Executive Dysfunction", "Emotional Lability", "Pregnancy-Induced Hypothyroidism"]
+    },
+    postnatal: {
+      text: "The postpartum period represents one of the most dramatic neuroendocrine transitions in human physiology. Estrogen and progesterone plummet to near-zero within 24 hours of birth—a hormonal crash more severe than any natural process except menopause, but occurring 100x faster. This sudden withdrawal strips away the neuroprotective effects these hormones provided during pregnancy. The result: inflammation surges in the brain, particularly in the amygdala (fear/threat center) and anterior cingulate cortex (emotional regulation). This creates a state of hypervigilance—constantly scanning for threats to the baby—which, when combined with sleep deprivation, becomes pathological. Sleep loss prevents the brain from clearing metabolic waste and consolidating memories, leading to a vicious cycle. Intrusive thoughts (imagining harm coming to the baby) affect up to 90% of new mothers; in depression, these become more frequent and distressing. The oxytocin system, which should promote bonding, can become dysregulated. Dopamine reward circuits may not activate properly during infant interaction, preventing the 'joy' of motherhood and contributing to emotional numbness or detachment. For 15-20% of mothers, this combination results in postpartum depression; 1-2% experience postpartum psychosis, a psychiatric emergency.",
+      tags: ["Hyper-vigilance", "Severe Insomnia", "Intrusive Thoughts", "Weepiness", "Emotional Numbness", "Anhedonia", "Rage Episodes", "Suicidal Ideation", "Bonding Difficulty", "Brain Fog Persistence", "Memory Impairment", "Hallucinations (rare)", "Paranoia (rare)"]
+    }
+  },
+  
+  heart: {
+    title: "Cardiovascular Stress",
+    subtitle: "Circulatory System Under Load",
+    icon: '<i class="fas fa-heart-pulse"></i>',
+    prenatal: {
+      text: "Pregnancy demands extraordinary cardiovascular adaptation. Blood volume increases by 40-50% (about 1.5 liters) to perfuse the placenta and meet fetal oxygen demands. Cardiac output rises by 30-50%, meaning the heart pumps significantly more blood per minute—equivalent to the workload of moderate continuous exercise. The expanding uterus displaces the diaphragm upward, compressing the lungs and reducing breathing capacity by 20%, causing shortness of breath even at rest. Heart rate increases by 10-20 beats per minute. These changes create physical sensations identical to anxiety: racing heart, chest tightness, breathlessness, and dizziness. For women with pre-existing anxiety or panic disorder, this can trigger a feedback loop where normal pregnancy symptoms are interpreted as medical emergencies, intensifying psychological distress. Blood pressure typically drops in the second trimester due to vasodilation, causing orthostatic hypotension (dizziness when standing). In the third trimester, the vena cava (major vein) can be compressed when lying flat, reducing blood return to the heart and causing faintness—another anxiety trigger.",
+      tags: ["Palpitations", "Tachycardia", "Dizziness", "Shortness of Breath", "Chest Tightness", "Orthostatic Hypotension", "Syncope Risk", "Panic-like Symptoms"]
+    },
+    postnatal: {
+      text: "The cardiovascular system undergoes rapid, dramatic reversal postpartum. The body must shed the extra 1.5 liters of blood volume, primarily through massive fluid shifts manifesting as night sweats (soaking through clothes and sheets) and increased urination. This diuresis begins within hours of birth and peaks around day 3-5. The sudden fluid redistribution can cause significant edema (swelling) in the hands, feet, and face before it resolves. Blood pressure, which may have been elevated during labor, can become unstable—sometimes spiking dangerously (postpartum preeclampsia can develop even in women who didn't have it during pregnancy) or dropping too low. The physical sensations of these shifts—rapid heartbeat, chest pressure, sweating, shakiness—are virtually indistinguishable from panic attacks, and can trigger genuine anxiety episodes. For women with postpartum cardiomyopathy (rare but serious weakening of the heart muscle), symptoms overlap significantly with depression: fatigue, breathlessness, inability to care for baby. The stress response system remains on high alert, with cortisol and adrenaline frequently elevated, maintaining the 'fight or flight' state that prevents rest and recovery.",
+      tags: ["Profuse Night Sweats", "Panic Sensations", "Edema Shifts", "Blood Pressure Instability", "Palpitations", "Breathlessness", "Chest Pain", "Shakiness", "Postpartum Preeclampsia Risk"]
+    }
+  },
+  
+  stomach: {
+    title: "Gut-Brain Axis",
+    subtitle: "Digestive & Metabolic Disruption",
+    icon: '<i class="fas fa-utensils"></i>',
+    prenatal: {
+      text: "The gut-brain connection becomes profoundly disrupted during pregnancy. Rising hCG (human chorionic gonadotropin) in early pregnancy triggers nausea and vomiting—'morning sickness' affects 70-80% of pregnancies, though the term is misleading as symptoms often persist all day. For 1-3%, this becomes hyperemesis gravidarum, severe vomiting requiring hospitalization. Progesterone relaxes smooth muscle throughout the body, slowing gut motility to maximize nutrient absorption for the fetus, but causing constipation, bloating, and gastroesophageal reflux (heartburn). The stomach is physically compressed as the uterus expands, worsening reflux. These digestive issues disrupt sleep—it's hard to rest with heartburn or nausea—creating a cycle where poor sleep lowers mood, and low mood worsens physical symptoms. The gut produces 90% of the body's serotonin (a key mood regulator), but this production becomes dysregulated during pregnancy. Gut inflammation, common in pregnancy, reduces serotonin synthesis and increases inflammatory cytokines that can cross the blood-brain barrier and affect mood. Food aversions, cravings, and changes in taste/smell (often metallic) can make eating unpleasant, leading to inadequate nutrition that further compromises mental health.",
+      tags: ["Nausea", "Vomiting", "Hyperemesis Gravidarum", "Heartburn/GERD", "Constipation", "Bloating", "Food Aversions", "Metallic Taste", "Malnutrition Risk", "Gut Dysbiosis"]
+    },
+    postnatal: {
+      text: "Postpartum digestive and metabolic changes significantly impact mental health. Stress hormones (cortisol, adrenaline) can completely shut down appetite—a phenomenon called stress-induced anorexia—leaving new mothers unable to eat despite knowing they need nutrition. Conversely, some experience intense emotional eating, using food to cope with overwhelming stress or to stay awake during night feedings. The gut microbiome, already altered during pregnancy, undergoes further disruption postpartum, especially with antibiotics (given for C-sections or infections) or the stress response itself. Since gut bacteria produce neurotransmitter precursors and communicate directly with the brain via the vagus nerve, this dysbiosis directly impacts mood, anxiety, and cognitive function. Gut inflammation triggers systemic inflammation, which is increasingly recognized as a major contributor to postpartum depression. For breastfeeding mothers, the metabolic demands are extreme: producing milk burns 300-500 calories daily and requires significant protein, calcium, and hydration. This creates intense hunger and thirst, but executive dysfunction and depression can make meal planning/preparation feel impossible. Blood sugar fluctuations from irregular eating cause mood swings, irritability, and brain fog. Constipation (from iron supplements, dehydration, fear of bowel movements due to perineal trauma) can become severe and painful, adding to physical misery.",
+      tags: ["Appetite Loss", "Stress-Induced Anorexia", "Comfort Eating", "Gut Inflammation", "Microbiome Disruption", "Blood Sugar Swings", "Severe Constipation", "Dehydration", "Nutritional Deficiency", "Iron Deficiency Anemia", "Malabsorption"]
+    }
+  },
+  
+  uterus: {
+    title: "Reproductive System",
+    subtitle: "Uterine & Pelvic Floor Transformation",
+    icon: '<i class="fas fa-baby"></i>',
+    prenatal: {
+      text: "The uterus undergoes one of the most dramatic transformations in the human body, expanding from the size of a pear (50g) to accommodate a full-term baby, placenta, and amniotic fluid—growing approximately 500 times its original size to about 1100g. This expansion stretches abdominal muscles (often causing diastasis recti, separation of the ab muscles), ligaments (round ligament pain is sharp, sudden pain in the groin/lower abdomen), and skin. The growing uterus presses on the bladder, causing frequent urination and urgency, disrupting sleep 3-5+ times per night. It compresses the diaphragm, contributing to breathlessness. Pelvic pressure increases throughout pregnancy as the baby descends, causing a sensation of heaviness, difficulty walking, and pubic symphysis dysfunction (painful separation of the pelvic bones). Braxton Hicks contractions (practice contractions) can be uncomfortable and anxiety-inducing. The physical discomfort limits mobility, exercise capacity, and sleep quality—all protective factors against depression. Body image concerns arise as the pregnant body changes rapidly and dramatically. For women with histories of trauma, the loss of bodily autonomy and the invasive nature of prenatal care can be retraumatizing.",
+      tags: ["Pelvic Pain", "Round Ligament Pain", "Frequent Urination", "Nocturia", "Mobility Loss", "Diastasis Recti", "Pubic Symphysis Dysfunction", "Braxton Hicks", "Body Image Distress", "Sleep Disruption"]
+    },
+    postnatal: {
+      text: "The postpartum uterus undergoes involution—shrinking from the size of a watermelon back to pear-size over 6-8 weeks through powerful, often painful contractions called 'afterpains.' These intensify during breastfeeding (oxytocin triggers uterine contractions) and are significantly more painful with subsequent births. Lochia—vaginal bleeding and discharge as the uterine lining sheds—lasts 4-6 weeks, progressing from heavy bleeding to lighter discharge. This constant bleeding requires pad changes, can smell unpleasant, and serves as a persistent reminder of bodily trauma. For vaginal births, perineal trauma is nearly universal: 90% of first-time mothers experience tearing (1st to 4th degree) or episiotomy. Even 'minor' tears cause significant pain during sitting, urinating, and bowel movements. Severe tears (3rd/4th degree, affecting the anal sphincter) can cause fecal incontinence and require months of pelvic floor therapy. C-section mothers contend with major abdominal surgery recovery: a 4-6 inch incision through seven layers of tissue, causing pain with movement, lifting, coughing, or laughing for weeks to months. Both birth types can result in urinary incontinence (leaking with coughing, sneezing, or exercise), which affects 30-50% of postpartum women and can persist for years without treatment. The combination of pain, bleeding, incontinence, and restricted mobility (unable to lift anything heavier than the baby, difficulty with stairs, exercise restrictions for 6+ weeks) profoundly impacts mood, self-esteem, and sense of bodily integrity. Many women describe feeling 'broken' or 'betrayed by their body.' Sexual function is typically impaired for months due to pain, hormonal changes (vaginal dryness from low estrogen, especially during breastfeeding), and psychological factors—yet many providers clear women for sex at 6 weeks regardless of actual healing or readiness.",
+      tags: ["Afterpains", "Cramping", "Lochia (Heavy Bleeding)", "Perineal Tears", "Episiotomy Pain", "C-section Recovery", "Incisional Pain", "Urinary Incontinence", "Fecal Incontinence", "Pelvic Floor Dysfunction", "Painful Intercourse", "Body Dysmorphia", "Feeling 'Broken'", "Loss of Bodily Autonomy", "Vaginal Dryness", "Hemorrhoids", "Infection Risk"]
+    }
+  },
+
+  hormones: {
+    title: "Endocrine System",
+    subtitle: "Hormonal Orchestration & Collapse",
+    icon: '<i class="fas fa-vial"></i>',
+    prenatal: {
+      text: "Pregnancy is an endocrine symphony of staggering complexity. Estrogen increases 100-fold, progesterone 10-15 fold, prolactin rises steadily, and the placenta produces unique hormones like hPL (human placental lactogen) and hCG. These hormones coordinate fetal development, but profoundly affect maternal brain chemistry. Estrogen is generally mood-stabilizing, but rapid fluctuations can trigger anxiety or depression, especially in women with hormone sensitivity (history of PMDD, postpartum depression, or reaction to hormonal birth control). Progesterone metabolites like allopregnanolone normally reduce anxiety, but genetic variations in how women process these metabolites may increase depression risk. The hypothalamic-pituitary-adrenal (HPA) axis, which regulates stress response, becomes less reactive during healthy pregnancy (protecting the fetus from maternal stress hormones), but in women who develop prenatal depression, this adaptation may fail, leaving them hyperresponsive to stressors. Thyroid hormone requirements increase by 30-50%; if the thyroid can't keep up, hypothyroidism develops, causing fatigue, weight gain, cold intolerance, and depression-like symptoms. Insulin resistance increases, raising gestational diabetes risk—the blood sugar fluctuations and dietary restrictions can affect mood and cognition.",
+      tags: ["Estrogen Surge", "Progesterone Elevation", "Cortisol Dysregulation", "Thyroid Dysfunction", "Insulin Resistance", "Hormone Sensitivity", "Allopregnanolone Variations", "HPA Axis Changes"]
+    },
+    postnatal: {
+      text: "The postpartum hormonal crash is unparalleled in medicine. Within 24 hours of placenta delivery, estrogen and progesterone plummet from pregnancy peaks to near-menopausal levels—a hormonal freefall that occurs 100 times faster than natural menopause. Prolactin surges to support lactation, but this further suppresses estrogen in breastfeeding mothers, potentially prolonging mood symptoms. Oxytocin pulses with breastfeeding, theoretically promoting bonding and calm, but the oxytocin system can become dysregulated in depression, failing to produce expected positive feelings. The HPA axis, suppressed during pregnancy, rebounds with a vengeance—cortisol can spike to levels seen in major depression or PTSD. This creates a state of chronic stress activation. Thyroid function commonly becomes disrupted (postpartum thyroiditis affects 5-10% of women), causing either hyperthyroidism (anxiety, palpitations, weight loss) or hypothyroidism (fatigue, depression, weight gain, hair loss). For women with autoimmune conditions, the postpartum period represents a rebound in immune activation after pregnancy's immunosuppression, often triggering disease flares. The melatonin-cortisol rhythm, which regulates sleep-wake cycles, becomes completely disrupted by nighttime infant care, perpetuating the cycle of exhaustion. For women with PCOS, diabetes, or metabolic syndrome, the hormonal upheaval can be particularly severe and prolonged.",
+      tags: ["Estrogen Crash", "Progesterone Withdrawal", "Prolactin Surge", "Cortisol Spikes", "Oxytocin Dysregulation", "Thyroid Dysfunction", "Postpartum Thyroiditis", "Melatonin Disruption", "HPA Axis Hyperactivity", "Immune Rebound", "Hormone Withdrawal Syndrome"]
+    }
+  },
+
+  immune: {
+    title: "Immune System",
+    subtitle: "Inflammatory Response & Infection Risk",
+    icon: '<i class="fas fa-shield-virus"></i>',
+    prenatal: {
+      text: "Pregnancy requires a delicate immune balance: the mother's immune system must tolerate the fetus (which is genetically half 'foreign') without rejecting it, while still protecting both mother and baby from infection. This is achieved through a shift toward anti-inflammatory immune responses (Th2 dominance over Th1), mediated by pregnancy hormones. However, this immunomodulation has psychological consequences. Inflammatory cytokines (immune signaling molecules like IL-6, TNF-alpha) can cross the blood-brain barrier and directly affect neurotransmitter metabolism, particularly reducing serotonin and increasing vulnerability to depression. Some women experience paradoxical immune activation during pregnancy, with elevated inflammatory markers correlating strongly with prenatal depression and anxiety. Chronic low-grade inflammation, measured by C-reactive protein (CRP), is associated with pregnancy complications and mood disorders. Autoimmune conditions may improve (rheumatoid arthritis often goes into remission) or worsen (lupus flares are common) during pregnancy. Infections during pregnancy—from urinary tract infections to flu to COVID-19—trigger strong inflammatory responses that can impact fetal brain development and maternal mental health.",
+      tags: ["Immune Suppression", "Inflammatory Cytokines", "Infection Susceptibility", "Autoimmune Flares", "Chronic Inflammation", "Cytokine-Induced Depression"]
+    },
+    postnatal: {
+      text: "The postpartum immune system undergoes dramatic rebound activation. The anti-inflammatory state of pregnancy reverses rapidly, and the immune system can overshoot, triggering autoimmune phenomena (postpartum thyroiditis, new-onset autoimmune conditions, or flares of existing ones). Inflammatory markers spike in the early postpartum period, correlating directly with depression severity—postpartum depression is increasingly understood as having a significant inflammatory component. Birth itself, whether vaginal or cesarean, triggers an acute inflammatory response (trauma, tissue repair). Infections are common: mastitis (breast infection) affects 10-20% of breastfeeding mothers, causing fever, flu-like symptoms, and severe breast pain; endometritis (uterine infection) is more common after C-section; urinary tract infections are frequent; wound infections can occur at perineal tears or C-section incisions. Each infection requires antibiotics (which further disrupt the gut microbiome) and triggers inflammatory cascades that worsen mood symptoms. Sleep deprivation itself is pro-inflammatory, activating the same inflammatory pathways seen in major depression. The combination of hormonal withdrawal, sleep loss, and inflammation creates a 'perfect storm' for postpartum depression. Emerging research shows that women with postpartum depression have elevated levels of IL-6, IL-1β, TNF-alpha, and CRP—inflammation markers that directly impair neuroplasticity, reduce neurogenesis, and alter neurotransmitter function.",
+      tags: ["Immune Rebound", "Autoimmune Activation", "Mastitis", "Endometritis", "Wound Infections", "Inflammatory Cytokines", "IL-6/TNF-alpha Elevation", "Infection-Triggered Depression", "Chronic Inflammation", "Microbiome Disruption"]
+    }
+  },
+
+  sleep: {
+    title: "Sleep Architecture",
+    subtitle: "Circadian Rhythm & Rest Disruption",
+    icon: '<i class="fas fa-bed"></i>',
+    prenatal: {
+      text: "Sleep becomes increasingly disrupted as pregnancy progresses. First trimester fatigue is overwhelming—progesterone acts as a sedative, and the metabolic demands of creating a placenta and fetus exhaust the body. Yet many women experience insomnia even while fatigued, lying awake despite exhaustion. By the third trimester, physical discomfort makes restful sleep nearly impossible: the growing belly makes finding comfortable positions difficult, fetal movement wakes the mother, frequent urination interrupts sleep 3-5+ times nightly, heartburn worsens when lying down, leg cramps jolt women awake, and anxiety about labor/parenthood causes rumination. Sleep architecture changes during pregnancy: REM sleep (crucial for emotional processing and memory) decreases, particularly in late pregnancy, while slow-wave sleep (deep, restorative sleep) is fragmented. Sleep apnea, both obstructive and central, becomes more common due to weight gain, fluid retention, and hormonal effects on breathing control, causing oxygen desaturation and further sleep disruption. Poor sleep quality during pregnancy is one of the strongest predictors of postpartum depression.",
+      tags: ["Insomnia Despite Fatigue", "Frequent Nighttime Urination", "Physical Discomfort", "Fetal Movement Disruption", "Leg Cramps", "Sleep Apnea", "REM Sleep Reduction", "Anxiety-Related Insomnia"]
+    },
+    postnatal: {
+      text: "Postpartum sleep deprivation is not simply tiredness—it's a form of torture recognized by international human rights organizations. Newborns feed every 2-3 hours around the clock, meaning mothers rarely get more than 1-2 hours of continuous sleep for weeks to months. This chronic sleep fragmentation prevents progression through normal sleep cycles, particularly blocking REM and slow-wave sleep. The consequences are catastrophic for mental health: sleep deprivation impairs emotional regulation (the prefrontal cortex goes 'offline'), increases amygdala reactivity (everything feels like a threat), reduces hippocampal function (memory formation is impaired—leading to terrifying moments of 'I don't remember if I fed the baby'), and increases inflammatory cytokines. After just one night of total sleep deprivation, healthy individuals show mood symptoms equivalent to clinical depression. New mothers may go months with cumulative sleep debt equivalent to dozens of all-nighters. The circadian rhythm becomes completely dysregulated—there's no longer a clear day/night distinction, and melatonin-cortisol cycles are disrupted. This biological desynchronization contributes to mood instability, anxiety, and depression. Sleep deprivation also impairs lactation (prolactin pulses during sleep), creates safety risks (driving while sleep-deprived is as dangerous as driving drunk), and increases postpartum psychosis risk. The cruel paradox: even when the baby sleeps, many mothers develop conditioned hyperarousal and can't sleep, lying awake listening for the baby, or experiencing anxiety-driven insomnia.",
+      tags: ["Severe Sleep Deprivation", "Sleep Fragmentation", "REM Deprivation", "Circadian Dysregulation", "Chronic Sleep Debt", "Conditioned Hyperarousal", "Sleep-Onset Insomnia", "Memory Impairment", "Emotional Dysregulation", "Safety Impairment", "Microsleeps"]
+    }
+  },
+
+  musculoskeletal: {
+    title: "Musculoskeletal System",
+    subtitle: "Structural Changes & Pain",
+    icon: '<i class="fas fa-bone"></i>',
+    prenatal: {
+      text: "Pregnancy hormones, particularly relaxin, soften ligaments and connective tissue to allow the pelvis to expand for birth. However, this affects the entire body: joints become unstable, increasing injury risk and causing widespread joint pain. The spine undergoes dramatic changes: the growing belly shifts the center of gravity forward, creating compensatory lumbar lordosis (excessive lower back curve) and thoracic kyphosis (upper back rounding). This causes significant lower back pain (50-70% of pregnant women), upper back pain, and neck pain. The added weight (25-35 pounds on average) strains muscles, joints, and the cardiovascular system. Carpal tunnel syndrome is common (fluid retention compresses nerves in the wrists), causing hand numbness, tingling, and pain that disrupts sleep. Pelvic girdle pain and symphysis pubis dysfunction cause sharp pain in the pubic bone, groin, hips, and difficulty walking or rolling over in bed. Sciatica—nerve pain radiating down the leg—occurs when the uterus or baby compresses the sciatic nerve. Chronic pain is exhausting, disrupts sleep, limits mobility and exercise (both protective against depression), and directly affects mood through pain-depression neural pathways.",
+      tags: ["Lower Back Pain", "Pelvic Girdle Pain", "Sciatica", "Joint Instability", "Carpal Tunnel Syndrome", "Round Ligament Pain", "Rib Pain", "Reduced Mobility", "Chronic Pain"]
+    },
+    postnatal: {
+      text: "The postpartum musculoskeletal system faces compound challenges: recovering from pregnancy changes while adapting to new physical demands of infant care. The labor and birth process itself often causes acute injuries: coccyx (tailbone) fractures or bruising from pushing, pubic symphysis separation requiring weeks of limited mobility, severe muscle strains. The repetitive physical tasks of newborn care—constant lifting, carrying, feeding in awkward positions for hours, bending over cribs/changing tables—strain the already-weakened core and back muscles. Diastasis recti (abdominal separation) persists postpartum in 60% of women at 6 weeks and 30% at 12 months, causing lower back pain, pelvic instability, and functional impairment. Breastfeeding positions often cause neck, shoulder, and upper back pain if ergonomics are poor. C-section mothers have additional challenges: the rectus abdominis muscles are separated during surgery, significantly weakening core stability, and it takes 6-12 months to regain functional core strength. Chronic pain conditions can develop: persistent pelvic pain, chronic lower back pain, and complex regional pain syndrome. Relaxin remains elevated for months, particularly during breastfeeding, maintaining joint laxity and instability. The physical inability to exercise (due to pain, medical restrictions, lack of time/energy) removes a critical coping mechanism for depression. The chronic pain-depression relationship is bidirectional: pain worsens mood, and depression lowers pain threshold, creating a vicious cycle.",
+      tags: ["Diastasis Recti", "Chronic Back Pain", "Pelvic Instability", "Coccyx Injury", "Repetitive Strain", "Neck/Shoulder Pain", "Core Weakness", "Chronic Pelvic Pain", "Exercise Limitation", "Pain-Depression Cycle"]
+    }
+  },
+
+  skin: {
+    title: "Integumentary System",
+    subtitle: "Skin & Hair Changes",
+    icon: '<i class="fas fa-hand-sparkles"></i>',
+    prenatal: {
+      text: "Pregnancy hormones dramatically affect skin and hair. Hyperpigmentation is common: melasma (dark patches on the face, 'mask of pregnancy'), linea nigra (dark line down the abdomen), darkened areolas, and darkened existing scars or moles. Some women experience acne flares due to increased androgens, while others see improvement. Stretch marks (striae gravidarum) develop in 50-90% of pregnancies as skin stretches beyond its elastic capacity, appearing as red or purple streaks on the abdomen, breasts, thighs, and hips. Skin becomes more sensitive, with increased reactions to products, heat rash, and pregnancy-specific rashes like PUPPP (pruritic urticarial papules and plaques of pregnancy), which is intensely itchy and affects quality of life. Hair often becomes thicker and fuller during pregnancy (estrogen prolongs the growth phase). Spider veins and varicose veins develop from increased blood volume and venous pressure. While these are 'cosmetic' changes, they significantly impact body image, self-esteem, and identity—factors closely linked to perinatal mood.",
+      tags: ["Melasma", "Stretch Marks", "Acne", "Hyperpigmentation", "Skin Sensitivity", "PUPPP Rash", "Varicose Veins", "Body Image Distress"]
+    },
+    postnatal: {
+      text: "Postpartum skin changes can be psychologically devastating. Stretch marks, initially red or purple, fade to silver or white but remain permanently visible, serving as constant reminders of bodily change. The abdominal skin often remains loose and wrinkled ('deflated balloon' appearance) for months or permanently if skin elasticity was exceeded. C-section scars are permanent, often thick and numb, and may cause negative feelings about body image or birth experience. Melasma and hyperpigmentation slowly fade but can persist for months to years. The most distressing change for many women is postpartum hair loss (telogen effluvium): starting around 3-4 months postpartum, hair that was retained during pregnancy all sheds at once, causing alarming hair loss—handfuls in the shower, visible thinning, receding hairline. This can last 6-12 months and, for women whose identity is tied to their appearance, can trigger significant distress. Acne may flare postpartum due to hormonal fluctuations. Skin may remain dry, sensitive, or develop new conditions like eczema. Breast changes are dramatic: during engorgement, breasts become rock-hard, hot, and painful; with breastfeeding, they fluctuate in size throughout the day; nipples may crack, bleed, or develop painful conditions like thrush or blebs. When breastfeeding ends, breasts often appear deflated and changed in shape. These cumulative changes can cause profound body dysmorphia, grief over the 'loss' of one's pre-pregnancy body, and difficulty recognizing oneself in the mirror—all contributing to depression and identity crisis.",
+      tags: ["Postpartum Hair Loss", "Loose Abdominal Skin", "Permanent Stretch Marks", "C-section Scarring", "Melasma Persistence", "Breast Changes", "Nipple Trauma", "Body Dysmorphia", "Identity Crisis", "Skin Elasticity Loss"]
+    }
+  }
+};
+// Global State
+let currentSelectedPart = null;
+
+// Function triggered by clicking hotspots
+function simulateScan(part) {
+  currentSelectedPart = part;
+  const overlay = document.getElementById('scanOverlay');
+  const emptyState = document.getElementById('infoEmpty');
+  const contentState = document.getElementById('infoContent');
+  
+  // 1. Run Scan Animation
+  overlay.classList.remove('scanning');
+  void overlay.offsetWidth; // Trigger reflow
+  overlay.classList.add('scanning');
+  
+  // 2. Hide Empty State
+  emptyState.style.display = 'none';
+  contentState.classList.remove('active');
+  
+  // 3. Highlight Active Hotspot
+  document.querySelectorAll('.body-hotspot').forEach(h => h.classList.remove('active'));
+  document.querySelector(`.hotspot-${part}`).classList.add('active');
+
+  // 4. Update Content after brief delay (simulating scan time)
+  setTimeout(() => {
+    updateBodyInfoPanel();
+    contentState.classList.add('active');
+  }, 400);
+}
+
+// Function to update the panel content based on Phase + Selected Part
+function updateBodyInfoPanel() {
+  if (!currentSelectedPart) return;
+
+  // Determine current active phase from the existing Toggle Buttons
+  const activeBtn = document.querySelector('.toggle-btn.active');
+  const currentPhase = activeBtn ? activeBtn.dataset.phase : 'prenatal'; // Default to prenatal
+  
+  const data = bodySimulationData[currentSelectedPart];
+  const phaseData = data[currentPhase]; // Get text/tags for the active phase
+
+  // UI Updates
+  document.getElementById('panelIcon').innerHTML = data.icon;
+  document.getElementById('panelTitle').textContent = data.title;
+  document.getElementById('panelSubtitle').textContent = data.subtitle;
+  
+  // Phase Specific Updates
+  const badge = document.getElementById('panelBadge');
+  badge.textContent = currentPhase === 'prenatal' ? 'Prenatal Phase' : 'Postnatal Phase';
+  badge.className = `phase-badge ${currentPhase}`; // Switches blue/pink color
+  
+  document.getElementById('panelText').textContent = phaseData.text;
+  
+  // Update Tags
+  const tagContainer = document.getElementById('panelTags');
+  tagContainer.innerHTML = phaseData.tags.map(tag => 
+    `<span class="symptom-tag">${tag}</span>`
+  ).join('');
+}
+
+// =========================================
+// CONNECT TO EXISTING PHASE TOGGLE
+// =========================================
+// We attach a listener to the existing toggle buttons to refresh the body panel
+const existingToggleBtns = document.querySelectorAll('.toggle-btn');
+
+existingToggleBtns.forEach(btn => {
+  btn.addEventListener('click', function() {
+    const phase = this.dataset.phase;
+    
+    // Update Silhouette (Belly size)
+    const bodyModel = document.getElementById('bodyModel');
+    if(bodyModel) bodyModel.setAttribute('data-phase', phase);
+    
+    // Refresh the panel if a part is already selected
+    if (currentSelectedPart) {
+      // Small re-scan effect when switching phases
+      const contentState = document.getElementById('infoContent');
+      contentState.classList.remove('active');
+      setTimeout(() => {
+        updateBodyInfoPanel();
+        contentState.classList.add('active');
+      }, 200);
+    }
+  });
+});
+
+    // Initialize animations on page load
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+  </script>
+</body>
+</html>

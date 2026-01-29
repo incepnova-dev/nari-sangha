@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner Guide - Perinatal Support Journey</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+
+  <header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <a href="index.html">Nari Shakti</a>
+    </div>
+
+    <nav class="main-nav">
+      <a href="products.html">Product</a>
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="stories.html">Stories</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="btn-nav primary">Sign In</a>
+      <a href="contact.html" class="btn-nav outline">Contact Us</a>
+    </div>
+  </div>
+</header>
+
+  <style>
+    /* ============================================
+       CORE THEME & RESET
+       ============================================ */
+    :root {
+      /* Requested Palette */
+      --pink: #ec407a;
+      --deep-pink: #d81b60;
+      --lavender: #ede7f6;
+      --bg: #faf5fb;
+      --card-bg: #ffffff;
+      --text-main: #212121;
+      --text-soft: #555555;
+      --border-soft: #e0e0e0;
+      --chip-bg: #f3e5f5;
+      --mild: #4caf50;
+      --moderate: #ff9800;
+      --critical: #f44336;
+      --serious: #9c27b0;
+      --neuron-blue: #2196f3;
+      --serotonin: #00bcd4;
+      --oxytocin: #e91e63;
+      --cortisol: #ff5722;
+
+      /* UI Utilities */
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-xl: 30px;
+      --shadow-sm: 0 4px 6px rgba(0,0,0,0.03);
+      --shadow-md: 0 10px 30px rgba(216, 27, 96, 0.08);
+      --shadow-lg: 0 20px 50px rgba(0,0,0,0.12);
+      --gradient-primary: linear-gradient(135deg, var(--deep-pink) 0%, var(--pink) 100%);
+      --gradient-hero: linear-gradient(135deg, #faf5fb 0%, #e8eaf6 50%, #fce4ec 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+      HEADER STYLES (From Index)
+   ========================================= */
+.site-header {
+  background: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin-bottom: 2rem;
+}
+
+.nav-container {
+  max-width: 1400px; /* Matches your page-container */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  text-decoration: none;
+  color: var(--deep-pink); /* Using your existing variable */
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: var(--deep-pink);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-nav {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-nav.primary {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.btn-nav.outline {
+  border: 1px solid var(--border-soft);
+  color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+  .main-nav { display: none; }
+}
+
+ 
+
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--text-main);
+      font-weight: 800;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    .loading-overlay.hidden { opacity: 0; pointer-events: none; }
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid var(--lavender);
+      border-top: 5px solid var(--deep-pink);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* ============================================
+       1. IMMERSIVE HERO SECTION
+       ============================================ */
+    .hero-3d-container {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+      overflow: hidden;
+      background: var(--gradient-hero);
+    }
+
+    .particle-field {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-3d-card {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 850px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-xl);
+      padding: 4rem;
+      border: 1px solid rgba(236, 64, 122, 0.2); /* Optional: Adds a pink tint border */
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out; /* Smoother tracking */
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.5rem;
+      background: var(--gradient-primary);
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 20px rgba(216, 27, 96, 0.4);
+    }
+
+    /* Find and replace .hero-title, and add .title-emphasis */
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    
+    /* The Dark Grey Gradient for "Support Her Through" */
+    color: #212121; /* Fallback */
+    background: linear-gradient(135deg, #212121 0%, #555 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+
+  .title-emphasis {
+  /* The Vibrant Pink Gradient for "Perinatal Depression" */
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Optional: Adds the subtle glow/shimmer animation from the other file */
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(236, 64, 122, 0.3));
+}
+
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      color: #555;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-btn-primary {
+      background: white;
+      color: var(--deep-pink);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .hero-btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+
+    .hero-btn-secondary {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .hero-btn-secondary:hover { background: white; color: var(--deep-pink); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 1.5rem;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      z-index: 3;
+    }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); } 40% { transform: translate(-50%, -10px); } 60% { transform: translate(-50%, -5px); } }
+
+    /* ============================================
+       INTERACTIVE SYMPTOM RECOGNITION WHEEL
+       ============================================ */
+    .symptom-wheel-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-header-center {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title-light {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--text-main); /* Changed from white to dark text */
+      margin-bottom: 1rem;
+      /* text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);  <-- You might want to remove this shadow for dark text */
+    }
+
+    .section-subtitle-light {
+      font-size: 1.2rem;
+      color: var(--text-soft); /* Changed from rgba(255, 255, 255, 0.9) to soft dark text */
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .symptom-wheel-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .wheel-center:hover {
+      transform: translate(-50%, -50%) scale(1.05);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    }
+
+    .wheel-center-icon {
+      font-size: 4rem;
+      color: #f5576c;
+      margin-bottom: 0.5rem;
+    }
+
+    .wheel-center-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .symptom-segment {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      animation: orbitFloat 6s ease-in-out infinite;
+    }
+
+    .symptom-segment:nth-child(1) {
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      animation-delay: 0s;
+    }
+
+    .symptom-segment:nth-child(2) {
+      top: 15%;
+      right: 5%;
+      animation-delay: 0.5s;
+    }
+
+    .symptom-segment:nth-child(3) {
+      bottom: 15%;
+      right: 5%;
+      animation-delay: 1s;
+    }
+
+    .symptom-segment:nth-child(4) {
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      animation-delay: 1.5s;
+    }
+
+    .symptom-segment:nth-child(5) {
+      bottom: 15%;
+      left: 5%;
+      animation-delay: 2s;
+    }
+
+    .symptom-segment:nth-child(6) {
+      top: 15%;
+      left: 5%;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes orbitFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(0, -15px); }
+    }
+
+    .symptom-segment:hover {
+      transform: scale(1.15) translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      z-index: 5;
+    }
+
+    .symptom-icon {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .symptom-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .symptom-count {
+      font-size: 0.75rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .symptom-segment.emotional { border-top: 5px solid #2196f3; }
+    .symptom-segment.emotional .symptom-icon { color: #2196f3; }
+
+    .symptom-segment.behavioral { border-top: 5px solid #ff9800; }
+    .symptom-segment.behavioral .symptom-icon { color: #ff9800; }
+
+    .symptom-segment.cognitive { border-top: 5px solid #9c27b0; }
+    .symptom-segment.cognitive .symptom-icon { color: #9c27b0; }
+
+    .symptom-segment.physical { border-top: 5px solid #f44336; }
+    .symptom-segment.physical .symptom-icon { color: #f44336; }
+
+    .symptom-segment.social { border-top: 5px solid #4caf50; }
+    .symptom-segment.social .symptom-icon { color: #4caf50; }
+
+    .symptom-segment.sleep { border-top: 5px solid #673ab7; }
+    .symptom-segment.sleep .symptom-icon { color: #673ab7; }
+
+    /* Modal for symptom details */
+    .symptom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .symptom-modal.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #f44336;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .modal-icon {
+      font-size: 3rem;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .symptom-list-modal {
+      list-style: none;
+      padding: 0;
+    }
+
+    .symptom-list-modal li {
+      padding: 1rem;
+      border-left: 4px solid;
+      background: #f5f5f5;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #555;
+    }
+    /* ============================================
+       3. PARTNER GUIDE SUBHERO
+       ============================================ */
+    .subhero-partner {
+      padding: 60px 20px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .subhero-card-3d {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      padding: 4rem 2rem;
+      box-shadow: var(--shadow-md);
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 1px solid var(--border-soft);
+    }
+    .subhero-title {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--deep-pink), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: var(--deep-pink);
+      margin-bottom: 1.5rem;
+    }
+    .subhero-stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .substat-bubble {
+      background: white;
+      border: 1px solid var(--deep-pink);
+      color: var(--deep-pink);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s;
+    }
+    .substat-bubble:hover { transform: translateY(-5px); background: var(--deep-pink); color: white; }
+
+    /* ============================================
+       4. JOURNEY MAP
+       ============================================ */
+    .journey-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .journey-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .journey-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .journey-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); border-color: var(--pink); }
+    .journey-number {
+      width: 60px; height: 60px;
+      background: var(--lavender);
+      color: var(--deep-pink);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+    .action-chip {
+      display: inline-block;
+      background: var(--chip-bg);
+      color: var(--deep-pink);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 5px 5px 0 0;
+    }
+
+
+    /* ============================================
+      4. INTERACTIVE STRATEGY CARDS (FLIP CARDS)
+       ============================================ */
+    .strategies-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      padding: 4rem 2rem;
+    }
+
+    .strategies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      height: 450px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .flip-card-front {
+      background: white;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      transform: rotateY(180deg);
+      overflow-y: auto;
+    }
+
+    .strategy-number-badge {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b9d, #c44569);
+      color: white;
+      font-size: 2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+    }
+
+    .strategy-icon-front {
+      font-size: 5rem;
+      color: #667eea;
+      margin-bottom: 1.5rem;
+    }
+
+    .strategy-title-front {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .strategy-hint {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    .strategy-title-back {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .strategy-content-back {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .strategy-content-back ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+
+    .strategy-content-back li {
+      padding: 0.75rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .strategy-content-back li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+      color: #4caf50;
+    }
+
+    .do-section-back,
+    .dont-section-back {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .do-section-back h4,
+    .dont-section-back h4 {
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    /* ============================================
+       5. WELLNESS & NUTRITION
+       ============================================ */
+    .wellness-wrapper {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .wellness-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .wellness-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-soft);
+      transition: transform 0.3s ease;
+    }
+    .wellness-card:hover { transform: translateY(-5px); }
+    .wellness-icon {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      background: var(--gradient-primary);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      margin-right: 1rem;
+    }
+    .wellness-icon-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .wellness-list { list-style: none; }
+    .wellness-list li {
+      display: flex; gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 0.95rem; color: var(--text-soft);
+    }
+    .wellness-list li:last-child { border-bottom: none; }
+    .check-icon {
+      color: var(--mild);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* ============================================
+       6. TIMELINE SECTION
+       ============================================ */
+    .timeline-section {
+      background: white;
+      padding: 5rem 2rem;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+    .timeline-container { max-width: 900px; margin: 3rem auto 0; position: relative; }
+    .timeline-line {
+      position: absolute; left: 50%; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, var(--mild), var(--moderate), var(--critical));
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+    .timeline-item {
+      display: flex; justify-content: space-between; margin-bottom: 3rem;
+      position: relative;
+    }
+    .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-content {
+      width: 45%;
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-soft);
+    }
+    .timeline-marker {
+      position: absolute; left: 50%; top: 20px;
+      transform: translateX(-50%);
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 0 0 2px var(--border-soft);
+      z-index: 2;
+    }
+    
+    @media (max-width: 768px) {
+      .timeline-line { left: 20px; }
+      .timeline-item { flex-direction: column; padding-left: 50px; }
+      .timeline-item:nth-child(even) { flex-direction: column; }
+      .timeline-content { width: 100%; }
+      .timeline-marker { left: 20px; }
+    }
+
+    /* ============================================
+       7. ACCORDION (Urgency)
+       ============================================ */
+    .accordion-section { max-width: 800px; margin: 0 auto 6rem; padding: 0 2rem; }
+    .accordion-item {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+    }
+    .accordion-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      background: white;
+      transition: background 0.3s;
+    }
+    .accordion-header:hover { background: var(--bg); }
+    .accordion-title { display: flex; align-items: center; gap: 1rem; font-weight: 700; color: var(--text-main); }
+    .accordion-icon-box {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; color: white;
+    }
+    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg); }
+    .accordion-inner { padding: 1.5rem; }
+
+    /* ============================================
+       8. EMERGENCY SECTION
+       ============================================ */
+    .emergency-section {
+      background: linear-gradient(135deg, #c62828 0%, #e53935 100%);
+      padding: 5rem 2rem;
+      color: white;
+      text-align: center;
+    }
+    .emergency-title { font-size: 3rem; margin-bottom: 1rem; }
+    .emergency-signs-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem; max-width: 1000px; margin: 3rem auto;
+    }
+    .emergency-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .emergency-contacts {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;
+    }
+    .emergency-btn {
+      background: white; color: #c62828;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 800;
+      display: flex; align-items: center; gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .emergency-btn:hover { transform: scale(1.05); }
+
+    /* ============================================
+       9. STRATEGIES (Flip Cards)
+       ============================================ */
+    .strategies-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(to bottom, var(--bg), #e3f2fd);
+    }
+    .strategies-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem; max-width: 1200px; margin: 3rem auto 0;
+    }
+    .flip-card { perspective: 1000px; height: 400px; }
+    .flip-card-inner {
+      position: relative; width: 100%; height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back {
+      position: absolute; width: 100%; height: 100%;
+      backface-visibility: hidden;
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-md);
+    }
+    .flip-card-front { background: white; color: var(--text-main); }
+    .flip-card-back { background: var(--gradient-primary); color: white; transform: rotateY(180deg); }
+    .strategy-icon { font-size: 4rem; color: var(--deep-pink); margin-bottom: 1.5rem; }
+    
+    /* ============================================
+       10. MYTH BUSTERS & CHECKLIST
+       ============================================ */
+
+      /* ============================================
+       MYTH BUSTER SLOT MACHINE
+       ============================================ */
+    .myths-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      padding: 4rem 2rem;
+    }
+
+    .myth-buster-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+    }
+
+    .myth-slot {
+      background: #f5f5f5;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .myth-slot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .myth-label-slot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #f44336;
+      color: white;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .myth-text-slot {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .reality-reveal {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .myth-slot.revealed .reality-reveal {
+      max-height: 500px;
+    }
+
+    .reality-label-slot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #4caf50;
+      color: white;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    .reality-text-slot {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+      padding: 1rem;
+      background: rgba(76, 175, 80, 0.1);
+      border-left: 4px solid #4caf50;
+      border-radius: 8px;
+    }
+
+    .reveal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .reveal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .myths-section { padding: 5rem 2rem; background: var(--bg); }
+    .myth-container { max-width: 800px; margin: 0 auto; }
+    .myth-item {
+      background: white; border-radius: var(--radius-md);
+      padding: 2rem; margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      border-left: 5px solid var(--critical);
+      transition: transform 0.2s;
+    }
+    .myth-item:hover { transform: translateX(10px); }
+    .myth-item.revealed { border-left-color: var(--mild); }
+    .myth-content { max-height: 0; overflow: hidden; transition: max-height 0.4s; }
+    .myth-item.revealed .myth-content { max-height: 200px; margin-top: 1rem; }
+
+    .checklist-section { padding: 5rem 2rem; background: white; }
+    .checklist-container { max-width: 800px; margin: 0 auto; }
+    .checklist-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.2rem;
+      background: var(--bg);
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .checklist-item.completed { background: #e8f5e9; text-decoration: line-through; color: var(--text-soft); }
+    .checkbox {
+      width: 24px; height: 24px; border: 2px solid var(--deep-pink);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    }
+    .checklist-item.completed .checkbox { background: var(--mild); border-color: var(--mild); color: white; }
+
+
+    /* ============================================
+       INTERACTIVE CHECKLIST WITH GAMIFICATION
+       ============================================ */
+    .checklist-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      padding: 4rem 2rem;
+    }
+
+    .checklist-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .progress-tracker {
+      position: sticky;
+      top: 2rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .progress-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .progress-percentage {
+      font-size: 2.5rem;
+      font-weight: 900;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 15px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: white;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .checklist-item-enhanced {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      background: #f5f5f5;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .checklist-item-enhanced:hover {
+      transform: translateX(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .checklist-item-enhanced.completed {
+      background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+    }
+
+    .checklist-item-enhanced.completed::before {
+      content: '🎉';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      animation: celebrate 0.5s ease;
+    }
+
+    @keyframes celebrate {
+      0% { transform: translateY(-50%) scale(0); }
+      50% { transform: translateY(-50%) scale(1.3); }
+      100% { transform: translateY(-50%) scale(1); }
+    }
+
+    .custom-checkbox {
+      width: 30px;
+      height: 30px;
+      border: 3px solid #667eea;
+      border-radius: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .checklist-item-enhanced.completed .custom-checkbox {
+      background: #4caf50;
+      border-color: #4caf50;
+    }
+
+    .custom-checkbox i {
+      color: white;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .checklist-item-enhanced.completed .custom-checkbox i {
+      opacity: 1;
+    }
+
+    .checklist-text-enhanced {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #333;
+      flex: 1;
+    }
+
+    .checklist-item-enhanced.completed .checklist-text-enhanced {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .completion-celebration {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .completion-celebration.active {
+      display: flex;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .celebration-content {
+      text-align: center;
+      color: white;
+    }
+
+    .celebration-icon {
+      font-size: 10rem;
+      margin-bottom: 2rem;
+      animation: celebrationBounce 1s ease infinite;
+    }
+
+    @keyframes celebrationBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .celebration-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .celebration-message {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .celebration-close-btn {
+      padding: 1rem 3rem;
+      background: white;
+      color: #667eea;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .celebration-close-btn:hover {
+      transform: scale(1.1);
+    }
+
+
+    /* ============================================
+       FINAL HOPE MESSAGE WITH PARTICLES
+       ============================================ */
+    .final-message-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8e9f1 0%, #f3d8e6 50%, #E30B5D 100%);
+
+      padding: 4rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hope-particles {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hope-particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: hopeFloat 10s linear infinite;
+    }
+
+    @keyframes hopeFloat {
+      0% { transform: translateY(100vh) translateX(0); }
+      100% { transform: translateY(-100vh) translateX(100px); }
+    }
+
+    .final-message-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+      color: white;
+    }
+
+    .final-icon-mega {
+      font-size: 8rem;
+      margin-bottom: 2rem;
+      animation: heartbeat 2s ease infinite;
+      filter: drop-shadow(0 10px 40px rgba(255, 255, 255, 0.3));
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      10%, 30% { transform: scale(1.1); }
+      20%, 40% { transform: scale(1); }
+    }
+
+    .final-title-mega {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      margin-bottom: 2rem;
+      text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .final-message-text {
+      font-size: 1.3rem;
+      line-height: 2;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-quote-box {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-left: 5px solid white;
+      padding: 2rem;
+      border-radius: 15px;
+      margin: 3rem 0;
+      font-size: 1.4rem;
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .final-btn {
+      padding: 1.2rem 3rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .final-btn-primary {
+      background: white;
+      color: #667eea;
+      box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3);
+    }
+
+    .final-btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 50px rgba(255, 255, 255, 0.5);
+    }
+
+    /* ============================================
+       11. RESOURCES SECTION (FIXED)
+       ============================================ */
+    .resources-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(to top, var(--bg), #fff);
+      position: relative;
+    }
+    
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .resource-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-md);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .resource-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 5px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .resource-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .resource-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--lavender);
+      color: var(--deep-pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .resource-card:hover .resource-icon {
+      background: var(--deep-pink);
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .resource-category {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--text-main);
+    }
+
+    .resource-items {
+      list-style: none;
+      width: 100%;
+      text-align: left;
+      padding: 0;
+    }
+
+    .resource-items li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .resource-items li:last-child {
+      border-bottom: none;
+    }
+
+    .resource-items li::before {
+      content: '\f058'; /* FontAwesome Check Circle */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--mild);
+      margin-top: 3px;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: var(--lavender);
+      margin-top: 2rem;
+    }
+    .footer-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: white; padding: 0.5rem 1rem;
+      border-radius: 50px;
+      color: var(--deep-pink);
+      font-weight: 700;
+      margin: 0.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <section class="hero-3d-container" id="heroSection">
+    <canvas class="particle-field" id="particleCanvas"></canvas>
+    <div class="hero-3d-card" id="hero3DCard">
+      <div class="hero-badge"><i class="fas fa-heart-pulse"></i> Partner & Family Guide</div>
+        <h1 class="hero-title">
+          Support Her Through <br>
+          <span class="title-emphasis">Perinatal Depression</span>
+        </h1>
+
+      <p class="hero-subtitle">You are not just an observer. You are the most critical part of her recovery team. Learn to recognize the signs, respond with empathy, and act when it matters most.</p>
+      <div class="hero-cta-group">
+        <button class="hero-btn hero-btn-primary" onclick="scrollToSection('symptomWheel')">
+          <i class="fas fa-play"></i> Start Journey
+        </button>
+        <button class="hero-btn hero-btn-primary" onclick="scrollToSection('emergencySection')">
+          <i class="fas fa-exclamation-triangle"></i> Emergency Help
+        </button>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="scrollToSection('symptomWheel')">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <section class="symptom-wheel-section" id="symptomWheel">
+    <div class="section-header-center">
+      <h2 class="section-title-light">Warning Signs to Recognize</h2>
+      <p class="section-subtitle-light">
+        Click each orbit to explore symptoms in detail. Early recognition can be life-saving.
+      </p>
+    </div>
+
+    <div class="symptom-wheel-container">
+      <div class="wheel-center">
+        <div class="wheel-center-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="wheel-center-text">Watch For<br>These Signs</div>
+      </div>
+
+      <div class="symptom-segment emotional" onclick="openSymptomModal('emotional')">
+        <div class="symptom-icon">😢</div>
+        <div class="symptom-title">Emotional</div>
+        <div class="symptom-count">5 Signs</div>
+      </div>
+
+      <div class="symptom-segment behavioral" onclick="openSymptomModal('behavioral')">
+        <div class="symptom-icon">👤</div>
+        <div class="symptom-title">Behavioral</div>
+        <div class="symptom-count">5 Signs</div>
+      </div>
+
+      <div class="symptom-segment cognitive" onclick="openSymptomModal('cognitive')">
+        <div class="symptom-icon">🧠</div>
+        <div class="symptom-title">Cognitive</div>
+        <div class="symptom-count">5 Signs</div>
+      </div>
+
+      <div class="symptom-segment physical" onclick="openSymptomModal('physical')">
+        <div class="symptom-icon">💓</div>
+        <div class="symptom-title">Physical</div>
+        <div class="symptom-count">5 Signs</div>
+      </div>
+
+      <div class="symptom-segment social" onclick="openSymptomModal('social')">
+        <div class="symptom-icon">👥</div>
+        <div class="symptom-title">Social</div>
+        <div class="symptom-count">4 Signs</div>
+      </div>
+
+      <div class="symptom-segment sleep" onclick="openSymptomModal('sleep')">
+        <div class="symptom-icon">😴</div>
+        <div class="symptom-title">Sleep</div>
+        <div class="symptom-count">4 Signs</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subhero-partner">
+    <div class="subhero-card-3d">
+      <h1 class="subhero-title">Transform from Observer to Advocate</h1>
+      <p style="font-size: 1.2rem; color: var(--text-soft); margin-bottom: 2rem;">
+        Your essential toolkit for supporting women through perinatal depression. 
+        Validation, practical help, and patience are your strongest tools.
+      </p>
+      <div class="subhero-stats">
+        <div class="substat-bubble">1 in 7 Mothers Affected</div>
+        <div class="substat-bubble">Treatment Works</div>
+        <div class="substat-bubble">Your Role is Vital</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey-section">
+    <h2 style="text-align:center; margin-bottom: 3rem;">Your Advocacy Journey</h2>
+    <div class="journey-map">
+      <article class="journey-card">
+        <div class="journey-number">1</div>
+        <h3>🔍 Recognition</h3>
+        <p style="margin: 1rem 0; color: var(--text-soft);">Learn to identify warning signs early. Distinguish "baby blues" from clinical depression.</p>
+        <div>
+          <span class="action-chip">Emotional Signs</span>
+          <span class="action-chip">Behavioral Changes</span>
+        </div>
+      </article>
+      <article class="journey-card">
+        <div class="journey-number">2</div>
+        <h3>💬 Response</h3>
+        <p style="margin: 1rem 0; color: var(--text-soft);">Master effective communication. Provide non-judgmental support and create a safe space.</p>
+        <div>
+          <span class="action-chip">Active Listening</span>
+          <span class="action-chip">Validation</span>
+        </div>
+      </article>
+      <article class="journey-card">
+        <div class="journey-number">3</div>
+        <h3>🛠️ Resources</h3>
+        <p style="margin: 1rem 0; color: var(--text-soft);">Connect to professional help networks. Navigate treatment options and crisis tools.</p>
+        <div>
+          <span class="action-chip">Therapy</span>
+          <span class="action-chip">Medication</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wellness-wrapper">
+    <h2 class="section-title" style="text-align: center;">Evidence-Based Nutrition & Wellness</h2>
+    <p class="section-subtitle" style="text-align: center;">Targeted nutritional support and lifestyle interventions that directly impact brain chemistry and mood regulation.</p>
+    
+    <div class="wellness-grid">
+      <div class="wellness-card">
+        <div class="wellness-icon-header">
+          <div class="wellness-icon"><i class="fas fa-pills"></i></div>
+          <h3>Critical Nutrients</h3>
+        </div>
+        <ul class="wellness-list">
+          <li><i class="fas fa-check check-icon"></i> Omega-3 (EPA >1000mg): Improves neurotransmitter function</li>
+          <li><i class="fas fa-check check-icon"></i> Vitamin D3: Target serum levels 40-60 ng/mL</li>
+          <li><i class="fas fa-check check-icon"></i> Magnesium: Reduces anxiety and aids sleep</li>
+        </ul>
+      </div>
+      <div class="wellness-card">
+        <div class="wellness-icon-header">
+          <div class="wellness-icon"><i class="fas fa-apple-alt"></i></div>
+          <h3>Daily Support</h3>
+        </div>
+        <ul class="wellness-list">
+          <li><i class="fas fa-check check-icon"></i> Protein + Complex Carbs: Stabilizes blood sugar</li>
+          <li><i class="fas fa-check check-icon"></i> Hydration: Combats fatigue and headaches</li>
+          <li><i class="fas fa-check check-icon"></i> Regular Snacks: Prevents "hangry" mood dips</li>
+        </ul>
+      </div>
+      <div class="wellness-card">
+        <div class="wellness-icon-header">
+          <div class="wellness-icon"><i class="fas fa-moon"></i></div>
+          <h3>Sleep Hygiene</h3>
+        </div>
+        <ul class="wellness-list">
+          <li><i class="fas fa-check check-icon"></i> Protect a 4-hour sleep block (Partners: take this shift!)</li>
+          <li><i class="fas fa-check check-icon"></i> Reduce evening blue light exposure</li>
+          <li><i class="fas fa-check check-icon"></i> Sleep when baby sleeps (actually do it)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <h2 class="section-title" style="text-align: center;">Disease Trajectory</h2>
+    <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Understanding the natural progression helps identify intervention points and predict outcomes.</p>
+    
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div style="color: var(--mild); font-weight: 700; font-size: 0.9rem;">DAYS 3-10 POSTPARTUM</div>
+          <h4>Baby Blues</h4>
+          <p style="font-size: 0.95rem; color: var(--text-soft);">Affects 50-80% of mothers. Tearfulness, mood swings, anxiety. Usually self-limiting.</p>
+        </div>
+        <div class="timeline-marker" style="background: var(--mild);"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div style="color: var(--moderate); font-weight: 700; font-size: 0.9rem;">2+ WEEKS POSTPARTUM</div>
+          <h4>Perinatal Depression Onset</h4>
+          <p style="font-size: 0.95rem; color: var(--text-soft);">Symptoms persist beyond the "blues" window. Interferes with daily functioning and bonding.</p>
+        </div>
+        <div class="timeline-marker" style="background: var(--moderate);"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div style="color: var(--critical); font-weight: 700; font-size: 0.9rem;">URGENT / EMERGENCY</div>
+          <h4>Severe Symptoms / Psychosis</h4>
+          <p style="font-size: 0.95rem; color: var(--text-soft);">Intrusive thoughts, detachment from reality, or risk of harm requires immediate ER visit.</p>
+        </div>
+        <div class="timeline-marker" style="background: var(--critical);"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="accordion-section">
+    <h2 class="section-title" style="text-align: center;">When to Consult a Provider</h2>
+    <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Clear guidelines on urgency levels help ensure timely intervention.</p>
+    
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-title">
+          <div class="accordion-icon-box" style="background: var(--critical);">
+            <i class="fas fa-exclamation"></i>
+          </div>
+          IMMEDIATE (Within 24 Hours)
+        </div>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <ul class="wellness-list">
+            <li><i class="fas fa-circle" style="color: var(--critical); font-size: 0.6rem;"></i> Suicidal thoughts or plan</li>
+            <li><i class="fas fa-circle" style="color: var(--critical); font-size: 0.6rem;"></i> Thoughts of harming the baby</li>
+            <li><i class="fas fa-circle" style="color: var(--critical); font-size: 0.6rem;"></i> Hallucinations or delusions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-title">
+          <div class="accordion-icon-box" style="background: var(--moderate);">
+            <i class="fas fa-clock"></i>
+          </div>
+          URGENT (Within 48-72 Hours)
+        </div>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <ul class="wellness-list">
+            <li><i class="fas fa-circle" style="color: var(--moderate); font-size: 0.6rem;"></i> Worsening symptoms affecting daily tasks</li>
+            <li><i class="fas fa-circle" style="color: var(--moderate); font-size: 0.6rem;"></i> Severe insomnia not related to baby</li>
+            <li><i class="fas fa-circle" style="color: var(--moderate); font-size: 0.6rem;"></i> Panic attacks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-title">
+          <div class="accordion-icon-box" style="background: var(--neuron-blue);">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          ROUTINE (Book Appointment)
+        </div>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <ul class="wellness-list">
+            <li><i class="fas fa-circle" style="color: var(--neuron-blue); font-size: 0.6rem;"></i> Persistent low mood > 2 weeks</li>
+            <li><i class="fas fa-circle" style="color: var(--neuron-blue); font-size: 0.6rem;"></i> Difficulty bonding</li>
+            <li><i class="fas fa-circle" style="color: var(--neuron-blue); font-size: 0.6rem;"></i> Feeling overwhelmed constantly</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="emergency-section" id="emergencySection">
+    <i class="fas fa-ambulance" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+    <h2 class="emergency-title">IMMEDIATE ACTION REQUIRED</h2>
+    <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; opacity: 0.9;">If you notice suicidal thoughts, psychosis, or thoughts of harm, do not wait.</p>
+    
+    <div class="emergency-contacts">
+      <div class="emergency-btn" onclick="window.location.href='tel:988'">
+        <i class="fas fa-phone"></i> 988 (Suicide & Crisis)
+      </div>
+      <div class="emergency-btn" onclick="window.location.href='tel:1-800-944-4773'">
+        <i class="fas fa-heart"></i> 1-800-944-4773 (PSI)
+      </div>
+    </div>
+  </section>
+
+   <section class="strategies-section" id="strategiesSection">
+    <div class="section-header-center">
+      <h2 class="section-title-light">6 Powerful Support Strategies</h2>
+      <p class="section-subtitle-light">
+        Hover over each card to flip and discover actionable ways to help
+      </p>
+    </div>
+
+    <div class="strategies-grid">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">1</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-ear-listen"></i>
+            </div>
+            <h3 class="strategy-title-front">Listen Without Judgment</h3>
+            <p class="strategy-hint">Hover to see what to say & what NOT to say</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">What to Say & Not Say</h4>
+            <div class="do-section-back">
+              <h4>✅ DO SAY:</h4>
+              <ul>
+                <li>"I'm here for you. You're not alone."</li>
+                <li>"This is a medical condition, not your fault."</li>
+                <li>"You're a good mother going through a hard time."</li>
+                <li>"What do you need right now?"</li>
+              </ul>
+            </div>
+            <div class="dont-section-back">
+              <h4>❌ DON'T SAY:</h4>
+              <ul>
+                <li>"Just snap out of it"</li>
+                <li>"Other moms have it worse"</li>
+                <li>"You should be grateful"</li>
+                <li>"It's just hormones"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">2</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h3 class="strategy-title-front">Provide Practical Help</h3>
+            <p class="strategy-hint">Hover for concrete actions</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">Concrete Actions</h4>
+            <div class="strategy-content-back">
+              <strong>Don't ask "What can I do?"—Just DO it:</strong>
+              <ul>
+                <li>Take the 2 AM feeding shift</li>
+                <li>Prepare meals and keep water nearby</li>
+                <li>Do laundry, dishes, cleaning</li>
+                <li>Handle diaper changes and bathing</li>
+                <li>Watch baby so she can nap</li>
+                <li>Manage bills and paperwork</li>
+              </ul>
+              <p style="margin-top: 1rem; font-style: italic;">
+                Depression makes decisions overwhelming. Just act.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">3</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-user-doctor"></i>
+            </div>
+            <h3 class="strategy-title-front">Facilitate Treatment</h3>
+            <p class="strategy-hint">Hover for action steps</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">Get Professional Help</h4>
+            <div class="strategy-content-back">
+              <ul>
+                <li>Research perinatal mental health specialists</li>
+                <li>Schedule appointments for her</li>
+                <li>Provide transportation to sessions</li>
+                <li>Attend appointments if invited</li>
+                <li>Support medication without judgment</li>
+                <li>Handle insurance and paperwork</li>
+              </ul>
+              <p style="margin-top: 1rem; background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px;">
+                <strong>Treatment Options:</strong> Therapy (CBT, IPT), Medication, Support Groups, Couples Therapy
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">4</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-shield-heart"></i>
+            </div>
+            <h3 class="strategy-title-front">Protect Recovery Time</h3>
+            <p class="strategy-hint">Hover to learn how</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">Create Safe Space</h4>
+            <div class="strategy-content-back">
+              <ul>
+                <li>Manage visitors—screen calls, limit guests</li>
+                <li>Encourage self-care: "Go take a shower"</li>
+                <li>Treat therapy time as non-negotiable</li>
+                <li>Buffer her from judgmental family/friends</li>
+                <li>Celebrate small wins: "You got dressed today!"</li>
+                <li>Create quiet, peaceful home environment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">5</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="strategy-title-front">Monitor & Advocate</h3>
+            <p class="strategy-hint">Hover for tracking tips</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">Track Progress</h4>
+            <div class="strategy-content-back">
+              <ul>
+                <li>Keep a symptom log to share with doctors</li>
+                <li>Use Edinburgh Postnatal Depression Scale</li>
+                <li>Report worsening symptoms immediately</li>
+                <li>Be patient—recovery takes 6+ months</li>
+                <li>Trust your instincts about her wellbeing</li>
+                <li>Communicate regularly with her healthcare team</li>
+              </ul>
+              <p style="margin-top: 1rem; font-style: italic;">
+                Medications need 4-6 weeks to work. Stay vigilant.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="strategy-number-badge">6</div>
+            <div class="strategy-icon-front">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h3 class="strategy-title-front">Take Care of Yourself</h3>
+            <p class="strategy-hint">Hover for self-care guidance</p>
+          </div>
+          <div class="flip-card-back">
+            <h4 class="strategy-title-back">You Can't Pour From Empty Cup</h4>
+            <div class="strategy-content-back">
+              <p style="margin-bottom: 1rem;">
+                Supporting someone with depression is exhausting. Your wellbeing matters too.
+              </p>
+              <ul>
+                <li>Find your own support group</li>
+                <li>Maintain your exercise routine</li>
+                <li>Accept help from others</li>
+                <li>Consider therapy for yourself</li>
+                <li>Take breaks when needed</li>
+                <li>Watch for caregiver burnout</li>
+              </ul>
+              <p style="margin-top: 1rem; background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px;">
+                ⚠️ If you feel resentful, exhausted, or depressed, seek help immediately.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="resources-section">
+        <h2 class="section-title" style="text-align: center;">🌐 Essential Resources & Support Networks</h2>
+        
+        <div class="resources-grid">
+          
+          <article class="resource-card" tabindex="0">
+            <div class="resource-icon">📞</div>
+            <h3 class="resource-category">Crisis Hotlines</h3>
+            <ul class="resource-items">
+              <li>988 - Suicide & Crisis Lifeline (24/7)</li>
+              <li>1-800-944-4773 - Postpartum Support International</li>
+              <li>1-800-662-4357 - SAMHSA National Helpline</li>
+              <li>Text "HELLO" to 741741 - Crisis Text Line</li>
+            </ul>
+          </article>
+
+          <article class="resource-card" tabindex="0">
+            <div class="resource-icon">💻</div>
+            <h3 class="resource-category">Websites & Organizations</h3>
+            <ul class="resource-items">
+              <li>postpartum.net - PSI (education & support groups)</li>
+              <li>mghcpdonline.org - Massachusetts General Hospital</li>
+              <li>2020mom.org - Postpartum Progress (blogs & stories)</li>
+              <li>womensmentalhealth.org - Research & information</li>
+            </ul>
+          </article>
+
+          <article class="resource-card" tabindex="0">
+            <div class="resource-icon">👥</div>
+            <h3 class="resource-category">Support Groups</h3>
+            <ul class="resource-items">
+              <li>PSI Online Support Groups (various times/languages)</li>
+              <li>Local hospital perinatal mental health programs</li>
+              <li>Peer support groups (in-person and virtual)</li>
+              <li>Partner/family-specific support groups</li>
+            </ul>
+          </article>
+
+          <article class="resource-card" tabindex="0">
+            <div class="resource-icon">📋</div>
+            <h3 class="resource-category">Screening Tools</h3>
+            <ul class="resource-items">
+              <li>Edinburgh Postnatal Depression Scale (EPDS)</li>
+              <li>Patient Health Questionnaire-9 (PHQ-9)</li>
+              <li>Postpartum Depression Screening Scale (PDSS)</li>
+              <li>Ask healthcare provider for professional screening</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+
+
+   <section class="checklist-section" id="checklistSection">
+    <div class="section-header-center">
+      <h2 class="section-title-light" style="color: #333;">Your Action Plan</h2>
+      <p class="section-subtitle-light" style="color: #666;">
+        Complete these steps to be fully prepared. Track your progress!
+      </p>
+    </div>
+
+    <div class="checklist-container">
+      <div class="progress-tracker">
+        <div class="progress-text">Progress</div>
+        <div class="progress-percentage" id="progressPercentage">0%</div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Save crisis hotline numbers in phone: PSI (1-800-944-4773), 988 Suicide Lifeline
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Research 3 perinatal mental health specialists in your area
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Review insurance coverage for mental health services
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Identify 2-3 trusted people who can provide backup support
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Set up meal delivery service or coordinate meal train
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Schedule weekly check-in conversations about her mental health
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Download Edinburgh Postnatal Depression Scale (EPDS) screening tool
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Join a partner support group or find your own therapist
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Create emergency contacts card for babysitters/caregivers
+          </div>
+        </div>
+
+        <div class="checklist-item-enhanced" onclick="toggleChecklistItem(this)">
+          <div class="custom-checkbox">
+            <i class="fas fa-check"></i>
+          </div>
+          <div class="checklist-text-enhanced">
+            Read this entire guide thoroughly and bookmark for future reference
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+   <section class="final-message-section" id="finalMessage">
+    <div class="hope-particles" id="hopeParticles"></div>
+    
+    <div class="final-message-content">
+      <div class="final-icon-mega">
+        <i class="fas fa-hands-holding-heart"></i>
+      </div>
+      
+      <h2 class="final-title-mega">
+        Your Support Saves Lives
+      </h2>
+      
+      <p class="final-message-text">
+        Recovery from perinatal depression takes time—typically 6 months to a year with treatment. 
+        There will be good days and difficult days. Your patience, understanding, and active support 
+        are <strong>essential to her recovery</strong>.
+      </p>
+      
+      <div class="final-quote-box">
+        "She is not weak. She is not a bad mother. She is ill. And with proper treatment and support, 
+        she WILL recover. Your love and advocacy make an immeasurable difference."
+      </div>
+      
+      <p class="final-message-text">
+        You don't need to be perfect. You just need to be present, compassionate, and willing to help.
+      </p>
+      
+      <div class="final-cta-buttons">
+        <button class="final-btn final-btn-primary" onclick="scrollToSection('heroSection')">
+          <i class="fas fa-rotate-left"></i>
+          Review the Guide
+        </button>
+        <button class="final-btn final-btn-primary" onclick="window.print()">
+          <i class="fas fa-print"></i>
+          Print This Guide
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <h3 style="color: var(--deep-pink); margin-bottom: 1rem;">Recovery is Possible</h3>
+    <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-soft);">
+      Perinatal depression is a medical condition, not a personal failing. With appropriate treatment and your support, she can heal and thrive.
+    </p>
+    <div>
+      <span class="footer-badge"><i class="fas fa-heart"></i> Evidence-Based</span>
+      <span class="footer-badge"><i class="fas fa-shield-alt"></i> Confidential</span>
+      <span class="footer-badge"><i class="fas fa-brain"></i> Validated</span>
+    </div>
+  </footer>
+
+  <div class="symptom-modal" id="symptomModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeSymptomModal()"><i class="fas fa-times"></i></button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modalIcon"></div>
+        <h3 class="modal-title" id="modalTitle"></h3>
+      </div>
+      <ul class="symptom-list-modal" id="modalSymptomList"></ul>
+    </div>
+  </div>
+
+  <div class="completion-celebration" id="completionCelebration">
+    <div class="celebration-content">
+      <div class="celebration-icon">🎉</div>
+      <h2 class="celebration-title">Amazing!</h2>
+      <p class="celebration-message">
+        You've completed all action items. You're now equipped to provide life-saving support!
+      </p>
+      <button class="celebration-close-btn" onclick="closeCompletionModal()">
+        Continue Journey
+      </button>
+    </div>
+  </div>
+
+
+  <script>
+    // --- PARTICLE EFFECT ---
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+     draw() {
+        // ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';  <-- DELETE THIS
+        ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';      // <-- ADD THIS (Pink)
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+
+    }
+    
+    const particles = Array.from({ length: 80 }, () => new Particle());
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // --- 3D TILT EFFECT ---
+    const card = document.getElementById('hero3DCard');
+    const container = document.getElementById('heroSection');
+    
+    container.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+    
+    container.addEventListener('mouseleave', () => {
+      card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    });
+
+    // --- SYMPTOM DATA & MODAL ---
+    const symptomData = {
+      emotional: {
+        icon: '<i class="fas fa-sad-tear" style="color:#2196f3"></i>',
+        title: 'Emotional Changes',
+        symptoms: ['Persistent sadness/crying', 'Loss of joy (Anhedonia)', 'Overwhelming guilt', 'Feeling "numb" or empty']
+      },
+      behavioral: {
+        icon: '<i class="fas fa-user-slash" style="color:#ff9800"></i>',
+        title: 'Behavioral Changes',
+        symptoms: ['Withdrawing from partner/family', 'Neglecting self-care (showers, eating)', 'Reduced interaction with baby']
+      },
+      cognitive: {
+        icon: '<i class="fas fa-brain" style="color:#9c27b0"></i>',
+        title: 'Cognitive Changes',
+        symptoms: ['Brain fog / confusion', 'Scary intrusive thoughts', 'Decision paralysis', 'Memory lapses']
+      },
+      physical: {
+        icon: '<i class="fas fa-heart-broken" style="color:#f44336"></i>',
+        title: 'Physical Symptoms',
+        symptoms: ['Extreme fatigue beyond newborn stage', 'Physical aches/headaches', 'Restlessness / Agitation', 'Racing heart']
+      },
+      social: {
+        icon: '<i class="fas fa-users-slash" style="color:#4caf50"></i>',
+        title: 'Social Withdrawal',
+        symptoms: ['Canceling plans', 'Not returning calls', 'Refusing visitors', 'Isolation in bedroom']
+      },
+      sleep: {
+        icon: '<i class="fas fa-bed" style="color:#d81b60"></i>',
+        title: 'Sleep Disturbances',
+        symptoms: ['Cannot sleep when baby sleeps (Insomnia)', 'Waking up at 3AM unable to return to sleep', 'Nightmares']
+      }
+    };
+
+    function openSymptomModal(type) {
+      const data = symptomData[type];
+      document.getElementById('modalIcon').innerHTML = data.icon;
+      document.getElementById('modalTitle').innerText = data.title;
+      document.getElementById('modalSymptomList').innerHTML = data.symptoms.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('symptomModal').classList.add('active');
+    }
+
+    function closeSymptomModal() {
+      document.getElementById('symptomModal').classList.remove('active');
+    }
+
+    // --- MYTH BUSTERS ---
+    function toggleMyth(item) {
+      item.classList.toggle('revealed');
+    }
+
+    // --- CHECKLIST ---
+    function toggleCheck(item) {
+      item.classList.toggle('completed');
+      const icon = item.querySelector('.fa-check');
+      icon.style.display = item.classList.contains('completed') ? 'block' : 'none';
+    }
+
+    // ============================================
+    // MYTH TOGGLE
+    // ============================================
+    function toggleMyth(element) {
+      element.classList.toggle('revealed');
+    }
+
+    // ============================================
+    // CHECKLIST WITH PROGRESS TRACKING
+    // ============================================
+    function toggleChecklistItem(element) {
+      element.classList.toggle('completed');
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const items = document.querySelectorAll('.checklist-item-enhanced');
+      const completed = document.querySelectorAll('.checklist-item-enhanced.completed');
+      const percentage = Math.round((completed.length / items.length) * 100);
+      
+      document.getElementById('progressPercentage').textContent = percentage + '%';
+      document.getElementById('progressBarFill').style.width = percentage + '%';
+      
+      // Show celebration when all completed
+      if (percentage === 100) {
+        setTimeout(() => {
+          document.getElementById('completionCelebration').classList.add('active');
+        }, 500);
+      }
+    }
+
+    function closeCompletionModal() {
+      document.getElementById('completionCelebration').classList.remove('active');
+    }
+
+
+    // --- UTILS ---
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+      }, 800);
+    });
+
+
+// ============================================
+    // SMOOTH SCROLLING
+    // ============================================
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ============================================
+    // CALL NUMBER FUNCTION
+    // ============================================
+    function callNumber(number) {
+      if (confirm(`Call ${number}?\n\nThis will open your phone's dialer.`)) {
+        window.location.href = `tel:${number}`;
+      }
+    }
+
+    // ============================================
+    // LOADING SCREEN
+    // ============================================
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loadingOverlay').classList.add('hidden');
+      }, 1000);
+    });
+
+  
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(30px)';
+      section.style.transition = 'all 0.6s ease';
+      observer.observe(section);
+    });
+
+     function toggleAccordion(header) {
+      const accordionItem = header.parentElement;
+      const content = accordionItem.querySelector('.accordion-content');
+      const isActive = accordionItem.classList.contains('active');
+
+      document.querySelectorAll('.accordion-item').forEach(item => {
+        item.classList.remove('active');
+        const c = item.querySelector('.accordion-content');
+        if (c) c.style.maxHeight = null;
+      });
+
+      if (!isActive) {
+        accordionItem.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    }
+  </script>
+</body>
+</html>
