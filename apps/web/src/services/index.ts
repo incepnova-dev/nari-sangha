@@ -56,12 +56,31 @@ function clearTokens(): void {
 
 // Convenience exports that match the old API
 export const signIn = async (credentials: { email: string; password: string }) => {
+  // Admin Login Override
+  if (credentials.email === 'admin@narisangha.com' && credentials.password === 'admin123') {
+    const adminData = {
+      token: 'mock-admin-token-12345',
+      user: {
+        id: 'admin-user-id',
+        email: 'admin@narisangha.com',
+        fullName: 'Admin User',
+        role: 'admin',
+      }
+    };
+    storeTokens(adminData);
+    return {
+      success: true,
+      data: adminData,
+      status: 200
+    };
+  }
+
   const result = await authService.signIn(credentials);
-  
+
   if (result.success && result.data) {
     storeTokens(result.data);
   }
-  
+
   return result;
 };
 
@@ -108,7 +127,7 @@ export const signUp = async (userData: SignUpData): Promise<AuthResponse> => {
 
 export const signOut = async (): Promise<AuthResponse> => {
   const token = getToken();
-  
+
   try {
     if (token) {
       const headers: Record<string, string> = {
@@ -127,7 +146,7 @@ export const signOut = async (): Promise<AuthResponse> => {
     // Always clear local storage
     clearTokens();
   }
-  
+
   return {
     success: true,
   };
@@ -135,7 +154,7 @@ export const signOut = async (): Promise<AuthResponse> => {
 
 export const getCurrentUser = async (): Promise<AuthResponse> => {
   const token = getToken();
-  
+
   if (!token) {
     return {
       success: false,
@@ -143,9 +162,23 @@ export const getCurrentUser = async (): Promise<AuthResponse> => {
       status: 401,
     };
   }
-  
+
+  // Admin Session Override
+  if (token === 'mock-admin-token-12345') {
+    return {
+      success: true,
+      data: {
+        id: 'admin-user-id',
+        email: 'admin@narisangha.com',
+        fullName: 'Admin User',
+        role: 'admin',
+      },
+      status: 200
+    };
+  }
+
   const result = await profileService.getProfile(token);
-  
+
   return {
     success: result.success,
     data: result.data,
@@ -156,7 +189,7 @@ export const getCurrentUser = async (): Promise<AuthResponse> => {
 
 export const refreshToken = async (): Promise<AuthResponse> => {
   const token = getToken();
-  
+
   try {
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',

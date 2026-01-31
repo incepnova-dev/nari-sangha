@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./landing.module.css";
 import logo from "../../assets/logo.svg";
 import { useI18n } from "../../hooks/useI18n";
 import ModernLanguageSelector from "../header/ModernLanguageSelector";
-
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
 import { useCart } from "../../context/CartContext";
+import { useAuth } from "../../context/AuthContext";
 
 interface NavbarProps {
   onSignInClick: () => void;
@@ -17,6 +17,39 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
   const { t, language, setLanguage, languages } = useI18n();
   const { cartCount, setIsCartOpen } = useCart();
   const location = useLocation();
+  // const navigate = useNavigate(); // Unused since we use window.location
+  const { signOut } = useAuth();
+
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSignOut = () => {
+    // Instant Sign Out: Clear local state immediately without waiting for server
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('refreshToken');
+    sessionStorage.removeItem('authToken');
+
+    // Fire and forget server signout (browser may cancel it on reload, which is fine)
+    signOut();
+
+    setIsProfileOpen(false);
+    window.location.href = ROUTES.LANDING; // Force full reload/navigation
+  };
+
   const menuItems = [
     { key: "hero.nav.home", path: ROUTES.LANDING },
     { key: "hero.nav.journeys", path: ROUTES.JOURNEYS },
@@ -77,7 +110,41 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
             languages={languages}
             variant="light"
           />
-          {!isAuthenticated && (
+          {isAuthenticated ? (
+            /* Profile Dropdown */
+            <div className={styles.profileWrapper} ref={profileRef}>
+              <button
+                className={styles.profileButton}
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                aria-label="Profile Menu"
+              >
+                <img
+                  src="https://ui-avatars.com/api/?name=User&background=E30B5D&color=fff&size=36"
+                  alt="Profile"
+                  className={styles.profileImage}
+                />
+              </button>
+
+              {isProfileOpen && (
+                <div className={styles.profileDropdown}>
+                  <Link
+                    to={ROUTES.DASHBOARD || "/dashboard"}
+                    className={styles.dropdownItem}
+                    onClick={() => setIsProfileOpen(false)}
+                  >
+                    <span>👤</span> Profile Dashboard
+                  </Link>
+                  <button
+                    className={`${styles.dropdownItem} ${styles.dropdownSignOut}`}
+                    onClick={handleSignOut}
+                  >
+                    <span>🔒</span> Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Sign In Button - Only visible when NOT authenticated */
             <button className={styles.signInButton} onClick={onSignInClick}>
               {t("hero.nav.signIn")}
             </button>

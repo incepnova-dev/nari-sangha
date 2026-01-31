@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Dashboard from "../home/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import Landing from "../landing/Landing";
 import Logout from "../logout/Logout";
 import { useAuth } from "../../context/AuthContext";
@@ -39,6 +39,7 @@ import InsuranceGuide from "../pages/InsuranceGuide";
 export const ROUTES = {
   LANDING: "/",
   HOME: "/home",
+  DASHBOARD: "/dashboard",
   LOGOUT: "/logout",
   JOURNEYS: "/journeys",
   PREGNANCY: "/journeys/pregnancy",
@@ -115,6 +116,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.INSURANCE_GUIDE} element={<InsuranceGuide />} />
       </Route>
 
+      <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
       <Route path={ROUTES.HOME} element={renderHome()} />
       <Route path={ROUTES.LOGOUT} element={<Logout />} />
 

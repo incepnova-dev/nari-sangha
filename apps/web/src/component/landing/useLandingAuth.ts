@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../routes/Routes";
-import { useAuth } from "../../context/AuthContext";
+// import { useNavigate } from "react-router-dom";
+// import { ROUTES } from "../routes/Routes";
+// import { useAuth } from "../../context/AuthContext";
 
 interface UseLandingAuthProps {
   onSignInSuccess?: (data: any) => void;
 }
 
 export const useLandingAuth = ({ onSignInSuccess }: UseLandingAuthProps) => {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  // const navigate = useNavigate(); // Unused
+  // const { isAuthenticated } = useAuth(); // Unused
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
 
@@ -24,11 +24,8 @@ export const useLandingAuth = ({ onSignInSuccess }: UseLandingAuthProps) => {
     };
   }, [isSignUpModalOpen, isSignInModalOpen]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(ROUTES.HOME, { replace: true });
-    }
-  }, [isAuthenticated, navigate]);
+  // Removed automatic redirect to keep users on the current page after login.
+  // If redirect is needed, it should be done on login success action, not strictly on state.
 
   const handleSignUpClick = useCallback(() => {
     setIsSignUpModalOpen(true);
@@ -52,6 +49,7 @@ export const useLandingAuth = ({ onSignInSuccess }: UseLandingAuthProps) => {
         onSignInSuccess(userData);
       }
       setIsSignInModalOpen(false);
+      window.location.reload(); // Refresh to ensure clean state
     },
     [onSignInSuccess]
   );
