@@ -1,5 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import InnerPageHero from '../shared/InnerPageHero';
+import styles from './GynaecologyOB.module.css';
 
 const CANCER_TYPES = ['breast', 'cervical', 'ovarian', 'endometrial'] as const;
 const STAGES = [1, 2, 3, 4] as const;
@@ -64,8 +66,13 @@ const COLORS: Record<CancerType, VisualColors> = {
 const CancerVisualization: React.FC = () => {
     const [type, setType] = useState<CancerType>('breast');
     const [stage, setStage] = useState<Stage>(1);
+    const vizRef = useRef<HTMLDivElement>(null);
 
     const colors = useMemo(() => COLORS[type], [type]);
+
+    const scrollToViz = () => {
+        vizRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
 
     // --- SVG COMPONENT HELPERS ---
 
@@ -177,6 +184,42 @@ const CancerVisualization: React.FC = () => {
                         >
                             <animate attributeName="opacity" values="0.2;0.6;0.2" dur={`${2.5 + i * 0.2}s`} repeatCount="indefinite" />
                         </motion.line>
+                    );
+                })}
+            </g>
+        );
+    };
+
+    const renderParticles = (cx: number, cy: number, radius: number, currentStage: number) => {
+        const count = currentStage * 8;
+        return (
+            <g className="cellular-particles">
+                {Array.from({ length: 40 }).map((_, i) => {
+                    const isVisible = i < count;
+                    const angle = (i * 137.5) * (Math.PI / 180);
+                    const dist = radius + 15 + (i * 2);
+                    const x = cx + Math.cos(angle) * dist;
+                    const y = cy + Math.sin(angle) * dist;
+                    const size = 1 + Math.random();
+
+                    return (
+                        <motion.circle
+                            key={i}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: isVisible ? 0.5 : 0 }}
+                            cx={x} cy={y}
+                            r={size}
+                            fill={colors.infection[1]}
+                        >
+                            <animate attributeName="opacity" values="0.2;0.6;0.2" dur={`${4 + Math.random() * 2}s`} repeatCount="indefinite" />
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                values="0 0; 2 2; 0 0"
+                                dur={`${6 + Math.random() * 4}s`}
+                                repeatCount="indefinite"
+                            />
+                        </motion.circle>
                     );
                 })}
             </g>
@@ -345,196 +388,248 @@ const CancerVisualization: React.FC = () => {
                     {renderParticles(230, 190, r, stage)}
                     {renderTumorSphere(230, 190, r * 0.8, stage)}
                 </motion.g>
+                {stage === 4 && (
+                    <g>
+                        <path d="M 230 190 Q 150 120 100 80" fill="none" stroke={colors.blood} strokeWidth="2" strokeDasharray="6,4" opacity="0.6">
+                            <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="4s" repeatCount="indefinite" />
+                        </path>
+                        <circle cx="100" cy="80" r="8" fill="url(#tumor3DGrad)">
+                            <animateMotion dur="4.5s" repeatCount="indefinite" path="M 230 190 Q 150 120 100 80" />
+                        </circle>
+                        <text x="70" y="65" fontSize="10" fontWeight="900" fill={colors.accent}>Lung Met</text>
+                    </g>
+                )}
             </g>
         );
     };
 
     return (
-        <div style={{ padding: '2rem', background: '#fdfcfe', minHeight: '100vh', fontFamily: '"Inter", sans-serif' }}>
-            <motion.div
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                style={{
-                    maxWidth: '1200px',
-                    margin: '0 auto',
-                    background: 'rgba(255, 255, 255, 0.75)',
-                    backdropFilter: 'blur(24px) saturate(180%)',
-                    border: '1px solid rgba(255, 255, 255, 0.4)',
-                    padding: '3rem',
-                    borderRadius: '48px',
-                    boxShadow: '0 30px 80px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.5)'
-                }}
-            >
-                <header style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                    <motion.span
-                        layoutId="badge"
-                        style={{ display: 'inline-block', background: colors.tissue[0], color: colors.accent, padding: '8px 20px', borderRadius: '100px', fontSize: '11px', fontWeight: 900, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '16px' }}
-                    >
-                        Patient Education Portal
-                    </motion.span>
-                    <h1 style={{ fontSize: '42px', fontWeight: 900, color: '#1a1d23', letterSpacing: '-0.5px' }}>3D Cancer Progression Explorer</h1>
-                    <p style={{ color: '#64748b', fontSize: '18px', maxWidth: '600px', margin: '12px auto 0', lineHeight: 1.6 }}>
-                        Understanding biological changes through high-fidelity visual simulation.
-                    </p>
-                </header>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: '4rem' }}>
-                    <aside>
-                        <div style={{ position: 'sticky', top: '2rem' }}>
-                            <section style={{ marginBottom: '3rem' }}>
-                                <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem' }}>Select Organ System</h3>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                    {CANCER_TYPES.map(t => (
-                                        <button
-                                            key={t}
-                                            onClick={() => setType(t)}
-                                            style={{
-                                                padding: '1.25rem 1.5rem',
-                                                borderRadius: '24px',
-                                                border: '1px solid',
-                                                borderColor: type === t ? colors.accent : '#f1f5f9',
-                                                cursor: 'pointer',
-                                                background: type === t ? colors.accent : 'white',
-                                                color: type === t ? 'white' : '#475569',
-                                                fontWeight: 800,
-                                                textAlign: 'left',
-                                                transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
-                                                boxShadow: type === t ? `0 12px 24px ${colors.accent}33` : 'none',
-                                                fontSize: '15px'
-                                            }}
-                                        >
-                                            {t.charAt(0).toUpperCase() + t.slice(1)}
-                                        </button>
-                                    ))}
-                                </div>
-                            </section>
-
-                            <section>
-                                <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem' }}>Clinical Staging</h3>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
-                                    {STAGES.map(s => (
-                                        <button
-                                            key={s}
-                                            onClick={() => setStage(s)}
-                                            style={{
-                                                aspectRatio: '1',
-                                                borderRadius: '20px',
-                                                border: '1px solid',
-                                                borderColor: stage === s ? colors.accent : '#f1f5f9',
-                                                cursor: 'pointer',
-                                                background: stage === s ? colors.accent : 'white',
-                                                color: stage === s ? 'white' : '#475569',
-                                                fontWeight: 900,
-                                                fontSize: '20px',
-                                                transition: 'all 0.3s'
-                                            }}
-                                        >
-                                            {s}
-                                        </button>
-                                    ))}
-                                </div>
-                            </section>
-
-                            <div style={{ marginTop: '4rem', padding: '24px', background: 'rgba(241, 245, 249, 0.5)', borderRadius: '32px', border: '1px solid #f1f5f9' }}>
-                                <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#475569', marginBottom: '12px' }}>Biological Markers</h4>
-                                <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.blood }} />
-                                        <span>Angiogenesis (Stage II+)</span>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.inflammation[0] }} />
-                                        <span>Inflammation Halo</span>
-                                    </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.necrotic }} />
-                                        <span>Necrotic Mass (Stage III+)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
-
-                    <main style={{ position: 'relative' }}>
-                        <div style={{
-                            background: '#fff',
-                            borderRadius: '40px',
-                            boxShadow: 'inset 0 10px 40px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.01)',
-                            border: '1px solid #f1f5f9',
-                            position: 'relative',
-                            height: '560px',
-                            overflow: 'hidden'
-                        }}>
-                            <svg viewBox="0 0 450 400" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%' }}>
+        <div className={styles.page} style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #fefce8 100%)' }}>
+            <InnerPageHero
+                title="Ultra-Realistic 3D Cancer Explorer"
+                subtitle="Interactive educational visualization to understand cancer stages, progression, and anatomical impact — designed for clarity, not diagnosis."
+                badge="Medical Visualization"
+                illustration={
+                    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <motion.div
+                            animate={{
+                                scale: [1, 1.05, 1],
+                                rotate: [0, 5, 0]
+                            }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            style={{ position: 'relative' }}
+                        >
+                            <svg width="300" height="300" viewBox="0 0 200 200">
                                 <defs>
-                                    {/* Medical-Scan Grade 3D Lighting */}
-                                    <radialGradient id="organ3DGrad" fx="35%" fy="35%">
-                                        <stop offset="0%" stopColor="white" stopOpacity="0.6" />
-                                        <stop offset="50%" stopColor={colors.tissue[0]} />
-                                        <stop offset="100%" stopColor={colors.tissue[2]} />
+                                    <radialGradient id="heroTumorGrad" fx="30%" fy="30%">
+                                        <stop offset="0%" stopColor="#ffcdd2" />
+                                        <stop offset="70%" stopColor="#e53935" />
+                                        <stop offset="100%" stopColor="#b71c1c" />
                                     </radialGradient>
-
-                                    <radialGradient id="tumor3DGrad" fx="30%" fy="30%">
-                                        <stop offset="0%" stopColor={colors.tumor[0]} />
-                                        <stop offset="40%" stopColor={colors.tumor[1]} />
-                                        <stop offset="85%" stopColor={colors.tumor[2]} />
-                                        <stop offset="100%" stopColor={colors.tumor[3]} />
-                                    </radialGradient>
-
-                                    <filter id="glowSoft">
-                                        <feGaussianBlur stdDeviation="8" result="blur" />
+                                    <filter id="heroGlow">
+                                        <feGaussianBlur stdDeviation="10" result="blur" />
                                         <feMerge>
                                             <feMergeNode in="blur" />
                                             <feMergeNode in="SourceGraphic" />
                                         </feMerge>
                                     </filter>
-
-                                    <filter id="glowMedium">
-                                        <feGaussianBlur stdDeviation="4" result="blur" />
-                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                                    </filter>
-
-                                    <filter id="shadowSoft">
-                                        <feDropShadow dx="6" dy="10" stdDeviation="10" floodOpacity="0.12" />
-                                    </filter>
                                 </defs>
-                                {renderAnatomy()}
+                                <circle cx="100" cy="100" r="60" fill="url(#heroTumorGrad)" filter="url(#heroGlow)" />
+                                <ellipse cx="75" cy="75" rx="20" ry="15" fill="white" opacity="0.2" transform="rotate(-45, 75, 75)" />
                             </svg>
-
-                            {/* Educational Info Card */}
-                            <motion.div
-                                key={stage}
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(20px)', border: '1px solid rgba(0,0,0,0.05)', padding: '20px 32px', borderRadius: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-                            >
-                                <div style={{ flex: 1 }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
-                                        <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#1a202c' }}>STAGE {['I', 'II', 'III', 'IV'][stage - 1]}</h2>
-                                        <div style={{ height: '3px', width: '40px', background: colors.accent, borderRadius: '2px' }} />
-                                    </div>
-                                    <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 500 }}>
-                                        {stage === 1 && "Localized microscopic interaction within tissue boundaries."}
-                                        {stage === 2 && "Vascular expansion and early physiological penetration."}
-                                        {stage === 3 && "Extensive regional mass growth and cellular invasion."}
-                                        {stage === 4 && "Systemic migration to distant anatomical quadrants."}
-                                    </p>
-                                </div>
-                                <div style={{ textAlign: 'right', minWidth: '140px' }}>
-                                    <div style={{ fontSize: '18px', fontWeight: 900, color: colors.accent }}>
-                                        {[96, 84, 62, 24][stage - 1]}% Rate
-                                    </div>
-                                    <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Survival Trend</div>
-                                </div>
-                            </motion.div>
-                        </div>
-
-                        <div style={{ marginTop: '2rem', fontSize: '12px', color: '#94a3b8', fontWeight: 500, fontStyle: 'italic', textAlign: 'center', background: '#f8fafc', padding: '12px', borderRadius: '16px', border: '1px solid #f1f5f9' }}>
-                            ⚠ Educational Framework: This model is for visualization only and does not provide medical diagnosis.
-                        </div>
-                    </main>
+                        </motion.div>
+                    </div>
+                }
+            >
+                <div style={{ display: 'flex', gap: '16px', marginTop: '32px' }}>
+                    <button
+                        onClick={scrollToViz}
+                        style={{ padding: '16px 32px', borderRadius: '50px', border: 'none', background: '#d81b60', color: 'white', fontWeight: 800, cursor: 'pointer', boxShadow: '0 10px 30px rgba(216, 27, 96, 0.2)' }}
+                    >
+                        Explore Stages
+                    </button>
+                    <button
+                        onClick={scrollToViz}
+                        style={{ padding: '16px 32px', borderRadius: '50px', border: '2px solid rgba(216, 27, 96, 0.3)', background: 'transparent', color: '#880e4f', fontWeight: 800, cursor: 'pointer' }}
+                    >
+                        Learn About Cancer Types
+                    </button>
                 </div>
-            </motion.div>
+            </InnerPageHero>
+
+            <div className={styles.container} ref={vizRef} style={{ padding: '80px 0' }}>
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.85)',
+                        backdropFilter: 'blur(32px)',
+                        border: '1px solid rgba(255, 255, 255, 0.5)',
+                        padding: '3rem',
+                        borderRadius: '56px',
+                        boxShadow: '0 40px 100px rgba(0,0,0,0.05)'
+                    }}
+                >
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '340px 1fr', gap: '4rem' }}>
+                        <aside>
+                            <div style={{ position: 'sticky', top: '2rem' }}>
+                                <section style={{ marginBottom: '3rem' }}>
+                                    <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem' }}>Select Organ System</h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                        {CANCER_TYPES.map(t => (
+                                            <button
+                                                key={t}
+                                                onClick={() => setType(t)}
+                                                style={{
+                                                    padding: '1.25rem 1.5rem',
+                                                    borderRadius: '24px',
+                                                    border: '1px solid',
+                                                    borderColor: type === t ? colors.accent : '#f1f5f9',
+                                                    cursor: 'pointer',
+                                                    background: type === t ? colors.accent : 'white',
+                                                    color: type === t ? 'white' : '#475569',
+                                                    fontWeight: 800,
+                                                    textAlign: 'left',
+                                                    transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
+                                                    boxShadow: type === t ? `0 12px 24px ${colors.accent}33` : 'none',
+                                                    fontSize: '15px'
+                                                }}
+                                            >
+                                                {t.charAt(0).toUpperCase() + t.slice(1)}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <h3 style={{ fontSize: '13px', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1.5rem' }}>Clinical Staging</h3>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem' }}>
+                                        {STAGES.map(s => (
+                                            <button
+                                                key={s}
+                                                onClick={() => setStage(s)}
+                                                style={{
+                                                    aspectRatio: '1',
+                                                    borderRadius: '20px',
+                                                    border: '1px solid',
+                                                    borderColor: stage === s ? colors.accent : '#f1f5f9',
+                                                    cursor: 'pointer',
+                                                    background: stage === s ? colors.accent : 'white',
+                                                    color: stage === s ? 'white' : '#475569',
+                                                    fontWeight: 900,
+                                                    fontSize: '20px',
+                                                    transition: 'all 0.3s'
+                                                }}
+                                            >
+                                                {s}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                <div style={{ marginTop: '4rem', padding: '24px', background: 'rgba(241, 245, 249, 0.5)', borderRadius: '32px', border: '1px solid #f1f5f9' }}>
+                                    <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#475569', marginBottom: '12px' }}>Biological Markers</h4>
+                                    <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.blood }} />
+                                            <span>Angiogenesis (Stage II+)</span>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.inflammation[0] }} />
+                                            <span>Inflammation Halo</span>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <div style={{ width: 12, height: 12, borderRadius: '4px', background: colors.necrotic }} />
+                                            <span>Necrotic Mass (Stage III+)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <main style={{ position: 'relative' }}>
+                            <div style={{
+                                background: '#fff',
+                                borderRadius: '40px',
+                                boxShadow: 'inset 0 10px 40px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.01)',
+                                border: '1px solid #f1f5f9',
+                                position: 'relative',
+                                height: '560px',
+                                overflow: 'hidden'
+                            }}>
+                                <svg viewBox="0 0 450 400" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%' }}>
+                                    <defs>
+                                        {/* Medical-Scan Grade 3D Lighting */}
+                                        <radialGradient id="organ3DGrad" fx="35%" fy="35%">
+                                            <stop offset="0%" stopColor="white" stopOpacity="0.6" />
+                                            <stop offset="50%" stopColor={colors.tissue[0]} />
+                                            <stop offset="100%" stopColor={colors.tissue[2]} />
+                                        </radialGradient>
+
+                                        <radialGradient id="tumor3DGrad" fx="30%" fy="30%">
+                                            <stop offset="0%" stopColor={colors.tumor[0]} />
+                                            <stop offset="40%" stopColor={colors.tumor[1]} />
+                                            <stop offset="85%" stopColor={colors.tumor[2]} />
+                                            <stop offset="100%" stopColor={colors.tumor[3]} />
+                                        </radialGradient>
+
+                                        <filter id="glowSoft">
+                                            <feGaussianBlur stdDeviation="8" result="blur" />
+                                            <feMerge>
+                                                <feMergeNode in="blur" />
+                                                <feMergeNode in="SourceGraphic" />
+                                            </feMerge>
+                                        </filter>
+
+                                        <filter id="glowMedium">
+                                            <feGaussianBlur stdDeviation="4" result="blur" />
+                                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                        </filter>
+
+                                        <filter id="shadowSoft">
+                                            <feDropShadow dx="6" dy="10" stdDeviation="10" floodOpacity="0.12" />
+                                        </filter>
+                                    </defs>
+                                    {renderAnatomy()}
+                                </svg>
+
+                                {/* Educational Info Card */}
+                                <motion.div
+                                    key={stage}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(20px)', border: '1px solid rgba(0,0,0,0.05)', padding: '20px 32px', borderRadius: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                                >
+                                    <div style={{ flex: 1 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
+                                            <h2 style={{ fontSize: '20px', fontWeight: 900, color: '#1a202c' }}>STAGE {['I', 'II', 'III', 'IV'][stage - 1]}</h2>
+                                            <div style={{ height: '3px', width: '40px', background: colors.accent, borderRadius: '2px' }} />
+                                        </div>
+                                        <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 500 }}>
+                                            {stage === 1 && "Localized microscopic interaction within tissue boundaries."}
+                                            {stage === 2 && "Vascular expansion and early physiological penetration."}
+                                            {stage === 3 && "Extensive regional mass growth and cellular invasion."}
+                                            {stage === 4 && "Systemic migration to distant anatomical quadrants."}
+                                        </p>
+                                    </div>
+                                    <div style={{ textAlign: 'right', minWidth: '140px' }}>
+                                        <div style={{ fontSize: '18px', fontWeight: 900, color: colors.accent }}>
+                                            {[96, 84, 62, 24][stage - 1]}% Rate
+                                        </div>
+                                        <div style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Survival Trend</div>
+                                    </div>
+                                </motion.div>
+                            </div>
+
+                            <div style={{ marginTop: '2rem', fontSize: '12px', color: '#94a3b8', fontWeight: 500, fontStyle: 'italic', textAlign: 'center', background: '#f8fafc', padding: '12px', borderRadius: '16px', border: '1px solid #f1f5f9' }}>
+                                ⚠ Educational Framework: This model is for visualization only and does not provide medical diagnosis.
+                            </div>
+                        </main>
+                    </div>
+                </motion.div>
+            </div>
 
             <style>{`
                 @media (prefers-reduced-motion: reduce) {

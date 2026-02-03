@@ -1,0 +1,1075 @@
+/* AUTOIMMUNE HEALTH - PARITY STYLES */
+
+.page {
+    --pink: #ec407a;
+    --deep-pink: #d81b60;
+    --lavender: #ede7f6;
+    --bg: #faf5fb;
+    --text-main: #212121;
+    --text-soft: #555;
+    --lupus-color: #9c27b0;
+    --ra-color: #f06292;
+    --thyroid-color: #4fc3f7;
+    --success: #66bb6a;
+    --warning: #ffa726;
+    --critical: #ef5350;
+
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.pageShell {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+
+/* HERO SECTION */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 4rem;
+    border-radius: 28px;
+    background: radial-gradient(circle at top left, #fce4ec 0%, #f3e5f5 50%, #ffffff 100%);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    margin-bottom: 5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 2.5rem;
+    }
+}
+
+.heroContent h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--deep-pink) 0%, var(--lupus-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    font-family: 'Playfair Display', serif;
+}
+
+.heroSubtitle {
+    color: var(--text-soft);
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.heroStats {
+    display: flex;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.statItem {
+    background: white;
+    padding: 1.2rem 1.8rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.statNumber {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--deep-pink);
+    display: block;
+    font-family: 'Playfair Display', serif;
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: var(--text-soft);
+}
+
+.heroCtaRow {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btnPrimary {
+    background: var(--deep-pink);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.3);
+}
+
+.btnSecondary {
+    background: white;
+    color: var(--deep-pink);
+    border: 2px solid var(--deep-pink);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+/* 3D IMMUNE VISUALIZATION */
+.heroVisual3d {
+    position: relative;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.immune3dContainer {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    display: grid;
+    place-items: center;
+    perspective: 1000px;
+}
+
+.immuneCore {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    animation: float3D 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes float3D {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateX(0deg) rotateY(0deg);
+    }
+
+    25% {
+        transform: translateY(-20px) rotateX(5deg) rotateY(90deg);
+    }
+
+    50% {
+        transform: translateY(0) rotateX(0deg) rotateY(180deg);
+    }
+
+    75% {
+        transform: translateY(-20px) rotateX(-5deg) rotateY(270deg);
+    }
+}
+
+.coreRing {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid;
+    animation: expandRing 3s ease-in-out infinite;
+}
+
+.ring1 {
+    border-color: rgba(236, 64, 122, 0.4);
+    animation-delay: 0s;
+}
+
+.ring2 {
+    border-color: rgba(156, 39, 176, 0.4);
+    animation-delay: 1s;
+}
+
+.ring3 {
+    border-color: rgba(79, 195, 247, 0.4);
+    animation-delay: 2s;
+}
+
+@keyframes expandRing {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+.coreCenter {
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(236, 64, 122, 0.5), 0 0 80px rgba(156, 39, 176, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.3);
+    animation: coreGlow 4s ease-in-out infinite;
+}
+
+@keyframes coreGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 40px rgba(236, 64, 122, 0.5), 0 0 80px rgba(156, 39, 176, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 60px rgba(236, 64, 122, 0.8), 0 0 120px rgba(156, 39, 176, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.5);
+    }
+}
+
+.orbitingCell {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+}
+
+.cellInner {
+    font-size: 2rem;
+    background: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    animation: cellFloat 3s ease-in-out infinite;
+}
+
+@keyframes cellFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scale(1.1);
+    }
+}
+
+.cell1 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: orbit1 8s linear infinite;
+}
+
+.cell2 {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    animation: orbit2 10s linear infinite;
+}
+
+.cell3 {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: orbit3 12s linear infinite;
+}
+
+.cell4 {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    animation: orbit4 9s linear infinite;
+}
+
+@keyframes orbit1 {
+    0% {
+        transform: translate(-50%, 0) rotate(0deg) translateX(150px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, 0) rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit2 {
+    0% {
+        transform: translate(0, -50%) rotate(0deg) translateX(150px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(0, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit3 {
+    0% {
+        transform: translate(-50%, 0) rotate(0deg) translateX(150px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, 0) rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+}
+
+@keyframes orbit4 {
+    0% {
+        transform: translate(0, -50%) rotate(0deg) translateX(150px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(0, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
+    }
+}
+
+.animationDescription {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.descBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.1), rgba(156, 39, 176, 0.1));
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--deep-pink);
+}
+
+.descTitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-main);
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+}
+
+.descText {
+    color: var(--text-soft);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* THEMES SECTION */
+.themesSection {
+    margin-top: 4rem;
+}
+
+.sectionHeaderEnhanced {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .sectionHeaderEnhanced {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sectionTitleGradient {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--deep-pink), var(--lupus-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Progress Tracker */
+.progressTracker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.trackerVisual {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.progressCircleSvg {
+    transform: rotate(-90deg);
+}
+
+.progressBgCircle {
+    fill: none;
+    stroke: rgba(236, 64, 122, 0.1);
+    stroke-width: 8;
+}
+
+.progressFillCircle {
+    fill: none;
+    stroke: url(#progressGradient);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 377;
+    transition: stroke-dashoffset 0.6s ease;
+}
+
+.progressCenter {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progressNumber {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--deep-pink), var(--lupus-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.progressLabel {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* THEME GRID */
+.themeGridEnhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.themeCard3d {
+    position: relative;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.themeCard3d:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.themeCard3d.explored {
+    border: 2px solid var(--success);
+    background: linear-gradient(135deg, rgba(102, 187, 106, 0.05), #ffffff);
+}
+
+.cardIconContainer {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+}
+
+.iconBg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.1), rgba(156, 39, 176, 0.1));
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.cardIcon {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 2.5rem;
+}
+
+.cardTitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    font-weight: 900;
+}
+
+.cardDescription {
+    color: var(--text-soft);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cardBadge {
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.1), rgba(156, 39, 176, 0.1));
+    color: var(--deep-pink);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.cardArrow {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--pink), var(--lupus-color));
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+/* SIMULATOR SECTION */
+.bodySimulatorSection {
+    margin-top: 5rem;
+    padding: 3rem;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .bodySimulatorSection {
+        padding: 1.5rem;
+    }
+}
+
+.simulatorHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.simulatorTabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.simTab {
+    background: white;
+    border: 2px solid #e0e0e0;
+    padding: 1.2rem 2rem;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+    transition: all 0.3s;
+}
+
+.simTab.active {
+    background: linear-gradient(135deg, var(--pink), var(--lupus-color));
+    color: white;
+    border-color: transparent;
+}
+
+.simGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+@media (max-width: 1024px) {
+    .simGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bodyOutlineWrapper {
+    background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bodySvg {
+    width: 100%;
+    height: auto;
+    max-width: 280px;
+    display: block;
+}
+
+.bodyPath {
+    stroke: var(--pink);
+    stroke-width: 3;
+    fill: rgba(236, 64, 122, 0.05);
+    stroke-linecap: round;
+    transition: all 0.6s ease-in-out;
+}
+
+.premiumBodyPath {
+    stroke: var(--pink);
+    stroke-width: 2;
+    fill: url(#bodyGrad);
+    stroke-linecap: round;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.8;
+}
+
+.hotspot {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hotspotPulse {
+    fill: white;
+    filter: blur(8px);
+    opacity: 0;
+    animation: hotspotGlowAnim 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.hotspot:hover .hotspotPulse,
+.activeHotspot .hotspotPulse {
+    opacity: 0.6;
+    fill: var(--pink);
+    filter: blur(12px);
+}
+
+.organIcon {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.hotspot:hover .organIcon,
+.activeHotspot .organIcon {
+    transform: scale(1.3) translateY(-5px);
+    filter: drop-shadow(0 0 15px rgba(236, 64, 122, 0.5)) brightness(1.2);
+}
+
+@keyframes hotspotGlowAnim {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.4;
+    }
+}
+
+/* Ambient Particles */
+.particle {
+    fill: white;
+    opacity: 0.3;
+    filter: blur(1px);
+    animation: particleFloat 15s linear infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.4;
+    }
+
+    90% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateY(-400px) translateX(20px);
+        opacity: 0;
+    }
+}
+
+@keyframes hotspotPulseAnim {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1.8);
+        opacity: 0.4;
+    }
+}
+
+.mapPrompt {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.6rem 2rem;
+    border-radius: 40px;
+    box-shadow: 0 8px 32px rgba(236, 64, 122, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    z-index: 5;
+    animation: promptPulse 2s ease-in-out infinite;
+}
+
+@keyframes promptPulse {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+.mapPrompt p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--pink);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Organ Info Card Styles */
+.organInfoCard {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid rgba(236, 64, 122, 0.1);
+}
+
+.organInfoHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.organIconLarge {
+    font-size: 3rem;
+    width: 70px;
+    height: 70px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.organInfoHeader h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--pink);
+}
+
+.organSubtitle {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.organDesc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+}
+
+.organFacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.organFactTag {
+    background: #fdf2f8;
+    color: var(--pink);
+    padding: 0.4rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.resetMap {
+    margin-top: auto;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+    padding: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.resetMap:hover {
+    background: #eee;
+    color: #333;
+}
+
+.defaultInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bodyPathBreakdown {
+    stroke: #999;
+    stroke-width: 3;
+    fill: rgba(150, 150, 150, 0.05);
+    stroke-linecap: round;
+    opacity: 0.7;
+    transition: all 0.6s ease-in-out;
+}
+
+.bodyBreathing {
+    animation: breathing 6s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.bodyBreathingSlower {
+    animation: breathing 8s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.organGroup {
+    transition: all 0.6s ease-in-out;
+}
+
+.organShape {
+    opacity: 0.7;
+    transition: all 0.6s ease-in-out;
+}
+
+.organLabel {
+    font-size: 10px;
+    font-weight: 700;
+    fill: #444;
+    text-anchor: middle;
+    pointer-events: none;
+    transition: all 0.6s ease-in-out;
+}
+
+.thyroidGroup .organShape {
+    fill: #4fc3f7;
+}
+
+.jointsGroup .organShape {
+    fill: #f06292;
+}
+
+.thyroidGroup .organLabel {
+    fill: #fff;
+}
+
+/* Tab-specific Visual States */
+.normal .organShape {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.breakdown .organShape {
+    opacity: 0.4;
+    filter: grayscale(0.5);
+}
+
+.attack .organShape {
+    opacity: 1;
+    animation: areaHighlight 3.5s ease-in-out infinite;
+}
+
+.infoCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 2px solid #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.infoCard h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--deep-pink);
+}
+
+/* INFO PANEL */
+.infoPanel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 90%;
+    max-width: 700px;
+    height: 100vh;
+    background: white;
+    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow-y: auto;
+}
+
+.infoPanel.active {
+    right: 0;
+}
+
+.panelHeader {
+    background: linear-gradient(135deg, var(--deep-pink), var(--lupus-color));
+    color: white;
+    padding: 3rem 2.5rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.panelIcon {
+    font-size: 4rem;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closePanel {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.panelContent {
+    padding: 2.5rem;
+}
+
+.factCard {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border-left: 5px solid var(--pink);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1rem;
+}
+
+.factBadge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: linear-gradient(135deg, var(--pink), var(--lupus-color));
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Keyframes for Body Simulations */
+@keyframes breathing {
+
+    0%,
+    100% {
+        transform: scaleY(1) translateY(0);
+    }
+
+    50% {
+        transform: scaleY(1.015) translateY(-2px);
+    }
+}
+
+@keyframes areaHighlight {
+
+    0%,
+    100% {
+        filter: brightness(1) drop-shadow(0 0 2px rgba(236, 64, 122, 0));
+        opacity: 0.7;
+    }
+
+    50% {
+        filter: brightness(1.15) drop-shadow(0 0 10px rgba(236, 64, 122, 0.4));
+        opacity: 1;
+    }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .bodySvg *,
+    .bodyBreathing,
+    .bodyBreathingSlower,
+    .organShape,
+    .bodyPath {
+        animation: none !important;
+        transition: none !important;
+    }
+}

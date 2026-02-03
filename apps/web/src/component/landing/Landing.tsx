@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "./HeroSection";
 import WomenStories from "./WomenStories";
 import ProductsSection from "./ProductsSection";
+import VideoSection from "./VideoSection";
 import styles from "./landing.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
@@ -87,10 +88,12 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
 
       <ProductsSection />
 
+      <VideoSection />
+
       <WomenStories />
 
       {/* 6. Knowledge Hub CTA */}
-      <div style={{ background: "#FAFAFA", padding: "80px 20px", textAlign: "center" }}>
+      <div className={styles.section} style={{ background: "#FAFAFA", padding: "60px 20px", textAlign: "center" }}>
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <h2 className={styles.sectionTitle} style={{ fontSize: "32px" }}>Your Health Knowledge Hub</h2>
           <p style={{ fontSize: "18px", color: "#666", marginBottom: "32px" }}>Access thousands of expert-reviewed articles, guides, and videos to help you make informed decisions.</p>
@@ -101,7 +104,6 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
           >
             Visit Knowledge Hub
           </button>
-
         </div>
       </div>
     </>

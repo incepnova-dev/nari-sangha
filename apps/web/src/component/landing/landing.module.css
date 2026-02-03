@@ -45,7 +45,6 @@
 .main {
   display: flex;
   flex-direction: column;
-  gap: 120px;
 }
 
 .navbarWrapper {
@@ -305,7 +304,7 @@
 }
 
 .hero {
-  padding: 100px 5%;
+  padding: 80px 5% 60px;
   background: linear-gradient(180deg, #D81B60 0%, #E91E63 50%, #F8BBD0 100%);
   display: flex;
   flex-direction: row;
@@ -317,7 +316,7 @@
   overflow: hidden;
   z-index: 1;
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   margin: 0;
   border-radius: 0;
 }

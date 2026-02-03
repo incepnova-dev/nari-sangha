@@ -27,23 +27,6 @@ const LossSupport: React.FC = () => {
 
     return (
         <div className="loss-support-page">
-            <header className="site-header">
-                <div className="nav-container">
-                    <div className="logo">
-                        <a href="/"><i className="fas fa-heart-broken"></i> Nari Sangha</a>
-                    </div>
-                    <nav className="main-nav">
-                        <a href="/products">Product</a>
-                        <a href="/about">About Us</a>
-                        <a href="/services">Services</a>
-                        {/* Stories Link Removed */}
-                    </nav>
-                    <div className="nav-actions">
-                        <a href="#crisis-support" className="btn-support" style={{ background: 'var(--crisis-red)', borderColor: 'var(--crisis-red)', color: 'white', padding: '0.5rem 1rem', borderRadius: '50px', textDecoration: 'none', fontWeight: 600 }}>24/7 Crisis Support</a>
-                        <a href="/login" className="btn-secondary-3d" style={{ padding: '0.5rem 1.2rem', minHeight: 'auto' }}>Sign In</a>
-                    </div>
-                </div>
-            </header>
 
             <section className="hero-constellation">
                 <div className="constellation-bg">

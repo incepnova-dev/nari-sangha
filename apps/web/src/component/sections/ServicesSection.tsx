@@ -52,18 +52,6 @@ const SERVICES: ServiceCategory[] = [
         color: "linear-gradient(135deg, #84FAB0 0%, #8FD3F4 100%)"
     },
     {
-        title: "Specialized Care",
-        icon: "✨",
-        desc: "Expert guidance for specific health and aesthetic goals.",
-        items: [
-            "Adolescent Gynaecology",
-            "Menopause Management",
-            "Cosmetic Gynaecology",
-            "Preventive Screenings"
-        ],
-        color: "linear-gradient(135deg, #F6D365 0%, #FDA085 100%)"
-    },
-    {
         title: "Nutrition & Fitness",
         icon: "🥗",
         desc: "Functional nutrition and movement plans tailored to your hormonal health.",

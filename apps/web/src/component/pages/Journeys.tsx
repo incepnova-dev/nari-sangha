@@ -11,7 +11,6 @@ import ServicesSection from "../sections/ServicesSection";
 // Assets
 import pregnancyImg from "../../assets/journey_pregnancy.png";
 import fertilityImg from "../../assets/journey_fertility.png";
-import symptomsImg from "../../assets/journey_symptoms.png";
 import menopauseImg from "../../assets/journey_menopause.png";
 import lossSupportImg from "../../assets/journey_loss_support.png";
 import breastfeedingImg from "../../assets/journey_breastfeeding.png";
@@ -135,16 +134,6 @@ const Journeys: React.FC = () => {
             image: breastfeedingImg
         },
 
-        {
-            id: "symptom-care",
-            title: "Symptom → Care Journey",
-            focus: "Start with symptoms and reach the right next action for your health.",
-            includes: ["Triage", "Care steps", "Education"],
-            nextSteps: ["Quick triage and education", "Find doctors or teleconsult", "Prevention plan"],
-            icon: "🩺",
-            path: ROUTES.SYMPTOM_CHECKER,
-            image: symptomsImg
-        },
         {
             id: "prevention",
             title: "Prevention Journey",
