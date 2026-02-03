@@ -63,40 +63,30 @@ const PreventiveHealthJourney: React.FC = () => {
                 title="Preventive Health"
                 subtitle="Stay ahead of potential health issues with age-appropriate screenings, vaccinations, and proactive care."
                 badge="Prevention & Wellness"
-            />
-
-            {/* Back Button */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
+            >
                 <button
                     onClick={() => navigate(ROUTES.JOURNEYS)}
                     style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        padding: "10px 16px",
-                        background: "white",
-                        border: "1px solid #eee",
-                        borderRadius: "12px",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#666",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#f9f9f9";
-                        e.currentTarget.style.color = "var(--pink)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "white";
-                        e.currentTarget.style.color = "#666";
+                        marginTop: '20px',
+                        padding: '10px 20px',
+                        background: 'rgba(255,255,255,0.2)',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        color: 'white',
+                        borderRadius: '30px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        backdropFilter: 'blur(5px)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
                     }}
                 >
-                    <span style={{ fontSize: "16px" }}>←</span>
-                    Back to all journeys
+                    ← Back to Paths
                 </button>
-            </div>
+            </InnerPageHero>
+
+            {/* Back Button Moved to Hero */}
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
 
@@ -189,7 +179,7 @@ const PreventiveHealthJourney: React.FC = () => {
                                 <span style={{ background: '#F5F5F5', padding: '4px 12px', borderRadius: '20px', fontSize: '11px', fontWeight: '800', color: '#777' }}>{s.badge}</span>
                             </div>
                             <h3 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '20px' }}>{s.title}</h3>
-                            <div style={{ borderTop: '1px solid #F0F0F0', paddingTop: '20px' }}>
+                            <div style={{ borderTop: '1px solid #F0F0F0', paddingTop: '20px', marginBottom: '20px' }}>
                                 {s.guidelines.map(g => (
                                     <div key={g.age} style={{ marginBottom: '12px', display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                                         <span style={{ fontWeight: '700', color: '#888' }}>{g.age}:</span>
@@ -197,6 +187,31 @@ const PreventiveHealthJourney: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
+                            <button
+                                onClick={() => navigate(ROUTES.SCREENING)}
+                                style={{
+                                    width: '100%',
+                                    padding: '12px',
+                                    background: 'white',
+                                    border: '1px solid #eee',
+                                    borderRadius: '12px',
+                                    fontSize: '13px',
+                                    fontWeight: '700',
+                                    color: 'var(--pink)',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = 'var(--pink)';
+                                    e.currentTarget.style.color = 'white';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'white';
+                                    e.currentTarget.style.color = 'var(--pink)';
+                                }}
+                            >
+                                View Detailed {s.title} Guide →
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -204,7 +219,7 @@ const PreventiveHealthJourney: React.FC = () => {
                 {/* Vaccinations Timeline */}
                 <div style={{ background: 'white', padding: '60px 40px', borderRadius: '40px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', marginBottom: '80px' }}>
                     <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '40px', textAlign: 'center' }}>💉 Vaccination Life-Stages</h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '40px' }}>
                         {[
                             { title: "General Protection", icon: "🛡️", vax: ["HPV (Up to 45)", "Flu (Annual)", "Tdap (Every 10 yrs)"] },
                             { title: "Pregnancy Essential", icon: "🤰", vax: ["Tdap (27-36 weeks)", "Flu (Safe anytime)", "COVID-19 (Safe anytime)"] },
@@ -224,6 +239,24 @@ const PreventiveHealthJourney: React.FC = () => {
                                 </ul>
                             </div>
                         ))}
+                    </div>
+                    <div style={{ textAlign: 'center' }}>
+                        <button
+                            onClick={() => navigate(ROUTES.VACCINATION)}
+                            style={{
+                                padding: '16px 40px',
+                                background: 'linear-gradient(135deg, var(--pink), #f06292)',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '30px',
+                                fontSize: '16px',
+                                fontWeight: '800',
+                                cursor: 'pointer',
+                                boxShadow: '0 10px 20px rgba(216, 27, 96, 0.2)'
+                            }}
+                        >
+                            Explore Comprehensive Vaccination Guide
+                        </button>
                     </div>
                 </div>
 

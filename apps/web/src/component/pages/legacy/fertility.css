@@ -1,0 +1,524 @@
+/* fertility.css */
+:root {
+    --fert-primary: #e91e63;
+    --fert-secondary: #ff6b9d;
+    --fert-success: #4caf50;
+    --fert-warning: #ff9800;
+    --fert-danger: #f44336;
+    --fert-info: #2196f3;
+    --fert-purple: #9c27b0;
+    --fert-glass: rgba(255, 255, 255, 0.7);
+}
+
+.fertilityHighFidelity {
+    background-color: #fff8f9;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+/* Hero Stats Styling */
+.heroStatsGrid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.statBox {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.1);
+    min-width: 180px;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(233, 30, 99, 0.05);
+}
+
+.statBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.15);
+}
+
+.statIcon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.statValue {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--fert-primary);
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Section Styling */
+.hfSection {
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.hfSectionTitle {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--fert-primary) 0%, var(--fert-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hfSectionSubtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Nutrient Grid */
+.nutrientGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.nutrientCard {
+    background: white;
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+}
+
+.nutrientCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--nutrient-color);
+}
+
+.nutrientCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.nutrientHeader {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.nutrientIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--nutrient-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nutrientName {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #2d3436;
+}
+
+.nutrientBenefit {
+    font-size: 0.95rem;
+    color: #636e72;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.dailyNeedBox {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.foodList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.foodItem {
+    padding: 0.5rem 1rem;
+    background: #fdf2f7;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--fert-primary);
+    transition: all 0.2s;
+}
+
+.foodItem:hover {
+    background: var(--nutrient-color);
+    color: white;
+}
+
+/* Habits Grid */
+.habitsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.habitsCard {
+    border-radius: 35px;
+    padding: 3rem;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.doCard {
+    background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);
+    border-color: #4caf50;
+}
+
+.dontCard {
+    background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%);
+    border-color: #f44336;
+}
+
+.habitTitle {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.habitItem {
+    display: flex;
+    align-items: start;
+    gap: 1.2rem;
+    background: white;
+    padding: 1.2rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.habitItem:hover {
+    transform: translateX(10px);
+}
+
+.habitIcon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.habitInfo h4 {
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.habitInfo p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Loss Types Grid */
+.lossGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+}
+
+.lossCard {
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border-left: 8px solid var(--loss-color);
+    transition: all 0.3s;
+}
+
+.lossCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.lossHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.lossIcon {
+    width: 55px;
+    height: 55px;
+    background: var(--loss-color);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.lossCard h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.lossCard .stat {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.lossCard p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.warningBox {
+    background: #fff8f0;
+    padding: 1.2rem;
+    border-radius: 15px;
+    margin-bottom: 1.2rem;
+}
+
+.warningBox h5 {
+    color: #f57c00;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.warningBox ul {
+    list-style: none;
+    font-size: 0.85rem;
+}
+
+.actionPill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f0f7ff;
+    border-radius: 12px;
+    color: #0061c1;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+/* Doctor Triggers Grid */
+.triggerGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.triggerCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    border-top: 4px solid var(--t-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.2s;
+}
+
+.triggerCard:hover {
+    transform: scale(1.03);
+}
+
+.triggerIcon {
+    width: 45px;
+    height: 45px;
+    background: var(--t-color);
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.triggerCard p {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Timeline Styling */
+.hfTimeline {
+    position: relative;
+    padding: 4rem 0;
+}
+
+.hfTimeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--fert-primary) 0%, var(--fert-purple) 50%, var(--fert-info) 100%);
+    border-radius: 10px;
+}
+
+.timelineItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+.timelineLeft,
+.timelineRight {
+    width: 45%;
+}
+
+.timelineMarker {
+    width: 100px;
+    height: 100px;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    border: 6px solid var(--m-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.markerIcon {
+    font-size: 2rem;
+}
+
+.markerLabel {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #888;
+}
+
+.timelineCard {
+    background: white;
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    border-bottom: 5px solid var(--m-color);
+    transition: transform 0.3s;
+}
+
+.timelineCard:hover {
+    transform: scale(1.05);
+}
+
+.timelineCard h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--m-color);
+    margin-bottom: 0.8rem;
+}
+
+.timelineCard p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+    .habitsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .hfTimeline::before {
+        left: 40px;
+        transform: none;
+    }
+
+    .timelineItem {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        gap: 2rem;
+    }
+
+    .timelineLeft,
+    .timelineRight {
+        width: 100%;
+    }
+
+    .timelineMarker {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    .timelineCard {
+        width: 100%;
+    }
+
+    .timelineLeft:empty {
+        display: none;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.float {
+    animation: float 4s ease-in-out infinite;
+}

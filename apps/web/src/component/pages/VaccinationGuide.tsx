@@ -1,22 +1,8 @@
 import React, { useState } from "react";
 import styles from "./VaccinationGuide.module.css";
 import InnerPageHero from "../shared/InnerPageHero";
-
-interface Vaccine {
-    id: string;
-    title: string;
-    who: string;
-    why: string;
-    status: string;
-    icon: string;
-}
-
-const VACCINES: Vaccine[] = [
-    { id: "hpv", title: "HPV", who: "Ages 9-26 (Catch-up to 45)", why: "Reduces cervical cancer risk", status: "Critical", icon: "🛡️" },
-    { id: "flu", title: "Influenza (Flu)", who: "All adults, annually", why: "Prevents seasonal complications", status: "Annual", icon: "💉" },
-    { id: "tdap", title: "Tdap (Pregnancy)", who: "27-36 weeks (every pregnancy)", why: "Protects baby from whooping cough", status: "Priority", icon: "👶" },
-    { id: "covid", title: "COVID-19", who: "All adults", why: "Reduced risk of severe illness", status: "Updated", icon: "🦠" },
-];
+import VaccineExplorer from "../shared/VaccineExplorer";
+import MythBuster from "../shared/MythBuster";
 
 const VaccinationGuide: React.FC = () => {
     const [activeTab, setActiveTab] = useState("overview");
@@ -56,17 +42,7 @@ const VaccinationGuide: React.FC = () => {
 
                         <div className={styles.tabContent}>
                             {activeTab === 'overview' && (
-                                <div className={styles.overviewGrid}>
-                                    {VACCINES.map(v => (
-                                        <div key={v.id} className={styles.vaccineCard}>
-                                            <span className={styles.vIcon}>{v.icon}</span>
-                                            <h3>{v.title}</h3>
-                                            <p><strong>Who:</strong> {v.who}</p>
-                                            <p><strong>Why:</strong> {v.why}</p>
-                                            <div className={styles.vBadge}>{v.status}</div>
-                                        </div>
-                                    ))}
-                                </div>
+                                <VaccineExplorer />
                             )}
 
                             {activeTab === 'pregnancy' && (
@@ -93,19 +69,7 @@ const VaccinationGuide: React.FC = () => {
                             )}
 
                             {activeTab === 'scheduler' && (
-                                <div className={styles.schedulerInterface}>
-                                    <h3>Personalized Vaccination Scheduler</h3>
-                                    <p>Based on your age and health history, we'll create a custom tracking plan for your dashboard.</p>
-                                    <div className={styles.formRow}>
-                                        <input type="number" placeholder="Enter Your Age" className={styles.input} />
-                                        <select className={styles.select}>
-                                            <option>Currently Pregnant?</option>
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                    <button className={styles.btnAction}>Generate My Schedule →</button>
-                                </div>
+                                <MythBuster />
                             )}
                         </div>
                     </div>

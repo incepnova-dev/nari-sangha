@@ -132,25 +132,6 @@ const JourneyFlow: React.FC = () => {
                     </path>
                 </svg>
             </div>
-
-            {/* Quick Jump Navigation */}
-            <div className={styles.quickJump}>
-                <p className={styles.quickLabel}>Jump to any stage:</p>
-                <div className={styles.quickButtons}>
-                    <button className={`${styles.btn} ${styles.btnOutline}`}>
-                        <span>🏠</span> Home
-                    </button>
-                    <button className={`${styles.btn} ${styles.btnPrimary}`}>
-                        <span>🤰</span> Start Journey
-                    </button>
-                    <button className={`${styles.btn} ${styles.btnGhost}`}>
-                        <span>📊</span> My Dashboard
-                    </button>
-                    <button className={`${styles.btn} ${styles.btnGhost}`}>
-                        <span>👨‍⚕️</span> Find Doctors
-                    </button>
-                </div>
-            </div>
         </div>
     );
 };

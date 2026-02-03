@@ -3,6 +3,9 @@ import styles from "./landing.module.css";
 import { useI18n } from "../../hooks/useI18n";
 
 import heroImg from "../../assets/hero_premium.png";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes/Routes";
+
 
 interface HeroSectionProps {
   onSignInClick: () => void;
@@ -10,6 +13,8 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onSignInClick }) => {
   const { t } = useI18n();
+  const navigate = useNavigate();
+
 
   return (
     <section className={styles.hero}>
@@ -19,7 +24,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onSignInClick }) => {
         <p className={styles.heroSubtitle}>{t("hero.subtitle")}</p>
         <div className={styles.heroActions}>
           <button className={styles.primaryCta} onClick={onSignInClick}>{t("hero.cta.primary")}</button>
-          <button className={styles.secondaryCta}>{t("hero.cta.secondary")}</button>
+          <button className={styles.secondaryCta} onClick={() => navigate(ROUTES.JOURNEYS + '#services')}>{t("hero.cta.secondary")}</button>
+
         </div>
       </div>
       <div className={styles.heroMedia}>

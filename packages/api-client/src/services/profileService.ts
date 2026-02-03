@@ -1,17 +1,11 @@
 import { ApiClient, ApiResponse } from '../apiClient';
+import { ServiceResult } from './authService';
 
 export interface UserProfile {
   id?: string;
   name?: string;
   email?: string;
   [key: string]: any;
-}
-
-export interface ServiceResult<T> {
-  success: boolean;
-  data?: T;
-  error?: string;
-  status?: number;
 }
 
 /**

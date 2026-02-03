@@ -1,0 +1,3065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breastfeeding Journey - Interactive Guide with Simulations</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ec407a;
+      --primary-dark: #d81b60;
+      --bg: #faf5fb;
+      --text: #212121;
+      --text-soft: #555;
+      --theme-physical: #e91e63;
+      --theme-patterns: #9c27b0;
+      --theme-maternal: #ff9800;
+      --theme-skills: #2196f3;
+      --theme-transitions: #4caf50;
+      --theme-social: #00bcd4;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* --- FIXED NAVIGATION STYLES --- */
+    .site-header {
+      background: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo a {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Styles for Sign In / Contact Buttons */
+    .btn-nav {
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .btn-nav.primary {
+      background: var(--primary); /* Fixed Visibility */
+      color: white;
+      border: 1px solid var(--primary);
+    }
+
+    .btn-nav.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-nav.outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-nav.outline:hover {
+      background: rgba(236, 64, 122, 0.1);
+    }
+
+    /* --- HERO & CONTENT STYLES --- */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #faf5fb 0%, #fce4ec 50%, #ede7f6 100%);
+      border-radius: 0 0 32px 32px; /* Adjusted radius */
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    /* --- NEW HERO ANIMATION STYLES --- */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 500px; /* Ensure height matches content */
+    }
+
+    .journey-svg {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(236, 64, 122, 0.2)); /* Soft pink glow */
+      animation: float-journey 6s ease-in-out infinite;
+    }
+
+    @keyframes float-journey {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .title-em {
+      background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      margin-bottom: 2rem;
+    }
+    
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    
+    .badge {
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(236,64,122,0.2);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    
+    /* Main Action Buttons (Begin Journey & Milk Supply) */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary-dark), #f06292); /* Strong visible gradient */
+      color: white !important; /* Force white text */
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(216,27,96,0.3);
+      transition: all 0.3s;
+      text-decoration: none; /* Removes link underline */
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(216,27,96,0.4);
+    }
+    
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #heroCanvas {
+      width: 100%;
+      max-width: 500px;
+      height: 500px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* Body Changes Simulation */
+    .simulation-container {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    
+    .simulation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    
+    .sim-panel {
+      background: linear-gradient(135deg, rgba(236,64,122,0.05) 0%, rgba(236,64,122,0.1) 100%);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+    
+    .sim-panel h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    #bodyChangesCanvas {
+      width: 100%;
+      height: 400px;
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .week-slider-container {
+      margin-bottom: 1.5rem;
+    }
+    
+    .week-display {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    
+    .week-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(236,64,122,0.2);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    
+    .week-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(236,64,122,0.4);
+    }
+    
+    .week-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(236,64,122,0.4);
+    }
+    
+    .changes-list {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    
+    .change-item {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: rgba(236,64,122,0.05);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+    }
+    
+    .change-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-dark);
+    }
+    
+    .change-item p {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+    
+    /* Latch Simulator */
+    #latchCanvas {
+      width: 100%;
+      height: 300px;
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .position-controls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .position-btn {
+      padding: 1rem;
+      background: white;
+      border: 2px solid rgba(236,64,122,0.3);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .position-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    
+    .position-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    /* Theme Navigation */
+    .theme-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    
+    .theme-btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 2px solid transparent;
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .theme-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    
+    .theme-btn.active {
+      color: white;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .theme-btn.physical { border-color: var(--theme-physical); }
+    .theme-btn.physical.active { background: var(--theme-physical); }
+    
+    .theme-btn.patterns { border-color: var(--theme-patterns); }
+    .theme-btn.patterns.active { background: var(--theme-patterns); }
+    
+    .theme-btn.maternal { border-color: var(--theme-maternal); }
+    .theme-btn.maternal.active { background: var(--theme-maternal); }
+    
+    .theme-btn.skills { border-color: var(--theme-skills); }
+    .theme-btn.skills.active { background: var(--theme-skills); }
+    
+    .theme-btn.transitions { border-color: var(--theme-transitions); }
+    .theme-btn.transitions.active { background: var(--theme-transitions); }
+    
+    .theme-btn.social { border-color: var(--theme-social); }
+    .theme-btn.social.active { background: var(--theme-social); }
+    
+    /* Theme Sections */
+    .theme-section {
+      margin-bottom: 5rem;
+      display: none;
+    }
+    
+    .theme-section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .theme-header {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    
+    .theme-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .theme-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    
+    .theme-description {
+      font-size: 1.1rem;
+      color: var(--text-soft);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    
+    .topic-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      transition: all 0.4s;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    
+    .topic-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+    
+    .topic-card.explored::after {
+      content: '✓';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      background: #4caf50;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      z-index: 2;
+    }
+    
+    .topic-header {
+      padding: 2rem;
+      position: relative;
+    }
+    
+    .topic-card.physical .topic-header { background: linear-gradient(135deg, rgba(233,30,99,0.05), rgba(233,30,99,0.15)); }
+    .topic-card.patterns .topic-header { background: linear-gradient(135deg, rgba(156,39,176,0.05), rgba(156,39,176,0.15)); }
+    .topic-card.maternal .topic-header { background: linear-gradient(135deg, rgba(255,152,0,0.05), rgba(255,152,0,0.15)); }
+    .topic-card.skills .topic-header { background: linear-gradient(135deg, rgba(33,150,243,0.05), rgba(33,150,243,0.15)); }
+    .topic-card.transitions .topic-header { background: linear-gradient(135deg, rgba(76,175,80,0.05), rgba(76,175,80,0.15)); }
+    .topic-card.social .topic-header { background: linear-gradient(135deg, rgba(0,188,212,0.05), rgba(0,188,212,0.15)); }
+    
+    .topic-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+    
+    .topic-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .topic-number {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(236,64,122,0.1);
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+    
+    .topic-body {
+      padding: 1.5rem 2rem;
+    }
+    
+    .topic-preview {
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    
+    .expand-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .expand-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 9998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: white;
+      border-radius: 24px;
+      max-width: 900px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      z-index: 9999;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .modal-header {
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(236,64,122,0.1) 0%, rgba(236,64,122,0.2) 100%);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 2px solid rgba(236,64,122,0.2);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .modal-close:hover {
+      background: var(--primary);
+      color: white;
+      transform: rotate(90deg);
+    }
+    
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    
+    .modal-body {
+      padding: 2rem;
+    }
+    
+    .attr-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(236,64,122,0.03);
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .attr-section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .progress-hud {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      z-index: 999;
+      min-width: 280px;
+      border: 2px solid rgba(236,64,122,0.2);
+    }
+    
+    .hud-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .progress-bar-bg {
+      background: rgba(236,64,122,0.1);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ec407a, #d81b60);
+      border-radius: 999px;
+      width: 0%;
+      transition: width 0.5s;
+    }
+    
+    .hud-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+    
+    @media (max-width: 968px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .simulation-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .progress-hud {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        min-width: auto;
+      }
+    }
+
+    /* --- EMOTIONAL BOND SECTION --- */
+.bond-section {
+  background: white;
+  border-radius: 32px;
+  padding: 4rem 2rem;
+  margin: 3rem 0;
+  box-shadow: 0 10px 40px rgba(236, 64, 122, 0.05);
+  overflow: hidden;
+  border: 1px solid rgba(236, 64, 122, 0.1);
+}
+
+.bond-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .bond-container { grid-template-columns: 1fr; text-align: center; }
+  .bond-quote { margin: 0 auto; }
+}
+
+.bond-label {
+  display: inline-block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ec407a;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: rgba(236, 64, 122, 0.08);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+
+.bond-text h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  background: linear-gradient(45deg, #d81b60, #ad1457);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bond-text p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.bond-quote {
+  font-family: serif; /* Elegant font change */
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #d81b60;
+  border-left: 4px solid #fce4ec;
+  padding-left: 1.5rem;
+}
+
+/* --- NEW PHOTO & OVERLAY STYLES --- */
+.bond-visual {
+  position: relative;
+  width: 100%;
+  max-width: 450px; /* Adjust size as needed */
+  aspect-ratio: 1 / 1; /* Keeps it square */
+  border-radius: 24px;
+  overflow: hidden; /* Crops the photo and overlay */
+  box-shadow: 0 15px 40px rgba(236, 64, 122, 0.2);
+}
+
+.photo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.real-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the photo fills the space without stretching */
+  display: block;
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(255, 182, 193, 0.3), rgba(236, 64, 122, 0.5)); /* Warm pink gradient */
+  mix-blend-mode: soft-light; /* Blends nicely with the photo */
+}
+
+.overlay-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Sits on top of the photo */
+}
+
+.bond-svg {
+  width: 100%;
+  max-width: 350px;
+  filter: drop-shadow(0 10px 20px rgba(236, 64, 122, 0.15));
+}
+
+  </style>
+</head>
+<body>
+  
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="logo">
+        <a href="index.html"><i class="fas fa-heart"></i> Nari Shakti</a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="products.html">Product</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="stories.html">Stories</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn-nav primary">Sign In</a>
+        <a href="contact.html" class="btn-nav outline">Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">
+          Your <span class="title-em">Breastfeeding</span> Journey Starts Here
+        </h1>
+        
+        <p class="hero-desc">
+          Explore 20 essential breastfeeding areas organized into 6 themes, with interactive body change simulations and detailed guidance for each stage.
+        </p>
+        
+        <div class="badges">
+          <span class="badge">
+            <i class="fas fa-layer-group"></i> 6 Themed Sections
+          </span>
+          <span class="badge">
+            <i class="fas fa-book-open"></i> 20 Core Topics
+          </span>
+          <span class="badge">
+            <i class="fas fa-microscope"></i> Live Simulations
+          </span>
+        </div>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          
+          <button class="btn-primary" onclick="document.getElementById('simulations').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-rocket"></i> Begin Your Journey
+          </button>
+
+          <a href="milk-supply-nutrition-enhanced.html" class="btn-primary" style="text-decoration: none;">
+            <i class="fas fa-chart-line"></i> Milk Supply & Nutrition
+          </a>
+
+        </div>
+     </div>
+      
+      <div class="hero-visual">
+        <svg viewBox="0 0 500 500" class="journey-svg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pathGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#ec407a;stop-opacity:0.2" />
+              <stop offset="100%" style="stop-color:#d81b60;stop-opacity:1" />
+            </linearGradient>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <path id="journeyPath" d="M 50,400 Q 150,350 250,250 T 450,100" 
+                fill="none" stroke="url(#pathGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10">
+            <animate attributeName="stroke-dashoffset" from="100" to="0" dur="3s" repeatCount="indefinite" />
+          </path>
+
+          <g transform="translate(50, 400)">
+            <circle r="15" fill="white" stroke="#ec407a" stroke-width="2">
+              <animate attributeName="r" values="15;18;15" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <text x="0" y="35" text-anchor="middle" fill="#d81b60" font-size="12" font-weight="bold">Start</text>
+            <path d="M 0,-8 Q 5,0 0,8 Q -5,0 0,-8" fill="#ec407a" />
+          </g>
+
+          <g transform="translate(250, 250)">
+            <circle r="25" fill="white" stroke="#ec407a" stroke-width="2" filter="url(#glow)">
+              <animate attributeName="r" values="25;28;25" dur="3s" begin="1s" repeatCount="indefinite" />
+            </circle>
+            <text x="0" y="45" text-anchor="middle" fill="#d81b60" font-size="12" font-weight="bold">Nurture</text>
+            <path d="M 0,-5 C -5,-15 -15,-5 -5,5 L 0,10 L 5,5 C 15,-5 5,-15 0,-5" fill="#ec407a" transform="scale(1.5)" />
+          </g>
+
+          <g transform="translate(450, 100)">
+            <circle r="20" fill="#d81b60" stroke="white" stroke-width="3">
+              <animate attributeName="r" values="20;24;20" dur="3s" begin="2s" repeatCount="indefinite" />
+            </circle>
+            <text x="0" y="40" text-anchor="middle" fill="#d81b60" font-size="12" font-weight="bold">Thrive</text>
+            <g stroke="white" stroke-width="2">
+              <line x1="0" y1="-10" x2="0" y2="10" />
+              <line x1="-10" y1="0" x2="10" y2="0" />
+              <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
+            </g>
+          </g>
+
+          <circle r="6" fill="#fce4ec" stroke="#ec407a" stroke-width="1">
+            <animateMotion dur="4s" repeatCount="indefinite">
+              <mpath href="#journeyPath"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+          </circle>
+
+          <circle r="4" fill="#ec407a">
+            <animateMotion dur="4s" begin="2s" repeatCount="indefinite">
+              <mpath href="#journeyPath"/>
+            </animateMotion>
+            <animate attributeName="opacity" values="0;1;0" dur="4s" begin="2s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+      </div>
+  </section>
+
+  <div class="container">
+
+
+<section class="bond-section fade-in-up">
+  <div class="bond-container">
+    
+    <div class="bond-text">
+      <span class="bond-label">The Essence of Nurturing</span>
+      <h2>More Than Just Nutrition</h2>
+      <p>
+        Breastfeeding is a biological conversation. With every drop of milk, you pass on immunity, comfort, and love. It is a silent language of connection that builds a foundation for a lifetime of trust.
+      </p>
+      <div class="bond-quote">
+        "You are not just feeding a body; you are shaping a heart."
+      </div>
+    </div>
+
+   <div class="bond-visual">
+  
+  <div class="photo-container">
+    <img src="mom_child.png" alt="Mother and child connecting" class="real-photo">
+    <div class="photo-overlay"></div>
+  </div>
+
+  <svg viewBox="0 0 400 400" class="overlay-svg">
+    <defs>
+      <filter id="connection-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+      <linearGradient id="flow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#fff;stop-opacity:0.8" />
+        <stop offset="100%" style="stop-color:#ec407a;stop-opacity:0.8" />
+      </linearGradient>
+    </defs>
+
+    <circle cx="200" cy="200" r="80" fill="none" stroke="#fce4ec" stroke-width="2" opacity="0.6">
+      <animate attributeName="r" values="80;100;80" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" />
+    </circle>
+
+    <path d="M 100,280 Q 150,150 280,180" fill="none" stroke="url(#flow-grad)" stroke-width="3" filter="url(#connection-glow)" stroke-linecap="round">
+      <animate attributeName="stroke-dasharray" from="0,300" to="300,0" dur="4s" repeatCount="indefinite" />
+    </path>
+
+    <circle r="4" fill="#ec407a">
+      <animateMotion dur="4s" repeatCount="indefinite" path="M 100,280 Q 150,150 280,180" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle r="3" fill="#fff">
+      <animateMotion dur="4s" begin="2s" repeatCount="indefinite" path="M 100,280 Q 150,150 280,180" />
+      <animate attributeName="opacity" values="0;1;0" dur="4s" begin="2s" repeatCount="indefinite" />
+    </circle>
+
+    <g transform="translate(100, 280) scale(0.8)">
+      <path d="M 0 -10 C -10 -20 -25 -5 -10 5 L 0 15 L 10 5 C 25 -5 10 -20 0 -10" fill="#ec407a">
+         <animateTransform attributeName="transform" type="scale" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+      </path>
+    </g>
+    <g transform="translate(280, 180) scale(0.6)">
+      <path d="M 0 -10 C -10 -20 -25 -5 -10 5 L 0 15 L 10 5 C 25 -5 10 -20 0 -10" fill="#fff">
+        <animateTransform attributeName="transform" type="scale" values="0.6;0.8;0.6" dur="2s" begin="1s" repeatCount="indefinite" />
+      </path>
+    </g>
+
+  </svg>
+</div>
+
+
+  </div>
+</section>
+
+
+
+
+    <div class="section-header" id="simulations">
+      <h2 class="section-title">Interactive Body Changes Simulator</h2>
+      <p class="section-subtitle">
+        Visualize how your body changes throughout your breastfeeding journey
+      </p>
+    </div>
+
+    <div class="simulation-container">
+      <div class="simulation-grid">
+        <div class="sim-panel">
+          <h3><i class="fas fa-female"></i> Body Changes Timeline</h3>
+          <div class="week-slider-container">
+            <div class="week-display" id="weekDisplay">Week 0 - Pregnancy</div>
+            <input type="range" class="week-slider" id="weekSlider" min="0" max="52" value="0" step="1">
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-soft); margin-top: 0.5rem;">
+              <span>Birth</span>
+              <span>26 Weeks</span>
+              <span>52 Weeks</span>
+            </div>
+          </div>
+          <canvas id="bodyChangesCanvas"></canvas>
+        </div>
+
+        <div class="sim-panel">
+          <h3><i class="fas fa-list-alt"></i> What's Happening</h3>
+          <div class="changes-list" id="changesList">
+            </div>
+        </div>
+      </div>
+    </div>
+
+     <style>
+  /* --- 3D SCENE STYLES --- */
+  #latch-3d-section {
+    background: #fff;
+    padding: 3rem 1rem;
+    perspective: 1000px;
+    overflow: hidden;
+    margin: 2rem 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .latch-3d-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media(max-width: 900px) { .latch-3d-container { grid-template-columns: 1fr; } }
+
+  /* The 3D Stage */
+  .stage-3d {
+    width: 100%;
+    height: 450px;
+    background: radial-gradient(circle at center, #f8f9fa 0%, #e0e0e0 100%);
+    border-radius: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+  }
+
+  /* 3D Objects */
+  .actor {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Mother Layer */
+  .mother-group {
+    width: 300px; height: 300px;
+    margin-left: -150px; margin-top: -100px;
+    transform: translateZ(0px);
+  }
+  
+  .breast-3d {
+    width: 160px; height: 160px;
+    background: radial-gradient(circle at 30% 30%, #ffe0e9, #ffccd5);
+    border-radius: 50%;
+    position: absolute;
+    top: 70px; left: 70px;
+    box-shadow: 15px 15px 35px rgba(0,0,0,0.1);
+  }
+  .nipple-3d {
+    width: 24px; height: 24px;
+    background: #ec407a;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) translateZ(25px);
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Baby Layer */
+  .baby-group {
+    width: 130px; height: 130px;
+    margin-left: -65px; margin-top: -65px;
+    /* Default Resting Pos */
+    transform: translateZ(150px) translateX(0px) translateY(150px) rotateX(20deg); 
+  }
+
+  .baby-head-3d {
+    width: 130px; height: 130px;
+    background: radial-gradient(circle at 30% 30%, #fff9c4, #fdd835);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  }
+  
+  .baby-face {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    transform: rotateZ(90deg); /* Face looking up at breast */
+  }
+  
+  .eye { width: 12px; height: 12px; background: #333; border-radius: 50%; position: absolute; }
+  .eye.left { top: 35px; left: 40px; }
+  .eye.right { top: 35px; right: 40px; }
+  
+  .mouth-3d {
+    width: 25px; height: 12px;
+    background: #5d4037;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 35px; left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s;
+  }
+
+  /* --- POSITIONS (The Physics) --- */
+  
+  /* 1. Cradle: Horizontal, centered below */
+  .stage-3d[data-pos="cradle"] .baby-group {
+    transform: translateZ(100px) translateX(0px) translateY(60px) rotateZ(0deg);
+  }
+  
+  /* 2. Cross-Cradle: Angled from opposite side, tighter control */
+  .stage-3d[data-pos="cross"] .baby-group {
+    transform: translateZ(100px) translateX(-40px) translateY(60px) rotateZ(15deg) rotateY(15deg);
+  }
+
+  /* 3. Football: Tucked to the side (right), body angled back */
+  .stage-3d[data-pos="football"] .baby-group {
+    transform: translateZ(100px) translateX(140px) translateY(10px) rotateZ(-45deg) rotateY(-10deg);
+  }
+
+  /* 4. Side-Lying: Lower, parallel to bed (bottom of screen) */
+  .stage-3d[data-pos="side"] .baby-group {
+    transform: translateZ(100px) translateX(0px) translateY(140px) rotateX(-20deg);
+  }
+
+  /* --- ANIMATION: THE LATCH --- */
+  .stage-3d.latching .baby-group {
+    transform: translateZ(30px) !important; /* Move TO the breast (Z-axis) */
+  }
+  
+  .stage-3d.latching .mouth-3d {
+    width: 50px; height: 50px; /* Wide open mouth */
+    background: #d81b60;       /* Inside mouth color */
+    bottom: 25px;
+    border-radius: 50%;
+  }
+
+  /* UI Controls */
+  .latch-ui h3 { color: #d81b60; margin-bottom: 0.5rem; font-size: 1.8rem; }
+  .latch-ui p { color: #555; margin-bottom: 2rem; font-size: 1rem; line-height: 1.5; }
+  
+  .control-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem; 
+    margin-bottom: 2rem;
+  }
+  
+  .pos-card {
+    padding: 1.2rem;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .pos-card:hover { border-color: #ec407a; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(236,64,122,0.1); }
+  .pos-card.active { border-color: #ec407a; background: #fff5f8; }
+  
+  .pos-card i { font-size: 1.5rem; color: #ec407a; margin-bottom: 5px; }
+  .pos-card strong { display: block; font-size: 0.95rem; color: #333; }
+  .pos-card small { font-size: 0.75rem; color: #777; line-height: 1.2; }
+  
+  .play-latch-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: #263238;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+  }
+  .play-latch-btn:hover { transform: scale(1.02); background: #37474f; }
+  .play-latch-btn i { color: #ffd54f; }
+
+  /* Milk Particles */
+  .milk-particle {
+    position: absolute; width: 10px; height: 10px; background: white; border-radius: 50%;
+    top: 50%; left: 50%; pointer-events: none; z-index: 100;
+    box-shadow: 0 0 8px rgba(255,255,255,0.9);
+  }
+
+</style>
+
+<style>
+  /* --- 3D SCENE STYLES --- */
+  #latch-3d-section {
+    background: #fff;
+    padding: 3rem 1rem;
+    perspective: 1000px; /* Deep 3D space */
+    overflow: hidden;
+    margin: 2rem 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .latch-3d-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media(max-width: 900px) { .latch-3d-container { grid-template-columns: 1fr; } }
+
+  /* The 3D Stage */
+  .stage-3d {
+    width: 100%;
+    height: 450px;
+    background: radial-gradient(circle at center, #fce4ec 0%, #f8bbd0 100%); /* Soft skin-tone glow background */
+    border-radius: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- ACTORS (Mother & Baby) --- */
+  .actor {
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Mother Layer */
+  .mother-group {
+    /* Anchored center-left */
+    transform: translateZ(0px) translateX(-50px);
+    z-index: 1;
+  }
+  
+  /* Baby Layer */
+  .baby-group {
+    /* Anchored center */
+    z-index: 2;
+    /* Initial: Pulled back from breast */
+    transform: translateZ(50px) translateX(80px) rotateY(-15deg); 
+  }
+
+  /* --- SVG STYLING --- */
+  .human-svg {
+    filter: drop-shadow(5px 10px 15px rgba(166, 76, 76, 0.15));
+  }
+
+  /* Skin Tones */
+  .skin-base { fill: #ffdbac; } /* Adjustable skin tone */
+  .skin-shadow { fill: #e0bfa0; }
+  .nipple-color { fill: #e57373; }
+  .feature-stroke { stroke: #d7ccc8; stroke-width: 2; fill: none; }
+
+  /* Jaw Animation */
+  #baby-jaw {
+    transform-origin: 60px 75px; /* Pivot point for jaw */
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* --- POSITIONS (The Physics) --- */
+  /* 1. Cradle: Horizontal */
+  .stage-3d[data-pos="cradle"] .baby-group {
+    transform: translateZ(50px) translateX(100px) translateY(40px) rotateZ(0deg);
+  }
+  
+  /* 2. Cross-Cradle: Angled in */
+  .stage-3d[data-pos="cross"] .baby-group {
+    transform: translateZ(50px) translateX(90px) translateY(30px) rotateZ(15deg);
+  }
+
+  /* 3. Football: Tucked side/vertical */
+  .stage-3d[data-pos="football"] .baby-group {
+    transform: translateZ(50px) translateX(120px) translateY(-20px) rotateZ(-45deg);
+  }
+
+  /* 4. Side-Lying: Flat */
+  .stage-3d[data-pos="side"] .baby-group {
+    transform: translateZ(50px) translateX(100px) translateY(80px) rotateZ(-10deg);
+  }
+
+  /* --- ANIMATION: THE LATCH --- */
+  /* Move closer */
+  .stage-3d.latching .baby-group {
+    transform: translateZ(10px) translateX(20px) !important; /* Touch the breast */
+  }
+  
+  /* Open Mouth */
+  .stage-3d.latching #baby-jaw {
+    transform: rotate(35deg); /* Jaw drops open */
+  }
+
+  /* UI Controls Styling (Matches your theme) */
+  .latch-ui h3 { color: #d81b60; margin-bottom: 0.5rem; font-size: 1.8rem; }
+  .latch-ui p { color: #555; margin-bottom: 2rem; font-size: 1rem; line-height: 1.5; }
+  
+  .control-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem; 
+    margin-bottom: 2rem;
+  }
+  
+  .pos-card {
+    padding: 1.2rem;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .pos-card:hover { border-color: #ec407a; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(236,64,122,0.1); }
+  .pos-card.active { border-color: #ec407a; background: #fff5f8; }
+  
+  .pos-card i { font-size: 1.5rem; color: #ec407a; margin-bottom: 5px; }
+  .pos-card strong { display: block; font-size: 0.95rem; color: #333; }
+  .pos-card small { font-size: 0.75rem; color: #777; line-height: 1.2; }
+  
+  .play-latch-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: #263238;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+  }
+  .play-latch-btn:hover { transform: scale(1.02); background: #37474f; }
+  .play-latch-btn i { color: #ffd54f; }
+
+  /* Milk Particles */
+  .milk-particle {
+    position: absolute; width: 8px; height: 8px; background: white; border-radius: 50%;
+    top: 50%; left: 30%; pointer-events: none; z-index: 100;
+    box-shadow: 0 0 8px rgba(255,255,255,0.9);
+  }
+
+<style>
+  /* --- 3D SCENE STYLES --- */
+  #latch-3d-section {
+    background: #fff;
+    padding: 3rem 1rem;
+    perspective: 1000px;
+    overflow: hidden;
+    margin: 2rem 0;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .latch-3d-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media(max-width: 900px) { .latch-3d-container { grid-template-columns: 1fr; } }
+
+  /* The 3D Stage */
+  .stage-3d {
+    width: 100%;
+    height: 450px;
+    background: radial-gradient(circle at center, #fff0f5 0%, #eceff1 100%);
+    border-radius: 20px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- ACTORS (Mother & Baby) --- */
+  .actor {
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); /* Smooth snap */
+  }
+
+  /* Mother Layer */
+  .mother-group {
+    transform: translateZ(0px) translateX(-60px);
+    z-index: 1;
+  }
+  
+  /* Baby Layer */
+  .baby-group {
+    z-index: 2;
+    transform-origin: center center;
+    /* Default: Nose aligned to nipple, but pulled back */
+    transform: translateZ(60px) translateX(90px) rotateY(-20deg); 
+  }
+
+  /* --- SVG STYLING --- */
+  .human-svg {
+    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.1));
+    overflow: visible;
+  }
+
+  /* Jaw Animation */
+  #baby-jaw {
+    transform-origin: 65px 75px; /* Pivot at the TMJ joint */
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  #baby-head-shape {
+    transition: transform 0.6s ease;
+    transform-origin: 70px 70px;
+  }
+
+  /* --- POSITIONS (The Setup) --- */
+  /* Note: We align NOSE to Nipple height initially */
+  
+  /* 1. Cradle */
+  .stage-3d[data-pos="cradle"] .baby-group {
+    transform: translateZ(60px) translateX(120px) translateY(50px) rotateZ(0deg);
+  }
+  
+  /* 2. Cross-Cradle (More Angled) */
+  .stage-3d[data-pos="cross"] .baby-group {
+    transform: translateZ(60px) translateX(110px) translateY(40px) rotateZ(15deg);
+  }
+
+  /* 3. Football (Vertical/Tucked) */
+  .stage-3d[data-pos="football"] .baby-group {
+    transform: translateZ(60px) translateX(140px) translateY(-10px) rotateZ(-45deg);
+  }
+
+  /* 4. Side-Lying (Flat) */
+  .stage-3d[data-pos="side"] .baby-group {
+    transform: translateZ(60px) translateX(120px) translateY(90px) rotateZ(-10deg);
+  }
+
+  /* --- ANIMATION PHASE 1: THE GAPE (Extension) --- */
+  .stage-3d.gaping .baby-group {
+    /* Head tilts back (extension) to lead with chin */
+    transform: translateZ(60px) translateX(120px) translateY(50px) rotateZ(-15deg) !important;
+  }
+  .stage-3d.gaping #baby-jaw {
+    transform: rotate(45deg); /* MAX open */
+  }
+
+  /* --- ANIMATION PHASE 2: THE DEEP LATCH --- */
+  .stage-3d.latching .baby-group {
+    /* 1. Move DEEP into Z space (bury in breast)
+       2. Move X/Y to cover Areola
+       3. Rotate Z to seal lips */
+    transform: translateZ(5px) translateX(30px) translateY(35px) rotateZ(0deg) !important;
+  }
+  
+  /* Jaw stays open but engaged */
+  .stage-3d.latching #baby-jaw {
+    transform: rotate(35deg); 
+  }
+
+  /* --- UI CONTROLS --- */
+  .latch-ui h3 { color: #d81b60; margin-bottom: 0.5rem; font-size: 1.8rem; }
+  .latch-ui p { color: #555; margin-bottom: 2rem; font-size: 1rem; line-height: 1.5; }
+  
+  .control-grid { 
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;
+  }
+  
+  .pos-card {
+    padding: 1.2rem;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .pos-card:hover { border-color: #ec407a; transform: translateY(-3px); }
+  .pos-card.active { border-color: #ec407a; background: #fff5f8; box-shadow: 0 4px 12px rgba(236,64,122,0.2); }
+  
+  .pos-card i { font-size: 1.5rem; color: #ec407a; }
+  
+  .play-latch-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #263238 0%, #37474f 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+  }
+  .play-latch-btn:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+  .play-latch-btn i { color: #ffd54f; }
+
+  /* Visual Feedback Particles */
+  .milk-particle {
+    position: absolute; width: 10px; height: 10px; background: white; border-radius: 50%;
+    top: 50%; left: 30%; pointer-events: none; z-index: 100;
+    box-shadow: 0 0 8px rgba(255,255,255,0.9);
+  }
+
+  /* Success Message */
+  .latch-feedback-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #fafafa;
+    border-left: 4px solid #ddd;
+    font-size: 0.95rem;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+  }
+  .latch-feedback-box.success { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+  .latch-feedback-box.active { background: #e3f2fd; border-color: #2196f3; color: #0d47a1; }
+
+</style>
+
+<section id="latch-3d-section">
+  <div class="latch-3d-container">
+    
+    <div class="stage-3d" id="stage3D" data-pos="cradle">
+      
+      <div class="actor mother-group">
+        <svg width="240" height="320" viewBox="0 0 240 320" class="human-svg">
+          <path d="M 60 320 L 60 100 Q 60 20 160 20 L 230 20" fill="#ffdbac" />
+          
+          <path d="M 60 120 Q 200 120 200 220 Q 200 290 130 310 L 60 310" fill="#ffdbac" />
+          <path d="M 60 120 Q 200 120 200 220" fill="none" stroke="#d7ccc8" stroke-width="1" opacity="0.3"/>
+          
+          <circle cx="160" cy="215" r="28" fill="#e57373" opacity="0.6" />
+          
+          <circle cx="160" cy="215" r="8" fill="#d32f2f" opacity="0.8" />
+          
+          <line id="align-line" x1="160" y1="215" x2="260" y2="215" stroke="#2196f3" stroke-width="2" stroke-dasharray="5,5" opacity="0" />
+        </svg>
+      </div>
+
+      <div class="actor baby-group">
+        <svg width="150" height="150" viewBox="0 0 150 150" class="human-svg">
+          <g id="baby-head-shape">
+            <path d="M 20 80 Q 20 10 80 10 Q 140 10 140 70 L 140 85 Q 140 95 80 95" fill="#ffdbac" />
+            <path d="M 20 80 Q 10 85 25 90" fill="none" stroke="#e0bfa0" stroke-width="2" />
+            <path d="M 40 70 Q 50 75 60 70" fill="none" stroke="#8d6e63" stroke-width="3" stroke-linecap="round" />
+            <ellipse cx="120" cy="80" rx="8" ry="10" fill="#e0bfa0" />
+          </g>
+
+          <g id="baby-jaw">
+            <path d="M 35 90 Q 80 150 120 100 L 120 90" fill="#ffdbac" />
+            <path d="M 35 90 Q 50 100 70 95" fill="none" stroke="#e57373" stroke-width="3" stroke-linecap="round" />
+            <path d="M 50 100 Q 70 110 90 100" fill="#e57373" opacity="0" id="baby-tongue"/>
+          </g>
+          
+          <path d="M 25 90 Q 40 85 60 90" fill="none" stroke="#e57373" stroke-width="3" stroke-linecap="round" />
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="latch-ui">
+      <h3><i class="fas fa-check-circle"></i> Perfect Latch Simulator</h3>
+      <p>A good latch is <strong>asymmetric</strong>. The baby's chin should hit the breast first, covering more of the areola with the lower lip.</p>
+
+      <div class="control-grid">
+        <div class="pos-card active" onclick="change3DPos('cradle', this)">
+          <i class="fas fa-baby-carriage"></i>
+          <div><strong>Cradle</strong><small>Tummy to Tummy</small></div>
+        </div>
+        <div class="pos-card" onclick="change3DPos('cross', this)">
+          <i class="fas fa-hands-holding-circle"></i>
+          <div><strong>Cross-Cradle</strong><small>Newborn Control</small></div>
+        </div>
+        <div class="pos-card" onclick="change3DPos('football', this)">
+          <i class="fas fa-football-ball"></i>
+          <div><strong>Football</strong><small>C-Section Friendly</small></div>
+        </div>
+        <div class="pos-card" onclick="change3DPos('side', this)">
+          <i class="fas fa-bed"></i>
+          <div><strong>Side-Lying</strong><small>Night Feeding</small></div>
+        </div>
+      </div>
+
+      <button class="play-latch-btn" onclick="animateDeepLatch()">
+        <i class="fas fa-play-circle"></i> Simulate Deep Latch
+      </button>
+      
+      <div id="latchStatus" class="latch-feedback-box">
+        <i class="fas fa-info-circle" style="margin-right:10px;"></i>
+        <span>Select a position to begin alignment.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function change3DPos(pos, btn) {
+    // 1. Update UI
+    document.querySelectorAll('.pos-card').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // 2. Reset Stage
+    const stage = document.getElementById('stage3D');
+    stage.classList.remove('latching', 'gaping');
+    
+    // 3. Update Text
+    const status = document.getElementById('latchStatus');
+    status.className = 'latch-feedback-box';
+    status.innerHTML = `<i class="fas fa-info-circle" style="margin-right:10px;"></i><span>Aligned for <strong>${pos}</strong> hold. Ready to latch.</span>`;
+    
+    // 4. Move Baby to Starting Position
+    stage.setAttribute('data-pos', pos);
+  }
+
+  function animateDeepLatch() {
+    const stage = document.getElementById('stage3D');
+    const status = document.getElementById('latchStatus');
+    const tongue = document.getElementById('baby-tongue');
+    
+    // RESET
+    stage.classList.remove('latching', 'gaping');
+    tongue.style.opacity = '0';
+    void stage.offsetWidth; // Force reflow
+    
+    // PHASE 1: ALIGNMENT (Nose to Nipple)
+    status.className = 'latch-feedback-box active';
+    status.innerHTML = '<span><strong>Step 1:</strong> Aligning Nose to Nipple... (Chin tucked)</span>';
+    
+    setTimeout(() => {
+      // PHASE 2: THE GAPE (Head tilts back, Mouth opens wide)
+      stage.classList.add('gaping');
+      status.innerHTML = '<span><strong>Step 2:</strong> Waiting for wide gape (160°)...</span>';
+      
+      setTimeout(() => {
+        // PHASE 3: ASYMMETRIC LATCH (Chin drives into breast)
+        stage.classList.remove('gaping'); // Remove tilt to allow dive
+        stage.classList.add('latching'); // Dive in
+        
+        status.innerHTML = '<span><strong>Step 3:</strong> Asymmetric Latch! Chin first, then lips seal.</span>';
+        
+        // Show tongue cupping
+        setTimeout(() => {
+          tongue.style.opacity = '1'; 
+          status.className = 'latch-feedback-box success';
+          status.innerHTML = '<i class="fas fa-check-circle" style="margin-right:10px;"></i><span><strong>Success!</strong> Deep latch achieved. Milk flowing.</span>';
+          spawnMilkParticles();
+        }, 600);
+        
+      }, 1000); // Wait for gape
+      
+    }, 800); // Wait for align
+  }
+
+  function spawnMilkParticles() {
+    const stage = document.getElementById('stage3D');
+    // Create particles originating from the latch point
+    for(let i=0; i<15; i++) {
+      let p = document.createElement('div');
+      p.className = 'milk-particle';
+      // Spray outward from breast
+      let x = (Math.random() - 0.5) * 50;
+      let y = (Math.random() - 0.5) * 50;
+      p.style.transform = `translate(${x}px, ${y}px)`;
+      p.style.transition = "all 1s ease-out";
+      
+      stage.appendChild(p);
+      
+      setTimeout(() => {
+        p.style.opacity = 0;
+        p.style.transform = `translate(${x*2}px, ${y*2}px) scale(0)`;
+      }, 50);
+      
+      setTimeout(() => p.remove(), 1000);
+    }
+  }
+</script>
+
+
+    <div class="section-header" id="topics">
+      <h2 class="section-title">Explore By Theme</h2>
+      <p class="section-subtitle">
+        20 topics organized into 6 comprehensive themes
+      </p>
+    </div>
+
+    <div class="theme-nav">
+      <button class="theme-btn physical active" onclick="switchTheme('physical')">
+        <i class="fas fa-heartbeat"></i> Physical Fundamentals
+      </button>
+      <button class="theme-btn patterns" onclick="switchTheme('patterns')">
+        <i class="fas fa-clock"></i> Feeding Patterns
+      </button>
+      <button class="theme-btn maternal" onclick="switchTheme('maternal')">
+        <i class="fas fa-heart"></i> Maternal Health
+      </button>
+      <button class="theme-btn skills" onclick="switchTheme('skills')">
+        <i class="fas fa-tools"></i> Practical Skills
+      </button>
+      <button class="theme-btn transitions" onclick="switchTheme('transitions')">
+        <i class="fas fa-arrows-alt-h"></i> Transitions
+      </button>
+      <button class="theme-btn social" onclick="switchTheme('social')">
+        <i class="fas fa-users"></i> Social & Support
+      </button>
+    </div>
+
+    <div id="themeSections"></div>
+  </div>
+
+  <div class="progress-hud">
+    <div class="hud-title">
+      <i class="fas fa-compass"></i> Journey Progress
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="hud-stats">
+      <span><span id="exploredCount">0</span>/20 explored</span>
+      <span id="progressPercent">0%</span>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <button class="modal-close" id="modalClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="modal-title" id="modalTitle"></h2>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+
+  <script>
+    const themes = {
+      physical: {
+        title: "Physical Fundamentals",
+        icon: "🌱",
+        description: "Understanding the core physical aspects of breastfeeding - how your body works, proper positioning, and milk production.",
+        color: "#e91e63"
+      },
+      patterns: {
+        title: "Feeding Patterns & Schedules",
+        icon: "⏰",
+        description: "Learning your baby's hunger cues, feeding frequency, and understanding normal feeding patterns throughout development.",
+        color: "#9c27b0"
+      },
+      maternal: {
+        title: "Maternal Health & Wellbeing",
+        icon: "💖",
+        description: "Taking care of yourself - nutrition, breast health, emotional wellbeing, and managing common complications.",
+        color: "#ff9800"
+      },
+      skills: {
+        title: "Practical Skills",
+        icon: "🛠️",
+        description: "Essential techniques for pumping, storage, night feeding, and maintaining your breastfeeding routine.",
+        color: "#2196f3"
+      },
+      transitions: {
+        title: "Transitions & Milestones",
+        icon: "🌈",
+        description: "Navigating major changes - introducing solids, returning to work, and eventual weaning when you're ready.",
+        color: "#4caf50"
+      },
+      social: {
+        title: "Social & Support Systems",
+        icon: "🤝",
+        description: "Building your support network, breastfeeding in public, and accessing resources for special circumstances.",
+        color: "#00bcd4"
+      }
+    };
+
+    const topics = [
+      {id:1,title:"Latch & Positioning",icon:"👶",theme:"physical",preview:"Master proper attachment",attrs:{definition:"How baby attaches to breast",importance:"Prevents damage, ensures milk transfer",timing:"Learn before birth",techniques:"Cradle, cross-cradle, football, side-lying positions",signs:"Wide mouth (140-160°), flanged lips, rhythmic sucking, audible swallowing",problems:"Shallow latch affects 60-80% first-time mothers, nipple pain 79-96%",solutions:"Adjust baby position, bring baby to breast not breast to baby",help:"Pain beyond 1 week, cracked/bleeding nipples",duration:"1-2 weeks to master (14 days average first-time, 5-7 experienced)",resources:"Hospital lactation consultants, La Leche League, IBCLC",partner:"Position pillows, bring baby to mother, provide feedback",cultural:"Different positions preferred in different cultures"}},
+      
+      {id:2,title:"Milk Supply",icon:"💧",theme:"physical",preview:"Supply-demand mechanisms",attrs:{definition:"Breast milk creation and maintenance through hormonal regulation",importance:"Ensures baby receives adequate nutrition for growth",timing:"Begins pregnancy, dramatically increases after delivery",techniques:"8-12 feeds/24 hours, responsive feeding, complete breast emptying",signs:"6+ wet diapers daily, weight gain 150-200g/week, satisfied baby",problems:"Perceived low supply 35-50% (usually adequate), true insufficiency only 2-5%",solutions:"Nurse frequently, ensure effective latch, adequate hydration 3-4L daily",help:"Baby losing weight, fewer than 6 wet diapers, not back to birth weight by 2 weeks",duration:"Supply-demand regulation 6-12 weeks to fully establish",resources:"Lactation consultants for weighted feeds, pediatrician, breast pump",partner:"Bring baby for night feedings, manage household tasks",cultural:"Traditional foods believed to increase supply (oats, fenugreek)"}},
+      
+      {id:3,title:"Colostrum",icon:"🥇",theme:"physical",preview:"First milk immunological power",attrs:{definition:"First milk produced - thick, yellow, extremely high in antibodies",importance:"Provides passive immunity, prevents infection, aids meconium passage",timing:"Present mid-pregnancy, produced first 2-5 days postpartum",techniques:"Hand expression, frequent nursing in small concentrated amounts",signs:"Small amounts appropriate to stomach: Day 1: 5-7mL, Day 2: 10-15mL, Day 3: 15-30mL",problems:"Worry about 'not enough' milk, some cultures incorrectly discard colostrum",solutions:"Understand newborn stomach is marble-sized (5-7mL), colostrum highly concentrated",help:"Baby excessively sleepy not waking to feed, no feeding within first hours",duration:"Pure colostrum days 1-2, transitional milk days 3-5, mature milk by days 10-14",resources:"Prenatal breastfeeding classes explaining colostrum importance",partner:"Reassure mother about small amounts being normal, track feeding frequency",cultural:"18-45% of certain cultures discard colostrum - actively discourage this"}},
+      
+      {id:4,title:"Feeding Frequency",icon:"⏰",theme:"patterns",preview:"Timing and hunger cues",attrs:{definition:"How often and how long baby nurses varying by age",importance:"Establishes adequate supply, ensures proper nutrition and hydration",timing:"Newborn: every 1.5-3 hours, Weeks 2-6: 8-10 feeds, Months 2-4: 6-8 feeds",techniques:"Watch hunger cues not clock, allow cluster feeding (normal)",signs:"8-12 feeds per 24 hours early weeks, baby satisfied after feeding",problems:"Cluster feeding misconceptions, external pressure to schedule feeds",solutions:"Feed on demand, expect growth spurt clusters at predictable times",help:"Newborn sleeping >4 hours without eating until back to birth weight",duration:"10-45 minutes per session initially, becoming more efficient over time",resources:"Baby tracking apps (Huckleberry, Baby Tracker), feeding logs",partner:"Track feeds if helpful, manage visitors during cluster periods",cultural:"Western cultures push schedules; traditional cultures practice demand feeding"}},
+      
+      {id:5,title:"Growth Spurts",icon:"📈",theme:"patterns",preview:"Temporary increased feeding",attrs:{definition:"Periods of dramatically increased feeding frequency lasting 24-72 hours",importance:"Baby increasing mother's supply for upcoming needs - NOT supply problem",timing:"Common at 2-3 weeks, 6 weeks, 3 months, 6 months, 9 months, 12 months",techniques:"Allow unlimited increased feeding, don't supplement unnecessarily",signs:"Increased feeding 24-48 hours then return to normal, weight gain follows",problems:"Mother worries about low supply (35-60% during spurts)",solutions:"Understand temporary (48 hours average), rest, accept help with household",help:"Spurt extends beyond 3 days, baby seems ill with fever/lethargy",duration:"Usually 24-72 hours per spurt, corresponding weight gain 150-200g following week",resources:"Growth chart tracking, pediatrician reassurance for expectation setting",partner:"Manage household tasks, bring meals to nursing mother, minimize visitors",cultural:"Different interpretations of constant feeding (insufficient milk vs. normal)"}},
+      
+      {id:6,title:"Breast Health",icon:"🩹",theme:"maternal",preview:"Prevention and treatment",attrs:{definition:"Maintaining breast and nipple condition to prevent infection and damage",importance:"Prevents mastitis (10-33% of mothers), thrush, abscess formation",timing:"Begin preventive care immediately postpartum, address issues promptly",techniques:"Air dry after feeds, express milk on nipples (healing), proper latch",signs:"Minimal tenderness after first week, intact skin, breasts soft between feeds",problems:"Cracked nipples 34-96%, thrush 5-20%, mastitis 10-33%, plugged ducts 15-25%",solutions:"Lanolin cream, correct latch immediately, warm compresses, antibiotics for mastitis",help:"Cracked/bleeding nipples, fever >101°F, red streaks on breast",duration:"Initial sensitivity normal 3-7 days, trauma heals 3-7 days with intervention",resources:"Medical-grade lanolin, hydrogel pads, lactation consultant assessment",partner:"Help apply treatments, watch for infection signs (fever, redness)",cultural:"Traditional remedies vary (ghee, herbal preparations) - verify safety"}},
+      
+      {id:7,title:"Nutrition",icon:"🥗",theme:"maternal",preview:"Supporting production",attrs:{definition:"Mother's dietary and fluid needs to support milk production and health",importance:"Supports 750-1000mL daily production, maternal energy and recovery",timing:"Increase intake immediately postpartum, maintain throughout breastfeeding",techniques:"+450-500 extra calories daily, 3-4L fluids, balanced nutrient-dense meals",signs:"Adequate milk supply, mother feels energized, pale yellow urine",problems:"Dehydration (headache, dizziness), poor nutrition, excessive weight loss >1kg/week",solutions:"Water bottle at each nursing station, nutrient-dense snacks readily available",help:"Dizziness, extreme fatigue, dark concentrated urine, supply decrease",duration:"Entire breastfeeding period - needs remain elevated as long as nursing",resources:"Nutritionist consultation, postpartum meal delivery services",partner:"Prepare meals, keep water accessible at nursing stations, provide snacks",cultural:"Postpartum dietary traditions (hot/cold food balance, specific soups)"}},
+      
+      {id:8,title:"Mental Health",icon:"🧠",theme:"maternal",preview:"Psychological wellbeing",attrs:{definition:"Mother's psychological and emotional wellbeing during breastfeeding",importance:"Affects bonding, milk supply (stress inhibits oxytocin), family health",timing:"Monitor from birth through weaning, highest PPD/PPA risk first 6 months",techniques:"Self-care practices, adequate rest, social support, therapy when needed",signs:"Feeling bonded with baby, manageable stress, enjoying motherhood moments",problems:"Postpartum depression 10-20%, anxiety 10-15%, D-MER, breastfeeding aversion",solutions:"Professional mental health care, breastfeeding-compatible medications available",help:"Persistent sadness >2 weeks, intrusive thoughts, inability to bond, self-harm thoughts",duration:"Risk highest first 6 months postpartum, can occur throughout first year",resources:"Perinatal mental health therapist, psychiatrist, Postpartum Support International",partner:"Watch for warning signs (crying, withdrawal), encourage treatment, provide support",cultural:"Significant mental health stigma in many cultures, variable access to care"}},
+      
+      {id:9,title:"Medications",icon:"💊",theme:"maternal",preview:"Drug safety",attrs:{definition:"Understanding safety of medications and substances during breastfeeding",importance:"Protects baby while allowing mother necessary treatment - most ARE compatible",timing:"Review all medications before and during breastfeeding, check each new prescription",techniques:"Consult LactMed database (free NIH resource), ask prescribers about compatibility",signs:"Mother receives necessary medical treatment safely without stopping breastfeeding",problems:"Unnecessary medication avoidance (mother not treating conditions), unsafe use",solutions:"Find breastfeeding-compatible alternatives for most medications, time doses after nursing",help:"Any new prescription, OTC medication questions, infant behavior changes after maternal medication",duration:"Throughout entire breastfeeding period - check each and every medication",resources:"LactMed database (free, updated), InfantRisk Center hotline, pharmacist",partner:"Help research medications using LactMed, remind about optimal timing of doses",cultural:"Different comfort levels with pharmaceutical vs. traditional/herbal remedies"}},
+      
+      {id:10,title:"Pumping",icon:"🍼",theme:"skills",preview:"Expressing and storing",attrs:{definition:"Expressing breast milk using manual or electric pumps and storing safely",importance:"Allows work return, builds freezer stash, maintains supply during separation",timing:"Establish breastfeeding first (3-4 weeks) before introducing pump except medical necessity",techniques:"Double electric pump most efficient, hands-on pumping increases output 48%",signs:"Accumulated freezer stash, maintained milk supply, efficient sessions 60-120mL",problems:"Low pump output (pump less efficient than baby - normal), storage confusion",solutions:"Pump at regular times, look at baby photo (oxytocin), correct flange size (nipple + 2-4mm)",help:"Pumping painful (check flange fit), significant supply decrease, unable to pump enough",duration:"Storage: room temp 4 hours, fridge 4 days, freezer 6-12 months, Sessions: 15-20 minutes",resources:"Breast pump through insurance (mandated coverage), storage bags, labeling system",partner:"Wash pump parts daily, organize stored milk (oldest first), give bottles for rest",cultural:"Workplace pumping rights vary dramatically (US: PUMP Act requires accommodations)"}},
+      
+      {id:11,title:"Night Feeding",icon:"🌙",theme:"skills",preview:"Safe nighttime nursing",attrs:{definition:"Managing breastfeeding during nighttime hours maintaining safety and rest",importance:"Maintains milk supply (prolactin peaks 2-6 AM), supports infant sleep patterns",timing:"Expect 2-4 night feedings initially, gradually decreasing over 6-12 months",techniques:"Side-lying nursing, room-sharing, dream feeding (10-11 PM), minimize lights",signs:"Both mother and baby return to sleep easily, safe sleep practices maintained",problems:"Severe exhaustion affecting daily function, unsafe sleep practices (recliner)",solutions:"Partner shift system (4-6 hour consolidated sleep), nap when baby naps, safe bedsharing if chosen",help:"Severe sleep deprivation affecting function, unsafe behaviors, hallucinations from exhaustion",duration:"Night feeds decrease: 0-4 weeks (3-5 feeds), 1-2 months (2-4), 7-12 months (0-2)",resources:"Safe sleep guidelines (AAP), Safe Sleep Seven for bedsharing, sleep consultants",partner:"Change diapers, bring baby to mother, resettle baby after feeding, handle morning shift",cultural:"Bedsharing practices vary - Western medicine discourages but 60-75% mothers do it"}},
+      
+      {id:12,title:"Bottles & Pacifiers",icon:"🍼",theme:"skills",preview:"Safe alternative introduction",attrs:{definition:"Offering bottles and pacifiers as alternatives or supplements to direct breastfeeding",importance:"Can support breastfeeding success (flexibility) or interfere (nipple confusion)",timing:"Wait 3-4 weeks for bottle introduction to establish breastfeeding, evaluate pacifier necessity",techniques:"Paced bottle feeding (horizontal position, frequent pauses), slow-flow nipples",signs:"Baby accepts bottle but still breastfeeds well, no reduction in nursing frequency or supply",problems:"Nipple confusion (baby preferring bottle's faster flow), bottle/pacifier refusal",solutions:"Maintain breast priority (always nurse first), have partner/others give bottles",help:"Baby refusing breast after bottles introduced, supply dropping significantly",duration:"Gradual introduction over several attempts (1-2 weeks), occasional refusal normal initially",resources:"Lactation consultant for bottle introduction guidance, various bottle brands to try",partner:"Give bottles to allow mother rest or enable work, maintain feeding schedule, monitor preferences",cultural:"Pacifier use culturally variable - common in US/Europe, less common in some Asian cultures"}},
+      
+      {id:13,title:"Work Return",icon:"💼",theme:"transitions",preview:"Maintaining while employed",attrs:{definition:"Continuing breastfeeding while returning to employment through pumping and planning",importance:"Allows continuation of breastfeeding benefits despite work separation",timing:"Plan 2-4 weeks before return date, build freezer stash, practice bottle feeding",techniques:"Pump every 3-4 hours during work, pump at times baby would normally nurse",signs:"Maintained milk supply matching baby's needs, baby accepts bottles from caregiver",problems:"Supply decrease from reduced frequency, lack of workplace support, time constraints",solutions:"Know your rights (PUMP Act in US), pump during breaks, maintain night nursing",help:"Workplace discrimination/lack of accommodations, significant supply drop, mastitis from missed sessions",duration:"Varies by work schedule and breastfeeding goals, can continue through toddlerhood",resources:"Workplace lactation rooms (required), PUMP Act information, portable high-quality pumps",partner:"Handle morning routine efficiently, manage stored milk organization, bottle feed during work",cultural:"Maternity leave varies dramatically: US (0-12 weeks unpaid), Europe (6-12+ months paid)"}},
+      
+      {id:14,title:"Introducing Solids",icon:"🥄",theme:"transitions",preview:"Complementary feeding",attrs:{definition:"Beginning solid foods around 6 months while continuing breastfeeding as primary nutrition",importance:"Meets increasing nutritional needs (especially iron/zinc), important developmental milestone",timing:"Around 6 months when baby shows readiness: sits independently, interest in food, lost tongue-thrust",techniques:"Baby-led weaning or purees (both work), continue nursing BEFORE offering solids",signs:"Baby interested in food, continued robust breastfeeding, meeting nutritional needs",problems:"Too early introduction (<6 months), replacing breastfeeding with solids, food allergies",solutions:"Nurse before solids to maintain supply, gradual introduction one food at a time",help:"Allergic reactions (rash, vomiting, bloody stools), feeding difficulties, significant supply drop",duration:"Gradual increase over months - breast milk primary nutrition through 12 months despite solids",resources:"Pediatrician feeding guidance, feeding therapist if difficulties, allergy testing if family history",partner:"Prepare age-appropriate foods, participate in family meals, clean up messes enthusiastically",cultural:"First foods vary by culture (rice cereal vs. mashed foods vs. family foods from start)"}},
+      
+      {id:15,title:"Weaning",icon:"🌅",theme:"transitions",preview:"Transition from breastfeeding",attrs:{definition:"Gradual or sudden ending of breastfeeding relationship - timing and method vary widely",importance:"Should be respectful of both mother's and baby's needs, minimize discomfort, preserve bond",timing:"Varies widely - WHO recommends through age 2+, many wean earlier, some nurse into childhood",techniques:"Drop one feeding at a time gradually ('don't offer, don't refuse'), baby-led vs. mother-led",signs:"Gradual transition without severe engorgement or distress for either party, maintained connection",problems:"External pressure to wean early, abrupt weaning causing engorgement/mastitis, maternal guilt",solutions:"Follow your own timeline not others' expectations, gradual reduction over weeks/months",help:"Severe engorgement during weaning, emotional difficulty coping, depression symptoms emerging",duration:"Can take weeks to months depending on approach - gradual weaning typically easiest on both",resources:"Lactation consultant for weaning guidance, support groups, mental health support if needed",partner:"Provide comfort to baby during transition, support mother's decision without judgment",cultural:"Weaning age expectations vary dramatically: US average 6-9 months, globally 2-4 years common"}},
+      
+      {id:16,title:"Weight Gain",icon:"⚖️",theme:"patterns",preview:"Tracking intake",attrs:{definition:"Monitoring baby's growth patterns and elimination as primary intake indicators",importance:"Primary objective measure of adequate milk intake - more reliable than perception",timing:"Daily monitoring early on (first 2 weeks), then weekly weight checks, monthly pediatric visits",techniques:"Track wet/dirty diapers (simple chart), regular weight checks (same scale, same time)",signs:"6+ wet diapers daily, back to birth weight by 2 weeks, gain 150-200g/week first 3 months",problems:"Slow weight gain, excessive weight loss (>10% from birth), dehydration signs",solutions:"Increase feeding frequency, improve latch efficiency, possible supplementation if medically indicated",help:"Weight loss >10% from birth, fewer than 6 wet diapers daily, dark concentrated urine, lethargy",duration:"Close monitoring first 2 weeks critical, then regular pediatric visits (2 weeks, 1, 2, 4, 6 months)",resources:"Pediatrician visits for weight checks, home baby scale rental, lactation consultant weighted feeds",partner:"Track diapers on shared chart, attend weight check appointments, observe baby's alertness",cultural:"Different growth expectations and chart usage (WHO vs. CDC charts have different curves)"}},
+      
+      {id:17,title:"Complications",icon:"⚠️",theme:"maternal",preview:"Medical issue treatment",attrs:{definition:"Medical issues arising during breastfeeding requiring professional treatment and intervention",importance:"Early recognition prevents serious complications like abscess (3-11% of untreated mastitis)",timing:"Can occur any time during breastfeeding journey, most common in early weeks",techniques:"Prevention through proper latch, frequent complete emptying, good hygiene, stress management",signs:"Quick identification and appropriate treatment, resolution without breastfeeding interruption",problems:"Mastitis 10-33%, thrush 5-20%, plugged ducts 15-25%, tongue tie, nipple trauma, low supply",solutions:"Warm compresses/massage, continue nursing, antibiotics for mastitis, antifungals for thrush, frenotomy",help:"Fever >101°F, red streaks on breast, white patches in baby's mouth, persistent pain, supply concerns",duration:"Treatment varies: plugged ducts (24-48 hours), mastitis (10-14 day antibiotics), thrush (14-21 days)",resources:"Pediatrician, lactation consultant (IBCLC), oral surgeon for tongue ties, infectious disease specialist",partner:"Monitor symptoms closely, encourage prompt medical care, assist with treatments, attend appointments",cultural:"Different comfort levels with medical intervention, traditional remedies may or may not help"}},
+      
+      {id:18,title:"Support Systems",icon:"🤝",theme:"social",preview:"Building help network",attrs:{definition:"Network of people, professionals, and services available to support breastfeeding success",importance:"Dramatically increases breastfeeding success rates and duration, provides problem-solving resources",timing:"Build network during pregnancy and early postpartum period, ongoing throughout journey",techniques:"Join support groups, hire/consult IBCLC, educate partner, connect with experienced mothers",signs:"Quick access to help when problems arise, feeling supported and informed, confident decisions",problems:"Isolation, conflicting advice from multiple sources, lack of knowledgeable support, geographic barriers",solutions:"Find evidence-based sources, La Leche League meetings (free), online communities, telehealth options",help:"Feeling alone and overwhelmed, receiving harmful advice, unable to find local resources",duration:"Ongoing throughout breastfeeding journey - needs change but support remains important",resources:"IBCLC (gold standard), pediatrician, WIC program, breastfeeding support groups, peer counselors",partner:"Research resources, attend lactation appointments, filter unhelpful visitors/advice, provide encouragement",cultural:"Community support structures vary (extended family involvement vs. nuclear family isolation)"}},
+      
+      {id:19,title:"Public Feeding",icon:"👥",theme:"social",preview:"Nursing confidently",attrs:{definition:"Feeding baby outside home environment in public spaces and social situations",importance:"Allows mother and baby freedom to participate in normal life, essential for mental health",timing:"Practice at home with mirror first, venture out when comfortable (usually weeks 2-4)",techniques:"Nursing covers optional, two-shirt method (lift one, pull down other), know your legal rights",signs:"Confident feeding anywhere baby is hungry, comfortable with chosen method, aware of rights",problems:"Self-consciousness, lack of comfortable accommodations, inappropriate comments from strangers",solutions:"Practice builds confidence, know state laws protect nursing in public, have prepared responses",help:"Harassment or discrimination, severe anxiety preventing necessary outings with baby",duration:"Throughout entire breastfeeding period - becomes more natural with practice and confidence",resources:"Nursing room finder apps (Moms Pump Here), state law information, supportive online communities",partner:"Provide moral support, run interference with inappropriate comments, help find comfortable spots",cultural:"Public breastfeeding acceptance varies dramatically - legally protected in US, taboo in some cultures"}},
+      
+      {id:20,title:"Special Circumstances",icon:"⭐",theme:"social",preview:"Complex situations",attrs:{definition:"Breastfeeding with complications: multiples, premature babies, medical conditions, anatomical issues",importance:"Requires specialized knowledge and support but breast milk benefits are even more critical",timing:"Address from birth or diagnosis, immediate specialized lactation support essential for success",techniques:"Tandem nursing (twins), triple feeding protocol, exclusive pumping, specialized positioning, supplementation",signs:"Babies receiving breast milk despite challenges, sustainable long-term plan established, adequate support",problems:"Supply issues with multiples, NICU separation barriers, coordination difficulties, tongue/lip ties",solutions:"Hospital-grade pump essential, specialized lactation consultant with relevant experience, specific protocols",help:"Immediately upon diagnosis or complication - don't wait, early intervention absolutely critical for outcomes",duration:"Depends on specific circumstance - some temporary challenges, some ongoing throughout breastfeeding",resources:"NICU lactation consultants, specialists in multiples/prematurity, condition-specific support groups",partner:"Extra hands absolutely essential for success, attend all medical appointments, emotional support critical",cultural:"Access to specialized resources varies dramatically by location, some cultures more accepting of challenges"}}
+    ];
+
+    // Body changes data by week
+    const bodyChanges = {
+      0: {
+        title: "Birth & Initial Days",
+        changes: [
+          { title: "Colostrum Production", desc: "Thick, yellow first milk rich in antibodies. Produced in small amounts (2-20mL per feed)." },
+          { title: "Breast Fullness", desc: "Breasts may feel soft. This is normal - colostrum is concentrated and baby's stomach is tiny (5-7mL)." },
+          { title: "Hormonal Shift", desc: "Prolactin levels spike after placenta delivery, triggering milk production system." }
+        ]
+      },
+      1: {
+        title: "Week 1 - Milk Coming In",
+        changes: [
+          { title: "Engorgement", desc: "Days 2-5: Breasts become full, warm, heavy as transitional milk arrives. Size increases 1-2 cup sizes temporarily." },
+          { title: "Increased Volume", desc: "Production jumps from 30-60mL daily to 300-750mL by day 5. Dramatic increase." },
+          { title: "Nipple Sensitivity", desc: "Initial tenderness normal (3-5/10 pain scale). Should decrease significantly by end of week." }
+        ]
+      },
+      2: {
+        title: "Week 2 - Establishing Pattern",
+        changes: [
+          { title: "Supply Regulation", desc: "Body learning baby's needs. Producing 500-750mL daily. Breasts may feel less full between feeds (normal)." },
+          { title: "Letdown Sensation", desc: "May feel tingling, pins-and-needles during milk release. Can happen 2-5 times per feed." },
+          { title: "Leaking", desc: "Common in early weeks. One breast may leak while feeding from other. Breast pads helpful." }
+        ]
+      },
+      6: {
+        title: "Week 6 - Supply Stabilizing",
+        changes: [
+          { title: "Autocrine Control", desc: "Transitioning from hormone-driven to demand-driven supply. Body responding directly to baby's needs." },
+          { title: "Growth Spurt", desc: "Common this week. Baby may feed constantly 24-48 hours to increase supply. This is normal!" },
+          { title: "Breast Size", desc: "Breasts may feel softer, less full. This is good - means supply is well-regulated, not decreasing." }
+        ]
+      },
+      12: {
+        title: "Week 12 - Mature Supply",
+        changes: [
+          { title: "Full Regulation", desc: "Supply-demand system fully established. Producing 750-1000mL daily based on baby's needs." },
+          { title: "Efficient Feeding", desc: "Baby getting faster at feeding. Sessions may shorten to 10-20 minutes." },
+          { title: "Comfortable Routine", desc: "Most mothers report breastfeeding feels natural, automatic, pain-free by now." }
+        ]
+      },
+      26: {
+        title: "Week 26 (6 Months) - Introducing Solids",
+        changes: [
+          { title: "Continued Production", desc: "Still producing 750-1000mL daily. Breast milk remains primary nutrition source." },
+          { title: "Feeding Pattern Shift", desc: "May notice baby nursing before meals, using breast for comfort as well as nutrition." },
+          { title: "Body Adaptation", desc: "Breasts adapt to produce nutritionally complete milk with higher fat content in shorter feeds." }
+        ]
+      },
+      52: {
+        title: "Week 52 (1 Year) - Extended Breastfeeding",
+        changes: [
+          { title: "Ongoing Benefits", desc: "Milk composition adapts to toddler's needs. Producing 400-600mL daily with solid foods." },
+          { title: "Immune Support", desc: "Antibodies remain high. Extended breastfeeding provides ongoing immune protection." },
+          { title: "Comfort & Connection", desc: "Breastfeeding provides emotional security and bonding beyond nutrition." }
+        ]
+      }
+    };
+
+    // Generate theme sections
+    function generateThemeSections() {
+      const container = document.getElementById('themeSections');
+      
+      Object.entries(themes).forEach(([themeKey, themeData]) => {
+        const section = document.createElement('div');
+        section.className = `theme-section ${themeKey === 'physical' ? 'active' : ''}`;
+        section.id = `theme-${themeKey}`;
+        
+        const themeTopics = topics.filter(t => t.theme === themeKey);
+        
+        section.innerHTML = `
+          <div class="theme-header">
+            <span class="theme-icon">${themeData.icon}</span>
+            <h2 class="theme-title">${themeData.title}</h2>
+            <p class="theme-description">${themeData.description}</p>
+          </div>
+          
+          <div class="topic-grid">
+            ${themeTopics.map(topic => `
+              <div class="topic-card ${themeKey}" data-id="${topic.id}">
+                <div class="topic-header">
+                  <span class="topic-icon">${topic.icon}</span>
+                  <h3 class="topic-title">${topic.title}</h3>
+                  <span class="topic-number">Topic ${topic.id}</span>
+                </div>
+                <div class="topic-body">
+                  <p class="topic-preview">${topic.preview}</p>
+                  <button class="expand-btn">
+                    <i class="fas fa-expand-alt"></i> Explore Details
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        
+        container.appendChild(section);
+      });
+      
+      // Add click listeners
+      document.querySelectorAll('.topic-card').forEach(card => {
+        card.addEventListener('click', function() {
+          openModal(parseInt(this.dataset.id));
+        });
+      });
+    }
+
+    function switchTheme(themeKey) {
+      // Update buttons
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`.theme-btn.${themeKey}`).classList.add('active');
+      
+      // Update sections
+      document.querySelectorAll('.theme-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(`theme-${themeKey}`).classList.add('active');
+    }
+
+    function openModal(id) {
+      const topic = topics.find(t => t.id === id);
+      const modal = document.getElementById('modal');
+      const backdrop = document.getElementById('modalBackdrop');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      
+      title.innerHTML = `${topic.icon} ${topic.title}`;
+      
+      const attrNames = {
+        definition:"Definition",importance:"Importance",timing:"Timing",
+        techniques:"Techniques",signs:"Success Signs",problems:"Common Problems",
+        solutions:"Solutions",help:"When to Seek Help",duration:"Duration",
+        resources:"Resources",partner:"Partner Role",cultural:"Cultural Notes"
+      };
+      
+      const icons = {
+        definition:'info-circle',importance:'star',timing:'clock',techniques:'wrench',
+        signs:'check-circle',problems:'exclamation-triangle',solutions:'lightbulb',
+        help:'user-md',duration:'hourglass-half',resources:'book',
+        partner:'hands-helping',cultural:'globe'
+      };
+      
+      body.innerHTML = Object.entries(topic.attrs).map(([k,v]) => `
+        <div class="attr-section">
+          <h3><i class="fas fa-${icons[k]}"></i> ${attrNames[k]}</h3>
+          <p>${v}</p>
+        </div>
+      `).join('');
+      
+      modal.classList.add('active');
+      backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      const card = document.querySelector(`[data-id="${id}"]`);
+      if (!card.classList.contains('explored')) {
+        card.classList.add('explored');
+        updateProgress();
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+      document.getElementById('modalBackdrop').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+
+    function updateProgress() {
+      const explored = document.querySelectorAll('.topic-card.explored').length;
+      const percent = Math.round((explored / 20) * 100);
+      document.getElementById('exploredCount').textContent = explored;
+      document.getElementById('progressPercent').textContent = percent + '%';
+      document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    // Body Changes Simulator
+    (function() {
+      const canvas = document.getElementById('bodyChangesCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const slider = document.getElementById('weekSlider');
+      const weekDisplay = document.getElementById('weekDisplay');
+      const changesList = document.getElementById('changesList');
+      
+      canvas.width = canvas.offsetWidth;
+      canvas.height = 400;
+      
+      function getDataForWeek(week) {
+        const keys = Object.keys(bodyChanges).map(Number).sort((a,b) => a-b);
+        for (let i = keys.length - 1; i >= 0; i--) {
+          if (week >= keys[i]) return bodyChanges[keys[i]];
+        }
+        return bodyChanges[0];
+      }
+      
+      function draw(week) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const baseRadius = 80;
+        const growthFactor = 1 + (week / 52) * 0.3;
+        const radius = baseRadius * growthFactor;
+        
+        // Draw breasts
+        const spacing = radius * 0.6;
+        
+        // Left breast
+        ctx.beginPath();
+        ctx.arc(cx - spacing, cy, radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(236,64,122,0.15)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(236,64,122,0.4)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Right breast
+        ctx.beginPath();
+        ctx.arc(cx + spacing, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+        
+        // Draw milk ducts
+        const ductCount = Math.min(8, 4 + Math.floor(week / 8));
+        for (let i = 0; i < ductCount; i++) {
+          const angle = (Math.PI * 2 / ductCount) * i;
+          
+          // Left breast ducts
+          ctx.beginPath();
+          ctx.moveTo(cx - spacing, cy);
+          ctx.lineTo(cx - spacing + Math.cos(angle) * radius * 0.7, cy + Math.sin(angle) * radius * 0.7);
+          ctx.strokeStyle = `rgba(156,39,176,${0.3 + (week / 52) * 0.3})`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          
+          // Right breast ducts
+          ctx.beginPath();
+          ctx.moveTo(cx + spacing, cy);
+          ctx.lineTo(cx + spacing + Math.cos(angle) * radius * 0.7, cy + Math.sin(angle) * radius * 0.7);
+          ctx.stroke();
+        }
+        
+        // Draw nipples
+        ctx.beginPath();
+        ctx.arc(cx - spacing, cy, 12, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(233,30,99,0.5)';
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(cx + spacing, cy, 12, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Week indicator
+        ctx.fillStyle = '#212121';
+        ctx.font = 'bold 16px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Week ${week}`, cx, 30);
+        
+        // Supply indicator
+        const supplyLevel = Math.min(100, 20 + (week / 52) * 80);
+        ctx.fillStyle = '#555';
+        ctx.font = '14px Inter, sans-serif';
+        ctx.fillText(`Milk Production: ${supplyLevel.toFixed(0)}%`, cx, canvas.height - 20);
+      }
+      
+      function updateChanges(week) {
+        const data = getDataForWeek(week);
+        weekDisplay.textContent = data.title;
+        
+        changesList.innerHTML = data.changes.map(change => `
+          <div class="change-item">
+            <h4>${change.title}</h4>
+            <p>${change.desc}</p>
+          </div>
+        `).join('');
+      }
+      
+      slider.addEventListener('input', function() {
+        const week = parseInt(this.value);
+        draw(week);
+        updateChanges(week);
+      });
+      
+      draw(0);
+      updateChanges(0);
+    })();
+
+    // Latch Simulator
+    (function() {
+      const canvas = document.getElementById('latchCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let currentPosition = 'cradle';
+      
+      canvas.width = canvas.offsetWidth;
+      canvas.height = 300;
+      
+      const positions = {
+        cradle: { 
+          baby: { x: canvas.width * 0.55, y: canvas.height * 0.65, angle: -30 },
+          text: 'Cradle Hold: Baby lies across your body, head in crook of arm'
+        },
+        cross: { 
+          baby: { x: canvas.width * 0.5, y: canvas.height * 0.6, angle: -45 },
+          text: 'Cross-Cradle: Opposite arm supports baby, better control'
+        },
+        football: { 
+          baby: { x: canvas.width * 0.65, y: canvas.height * 0.7, angle: 45 },
+          text: 'Football: Baby tucked under arm at your side, feet toward back'
+        },
+        side: { 
+          baby: { x: canvas.width * 0.55, y: canvas.height * 0.75, angle: 0 },
+          text: 'Side-Lying: Both lying down, perfect for night feeding'
+        }
+      };
+      
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        const pos = positions[currentPosition];
+        const mx = canvas.width * 0.3;
+        const my = canvas.height * 0.5;
+        
+        // Mother silhouette
+        ctx.fillStyle = 'rgba(236,64,122,0.2)';
+        ctx.fillRect(mx - 40, my - 60, 80, 120);
+        
+        // Breast
+        ctx.beginPath();
+        ctx.arc(mx + 30, my, 35, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(236,64,122,0.4)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(236,64,122,0.6)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Nipple
+        ctx.beginPath();
+        ctx.arc(mx + 30, my, 8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(233,30,99,0.6)';
+        ctx.fill();
+        
+        // Baby
+        ctx.save();
+        ctx.translate(pos.baby.x, pos.baby.y);
+        ctx.rotate(pos.baby.angle * Math.PI / 180);
+        ctx.fillStyle = 'rgba(33,150,243,0.4)';
+        ctx.fillRect(-40, -20, 80, 40);
+        ctx.fillStyle = 'rgba(33,150,243,0.6)';
+        ctx.beginPath();
+        ctx.arc(40, 0, 15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+        
+        // Position text
+        ctx.fillStyle = '#212121';
+        ctx.font = '14px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(pos.text, canvas.width / 2, canvas.height - 20);
+      }
+      
+      draw();
+      
+      document.querySelectorAll('.position-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.position-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          currentPosition = this.dataset.position;
+          draw();
+        });
+      });
+    })();
+
+    generateThemeSections();
+
+    
+  </script>
+
+
+  <style>
+  /* --- SCOPED STYLES FOR SIMULATION SECTION --- */
+  .bio-twin-section {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #37474f;
+    background: #fff;
+    padding: 2rem 1rem;
+    margin: 2rem 0;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+  }
+
+  .bio-twin-section :root {
+    --sim-primary: #ec407a;
+    --sim-dark: #d81b60;
+    --sim-water: #42a5f5;
+  }
+
+  /* Baby & Pump Overlays */
+  .sim-baby {
+    position: absolute; 
+    /* CHANGED: Brought up from -80px to 20px so face is fully visible */
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    font-size: 5rem; 
+    transition: bottom 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    z-index: 10;
+    filter: drop-shadow(0 -5px 10px rgba(0,0,0,0.1));
+  }
+  
+  /* When nursing active, baby moves up slightly closer */
+  .sim-baby.active { 
+    bottom: 100px; /* Adjusted to move up to the breast */
+  }
+
+  .bio-wrapper { max-width: 1200px; margin: 0 auto; }
+
+  /* Section Header */
+  .bio-header { text-align: center; margin-bottom: 2rem; }
+  .bio-header h2 { font-size: 2.2rem; color: #d81b60; margin-bottom: 0.5rem; }
+  .bio-header p { color: #555; font-size: 1.1rem; }
+
+  /* Narrator Bar (Top) */
+  .narrator-bar {
+    background: #fdf2f7;
+    border-radius: 16px;
+    padding: 1.2rem 2rem;
+    margin-bottom: 2rem;
+    border-left: 6px solid #ec407a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
+  }
+  .narrator-text h3 { font-size: 1.2rem; margin: 0 0 0.2rem 0; color: #d81b60; }
+  .narrator-text p { margin: 0; font-size: 1rem; color: #444; }
+  
+  .status-tags { display: flex; gap: 10px; }
+  .status-tag { padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+  .tag-danger { background: #ffebee; color: #c62828; animation: bio-pulse 1s infinite; box-shadow: 0 0 5px #ef5350; }
+  .tag-warning { background: #fff3e0; color: #e65100; }
+
+  /* Main Grid */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media(max-width:1024px) { .bio-grid { grid-template-columns: 1fr; } }
+
+  .bio-card { 
+    background: #ffffff; border-radius: 20px; padding: 1.5rem; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden; border: 1px solid #eee;
+  }
+  .bio-card-header { 
+    font-weight: 700; color: #78909c; text-transform: uppercase; 
+    letter-spacing: 1px; font-size: 0.85rem; margin-bottom: 1.2rem; 
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* --- LEFT: METRICS PANEL --- */
+  .bio-metric { margin-bottom: 1.5rem; }
+  .bio-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; color: #455a64; }
+  .bio-track { background: #eceff1; height: 12px; border-radius: 6px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+  .bio-fill { height: 100%; transition: width 0.5s ease; border-radius: 6px; }
+  
+  .fill-hydro { background: linear-gradient(90deg, #42a5f5, #2196f3); }
+  .fill-hormone { background: linear-gradient(90deg, #ab47bc, #8e24aa); }
+  .fill-energy { background: linear-gradient(90deg, #ffa726, #fb8c00); }
+
+  .stash-box { 
+    background: #e3f2fd; border-radius: 16px; padding: 1.2rem; text-align: center; margin-top: 1rem; border: 1px solid #90caf9;
+    position: relative; overflow: hidden;
+  }
+  .stash-label { font-size: 0.8rem; text-transform: uppercase; color: #1565c0; font-weight: 700; letter-spacing: 1px; }
+  .stash-val { font-size: 2rem; font-weight: 800; color: #0d47a1; transition: transform 0.2s; display: inline-block; }
+  .stash-unit { font-size: 1rem; color: #1565c0; font-weight: 600; }
+  
+  .stash-pop { animation: stash-pop 0.3s ease; color: #ec407a; }
+
+  /* --- CENTER: ANATOMY STAGE --- */
+  .bio-stage {
+    height: 400px;
+    background: radial-gradient(circle at center, #ffffff 0%, #f3e5f5 100%);
+    border-radius: 20px;
+    border: 1px solid #fce4ec;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Educational Labels on Image */
+  .label-point {
+    position: absolute; font-size: 0.75rem; color: #888; font-weight: 600;
+    pointer-events: none; z-index: 5; background: rgba(255,255,255,0.8);
+    padding: 2px 6px; border-radius: 4px;
+  }
+  .label-line { position: absolute; height: 1px; background: #ddd; z-index: 4; }
+
+  /* Bio-Feedback Overlay (Text on Breast) */
+  .bio-text-overlay {
+    position: absolute; top: 20px; left: 0; width: 100%; text-align: center;
+    font-weight: bold; color: #ec407a; font-size: 1rem; opacity: 0; transition: opacity 0.3s;
+    z-index: 10; text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+  }
+  .bio-text-overlay.visible { opacity: 1; transform: translateY(0); }
+
+  .torso { display: flex; gap: 40px; position: relative; z-index: 2; margin-top: -40px; }
+  
+  /* BREAST VISUALIZATION */
+  .sim-breast {
+    width: 110px; height: 110px; 
+    background: #ffe0e9; 
+    border: 3px solid #f8bbd0; 
+    border-radius: 50%;
+    position: relative; 
+    overflow: hidden; 
+    transition: transform 0.3s;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+  }
+  .sim-milk {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+    background: linear-gradient(to top, #ffffff, #fce4ec); 
+    transition: height 0.5s linear; 
+    opacity: 0.95;
+  }
+  /* Milk surface line */
+  .sim-milk::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: rgba(255,255,255,0.8); box-shadow: 0 0 5px white;
+  }
+
+  .sim-nipple {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 16px; height: 16px; background: #f06292; border-radius: 50%; z-index: 5;
+    border: 2px solid #ec407a;
+  }
+
+  /* Status Indicator on Breast (e.g. "Full") */
+  .breast-status {
+    position: absolute; top: -25px; left: 50%; transform: translateX(-50%);
+    font-size: 0.7rem; color: #888; white-space: nowrap; font-weight: 600;
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  .sim-pump {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+    display: flex; gap: 60px; transition: transform 0.3s; z-index: 10;
+  }
+  .sim-pump.active { transform: translate(-50%, -50%) scale(1); }
+  
+  .sim-bottle {
+    width: 50px; height: 70px; background: rgba(255,255,255,0.9); border: 2px solid #b0bec5; 
+    border-radius: 0 0 15px 15px; position: relative; overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .sim-b-fill {
+    position: absolute; bottom: 0; width: 100%; height: 0%; background: #fff; transition: height 0.2s;
+  }
+
+  /* Sleep Overlay */
+  .sim-sleep {
+    position: absolute; inset: 0; background: rgba(13, 27, 42, 0.95);
+    color: white; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.5s; z-index: 20; border-radius: 12px;
+  }
+  .sim-sleep.active { opacity: 1; pointer-events: all; }
+
+  /* --- RIGHT: INTERACTIVE ACTION PANEL --- */
+  .bio-btn {
+    width: 100%; padding: 1.2rem; margin-bottom: 1rem;
+    border: 2px solid #f0f0f0; background: white; border-radius: 16px;
+    cursor: pointer; text-align: left; display: flex; align-items: center; gap: 1rem;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .bio-btn:hover { border-color: #ec407a; transform: translateX(5px); box-shadow: 0 5px 15px rgba(236,64,122,0.1); }
+  .bio-btn.disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(1); }
+  
+  /* Progress bar inside button for transitions */
+  .btn-progress {
+    position: absolute; bottom: 0; left: 0; height: 4px; width: 0%; 
+    background: #ec407a; transition: width linear;
+  }
+
+  .bio-icon {
+    width: 45px; height: 45px; background: #fce4ec; border-radius: 12px; color: #d81b60;
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+  }
+  .bio-btn strong { display: block; font-size: 1rem; color: #333; margin-bottom: 2px; }
+  .bio-btn span { font-size: 0.8rem; color: #777; display: block; line-height: 1.3; }
+
+  /* Explanation Box inside Right Panel */
+  .action-explain-box {
+    background: #fff3e0; padding: 1rem; border-radius: 12px; font-size: 0.85rem; color: #e65100;
+    margin-top: 1rem; display: none; border-left: 4px solid #ffa726; animation: slideDown 0.3s ease;
+  }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Animations */
+  @keyframes bio-pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+  
+  .bio-particle {
+    position: absolute; pointer-events: none; animation: flyToStash 1s forwards cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    font-weight: 800; font-size: 1.2rem; z-index: 100; background: white; 
+    padding: 5px 10px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid #eee;
+  }
+  
+  @keyframes stash-pop { 0% { transform: scale(1); } 50% { transform: scale(1.5); color: #ec407a; } 100% { transform: scale(1); } }
+
+  /* Simple floating text animation */
+  @keyframes floatUpFade { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-40px); opacity: 0; } }
+  .float-text { position: absolute; animation: floatUpFade 1.5s forwards; color: #ec407a; font-weight: bold; font-size: 0.9rem; }
+
+</style>
+
+<section id="bio-twin-section">
+  <div class="bio-wrapper">
+    
+    <div class="bio-header">
+      <h2><i class="fa-solid fa-dna"></i> Bio-Twin Simulation Lab</h2>
+      <p>Interactive dashboard visualizing the biology of lactation. <strong>Act fast</strong> to keep stats healthy!</p>
+    </div>
+
+    <div class="narrator-bar" id="narratorBar">
+      <div class="narrator-text">
+        <h3 id="mainStatus"><i class="fa-solid fa-pause-circle"></i> Simulation Paused</h3>
+        <p id="subStatus">Click the Play button on the left dashboard to start your journey.</p>
+      </div>
+      <div class="status-tags" id="tags"></div>
+    </div>
+
+    <div class="bio-grid">
+      
+      <div class="bio-card">
+        <div class="bio-card-header">
+          <span>Simulation Time: <span id="clock" style="color:#d81b60;">08:00 AM</span></span>
+          <button onclick="toggleSim()" style="border:none; background:none; cursor:pointer; color:#ec407a; font-size:1.5rem; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fa-solid fa-play-circle" id="playIcon"></i>
+          </button>
+        </div>
+
+        <div class="bio-metric">
+          <div class="bio-label">
+            <span><i class="fa-solid fa-droplet" style="color:#42a5f5"></i> Hydration</span> 
+            <span id="val-hydro">100%</span>
+          </div>
+          <div class="bio-track"><div class="bio-fill fill-hydro" id="bar-hydro" style="width:100%"></div></div>
+          <small style="color:#888; font-size:0.75rem; display:block; margin-top:4px;">Water fuels milk volume. Keeps flow fast.</small>
+        </div>
+
+        <div class="bio-metric">
+          <div class="bio-label">
+            <span><i class="fa-solid fa-wand-magic-sparkles" style="color:#ab47bc"></i> Prolactin Hormone</span> 
+            <span id="val-hormone">50%</span>
+          </div>
+          <div class="bio-track"><div class="bio-fill fill-hormone" id="bar-hormone" style="width:50%"></div></div>
+          <small style="color:#888; font-size:0.75rem; display:block; margin-top:4px;">"The Milk Maker". Boosted by nursing/pumping.</small>
+        </div>
+
+        <div class="bio-metric">
+          <div class="bio-label">
+            <span><i class="fa-solid fa-bolt" style="color:#ffa726"></i> Maternal Energy</span> 
+            <span id="val-energy">80%</span>
+          </div>
+          <div class="bio-track"><div class="bio-fill fill-energy" id="bar-energy" style="width:80%"></div></div>
+        </div>
+
+        <div class="stash-box" id="stashBox">
+          <div class="stash-label"><i class="fa-solid fa-snowflake"></i> Freezer Stash</div>
+          <div>
+            <span class="stash-val" id="stashVal">0</span> 
+            <span class="stash-unit">oz</span>
+          </div>
+          <div style="font-size:0.7rem; color:#666; margin-top:5px;">Target: 20 oz for back-to-work</div>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-stage" id="stageArea">
+          
+          <div class="label-point" style="top: 80px; left: 60px;">Milk Ducts</div>
+          <div class="label-line" style="top: 90px; left: 80px; width: 40px; transform: rotate(20deg);"></div>
+          
+          <div class="label-point" style="top: 180px; right: 50px;">Nipple Pores</div>
+          <div class="label-line" style="top: 180px; right: 90px; width: 30px;"></div>
+
+          <div class="bio-text-overlay" id="bioOverlay">Oxytocin Release...</div>
+
+          <div class="sim-sleep" id="sleepOverlay">
+            <i class="fa-solid fa-moon" style="font-size:4rem; margin-bottom:1rem; color:#ffd54f;"></i>
+            <h3 style="font-size:1.5rem;">Rest & Repair</h3>
+            <p>Hormones resetting...</p>
+          </div>
+
+          <div class="sim-pump" id="pumpKit">
+            <div class="sim-bottle"><div class="sim-b-fill" id="fillL"></div></div>
+            <div class="sim-bottle"><div class="sim-b-fill" id="fillR"></div></div>
+          </div>
+
+          <div class="torso">
+            <div class="sim-breast">
+              <div class="breast-status" id="statL">Filling...</div>
+              <div class="sim-milk" id="milkL" style="height:30%"></div>
+              <div class="sim-nipple"></div>
+            </div>
+            <div class="sim-breast">
+              <div class="breast-status" id="statR">Filling...</div>
+              <div class="sim-milk" id="milkR" style="height:30%"></div>
+              <div class="sim-nipple"></div>
+            </div>
+          </div>
+
+          <div class="sim-baby" id="babyHead">👶</div>
+        </div>
+        
+        <div style="margin-top:1.5rem; display:flex; align-items:center; gap:15px; padding:0 1rem;">
+          <div style="text-align:center;">
+            <div style="font-size:0.8rem; font-weight:700; color:#555;">BABY HUNGER</div>
+            <div id="hungerVal" style="font-weight:800; font-size:1.2rem; color:#ef5350;">20%</div>
+          </div>
+          <div class="bio-track" style="flex:1; height:16px;">
+            <div class="bio-fill" id="bar-hunger" style="background:#ef5350; width:20%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bio-card">
+        <div class="bio-card-header">Take Action</div>
+
+        <button class="bio-btn" onclick="actNurse()" id="btnNurse">
+          <div class="btn-progress" id="progNurse"></div>
+          <div class="bio-icon" style="background:#fce4ec; color:#ec407a"><i class="fa-solid fa-person-breastfeeding"></i></div>
+          <div><strong>Nurse Baby</strong><span>Direct feed. Hormonal boost.</span></div>
+        </button>
+
+        <button class="bio-btn" onclick="actPump()" id="btnPump">
+          <div class="btn-progress" id="progPump"></div>
+          <div class="bio-icon" style="background:#eceff1; color:#78909c"><i class="fa-solid fa-bottle-droplet"></i></div>
+          <div><strong>Pump Milk</strong><span>Build stash. Empty breasts.</span></div>
+        </button>
+
+        <button class="bio-btn" onclick="actHydrate()" id="btnDrink">
+          <div class="btn-progress" id="progDrink"></div>
+          <div class="bio-icon" style="background:#e3f2fd; color:#42a5f5"><i class="fa-solid fa-glass-water"></i></div>
+          <div><strong>Hydrate</strong><span>Increase flow rate.</span></div>
+        </button>
+
+        <button class="bio-btn" onclick="actSleep()" id="btnSleep">
+          <div class="btn-progress" id="progSleep"></div>
+          <div class="bio-icon" style="background:#e8eaf6; color:#5c6bc0"><i class="fa-solid fa-bed"></i></div>
+          <div><strong>Rest / Nap</strong><span>Restore energy & sanity.</span></div>
+        </button>
+
+        <div class="action-explain-box" id="explainBox">
+          <strong id="explainTitle">Why do this?</strong>
+          <p id="explainText" style="margin:5px 0 0 0;">Select an action to see its biological impact.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  /* =========================================
+     BIO-TWIN SIMULATION LOGIC (V3.0)
+     ========================================= */
+  
+  const bioState = {
+    running: false,
+    timer: null,
+    
+    // Core Stats (0-100)
+    milk: 30,       // Fullness of breasts (visual level)
+    capacity: 100,  // Max milk capacity
+    hunger: 20,     // Baby hunger
+    hydration: 80,  // Mom's water level
+    hormones: 50,   // Prolactin level
+    energy: 80,     // Mom's fatigue
+    stash: 0,       // Stored milk in OZ
+    isBusy: false   // Blocking flag
+  };
+
+  // --- MAIN LOOP (Runs every 200ms) ---
+  function tick() {
+    if(!bioState.running) return;
+
+    // 1. Natural Decay
+    bioState.hunger = Math.min(100, bioState.hunger + 0.3); 
+    bioState.hydration = Math.max(0, bioState.hydration - 0.1); 
+    bioState.energy = Math.max(0, bioState.energy - 0.05); 
+    bioState.hormones = Math.max(20, bioState.hormones - 0.1); 
+
+    // 2. Milk Production (Rate = Hydration + Hormones)
+    // "Refilling" visual
+    let rate = 0.2 * (bioState.hydration/100) * (bioState.hormones/50);
+    
+    if (bioState.milk < 98) {
+        bioState.milk = Math.min(bioState.capacity, bioState.milk + rate);
+        showBreastStatus("Refilling...", 0.6);
+    } else {
+        showBreastStatus("Full (FIL Active)", 1); // Feedback Inhibitor of Lactation
+    }
+
+    updateUI();
+    checkWarnings();
+  }
+
+  // --- ACTIONS ---
+
+  function actNurse() {
+    if(bioState.isBusy || !bioState.running) return;
+    setBusy(true);
+    
+    // VISUALS
+    document.getElementById('babyHead').classList.add('active');
+    runBtnProgress('progNurse', 3000);
+    showExplain("Nursing", "Direct nipple stimulation releases Oxytocin (Let-down) and Prolactin (Make-more). Most efficient way to feed.");
+    updateNarrator("Nursing Started...", "Baby latched. Signaling brain to release milk.", "success");
+    showOverlayText("Oxytocin Release!");
+
+    setTimeout(() => {
+      // 1.5s in - Letdown happens
+      showOverlayText("Let-down Reflex: Milk Flowing");
+      
+      // Calculate Transfer
+      let milkRemoved = Math.min(bioState.milk, 40); // Baby takes chunks
+      bioState.milk -= milkRemoved;
+      
+      // Satisfaction Math (Milk * 3 reduces hunger)
+      bioState.hunger = Math.max(0, bioState.hunger - (milkRemoved * 3));
+      
+      // Boosts
+      bioState.hormones = Math.min(100, bioState.hormones + 25);
+      bioState.energy = Math.max(0, bioState.energy - 5); // Nursing burns calories
+
+      spawnFloatingText(`-${Math.floor(milkRemoved)}% Vol`, 'milkL', '#ec407a');
+    }, 1500);
+
+    setTimeout(() => {
+      document.getElementById('babyHead').classList.remove('active');
+      
+      if(bioState.hunger < 15) {
+        updateNarrator("Feed Complete", "Baby is full and sleepy. Hindmilk received.", "normal");
+      } else {
+        updateNarrator("Still Hungry", "Baby unlatched but needs more. Try switching sides.", "warning");
+      }
+      hideOverlayText();
+      setBusy(false);
+    }, 3000);
+  }
+
+  function actPump() {
+    if(bioState.isBusy || !bioState.running) return;
+    setBusy(true);
+
+    // VISUALS
+    document.getElementById('pumpKit').classList.add('active');
+    document.getElementById('fillL').style.height = '100%';
+    document.getElementById('fillR').style.height = '100%';
+    runBtnProgress('progPump', 3000);
+    showExplain("Pumping", "Uses suction to mimic baby. Emptying breasts removes FIL protein, signaling body to make MORE milk tomorrow.");
+    updateNarrator("Pumping...", "Extracting milk for storage.", "normal");
+    showOverlayText("Vacuum Suction Active");
+
+    setTimeout(() => {
+        showOverlayText("Draining Ducts...");
+        // Logic
+        let pumpedAmount = bioState.milk; 
+        bioState.milk = 0; // Empty completely
+        
+        // Convert to Stash (approx 10 units = 1 oz for simulation)
+        // Ensure minimum pump if breasts had milk
+        let ounces = Math.floor(pumpedAmount / 10);
+        if (pumpedAmount > 10 && ounces === 0) ounces = 1; 
+        
+        bioState.stash += ounces;
+        bioState.hormones = Math.min(100, bioState.hormones + 15); 
+
+        // Particle Animation flying to stash
+        if(ounces > 0) animateMilkToStash();
+
+    }, 1500);
+
+    setTimeout(() => {
+      document.getElementById('pumpKit').classList.remove('active');
+      document.getElementById('fillL').style.height = '0%';
+      document.getElementById('fillR').style.height = '0%';
+      hideOverlayText();
+      
+      updateNarrator("Pumping Done", "Breasts emptied. Feedback loop set to 'Produce'.", "success");
+      setBusy(false);
+    }, 3000);
+  }
+
+  function actHydrate() {
+    if(bioState.isBusy || !bioState.running) return;
+    
+    showExplain("Hydration", "Breastmilk is 87% water. Staying hydrated keeps your blood volume up for efficient milk synthesis.");
+    updateNarrator("Gulp Gulp!", "Hydration restored. Production rate increased.", "success");
+    
+    // Instant Effect
+    bioState.hydration = Math.min(100, bioState.hydration + 40);
+    spawnFloatingText("+Flow Rate", 'bar-hydro', '#42a5f5');
+  }
+
+  function actSleep() {
+    if(bioState.isBusy || !bioState.running) return;
+    setBusy(true);
+    
+    document.getElementById('sleepOverlay').classList.add('active');
+    runBtnProgress('progSleep', 3000);
+    showExplain("Rest", "Cortisol (stress hormone) inhibits milk flow. Sleep lowers cortisol and lets prolactin receptors reset.");
+    updateNarrator("Sleeping...", "Time passing... Body recovering.", "normal");
+
+    let ffInterval = setInterval(() => {
+        bioState.energy = Math.min(100, bioState.energy + 2);
+        bioState.hormones = Math.min(100, bioState.hormones + 0.5);
+        // Milk fills up while sleeping
+        bioState.milk = Math.min(bioState.capacity, bioState.milk + 1.5);
+        // Baby gets hungrier!
+        bioState.hunger = Math.min(100, bioState.hunger + 1.5);
+    }, 100);
+
+    setTimeout(() => {
+      clearInterval(ffInterval);
+      document.getElementById('sleepOverlay').classList.remove('active');
+      if(bioState.hunger > 80) updateNarrator("Woke Up!", "Rested, but Baby is hungry!", "danger");
+      else updateNarrator("Good Morning", "Energy restored.", "normal");
+      setBusy(false);
+    }, 3000);
+  }
+
+  // --- UI UPDATERS ---
+  function updateUI() {
+    setBar('bar-hydro', bioState.hydration);
+    document.getElementById('val-hydro').innerText = Math.floor(bioState.hydration) + '%';
+    
+    setBar('bar-hormone', bioState.hormones);
+    document.getElementById('val-hormone').innerText = Math.floor(bioState.hormones) + '%';
+    
+    setBar('bar-energy', bioState.energy);
+    document.getElementById('val-energy').innerText = Math.floor(bioState.energy) + '%';
+    
+    document.getElementById('stashVal').innerText = bioState.stash;
+
+    let milkPercent = (bioState.milk / bioState.capacity) * 100;
+    document.getElementById('milkL').style.height = milkPercent + '%';
+    document.getElementById('milkR').style.height = milkPercent + '%';
+    
+    setBar('bar-hunger', bioState.hunger);
+    document.getElementById('hungerVal').innerText = Math.floor(bioState.hunger) + '%';
+    
+    const head = document.getElementById('babyHead');
+    if(bioState.hunger < 10) head.innerText = "😴";
+    else if(bioState.hunger < 50) head.innerText = "👶";
+    else if(bioState.hunger < 80) head.innerText = "😐";
+    else head.innerText = "😭";
+  }
+
+  function checkWarnings() {
+    const tags = document.getElementById('tags');
+    if(bioState.isBusy) return; 
+    tags.innerHTML = ''; 
+
+    if(bioState.hunger >= 85) {
+      updateNarrator("Baby is Crying!", "Critical Hunger. Nurse immediately to calm baby.", "danger");
+      addTag("CRITICAL HUNGER", "danger");
+    } else if(bioState.hydration < 20) {
+      updateNarrator("Dehydrated", "Milk synthesis halted. Drink water now.", "danger");
+      addTag("Thirsty", "danger");
+    } else if(bioState.milk >= 95) {
+      addTag("Breasts Full", "warning");
+    }
+  }
+
+  // --- VISUAL HELPERS ---
+
+  function showExplain(title, text) {
+    const box = document.getElementById('explainBox');
+    box.style.display = 'block';
+    document.getElementById('explainTitle').innerText = title;
+    document.getElementById('explainText').innerText = text;
+  }
+
+  function showOverlayText(text) {
+    const el = document.getElementById('bioOverlay');
+    el.innerText = text;
+    el.classList.add('visible');
+  }
+  
+  function hideOverlayText() {
+    document.getElementById('bioOverlay').classList.remove('visible');
+  }
+
+  function showBreastStatus(text, opacity) {
+    document.getElementById('statL').innerText = text;
+    document.getElementById('statL').style.opacity = opacity;
+    document.getElementById('statR').innerText = text;
+    document.getElementById('statR').style.opacity = opacity;
+  }
+
+  function animateMilkToStash() {
+    // 1. Create flying particle
+    const particle = document.createElement('div');
+    particle.innerText = "🍼";
+    particle.style.position = "absolute";
+    particle.style.zIndex = "1000";
+    particle.style.fontSize = "2rem";
+    particle.style.transition = "all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55)";
+    
+    // Start at pump
+    const pumpRect = document.getElementById('pumpKit').getBoundingClientRect();
+    const stashRect = document.getElementById('stashBox').getBoundingClientRect();
+    
+    // Adjust for scroll
+    const scrollY = window.scrollY;
+    
+    particle.style.left = (pumpRect.left + 30) + "px";
+    particle.style.top = (pumpRect.top + scrollY) + "px";
+    
+    document.body.appendChild(particle);
+    
+    // 2. Fly to Stash Box
+    setTimeout(() => {
+      particle.style.left = (stashRect.left + 50) + "px";
+      particle.style.top = (stashRect.top + scrollY + 20) + "px";
+      particle.style.transform = "scale(0.5)";
+      particle.style.opacity = "0.5";
+    }, 50);
+
+    // 3. Land and Pop
+    setTimeout(() => {
+        document.body.removeChild(particle);
+        const stashVal = document.getElementById('stashVal');
+        stashVal.classList.remove('stash-pop');
+        void stashVal.offsetWidth; // trigger reflow
+        stashVal.classList.add('stash-pop');
+    }, 1000);
+  }
+
+  function spawnFloatingText(text, elementId, color) {
+    const el = document.getElementById(elementId);
+    if(!el) return;
+    const rect = el.getBoundingClientRect();
+    const float = document.createElement('div');
+    float.className = 'float-text';
+    float.innerText = text;
+    float.style.color = color;
+    // Position relative to parent container ideally, but body works for demo
+    float.style.left = (rect.left + window.scrollX + 20) + 'px';
+    float.style.top = (rect.top + window.scrollY) + 'px';
+    document.body.appendChild(float);
+    setTimeout(() => float.remove(), 1500);
+  }
+
+  function runBtnProgress(id, duration) {
+    const bar = document.getElementById(id);
+    bar.style.transition = `width ${duration}ms linear`;
+    bar.style.width = '100%';
+    setTimeout(() => {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+    }, duration);
+  }
+
+  function setBar(id, val) { document.getElementById(id).style.width = val + '%'; }
+  
+  function setBusy(busy) {
+    bioState.isBusy = busy;
+    document.querySelectorAll('.bio-btn').forEach(b => b.classList.toggle('disabled', busy));
+  }
+
+  function updateNarrator(main, sub, type) {
+    const bar = document.getElementById('narratorBar');
+    document.getElementById('mainStatus').innerHTML = main;
+    document.getElementById('subStatus').innerText = sub;
+    if(type === 'danger') bar.style.borderLeftColor = '#ef5350';
+    else if(type === 'success') bar.style.borderLeftColor = '#66bb6a';
+    else if(type === 'warning') bar.style.borderLeftColor = '#ffa726';
+    else bar.style.borderLeftColor = '#ec407a';
+  }
+
+  function addTag(text, type) {
+    const span = document.createElement('span');
+    span.className = `status-tag tag-${type}`;
+    span.innerText = text;
+    document.getElementById('tags').appendChild(span);
+  }
+
+  function toggleSim() {
+    bioState.running = !bioState.running;
+    const icon = document.getElementById('playIcon');
+    if(bioState.running) {
+      icon.className = "fa-solid fa-pause-circle";
+      if(!bioState.timer) bioState.timer = setInterval(tick, 200);
+      updateNarrator("Simulation Running", "Monitor stats and take action.", "normal");
+    } else {
+      icon.className = "fa-solid fa-play-circle";
+      updateNarrator("Paused", "Click play to resume.", "normal");
+    }
+  }
+</script>
+
+</body>
+</html>

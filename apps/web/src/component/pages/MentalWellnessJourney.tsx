@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "../landing/landing.module.css";
 import { ROUTES } from "../routes/Routes";
 import InnerPageHero from "../shared/InnerPageHero";
+import HormoneTimeline from "../shared/HormoneTimeline";
+import CognitiveDistortions from "../shared/CognitiveDistortions";
 
 const MentalWellnessJourney: React.FC = () => {
     const navigate = useNavigate();
@@ -81,6 +83,27 @@ const MentalWellnessJourney: React.FC = () => {
                 subtitle="Your mental health is a journey, not a destination. Find tools, support, and resources to nurture your emotional wellbeing."
                 badge="Mental Health Support"
             >
+                <div style={{ marginBottom: '15px' }}>
+                    <button
+                        onClick={() => navigate(ROUTES.JOURNEYS)}
+                        style={{
+                            padding: '8px 16px',
+                            background: 'rgba(255,255,255,0.2)',
+                            border: '1px solid rgba(255,255,255,0.4)',
+                            color: 'white',
+                            borderRadius: '30px',
+                            cursor: 'pointer',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            backdropFilter: 'blur(5px)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                    >
+                        ← Back to Paths
+                    </button>
+                </div>
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🥗 Holistic Approach</span>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🧪 Science-Backed</span>
@@ -88,38 +111,7 @@ const MentalWellnessJourney: React.FC = () => {
                 </div>
             </InnerPageHero>
 
-            {/* Back Button */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
-                <button
-                    onClick={() => navigate(ROUTES.JOURNEYS)}
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        padding: "10px 16px",
-                        background: "white",
-                        border: "1px solid #eee",
-                        borderRadius: "12px",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#666",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#f9f9f9";
-                        e.currentTarget.style.color = "var(--pink)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "white";
-                        e.currentTarget.style.color = "#666";
-                    }}
-                >
-                    <span style={{ fontSize: "16px" }}>←</span>
-                    Back to all journeys
-                </button>
-            </div>
+            {/* Back Button Moved to Hero */}
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
 
@@ -168,6 +160,12 @@ const MentalWellnessJourney: React.FC = () => {
                     ))}
                 </div>
 
+                {/* Hormone Journey Timeline */}
+                <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '30px' }}>
+                    Interactive Hormone Journey
+                </h2>
+                <HormoneTimeline />
+
                 {/* Brain Chemistry Visual */}
                 <div style={{ background: 'white', padding: '60px 40px', borderRadius: '40px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)', marginBottom: '80px' }}>
                     <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>🧪 Understanding Your Chemistry</h2>
@@ -182,6 +180,15 @@ const MentalWellnessJourney: React.FC = () => {
                         ))}
                     </div>
                 </div>
+
+                {/* Cognitive Distortions Module */}
+                <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '30px' }}>
+                    Mindset Support: Reframing Thinking Traps
+                </h2>
+                <p style={{ fontSize: '16px', color: '#555', marginBottom: '24px', lineHeight: '1.6' }}>
+                    Depression often creates "thinking traps" that distort how we see ourselves and our babies. Learning to identify and reframe these patterns is a key part of recovery.
+                </p>
+                <CognitiveDistortions />
 
                 {/* Severity Guide */}
                 <div style={{ marginBottom: '80px' }}>
@@ -278,7 +285,12 @@ const MentalWellnessJourney: React.FC = () => {
                         <p style={{ fontSize: '16px', opacity: 0.9, lineHeight: '1.6', marginBottom: '24px' }}>
                             Supporting a loved one through mental health challenges can be difficult. Our family guide helps you understand, communicate, and support without burnout.
                         </p>
-                        <button style={{ background: 'white', color: '#1A237E', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '800', cursor: 'pointer' }}>Get Family Guide</button>
+                        <button
+                            style={{ background: 'white', color: '#1A237E', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '800', cursor: 'pointer' }}
+                            onClick={() => navigate(ROUTES.PERINATAL_FAMILY)}
+                        >
+                            Get Family Guide
+                        </button>
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.05)', padding: '32px', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.1)' }}>
                         <h4 style={{ marginBottom: '20px', fontSize: '18px', fontWeight: '800' }}>Quick Tips for Support:</h4>
@@ -311,6 +323,31 @@ const MentalWellnessJourney: React.FC = () => {
                     >
                         Book a Private Session
                     </button>
+                </div>
+
+                {/* RELATED JOURNEYS */}
+                <div style={{ marginTop: '80px', textAlign: 'center' }}>
+                    <h2 className={styles.sectionTitle}>Shared Resilience</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '40px' }}>
+                        <div
+                            style={{ background: 'white', padding: '40px', borderRadius: '32px', border: '1px solid #eee', cursor: 'pointer', textAlign: 'left' }}
+                            onClick={() => navigate(ROUTES.LOSS_SUPPORT)}
+                        >
+                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🎗️</div>
+                            <h4 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '12px' }}>Loss & Grief Support</h4>
+                            <p style={{ fontSize: '15px', color: '#666', marginBottom: '20px' }}>Compassionate guidance and therapeutic tools for navigating difficult periods of loss.</p>
+                            <span style={{ fontSize: '15px', fontWeight: '700', color: 'var(--pink)' }}>View Suppport Path &rarr;</span>
+                        </div>
+                        <div
+                            style={{ background: 'white', padding: '40px', borderRadius: '32px', border: '1px solid #eee', cursor: 'pointer', textAlign: 'left' }}
+                            onClick={() => navigate(ROUTES.COMMUNITY)}
+                        >
+                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🤝</div>
+                            <h4 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '12px' }}>Safe Communities</h4>
+                            <p style={{ fontSize: '15px', color: '#666', marginBottom: '20px' }}>Join moderated safe spaces to share experiences and receive support from peers.</p>
+                            <span style={{ fontSize: '15px', fontWeight: '700', color: 'var(--pink)' }}>Join Community &rarr;</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>

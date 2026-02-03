@@ -1,0 +1,261 @@
+/* --- MENOPAUSE JOURNEY HIGH-FIDELITY STYLES --- */
+:root {
+    --pink: #ec407a;
+    --deep-pink: #d81b60;
+    --lavender: #ede7f6;
+    --bg-garden: #faf5fb;
+}
+
+.menopause-page {
+    background: var(--bg-garden);
+    color: #212121;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.menopause-hero {
+    background: radial-gradient(circle at top left, #fce4ec 0, #f3e5f5 45%, #ffffff 100%);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Journey Track */
+.journey-track {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0.75rem;
+    border-radius: 50px;
+    margin: 2rem auto;
+    width: fit-content;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.track-dot {
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+    color: #666;
+}
+
+.track-dot.active {
+    background: var(--deep-pink);
+    color: white;
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.2);
+}
+
+/* Stage Card */
+.journey-stage-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 32px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    margin-bottom: 4rem;
+    animation: fadeInScale 0.6s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Symptom Grid (Flip) */
+.symptom-flip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.flip {
+    perspective: 1000px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    height: 220px;
+}
+
+.flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip.is-flipped .flip-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+    background: #fdf2f8;
+}
+
+/* Whole Body Scanner */
+.scanner-dashboard {
+    background: white;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    margin-top: 4rem;
+}
+
+.scanner-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+}
+
+.viz-panel {
+    background: #f8f9fa;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thermal-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(236, 64, 122, 0.4), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.viz-panel.state-peri .thermal-overlay {
+    animation: hotFlashPulse 3s infinite;
+}
+
+@keyframes hotFlashPulse {
+
+    0%,
+    100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Seasonal Checker */
+.seasonal-checker {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 4rem 0;
+}
+
+.checker-form {
+    background: white;
+    padding: 3rem;
+    border-radius: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.option-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 1rem 0 2rem;
+}
+
+.option-btn {
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    background: #f1f3f5;
+}
+
+.option-btn.selected {
+    border-color: var(--pink);
+    background: #fdf2f8;
+    color: var(--deep-pink);
+}
+
+.result-card {
+    background: linear-gradient(135deg, #1a237e, #4a148c);
+    color: white;
+    padding: 3rem;
+    border-radius: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.weather-emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Organ Selection */
+.organ-info {
+    padding: 3rem;
+    background: #e3f2fd;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.organ-group {
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.organ-group:hover {
+    opacity: 0.8;
+}
+
+.organ-group.active {
+    filter: drop-shadow(0 0 5px var(--pink));
+}
+
+@media (max-width: 968px) {
+
+    .scanner-body,
+    .seasonal-checker {
+        grid-template-columns: 1fr;
+    }
+}

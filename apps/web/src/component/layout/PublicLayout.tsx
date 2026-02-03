@@ -4,7 +4,7 @@ import Footer from "../landing/Footer";
 import LandingModals from "../landing/LandingModals";
 import { useLandingAuth } from "../landing/useLandingAuth";
 import { useAuth } from "../../context/AuthContext";
-import { ROUTES } from "../routes/Routes";
+import { ROUTES } from "../routes/routeConstants";
 import styles from "../landing/landing.module.css";
 import "../../styles/themes.module.css";
 

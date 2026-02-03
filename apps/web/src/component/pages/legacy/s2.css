@@ -1,0 +1,309 @@
+/* --- s2.css (Legacy Aesthetic Simulator Styles) --- */
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --text-main: #f1f5f9;
+    --accent: #22d3ee;
+    --pink: #f472b6;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+.simulator-body {
+    margin: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.app-container-sim {
+    display: grid;
+    grid-template-columns: 340px 1fr 300px;
+    height: 100vh;
+}
+
+/* --- PANELS --- */
+.panel-sim {
+    background: var(--panel-bg);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 10;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+}
+
+.header-sim {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* MODE SWITCHER */
+.mode-switch-sim {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.mode-btn-sim {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    color: #94a3b8;
+}
+
+.mode-btn-sim.active {
+    background: var(--accent);
+    color: #0f172a;
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+}
+
+/* CONTROLS */
+.controls-section-sim {
+    display: none;
+}
+
+.controls-section-sim.active {
+    display: block;
+    animation: fadeInSim 0.3s;
+}
+
+@keyframes fadeInSim {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.control-group-sim {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.control-group-sim:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.label-row-sim {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+
+.range-input-sim {
+    width: 100%;
+    height: 4px;
+    background: #334155;
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.range-input-sim::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* VIEWPORT & CANVAS */
+.viewport-sim {
+    background: #020617;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.canvas-wrapper-sim {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    display: block;
+}
+
+.canvas-sim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* SLIDER (Comparison) */
+.slider-bar-sim {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: white;
+    cursor: ew-resize;
+    z-index: 30;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.slider-handle-sim {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: var(--pink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 0 15px var(--pink);
+    border: 2px solid white;
+}
+
+.side-label-sim {
+    position: absolute;
+    top: 20px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 25;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lbl-orig-sim {
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #cbd5e1;
+}
+
+.lbl-sim-sim {
+    right: 20px;
+    background: var(--pink);
+    color: white;
+    box-shadow: 0 0 15px var(--pink);
+}
+
+/* MARKERS */
+.marker-sim {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: rgba(34, 211, 238, 0.4);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 40;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: background 0.2s;
+}
+
+.marker-sim:hover,
+.marker-sim.dragging {
+    background: var(--accent);
+    z-index: 50;
+}
+
+.marker-sim::after {
+    content: attr(data-label);
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.marker-sim:hover::after {
+    opacity: 1;
+}
+
+/* UPLOAD SCREEN */
+.upload-screen-sim {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.98);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.upload-btn-sim {
+    background: var(--accent);
+    color: #000;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.4);
+    transition: transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-btn-sim:hover {
+    transform: scale(1.05);
+}
+
+.reset-btn-sim {
+    margin-top: auto;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.reset-btn-sim:hover {
+    background: rgba(255, 255, 255, 0.1);
+}

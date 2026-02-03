@@ -1,196 +1,287 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../landing/landing.module.css";
 import { ROUTES } from "../routes/Routes";
 import InnerPageHero from "../shared/InnerPageHero";
+import { useMenopauseLogic } from "../hooks/useMenopauseLogic";
+import { WholeBodyScanner } from "../canvas/MenopauseCanvas";
+import './legacy/menopause.css';
 
 const MenopauseJourney: React.FC = () => {
     const navigate = useNavigate();
-    const [currentStage, setCurrentStage] = useState("Perimenopause");
+    const {
+        stagingInput,
+        updateStagingInput,
+        showResult,
+        revealSeason,
+        seasonResult,
+        scannerPhase,
+        setScannerPhase,
+        activeOrgan,
+        setActiveOrgan,
+        activeJourneyStage,
+        setActiveJourneyStage
+    } = useMenopauseLogic();
 
-    const stages = [
-        {
-            name: "Perimenopause",
-            icon: "🌓",
-            desc: "The transition phase where hormone levels start to fluctuate.",
-            stats: ["Age: 40-50", "Duration: 4-10 yrs"],
-            symptoms: [
-                { title: "Hot Flashes", desc: "Sudden waves of heat and sweating.", tip: "Layered clothing & fans help." },
-                { title: "Irregular Cycles", desc: "Changes in flow and frequency.", tip: "Track cycles closely." },
-                { title: "Mood Swings", desc: "Increased irritability or anxiety.", tip: "Mindfulness and sleep." },
-                { title: "Sleep Issues", desc: "Difficulty falling or staying asleep.", tip: "Cool room & dark curtains." }
+    const [flippedCards, setFlippedCards] = useState<number[]>([]);
+
+    const toggleFlip = (index: number) => {
+        setFlippedCards(prev =>
+            prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]
+        );
+    };
+
+    const journeyStages: any = {
+        lateRepro: {
+            kicker: "Stage -3a / -3b",
+            title: "Late Reproductive",
+            oneLiner: "Cycles are mostly regular, but your hormones may start to feel less predictable.",
+            badges: ["Cycles mostly regular", "Subtle changes"],
+            steps: [
+                { q: "What you might notice", a: "Sleep feels lighter, PMS shifts, anxiety may rise, or periods change slightly." },
+                { q: "What's happening (simple)", a: "Your ovulation hormones begin to wobble—small swings can feel big in the brain." },
+                { q: "What to bring to a visit", a: "Cycle calendar, sleep notes, new mood symptoms, and any heavy bleeding changes." }
             ]
         },
-        {
-            name: "Menopause",
-            icon: "🌕",
-            desc: "The point when you haven't had a period for 12 consecutive months.",
-            stats: ["Average Age: 51", "Marker: 12 months"],
-            symptoms: [
-                { title: "Vaginal Dryness", desc: "Lower estrogen affects lubrication.", tip: "Water-based moisturizers." },
-                { title: "Joint Pain", desc: "Aches due to inflammation changes.", tip: "Low-impact exercise." },
-                { title: "Brain Fog", desc: "Difficulty concentrating or memory lapses.", tip: "Puzzles & routine help." },
-                { title: "Heart Palpitations", desc: "Sudden fluttering in the chest.", tip: "Reduce caffeine & stress." }
+        peri: {
+            kicker: "Stage -2 / -1",
+            title: "Perimenopause",
+            oneLiner: "This is the 'hormone rollercoaster' phase—symptoms often peak here.",
+            badges: ["Cycle skipping", "Hot flashes", "Mood/sleep changes"],
+            steps: [
+                { q: "What you might notice", a: "Hot flashes, night sweats, brain fog, heavier or irregular bleeding, more anxiety." },
+                { q: "What's happening (simple)", a: "Estrogen rises and falls unpredictably; progesterone often drops earlier." },
+                { q: "What to ask your clinician", a: "Symptom relief options, sleep plan, mood support, and bleeding red flags." }
             ]
         },
-        {
-            name: "Postmenopause",
-            icon: "🌑",
-            desc: "The years after menopause has occurred.",
-            stats: ["Duration: Lifetime", "Focus: Bone & Heart"],
-            symptoms: [
-                { title: "Bone Density", desc: "Increased risk of osteoporosis.", tip: "Calcium & Vitamin D." },
-                { title: "Heart Health", desc: "Changes in cholesterol and vessel health.", tip: "Regular cardio checks." },
-                { title: "Skin Changes", desc: "Reduced collagen leads to thinning.", tip: "Hydration & sun protection." },
-                { title: "Urinary Changes", desc: "Changes in pelvic floor strength.", tip: "Kegel exercises daily." }
+        post: {
+            kicker: "Stage +1 / +2",
+            title: "Postmenopause",
+            oneLiner: "The 'new baseline' begins—health prevention matters most now.",
+            badges: ["12+ months no period", "Bone + heart focus"],
+            steps: [
+                { q: "What you might notice", a: "Vaginal dryness, sleep issues, or libido changes can persist as tissues adapt." },
+                { q: "What's happening (simple)", a: "Estrogen stays low; bones and heart require active protection." },
+                { q: "Smart check-ins", a: "Blood pressure, bone density, strength training, and GSM treatment if needed." }
             ]
         }
+    };
+
+    const journeySymptoms = [
+        { tag: "Heat Waves", front: "Sudden Hot Flashes", back: "Your brain's thermostat is resetting.", ask: "Check BP & Cholesterol" },
+        { tag: "Joints", front: "Aches & Stiffness", back: "Estrogen supports joints & bones.", ask: "Strength plan & DEXA" },
+        { tag: "GSM", front: "Vaginal Dryness", back: "Tissues thin without estrogen.", ask: "Local treatment is key" },
+        { tag: "Brain", front: "Wired but Tired", back: "Hormones affect focus & sleep.", ask: "Mood support is available" }
     ];
 
-    const activeStageData = stages.find(s => s.name === currentStage) || stages[0];
+    const currentStageData = journeyStages[activeJourneyStage];
 
     return (
-        <div className="app-container">
+        <div className="menopause-page">
             <InnerPageHero
                 title="Menopause Journey"
-                subtitle="Navigate the change with confidence. Our interactive guide helps you understand your body's transition and manage symptoms effectively."
-                badge="The Change"
+                subtitle="Navigate the change with confidence. An interactive guide to understanding your body's transition."
+                badge="Premium Care Guide"
             >
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🧪 Hormone Tracking</span>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🦴 Bone Health</span>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🧘 Mental Wellbeing</span>
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                    <button className="btn-primary" onClick={() => navigate(ROUTES.APPOINTMENTS)}>Consult Specialist</button>
+                    <button className="btn-secondary" onClick={() => navigate(ROUTES.JOURNEYS)}>← Back to Paths</button>
                 </div>
             </InnerPageHero>
 
-            {/* Back Button */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
-                <button
-                    onClick={() => navigate(ROUTES.JOURNEYS)}
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        padding: "10px 16px",
-                        background: "white",
-                        border: "1px solid #eee",
-                        borderRadius: "12px",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#666",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-                    }}
-                >
-                    <span style={{ fontSize: "16px" }}>←</span>
-                    Back to all journeys
-                </button>
-            </div>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem' }}>
 
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
+                {/* Journey Staging Section */}
+                <section className="journey-section">
+                    <div className="section-header" style={{ textAlign: 'center' }}>
+                        <h2>Guided Journey Paths</h2>
+                        <p>Identify your stage and follow the clinical recommendations.</p>
+                    </div>
 
-                {/* Journey Track */}
-                <div style={{ marginBottom: '60px', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '30px' }}>Select Your Stage</h2>
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', background: 'rgba(0,0,0,0.02)', padding: '10px', borderRadius: '40px', width: 'fit-content', margin: '0 auto' }}>
-                        {stages.map(s => (
+                    <div className="journey-track">
+                        {Object.keys(journeyStages).map(key => (
                             <button
-                                key={s.name}
-                                onClick={() => setCurrentStage(s.name)}
-                                style={{
-                                    border: 'none',
-                                    padding: '12px 24px',
-                                    borderRadius: '30px',
-                                    fontWeight: '800',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.3s ease',
-                                    background: currentStage === s.name ? 'var(--pink)' : 'transparent',
-                                    color: currentStage === s.name ? 'white' : '#666',
-                                    boxShadow: currentStage === s.name ? '0 8px 16px rgba(236, 64, 122, 0.2)' : 'none'
-                                }}
+                                key={key}
+                                className={`track-dot ${activeJourneyStage === key ? 'active' : ''}`}
+                                onClick={() => setActiveJourneyStage(key)}
                             >
-                                {s.icon} {s.name}
+                                {journeyStages[key].title}
                             </button>
                         ))}
                     </div>
-                </div>
 
-                {/* Stage Detail Card */}
-                <div style={{
-                    background: 'white',
-                    padding: '40px',
-                    borderRadius: '32px',
-                    boxShadow: '0 20px 50px rgba(0,0,0,0.05)',
-                    marginBottom: '60px',
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '40px',
-                    alignItems: 'center'
-                }}>
-                    <div>
-                        <span style={{ color: 'var(--pink)', fontWeight: '800', fontSize: '13px', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '12px', display: 'block' }}>Active Stage Insight</span>
-                        <h3 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '16px' }}>{activeStageData.name}</h3>
-                        <p style={{ fontSize: '17px', color: '#555', lineHeight: '1.7', marginBottom: '24px' }}>{activeStageData.desc}</p>
-                        <div style={{ display: 'flex', gap: '12px' }}>
-                            {activeStageData.stats.map(stat => (
-                                <div key={stat} style={{ background: '#F8F9FA', padding: '10px 16px', borderRadius: '12px', fontSize: '13px', fontWeight: '700', color: '#666' }}>{stat}</div>
+                    <div className="journey-stage-card">
+                        <div className="stage-kicker">{currentStageData.kicker}</div>
+                        <h3 className="stage-title">{currentStageData.title}</h3>
+                        <p className="stage-one-liner">{currentStageData.oneLiner}</p>
+
+                        <div style={{ display: 'flex', gap: '0.5rem', margin: '1.5rem 0' }}>
+                            {currentStageData.badges.map((b: string) => (
+                                <span key={b} className="stage-badge">{b}</span>
+                            ))}
+                        </div>
+
+                        <div className="stage-steps">
+                            {currentStageData.steps.map((s: any, i: number) => (
+                                <details key={i} className="step" style={{ marginBottom: i === 0 ? '0' : '1rem' }} open={i === 0}>
+                                    <summary style={{ padding: '1rem', fontWeight: 700, cursor: 'pointer' }}>{s.q}</summary>
+                                    <div style={{ padding: '0 1rem 1rem', color: '#666' }}>{s.a}</div>
+                                </details>
                             ))}
                         </div>
                     </div>
-                    <div style={{ background: 'linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%)', height: '300px', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '80px' }}>
-                        {activeStageData.icon}
-                    </div>
-                </div>
+                </section>
 
-                {/* Symptoms Grid */}
-                <h2 style={{ fontSize: '24px', fontWeight: '900', marginBottom: '30px', textAlign: 'center' }}>Navigating Symptoms</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '80px' }}>
-                    {activeStageData.symptoms.map(sym => (
-                        <div key={sym.title} className={styles.card} style={{ padding: '24px', background: 'white', borderRadius: '20px' }}>
-                            <h4 style={{ color: 'var(--pink)', marginBottom: '8px', fontWeight: '800' }}>{sym.title}</h4>
-                            <p style={{ fontSize: '14px', color: '#555', marginBottom: '16px' }}>{sym.desc}</p>
-                            <div style={{ background: '#FFF8E1', padding: '10px', borderRadius: '10px', fontSize: '12px' }}>
-                                <strong style={{ color: '#F57C00' }}>💡 Pro Tip:</strong> {sym.tip}
+                {/* Symptom Flip Cards */}
+                <section style={{ marginTop: '6rem' }}>
+                    <div className="section-header">
+                        <h3>Navigating Common Symptoms</h3>
+                        <p>Click each card to understand the biological 'why' behind the symptom.</p>
+                    </div>
+                    <div className="symptom-flip-grid">
+                        {journeySymptoms.map((s, i) => (
+                            <div key={i} className={`flip ${flippedCards.includes(i) ? 'is-flipped' : ''}`} onClick={() => toggleFlip(i)}>
+                                <div className="flip-inner">
+                                    <div className="flip-face flip-front">
+                                        <div className="card-kicker" style={{ fontSize: '0.75rem', color: 'var(--pink)' }}>{s.tag}</div>
+                                        <strong>{s.front}</strong>
+                                        <div style={{ fontSize: '0.8rem', color: 'var(--deep-pink)', marginTop: 'auto' }}>Tap to decode →</div>
+                                    </div>
+                                    <div className="flip-face flip-back">
+                                        <div style={{ fontSize: '0.9rem', marginBottom: '1rem' }}>{s.back}</div>
+                                        <div style={{ background: '#fff3e0', padding: '8px', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 600 }}>💡 {s.ask}</div>
+                                        <div style={{ fontSize: '0.8rem', color: '#999', marginTop: 'auto' }}>Tap to flip back</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Whole Body Scanner */}
+                <section className="scanner-section" style={{ marginTop: '8rem' }}>
+                    <div className="section-header" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                        <h2>The Whole-Body Scanner</h2>
+                        <p>See how estrogen changes impact every system over time.</p>
+                    </div>
+                    <div className="scanner-dashboard">
+                        <div className="timeline-bar" style={{ display: 'flex', justifyContent: 'center', padding: '1.5rem', background: '#f8f9fa', gap: '1rem' }}>
+                            <button className={`track-dot ${scannerPhase === 'repro' ? 'active' : ''}`} onClick={() => setScannerPhase('repro')}>Reproductive</button>
+                            <button className={`track-dot ${scannerPhase === 'peri' ? 'active' : ''}`} onClick={() => setScannerPhase('peri')}>Perimenopause</button>
+                            <button className={`track-dot ${scannerPhase === 'post' ? 'active' : ''}`} onClick={() => setScannerPhase('post')}>Postmenopause</button>
+                        </div>
+                        <div className="scanner-body">
+                            <WholeBodyScanner phase={scannerPhase} activeOrgan={activeOrgan} onOrganClick={setActiveOrgan} />
+                            <div className="organ-info">
+                                {activeOrgan === 'none' ? (
+                                    <div style={{ textAlign: 'center', paddingTop: '4rem' }}>
+                                        <i className="fa-solid fa-person-rays" style={{ fontSize: '4rem', color: 'var(--pink)', marginBottom: '1.5rem' }}></i>
+                                        <h3>Select a System</h3>
+                                        <p>Tap on the brain, heart, bones, or pelvic area to see the biological shift.</p>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <span style={{ color: 'var(--pink)', fontWeight: 800, textTransform: 'uppercase', fontSize: '0.8rem' }}>Target System: {activeOrgan}</span>
+                                        <h3 style={{ margin: '1rem 0' }}>{activeOrgan.charAt(0).toUpperCase() + activeOrgan.slice(1)} Health</h3>
+                                        <p style={{ lineHeight: 1.7 }}>
+                                            {activeOrgan === 'brain' && (scannerPhase === 'peri' ? "Extreme fluctuations can cause 'the thermostat' to reset, leading to hot flashes and brain fog." : "Estrogen supports neurotransmission and cognitive focus.")}
+                                            {activeOrgan === 'heart' && (scannerPhase === 'post' ? "Loss of estrogen protector can lead to increased arterial stiffness and cholesterol shifts." : "Estrogen keeps blood vessels elastic and supports healthy lipid profiles.")}
+                                            {activeOrgan === 'bones' && (scannerPhase === 'post' ? "Bone resorption speeds up. Strength training and Vitamin D are critical now." : "Estrogen maintains a healthy balance between bone creation and loss.")}
+                                            {activeOrgan === 'vagina' && (scannerPhase === 'post' ? "Tissues may thin and lose moisture. Local treatment is highly effective." : "Estrogen maintains healthy lubrication and pelvic floor tissue integrity.")}
+                                        </p>
+                                        <button className="btn-primary" style={{ marginTop: '2rem' }} onClick={() => navigate(ROUTES.APPOINTMENTS)}>Discuss with a Specialist</button>
+                                    </div>
+                                )}
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                </section>
 
-                {/* Whole Body Scanner Info */}
-                <div style={{ background: '#1A237E', color: 'white', padding: '60px 40px', borderRadius: '40px', marginBottom: '80px' }}>
-                    <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '20px' }}>The Whole Body Impact</h2>
-                        <p style={{ fontSize: '16px', opacity: 0.9, lineHeight: '1.6', marginBottom: '40px' }}>
-                            Menopause isn't just about hot flashes. Estrogen receptors are located throughout your body, affecting your brain, heart, bones, and skin.
-                        </p>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '20px' }}>
-                            {[
-                                { area: "Brain", effect: "Memory & Mood" },
-                                { area: "Heart", effect: "Artery Health" },
-                                { area: "Bones", effect: "Density Support" },
-                                { area: "Skin", effect: "Collagen Levels" }
-                            ].map(a => (
-                                <div key={a.area} style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                                    <h4 style={{ fontWeight: '800', marginBottom: '4px' }}>{a.area}</h4>
-                                    <p style={{ fontSize: '12px', opacity: 0.7 }}>{a.effect}</p>
+                {/* Seasonal Checker */}
+                <section className="seasonal-checker-section" style={{ marginTop: '8rem' }}>
+                    <div className="section-header" style={{ textAlign: 'center' }}>
+                        <h2>Season Identity Checker</h2>
+                        <p>Discover which metabolic 'season' you are traversing based on the STRAW+10 protocol.</p>
+                    </div>
+                    <div className="seasonal-checker">
+                        <div className="checker-form">
+                            <h4>1. Select Age Range</h4>
+                            <div className="option-grid">
+                                {['35-40', '41-45', '46-50', '51-55', '56+'].map(a => (
+                                    <button
+                                        key={a}
+                                        className={`option-btn ${stagingInput.ageRange === a ? 'selected' : ''}`}
+                                        onClick={() => updateStagingInput('ageRange', a)}
+                                    >
+                                        {a} Years
+                                    </button>
+                                ))}
+                            </div>
+
+                            <h4>2. Period Pattern</h4>
+                            <div className="option-grid">
+                                {[
+                                    { id: 'regular', label: 'Regular (Every 24-35 days)' },
+                                    { id: 'irregular', label: 'Irregular (differs by 7+ days)' },
+                                    { id: 'skipped_brief', label: 'Skipped a few (but < 60 days)' },
+                                    { id: 'skipped_long', label: 'Skipped 60+ days consecutively' },
+                                    { id: 'none_12', label: 'No periods in last 12 months' }
+                                ].map(p => (
+                                    <button
+                                        key={p.id}
+                                        className={`option-btn ${stagingInput.periodPattern === p.id ? 'selected' : ''}`}
+                                        onClick={() => updateStagingInput('periodPattern', p.id)}
+                                    >
+                                        {p.label}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <h4>3. Main Concern</h4>
+                            <select
+                                className="option-btn"
+                                style={{ width: '100%' }}
+                                value={stagingInput.mainSymptom}
+                                onChange={(e) => updateStagingInput('mainSymptom', e.target.value)}
+                            >
+                                <option value="">Select Priority concern...</option>
+                                <option value="hotflash">Hot Flashes / Night Sweats</option>
+                                <option value="sleep">Sleep / Mood Shifts</option>
+                                <option value="bleeding">Heavy / Flood Bleeding</option>
+                                <option value="dryness">Dryness / Discomfort</option>
+                            </select>
+
+                            <button className="btn-primary" style={{ width: '100%', marginTop: '2rem' }} onClick={revealSeason}>Reveal My Season</button>
+                        </div>
+
+                        <div className={`result-card ${showResult ? '' : 'placeholder'}`}>
+                            {showResult ? (
+                                <div>
+                                    <span className="weather-emoji">{seasonResult.weather}</span>
+                                    <span style={{ fontSize: '0.9rem', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '1px' }}>Current Season</span>
+                                    <h2 style={{ fontSize: '2.5rem', margin: '0.5rem 0' }}>{seasonResult.season}</h2>
+                                    <h4 style={{ color: '#ffca28' }}>{seasonResult.title}</h4>
+                                    <p style={{ marginTop: '1.5rem', borderLeft: '3px solid #ffca28', paddingLeft: '1rem' }}>{seasonResult.description}</p>
+
+                                    <div style={{ marginTop: '2rem' }}>
+                                        <p style={{ fontWeight: 800, fontSize: '0.8rem', marginBottom: '0.5rem' }}>SEASONAL FORECAST:</p>
+                                        {seasonResult.forecast.map(f => (
+                                            <div key={f} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                                                <i className="fa-solid fa-check-circle" style={{ color: '#4caf50' }}></i>
+                                                <span>{f}</span>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
-                            ))}
+                            ) : (
+                                <div style={{ textAlign: 'center', opacity: 0.6 }}>
+                                    <i className="fa-solid fa-sun-cloud" style={{ fontSize: '4rem', marginBottom: '2rem' }}></i>
+                                    <h3>Your Personal Climate Awaits</h3>
+                                    <p>Complete the form to discover which season you're in and how to thrive.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
-
-                {/* Support Section */}
-                <div style={{ textAlign: 'center', background: 'white', padding: '60px', borderRadius: '40px', boxShadow: '0 10px 40px rgba(0,0,0,0.05)' }}>
-                    <h3 style={{ fontSize: '24px', fontWeight: '900', marginBottom: '16px' }}>Ready for a personalized plan?</h3>
-                    <p style={{ color: '#666', marginBottom: '32px' }}>Connect with our menopause specialists for HRT guidance, lifestyle adjustments, and holistic support.</p>
-                    <button
-                        onClick={() => navigate(ROUTES.APPOINTMENTS)}
-                        style={{ background: 'var(--pink)', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '30px', fontWeight: '800', fontSize: '16px', cursor: 'pointer' }}
-                    >
-                        Speak to a Specialist
-                    </button>
-                </div>
+                </section>
             </div>
         </div>
     );

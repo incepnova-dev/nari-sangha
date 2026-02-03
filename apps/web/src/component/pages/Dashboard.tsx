@@ -83,7 +83,16 @@ const Dashboard: React.FC = () => {
                         </div>
                         <h3 className={styles.actionTitle}>View Test Results</h3>
                         <p className={styles.actionDesc}>Access your latest lab reports and records</p>
-                        <button className={styles.actionButton}>View Records</button>
+                        <button className={styles.actionButton} onClick={() => alert("Accessing encrypted health records...")}>View Records</button>
+                    </div>
+
+                    <div className={styles.actionCard}>
+                        <div className={styles.actionIcon} style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)' }}>
+                            🗺️
+                        </div>
+                        <h3 className={styles.actionTitle}>Explore Journeys</h3>
+                        <p className={styles.actionDesc}>View all available health and wellness paths</p>
+                        <Link to={ROUTES.JOURNEYS} className={styles.actionButton}>Go to Hub</Link>
                     </div>
                 </div>
             </section>
@@ -157,7 +166,7 @@ const Dashboard: React.FC = () => {
                                 <span>⏰ 10:00 AM - 11:00 AM</span>
                             </div>
                         </div>
-                        <button className={styles.actionButton} style={{ width: 'auto', padding: '8px 20px', fontSize: '14px' }}>Reschedule</button>
+                        <button className={styles.actionButton} style={{ width: 'auto', padding: '8px 20px', fontSize: '14px' }} onClick={() => navigate(ROUTES.APPOINTMENTS)}>Reschedule</button>
                     </div>
 
                     <div className={styles.reminderItem}>
@@ -174,7 +183,7 @@ const Dashboard: React.FC = () => {
                                 <span>👶 Ultrasound and glucose screening</span>
                             </div>
                         </div>
-                        <button className={styles.actionButton} style={{ width: 'auto', padding: '8px 20px', fontSize: '14px' }}>Details</button>
+                        <button className={styles.actionButton} style={{ width: 'auto', padding: '8px 20px', fontSize: '14px' }} onClick={() => navigate(ROUTES.PREGNANCY)}>Details</button>
                     </div>
                 </div>
             </section>
@@ -246,6 +255,35 @@ const Dashboard: React.FC = () => {
                             <p style={{ color: '#666', fontSize: '14px' }}>Blood work and thyroid panel results ready</p>
                             <p style={{ color: '#999', fontSize: '12px', marginTop: '4px' }}>February 8, 2026</p>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* QUICK GUIDES */}
+            <section className={styles.section} style={{ background: '#fcf8fa' }}>
+                <div className={styles.sectionHeader}>
+                    <h2 className={styles.sectionTitle}>📚 Resources & Guides</h2>
+                    <p className={styles.sectionSubtitle}>Quick access to essential preventive care tools.</p>
+                </div>
+
+                <div className={styles.dashboardActions}>
+                    <div className={styles.actionCard} style={{ background: 'white', border: '1px solid #eee' }}>
+                        <div style={{ fontSize: '32px', marginBottom: '16px' }}>💉</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Vaccination Explorer</h4>
+                        <p style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Stay updated with your immunization schedule.</p>
+                        <Link to={ROUTES.VACCINATION} style={{ fontSize: '14px', fontWeight: '700', color: 'var(--pink)', textDecoration: 'none' }}>Open Guide &rarr;</Link>
+                    </div>
+                    <div className={styles.actionCard} style={{ background: 'white', border: '1px solid #eee' }}>
+                        <div style={{ fontSize: '32px', marginBottom: '16px' }}>📋</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Screening Roadmap</h4>
+                        <p style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Preventive health checkups and roadmap.</p>
+                        <Link to={ROUTES.SCREENING} style={{ fontSize: '14px', fontWeight: '700', color: 'var(--pink)', textDecoration: 'none' }}>Open Guide &rarr;</Link>
+                    </div>
+                    <div className={styles.actionCard} style={{ background: 'white', border: '1px solid #eee' }}>
+                        <div style={{ fontSize: '32px', marginBottom: '16px' }}>🤝</div>
+                        <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Community Hub</h4>
+                        <p style={{ fontSize: '13px', color: '#666', marginBottom: '16px' }}>Connect with safe spaces and support.</p>
+                        <Link to={ROUTES.COMMUNITY} style={{ fontSize: '14px', fontWeight: '700', color: 'var(--pink)', textDecoration: 'none' }}>Join Spaces &rarr;</Link>
                     </div>
                 </div>
             </section>

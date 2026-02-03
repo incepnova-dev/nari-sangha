@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../landing/landing.module.css";
-import { ROUTES } from "../routes/Routes";
+import { ROUTES } from "../routes/routeConstants";
 import InnerPageHero from "../shared/InnerPageHero";
+import MenstrualThemeExplorer from "../shared/MenstrualThemeExplorer";
 
 const MenstrualHealthJourney: React.FC = () => {
     const navigate = useNavigate();
@@ -62,40 +63,30 @@ const MenstrualHealthJourney: React.FC = () => {
                 title="Menstrual Health"
                 subtitle="Understand your cycle, track patterns, and manage period-related concerns with knowledge and support."
                 badge="Period Care"
-            />
-
-            {/* Back Button */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
+            >
                 <button
-                    onClick={() => navigate(ROUTES.JOURNEYS)}
+                    onClick={() => navigate(ROUTES.JOURNEYS + '#catalog')}
                     style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        padding: "10px 16px",
-                        background: "white",
-                        border: "1px solid #eee",
-                        borderRadius: "12px",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#666",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#f9f9f9";
-                        e.currentTarget.style.color = "var(--pink)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "white";
-                        e.currentTarget.style.color = "#666";
+                        marginTop: '20px',
+                        padding: '10px 20px',
+                        background: 'rgba(255,255,255,0.2)',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        color: 'white',
+                        borderRadius: '30px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        backdropFilter: 'blur(5px)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
                     }}
                 >
-                    <span style={{ fontSize: "16px" }}>←</span>
-                    Back to all journeys
+                    ← Back to Paths
                 </button>
-            </div>
+            </InnerPageHero>
+
+            {/* Back Button Moved to Hero */}
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
 
@@ -131,6 +122,12 @@ const MenstrualHealthJourney: React.FC = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Constellation of Themes Explorer */}
+                <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '30px' }}>
+                    Menstrual Health Explorer
+                </h2>
+                <MenstrualThemeExplorer />
 
                 {/* Common Concerns */}
                 <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '30px' }}>
@@ -211,6 +208,31 @@ const MenstrualHealthJourney: React.FC = () => {
                     >
                         Book a Consultation
                     </button>
+                </div>
+
+                {/* RELATED EXPLORATION */}
+                <div style={{ marginTop: '80px', textAlign: 'center' }}>
+                    <h2 className={styles.sectionTitle}>Continue Exploring</h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginTop: '40px' }}>
+                        <div
+                            style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', cursor: 'pointer', textAlign: 'left', border: '1px solid #eee' }}
+                            onClick={() => navigate(ROUTES.MENTAL_WELLNESS)}
+                        >
+                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🧠</div>
+                            <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Mental Wellness</h4>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>Understanding the intersection of hormonal cycles and your emotional wellbeing.</p>
+                            <span style={{ fontSize: '14px', fontWeight: '700', color: 'var(--pink)' }}>Explore Mindset &rarr;</span>
+                        </div>
+                        <div
+                            style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', cursor: 'pointer', textAlign: 'left', border: '1px solid #eee' }}
+                            onClick={() => navigate(ROUTES.OTC_GUIDE)}
+                        >
+                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🧭</div>
+                            <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>Contraception Compass</h4>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '16px' }}>Manage your cycle effectively with our interactive decision wizard for birth control.</p>
+                            <span style={{ fontSize: '14px', fontWeight: '700', color: 'var(--pink)' }}>Open Compass &rarr;</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>

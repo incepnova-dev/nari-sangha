@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './PerinatalJourney.module.css';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../routes/Routes';
 
 interface SystemPhaseData {
     description: string;
@@ -148,6 +150,7 @@ const PerinatalJourney: React.FC = () => {
     const [phase, setPhase] = useState<'prenatal' | 'postnatal'>('prenatal');
     const [selectedSystem, setSelectedSystem] = useState<string | null>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const navigate = useNavigate();
 
     // Flow Canvas Animation
     useEffect(() => {
@@ -503,6 +506,27 @@ const PerinatalJourney: React.FC = () => {
                         <i className="fas fa-hand-holding-heart"></i>
                         <h3>Treatment Options</h3>
                         <p>From therapy to medication, understand the evidence-based paths to healing.</p>
+                    </div>
+                    <div className={`${styles.resourceCard} ${styles.familyCard}`} style={{ gridColumn: '1 / -1', background: 'linear-gradient(135deg, #1a237e, #311b92)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '40px' }}>
+                        <div style={{ flex: 1 }}>
+                            <h3 style={{ color: 'white', marginBottom: '12px' }}>👨‍👩‍👧‍👦 Perinatal Family Guide</h3>
+                            <p style={{ opacity: 0.9, marginBottom: '0' }}>A dedicated guide for partners and family members on how to provide effective support during this transition.</p>
+                        </div>
+                        <button
+                            onClick={() => navigate(ROUTES.PERINATAL_FAMILY)}
+                            style={{
+                                background: 'white',
+                                color: '#1a237e',
+                                border: 'none',
+                                padding: '14px 28px',
+                                borderRadius: '12px',
+                                fontWeight: '800',
+                                cursor: 'pointer',
+                                marginLeft: '24px'
+                            }}
+                        >
+                            Open Family Guide
+                        </button>
                     </div>
                 </div>
             </section>

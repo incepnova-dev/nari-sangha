@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ShoppingBag, ShieldCheck, BookOpen, UserCheck } from "lucide-react";
+import { ArrowRight, ShoppingBag, ShieldCheck, UserCheck } from "lucide-react";
 import styles from "./landing.module.css";
 import { ROUTES } from "../routes/Routes";
 
@@ -20,13 +20,7 @@ const ResourceNavigation: React.FC = () => {
             path: ROUTES.SUPPORT,
             icon: <ShieldCheck size={24} />,
         },
-        {
-            title: "Knowledge Hub",
-            description: "Access trusted articles, guides, and research on women’s health.",
-            cta: "Visit Knowledge Hub",
-            path: ROUTES.STORIES,
-            icon: <BookOpen size={24} />,
-        },
+
         {
             title: "Expert Advice",
             description: "Connect with verified experts for personalized guidance and support.",

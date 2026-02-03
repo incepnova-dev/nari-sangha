@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes/Routes";
 import styles from "./CosmeticSurgeryGuide.module.css";
 import InnerPageHero from "../shared/InnerPageHero";
 
@@ -67,6 +69,7 @@ const PROCEDURES: Procedure[] = [
 ];
 
 const CosmeticSurgeryGuide: React.FC = () => {
+    const navigate = useNavigate();
     const [selectedPoint, setSelectedPoint] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [activeProcedure, setActiveProcedure] = useState<Procedure | null>(null);
@@ -145,10 +148,18 @@ const CosmeticSurgeryGuide: React.FC = () => {
                                     </ul>
                                 </div>
                                 <div className={styles.cardFooter}>
-                                    <button className={styles.btnSimulate} onClick={() => openSimulation(proc)}>
-                                        Recovery Experience
+                                    <button
+                                        className={styles.btnSimulate}
+                                        onClick={() => navigate(ROUTES.AESTHETIC_SIMULATOR)}
+                                    >
+                                        Aesthetic Simulator
                                     </button>
-                                    <button className={styles.btnMore}>View Outcomes</button>
+                                    <button
+                                        className={styles.btnMore}
+                                        onClick={() => openSimulation(proc)}
+                                    >
+                                        View Outcomes
+                                    </button>
                                 </div>
                             </article>
                         ))}

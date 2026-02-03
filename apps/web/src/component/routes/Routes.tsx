@@ -9,7 +9,7 @@ import Community from "../pages/Community";
 import Appointments from "../pages/Appointments";
 import Safety from "../pages/Safety";
 import Support from "../pages/Support";
-import Stories from "../pages/Stories";
+// import Stories from "../pages/Stories";
 import Journeys from "../pages/Journeys";
 import PregnancyJourney from "../pages/PregnancyJourney";
 import FertilityJourney from "../pages/FertilityJourney";
@@ -23,6 +23,10 @@ import SymptomChecker from "../pages/SymptomChecker";
 import Products from "../pages/Products";
 import MenopauseJourney from "../pages/MenopauseJourney";
 import PerinatalJourney from "../pages/PerinatalJourney";
+import PerinatalWellnessJourney from "../pages/PerinatalWellnessJourney";
+import CancerVisualization from "../pages/CancerVisualization";
+import AutoimmuneHealthJourney from "../pages/AutoimmuneHealthJourney";
+import BoneHealthJourney from "../pages/BoneHealthJourney";
 import About from "../pages/About";
 import GovernmentSchemes from "../pages/GovernmentSchemes";
 import ResearchHub from "../pages/ResearchHub";
@@ -32,45 +36,22 @@ import FindDoctors from "../pages/FindDoctors";
 import Teleconsultation from "../pages/Teleconsultation";
 import ScreeningGuide from "../pages/ScreeningGuide";
 import VaccinationGuide from "../pages/VaccinationGuide";
-import Services from "../pages/Services";
-import InsuranceGuide from "../pages/InsuranceGuide";
+import BreastfeedingJourney from "../pages/BreastfeedingJourney";
+import LossSupport from "../pages/LossSupport";
+import OTCGUIDE from "../pages/OTCGUIDE";
+import NutritionGuide from "../pages/NutritionGuide";
+import AestheticSimulator from "../pages/AestheticSimulator";
+import GynaecologyOB from "../pages/GynaecologyOB";
 
-// Centralized route paths
-export const ROUTES = {
-  LANDING: "/",
-  HOME: "/home",
-  DASHBOARD: "/dashboard",
-  LOGOUT: "/logout",
-  JOURNEYS: "/journeys",
-  PREGNANCY: "/journeys/pregnancy",
-  FERTILITY: "/journeys/fertility",
-  PREVENTIVE_HEALTH: "/journeys/preventive-health",
-  MENSTRUAL_HEALTH: "/journeys/menstrual-health",
-  CHRONIC_CONDITIONS: "/journeys/chronic-conditions",
-  MENTAL_WELLNESS: "/journeys/mental-wellness",
-  POSTPARTUM: "/journeys/postpartum",
-  ADOLESCENT_HEALTH: "/journeys/adolescent-health",
-  MENOPAUSE: "/journeys/menopause",
-  PRODUCTS: "/products",
-  APPOINTMENTS: "/appointments",
-  COMMUNITY: "/community",
-  SYMPTOM_CHECKER: "/symptom-checker",
-  SAFETY: "/safety",
-  SUPPORT: "/support",
-  STORIES: "/stories",
-  ABOUT: "/about",
-  PERINATAL: "/journeys/perinatal",
-  GOVERNMENT_SCHEMES: "/government-schemes",
-  RESEARCH: "/research",
-  COSMETIC_SURGERY: "/cosmetic-surgery",
-  PERINATAL_FAMILY: "/perinatal-family-guide",
-  TELECONSULTATION: "/teleconsultation",
-  FIND_DOCTORS: "/find-doctors",
-  SCREENING: "/screening",
-  VACCINATION: "/vaccination",
-  SERVICES: "/services",
-  INSURANCE_GUIDE: "/insurance-guide",
-} as const;
+
+import InsuranceGuide from "../pages/InsuranceGuide";
+import NavigationAudit from "../pages/NavigationAudit";
+import SystemMap from "../pages/SystemMap";
+
+
+import { ROUTES } from "./routeConstants";
+export { ROUTES };
+
 
 const AppRoutes = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -89,7 +70,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.APPOINTMENTS} element={<Appointments />} />
         <Route path={ROUTES.SAFETY} element={<Safety />} />
         <Route path={ROUTES.SUPPORT} element={<Support />} />
-        <Route path={ROUTES.STORIES} element={<Stories />} />
+        {/* <Route path={ROUTES.STORIES} element={<Stories />} /> */}
         <Route path={ROUTES.JOURNEYS} element={<Journeys />} />
         <Route path={ROUTES.PREGNANCY} element={<PregnancyJourney />} />
         <Route path={ROUTES.FERTILITY} element={<FertilityJourney />} />
@@ -103,7 +84,10 @@ const AppRoutes = () => {
         <Route path={ROUTES.PRODUCTS} element={<Products />} />
         <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourney />} />
         <Route path={ROUTES.PERINATAL} element={<PerinatalJourney />} />
-        <Route path={ROUTES.ABOUT} element={<About />} />
+        <Route path={ROUTES.PERINATAL_WELLNESS} element={<PerinatalWellnessJourney />} />
+        <Route path={ROUTES.AUTOIMMUNE_HEALTH} element={<AutoimmuneHealthJourney />} />
+        <Route path={ROUTES.BONE_HEALTH} element={<BoneHealthJourney />} />
+        <Route path={ROUTES.CANCER_VISUALIZATION} element={<CancerVisualization />} />
         <Route path={ROUTES.GOVERNMENT_SCHEMES} element={<GovernmentSchemes />} />
         <Route path={ROUTES.RESEARCH} element={<ResearchHub />} />
         <Route path={ROUTES.COSMETIC_SURGERY} element={<CosmeticSurgeryGuide />} />
@@ -112,9 +96,24 @@ const AppRoutes = () => {
         <Route path={ROUTES.FIND_DOCTORS} element={<FindDoctors />} />
         <Route path={ROUTES.SCREENING} element={<ScreeningGuide />} />
         <Route path={ROUTES.VACCINATION} element={<VaccinationGuide />} />
-        <Route path={ROUTES.SERVICES} element={<Services />} />
+        <Route path={ROUTES.SERVICES} element={<Navigate to={ROUTES.JOURNEYS + "#services"} replace />} />
         <Route path={ROUTES.INSURANCE_GUIDE} element={<InsuranceGuide />} />
+        <Route path={ROUTES.OTC_GUIDE} element={<OTCGUIDE />} />
+        <Route path={ROUTES.NUTRITION_GUIDE} element={<NutritionGuide />} />
+        <Route path={ROUTES.AESTHETIC_SIMULATOR} element={<AestheticSimulator />} />
+        <Route path={ROUTES.BREASTFEEDING} element={<BreastfeedingJourney />} />
+        <Route path={ROUTES.LOSS_SUPPORT} element={<LossSupport />} />
+        <Route path={ROUTES.ABOUT} element={<About />} />
+        <Route path={ROUTES.GYNAECOLOGY_OB} element={<GynaecologyOB />} />
+        <Route path={ROUTES.HORMONAL_HEALTH} element={<MenstrualHealthJourney />} />
+
+
+
+        {/* Internal Developer Routes */}
+        <Route path="/navigation-tasks" element={<NavigationAudit />} />
+        <Route path="/system-map" element={<SystemMap />} />
       </Route>
+
 
       <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
       <Route path={ROUTES.HOME} element={renderHome()} />

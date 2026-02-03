@@ -1,0 +1,1 @@
+﻿../../packages/api-client/src/services/index.ts(2,1): error TS2308: Module './authService' has already exported a member named 'ServiceResult'. Consider explicitly re-exporting to resolve the ambiguity.

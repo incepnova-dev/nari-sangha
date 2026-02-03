@@ -1,15 +1,27 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../routes/Routes";
+import { useNavigate, Link } from "react-router-dom";
+import { ROUTES } from "../routes/routeConstants";
 import styles from "./Journeys.module.css";
 import InnerPageHero from "../shared/InnerPageHero";
 import JourneyHeroAnimation from "./JourneyHeroAnimation";
 import JourneyFlow from "./JourneyFlow";
+import ServicesSection from "../sections/ServicesSection";
+
 
 // Assets
 import pregnancyImg from "../../assets/journey_pregnancy.png";
 import fertilityImg from "../../assets/journey_fertility.png";
 import symptomsImg from "../../assets/journey_symptoms.png";
+import menopauseImg from "../../assets/journey_menopause.png";
+import lossSupportImg from "../../assets/journey_loss_support.png";
+import breastfeedingImg from "../../assets/journey_breastfeeding.png";
+import postnatalImg from "../../assets/journey_postnatal.png";
+import menstrualImg from "../../assets/journey_menstrual.png";
+import mentalImg from "../../assets/journey_mental.png";
+import adolescentImg from "../../assets/journey_adolescent.png";
+import chronicImg from "../../assets/journey_chronic.png";
+import perinatalFamilyImg from "../../assets/journey_perinatal_family.png";
+import autoimmuneImg from "../../assets/journey_autoimmune.png";
 
 interface Journey {
     id: string;
@@ -25,10 +37,23 @@ interface Journey {
 const Journeys: React.FC = () => {
     const navigate = useNavigate();
 
-    // Scroll to top on page load/refresh
+    // Scroll to top on page load/refresh or handle hash
     React.useEffect(() => {
-        window.scrollTo(0, 0);
+        const hash = window.location.hash;
+        if (hash) {
+            const id = hash.replace('#', '');
+            // Wait slightly for section to mount
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        } else {
+            window.scrollTo(0, 0);
+        }
     }, []);
+
 
     // Handle card click with scroll to top
     const handleCardClick = (path: string | null) => {
@@ -57,7 +82,7 @@ const Journeys: React.FC = () => {
             nextSteps: ["Recovery monitoring", "Bonding support", "Pediatrician consult"],
             icon: "👶",
             path: ROUTES.POSTPARTUM,
-            image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80"
+            image: postnatalImg
         },
         {
             id: "perinatal",
@@ -66,7 +91,7 @@ const Journeys: React.FC = () => {
             includes: ["Body Map", "Self-assessments", "Counseling"],
             nextSteps: ["Interactive body exploration", "Hormonal crash timeline", "Connect with counselors"],
             icon: "🧬",
-            path: ROUTES.PERINATAL,
+            path: ROUTES.PERINATAL_WELLNESS,
             image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80"
         },
         {
@@ -87,7 +112,7 @@ const Journeys: React.FC = () => {
             nextSteps: ["Symptom management guide", "Hormone education", "Holistic wellness plan"],
             icon: "🔥",
             path: ROUTES.MENOPAUSE,
-            image: "https://images.unsplash.com/photo-1571391605332-62dc2513f592?auto=format&fit=crop&w=800&q=80"
+            image: menopauseImg
         },
         {
             id: "loss-grief",
@@ -96,9 +121,20 @@ const Journeys: React.FC = () => {
             includes: ["Medical guidance", "Emotional support", "Community"],
             nextSteps: ["Sensitive care resources", "Grief counseling", "Join support group"],
             icon: "🎗️",
-            path: ROUTES.CHRONIC_CONDITIONS,
-            image: "https://images.unsplash.com/photo-1528659091430-80410e7e174b?auto=format&fit=crop&w=800&q=80"
+            path: ROUTES.LOSS_SUPPORT,
+            image: lossSupportImg
         },
+        {
+            id: "breastfeeding",
+            title: "Breastfeeding Journey",
+            focus: "Master lactation with our Bio-Twin lab and nutrition guides.",
+            includes: ["Simulation", "Latch Guide", "Nutrition"],
+            nextSteps: ["Lactation simulation", "3D latch practice", "Meal planning"],
+            icon: "🍼",
+            path: ROUTES.BREASTFEEDING,
+            image: breastfeedingImg
+        },
+
         {
             id: "symptom-care",
             title: "Symptom → Care Journey",
@@ -120,6 +156,36 @@ const Journeys: React.FC = () => {
             image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
         },
         {
+            id: "menstrual-health",
+            title: "Menstrual Health",
+            focus: "Understand your cycle and manage menstrual health effectively.",
+            includes: ["Cycle Tracking", "Symptom Management", "Hormonal Balance"],
+            nextSteps: ["Start tracking", "Expert advice", "Join community"],
+            icon: "🩸",
+            path: ROUTES.MENSTRUAL_HEALTH,
+            image: menstrualImg
+        },
+        {
+            id: "mental-wellness",
+            title: "Mental Wellness",
+            focus: "Holistic support for your emotional and mental wellbeing.",
+            includes: ["Stress Relief", "Mindfulness", "Expert Support"],
+            nextSteps: ["Self-assessment", "Daily practices", "Connect with counselor"],
+            icon: "🧠",
+            path: ROUTES.MENTAL_WELLNESS,
+            image: mentalImg
+        },
+        {
+            id: "adolescent-health",
+            title: "Adolescent Health",
+            focus: "Empowering young women with knowledge and guidance.",
+            includes: ["Puberty Education", "Self-care", "Confidence Building"],
+            nextSteps: ["Health basics", "Body positivity", "Ask an expert"],
+            icon: "🌸",
+            path: ROUTES.ADOLESCENT_HEALTH,
+            image: adolescentImg
+        },
+        {
             id: "community",
             title: "Community & Stories",
             focus: "Support-first pathways, groups, and safe spaces for shared experiences.",
@@ -128,13 +194,54 @@ const Journeys: React.FC = () => {
             icon: "🤝",
             path: ROUTES.COMMUNITY,
             image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            id: "chronic",
+            title: "Chronic Conditions",
+            focus: "Management and support for long-term health conditions.",
+            includes: ["PCOS/Endometriosis", "Thyroid", "Diabetes"],
+            nextSteps: ["Specialist directory", "Management tools", "Daily tracking"],
+            icon: "🛡️",
+            path: ROUTES.CHRONIC_CONDITIONS,
+            image: chronicImg
+        },
+        {
+            id: "perinatal-family",
+            title: "Perinatal Family Guide",
+            focus: "Empowering partners and families with knowledge to support maternal wellness.",
+            includes: ["Partner Tips", "Family Support", "Communication"],
+            nextSteps: ["Support checklist", "Bonding exercises", "Role-play scenarios"],
+            icon: "👨‍👩‍👧",
+            path: ROUTES.PERINATAL_FAMILY,
+            image: perinatalFamilyImg
+        },
+        {
+            id: "autoimmune",
+            title: "Autoimmune Health",
+            focus: "Understanding the 'Silent Storm' - why 80% of cases affect women.",
+            includes: ["X-Chromosome", "Hormones", "Immune Map"],
+            nextSteps: ["Immune system basics", "Trigger identification", "Check symptoms"],
+            icon: "🧬",
+            path: ROUTES.AUTOIMMUNE_HEALTH,
+            image: autoimmuneImg
+        },
+        {
+            id: "bone-health",
+            title: "Bone & Joint Health",
+            focus: "Protecting your skeletal foundation through every life stage.",
+            includes: ["3D Simulation", "Hormone Map", "Risk Triage"],
+            nextSteps: ["Interactive bone explorer", "Bone density screening", "Prevention checklist"],
+            icon: "🦴",
+            path: ROUTES.BONE_HEALTH,
+            image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
         }
+
     ];
 
     const careTracks = [
-        { title: "Preventive Care", desc: "Screening & vaccination", icon: "🛡️", color: "#10b981" },
-        { title: "Personal Consult", desc: "Expert guidance for your needs", icon: "🩺", color: "#6366f1" },
-        { title: "Safe Support", desc: "Digital tools & safe community", icon: "🤝", color: "#be185d" },
+        { title: "Preventive Care", desc: "Screening & vaccination", icon: "🛡️", color: "#10b981", path: ROUTES.PREVENTIVE_HEALTH },
+        { title: "Personal Consult", desc: "Expert guidance for your needs", icon: "🩺", color: "#6366f1", path: ROUTES.APPOINTMENTS },
+        { title: "Safe Support", desc: "Digital tools & safe community", icon: "🤝", color: "#be185d", path: ROUTES.COMMUNITY },
     ];
 
     return (
@@ -160,7 +267,12 @@ const Journeys: React.FC = () => {
                 </div>
                 <div className={styles.careTrackGrid}>
                     {careTracks.map((track, idx) => (
-                        <div key={idx} className={styles.careTrackCard}>
+                        <div
+                            key={idx}
+                            className={styles.careTrackCard}
+                            onClick={() => handleCardClick(track.path)}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <div className={styles.careTrackIcon} style={{ background: track.color }}>{track.icon}</div>
                             <h3 className={styles.careTrackTitle}>{track.title}</h3>
                             <p className={styles.careTrackDesc}>{track.desc}</p>
@@ -170,7 +282,7 @@ const Journeys: React.FC = () => {
             </section>
 
             {/* START WITH JOURNEY */}
-            <section className={styles.journeySection}>
+            <section id="catalog" className={styles.journeySection}>
                 <div className={styles.journeyIntro}>
                     <h2 className={styles.journeyIntroTitle}>Start with a Journey</h2>
                     <p className={styles.journeyIntroSubtitle}>
@@ -182,10 +294,10 @@ const Journeys: React.FC = () => {
                 <div className={styles.journeyGridContainer}>
                     <div className={styles.cardGrid}>
                         {journeyCatalog.map((journey) => (
-                            <div
+                            <Link
                                 key={journey.id}
+                                to={journey.path || "#"}
                                 className={styles.journeyCard}
-                                onClick={() => handleCardClick(journey.path)}
                             >
                                 <div className={styles.cardCover}>
                                     <img src={journey.image} alt={journey.title} />
@@ -224,7 +336,7 @@ const Journeys: React.FC = () => {
                                         <span className={styles.learnMore}>Explore Journey <i className="fas fa-arrow-right"></i></span>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -232,8 +344,131 @@ const Journeys: React.FC = () => {
 
             {/* JOURNEY FLOW MAP */}
             <JourneyFlow />
+
+            {/* SPECIALIZED GUIDES */}
+            <section id="guides" className={styles.journeySection} style={{ background: '#f8f9fa', paddingTop: '60px', paddingBottom: '80px' }}>
+                <div className={styles.journeyIntro}>
+                    <h2 className={styles.journeyIntroTitle}>Specialized Health Guides</h2>
+                    <p className={styles.journeyIntroSubtitle}>
+                        Deep-dive resources into specific medical procedures and essential healthcare logistics.
+                    </p>
+                </div>
+
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', padding: '0 20px' }}>
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.COSMETIC_SURGERY)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#E3F2FD', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✨</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Cosmetic Surgery Guide</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Understanding procedures, risks, and recovery protocols for women's beauty health.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.INSURANCE_GUIDE)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#E8F5E9', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🛡️</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Insurance & Claims</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Navigate policy selection, claim processes, and maternity coverage effectively.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.OTC_GUIDE)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#FFF3E0', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🧭</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Contraception Compass</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Interactive decision wizard for women's birth control and STI protection.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.NUTRITION_GUIDE)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#F3E5F5', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🥦</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Nutrition & Supply</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Optimizing diet, hydration, and lifestyle for lactation and recovery.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.GOVERNMENT_SCHEMES)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#FFF1F0', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🏛️</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Government Schemes</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Discover public health programs, benefits, and financial assistance guides.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.VACCINATION)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#FCE4EC', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>💉</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Vaccination Explorer</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Personalized immunization schedules for every life stage and pregnancy.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.SCREENING)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#E0F2F1', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📋</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Screening Roadmap</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Preventive health checkups, diagnostic guides, and life-stage roadmap.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className={styles.journeyCard}
+                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
+                        onClick={() => navigate(ROUTES.CANCER_VISUALIZATION)}
+                    >
+                        <div style={{ fontSize: '40px', background: '#FCE4EC', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🧬</div>
+                        <div>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Cancer 3D Explorer</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Interactive 3D visualization of cancer progression stages and early detection.</p>
+                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Explorer &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SERVICES SECTION */}
+            <div id="services">
+                <ServicesSection />
+            </div>
         </div>
     );
 };
 
 export default Journeys;
+
+

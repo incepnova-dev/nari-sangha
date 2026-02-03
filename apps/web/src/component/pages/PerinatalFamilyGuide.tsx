@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes/routeConstants";
 import styles from "./PerinatalFamilyGuide.module.css";
 
 interface Symptom {
@@ -19,6 +21,7 @@ const SYMPTOMS: Symptom[] = [
 ];
 
 const PerinatalFamilyGuide: React.FC = () => {
+    const navigate = useNavigate();
     const [tilt, setTilt] = useState({ x: 0, y: 0 });
     const [activeSymptom, setActiveSymptom] = useState<Symptom | null>(null);
 
@@ -52,6 +55,13 @@ const PerinatalFamilyGuide: React.FC = () => {
                         provide meaningful support, and navigate the journey to recovery together.
                     </p>
                     <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+                        <button
+                            className={styles.heroBadge} // Reusing this class for basic shape if suitable, or style inline
+                            style={{ background: 'transparent', color: 'white', border: '1px solid white', cursor: 'pointer' }}
+                            onClick={() => navigate(ROUTES.JOURNEYS)}
+                        >
+                            ← Back to Paths
+                        </button>
                         <button className={styles.heroBadge} style={{ background: 'white', color: '#d81b60', border: '1px solid #d81b60' }}>
                             Start The Guide
                         </button>

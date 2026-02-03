@@ -1,0 +1,244 @@
+.vaccine-explorer {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    margin-bottom: 60px;
+}
+
+.age-stage-selector {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.age-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.age-btn:hover {
+    background: #fff;
+    border-color: #e91e63;
+    transform: translateY(-2px);
+}
+
+.age-btn.active {
+    background: #e91e63;
+    border-color: #e91e63;
+    color: white;
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.2);
+}
+
+.age-emoji {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.age-label {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.explorer-main {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .explorer-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+.body-visualization {
+    text-align: center;
+}
+
+.body-outline {
+    position: relative;
+    width: 200px;
+    height: 400px;
+    background: #fcf8fa;
+    margin: 0 auto 20px;
+    border-radius: 100px;
+    border: 2px solid #f8bbd0;
+}
+
+.hotspot {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.hotspot.active {
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 0 15px rgba(233, 30, 99, 0.4);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
+    }
+}
+
+.hotspot.selected {
+    background: #e91e63;
+    color: white;
+    transform: scale(1.2);
+    z-index: 10;
+}
+
+.hotspot.head {
+    top: 20px;
+    left: calc(50% - 25px);
+}
+
+.hotspot.chest {
+    top: 100px;
+    left: calc(50% - 25px);
+}
+
+.hotspot.repro {
+    top: 180px;
+    left: calc(50% - 25px);
+}
+
+.hint-text {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+}
+
+.info-panel-vax {
+    background: #fafafa;
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 400px;
+}
+
+.empty-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: #999;
+}
+
+.zone-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.zone-emoji-large {
+    font-size: 40px;
+}
+
+.zone-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #2A2A2A;
+}
+
+.vax-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vax-item {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #eee;
+}
+
+.vax-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.v-emoji {
+    font-size: 24px;
+}
+
+.vax-head h4 {
+    margin: 0;
+    font-size: 17px;
+    color: #e91e63;
+}
+
+.v-target {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.v-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.v-stat {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.v-stat.warn {
+    color: #d32f2f;
+    background: #fff8f8;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.v-stat.time {
+    font-weight: 700;
+    color: #1976d2;
+}

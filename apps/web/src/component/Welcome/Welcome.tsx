@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useMobileNavigation, ROUTES } from '../mobile-routes/Routes';
+import { useMobileNavigation, ROUTES as MOBILE_ROUTES } from '../mobile-routes/Routes';
+import { ROUTES as WEB_ROUTES } from '../routes/Routes';
+import { Link } from 'react-router-dom';
 import { icons } from '../../styles/theme';
 import Chatbot from './Chatbot';
 import CookieConsent from './CookieConsent';
@@ -23,11 +25,21 @@ const Welcome: React.FC<WelcomeProps> = () => {
   }, []);
 
   const handleGetStarted = () => {
-    navigation.navigate(ROUTES.REGION_SELECTION);
+    navigation.navigate(MOBILE_ROUTES.REGION_SELECTION);
   };
 
   const handleSignInClick = () => {
-    navigation.navigate(ROUTES.SIGN_IN);
+    navigation.navigate(MOBILE_ROUTES.SIGN_IN);
+  };
+
+  const handleFeatureClick = (title: string) => {
+    switch (title) {
+      case 'Products': navigation.navigate(MOBILE_ROUTES.PRODUCTS_OPTION); break;
+      case 'Care': navigation.navigate(MOBILE_ROUTES.DISCOVER_OPTIONS); break;
+      case 'Knowledge': navigation.navigate(MOBILE_ROUTES.KNOWLEDGE_HUB); break;
+      case 'Tracking': navigation.navigate(MOBILE_ROUTES.TRACK_OPTIONS); break;
+      default: handleGetStarted();
+    }
   };
 
   // Feature cards data
@@ -61,12 +73,12 @@ const Welcome: React.FC<WelcomeProps> = () => {
       <header className={`${styles.header} ${isScrolled ? styles.headerScrolled : ''}`}>
         <div className={styles.headerContent}>
           <div className={styles.logoSection}>
-            <a href="#" className={styles.logoLink} aria-label="NARI SANGHA">
+            <Link to={WEB_ROUTES.LANDING} className={styles.logoLink} aria-label="NARI SANGHA">
               <div className={styles.logo}>
                 <span className={styles.logoEmoji}>🌸</span>
                 <span className={styles.logoText}>NARI SANGHA</span>
               </div>
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className={styles.desktopNav} aria-label="Main navigation">
@@ -75,16 +87,16 @@ const Welcome: React.FC<WelcomeProps> = () => {
                   <button className={styles.navLink} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</button>
                 </li>
                 <li>
-                  <button className={styles.navLink} onClick={() => navigation.navigate(ROUTES.PRODUCTS_OPTION)}>Products</button>
+                  <button className={styles.navLink} onClick={() => navigation.navigate(MOBILE_ROUTES.PRODUCTS_OPTION)}>Products</button>
                 </li>
                 <li>
-                  <button className={styles.navLink} onClick={() => navigation.navigate(ROUTES.KNOWLEDGE_HUB)}>Knowledge</button>
+                  <button className={styles.navLink} onClick={() => navigation.navigate(MOBILE_ROUTES.KNOWLEDGE_HUB)}>Knowledge</button>
                 </li>
                 <li>
-                  <button className={styles.navLink} onClick={() => navigation.navigate(ROUTES.TRACK_OPTIONS)}>Track</button>
+                  <button className={styles.navLink} onClick={() => navigation.navigate(MOBILE_ROUTES.TRACK_OPTIONS)}>Track</button>
                 </li>
                 <li>
-                  <button className={styles.navLink} onClick={() => navigation.navigate(ROUTES.ABOUT_US)}>About</button>
+                  <button className={styles.navLink} onClick={() => navigation.navigate(MOBILE_ROUTES.ABOUT_US)}>About</button>
                 </li>
               </ul>
             </nav>
@@ -215,7 +227,12 @@ const Welcome: React.FC<WelcomeProps> = () => {
               </div>
               <h3 className={styles.featureTitle}>{feature.title}</h3>
               <p className={styles.featureDescription}>{feature.description}</p>
-              <button className={styles.featureLink}>Learn More →</button>
+              <button
+                className={styles.featureLink}
+                onClick={() => handleFeatureClick(feature.title)}
+              >
+                Learn More →
+              </button>
             </div>
           ))}
         </div>
@@ -250,7 +267,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
             Whether you're looking for supplements, wellness products, or health essentials,
             we make it easy to find trusted products tailored to your needs.
           </p>
-          <button className={styles.serviceLink} onClick={() => navigation.navigate(ROUTES.PRODUCTS_OPTION)}>
+          <button className={styles.serviceLink} onClick={() => navigation.navigate(MOBILE_ROUTES.PRODUCTS_OPTION)}>
             Explore Products →
           </button>
         </div>
@@ -262,7 +279,7 @@ const Welcome: React.FC<WelcomeProps> = () => {
             Whether you've moved to a new city or need a specialist,
             find trusted doctors, clinics, and hospitals that match your healthcare needs.
           </p>
-          <button className={styles.serviceLink} onClick={() => navigation.navigate(ROUTES.DISCOVER_OPTIONS)}>
+          <button className={styles.serviceLink} onClick={() => navigation.navigate(MOBILE_ROUTES.DISCOVER_OPTIONS)}>
             Find Providers →
           </button>
         </div>
@@ -285,9 +302,9 @@ const Welcome: React.FC<WelcomeProps> = () => {
             </blockquote>
           ))}
         </div>
-        <a href="#" className={styles.readMoreLink}>
+        {/* <Link to={WEB_ROUTES.STORIES} className={styles.readMoreLink}>
           Read more stories →
-        </a>
+        </Link> */}
       </section>
 
       {/* Call to Action - Get Started */}
@@ -325,27 +342,27 @@ const Welcome: React.FC<WelcomeProps> = () => {
           <div className={styles.footerSection}>
             <h4 className={styles.footerTitle}>Our Platform</h4>
             <ul className={styles.footerLinks}>
-              <li><a href="#" className={styles.footerLink}>Products</a></li>
-              <li><a href="#" className={styles.footerLink}>Healthcare</a></li>
-              <li><a href="#" className={styles.footerLink}>Knowledge Hub</a></li>
-              <li><a href="#" className={styles.footerLink}>Tracking</a></li>
+              <li><Link to={WEB_ROUTES.PRODUCTS} className={styles.footerLink}>Products</Link></li>
+              <li><Link to={WEB_ROUTES.FIND_DOCTORS} className={styles.footerLink}>Healthcare</Link></li>
+              <li><Link to={WEB_ROUTES.RESEARCH} className={styles.footerLink}>Knowledge Hub</Link></li>
+              <li><Link to={WEB_ROUTES.JOURNEYS} className={styles.footerLink}>Tracking</Link></li>
             </ul>
           </div>
           <div className={styles.footerSection}>
             <h4 className={styles.footerTitle}>Company</h4>
             <ul className={styles.footerLinks}>
-              <li><a href="#" className={styles.footerLink}>About</a></li>
-              <li><a href="#" className={styles.footerLink}>Contact</a></li>
-              <li><a href="#" className={styles.footerLink}>Support</a></li>
-              <li><a href="#" className={styles.footerLink}>Privacy</a></li>
+              <li><Link to={WEB_ROUTES.ABOUT} className={styles.footerLink}>About</Link></li>
+              <li><Link to={WEB_ROUTES.SUPPORT} className={styles.footerLink}>Contact</Link></li>
+              <li><Link to={WEB_ROUTES.SUPPORT} className={styles.footerLink}>Support</Link></li>
+              <li><Link to={WEB_ROUTES.LANDING} className={styles.footerLink}>Privacy</Link></li>
             </ul>
           </div>
           <div className={styles.footerSection}>
             <h4 className={styles.footerTitle}>Legal</h4>
             <ul className={styles.footerLinks}>
-              <li><a href="#" className={styles.footerLink}>Terms</a></li>
-              <li><a href="#" className={styles.footerLink}>Privacy Policy</a></li>
-              <li><a href="#" className={styles.footerLink}>Guidelines</a></li>
+              <li><Link to={WEB_ROUTES.LANDING} className={styles.footerLink}>Terms</Link></li>
+              <li><Link to={WEB_ROUTES.LANDING} className={styles.footerLink}>Privacy Policy</Link></li>
+              <li><Link to={WEB_ROUTES.LANDING} className={styles.footerLink}>Guidelines</Link></li>
             </ul>
           </div>
         </div>

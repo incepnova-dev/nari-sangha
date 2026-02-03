@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { ROUTES } from "../routes/Routes";
 import styles from "../landing/landing.module.css";
-import { products, insurancePlans, Product } from "../../data/seed";
+import { products, insurancePlans, Product, InsurancePlan } from "../../data/seed";
 import InnerPageHero from "../shared/InnerPageHero";
 import { useCart } from "../../context/CartContext";
 import InsuranceCard from "../shared/InsuranceCard";
 import ProductQuickView from "../shared/ProductQuickView";
+import ProductsAnimation from "../shared/animations/ProductsAnimation";
 
 const Products: React.FC = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -13,6 +15,8 @@ const Products: React.FC = () => {
     const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
     const { addToCart } = useCart();
     const location = useLocation();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         let timer: ReturnType<typeof setTimeout>;
@@ -50,7 +54,7 @@ const Products: React.FC = () => {
 
     const filteredProducts = selectedCategory === "All"
         ? products
-        : products.filter(p => p.category === selectedCategory);
+        : products.filter((p: Product) => p.category === selectedCategory);
 
     const benefits = [
         { icon: "👨‍⚕️", title: "Expert Curated", desc: "Approved by medical professionals" },
@@ -83,7 +87,9 @@ const Products: React.FC = () => {
                 title="Curated for Your Health"
                 subtitle="Find trusted products, supplements, and tools recommended by experts for every stage of your journey."
                 badge="Wellness Store"
+                illustration={<ProductsAnimation />}
             />
+
 
             <div style={{ maxWidth: '100vw', background: 'var(--theme-bg-accent)' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px 80px' }}>
@@ -162,7 +168,7 @@ const Products: React.FC = () => {
 
                     {/* Product Grid */}
                     <div className={styles.productsGrid} style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
-                        {filteredProducts.map((product) => (
+                        {filteredProducts.map((product: Product) => (
                             <div
                                 key={product.id}
                                 className={styles.productCard}
@@ -326,11 +332,28 @@ const Products: React.FC = () => {
                                 gap: '32px',
                                 marginBottom: '40px'
                             }}>
-                                {insurancePlans.map(plan => (
+                                {insurancePlans.map((plan: InsurancePlan) => (
                                     <InsuranceCard key={plan.id} plan={plan} />
                                 ))}
                             </div>
+                            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                                <button
+                                    onClick={() => navigate(ROUTES.INSURANCE_GUIDE)}
+                                    style={{
+                                        padding: '16px 32px',
+                                        background: 'white',
+                                        border: '2px solid #1565C0',
+                                        color: '#1565C0',
+                                        borderRadius: '12px',
+                                        fontWeight: '800',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    View Full Insurance Guide →
+                                </button>
+                            </div>
                         </div>
+
                     )}
 
                     {/* Why Shop With Us */}

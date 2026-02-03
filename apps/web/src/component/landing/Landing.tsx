@@ -3,8 +3,9 @@ import HeroSection from "./HeroSection";
 import WomenStories from "./WomenStories";
 import ProductsSection from "./ProductsSection";
 import styles from "./landing.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+
 import { useChatbot } from "../../context/ChatbotContext";
 
 interface LandingProps {
@@ -15,6 +16,8 @@ interface LandingProps {
 
 const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
   const { openChat } = useChatbot();
+  const navigate = useNavigate();
+
 
   return (
     <>
@@ -29,7 +32,8 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
               { title: "Guided Journeys", icon: "🛤️", path: ROUTES.JOURNEYS, color: "#F3E5F5" },
               { title: "Symptom Checker", icon: "🩺", path: ROUTES.SYMPTOM_CHECKER, color: "#E8F5E9" },
               { title: "Teleconsultation", icon: "📹", path: ROUTES.APPOINTMENTS, color: "#E3F2FD" },
-              { title: "Find Specialists", icon: "👩‍⚕️", path: ROUTES.APPOINTMENTS, color: "#FFF3E0" },
+              { title: "Public Benefits", icon: "🏛️", path: ROUTES.GOVERNMENT_SCHEMES, color: "#FFF3E0" },
+
             ].map((item, idx) => (
               <Link key={idx} to={item.path} style={{ textDecoration: "none" }}>
                 <div style={{ background: "white", padding: "24px", borderRadius: "20px", border: "1px solid #f0f0f0", transition: "transform 0.2s", boxShadow: "0 4px 12px rgba(0,0,0,0.03)" }}>
@@ -90,7 +94,14 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <h2 className={styles.sectionTitle} style={{ fontSize: "32px" }}>Your Health Knowledge Hub</h2>
           <p style={{ fontSize: "18px", color: "#666", marginBottom: "32px" }}>Access thousands of expert-reviewed articles, guides, and videos to help you make informed decisions.</p>
-          <button className={styles.secondaryCta} style={{ background: "white" }}>Visit Knowledge Hub</button>
+          <button
+            className={styles.secondaryCta}
+            style={{ background: "white" }}
+            onClick={() => navigate(ROUTES.RESEARCH)}
+          >
+            Visit Knowledge Hub
+          </button>
+
         </div>
       </div>
     </>

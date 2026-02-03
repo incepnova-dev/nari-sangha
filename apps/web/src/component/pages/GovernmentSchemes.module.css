@@ -92,9 +92,9 @@
 }
 
 .filterBtnActive {
-    background: #ec407a;
+    background: #d81b60;
     color: white;
-    border-color: #ec407a;
+    border-color: #d81b60;
 }
 
 /* Grid */
@@ -117,6 +117,7 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
 }
 
 .schemeCard:hover {
@@ -130,6 +131,7 @@
     display: flex;
     gap: 20px;
     position: relative;
+    flex: 1;
 }
 
 .emblem {
@@ -157,6 +159,7 @@
     font-size: 0.95rem;
     color: #666;
     margin-bottom: 16px;
+    line-height: 1.5;
 }
 
 .badges {
@@ -193,30 +196,114 @@
     color: #ec407a;
 }
 
-/* Drawer */
-.drawer {
-    background: #fafafa;
-    border-top: 1px solid #f0f0f0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
+/* Modal Overlay */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease-out;
 }
 
-.drawerOpen {
-    max-height: 800px;
-}
-
-.drawerContent {
-    padding: 32px;
+.modalContent {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    max-height: 90vh;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
 }
 
-.panel h4 {
+.modalCloseBtn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: #f5f5f5;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s;
+    z-index: 2;
+}
+
+.modalCloseBtn:hover {
+    background: #eee;
+    color: #333;
+    transform: rotate(90deg);
+}
+
+.modalHeader {
+    padding: 40px 40px 20px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modalIcon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #ec407a, #d81b60);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.modalTitle {
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.modalDesc {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.modalBody {
+    padding: 40px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modalGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.modalPanel h4,
+.modalSection h4 {
     font-size: 0.9rem;
     font-weight: 800;
-    color: #333;
+    color: #d81b60;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 16px;
@@ -225,79 +312,110 @@
     gap: 10px;
 }
 
-.panel h4 i {
-    color: #ec407a;
-}
-
-.list {
+.modalPanel ul {
     list-style: none;
     padding: 0;
 }
 
-.list li {
+.modalPanel li {
     font-size: 0.95rem;
-    color: #555;
+    color: #444;
     padding: 8px 0;
     border-bottom: 1px solid #eee;
+    line-height: 1.5;
 }
 
-.list li:last-child {
+.modalPanel li:last-child {
     border-bottom: none;
 }
 
-.list li strong {
-    color: #333;
+.modalSection {
+    margin-bottom: 40px;
+}
+
+.modalSection:last-child {
+    margin-bottom: 0;
 }
 
 .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
 }
 
 .chip {
     background: white;
-    border: 1px solid #eee;
-    padding: 6px 14px;
+    border: 1px solid #e0e0e0;
+    padding: 8px 16px;
     border-radius: 100px;
-    font-size: 0.85rem;
-    color: #666;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 600;
 }
 
-/* Steps */
 .steps {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    position: relative;
 }
 
 .stepItem {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
+    background: #fdfbfd;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #eee;
 }
 
 .stepNum {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     background: #ec407a;
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 800;
+    box-shadow: 0 4px 10px rgba(236, 64, 122, 0.3);
 }
 
 .stepText {
-    font-size: 0.95rem;
-    color: #555;
+    font-size: 0.9rem;
+    color: #444;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-/* Expand Btn */
+.modalFooter {
+    padding: 20px 40px;
+    border-top: 1px solid #f0f0f0;
+    background: #fff;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modalFooterBtn {
+    padding: 12px 32px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 100px;
+    color: #666;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modalFooterBtn:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
 .expandBtn {
     width: 100%;
     padding: 16px;
@@ -318,6 +436,28 @@
     background: #fff5f8;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
     .kp-hud {
         flex-direction: column;
@@ -326,5 +466,31 @@
 
     .schemesGrid {
         grid-template-columns: 1fr;
+    }
+
+    .modalGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .modalContent {
+        max-height: 95vh;
+    }
+
+    .modalHeader {
+        padding: 24px;
+        flex-direction: column;
+    }
+
+    .modalBody {
+        padding: 24px;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .stepItem {
+        flex-direction: row;
+        align-items: center;
     }
 }

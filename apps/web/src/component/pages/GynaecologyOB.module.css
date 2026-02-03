@@ -1,0 +1,335 @@
+.page {
+    background: #ffffff;
+    min-height: 100vh;
+    color: #2d3436;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Hero Section */
+.hero {
+    padding: 100px 0 80px;
+    background: linear-gradient(180deg, #fff5f7 0%, #ffffff 100%);
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #fdf2f8;
+    color: #db2777;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    color: #1a1a1a;
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #4a5568;
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+.intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #636e72;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Section Common */
+.section {
+    padding: 80px 0;
+}
+
+.sectionTitle {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* What We Support */
+.supportList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+}
+
+.supportItem {
+    padding: 24px;
+    background: #fafbfc;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid #f1f5f9;
+}
+
+.supportItem::before {
+    content: '✦';
+    color: #ec407a;
+    font-size: 1.2rem;
+}
+
+/* Services Grid */
+.servicesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.serviceCard {
+    background: white;
+    border-radius: 32px;
+    padding: 48px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f8f9fa;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+}
+
+.serviceIcon {
+    font-size: 3rem;
+    background: #fff5f7;
+    width: 80px;
+    height: 80px;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.serviceInfo h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.serviceInfo p {
+    font-size: 1.1rem;
+    color: #636e72;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.subPoints {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 24px;
+}
+
+.subPoints li {
+    font-size: 0.95rem;
+    color: #4a5568;
+    padding-left: 20px;
+    position: relative;
+}
+
+.subPoints li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #ec407a;
+}
+
+.note {
+    font-size: 0.85rem;
+    color: #a0aec0;
+    font-style: italic;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.linkBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #ec407a;
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.linkBtn:hover {
+    background: #d81b60;
+    transform: translateY(-2px);
+}
+
+/* Life Stages */
+.stagesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.stageCard {
+    background: white;
+    padding: 32px;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.stageCard h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* When to Seek Support */
+.guidanceBox {
+    background: #fdf2f8;
+    padding: 48px;
+    border-radius: 32px;
+    border: 1px solid #fceef2;
+}
+
+.guidanceList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.guidanceList li {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-left: 28px;
+    position: relative;
+}
+
+.guidanceList li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #ec407a;
+}
+
+.disclaimer {
+    font-size: 0.9rem;
+    color: #636e72;
+    text-align: center;
+    border-top: 1px solid rgba(236, 64, 122, 0.1);
+    padding-top: 24px;
+}
+
+/* CTA Block */
+.ctaBlock {
+    background: linear-gradient(135deg, #be185d 0%, #ec407a 100%);
+    padding: 80px 24px;
+    border-radius: 40px;
+    text-align: center;
+    color: white;
+    margin-bottom: 80px;
+}
+
+.ctaBlock h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.ctaBlock p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.btnRow {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btnPrimary {
+    padding: 16px 32px;
+    background: white;
+    color: #be185d;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btnSecondary {
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btnPrimary:hover,
+.btnSecondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .serviceCard {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 32px;
+    }
+
+    .serviceIcon {
+        margin: 0 auto;
+    }
+
+    .subPoints {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .ctaBlock h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

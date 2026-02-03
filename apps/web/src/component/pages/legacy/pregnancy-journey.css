@@ -1,0 +1,2413 @@
+/* =========================================
+   PREGNANCY JOURNEY - COMPREHENSIVE STYLES
+   ========================================= */
+
+:root {
+  --pink: #ec407a;
+  --deep-pink: #d81b60;
+  --lavender: #ede7f6;
+  --bg: #faf5fb;
+  --card-bg: #ffffff;
+  --text-main: #212121;
+  --text-soft: #555;
+  --border-soft: #e0e0e0;
+  --chip-bg: #f3e5f5;
+  --success: #66bb6a;
+  --warning: #ffa726;
+  --info: #42a5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =========================================
+   HEADER NAVIGATION
+   ========================================= */
+.site-header {
+  background: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  text-decoration: none;
+  color: var(--deep-pink);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.main-nav a:hover {
+  color: var(--deep-pink);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-nav {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-nav.primary {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.btn-nav.primary:hover {
+  background: #c2185b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+}
+
+.btn-nav.outline {
+  border: 1px solid var(--border-soft);
+  color: var(--text-main);
+}
+
+.btn-nav.outline:hover {
+  border-color: var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+@media (max-width: 768px) {
+  .main-nav { display: none; }
+}
+
+/* =========================================
+   REVOLUTIONARY HERO CONSTELLATION
+   ========================================= */
+.hero-constellation {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #faf5fb 0%, #ede7f6 50%, #fce4ec 100%);
+}
+
+/* Animated Background */
+.constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gradient-morph {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(236, 64, 122, 0.08) 0%, 
+              transparent 50%);
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+/* 2. Constrain the Visual Container */
+/* Target ALL possible visuals in the right column */
+.hero-right, 
+.bond-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* --- COMPACT VISUAL STYLES --- */
+.hero-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.pregnancy-svg {
+  width: 100%;
+  max-width: 800px; /* Reduced from 500px to 300px */
+  height: auto;
+  max-height: 600px;
+  filter: drop-shadow(0 10px 20px rgba(236, 64, 122, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.pregnancy-svg:hover {
+  transform: scale(1.02);
+}
+
+/* Ensure the layout respects the smaller image */
+.hero-content-wrapper {
+
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr !important; /* Force text to be wider than image */
+  align-items: center;
+  gap: 1; /* Reduce gap slightly if needed */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Force the image/canvas/svg to be small */
+.hero-right img, 
+.hero-right svg, 
+.hero-right canvas,
+.hero-visual img,
+.hero-visual svg {
+  width: 100% !important;
+  max-width: 320px !important; /* Strict limit */
+  height: auto !important;
+  max-height: 320px !important; /* Strict height limit */
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Mobile: Stack them */
+@media (max-width: 968px) {
+  .hero-content-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-right img, 
+  .hero-visual img {
+    max-width: 250px !important; /* Even smaller on mobile */
+  }
+}
+/* Mobile Responsive: Stack them nicely */
+  .hero-right, 
+  .hero-visual {
+    margin-top: 2rem;
+  }
+  
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* Add this inside your <style> tag if not already present */
+  .slider-labels-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .slider-label-badge {
+    background: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+
+/* 3D Title Effect */
+.hero-title-3d {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.title-line {
+  display: block;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-float 3s ease-in-out infinite;
+}
+
+.title-line:nth-child(1) { animation-delay: 0s; }
+.title-line:nth-child(2) { animation-delay: 0.2s; }
+.title-line:nth-child(3) { animation-delay: 0.4s; }
+
+.title-emphasis {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  transform: scale(1.05);
+}
+
+@keyframes title-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 42ch;
+  margin: 0;
+}
+
+/* Badge Constellation */
+.badge-constellation {
+  position: relative;
+  padding: 1rem 0;
+}
+
+.badge-orbit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-badge-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236, 64, 122, 0.2);
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  animation: badge-float 4s ease-in-out infinite;
+}
+
+.badge-1 { animation-delay: 0s; }
+.badge-2 { animation-delay: 0.5s; }
+.badge-3 { animation-delay: 1s; }
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.hero-badge-3d:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(236, 64, 122, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: var(--deep-pink);
+}
+
+.badge-icon {
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* CTA Buttons */
+.hero-cta-constellation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-primary-3d,
+.btn-secondary-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.btn-primary-3d {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(236, 64, 122, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary-3d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(236, 64, 122, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary-3d:hover .btn-shine {
+  left: 100%;
+}
+
+.btn-arrow {
+  transition: transform 0.3s;
+}
+
+.btn-primary-3d:hover .btn-arrow {
+  transform: translateY(3px);
+}
+
+.btn-secondary-3d {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--deep-pink);
+  border: 2px solid rgba(236, 64, 122, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary-3d:hover {
+  transform: translateY(-3px);
+  background: white;
+  border-color: var(--deep-pink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
+/* Right Side: Stage Constellation */
+.hero-right {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Hormone Core */
+.hormone-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.8) 0%, rgba(216,27,96,0.4) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(236,64,122,0.5),
+              0 0 80px rgba(236,64,122,0.3),
+              inset 0 0 20px rgba(255,255,255,0.3);
+  z-index: 10;
+  animation: core-pulse 3s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.core-pulse {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 2px solid rgba(236,64,122,0.3);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.core-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Stage Orbs */
+.stage-orb {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  cursor: pointer;
+  animation: orb-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards,
+             orb-float 4s ease-in-out infinite;
+  animation-delay: var(--delay), calc(var(--delay) + 0.6s);
+}
+
+@keyframes orb-entrance {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* --- STRETCHED ORB POSITIONS --- */
+
+/* First Trimester: Move to far Top-Left */
+/* --- ADJUSTED ORB POSITIONS (Right & Downside Tweak) --- */
+
+/* First Trimester: Moved Right & Down from the corner */
+/* --- ADJUSTED ORB 1 POSITION (Down & Right) --- */
+
+/* --- FIXED ORB 1 POSITION (Clear of Center) --- */
+
+.orb-1 {
+  top: 30% !important;   /* Kept down */
+  left: 0% !important;   /* Moved to Left Edge to stop overlapping */
+  transform: none !important;
+}
+
+/* Keep others as they were */
+.orb-2 {
+  top: 10% !important;
+  right: 0% !important;
+  transform: translate(-10%, 0) !important;
+}
+
+.orb-3 {
+  bottom: 5% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Container Safety */
+.stage-constellation {
+  width: 100%;
+  height: 100%;
+  min-height: 450px; /* Increased height to fit the shift */
+  position: relative;
+  overflow: visible; /* Prevents cutting off edges */
+}
+
+
+
+.orb-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.4) 0%, transparent 70%);
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stage-orb:hover .orb-glow {
+  opacity: 1;
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+.orb-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(236, 64, 122, 0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1),
+              inset 0 1px 0 rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stage-orb:hover .orb-content {
+  transform: scale(1.1);
+  background: white;
+  border-color: var(--deep-pink);
+  box-shadow: 0 15px 50px rgba(236,64,122,0.3),
+              inset 0 1px 0 rgba(255,255,255,1);
+}
+
+.orb-number {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(236, 64, 122, 0.4);
+}
+
+.orb-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  transition: transform 0.3s;
+}
+
+.stage-orb:hover .orb-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.orb-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.orb-sublabel {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+/* Orb Tooltips */
+.orb-tooltip {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(236, 64, 122, 0.2);
+  min-width: 200px;
+  max-width: 250px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.stage-orb:hover .orb-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  bottom: -90px;
+}
+
+.orb-tooltip h4 {
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+  color: var(--deep-pink);
+}
+
+.orb-tooltip p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(255, 255, 255, 0.98);
+}
+
+/* Connection Lines */
+.connection-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.connection-path {
+  filter: drop-shadow(0 0 5px rgba(236,64,122,0.3));
+}
+
+/* Floating Info Cards */
+.floating-info-cards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.info-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(236, 64, 122, 0.15);
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orb-1:hover ~ .floating-info-cards .card-repro,
+.orb-2:hover ~ .floating-info-cards .card-peri,
+.orb-3:hover ~ .floating-info-cards .card-post {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-repro {
+  top: 20%;
+  left: -10%;
+}
+
+.card-peri {
+  top: 20%;
+  right: -10%;
+}
+
+.card-post {
+  bottom: 10%;
+  right: 20%;
+}
+
+.card-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.stat-num {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.detail-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.detail-text {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+/* =========================================
+   PAGE SHELL & SECTIONS
+   ========================================= */
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 6rem;
+}
+
+.section-block {
+  margin-bottom: 4rem;
+}
+
+.section-title-row {
+  margin-bottom: 1.5rem;
+}
+
+.section-title-row h2 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  color: var(--text-main);
+}
+
+.section-tagline {
+  font-size: 1rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* =========================================
+   WEEK TRACKER
+   ========================================= */
+.week-selector-wrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.week-input-control {
+  margin-bottom: 1rem;
+}
+
+.week-input-control label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.slider-display {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#weekSlider {
+  flex: 1;
+  height: 8px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #e1bee7 0%, #ec407a 50%, #d81b60 100%);
+  outline: none;
+  -webkit-appearance: none;
+}
+
+#weekSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+  transition: transform 0.2s;
+}
+
+#weekSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#weekSlider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+}
+
+.week-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(236, 64, 122, 0.3);
+  min-width: 100px;
+}
+
+.week-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.week-label {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.trimester-indicator {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.tri-badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #8e24aa;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+
+/* --- TIMELINE LABEL FIX --- */
+
+/* 1. Ensure the timeline container has space at the bottom */
+/* --- ROBUST TIMELINE STYLES --- */
+
+.week-timeline {
+  position: relative;
+  margin-top: 3rem;     /* Space above */
+  padding-bottom: 3rem; /* Space below for labels */
+  width: 100%;
+}
+
+.timeline-track {
+  position: relative;
+  width: 100%;
+  height: 6px;          /* Thickness of the grey line */
+  background: #eee;
+  border-radius: 10px;
+}
+
+.timeline-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ec407a, #f48fb1);
+  border-radius: 10px;
+  width: 0%; /* Dynamic width */
+}
+
+.timeline-milestones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let clicks pass through to track if needed */
+}
+
+/* THE MILESTONE WRAPPER */
+.milestone {
+  position: absolute;
+  top: 50%;            /* Position vertical center of track */
+  transform: translateX(-50%); /* Center horizontally on its % point */
+  /* We do NOT translate Y here, so 'top: 50%' is our anchor point */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* THE DOT (Centered Exactly on the Line) */
+.milestone-dot {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border: 4px solid #ec407a;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 2;
+  
+  /* Absolute center the dot on the anchor point */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* THE LABEL (Pushed Down Below the Line) */
+.milestone-label {
+  position: absolute;
+  top: 20px; /* Distance BELOW the line */
+  
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #555;
+  white-space: nowrap; /* Keep on one line */
+  background: rgba(255,255,255,0.9); /* Background to hide lines if needed */
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* OPTIONAL: Active State Styling */
+.milestone.active .milestone-dot {
+  background: #ec407a;
+  border-color: white;
+  box-shadow: 0 0 0 3px #ec407a; /* Glow effect */
+}
+.milestone.active .milestone-label {
+  color: #d81b60;
+  font-weight: 800;
+}
+
+/* Week Details Card */
+.week-details-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.week-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.week-card-header h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.week-card-header p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.week-emoji {
+  font-size: 3rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.week-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.week-development {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.week-development h4 {
+  margin: 0 0 1rem;
+  color: var(--deep-pink);
+}
+
+.week-development ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.week-development li {
+  margin-bottom: 0.5rem;
+  color: var(--text-soft);
+}
+
+.week-tips h4 {
+  margin: 0 0 1rem;
+  color: var(--deep-pink);
+}
+
+.tip-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tip-chip {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #6a1b9a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* =========================================
+   3D PREGNANCY SIMULATOR
+   ========================================= */
+.simulator-dashboard {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 0;
+}
+
+@media (max-width: 900px) {
+  .simulator-dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+.simulator-controls {
+  background: #f9f9f9;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.control-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.control-group {
+  margin-bottom: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.view-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.view-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.85rem;
+}
+
+.view-btn:hover {
+  border-color: var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+.view-btn.active {
+  background: var(--deep-pink);
+  border-color: var(--deep-pink);
+  color: white;
+}
+
+.layer-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toggle-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.animate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.animate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+.simulator-stats {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.simulator-stats h4 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--deep-pink);
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-name {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.stat-row .stat-value {
+  font-weight: 700;
+  color: var(--deep-pink);
+  font-size: 0.95rem;
+}
+
+.simulator-visual {
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pregnancy-svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+}
+
+/* SVG Animations */
+.belly-growth {
+  transition: all 1s ease;
+}
+
+.baby-growth {
+  transition: all 1s ease;
+}
+
+.body-group,
+.baby-group,
+.organs-group,
+.measures-group {
+  transition: opacity 0.5s ease;
+}
+
+.view-label {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--deep-pink);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   JOURNEY SECTIONS (Trimester Cards)
+   ========================================= */
+.journey {
+  background: linear-gradient(180deg, rgba(252,228,236,0.35), rgba(243,229,245,0.25));
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(216,27,96,0.10);
+}
+
+.journey-track {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.6rem;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.track-dot {
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-soft);
+  font-weight: 650;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.track-dot:hover {
+  transform: translateY(-2px);
+  background: rgba(236,64,122,0.08);
+}
+
+.track-dot.active {
+  background: var(--deep-pink);
+  color: white;
+  box-shadow: 0 10px 22px rgba(216,27,96,0.25);
+}
+
+.journey-stage-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  animation: stageIn 0.4s ease both;
+}
+
+@keyframes stageIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stage-top {
+  margin-bottom: 1.5rem;
+}
+
+.stage-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+.stage-title {
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.stage-one-liner {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.stage-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.stage-badge {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(236,64,122,0.10);
+  color: var(--deep-pink);
+  border: 1px solid rgba(216,27,96,0.18);
+  font-weight: 600;
+}
+
+.stage-steps {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+.step {
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: white;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.step:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.step button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.step button span {
+  color: var(--text-soft);
+  font-weight: 650;
+  font-size: 0.9rem;
+}
+
+.step .step-body {
+  padding: 0 1.2rem 1.2rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: none;
+}
+
+.step.open .step-body {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chev {
+  transition: transform 0.2s ease;
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+.step.open .chev {
+  transform: rotate(180deg);
+}
+
+/* Symptom Flip Cards */
+.journey-subhead {
+  margin: 2rem 0 1rem;
+}
+
+.journey-subhead h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.journey-subhead p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+.symptom-flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.flip {
+  perspective: 1000px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  height: 200px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 1.2rem;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-front .tiny {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+.flip-front strong {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+}
+
+.flip-front p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.flip-action {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--deep-pink);
+  font-weight: 700;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+}
+
+.flip-back strong {
+  font-size: 1rem;
+  color: var(--deep-pink);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.flip-back ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.flip-back li {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.flip-back .ask {
+  font-size: 0.75rem;
+  background: #fff3e0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #ef6c00;
+}
+
+/* =========================================
+   NUTRITION SECTION
+   ========================================= */
+.nutrition-calculator {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.calc-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--deep-pink);
+}
+
+.nutrition-results {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.nutrient-card {
+  background: white;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.nutrient-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.nutrient-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.nutrient-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+.nutrient-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin-bottom: 0.8rem;
+}
+
+.nutrient-card p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.food-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.source-tag {
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #6a1b9a;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* =========================================
+   ALERT & WARNING SECTIONS
+   ========================================= */
+.alert-strip {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-left: 5px solid #ff9800;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.alert-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.alert-content h3 {
+  margin: 0 0 1rem;
+  color: #e65100;
+  font-size: 1.3rem;
+}
+
+.warning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.warning-item {
+  background: white;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border-left: 3px solid #ff9800;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   PRENATAL CARE TIMELINE
+   ========================================= */
+.care-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.care-phase {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.care-phase:hover {
+  transform: translateX(5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.phase-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.phase-icon {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.phase-header h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.3rem;
+  color: var(--deep-pink);
+}
+
+.phase-header p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.phase-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.check-item:hover {
+  background: #f9f9f9;
+}
+
+.check-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.check-item span {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.check-item input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: var(--text-soft);
+}
+
+/* Reminder Setup */
+.reminder-setup {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-top: 2rem;
+}
+
+.reminder-setup h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--deep-pink);
+}
+
+.reminder-setup > p {
+  margin: 0 0 1.5rem;
+  color: var(--text-soft);
+}
+
+.reminder-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(236, 64, 122, 0.4);
+}
+
+/* =========================================
+   HOSPITAL BAG BUILDER
+   ========================================= */
+.bag-builder {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.bag-categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-radius: 15px;
+}
+
+.bag-tab {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--text-soft);
+}
+
+.bag-tab:hover {
+  background: rgba(236, 64, 122, 0.08);
+  color: var(--deep-pink);
+}
+
+.bag-tab.active {
+  background: var(--deep-pink);
+  color: white;
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+}
+
+.bag-section {
+  display: none;
+}
+
+.bag-section.active {
+  display: block;
+  animation: fadeInUp 0.4s ease;
+}
+
+.bag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.bag-item-card {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.bag-item-card h4 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--deep-pink);
+}
+
+.bag-check {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: white;
+}
+
+.bag-check:hover {
+  background: rgba(236, 64, 122, 0.05);
+}
+
+.bag-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.bag-check span {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.bag-check input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: var(--text-soft);
+}
+
+.bag-progress {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 15px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.progress-bar {
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #ec407a, #d81b60);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.progress-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.bag-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-secondary,
+.btn-ghost {
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+.btn-secondary:hover {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid #e0e0e0;
+  color: var(--text-soft);
+}
+
+.btn-ghost:hover {
+  border-color: var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+/* =========================================
+   WELLNESS SECTION
+   ========================================= */
+.wellness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.wellness-card {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.wellness-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.wellness-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.wellness-card h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.3rem;
+  color: var(--deep-pink);
+}
+
+.wellness-card > p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.wellness-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tip-item {
+  padding: 0.5rem 0.8rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  border-left: 3px solid var(--deep-pink);
+}
+
+/* =========================================
+   CARE STRIP (NEXT STEPS)
+   ========================================= */
+.care-strip {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 900px) {
+  .care-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.care-strip h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.care-strip > div > p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.care-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.care-pill {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  color: #6a1b9a;
+  border: 1px solid rgba(255,255,255,0.7);
+  font-weight: 600;
+}
+
+.care-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.care-cta {
+  font-size: 0.9rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.care-cta.primary {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.care-cta.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+.care-cta.ghost {
+  background: transparent;
+  color: var(--deep-pink);
+  border: 2px solid rgba(216,27,96,0.4);
+}
+
+.care-cta.ghost:hover {
+  background: white;
+  border-color: var(--deep-pink);
+}
+
+/* =========================================
+   FLOATING HUD
+   ========================================= */
+.floating-hud {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 1rem 1.5rem;
+  z-index: 999;
+  transition: all 0.3s;
+  border: 2px solid var(--deep-pink);
+}
+
+.floating-hud.collapsed {
+  transform: translateY(calc(100% - 60px));
+}
+
+.hud-content {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.hud-label {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hud-week {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.hud-size {
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.hud-toggle {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+  transition: all 0.3s;
+}
+
+.hud-toggle:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+.floating-hud.collapsed .hud-toggle i {
+  transform: rotate(180deg);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 768px) {
+  .hero-title-3d {
+    font-size: 2rem;
+  }
+  
+  .stage-constellation {
+    max-width: 350px;
+  }
+  
+  .stage-orb {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .orb-icon {
+    font-size: 2rem;
+  }
+  
+  .simulator-dashboard {
+    grid-template-columns: 1fr;
+  }
+  
+  .week-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .floating-hud {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

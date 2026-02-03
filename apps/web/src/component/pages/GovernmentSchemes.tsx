@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from "./GovernmentSchemes.module.css";
 import InnerPageHero from "../shared/InnerPageHero";
+import { X, ExternalLink, Building2 } from "lucide-react";
 
 interface Scheme {
     id: string;
     title: string;
     description: string;
+    ministry: string;
+    website: string;
     tags: string[];
     category: string[];
     benefits: string[];
@@ -22,7 +25,9 @@ const SCHEMES: Scheme[] = [
         id: "jsy",
         title: "Janani Suraksha Yojana (JSY)",
         description: "Safe motherhood intervention promoting institutional delivery with cash assistance.",
-        tags: ["pregnancy", "delivery", "cash"],
+        ministry: "Ministry of Health & Family Welfare",
+        website: "https://nhm.gov.in",
+        tags: ["pregnancy", "cash", "delivery"],
         category: ["pregnancy"],
         benefits: [
             "Rural Mothers: ₹1,400 cash assistance for institutional birth",
@@ -36,8 +41,18 @@ const SCHEMES: Scheme[] = [
             "BPL/SC/ST women (HPA states)",
             "19 years of age and above"
         ],
-        documents: ["Jadav / MCP Card", "Aadhaar Card", "Bank Account Details", "BPL Card (if applicable)"],
-        steps: ["Register with ASHA/ANM", "Get at least 3 ANC checkups", "Deliver at Govt Facility", "Receive Bank Transfer"],
+        documents: [
+            "Jadav / MCP Card",
+            "Aadhaar Card",
+            "Bank Account Details",
+            "BPL Card (if applicable)"
+        ],
+        steps: [
+            "Register with ASHA/ANM",
+            "Get at least 3 ANC checkups",
+            "Deliver at Govt Facility",
+            "Receive Bank Transfer"
+        ],
         icon: "🤰",
         badges: ["Gov. Hospital", "Cash Aid", "ASHA Help"]
     },
@@ -45,7 +60,9 @@ const SCHEMES: Scheme[] = [
         id: "rbsk",
         title: "RBSK (Rashtriya Bal Swasthya Karyakram)",
         description: "Child health screening and early intervention for 30+ health conditions.",
-        tags: ["kids", "health", "surgery"],
+        ministry: "Ministry of Health & Family Welfare",
+        website: "https://rbsk.gov.in",
+        tags: ["kids", "health", "screening"],
         category: ["kids"],
         benefits: [
             "Health Screening: Mobile health teams visit schools/Anganwadis",
@@ -59,8 +76,18 @@ const SCHEMES: Scheme[] = [
             "6 to 18 years (Govt Schools)",
             "Children with birth defects"
         ],
-        documents: ["School ID / Anganwadi reg", "Screening Card", "Aadhaar (if available)", "Referral Slip"],
-        steps: ["Attend Camp/School Visit", "Get Screened by Team", "Receive Referral Card", "Visit DEIC Center"],
+        documents: [
+            "School ID / Anganwadi reg",
+            "Screening Card",
+            "Aadhaar (if available)",
+            "Referral Slip"
+        ],
+        steps: [
+            "Attend Camp/School Visit",
+            "Get Screened by Team",
+            "Receive Referral Card",
+            "Visit DEIC Center"
+        ],
         icon: "👶",
         badges: ["Screening", "Surgery", "Development"]
     },
@@ -68,6 +95,8 @@ const SCHEMES: Scheme[] = [
         id: "jssk",
         title: "JSSK (Janani Shishu Suraksha Karyakram)",
         description: "Absolute cashless services for pregnant women and sick infants (up to 1 year).",
+        ministry: "Ministry of Health & Family Welfare",
+        website: "https://nhm.gov.in",
         tags: ["pregnancy", "newborn", "free"],
         category: ["pregnancy", "kids"],
         benefits: [
@@ -82,8 +111,17 @@ const SCHEMES: Scheme[] = [
             "Sick Infants (0-1 year)",
             "No income criteria"
         ],
-        documents: ["MCP Card", "Aadhaar Card", "OPD/IPD Slip"],
-        steps: ["Call 102 for transport", "Admit to Govt Hospital", "Show ID/Registration", "Avail Cashless Care"],
+        documents: [
+            "MCP Card",
+            "Aadhaar Card",
+            "OPD/IPD Slip"
+        ],
+        steps: [
+            "Call 102 for transport",
+            "Admit to Govt Hospital",
+            "Show ID/Registration",
+            "Avail Cashless Care"
+        ],
         icon: "🚑",
         badges: ["Zero Cost", "Free Drugs", "Free Diet"]
     },
@@ -91,8 +129,10 @@ const SCHEMES: Scheme[] = [
         id: "parivar-vikas",
         title: "Mission Parivar Vikas",
         description: "High-quality family planning choices and reproductive health services.",
-        tags: ["family", "planning", "preventive"],
-        category: ["family", "preventive"],
+        ministry: "Ministry of Health & Family Welfare",
+        website: "https://nhm.gov.in",
+        tags: ["family", "planning", "contraceptive"],
+        category: ["family"],
         benefits: [
             "Contraceptives: Free Condoms, OCPs (Mala-N), ECPs",
             "Injectables: 'Antara' (MPA) injections (free)",
@@ -105,8 +145,17 @@ const SCHEMES: Scheme[] = [
             "Newlyweds",
             "Post-partum women"
         ],
-        documents: ["Aadhaar Card", "Marriage Proof (optional)", "Mobile Number"],
-        steps: ["Visit PHC/CHC/Sub-center", "Consult Counsellor", "Choose Method", "Receive Supply/Service"],
+        documents: [
+            "Aadhaar Card",
+            "Marriage Proof (optional)",
+            "Mobile Number"
+        ],
+        steps: [
+            "Visit PHC/CHC/Sub-center",
+            "Consult Counsellor",
+            "Choose Method",
+            "Receive Supply/Service"
+        ],
         icon: "👨‍👩‍👧‍👦",
         badges: ["Contraceptives", "Counseling", "Nayi Pehal"]
     },
@@ -114,8 +163,10 @@ const SCHEMES: Scheme[] = [
         id: "esic",
         title: "ESIC Maternity Benefit",
         description: "Paid maternity leave and medical care for women in organized sector jobs.",
-        tags: ["work", "pregnancy", "insurance"],
-        category: ["pregnancy"],
+        ministry: "Ministry of Labour & Employment",
+        website: "https://esic.gov.in",
+        tags: ["work", "maternity", "insurance"],
+        category: ["pregnancy", "empowerment"],
         benefits: [
             "Full Pay: 100% of average daily wages for 26 weeks",
             "Medical Bonus: ₹5,000 cash if no medical care provided by employer",
@@ -128,8 +179,17 @@ const SCHEMES: Scheme[] = [
             "Income < ₹21,000/mo",
             "Contribution > 70 days"
         ],
-        documents: ["ESIC E-Pehchan Card", "Form 19 (Claim)", "Medical Certificate"],
-        steps: ["Notify Employer", "Get Medical Cert", "Submit to ESIC Branch", "Receive Bank Transfer"],
+        documents: [
+            "ESIC E-Pehchan Card",
+            "Form 19 (Claim)",
+            "Medical Certificate"
+        ],
+        steps: [
+            "Notify Employer",
+            "Get Medical Cert",
+            "Submit to ESIC Branch",
+            "Receive Bank Transfer"
+        ],
         icon: "💼",
         badges: ["Paid Leave", "26 Weeks", "Medical Bonus"]
     },
@@ -137,7 +197,9 @@ const SCHEMES: Scheme[] = [
         id: "ssy",
         title: "Sukanya Samriddhi Yojana (SSY)",
         description: "High-interest government savings scheme specifically for the girl child.",
-        tags: ["finance", "girlchild", "future"],
+        ministry: "Ministry of Finance",
+        website: "https://nsiindia.gov.in",
+        tags: ["finance", "girlchild", "savings"],
         category: ["family", "empowerment"],
         benefits: [
             "High Return: Interest rate usually higher than PPF/FD",
@@ -151,8 +213,17 @@ const SCHEMES: Scheme[] = [
             "Max 2 girls per family",
             "Parents/Guardians"
         ],
-        documents: ["Birth Certificate", "Parent's Aadhaar/PAN", "Initial Deposit (₹250)"],
-        steps: ["Visit Post Office/Bank", "Fill SSY Form", "Deposit Cash/Cheque", "Get Passbook"],
+        documents: [
+            "Birth Certificate",
+            "Parent's Aadhaar/PAN",
+            "Initial Deposit (₹250)"
+        ],
+        steps: [
+            "Visit Post Office/Bank",
+            "Fill SSY Form",
+            "Deposit Cash/Cheque",
+            "Get Passbook"
+        ],
         icon: "💰",
         badges: ["High Interest", "Tax Free", "Education"]
     },
@@ -160,7 +231,9 @@ const SCHEMES: Scheme[] = [
         id: "bbbp",
         title: "Beti Bachao Beti Padhao",
         description: "Campaign to prevent gender-biased sex selection and ensure girl child education.",
-        tags: ["girlchild", "education", "awareness"],
+        ministry: "Ministry of Women & Child Development",
+        website: "https://wcd.nic.in/bbbp",
+        tags: ["girlchild", "education", "rights"],
         category: ["empowerment"],
         benefits: [
             "Protection: Strict enforcement of PC-PNDT Act",
@@ -174,8 +247,17 @@ const SCHEMES: Scheme[] = [
             "Parents & Communities",
             "Districts with low CSR"
         ],
-        documents: ["Birth Certificate", "School Admission Forms", "Aadhaar (Child/Parent)"],
-        steps: ["Contact Anganwadi", "Enroll girl in school", "Report violations", "Join local drives"],
+        documents: [
+            "Birth Certificate",
+            "School Admission Forms",
+            "Aadhaar (Child/Parent)"
+        ],
+        steps: [
+            "Contact Anganwadi",
+            "Enroll girl in school",
+            "Report violations",
+            "Join local drives"
+        ],
         icon: "🎓",
         badges: ["CSR", "Enrollment", "Awareness"]
     },
@@ -183,7 +265,9 @@ const SCHEMES: Scheme[] = [
         id: "poshan",
         title: "Poshan Abhiyaan",
         description: "Holistic nutrition program to reduce stunting, undernutrition, and anemia.",
-        tags: ["nutrition", "health", "kids"],
+        ministry: "Ministry of Women & Child Development",
+        website: "https://poshanabhiyaan.gov.in",
+        tags: ["nutrition", "health", "diet"],
         category: ["kids", "preventive"],
         benefits: [
             "Monitoring: Growth tracking via 'Poshan Tracker' app",
@@ -197,8 +281,17 @@ const SCHEMES: Scheme[] = [
             "Adolescent Girls",
             "Pregnant/Lactating Women"
         ],
-        documents: ["Aadhaar (for app)", "Mobile Number", "MCP Card"],
-        steps: ["Visit Anganwadi", "Get height/weight measured", "Check status on App", "Get nutrition counseling"],
+        documents: [
+            "Aadhaar (for app)",
+            "Mobile Number",
+            "MCP Card"
+        ],
+        steps: [
+            "Visit Anganwadi",
+            "Get height/weight measured",
+            "Check status on App",
+            "Get nutrition counseling"
+        ],
         icon: "🥕",
         badges: ["Tech Tracking", "Diet Diversity", "Anemia Mukt"]
     },
@@ -206,7 +299,9 @@ const SCHEMES: Scheme[] = [
         id: "sakhi",
         title: "Sakhi (One Stop Centre)",
         description: "Integrated support for women affected by violence, in private or public spaces.",
-        tags: ["safety", "violence", "support"],
+        ministry: "Ministry of Women & Child Development",
+        website: "https://wcd.nic.in",
+        tags: ["safety", "violence", "help"],
         category: ["safety"],
         benefits: [
             "Emergency Response: Immediate rescue & medical aid",
@@ -220,8 +315,17 @@ const SCHEMES: Scheme[] = [
             "All ages (girls & women)",
             "Domestic/Sexual violence victims"
         ],
-        documents: ["None mandatory initially", "ID (if available)", "Any evidence (if available)"],
-        steps: ["Call 181 (Women Helpline)", "Go to Sakhi Centre", "Meet Caseworker", "Receive Support"],
+        documents: [
+            "None mandatory initially",
+            "ID (if available)",
+            "Any evidence (if available)"
+        ],
+        steps: [
+            "Call 181 (Women Helpline)",
+            "Go to Sakhi Centre",
+            "Meet Caseworker",
+            "Receive Support"
+        ],
         icon: "🛡️",
         badges: ["Legal Aid", "Medical", "Shelter"]
     },
@@ -229,7 +333,9 @@ const SCHEMES: Scheme[] = [
         id: "pmmvy",
         title: "PMMVY (Matru Vandana Yojana)",
         description: "Direct cash transfer scheme for pregnant women and lactating mothers.",
-        tags: ["pregnancy", "cash", "family"],
+        ministry: "Ministry of Women & Child Development",
+        website: "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana",
+        tags: ["pregnancy", "cash", "maternity"],
         category: ["pregnancy", "family"],
         benefits: [
             "Installment 1: ₹1,000 on early registration",
@@ -243,8 +349,18 @@ const SCHEMES: Scheme[] = [
             "Beneficiaries of APL/BPL",
             "Not in govt employment"
         ],
-        documents: ["Aadhaar Card", "Bank Passbook", "MCP Card", "Registration at govt health center"],
-        steps: ["Register at Anganwadi/Health Center", "Apply within 150 days of LMP", "Submit claim forms", "Verification & DBT"],
+        documents: [
+            "Aadhaar Card",
+            "Bank Passbook",
+            "MCP Card",
+            "Registration at govt health center"
+        ],
+        steps: [
+            "Register at Anganwadi/Health Center",
+            "Apply within 150 days of LMP",
+            "Submit claim forms",
+            "Verification & DBT"
+        ],
         icon: "🤰",
         badges: ["₹5,000 Cash", "First Child", "DBT"]
     }
@@ -252,7 +368,7 @@ const SCHEMES: Scheme[] = [
 
 const GovernmentSchemes: React.FC = () => {
     const [activeFilter, setActiveFilter] = useState("all");
-    const [expandedScheme, setExpandedScheme] = useState<string | null>(null);
+    const [selectedScheme, setSelectedScheme] = useState<Scheme | null>(null);
     const [savedSchemes, setSavedSchemes] = useState<Set<string>>(new Set());
 
     const filters = [
@@ -275,10 +391,6 @@ const GovernmentSchemes: React.FC = () => {
         if (next.has(id)) next.delete(id);
         else next.add(id);
         setSavedSchemes(next);
-    };
-
-    const toggleExpand = (id: string) => {
-        setExpandedScheme(expandedScheme === id ? null : id);
     };
 
     return (
@@ -306,13 +418,6 @@ const GovernmentSchemes: React.FC = () => {
                         <span>{savedSchemes.size}</span>
                     </div>
                 </div>
-                <div className={styles["kp-hud__item"]}>
-                    <div className={styles["kp-hud__icon"]}>⚡</div>
-                    <div className={styles["kp-hud__txt"]}>
-                        <strong>Unlocked</strong>
-                        <span>{expandedScheme ? 1 : 0} / 1</span>
-                    </div>
-                </div>
             </div>
 
             {/* Filters */}
@@ -337,19 +442,37 @@ const GovernmentSchemes: React.FC = () => {
                     <article
                         key={scheme.id}
                         className={styles.schemeCard}
-                        onClick={() => toggleExpand(scheme.id)}
+                        onClick={() => setSelectedScheme(scheme)}
                     >
                         <div className={styles.cardTop}>
-                            <div className={styles.emblem}>{scheme.icon}</div>
+                            <div className={styles.cardHeaderRow}>
+                                <div className={styles.emblem}>{scheme.icon}</div>
+                                <span className={styles.ministryBadge}>
+                                    <Building2 size={12} />
+                                    {scheme.ministry}
+                                </span>
+                            </div>
+
                             <div className={styles.cardHead}>
                                 <h3>{scheme.title}</h3>
                                 <p>{scheme.description}</p>
+
+                                <div className={styles.keyBenefits}>
+                                    <strong>Key Benefits:</strong>
+                                    <ul>
+                                        {scheme.benefits.slice(0, 2).map((b, i) => (
+                                            <li key={i}>{b}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+
                                 <div className={styles.badges}>
-                                    {scheme.badges.map(b => (
-                                        <span key={b} className={styles.badge}>{b}</span>
+                                    {scheme.badges.map((b, i) => (
+                                        <span key={i} className={styles.badge}>{b}</span>
                                     ))}
                                 </div>
                             </div>
+
                             <button
                                 className={`${styles.saveBtn} ${savedSchemes.has(scheme.id) ? styles.saveBtnActive : ""}`}
                                 onClick={(e) => toggleSave(e, scheme.id)}
@@ -357,53 +480,97 @@ const GovernmentSchemes: React.FC = () => {
                                 {savedSchemes.has(scheme.id) ? "★" : "☆"}
                             </button>
                         </div>
+                        {/* 'Unlock details' button removed as requested */}
+                    </article>
+                ))}
+            </main>
 
-                        <div className={`${styles.drawer} ${expandedScheme === scheme.id ? styles.drawerOpen : ""}`}>
-                            <div className={styles.drawerContent}>
-                                <div className={styles.panel}>
+            {/* Modal */}
+            {selectedScheme && (
+                <div className={styles.modalOverlay} onClick={() => setSelectedScheme(null)}>
+                    <div
+                        className={styles.modalContent}
+                        onClick={e => e.stopPropagation()}
+                    >
+                        <button
+                            className={styles.modalCloseBtn}
+                            onClick={() => setSelectedScheme(null)}
+                        >
+                            <X size={24} />
+                        </button>
+
+                        <div className={styles.modalHeader}>
+                            <div className={styles.modalIcon}>{selectedScheme.icon}</div>
+                            <div className={styles.modalHeaderText}>
+                                <span className={styles.modalMinistry}>{selectedScheme.ministry}</span>
+                                <h2 className={styles.modalTitle}>{selectedScheme.title}</h2>
+                                <p className={styles.modalDesc}>{selectedScheme.description}</p>
+                            </div>
+                        </div>
+
+                        <div className={styles.modalBody}>
+                            <div className={styles.modalGrid}>
+                                <div className={styles.modalPanel}>
                                     <h4>🎁 What you get</h4>
-                                    <ul className={styles.list}>
-                                        {scheme.benefits.map((b, i) => (
+                                    <ul>
+                                        {selectedScheme.benefits.map((b, i) => (
                                             <li key={i}>{b}</li>
                                         ))}
                                     </ul>
                                 </div>
-                                <div className={styles.panel}>
+
+                                <div className={styles.modalPanel}>
                                     <h4>✅ Who it helps</h4>
-                                    <ul className={styles.list}>
-                                        {scheme.eligibility.map((e, i) => (
+                                    <ul>
+                                        {selectedScheme.eligibility.map((e, i) => (
                                             <li key={i}>{e}</li>
                                         ))}
                                     </ul>
                                 </div>
-                                <div className={styles.panel}>
-                                    <h4>📋 Bring these</h4>
-                                    <div className={styles.chips}>
-                                        {scheme.documents.map((d, i) => (
-                                            <span key={i} className={styles.chip}>{d}</span>
-                                        ))}
-                                    </div>
+                            </div>
+
+                            <div className={styles.modalSection}>
+                                <h4>📋 Bring these</h4>
+                                <div className={styles.chips}>
+                                    {selectedScheme.documents.map((d, i) => (
+                                        <span key={i} className={styles.chip}>{d}</span>
+                                    ))}
                                 </div>
-                                <div className={styles.panel}>
-                                    <h4>🗺️ 60-second path</h4>
-                                    <div className={styles.steps}>
-                                        {scheme.steps.map((s, i) => (
-                                            <div key={i} className={styles.stepItem}>
-                                                <div className={styles.stepNum}>{i + 1}</div>
-                                                <div className={styles.stepText}>{s}</div>
-                                            </div>
-                                        ))}
-                                    </div>
+                            </div>
+
+                            <div className={styles.modalSection}>
+                                <h4>🗺️ 60-second path</h4>
+                                <div className={styles.steps}>
+                                    {selectedScheme.steps.map((s, i) => (
+                                        <div key={i} className={styles.stepItem}>
+                                            <div className={styles.stepNum}>{i + 1}</div>
+                                            <div className={styles.stepText}>{s}</div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
 
-                        <button className={styles.expandBtn}>
-                            {expandedScheme === scheme.id ? "Close details" : "Unlock details"}
-                        </button>
-                    </article>
-                ))}
-            </main>
+                        <div className={styles.modalFooter}>
+                            <a
+                                href={selectedScheme.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.websiteBtn}
+                            >
+                                <ExternalLink size={16} />
+                                Visit Official Website
+                            </a>
+                            <button
+                                className={styles.modalFooterBtn}
+                                onClick={() => setSelectedScheme(null)}
+                            >
+                                Close Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

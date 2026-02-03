@@ -1,9 +1,4 @@
-/* Services.module.css */
-.servicesPage {
-    background: #fdfbfd;
-    min-height: 100vh;
-}
-
+/* ServicesSection.module.css */
 .section {
     padding: 80px 20px;
 }
@@ -43,6 +38,20 @@
 
 .cardBody {
     padding: 32px;
+    position: relative;
+}
+
+.cardTag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #fdf2f8;
+    color: #db2777;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .cardBody h3 {

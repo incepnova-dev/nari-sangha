@@ -66,40 +66,30 @@ const AdolescentHealthJourney: React.FC = () => {
                 title="Adolescent & Young Women's Health"
                 subtitle="Navigate puberty, periods, and growing up with accurate information, support, and reassurance."
                 badge="Teen Health"
-            />
-
-            {/* Back Button */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 20px 0' }}>
+            >
                 <button
                     onClick={() => navigate(ROUTES.JOURNEYS)}
                     style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "8px",
-                        padding: "10px 16px",
-                        background: "white",
-                        border: "1px solid #eee",
-                        borderRadius: "12px",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        color: "#666",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: "0 2px 8px rgba(0,0,0,0.04)"
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#f9f9f9";
-                        e.currentTarget.style.color = "var(--pink)";
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "white";
-                        e.currentTarget.style.color = "#666";
+                        marginTop: '20px',
+                        padding: '10px 20px',
+                        background: 'rgba(255,255,255,0.2)',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        color: 'white',
+                        borderRadius: '30px',
+                        cursor: 'pointer',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        backdropFilter: 'blur(5px)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
                     }}
                 >
-                    <span style={{ fontSize: "16px" }}>←</span>
-                    Back to all journeys
+                    ← Back to Paths
                 </button>
-            </div>
+            </InnerPageHero>
+
+            {/* Back Button Moved to Hero */}
 
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px' }}>
 

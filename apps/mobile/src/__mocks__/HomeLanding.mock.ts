@@ -132,7 +132,7 @@ export const mockVideos: Video[] = [
   },
 ];
 
-export const mockProducts: Product[] = [
+export const mock: Product[] = [
   {
     icon: icons.pill,
     name: 'Prenatal Vitamins',

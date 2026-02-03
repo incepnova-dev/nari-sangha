@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styles from "../landing/landing.module.css";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../routes/Routes";
+import { useNavigate } from "react-router-dom";
+
+import { ROUTES } from "../routes/routeConstants";
+
 import InnerPageHero from "../shared/InnerPageHero";
+import SymptomsAnimation from "../shared/animations/SymptomsAnimation";
 
 const SymptomChecker: React.FC = () => {
+    const navigate = useNavigate();
     const [selectedSymptom, setSelectedSymptom] = useState<string>("");
+
     const [severity, setSeverity] = useState<string>("");
     const [duration, setDuration] = useState<string>("");
     const [showResult, setShowResult] = useState(false);
@@ -72,7 +77,30 @@ const SymptomChecker: React.FC = () => {
                 title="Women's Health Symptom Checker"
                 subtitle="Quick triage and condition education to help you understand symptoms and decide when to seek medical care."
                 badge="AI Triage"
+                illustration={<SymptomsAnimation />}
             >
+                <div style={{ marginBottom: '15px' }}>
+                    <button
+                        onClick={() => navigate(ROUTES.JOURNEYS)}
+                        style={{
+                            padding: '8px 16px',
+                            background: 'rgba(255,255,255,0.2)',
+                            border: '1px solid rgba(255,255,255,0.4)',
+                            color: 'white',
+                            borderRadius: '30px',
+                            cursor: 'pointer',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            backdropFilter: 'blur(5px)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                    >
+                        ← Back to Paths
+                    </button>
+                </div>
+
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>🩺 Quick Triage</span>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>📚 Practical Guidance</span>
@@ -155,11 +183,36 @@ const SymptomChecker: React.FC = () => {
                                                 <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#555', marginBottom: '24px' }}>{result.msg}</p>
 
                                                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                                                    <Link to={ROUTES.APPOINTMENTS} className={styles.primaryCta} style={{ flex: 1, background: style.btn, textAlign: 'center', fontSize: '14px', minWidth: '150px' }}>
+                                                    <button
+                                                        className={styles.primaryCta}
+                                                        style={{ flex: 1, background: style.btn, textAlign: 'center', fontSize: '14px', minWidth: '150px', border: 'none', color: 'white', cursor: 'pointer' }}
+                                                        onClick={() => {
+                                                            if (result.action === "Read Care Guide") {
+                                                                if (selectedSymptom === "period" || selectedSymptom === "wellness") {
+                                                                    navigate(ROUTES.PREVENTIVE_HEALTH);
+                                                                } else if (selectedSymptom === "research" || duration === "weeks") {
+                                                                    navigate(ROUTES.RESEARCH);
+                                                                } else {
+                                                                    navigate(ROUTES.SERVICES);
+                                                                }
+                                                            } else if (result.action === "Book Teleconsult") {
+                                                                navigate(ROUTES.TELECONSULTATION);
+                                                            } else {
+                                                                navigate(ROUTES.FIND_DOCTORS);
+                                                            }
+                                                        }}
+                                                    >
                                                         {result.action}
-                                                    </Link>
-                                                    <button className={styles.secondaryCta} style={{ flex: 1, textAlign: 'center', fontSize: '14px', minWidth: '150px' }}>Save Log</button>
+                                                    </button>
+                                                    <button
+                                                        className={styles.secondaryCta}
+                                                        style={{ flex: 1, textAlign: 'center', fontSize: '14px', minWidth: '150px' }}
+                                                        onClick={() => navigate(ROUTES.DASHBOARD)}
+                                                    >
+                                                        Save Log
+                                                    </button>
                                                 </div>
+
                                             </>
                                         );
                                     })()}

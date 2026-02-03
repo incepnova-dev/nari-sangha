@@ -153,8 +153,9 @@
 
 .cardGrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
     margin-top: 40px;
 }
 
@@ -168,7 +169,16 @@
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.journeyCard:focus-visible {
+    outline: 2px solid #ec4899;
+    outline-offset: 3px;
 }
 
 .journeyCard:hover {
@@ -316,19 +326,7 @@
 }
 
 /* Responsive adjustments for card grid */
-@media (max-width: 1024px) {
-    .cardGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-}
-
 @media (max-width: 640px) {
-    .cardGrid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
     .journeyGridContainer {
         padding: 0 20px;
     }

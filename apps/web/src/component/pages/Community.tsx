@@ -1,9 +1,16 @@
 import React from 'react';
 import styles from '../landing/landing.module.css';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../routes/Routes';
 import InnerPageHero from '../shared/InnerPageHero';
+import CommunityAnimation from '../shared/animations/CommunityAnimation';
+
 // import { useI18n } from "../../hooks/useI18n";
 
 const Community: React.FC = () => {
+    const navigate = useNavigate();
+    // const { t } = useI18n(); // Keeping for future i18n support, though we use hardcoded for now
+
     // const { t } = useI18n(); // Keeping for future i18n support, though we use hardcoded for now
 
     const features = [
@@ -38,7 +45,29 @@ const Community: React.FC = () => {
                 title="Women's Health Community"
                 subtitle="Connect, share, and find strength with women who understand your journey. Judgement-free, moderated, and safe."
                 badge="Safe Space"
+                illustration={<CommunityAnimation />}
             >
+                <div style={{ marginBottom: '15px' }}>
+                    <button
+                        onClick={() => navigate(ROUTES.JOURNEYS)}
+                        style={{
+                            padding: '8px 16px',
+                            background: 'rgba(255,255,255,0.2)',
+                            border: '1px solid rgba(255,255,255,0.4)',
+                            color: 'white',
+                            borderRadius: '30px',
+                            cursor: 'pointer',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            backdropFilter: 'blur(5px)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                    >
+                        ← Back to Paths
+                    </button>
+                </div>
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>👥 12k+ Members</span>
                     <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>💬 Active Forums</span>
@@ -64,8 +93,9 @@ const Community: React.FC = () => {
                             <div style={{ fontSize: '14px', fontWeight: '700', color: '#555' }}>Upcoming Events</div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <button className={styles.primaryCta} style={{ width: '100%' }}>Join Now</button>
+                            <button className={styles.primaryCta} style={{ width: '100%' }} onClick={() => navigate(ROUTES.DASHBOARD)}>Join Now</button>
                         </div>
+
                     </div>
 
                     {/* Features */}
@@ -102,7 +132,8 @@ const Community: React.FC = () => {
                                         <span>🕙 Updated {t.updated}</span>
                                     </div>
                                 </div>
-                                <button className={styles.secondaryCta} style={{ padding: '8px 24px' }}>Join Group</button>
+                                {/* <button className={styles.secondaryCta} style={{ padding: '8px 24px' }} onClick={() => navigate(ROUTES.STORIES)}>Join Group</button> */}
+
                             </div>
                         ))}
                     </div>

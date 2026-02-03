@@ -1,10 +1,14 @@
 import React from "react";
 import styles from "../landing/landing.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+
 import InnerPageHero from "../shared/InnerPageHero";
+import ConsultAnimation from "../shared/animations/ConsultAnimation";
 
 const Appointments: React.FC = () => {
+    const navigate = useNavigate();
+
 
     const steps = [
         { num: 1, title: "Choose Concern", desc: "Select a specialty usually based on your symptom." },
@@ -32,7 +36,9 @@ const Appointments: React.FC = () => {
                 title="Teleconsultation Services"
                 subtitle="Connect with women's health specialists from home. Fast, secure, and confidential."
                 badge="Private & Secure"
+                illustration={<ConsultAnimation />}
             />
+
             {/* Keeping the feature tags but placing them below hero if needed, or removing if strictly following "NO additional elements" constraint. User said: "Hero Structure (must be identical across pages): ... NO additional elements." So I will remove the extra tags from the hero area. */}
 
             <div style={{ background: 'var(--theme-bg-accent)' }}>
@@ -65,7 +71,14 @@ const Appointments: React.FC = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px', fontSize: '13px', color: '#2E7D32', fontWeight: '700' }}>
                                     <span style={{ width: '8px', height: '8px', background: '#4CAF50', borderRadius: '50%' }} /> {s.available}
                                 </div>
-                                <button className={styles.primaryCta} style={{ width: '100%', borderRadius: '12px' }}>Book Now</button>
+                                <button
+                                    className={styles.primaryCta}
+                                    style={{ width: '100%', borderRadius: '12px' }}
+                                    onClick={() => navigate(ROUTES.TELECONSULTATION)}
+                                >
+                                    Book Now
+                                </button>
+
                             </div>
                         ))}
                     </div>
@@ -86,7 +99,8 @@ const Appointments: React.FC = () => {
                     {/* Final Nav */}
                     <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
                         <Link to={ROUTES.SYMPTOM_CHECKER} className={styles.secondaryCta}>← Previous: Symptom Checker</Link>
-                        <Link to={ROUTES.PRODUCTS} className={styles.primaryCta} style={{ background: '#D32F2F' }}>Next: Vaccination →</Link>
+                        <Link to={ROUTES.VACCINATION} className={styles.primaryCta} style={{ background: '#D32F2F' }}>Next: Vaccination →</Link>
+
                     </div>
 
                 </div>

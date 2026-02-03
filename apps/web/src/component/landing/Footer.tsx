@@ -13,7 +13,8 @@ const Footer: React.FC = () => {
     { label: t("hero.nav.home"), path: ROUTES.LANDING },
     { label: "Journeys", path: ROUTES.JOURNEYS },
     { label: "Products", path: ROUTES.PRODUCTS },
-    { label: t("hero.nav.knowledge"), path: ROUTES.STORIES },
+    { label: "Gov. Schemes", path: ROUTES.GOVERNMENT_SCHEMES },
+    // { label: t("hero.nav.knowledge"), path: ROUTES.STORIES },
     { label: t("hero.nav.track"), path: ROUTES.SYMPTOM_CHECKER }
   ];
 

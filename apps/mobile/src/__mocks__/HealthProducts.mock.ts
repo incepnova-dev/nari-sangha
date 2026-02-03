@@ -8,7 +8,7 @@ export interface Product {
   platforms: string[];
 }
 
-export const mockProducts: Product[] = [
+export const mock: Product[] = [
   {
     icon: '🧴',
     name: 'Prenatal Vitamins',
