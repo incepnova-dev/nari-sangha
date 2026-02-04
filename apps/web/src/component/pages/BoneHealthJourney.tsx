@@ -11,7 +11,9 @@ import {
     generateKnee3D,
     generateWrist3D,
     AGE_GRAPH_DATA,
+
     AGE_TO_PHASE_MAP,
+    HERO_PILLS_DATA,
     AgeGroup
 } from './BoneHealthJourneyData';
 
@@ -22,32 +24,13 @@ const BoneHealthJourney: React.FC = () => {
     const [viewedTopics, setViewedTopics] = useState<Set<number>>(new Set());
     const [expandedTopic, setExpandedTopic] = useState<number | null>(null);
     const [simulationStage, setSimulationStage] = useState('healthy');
-    const [selectedBodyPart, setSelectedBodyPart] = useState<string>('spine');
+    const [selectedBodyPart, setSelectedBodyPart] = useState<string | null>(null);
     const [vizData, setVizData] = useState<any>(null);
 
     // Refs for scrolling
     const timelineRef = useRef<HTMLElement>(null);
     const topicsRef = useRef<HTMLElement>(null);
     const simulationRef = useRef<HTMLDivElement>(null);
-    const headerRef = useRef<HTMLDivElement>(null);
-
-    // Scroll Spy & Header Shrink
-    useEffect(() => {
-        const handleScroll = () => {
-            // Optional: Add logic here if we had a sticky sub-nav inside the component
-            // For now just basic scroll listening if needed in future
-
-            if (headerRef.current) {
-                if (window.scrollY > 50) {
-                    headerRef.current.classList.add(styles.scrolled);
-                } else {
-                    headerRef.current.classList.remove(styles.scrolled);
-                }
-            }
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const scrollToSection = (id: string) => {
         const el = document.getElementById(id);
@@ -76,6 +59,11 @@ const BoneHealthJourney: React.FC = () => {
 
     // Update Visualization when stage or body part changes
     useEffect(() => {
+        if (!selectedBodyPart) {
+            setVizData(null);
+            return;
+        }
+
         let data;
         switch (selectedBodyPart) {
             case 'spine':
@@ -102,10 +90,16 @@ const BoneHealthJourney: React.FC = () => {
 
     const getGraphPath = (data: number[]) => {
         const xCoords = [150, 360, 540, 720, 850];
-        const points = data.map((val, idx) => {
+        // Normalize data to always have 5 points for smooth 'd' transition
+        // Fill missing points with the last known value
+        const normalizedData = [...data];
+        while (normalizedData.length < 5) {
+            normalizedData.push(normalizedData[normalizedData.length - 1]);
+        }
+
+        const points = normalizedData.map((val, idx) => {
             const x = xCoords[idx];
             // SVG is 350 height. 0% is at y=300 (approx), 100% is at y=50 (approx). Range = 250px.
-            // Value 100% -> y=50. Value 0% -> y=300.
             const y = 300 - (val / 100 * 250);
             return `${idx === 0 ? 'M' : 'L'} ${x},${y}`;
         }).join(' ');
@@ -116,10 +110,20 @@ const BoneHealthJourney: React.FC = () => {
     const estrogenPath = getGraphPath(graphData.estrogen);
     const bonePath = getGraphPath(graphData.boneDensity);
 
-    // For fill paths, we need to close the shape down to the X-axis (y=300)
-    // The last point x is xCoords[data.length - 1]
+    // Calculate dynamic clip width based on valid data points
+    // [150, 360, 540, 720, 850]
+    // 1 point -> reveal up to 150 + buffer? Or roughly 250?
+    // Let's reveal up to the next point's start or just the current point.
     const xCoords = [150, 360, 540, 720, 850];
-    const lastX = xCoords[graphData.estrogen.length - 1];
+    const count = graphData.estrogen.length;
+    // Add a small buffer (e.g. 50px) to ensure the point circle is fully visible if we had one,
+    // but primarily to show the segment.
+    // Actually, simply using the coordinate of the last point is sufficient for "reveal".
+    const clipWidth = count === 1 ? 200 : xCoords[count - 1] + 20;
+
+    // For fill paths, we need to close the shape down to the X-axis (y=300)
+    // We strictly use the 5th point (850) because normalized data goes to the end.
+    const lastX = 850;
     const startX = 150;
 
     const estrogenFill = `${estrogenPath} L ${lastX},300 L ${startX},300 Z`;
@@ -129,19 +133,7 @@ const BoneHealthJourney: React.FC = () => {
         <div className={styles.container}>
 
 
-            <div className={styles.pageNav} ref={headerRef}>
-                <div className={styles.pageNavContainer}>
-                    <a onClick={() => scrollToSection('timelineSection')} className={styles.pageNavLink}>
-                        <i className="fas fa-chart-line"></i> <span>Hormone Journey</span>
-                    </a>
-                    <a onClick={() => scrollToSection('topicsSection')} className={styles.pageNavLink}>
-                        <i className="fas fa-book-medical"></i> <span>Key Topics</span>
-                    </a>
-                    <a onClick={() => scrollToSection('simulationSection')} className={styles.pageNavLink}>
-                        <i className="fas fa-cube"></i> <span>3D Explorer</span>
-                    </a>
-                </div>
-            </div>
+
 
             <div className={styles.pageShell}>
                 {/* HERO SECTION */}
@@ -168,31 +160,51 @@ const BoneHealthJourney: React.FC = () => {
                     </div>
                     <div className={styles.heroVisual}>
                         <div className={styles.cycleOrbit}>
-                            <svg viewBox="0 0 200 200" className="rotating-orbit">
-                                <circle cx="100" cy="100" r="90" fill="none" stroke="#ec407a" strokeWidth="1" opacity="0.2" strokeDasharray="5,5" />
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="#ec407a" strokeWidth="1" opacity="0.3" />
-                                <circle cx="100" cy="100" r="50" fill="none" stroke="#ec407a" strokeWidth="2" opacity="0.1" />
-                            </svg>
-                        </div>
-                        {/* Static SVG representation for hero visual */}
-                        <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <svg width="240" height="240" viewBox="0 0 240 240">
+                            <svg viewBox="0 0 260 260">
                                 <defs>
-                                    <radialGradient id="heroBoneGrad" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stopColor="#fce4ec" stopOpacity="0.8" />
-                                        <stop offset="100%" stopColor="#f8bbd0" stopOpacity="0" />
+                                    <radialGradient id="boneGrad">
+                                        <stop offset="0%" stopColor="#fff" />
+                                        <stop offset="50%" stopColor="#f8bbd0" />
+                                        <stop offset="100%" stopColor="#ec407a" />
                                     </radialGradient>
                                 </defs>
-                                <circle cx="120" cy="120" r="100" fill="url(#heroBoneGrad)" />
-                                <path d="M120,40 L120,200 M60,80 L180,80 M80,160 L160,160" stroke="#ec407a" strokeWidth="2" opacity="0.2" />
-                                <text x="120" y="125" textAnchor="middle" fontSize="60" fill="#ec407a" opacity="0.1"><i className="fas fa-bone"></i></text>
+
+                                <g transform="translate(130, 130)">
+                                    <ellipse cx="0" cy="0" rx="32" ry="42" fill="url(#boneGrad)" stroke="#ec407a" strokeWidth="2.5">
+                                        <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+                                    </ellipse>
+                                    <rect x="-3" y="-45" width="6" height="40" rx="3" fill="#f8bbd0" stroke="#ec407a" strokeWidth="2" />
+
+                                    {/* Orbiting particles */}
+                                    <circle cx="55" cy="0" r="3.5" fill="#4caf50">
+                                        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="7s"
+                                            repeatCount="indefinite" />
+                                        <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="-55" cy="0" r="3.5" fill="#ff9800">
+                                        <animateTransform attributeName="transform" type="rotate" from="180" to="540" dur="7s"
+                                            repeatCount="indefinite" />
+                                        <animate attributeName="r" values="3;5;3" dur="2.3s" repeatCount="indefinite" />
+                                    </circle>
+                                    <circle cx="0" cy="55" r="3.5" fill="#9c27b0">
+                                        <animateTransform attributeName="transform" type="rotate" from="90" to="450" dur="7s"
+                                            repeatCount="indefinite" />
+                                        <animate attributeName="r" values="3;5;3" dur="2.7s" repeatCount="indefinite" />
+                                    </circle>
+                                </g>
+
+                                <circle cx="130" cy="130" r="65" fill="none" stroke="#ec407a" strokeWidth="1" opacity="0.25"
+                                    strokeDasharray="4,4" />
                             </svg>
                         </div>
 
                         <div className={styles.heroPillStack}>
-                            <div className={styles.heroPill}><i className="fas fa-arrow-up" style={{ color: '#4caf50' }}></i> Peak Density Age 30</div>
-                            <div className={styles.heroPill}><i className="fas fa-exclamation" style={{ color: '#ff9800' }}></i> Menopause Drop</div>
-                            <div className={styles.heroPill}><i className="fas fa-shield-alt" style={{ color: '#2196f3' }}></i> Prevention Works</div>
+                            {HERO_PILLS_DATA.map((pill, index) => (
+                                <div key={index} className={styles.heroPill} style={{ animationDelay: `${index * 0.2}s` }}>
+                                    <i className={`fas fa-${pill.icon}`} style={{ color: pill.color }}></i>
+                                    <span>{pill.label}: <strong>{pill.value}</strong></span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -249,6 +261,9 @@ const BoneHealthJourney: React.FC = () => {
 
                                 <svg viewBox="0 0 900 350" className={styles.hormoneChart}>
                                     <defs>
+                                        <clipPath id="chartRevealClip">
+                                            <rect x="0" y="0" width={clipWidth} height="350" style={{ transition: 'width 0.8s ease-in-out' }} />
+                                        </clipPath>
                                         <linearGradient id="estrogenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                             <stop offset="0%" stopColor="#4caf50" stopOpacity="0.8" />
                                             <stop offset="100%" stopColor="#4caf50" stopOpacity="0.1" />
@@ -272,15 +287,15 @@ const BoneHealthJourney: React.FC = () => {
                                     <text x="35" y="305" textAnchor="end" fill="#666" fontSize="12">0%</text>
 
                                     {/* Estrogen Line */}
-                                    <g style={{ opacity: chartVisible.estrogen ? 1 : 0.1, transition: 'opacity 0.5s' }}>
-                                        <path d={estrogenPath} fill="none" stroke="#4caf50" strokeWidth="4" strokeLinecap="round" style={{ transition: 'd 0.5s ease' }} />
-                                        <path d={estrogenFill} fill="url(#estrogenGrad)" opacity="0.3" style={{ transition: 'd 0.5s ease' }} />
+                                    <g style={{ opacity: chartVisible.estrogen ? 1 : 0.1, transition: 'opacity 0.5s' }} clipPath="url(#chartRevealClip)">
+                                        <path d={estrogenPath} fill="none" stroke="#4caf50" strokeWidth="4" strokeLinecap="round" style={{ transition: 'd 0.5s ease-in-out' }} />
+                                        <path d={estrogenFill} fill="url(#estrogenGrad)" opacity="0.3" style={{ transition: 'd 0.5s ease-in-out' }} />
                                     </g>
 
                                     {/* Bone Line */}
-                                    <g style={{ opacity: chartVisible.bone ? 1 : 0.1, transition: 'opacity 0.5s' }}>
-                                        <path d={bonePath} fill="none" stroke="#ff9800" strokeWidth="4" strokeLinecap="round" style={{ transition: 'd 0.5s ease' }} />
-                                        <path d={boneFill} fill="url(#boneGradChart)" opacity="0.3" style={{ transition: 'd 0.5s ease' }} />
+                                    <g style={{ opacity: chartVisible.bone ? 1 : 0.1, transition: 'opacity 0.5s' }} clipPath="url(#chartRevealClip)">
+                                        <path d={bonePath} fill="none" stroke="#ff9800" strokeWidth="4" strokeLinecap="round" style={{ transition: 'd 0.5s ease-in-out' }} />
+                                        <path d={boneFill} fill="url(#boneGradChart)" opacity="0.3" style={{ transition: 'd 0.5s ease-in-out' }} />
                                     </g>
 
                                     {/* Axis Labels */}
@@ -293,6 +308,14 @@ const BoneHealthJourney: React.FC = () => {
                                     <rect x="630" y="40" width="200" height="270" fill="#ffebee" opacity="0.3" rx="8" />
                                     <text x="730" y="25" textAnchor="middle" fill="#f44336" fontSize="12" fontWeight="700">DANGER ZONE</text>
                                 </svg>
+
+                                <div className={styles.stageInsightPanel}>
+                                    <div className={styles.stageBadge}>
+                                        {currentPhaseData.name} • {currentPhaseData.age}
+                                    </div>
+                                    <div className={styles.stageInsightText}>{currentPhaseData.graphSummary}</div>
+                                </div>
+
 
                                 <div className={styles.chartLegend}>
                                     <div className={styles.legendItem}>
@@ -424,23 +447,23 @@ const BoneHealthJourney: React.FC = () => {
                         <p className={styles.sectionTagline}>Master these 10 topics to take control of your skeletal destiny.</p>
                     </div>
 
-                    {/* Progress Bar */}
-                    <div style={{ maxWidth: '900px', margin: '2rem auto', padding: '1.5rem', background: 'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)', borderRadius: '16px', boxShadow: '0 4px 12px rgba(236,64,122,0.1)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-                            <div style={{ flex: 1, minWidth: '200px' }}>
-                                <div style={{ fontSize: '0.85rem', color: '#880e4f', fontWeight: 600, marginBottom: '0.5rem' }}>
-                                    <i className="fas fa-check-circle"></i> YOUR LEARNING PROGRESS
+                    {/* Progress Bar (Simplified) */}
+                    <div style={{ maxWidth: '900px', margin: '2rem auto', padding: '1.25rem 2rem', background: '#fff', borderRadius: '12px', border: '1px solid #f0f0f0', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                            <div style={{ flex: 1 }}>
+                                <div style={{ fontSize: '0.8rem', color: '#999', fontWeight: 700, marginBottom: '0.75rem', letterSpacing: '0.05em' }}>
+                                    YOUR LEARNING PROGRESS
                                 </div>
-                                <div style={{ background: 'white', height: '12px', borderRadius: '20px', overflow: 'hidden', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
-                                    <div style={{ width: `${progressPercent}%`, height: '100%', background: 'linear-gradient(90deg, #4caf50 0%, #66bb6a 100%)', transition: 'width 0.6s ease', borderRadius: '20px' }}></div>
+                                <div style={{ background: '#f5f5f5', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
+                                    <div style={{ width: `${progressPercent}%`, height: '100%', background: '#ec407a', transition: 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)' }}></div>
                                 </div>
-                                <div style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem' }}>
-                                    <span>{viewedTopics.size} of 10 topics explored</span>
+                                <div style={{ fontSize: '0.7rem', color: '#bbb', marginTop: '0.5rem' }}>
+                                    {viewedTopics.size} of 10 topics explored
                                 </div>
                             </div>
-                            <div style={{ textAlign: 'center', padding: '0.75rem 1.5rem', background: 'white', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
-                                <div style={{ fontSize: '2rem', fontWeight: 700, color: '#ec407a' }}>{progressPercent}%</div>
-                                <div style={{ fontSize: '0.7rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Complete</div>
+                            <div style={{ textAlign: 'right', minWidth: '80px' }}>
+                                <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ec407a', lineHeight: 1 }}>{progressPercent}%</div>
+                                <div style={{ fontSize: '0.65rem', color: '#999', fontWeight: 700, textTransform: 'uppercase', marginTop: '0.2rem' }}>Complete</div>
                             </div>
                         </div>
                     </div>
@@ -448,40 +471,43 @@ const BoneHealthJourney: React.FC = () => {
                     <div className={styles.topicsGrid}>
                         {topicsData.map(topic => {
                             const cat = topicCategories[topic.id];
-                            return (
-                                <div key={topic.id} className={`${styles.topicCard} ${expandedTopic === topic.id ? styles.expanded : ''} ${topic.critical ? styles.criticalTopic : ''}`}>
-                                    {viewedTopics.has(topic.id) && (
-                                        <div className={styles.topicViewedIndicator}><i className="fas fa-check"></i> Read</div>
-                                    )}
-                                    <div className={styles.topicCardHeader}>
-                                        <div className={styles.topicNumber} style={{ background: cat.color }}>
-                                            <span>{topic.id}</span>
-                                            <span className={styles.topicNumText}>TOPIC</span>
-                                        </div>
-                                        <div className={styles.topicCategoryBadge} style={{ background: `${cat.color}20`, color: cat.color }}>
-                                            {cat.emoji} {cat.category}
-                                        </div>
-                                        {topic.critical && (
-                                            <div className={styles.criticalBadge}><i className="fas fa-bell"></i> CRITICAL</div>
-                                        )}
-                                    </div>
+                            const isExpanded = expandedTopic === topic.id;
+                            const isViewed = viewedTopics.has(topic.id);
 
-                                    <div className={styles.topicHeader} onClick={() => toggleTopic(topic.id)}>
-                                        <div className={`${styles.topicIconNew} ${topic.critical ? styles.criticalIcon : ''}`}
-                                            style={!topic.critical ? { background: `${cat.color}15`, color: cat.color } : {}}>
-                                            <i className={`fas fa-${topic.icon}`}></i>
+                            return (
+                                <div key={topic.id} className={`${styles.topicCard} ${isExpanded ? styles.expanded : ''} ${topic.critical ? styles.criticalTopic : ''}`}>
+                                    <div className={styles.topicCardHeader} onClick={() => toggleTopic(topic.id)}>
+                                        {/* Left: Number Anchor */}
+                                        <div className={styles.topicNumber} style={isViewed ? { background: '#e8f5e9', color: '#4caf50', borderColor: '#4caf5020' } : {}}>
+                                            {isViewed ? <i className="fas fa-check" style={{ fontSize: '0.9rem' }}></i> : topic.id}
                                         </div>
+
+                                        {/* Center: Content Block */}
                                         <div className={styles.topicInfo}>
                                             <h3>{topic.title}</h3>
                                             <p className={styles.topicSummary}>{topic.summary}</p>
                                         </div>
-                                        <div className={styles.topicActionArea}>
-                                            <div className={styles.readTime}><i className="far fa-clock"></i> 3 min</div>
-                                            <i className={`fas fa-chevron-down ${styles.expandIcon} ${expandedTopic === topic.id ? styles.expanded : ''}`}></i>
+
+                                        {/* Right: Meta Information */}
+                                        <div className={styles.topicMetaGroup}>
+                                            <div className={styles.topicCategoryBadge}
+                                                style={{ background: `${cat.color}10`, color: cat.color, border: `1px solid ${cat.color}20` }}>
+                                                {cat.category}
+                                            </div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                                <span className={styles.readTime}>3 min</span>
+                                                {topic.critical && (
+                                                    <span className={styles.criticalBadge}>CRITICAL</span>
+                                                )}
+                                            </div>
                                         </div>
+
+                                        {/* Expand Indicator */}
+                                        <i className={`fas fa-chevron-down ${styles.expandIcon} ${isExpanded ? styles.expanded : ''}`}
+                                            style={{ marginLeft: '1rem', opacity: isExpanded ? 1 : 0.2, fontSize: '0.9rem' }}></i>
                                     </div>
 
-                                    <div className={`${styles.topicContent} ${expandedTopic === topic.id ? styles.active : ''}`}>
+                                    <div className={`${styles.topicContent} ${isExpanded ? styles.active : ''}`}>
                                         <div className={styles.contentSection} dangerouslySetInnerHTML={{ __html: topic.content }}></div>
                                         <div className={styles.topicFooterActions} style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem', marginBottom: '1.5rem' }}>
                                             <button className={styles.topicActionBtn} onClick={(e) => { e.stopPropagation(); toggleTopic(topic.id); }}>
@@ -554,51 +580,184 @@ const BoneHealthJourney: React.FC = () => {
                         </div>
 
                         <div className={`${styles.simDisplay} ${styles.card}`}>
-                            {vizData && (
+                            {vizData ? (
                                 <div className={styles.vizContainer} style={{ width: '100%' }}>
                                     <div className={styles.vizHeader}>
-                                        <h3>{vizData.title}</h3>
-                                        <span className={`${styles.stageTag} ${styles[simulationStage] || ''}`}>
-                                            {simulationStage.toUpperCase()}
-                                        </span>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1 }}>
+                                            <h3>{vizData.title}</h3>
+                                            <span className={`${styles.stageTag} ${styles[simulationStage] || ''}`}>
+                                                {simulationStage.toUpperCase()}
+                                            </span>
+                                        </div>
+                                        <button
+                                            className={styles.backToBodyBtn}
+                                            onClick={() => setSelectedBodyPart(null)}
+                                            style={{
+                                                padding: '0.4rem 0.9rem',
+                                                background: 'white',
+                                                border: '1px solid #ec407a',
+                                                borderRadius: '8px',
+                                                color: '#ec407a',
+                                                cursor: 'pointer',
+                                                fontWeight: 600,
+                                                fontSize: '0.85rem',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '0.4rem'
+                                            }}
+                                        >
+                                            <i className="fas fa-arrow-left"></i> Back to Body
+                                        </button>
                                     </div>
 
-                                    <div className={styles.vizSvgContainer} dangerouslySetInnerHTML={{ __html: vizData.svg }}></div>
+                                    <div className={styles.detailLayout}>
+                                        <div className={styles.vizSvgContainer} dangerouslySetInnerHTML={{ __html: vizData.svg }}></div>
 
-                                    <div className={styles.vizDescription}>
-                                        <h4>About this Stage</h4>
-                                        <p>{vizData.description}</p>
-                                    </div>
-
-                                    <div className={styles.vizStats}>
-                                        {/* We can re-use the infoType for conditional rendering of patient info boxes if we wanted, 
-                                                but for now following the generators return which embeds patient info in SVG or separate logic */}
-                                        {/* Note: The JS generators returned an HTML string 'patientInfo'. 
-                                                I refactored in Data file to return simple/riskInfo/attributes. 
-                                                I need to render them here properly if not in SVG */}
-
-                                        {/* Rendering the stats table */}
-                                        <div className={styles.vizStatRow}>
-                                            <div className={styles.vizStatCard}>
-                                                <span className={styles.vizStatLabel}>Bone Density</span>
-                                                <div className={`${styles.vizStatValue} ${vizData.stats.bmdClass}`}>{vizData.stats.bmd}</div>
+                                        <div className={styles.detailPanel}>
+                                            <div className={styles.vizDescription}>
+                                                <h4>About this Stage</h4>
+                                                <p>{vizData.description}</p>
                                             </div>
-                                            <div className={styles.vizStatCard}>
-                                                <span className={styles.vizStatLabel}>Fracture Risk</span>
-                                                <div className={`${styles.vizStatValue} ${vizData.stats.riskClass}`}>{vizData.stats.risk}</div>
-                                            </div>
-                                            <div className={styles.vizStatCard}>
-                                                <span className={styles.vizStatLabel}>Cartilage Status</span>
-                                                <div className={`${styles.vizStatValue} ${vizData.stats.cartClass}`}>{vizData.stats.cartilage}</div>
+
+                                            <div className={styles.vizStats} style={{ marginTop: '1.5rem' }}>
+                                                <div className={styles.vizStatRow} style={{ flexDirection: 'column', gap: '1rem' }}>
+                                                    <div className={styles.vizStatCard} style={{ width: '100%' }}>
+                                                        <span className={styles.vizStatLabel}>Bone Density</span>
+                                                        <div className={`${styles.vizStatValue} ${vizData.stats.bmdClass}`}>{vizData.stats.bmd}</div>
+                                                    </div>
+                                                    <div className={styles.vizStatCard} style={{ width: '100%' }}>
+                                                        <span className={styles.vizStatLabel}>Fracture Risk</span>
+                                                        <div className={`${styles.vizStatValue} ${vizData.stats.riskClass}`}>{vizData.stats.risk}</div>
+                                                    </div>
+                                                    <div className={styles.vizStatCard} style={{ width: '100%' }}>
+                                                        <span className={styles.vizStatLabel}>Cartilage Status</span>
+                                                        <div className={`${styles.vizStatValue} ${vizData.stats.cartClass}`}>{vizData.stats.cartilage}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className={styles.bodyDiagramContainer}>
+                                    <div className={styles.bodyDiagramHint}>
+                                        <h4>Explore Your Bones & Joints</h4>
+                                        <p>Tap the highlighted areas to see health insights</p>
+                                    </div>
+                                    <div className={styles.bodyDiagram}>
+                                        <svg viewBox="0 0 300 600" className={styles.skeletonSvg} style={{ width: '100%', height: 'auto', maxHeight: '550px', filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.03))' }}>
+                                            <defs>
+                                                <linearGradient id="skeletonStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" stopColor="#ec407a" />
+                                                    <stop offset="100%" stopColor="#f48fb1" />
+                                                </linearGradient>
+                                                <filter id="skeletonGlow">
+                                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                                    <feMerge>
+                                                        <feMergeNode in="coloredBlur" />
+                                                        <feMergeNode in="SourceGraphic" />
+                                                    </feMerge>
+                                                </filter>
+                                            </defs>
+
+                                            {/* Female Body Silhouette (Soft Background) */}
+                                            <path
+                                                d="M150,10 C175,10 195,40 195,70 C195,100 175,120 150,120 C125,120 105,100 105,70 C105,40 125,10 150,10 Z
+                                                   M150,120 C155,130 165,135 180,140 C225,155 250,185 250,240 C250,290 220,300 210,320 
+                                                   C200,340 250,370 250,440 C250,510 230,580 215,595 L85,595 
+                                                   C70,580 50,510 50,440 C50,370 100,340 90,320 C80,300 50,290 50,240 
+                                                   C50,185 75,155 120,140 C135,135 145,130 150,120 Z"
+                                                fill="url(#skeletonStroke)"
+                                                opacity="0.04"
+                                            />
+
+                                            {/* Refined Internal Skeleton */}
+                                            {/* Skull */}
+                                            <ellipse cx="150" cy="65" rx="22" ry="30" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2.5" filter="url(#skeletonGlow)" />
+
+                                            {/* Spine */}
+                                            <path d="M150,100 Q152,150 150,200 Q148,250 150,320"
+                                                filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="4" strokeLinecap="round" opacity="0.9" />
+
+                                            {/* Shoulders */}
+                                            <path d="M90,145 Q150,135 210,145" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+
+                                            {/* Ribcage Highlights */}
+                                            <path d="M120,165 Q150,155 180,165" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
+                                            <path d="M115,190 Q150,180 185,190" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
+                                            <path d="M120,215 Q150,205 180,215" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
+
+                                            {/* Pelvis (Refined Shape) */}
+                                            <path d="M110,320 C100,340 100,370 150,370 C200,370 200,340 190,320 Q150,310 110,320"
+                                                filter="url(#skeletonGlow)" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="3" />
+
+                                            {/* Arms */}
+                                            <line x1="90" y1="145" x2="70" y2="220" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <line x1="70" y1="220" x2="65" y2="290" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <circle cx="65" cy="300" r="8" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
+
+                                            <line x1="210" y1="145" x2="230" y2="220" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <line x1="230" y1="220" x2="235" y2="290" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <circle cx="235" cy="300" r="8" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
+
+                                            {/* Legs */}
+                                            <path d="M125,365 Q120,440 120,460" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3.5" strokeLinecap="round" />
+                                            <path d="M175,365 Q180,440 180,460" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3.5" strokeLinecap="round" />
+
+                                            {/* Knees */}
+                                            <circle cx="120" cy="465" r="9" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
+                                            <circle cx="180" cy="465" r="9" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
+
+                                            {/* Lower Legs */}
+                                            <line x1="120" y1="475" x2="115" y2="560" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <line x1="180" y1="475" x2="185" y2="560" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+
+                                            {/* INTERACTIVE HOTSPOTS (Aligned to new skeleton) */}
+                                            {/* Spine Hotspot */}
+                                            <circle
+                                                cx="150" cy="200" r="14"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('spine')}
+                                            />
+
+                                            {/* Hip Hotspot */}
+                                            <circle
+                                                cx="150" cy="345" r="16"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('hip')}
+                                            />
+
+                                            {/* Wrist Hotspot */}
+                                            <circle
+                                                cx="65" cy="300" r="12"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('wrist')}
+                                            />
+                                            <circle
+                                                cx="235" cy="300" r="12"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('wrist')}
+                                            />
+
+                                            {/* Knee Hotspot */}
+                                            <circle
+                                                cx="120" cy="465" r="12"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('knee')}
+                                            />
+                                            <circle
+                                                cx="180" cy="465" r="12"
+                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
+                                                onClick={() => setSelectedBodyPart('knee')}
+                                            />
+                                        </svg>
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
             <footer className={styles.siteFooter}>
                 <div className={styles.disclaimer}>
@@ -607,7 +766,7 @@ const BoneHealthJourney: React.FC = () => {
                 </div>
                 <div className={styles.footerCredits}>© 2026 Nari Sangha - Women's Health Platform</div>
             </footer>
-        </div>
+        </div >
     );
 };
 

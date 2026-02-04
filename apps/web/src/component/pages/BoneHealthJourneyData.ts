@@ -6,6 +6,7 @@ export const phaseData: any = {
     name: "Building Foundation",
     age: "Ages 12-19",
     icon: "fa-seedling",
+    graphSummary: "Rapid bone growth during these years determines your skeletal strength for life.",
     estrogen: { percent: 40, label: "Rising" },
     bone: { percent: 45, label: "Building" },
     joint: { percent: 90, label: "Excellent" },
@@ -22,6 +23,7 @@ export const phaseData: any = {
     name: "Peak Strength",
     age: "Ages 20-39",
     icon: "fa-mountain",
+    graphSummary: "Your bone density is at its maximum; healthy choices now maintain this peak longer.",
     estrogen: { percent: 95, label: "Peak Levels" },
     bone: { percent: 100, label: "Maximum Density" },
     joint: { percent: 95, label: "Optimal" },
@@ -38,6 +40,7 @@ export const phaseData: any = {
     name: "Transition Begins",
     age: "Ages 40-50",
     icon: "fa-exchange-alt",
+    graphSummary: "Subtle hormonal shifts start impacting bone renewal processes—prevention is vital.",
     estrogen: { percent: 70, label: "Declining" },
     bone: { percent: 85, label: "Early Loss" },
     joint: { percent: 75, label: "Good" },
@@ -55,6 +58,7 @@ export const phaseData: any = {
     name: "Critical Window",
     age: "Ages 50-60",
     icon: "fa-exclamation-triangle",
+    graphSummary: "Rapid estrogen decline requires immediate attention to protect against density loss.",
     estrogen: { percent: 25, label: "Dramatic Drop" },
     bone: { percent: 65, label: "Rapid Loss" },
     joint: { percent: 55, label: "Declining" },
@@ -73,6 +77,7 @@ export const phaseData: any = {
     name: "Maintenance Era",
     age: "Ages 60+",
     icon: "fa-shield-alt",
+    graphSummary: "Bone loss slows but fracture risk remains high; focus shifts to fall prevention.",
     estrogen: { percent: 15, label: "Minimal" },
     bone: { percent: 50, label: "Continued Loss" },
     joint: { percent: 40, label: "Compromised" },
@@ -91,6 +96,7 @@ export const phaseData: any = {
     name: "With Treatment",
     age: "Any Age with Therapy",
     icon: "fa-pills",
+    graphSummary: "Medication and lifestyle changes can stabilize density and reduce fracture risk by 50%.",
     estrogen: { percent: 25, label: "Stabilized" },
     bone: { percent: 75, label: "Improving" },
     joint: { percent: 65, label: "Protected" },
@@ -886,14 +892,136 @@ export const generateHip3D = (stage: string, styles: any) => {
 };
 
 
-export const generateKnee3D = (_stage: string, styles: any) => {
-  // knee generator placeholder due to output size limit
+export const generateKnee3D = (stage: string, styles: any) => {
+  // Visual Configuration based on stage
+  const c: any = {
+    healthy: {
+      boneOuter: '#f9fbe7', boneInner: '#ffffff', stroke: '#cddc39',
+      cartilage: '#81d4fa', cartilageGlow: '#4fc3f7',
+      gap: 20
+    },
+    early: {
+      boneOuter: '#fffde7', boneInner: '#ffffff', stroke: '#fff176',
+      cartilage: '#ffcc80', cartilageGlow: '#ffe0b2',
+      gap: 14
+    },
+    advanced: {
+      boneOuter: '#ffebee', boneInner: '#fff8f8', stroke: '#ffcdd2',
+      cartilage: '#eeeeee', cartilageGlow: '#e0e0e0',
+      gap: 4
+    },
+    treatment: {
+      boneOuter: '#f1f8e9', boneInner: '#ffffff', stroke: '#aed581',
+      cartilage: '#b3e5fc', cartilageGlow: '#81d4fa',
+      gap: 12
+    }
+  };
+
+  const styling = c[stage];
+
+  const svg = `
+    <svg viewBox="0 0 450 500" style="width:100%;height:100%;" class="${stage === 'healthy' ? styles.breathingAnimation : ''}">
+      <defs>
+        <radialGradient id="femurGrad_${stage}" cy="20%" r="80%">
+          <stop offset="0%" stop-color="${styling.boneInner}" />
+          <stop offset="100%" stop-color="${styling.boneOuter}" />
+        </radialGradient>
+        
+        <filter id="cartilageGlow_${stage}" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        
+        <linearGradient id="cartilageGrad_${stage}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="${styling.cartilage}" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="${styling.cartilageGlow}" stop-opacity="0.6" />
+        </linearGradient>
+      </defs>
+
+      <!-- FEMUR (Thigh Bone) -->
+      <!-- Shell -->
+      <path d="M 120,20 L 120,160 Q 120,240 225,240 Q 330,240 330,160 L 330,20 Z" 
+            fill="url(#femurGrad_${stage})" stroke="${styling.stroke}" stroke-width="4" />
+      <!-- Inner Depth Hint -->
+      <path d="M 130,30 L 130,160 Q 130,230 225,230 Q 320,230 320,160 L 320,30 Z" 
+            fill="none" stroke="${styling.stroke}" stroke-width="1" opacity="0.2" />
+            
+      <!-- CARTILAGE (Femur Side) -->
+      <!-- Thick cushion layer over the bone end -->
+      <path d="M 130,190 Q 225,255 320,190 Q 330,180 330,195 Q 320,270 225,270 Q 130,270 120,195 Q 120,180 130,190 Z" 
+            fill="url(#cartilageGrad_${stage})" opacity="0.8" filter="url(#cartilageGlow_${stage})" />
+
+      <!-- TIBIA (Shin Bone) -->
+      <g transform="translate(0, ${styling.gap})">
+         <!-- CARTILAGE (Tibia Side) -->
+         <path d="M 130,285 Q 225,295 320,285 Q 320,305 225,305 Q 130,305 130,285 Z" 
+            fill="url(#cartilageGrad_${stage})" opacity="0.6" />
+
+        <!-- Shell -->
+        <path d="M 140,295 Q 225,310 310,295 L 310,480 L 140,480 Z" 
+              fill="url(#femurGrad_${stage})" stroke="${styling.stroke}" stroke-width="4" />
+        <!-- Inner Shell Hint -->
+        <path d="M 150,305 Q 225,315 300,305 L 300,470 L 150,470 Z" 
+              fill="none" stroke="${styling.stroke}" stroke-width="1" opacity="0.15" />
+        <!-- Core Hint -->
+        <path d="M 165,320 Q 225,330 285,320 L 285,460 L 165,460 Z" 
+              fill="none" stroke="${styling.stroke}" stroke-width="1" opacity="0.2" />
+      </g>
+      
+       <!-- Knee Cap (Patella) Shadow Hint -->
+       <ellipse cx="225" cy="${240 + styling.gap / 2}" rx="40" ry="30" fill="#000" opacity="0.03" />
+
+      <!-- LABELS (Subtle) -->
+      <text x="345" y="100" fill="#9e9e9e" font-size="11" font-weight="600">FEMUR</text>
+      <line x1="335" y1="100" x2="310" y2="100" stroke="#e0e0e0" stroke-width="1" />
+      
+      <text x="345" y="400" fill="#9e9e9e" font-size="11" font-weight="600">TIBIA</text>
+      <line x1="335" y1="400" x2="310" y2="400" stroke="#e0e0e0" stroke-width="1" />
+      
+      <!-- Cartilage Label -->
+      <text x="50" y="240" fill="${styling.stroke}" font-size="12" font-weight="700">Cartilage</text>
+      <line x1="80" y1="235" x2="115" y2="220" stroke="${styling.stroke}" stroke-width="1" opacity="0.5" />
+      <line x1="80" y1="245" x2="115" y2="280" stroke="${styling.stroke}" stroke-width="1" opacity="0.5" />
+
+    </svg>
+  `;
+
+  const patientInfo: any = {
+    healthy: {
+      title: "Healthy Knee Joint",
+      description: "A thick, smooth cushion of cartilage separates the Femur and Tibia. The joint space is wide (approx 6-8mm), allowing friction-free gliding.",
+      stats: { bmd: 'Strong', statsClass: styles.statGood, cartilage: 'Thick Cushion', cartClass: styles.statGood }
+    },
+    early: {
+      title: "Early Wear (Osteoarthritis)",
+      description: "Cartilage is thinning and losing its smooth surface. The joint gap narrows slightly, which may cause morning stiffness or mild clicks.",
+      stats: { bmd: 'Stable', statsClass: styles.statGood, cartilage: 'Thinning', cartClass: styles.statModerate }
+    },
+    advanced: {
+      title: "Joint Degeneration",
+      description: "Cartilage is severely worn down. The protective gap is gone, leading to bone-on-bone contact, pain, and inflammation.",
+      stats: { bmd: 'Weak', statsClass: styles.statCritical, cartilage: 'Bone-on-Bone', cartClass: styles.statCritical }
+    },
+    treatment: {
+      title: "Active Management",
+      description: "Physical therapy and strengthening exercises help offload the joint, preserving remaining cartilage and reducing pain.",
+      stats: { bmd: 'Improving', statsClass: styles.statModerate, cartilage: 'Stabilized', cartClass: styles.statGood }
+    }
+  };
+
+  const info = patientInfo[stage];
+
   return {
-    svg: `<svg viewBox="0 0 450 480" class="${styles.breathingAnimation}"><text x="50%" y="50%" text-anchor="middle">Knee Visualization</text></svg>`,
-    title: "Knee Visualization",
-    description: "Your knee bones are separated by a thick cushion of cartilage...",
+    svg,
+    title: info.title,
+    description: info.description,
     stats: {
-      bmd: 'Normal', bmdClass: styles.statGood, risk: 'Low', riskClass: styles.statGood, cartilage: 'Excellent', cartClass: styles.statGood
+      bmd: info.stats.bmd,
+      bmdClass: info.stats.statsClass,
+      risk: info.stats.risk || (stage === 'advanced' ? 'High' : 'Low'),
+      riskClass: info.stats.statsClass,
+      cartilage: info.stats.cartilage,
+      cartClass: info.stats.cartClass
     }
   };
 };
@@ -937,14 +1065,151 @@ export const AGE_GRAPH_DATA: Record<AgeGroup, { labels: string[], estrogen: numb
   },
 };
 
-export const generateWrist3D = (_stage: string, styles: any) => {
-  // wrist generator placeholder due to output size limit
+export const generateWrist3D = (stage: string, styles: any) => {
+  const c: any = {
+    healthy: {
+      boneOuter: '#f3e5f5', boneInner: '#ffffff', stroke: '#8e24aa',
+      coreColor: '#ba68c8', coreOpacity: 0.1, strokeWidth: 2.5
+    },
+    early: {
+      boneOuter: '#fff3e0', boneInner: '#ffffff', stroke: '#fb8c00',
+      coreColor: '#ffb74d', coreOpacity: 0.2, strokeWidth: 2
+    },
+    advanced: {
+      boneOuter: '#ffebee', boneInner: '#fff8f8', stroke: '#e53935',
+      coreColor: '#e57373', coreOpacity: 0.3, strokeWidth: 1.5
+    },
+    treatment: {
+      boneOuter: '#e8f5e9', boneInner: '#ffffff', stroke: '#43a047',
+      coreColor: '#81c784', coreOpacity: 0.15, strokeWidth: 2
+    }
+  };
+
+  const styling = c[stage];
+
+  const svg = `
+    <svg viewBox="0 0 450 500" style="width:100%;height:100%;" class="${stage === 'healthy' ? styles.breathingAnimation : ''}">
+      <defs>
+        <radialGradient id="wristBoneGrad_${stage}" cy="40%" r="90%">
+            <stop offset="20%" stop-color="${styling.boneInner}" />
+            <stop offset="100%" stop-color="${styling.boneOuter}" />
+        </radialGradient>
+        
+        <pattern id="bonePattern_${stage}" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="${styling.coreColor}" opacity="${styling.coreOpacity}" />
+        </pattern>
+      </defs>
+
+      <!-- Radius (Large Bone) -->
+      <path d="M 120,400 L 120,220 Q 120,180 180,180 Q 240,180 240,220 L 240,400 Z" 
+            fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="${styling.strokeWidth}" />
+      <!-- Inner Glow/Shadow -->
+      <path d="M 130,400 L 130,230 Q 130,195 180,195 Q 230,195 230,230 L 230,400" 
+            fill="none" stroke="${styling.stroke}" stroke-width="1" opacity="0.15" />
+      <path d="M 120,400 L 120,220 Q 120,180 180,180 Q 240,180 240,220 L 240,400 Z" 
+            fill="url(#bonePattern_${stage})" />
+            
+      <!-- Ulna (Small Bone) -->
+      <path d="M 260,400 L 260,220 Q 260,190 300,190 Q 330,190 330,220 L 330,400 Z" 
+            fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="${styling.strokeWidth}" />
+      <!-- Inner Glow/Shadow -->
+      <path d="M 270,400 L 270,230 Q 270,205 300,205 Q 320,205 320,230 L 320,400" 
+            fill="none" stroke="${styling.stroke}" stroke-width="1" opacity="0.15" />
+      <path d="M 260,400 L 260,220 Q 260,190 300,190 Q 330,190 330,220 L 330,400 Z" 
+            fill="url(#bonePattern_${stage})" />
+
+      <!-- CARPAL BONES CLUSTER (Organized Arc) -->
+      <g transform="translate(0, -15)">
+        <!-- Proximal Row (Bottom) -->
+        <circle cx="155" cy="140" r="18" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        <circle cx="190" cy="135" r="22" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        <circle cx="235" cy="135" r="24" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        <circle cx="275" cy="145" r="16" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        
+        <!-- Distal Row (Top) -->
+        <circle cx="175" cy="105" r="20" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        <circle cx="215" cy="95" r="25" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+        <circle cx="260" cy="105" r="20" fill="url(#wristBoneGrad_${stage})" stroke="${styling.stroke}" stroke-width="1.5" />
+      </g>
+      
+      <!-- Fracture Line (Only in Advanced) -->
+      ${stage === 'advanced' ? `
+        <path d="M 140,240 L 220,260" stroke="#d32f2f" stroke-width="3" stroke-dasharray="5,5" opacity="0.8" />
+        <circle cx="180" cy="250" r="25" fill="none" stroke="#d32f2f" stroke-width="2">
+            <animate attributeName="r" values="25;30;25" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />
+        </circle>
+        <text x="180" y="290" text-anchor="middle" fill="#d32f2f" font-weight="bold" font-size="12">FRACTURE ZONE</text>
+      ` : ''}
+
+      <!-- Labels -->
+      <text x="350" y="320" fill="#9e9e9e" font-size="11" font-weight="600">ULNA</text>
+      <line x1="340" y1="320" x2="310" y2="320" stroke="#e0e0e0" stroke-width="1" />
+      
+      <text x="100" y="320" fill="#9e9e9e" text-anchor="end" font-size="11" font-weight="600">RADIUS</text>
+      <line x1="110" y1="320" x2="140" y2="320" stroke="#e0e0e0" stroke-width="1" />
+      
+      <text x="225" y="50" text-anchor="middle" fill="#bdbdbd" font-size="12" font-weight="600" letter-spacing="1">CARPAL CLUSTER</text>
+    </svg>
+  `;
+
+  const patientInfo: any = {
+    healthy: {
+      title: "Strong Wrist Structure",
+      description: "Your Radius and Ulna have a thick, dense outer shell (cortex). The inner spongy bone is tightly packed, providing maximum strength against impact.",
+      stats: { bmd: 'High Density', statsClass: styles.statGood, cartilage: 'Intact' }
+    },
+    early: {
+      title: "Silent Thinning (Osteopenia)",
+      description: "The outer bone shell is starting to thin. The inner honeycomb structure is becoming more porous, making the wrist slightly less resistant to falls.",
+      stats: { bmd: 'Lower Density', statsClass: styles.statModerate, cartilage: 'Normal' }
+    },
+    advanced: {
+      title: "Fragile Structure (Osteoporosis)",
+      description: "The outer shell is very thin and brittle. The inner structure has large gaps. A fall on an outstretched hand is the #1 cause of fractures here.",
+      stats: { bmd: 'Critical', statsClass: styles.statCritical, cartilage: 'Normal' }
+    },
+    treatment: {
+      title: "Rebuilding Strength",
+      description: "Treatment is thickening the outer shell and restoring some inner density. Fracture risk is steadily decreasing.",
+      stats: { bmd: 'Recovery', statsClass: styles.statModerate, cartilage: 'Stable' }
+    }
+  };
+
+  const info = patientInfo[stage];
+
   return {
-    svg: `<svg viewBox="0 0 450 480" class="${styles.breathingAnimation}"><text x="50%" y="50%" text-anchor="middle">Wrist Visualization</text></svg>`,
-    title: "Wrist Visualization",
-    description: "Your wrist bones have a dense honeycomb structure...",
+    svg,
+    title: info.title,
+    description: info.description,
     stats: {
-      bmd: 'Normal', bmdClass: styles.statGood, risk: 'Low', riskClass: styles.statGood, cartilage: 'N/A', cartClass: styles.statGood
+      bmd: info.stats.bmd,
+      bmdClass: info.stats.statsClass,
+      risk: info.stats.risk || (stage === 'advanced' ? 'High' : 'Low'),
+      riskClass: info.stats.statsClass,
+      cartilage: info.stats.cartilage,
+      cartClass: styles.statGood
     }
   };
 };
+
+export const HERO_PILLS_DATA = [
+  {
+    icon: "bone",
+    color: "#ff9800",
+    label: "T-score",
+    value: "-1.5"
+  },
+  {
+    icon: "heartbeat",
+    color: "#4caf50",
+    label: "Estrogen",
+    value: "70%"
+  },
+  {
+    icon: "chart-line",
+    color: "#ec407a",
+    label: "BMD",
+    value: "85%"
+  }
+];
