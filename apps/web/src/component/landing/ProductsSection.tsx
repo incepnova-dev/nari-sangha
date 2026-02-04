@@ -31,10 +31,10 @@ const ProductsSection: React.FC = () => {
                                 <div className={styles.productIcon}>{product.imageIcon}</div>
                                 <div className={styles.productInfo}>
                                     <h4>{product.name}</h4>
-                                    <div className={styles.productMeta}>
+                                    {/* <div className={styles.productMeta}>
                                         <span className={styles.price}>₹{product.price}</span>
                                         {product.originalPrice && <span className={styles.originalPrice}>₹{product.originalPrice}</span>}
-                                    </div>
+                                    </div> */}
                                     <div className={styles.rating}>⭐ {product.rating} ({product.reviews})</div>
                                 </div>
                             </div>

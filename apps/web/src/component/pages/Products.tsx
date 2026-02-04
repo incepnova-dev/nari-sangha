@@ -176,7 +176,6 @@ const Products: React.FC = () => {
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    height: '400px',
                                     cursor: 'pointer',
                                     position: 'relative',
                                     transition: 'all 0.3s ease'
@@ -285,8 +284,8 @@ const Products: React.FC = () => {
                                         ))}
                                     </div>
 
-                                    {/* Price Row - Pinned to Bottom */}
-                                    <div style={{
+                                    {/* Price Row Hidden on Card - Visible in Modal */}
+                                    {/* <div style={{
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
@@ -300,7 +299,7 @@ const Products: React.FC = () => {
                                                 <span style={{ textDecoration: 'line-through', color: '#999', fontSize: '14px' }}>₹{product.originalPrice}</span>
                                             )}
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         ))}
