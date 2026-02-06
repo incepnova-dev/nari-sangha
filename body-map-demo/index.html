@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Systems Map Explorer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fdfdfd;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-sub: #64748b;
+            --accent: #ff6b6b;
+            --body-skin: #fcece8;
+            --body-stroke: #d4a59a;
+            --hotspot-glow: rgba(255, 107, 107, 0.4);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1000px;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .map-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        #status-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        #selected-system {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* SVG Styling */
+        svg {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+            filter: drop-shadow(0 15px 25px rgba(212, 165, 154, 0.2));
+        }
+
+        .body-outline {
+            fill: var(--body-skin);
+            stroke: var(--body-stroke);
+            stroke-width: 1.5;
+        }
+
+        .system-point {
+            fill: var(--accent);
+            fill-opacity: 0.6;
+            stroke: #ffffff;
+            stroke-width: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .system-point:hover {
+            fill-opacity: 1;
+            r: 12;
+            filter: drop-shadow(0px 0px 8px var(--hotspot-glow));
+        }
+
+        .system-point.active-point {
+            fill: #1e293b !important;
+            fill-opacity: 1 !important;
+            stroke: #ffffff;
+            stroke-width: 3;
+            r: 11;
+        }
+
+        /* Tooltip behavior */
+        .tooltip {
+            position: absolute;
+            background: #1e293b;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 100;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(10px);
+            font-weight: 500;
+        }
+
+        .tooltip.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+            color: var(--text-sub);
+        }
+
+        .icon-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="map-section">
+            <svg viewBox="0 0 400 850" xmlns="http://www.w3.org/2000/svg" id="body-map">
+                <!-- Single Continuous Organic Silhouette -->
+                <path class="body-outline"
+                    d="M200,40 c-20,0 -35,18 -35,45 s15,48 35,48 s35,-21 35,-48 s-15,-45 -35,-45 M188,133 q12,10 24,0 l4,15 h-32 z M160,148 q40,-15 80,0 q25,45 20,105 q-15,60 -25,100 h-70 q-10,-40 -25,-100 q-5,-60 20,-105 z M165,353 h70 q25,20 25,65 q0,40 -15,75 h-90 q-15,-35 -15,-75 q0,-45 25,-65 z M160,155 q-35,30 -60,130 q-5,25 -20,105 q5,15 15,10 q10,-40 25,-125 q15,-80 40,-120 z M240,155 q35,30 60,130 q5,25 20,105 q-5,15 -15,10 q-10,-40 -25,-125 q-15,-80 -40,-120 z M155,493 q-10,120 0,320 q15,5 35,0 q5,-150 10,-320 z M245,493 q10,120 0,320 q-15,5 -35,0 q-5,-150 -10,-320 z" />
+
+                <!-- Systemic Hotspots -->
+                <circle id="endocrine" class="system-point" cx="200" cy="75" r="8">
+                    <title>Endocrine System</title>
+                </circle>
+
+                <circle id="thyroid" class="system-point" cx="200" cy="130" r="8">
+                    <title>Thyroid Gland</title>
+                </circle>
+
+                <circle id="cardiopulmonary" class="system-point" cx="200" cy="210" r="9">
+                    <title>Cardiopulmonary System</title>
+                </circle>
+
+                <circle id="digestive" class="system-point" cx="200" cy="290" r="9">
+                    <title>Digestive System</title>
+                </circle>
+
+                <circle id="renal" class="system-point" cx="225" cy="330" r="8">
+                    <title>Renal System</title>
+                </circle>
+
+                <circle id="reproductive" class="system-point" cx="200" cy="410" r="9">
+                    <title>Reproductive System</title>
+                </circle>
+
+                <circle id="musculoskeletal" class="system-point" cx="165" cy="630" r="8">
+                    <title>Musculoskeletal System</title>
+                </circle>
+            </svg>
+        </div>
+
+        <div class="info-section">
+            <h1>Organic Systems Map</h1>
+            <p>Anatomically precise hotspots mapped to a continuous female silhouette for clinical tracking.</p>
+
+            <div id="status-card">
+                <span class="label">System Selection</span>
+                <div id="selected-system">Pick a hotspot...</div>
+            </div>
+
+            <ul class="features-list">
+                <li class="feature-item">
+                    <div class="icon-dot"></div> Precise anatomical hotspots
+                </li>
+                <li class="feature-item">
+                    <div class="icon-dot"></div> One-tap focus tracking
+                </li>
+                <li class="feature-item">
+                    <div class="icon-dot"></div> Continuous organic silhouette
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        const tooltip = document.getElementById('tooltip');
+        const selectedSystemEl = document.getElementById('selected-system');
+        const points = document.querySelectorAll('.system-point');
+
+        points.forEach(point => {
+            // Hover logic
+            point.addEventListener('mouseenter', (e) => {
+                const name = point.querySelector('title').textContent;
+                tooltip.textContent = name;
+                tooltip.classList.add('show');
+
+                if (!selectedSystemEl.classList.contains('locked')) {
+                    selectedSystemEl.textContent = name;
+                }
+            });
+
+            point.addEventListener('mousemove', (e) => {
+                tooltip.style.left = (e.pageX + 20) + 'px';
+                tooltip.style.top = (e.pageY + 20) + 'px';
+            });
+
+            point.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+                if (!selectedSystemEl.classList.contains('locked')) {
+                    selectedSystemEl.textContent = 'Pick a hotspot...';
+                }
+            });
+
+            // Click logic
+            point.addEventListener('click', function () {
+                points.forEach(p => p.classList.remove('active-point'));
+                this.classList.add('active-point');
+
+                const systemName = this.querySelector('title').textContent;
+                selectedSystemEl.textContent = systemName;
+                selectedSystemEl.classList.add('locked');
+
+                console.log("System Selected:", systemName);
+
+                // Subtle UI feedback
+                const statusCard = document.getElementById('status-card');
+                statusCard.style.borderColor = 'var(--accent)';
+                statusCard.style.backgroundColor = '#fff1f2';
+                setTimeout(() => {
+                    statusCard.style.borderColor = '#e2e8f0';
+                    statusCard.style.backgroundColor = '#f8fafc';
+                }, 400);
+            });
+        });
+
+        // Click outside to reset
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('system-point')) {
+                points.forEach(p => p.classList.remove('active-point'));
+                selectedSystemEl.classList.remove('locked');
+                selectedSystemEl.textContent = 'Pick a hotspot...';
+            }
+        }, true);
+    </script>
+</body>
+
+</html>

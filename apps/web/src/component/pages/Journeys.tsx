@@ -175,13 +175,13 @@ const Journeys: React.FC = () => {
             image: adolescentImg
         },
         {
-            id: "community",
-            title: "Community & Stories",
-            focus: "Support-first pathways, groups, and safe spaces for shared experiences.",
-            includes: ["Support", "Events", "Safe Q&A"],
-            nextSteps: ["Join support groups", "Browse stories", "Expert-led forums"],
-            icon: "🤝",
-            path: ROUTES.COMMUNITY,
+            id: "gestational-diabetes",
+            title: "Gestational Diabetes",
+            focus: "Full guide to managing blood sugar during pregnancy.",
+            includes: ["Meal Planner", "Glucose Tracker", "Risk Analysis"],
+            nextSteps: ["Screening guide", "Dietary management", "Virtual consultation"],
+            icon: "🧬",
+            path: ROUTES.GESTATIONAL_DIABETES,
             image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
         },
         {

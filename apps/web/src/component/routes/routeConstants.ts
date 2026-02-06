@@ -45,4 +45,5 @@ export const ROUTES = {
     BONE_HEALTH: "/journeys/bone-health",
     CANCER_VISUALIZATION: "/visualizations/cancer",
     HORMONAL_HEALTH: "/journeys/hormonal-health",
+    GESTATIONAL_DIABETES: "/journeys/gestational-diabetes",
 } as const;

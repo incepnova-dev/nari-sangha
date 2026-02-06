@@ -1,0 +1,69 @@
+:root {
+    --bg-color: #fdfdfd;
+    --card-bg: #ffffff;
+    --text-main: #334155;
+    --text-sub: #64748b;
+    --accent: #ff6b6b;
+    --body-skin: #fcece8;
+    --body-stroke: #d4a59a;
+    --hotspot-glow: rgba(255, 107, 107, 0.4);
+}
+
+.body-map-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* SVG Styling */
+#body-map {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    filter: drop-shadow(0 15px 25px rgba(212, 165, 154, 0.2));
+}
+
+.body-outline {
+    fill: var(--body-skin);
+    stroke: var(--body-stroke);
+    stroke-width: 1.5;
+}
+
+.system-point {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.system-point:hover {
+    transform: scale(1.3);
+    filter: drop-shadow(0px 0px 8px var(--hotspot-glow));
+}
+
+.system-point.active-point {
+    filter: drop-shadow(0px 0px 12px var(--accent));
+    transform: scale(1.2);
+}
+
+/* Tooltip behavior */
+.body-map-tooltip {
+    position: fixed;
+    background: #1e293b;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 9999;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(10px);
+    font-weight: 500;
+}
+
+.body-map-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
