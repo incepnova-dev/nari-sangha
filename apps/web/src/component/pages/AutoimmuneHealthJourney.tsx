@@ -453,6 +453,18 @@ const AutoimmuneHealthJourney: React.FC = () => {
         };
     };
 
+    // Scroll Lock for Modal
+    useEffect(() => {
+        if (selectedTheme) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedTheme]);
+
     const scrollToThemes = () => {
         const element = document.getElementById("themesSection");
         if (element) {
@@ -463,92 +475,126 @@ const AutoimmuneHealthJourney: React.FC = () => {
     return (
         <div className={styles.page}>
             <div className={styles.pageShell}>
-                {/* HERO SECTION */}
+                {/* HERO SECTION WITH EXACT PARITY */}
                 <section className={styles.hero}>
-                    <div className={styles.heroContent}>
+                    <div className={styles['hero-content']}>
                         <h1>Your Autoimmune Health Journey Starts Here</h1>
-                        <p className={styles.heroSubtitle}>
+                        <p className={styles['hero-subtitle']}>
                             Empowering women with medically-accurate information about autoimmune diseases.
                             Understanding your body is the first step toward wellness.
                         </p>
 
-                        <div className={styles.heroStats}>
-                            <div className={styles.statItem}>
-                                <span className={styles.statNumber}>80%</span>
-                                <span className={styles.statLabel}>of patients are women</span>
+                        <div className={styles['hero-stats']}>
+                            <div className={styles['stat-item']}>
+                                <span className={styles['stat-number']}>80%</span>
+                                <span className={styles['stat-label']}>of patients are women</span>
                             </div>
-                            <div className={styles.statItem}>
-                                <span className={styles.statNumber}>1 in 12</span>
-                                <span className={styles.statLabel}>women affected</span>
+                            <div className={styles['stat-item']}>
+                                <span className={styles['stat-number']}>1 in 12</span>
+                                <span className={styles['stat-label']}>women affected worldwide</span>
                             </div>
-                            <div className={styles.statItem}>
-                                <span className={styles.statNumber}>10</span>
-                                <span className={styles.statLabel}>Health Themes</span>
+                            <div className={styles['stat-item']}>
+                                <span className={styles['stat-number']}>10</span>
+                                <span className={styles['stat-label']}>comprehensive themes</span>
                             </div>
                         </div>
 
-                        <div className={styles.heroCtaRow}>
-                            <button className={styles.btnPrimary} onClick={scrollToThemes}>Explore Health Themes</button>
-                            <button className={styles.btnSecondary}>Watch Introduction</button>
+                        <div className={styles['hero-cta-row']}>
+                            <button className={styles['btn-primary']} onClick={scrollToThemes}>Explore Health Themes</button>
+                            <button className={styles['btn-secondary']}>Watch Introduction</button>
                         </div>
                     </div>
 
-                    <div className={styles.heroVisual3d}>
-                        <div className={styles.immune3dContainer}>
-                            <div className={styles.immuneCore}>
-                                <div className={`${styles.coreRing} ${styles.ring1}`}></div>
-                                <div className={`${styles.coreRing} ${styles.ring2}`}></div>
-                                <div className={`${styles.coreRing} ${styles.ring3}`}></div>
-                                <div className={styles.coreCenter}>
-                                    <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }}>
+                    {/* STUNNING 3D IMMUNE SYSTEM VISUALIZATION */}
+                    <div className={styles['hero-visual-3d']}>
+                        <div className={styles['immune-3d-container']}>
+                            {/* Main Pulsating Core */}
+                            <div className={styles['immune-core']}>
+                                <div className={`${styles['core-ring']} ${styles['ring-1']}`}></div>
+                                <div className={`${styles['core-ring']} ${styles['ring-2']}`}></div>
+                                <div className={`${styles['core-ring']} ${styles['ring-3']}`}></div>
+                                <div className={styles['core-center']}>
+                                    <svg viewBox="0 0 100 100" className={styles['core-icon']}>
+                                        <circle cx="50" cy="50" r="45" fill="url(#coreGradient)" />
                                         <defs>
-                                            <linearGradient id="coreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                <stop offset="0%" stopColor="#ec407a" />
-                                                <stop offset="100%" stopColor="#9c27b0" />
+                                            <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style={{ stopColor: '#ec407a', stopOpacity: 1 }} />
+                                                <stop offset="100%" style={{ stopColor: '#9c27b0', stopOpacity: 1 }} />
                                             </linearGradient>
                                         </defs>
-                                        <circle cx="50" cy="50" r="45" fill="url(#coreGrad)" />
                                     </svg>
                                 </div>
                             </div>
 
-                            <div className={`${styles.orbitingCell} ${styles.cell1}`}><div className={styles.cellInner}>🦠</div></div>
-                            <div className={`${styles.orbitingCell} ${styles.cell2}`}><div className={styles.cellInner}>💉</div></div>
-                            <div className={`${styles.orbitingCell} ${styles.cell3}`}><div className={styles.cellInner}>🧬</div></div>
-                            <div className={`${styles.orbitingCell} ${styles.cell4}`}><div className={styles.cellInner}>⚡</div></div>
+                            {/* Orbiting Cells */}
+                            <div className={`${styles['orbiting-cell']} ${styles['cell-1']}`}>
+                                <div className={styles['cell-inner']}>🦠</div>
+                            </div>
+                            <div className={`${styles['orbiting-cell']} ${styles['cell-2']}`}>
+                                <div className={styles['cell-inner']}>💉</div>
+                            </div>
+                            <div className={`${styles['orbiting-cell']} ${styles['cell-3']}`}>
+                                <div className={styles['cell-inner']}>🧬</div>
+                            </div>
+                            <div className={`${styles['orbiting-cell']} ${styles['cell-4']}`}>
+                                <div className={styles['cell-inner']}>⚡</div>
+                            </div>
+
+                            {/* Floating Particles */}
+                            <div className={`${styles.particle} ${styles['particle-1']}`}></div>
+                            <div className={`${styles.particle} ${styles['particle-2']}`}></div>
+                            <div className={`${styles.particle} ${styles['particle-3']}`}></div>
+                            <div className={`${styles.particle} ${styles['particle-4']}`}></div>
+                            <div className={`${styles.particle} ${styles['particle-5']}`}></div>
+                            <div className={`${styles.particle} ${styles['particle-6']}`}></div>
                         </div>
 
-                        <div className={styles.animationDescription}>
-                            <div className={styles.descBadge}>✨ Interactive Immune System</div>
-                            <h3 className={styles.descTitle}>Your Body's Defense Network</h3>
-                            <p className={styles.descText}>
-                                The pulsating core represents your immune system's constant vigilance,
-                                while orbiting cells symbolize antibodies and T-cells working in harmony.
+                        {/* 3D Animation Description */}
+                        <div className={styles['animation-description']}>
+                            <div className={styles['desc-badge']}>
+                                <span className={styles['badge-icon']}>✨</span>
+                                <span className={styles['badge-text']}>Interactive Immune System</span>
+                            </div>
+                            <h3 className={styles['desc-title']}>Your Body's Defense Network</h3>
+                            <p className={styles['desc-text']}>
+                                Watch how immune cells communicate and protect your body. The pulsating core represents
+                                your immune system's constant vigilance, while orbiting elements symbolize antibodies,
+                                T-cells, and B-cells working in harmony.
                             </p>
+                            <div className={styles['desc-legend']}>
+                                <div className={styles['legend-item']}>
+                                    <span className={styles['legend-dot']} style={{ background: 'linear-gradient(135deg, #ec407a, #9c27b0)' }}></span>
+                                    <span className={styles['legend-label']}>Immune Core</span>
+                                </div>
+                                <div className={styles['legend-item']}>
+                                    <span className={styles['legend-dot']} style={{ background: '#4fc3f7' }}></span>
+                                    <span className={styles['legend-label']}>Active Cells</span>
+                                </div>
+                                <div className={styles['legend-item']}>
+                                    <span className={styles['legend-dot']} style={{ background: 'rgba(236,64,122,0.3)' }}></span>
+                                    <span className={styles['legend-label']}>Energy Flow</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                {/* THEME EXPLORER */}
+                {/* THEMES EXPLORATION */}
                 <section id="themesSection" className={styles.themesSection}>
                     <div className={styles.sectionHeaderEnhanced}>
-                        <div className={styles.headerContent}>
+                        <div className={styles.headerTitleBlock}>
                             <h2 className={styles.sectionTitleGradient}>Discover Your Health Journey</h2>
-                            <p className={styles.sectionSubtitle}>
+                            <p className={styles.heroSubtitle}>
                                 10 Essential themes designed for comprehensive understanding.
-                                <strong>Click any theme</strong> to unlock insights.
+                                <br />Click any theme to unlock insights.
                             </p>
                         </div>
-
                         <div className={styles.progressTracker}>
                             <div className={styles.trackerVisual}>
                                 <svg width="140" height="140" className={styles.progressCircleSvg}>
                                     <circle cx="70" cy="70" r="60" className={styles.progressBgCircle} />
-                                    <circle
-                                        cx="70" cy="70" r="60"
-                                        className={styles.progressFillCircle}
-                                        style={{ strokeDashoffset: 377 - (377 * progressPercent) / 100 }}
-                                    />
+                                    <circle cx="70" cy="70" r="60" className={styles.progressFillCircle}
+                                        style={{ strokeDashoffset: 377 - (377 * progressPercent) / 100 }} />
                                     <defs>
                                         <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                             <stop offset="0%" stopColor="#ec407a" />
@@ -557,23 +603,25 @@ const AutoimmuneHealthJourney: React.FC = () => {
                                     </defs>
                                 </svg>
                                 <div className={styles.progressCenter}>
-                                    <div className={styles.progressNumber}>{progressPercent}%</div>
-                                    <div className={styles.progressLabel}>Explored</div>
+                                    <span className={styles.progressNumber}>{progressPercent}%</span>
+                                    <span className={styles.progressLabel}>Explored</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div className={styles.themeGridEnhanced}>
-                        {Array.from(Object.values(themeData)).map(theme => (
-                            <div
+                        {Object.values(themeData).map(theme => (
+                            <motion.div
                                 key={theme.id}
-                                className={`${styles.themeCard3d} ${exploredThemes.has(theme.id) ? styles.explored : ""}`}
+                                className={`${styles.themeCard3d} ${exploredThemes.has(theme.id) ? styles.explored : ''}`}
                                 onClick={() => handleThemeClick(theme.id)}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
                             >
                                 <div className={styles.cardIconContainer}>
-                                    <div className={styles.iconBg}></div>
-                                    <span className={styles.cardIcon}>{theme.icon}</span>
+                                    <div className={styles.iconBg} />
+                                    <div className={styles.cardIcon}>{theme.icon}</div>
                                 </div>
                                 <h3 className={styles.cardTitle}>{theme.title}</h3>
                                 <p className={styles.cardDescription}>{theme.subtitle}</p>
@@ -581,30 +629,40 @@ const AutoimmuneHealthJourney: React.FC = () => {
                                     <span className={styles.cardBadge}>{theme.facts.length} Insights</span>
                                     <div className={styles.cardArrow}>→</div>
                                 </div>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </section>
 
-                {/* BODY SIMULATOR */}
+                {/* SYSTEM SIMULATOR SECTION */}
                 <section className={styles.bodySimulatorSection}>
                     <div className={styles.simulatorHeader}>
-                        <h2 className={styles.sectionTitleGradient}>Autoimmune Disease: What Happens Inside</h2>
+                        <h2 className={styles.sectionTitleGradient}>Body System Simulator</h2>
+                        <p className={styles.heroSubtitle}>Visualize how autoimmune conditions impact specific body regions.</p>
                     </div>
 
                     <div className={styles.simulatorTabs}>
-                        <button className={`${styles.simTab} ${currentSimTab === 'normal' ? styles.active : ''}`} onClick={() => setCurrentSimTab('normal')}>
+                        <div
+                            className={`${styles.simTab} ${currentSimTab === 'normal' ? styles.active : ''}`}
+                            onClick={() => setCurrentSimTab('normal')}
+                        >
                             <span className={styles.tabIcon}>✓</span>
-                            <span className={styles.tabLabel}>Normal Immunity</span>
-                        </button>
-                        <button className={`${styles.simTab} ${currentSimTab === 'breakdown' ? styles.active : ''}`} onClick={() => setCurrentSimTab('breakdown')}>
+                            <span>Normal Immunity</span>
+                        </div>
+                        <div
+                            className={`${styles.simTab} ${currentSimTab === 'breakdown' ? styles.active : ''}`}
+                            onClick={() => setCurrentSimTab('breakdown')}
+                        >
                             <span className={styles.tabIcon}>⚡</span>
-                            <span className={styles.tabLabel}>Immune Breakdown</span>
-                        </button>
-                        <button className={`${styles.simTab} ${currentSimTab === 'attack' ? styles.active : ''}`} onClick={() => setCurrentSimTab('attack')}>
+                            <span>Immune Breakdown</span>
+                        </div>
+                        <div
+                            className={`${styles.simTab} ${currentSimTab === 'attack' ? styles.active : ''}`}
+                            onClick={() => setCurrentSimTab('attack')}
+                        >
                             <span className={styles.tabIcon}>🎯</span>
-                            <span className={styles.tabLabel}>Self-Attack</span>
-                        </button>
+                            <span>Self-Attack</span>
+                        </div>
                     </div>
 
                     <div className={styles.simulatorContent}>
@@ -715,10 +773,10 @@ const AutoimmuneHealthJourney: React.FC = () => {
                     </div>
                 </section>
 
-                {/* THEME DETAIL PANEL */}
+                {/* THEME DETAIL PANEL (CONTROLS MODAL) */}
                 <AnimatePresence>
                     {selectedTheme && (
-                        <>
+                        <div className={styles.modalOverlay}>
                             <motion.div
                                 className={styles.backdrop}
                                 initial={{ opacity: 0 }}
@@ -727,13 +785,13 @@ const AutoimmuneHealthJourney: React.FC = () => {
                                 onClick={() => setSelectedTheme(null)}
                             />
                             <motion.div
-                                className={`${styles.infoPanel} ${styles.active}`}
-                                initial={{ right: "-100%" }}
-                                animate={{ right: 0 }}
-                                exit={{ right: "-100%" }}
-                                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                                className={styles.modalContent}
+                                initial={{ x: "100%" }}
+                                animate={{ x: 0 }}
+                                exit={{ x: "100%" }}
+                                transition={{ type: "spring", damping: 30, stiffness: 300 }}
                             >
-                                <button className={styles.closePanel} onClick={() => setSelectedTheme(null)}>✕</button>
+                                <button className={styles.closeModal} onClick={() => setSelectedTheme(null)}>✕</button>
                                 <div className={styles.panelHeader}>
                                     <div className={styles.panelIcon}>{selectedTheme.icon}</div>
                                     <div className={styles.panelTitleBlock}>
@@ -753,7 +811,7 @@ const AutoimmuneHealthJourney: React.FC = () => {
                                     })}
                                 </div>
                             </motion.div>
-                        </>
+                        </div>
                     )}
                 </AnimatePresence>
                 <div id="body-map-tooltip" className="body-map-tooltip" ref={tooltipRef}></div>
