@@ -15,7 +15,8 @@
 /* Hero Section */
 .menopause-hero {
     background: radial-gradient(circle at top left, #fce4ec 0, #f3e5f5 45%, #ffffff 100%);
-    padding: 6rem 2rem;
+    padding: 80px 5% 60px;
+    min-height: 80vh;
     position: relative;
     overflow: hidden;
     border-radius: 0 0 40px 40px;

@@ -21,6 +21,7 @@ import adolescentImg from "../../assets/journey_adolescent.png";
 import chronicImg from "../../assets/journey_chronic.png";
 import perinatalFamilyImg from "../../assets/journey_perinatal_family.png";
 import autoimmuneImg from "../../assets/journey_autoimmune.png";
+import symptomsImg from "../../assets/journey_symptoms.png";
 
 interface Journey {
     id: string;
@@ -91,7 +92,7 @@ const Journeys: React.FC = () => {
             nextSteps: ["Interactive body exploration", "Hormonal crash timeline", "Connect with counselors"],
             icon: "🧬",
             path: ROUTES.PERINATAL_WELLNESS,
-            image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80"
+            image: mentalImg
         },
         {
             id: "fertility",
@@ -142,7 +143,7 @@ const Journeys: React.FC = () => {
             nextSteps: ["Screening schedule", "Vaccines plan", "High risk preparation"],
             icon: "🛡️",
             path: ROUTES.PREVENTIVE_HEALTH,
-            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+            image: symptomsImg
         },
         {
             id: "menstrual-health",
@@ -175,14 +176,14 @@ const Journeys: React.FC = () => {
             image: adolescentImg
         },
         {
-            id: "gestational-diabetes",
-            title: "Gestational Diabetes",
-            focus: "Full guide to managing blood sugar during pregnancy.",
-            includes: ["Meal Planner", "Glucose Tracker", "Risk Analysis"],
-            nextSteps: ["Screening guide", "Dietary management", "Virtual consultation"],
-            icon: "🧬",
-            path: ROUTES.GESTATIONAL_DIABETES,
-            image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80"
+            id: "preeclampsia",
+            title: "Preeclampsia Education",
+            focus: "Understanding, prevention, and management of preeclampsia.",
+            includes: ["Symptom Checker", "Risk Assessment", "Management Guide"],
+            nextSteps: ["Check Symptoms", "Understand Risks", "Find Specialist"],
+            icon: "🩺",
+            path: ROUTES.PREECLAMPSIA_EDUCATION,
+            image: pregnancyImg
         },
         {
             id: "chronic",
@@ -222,7 +223,7 @@ const Journeys: React.FC = () => {
             nextSteps: ["Interactive bone explorer", "Bone density screening", "Prevention checklist"],
             icon: "🦴",
             path: ROUTES.BONE_HEALTH,
-            image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
+            image: menopauseImg
         }
 
     ];

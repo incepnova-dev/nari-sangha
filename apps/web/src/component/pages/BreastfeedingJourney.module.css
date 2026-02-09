@@ -1,0 +1,693 @@
+.breastfeedingPageRoot {
+    --primary: #ec407a;
+    --primary-dark: #d81b60;
+    --bg: #faf5fb;
+    --text: #212121;
+    --text-soft: #555;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.fadeInUp {
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.heroAccent {
+    color: var(--primary);
+}
+
+@keyframes float-journey {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    position: relative;
+    min-height: 90vh !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 80px 5% 60px !important;
+    background: linear-gradient(135deg, #faf5fb 0%, #fce4ec 50%, #ede7f6 100%) !important;
+    border-radius: 0 0 32px 32px !important;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.heroContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    /* Parity with HTML */
+}
+
+.heroTitle {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+.titleEmphasis {
+    background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroDesc {
+    font-size: 1.1rem;
+    color: var(--text-soft);
+    margin-bottom: 2rem;
+}
+
+.heroVisual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.journeySvg {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(236, 64, 122, 0.2));
+    animation: float-journey 6s ease-in-out infinite;
+}
+
+.heroBadge {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(236, 64, 122, 0.2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    animation: float 4s ease-in-out infinite;
+}
+
+.heroActions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    /* Left-aligned */
+    flex-wrap: wrap;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+/* --- BUTTONS --- */
+.btnPrimary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-dark), #f06292);
+    color: white !important;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.btnPrimary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(216, 27, 96, 0.4);
+}
+
+.btnOutline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.btnOutline:hover {
+    background: rgba(236, 64, 122, 0.1);
+}
+
+/* --- SECTIONS --- */
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sectionSubtitle {
+    font-size: 1.1rem;
+    color: var(--text-soft);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- CARDS & PANELS --- */
+.cardBase {
+    background: white !important;
+    border-radius: 24px !important;
+    box-shadow: var(--card-shadow) !important;
+    padding: 2.5rem !important;
+    border: 1px solid rgba(236, 64, 122, 0.1) !important;
+}
+
+.simPanel {
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.05) 0%, rgba(236, 64, 122, 0.1) 100%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(236, 64, 122, 0.1);
+}
+
+/* Specific component card styles */
+.breastfeedingPageRoot :global(.bio-twin-section) {
+    background: white;
+    padding: 60px 0;
+}
+
+.breastfeedingPageRoot :global(.bio-card) {
+    background: white;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(236, 64, 122, 0.05);
+}
+
+.breastfeedingPageRoot :global(.bio-card):hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.breastfeedingPageRoot :global(.narrator-bar) {
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+.breastfeedingPageRoot :global(.narrator-bar.system) {
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.05), rgba(236, 64, 122, 0.1));
+    border-left: 5px solid var(--primary);
+}
+
+.breastfeedingPageRoot :global(.latch-section) {
+    background: var(--bg);
+    /* Alternating */
+    padding: 80px 0;
+}
+
+.breastfeedingPageRoot :global(.nutrition-section) {
+    background: white;
+    padding: 80px 0;
+}
+
+.breastfeedingPageRoot :global(.nutrient-card) {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.breastfeedingPageRoot :global(.nutrient-card):hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.breastfeedingPageRoot :global(.lifestyle-section) {
+    background: var(--bg);
+    /* Alternating */
+    padding: 80px 0;
+}
+
+.breastfeedingPageRoot :global(.lifestyle-wheel) {
+    background: white;
+    border-radius: 32px;
+    box-shadow: var(--card-shadow);
+    padding: 3rem;
+    transition: all 0.3s ease;
+}
+
+/* Utility classes to match HTML visuals */
+.textDescription {
+    color: var(--text-soft);
+}
+
+.accentTitle {
+    color: var(--primary-dark);
+}
+
+/* --- BOND SECTION --- */
+.bondSection {
+    background: white;
+    border-radius: 32px;
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 10px 40px rgba(236, 64, 122, 0.05);
+    overflow: hidden;
+    border: 1px solid rgba(236, 64, 122, 0.1);
+}
+
+.bondContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.bondLabel {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ec407a;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: rgba(236, 64, 122, 0.08);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+}
+
+.bondText h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    background: linear-gradient(45deg, #d81b60, #ad1457);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bondText p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.bondQuote {
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #d81b60;
+    border-left: 4px solid #fce4ec;
+    padding-left: 1.5rem;
+}
+
+.bondVisual {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(236, 64, 122, 0.2);
+}
+
+.photoContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.realPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photoOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(255, 182, 193, 0.3), rgba(236, 64, 122, 0.5));
+    mix-blend-mode: soft-light;
+}
+
+.overlaySvg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* --- THEME NAVIGATION --- */
+.themeNav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.themeBtn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.themeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.themeBtn.active {
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.themeBtn.physical {
+    border-color: #e91e63;
+}
+
+.themeBtn.physical.active {
+    background: #e91e63;
+}
+
+.themeBtn.patterns {
+    border-color: #9c27b0;
+}
+
+.themeBtn.patterns.active {
+    background: #9c27b0;
+}
+
+.themeBtn.maternal {
+    border-color: #ff9800;
+}
+
+.themeBtn.maternal.active {
+    background: #ff9800;
+}
+
+.themeBtn.skills {
+    border-color: #2196f3;
+}
+
+.themeBtn.skills.active {
+    background: #2196f3;
+}
+
+.themeBtn.transitions {
+    border-color: #4caf50;
+}
+
+.themeBtn.transitions.active {
+    background: #4caf50;
+}
+
+.themeBtn.social {
+    border-color: #00bcd4;
+}
+
+.themeBtn.social.active {
+    background: #00bcd4;
+}
+
+/* --- TIMELINE SIMULATOR --- */
+.simulationContainer {
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    margin-bottom: 4rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.simulationGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.weekSliderContainer {
+    margin-bottom: 1.5rem;
+}
+
+.weekDisplay {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.weekSlider {
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(236, 64, 122, 0.2);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.weekSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(236, 64, 122, 0.4);
+}
+
+/* Modal Styles */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.modalBackdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border-radius: 24px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    z-index: 9999;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s;
+}
+
+.modal.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modalHeader {
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.1) 0%, rgba(236, 64, 122, 0.2) 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 2px solid rgba(236, 64, 122, 0.2);
+}
+
+.modalClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modalClose:hover {
+    background: var(--primary);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.modalTitle {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.modalBody {
+    padding: 2rem;
+}
+
+.attrSection {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(236, 64, 122, 0.03);
+    border-radius: 16px;
+    border-left: 4px solid var(--primary);
+}
+
+.attrSection h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Progress HUD */
+.progressHud {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    min-width: 280px;
+    border: 2px solid rgba(236, 64, 122, 0.2);
+}
+
+.hudTitle {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.progressBarBg {
+    background: rgba(236, 64, 122, 0.1);
+    border-radius: 999px;
+    height: 12px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #ec407a, #d81b60);
+    border-radius: 999px;
+    width: 0%;
+    transition: width 0.5s;
+}
+
+.hudStats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+}
+
+@media (max-width: 968px) {
+    .progressHud {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        min-width: auto;
+    }
+}

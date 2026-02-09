@@ -2,6 +2,67 @@
     background: #ffffff;
     min-height: 100vh;
     padding-bottom: 120px;
+    /* Local scope theme variables for hero parity */
+    --theme-hero-start: rgba(227, 11, 93, 0.92);
+    --theme-hero-end: rgba(122, 31, 162, 0.86);
+}
+
+/* 1. SURGICAL CLEARING: Kill all backgrounds/shadows/borders on children to remove "boxed" look */
+.journeysPage [class*="InnerPageHero_hero"] *,
+.journeysPage [class*="heroInner"],
+.journeysPage [class*="heroIllustration"],
+.journeysPage [class*="containerGrid"],
+.journeysPage [class*="heroActions"],
+.journeysPage [class*="heroTitle"],
+.journeysPage [class*="heroSubtitle"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* 2. ROOT BACKGROUND: Apply the gradient ONLY to the root section */
+.journeysPage section[class*="InnerPageHero_hero"] {
+    background:
+        radial-gradient(900px 420px at 20% 20%, rgba(255, 209, 230, 0.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 10%, rgba(255, 255, 255, 0.14), transparent 55%),
+        linear-gradient(135deg, var(--theme-hero-start), var(--theme-hero-end)) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    min-height: 80vh !important;
+    padding: 80px 5% 60px !important;
+}
+
+/* 3. TEXT & TITLE REFINEMENT */
+.journeysPage [class*="heroTitle"] {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+.journeysPage [class*="heroSubtitle"] {
+    color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* 4. EXEMPTIONS: Re-apply specific backgrounds for elements that NEED them */
+.journeysPage [class*="heroTag"] {
+    background: #ffffff !important;
+    color: #3d4358 !important;
+    border: 2px solid rgba(227, 11, 93, 0.2) !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+}
+
+.journeysPage .primaryCta {
+    background: #ffffff !important;
+    color: #e30b5d !important;
+}
+
+.journeysPage .secondaryCta {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Hero Actions (Merged from Landing style) */
@@ -15,7 +76,7 @@
 
 .primaryCta {
     background: #ffffff;
-    color: var(--pink);
+    color: #e30b5d;
     padding: 14px 32px;
     border-radius: 999px;
     font-weight: 800;

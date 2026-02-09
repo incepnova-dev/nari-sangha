@@ -3,6 +3,8 @@ import styles from "./landing.module.css";
 import { useI18n } from "../../hooks/useI18n";
 import { stories, Story } from "../../data/seed";
 import StoryModal from "./StoryModal";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../routes/Routes";
 
 const WomenStories: React.FC = () => {
     const { t } = useI18n();
@@ -122,6 +124,20 @@ const WomenStories: React.FC = () => {
                                 </div>
                             </div>
                         ))}
+
+                        {/* Join Community CTA Hook */}
+                        <div className={styles.storyCard} style={{ background: 'linear-gradient(135deg, #fce4ec, #f3e5f5)', border: '2px dashed var(--deep-pink)' }}>
+                            <div className={styles.storyBody} style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+                                <div className={styles.storyIcon} style={{ fontSize: '48px', marginBottom: '20px' }}>🤝</div>
+                                <h3 style={{ fontSize: '22px', marginBottom: '12px', color: 'var(--deep-pink)' }}>Join Our Community</h3>
+                                <p style={{ fontSize: '14px', color: '#555', marginBottom: '20px', lineHeight: '1.6' }}>
+                                    Connect with thousands of women, share your story, and find support in our safe space.
+                                </p>
+                                <Link to={ROUTES.COMMUNITY} className={styles.readFullStoryBtn} style={{ background: '#d81b60', color: 'white', border: 'none', textDecoration: 'none', display: 'inline-block', textAlign: 'center' }}>
+                                    Join Now
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

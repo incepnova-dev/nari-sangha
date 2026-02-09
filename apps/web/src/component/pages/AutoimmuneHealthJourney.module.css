@@ -180,7 +180,8 @@
     height: 350px;
     display: grid;
     place-items: center;
-    perspective: 1000px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
 }
 
 /* Main Pulsating Core */
@@ -323,68 +324,64 @@
 .cell-1 {
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
     animation: orbit1 8s linear infinite;
 }
 
 .cell-2 {
     top: 50%;
     right: 0;
-    transform: translateY(-50%);
     animation: orbit2 10s linear infinite;
 }
 
 .cell-3 {
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
     animation: orbit3 12s linear infinite;
 }
 
 .cell-4 {
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
     animation: orbit4 9s linear infinite;
 }
 
 @keyframes orbit1 {
     0% {
-        transform: translate(-50%, 0) rotate(0deg) translateX(150px) rotate(0deg);
+        transform: translate(-50%, 0) rotate(0deg) translateX(160px) rotate(0deg);
     }
 
     100% {
-        transform: translate(-50%, 0) rotate(360deg) translateX(150px) rotate(-360deg);
+        transform: translate(-50%, 0) rotate(360deg) translateX(160px) rotate(-360deg);
     }
 }
 
 @keyframes orbit2 {
     0% {
-        transform: translate(0, -50%) rotate(0deg) translateX(150px) rotate(0deg);
+        transform: translate(0, -50%) rotate(0deg) translateX(160px) rotate(0deg);
     }
 
     100% {
-        transform: translate(0, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
+        transform: translate(0, -50%) rotate(360deg) translateX(160px) rotate(-360deg);
     }
 }
 
 @keyframes orbit3 {
     0% {
-        transform: translate(-50%, 0) rotate(0deg) translateX(150px) rotate(0deg);
+        transform: translate(-50%, 0) rotate(0deg) translateX(160px) rotate(0deg);
     }
 
     100% {
-        transform: translate(-50%, 0) rotate(360deg) translateX(150px) rotate(-360deg);
+        transform: translate(-50%, 0) rotate(360deg) translateX(160px) rotate(-360deg);
     }
 }
 
 @keyframes orbit4 {
     0% {
-        transform: translate(0, -50%) rotate(0deg) translateX(150px) rotate(0deg);
+        transform: translate(0, -50%) rotate(0deg) translateX(160px) rotate(0deg);
     }
 
     100% {
-        transform: translate(0, -50%) rotate(360deg) translateX(150px) rotate(-360deg);
+        transform: translate(0, -50%) rotate(360deg) translateX(160px) rotate(-360deg);
     }
 }
 

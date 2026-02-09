@@ -76,17 +76,16 @@ const SERVICES: ServiceCategory[] = [
         color: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
     },
     {
-        title: "Master Your Breastfeeding Journey",
-        icon: "🍼",
-        tag: "Interactive Simulation",
-        desc: "Experience the biological wonder of lactation through our Bio-Twin simulation lab and interactive guides.",
+        title: "Gestational Diabetes",
+        icon: "🩸",
+        desc: "Comprehensive care and tracking for gestational diabetes.",
         items: [
-            "Lactation Biology",
-            "3D Latch Simulation",
-            "Nutritional Support",
-            "Interactive Positioning"
+            "Glucose Tracking",
+            "Meal Planning",
+            "Risk Analysis",
+            "Medical Management"
         ],
-        cta: "Begin Simulation",
+        cta: "Manage Health",
         color: "linear-gradient(135deg, #ec407a 0%, #d81b60 100%)"
     }
 ];
@@ -102,7 +101,7 @@ const ServicesSection: React.FC = () => {
             case "Specialized Care": navigate(ROUTES.COSMETIC_SURGERY); break;
             case "Nutrition & Fitness": navigate(ROUTES.NUTRITION_GUIDE); break;
             case "Diagnostic & Screening": navigate(ROUTES.PREVENTIVE_HEALTH); break;
-            case "Master Your Breastfeeding Journey": navigate(ROUTES.BREASTFEEDING); break;
+            case "Gestational Diabetes": navigate(ROUTES.GESTATIONAL_DIABETES); break;
             default: navigate(ROUTES.JOURNEYS);
         }
     };

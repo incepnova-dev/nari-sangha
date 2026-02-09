@@ -1,7 +1,7 @@
 .hero {
     background: linear-gradient(135deg, var(--theme-hero-start) 0%, var(--theme-hero-end) 100%);
-    min-height: 85vh;
-    padding: 100px 20px;
+    min-height: 80vh;
+    padding: 80px 5% 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,7 +99,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .hero {
-        padding: 60px 20px 50px;
+        padding: 60px 5% 50px;
     }
 
     .heroSubtitle {
@@ -109,7 +109,7 @@
 
 @media (max-width: 480px) {
     .hero {
-        padding: 50px 16px 40px;
+        padding: 50px 5% 40px;
     }
 
     .heroTag {

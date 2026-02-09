@@ -43,6 +43,7 @@ import NutritionGuide from "../pages/NutritionGuide";
 import AestheticSimulator from "../pages/AestheticSimulator";
 import GynaecologyOB from "../pages/GynaecologyOB";
 import GestationalDiabetes from "../pages/GestationalDiabetes";
+import PreeclampsiaEducation from "../pages/PreeclampsiaEducation";
 
 
 import InsuranceGuide from "../pages/InsuranceGuide";
@@ -108,6 +109,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.GYNAECOLOGY_OB} element={<GynaecologyOB />} />
         <Route path={ROUTES.HORMONAL_HEALTH} element={<MenstrualHealthJourney />} />
         <Route path={ROUTES.GESTATIONAL_DIABETES} element={<GestationalDiabetes />} />
+        <Route path={ROUTES.PREECLAMPSIA_EDUCATION} element={<PreeclampsiaEducation />} />
 
 
 

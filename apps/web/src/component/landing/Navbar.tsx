@@ -55,7 +55,6 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
     { key: "hero.nav.journeys", path: ROUTES.JOURNEYS },
     { key: "hero.nav.products", path: ROUTES.PRODUCTS },
     { key: "hero.nav.consult", path: ROUTES.APPOINTMENTS },
-    { key: "hero.nav.community", path: ROUTES.COMMUNITY },
     { key: "hero.nav.symptoms", path: ROUTES.SYMPTOM_CHECKER },
     { key: "hero.nav.about", path: ROUTES.ABOUT },
   ];
@@ -82,8 +81,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
                 } ${item.path === ROUTES.JOURNEYS ? styles.hoverJourneys :
                   item.path === ROUTES.PRODUCTS ? styles.hoverProducts :
                     item.path === ROUTES.APPOINTMENTS ? styles.hoverConsult :
-                      item.path === ROUTES.COMMUNITY ? styles.hoverCommunity :
-                        item.path === ROUTES.SYMPTOM_CHECKER ? styles.hoverSymptoms : ''
+                      item.path === ROUTES.SYMPTOM_CHECKER ? styles.hoverSymptoms : ''
                 }`}
             >
               {t(item.key)}

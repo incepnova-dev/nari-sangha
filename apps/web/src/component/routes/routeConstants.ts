@@ -46,4 +46,5 @@ export const ROUTES = {
     CANCER_VISUALIZATION: "/visualizations/cancer",
     HORMONAL_HEALTH: "/journeys/hormonal-health",
     GESTATIONAL_DIABETES: "/journeys/gestational-diabetes",
+    PREECLAMPSIA_EDUCATION: "/journeys/preeclampsia-education",
 } as const;
