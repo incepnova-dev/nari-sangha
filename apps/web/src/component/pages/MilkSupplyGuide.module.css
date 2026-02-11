@@ -1,0 +1,549 @@
+.pageContainer {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #faf8f9 0%, #ffffff 100%);
+}
+
+.mainContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Section Headers */
+.trackerSection h2,
+.boostersSection h2,
+.nutritionSection h2,
+.mealPlanSection h2,
+.hydrationSection h2,
+.warningSection h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.sectionDesc {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Tracker Section */
+.trackerSection {
+    margin-bottom: 60px;
+}
+
+.trackerCard {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.trackerInput {
+    margin-bottom: 30px;
+}
+
+.trackerInput label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.trackerInput input[type="range"] {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #f44336 0%, #ff9800 50%, #4caf50 100%);
+    outline: none;
+    -webkit-appearance: none;
+    margin-bottom: 10px;
+}
+
+.trackerInput input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid #d81b60;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.trackerScale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+
+.supplyStatus {
+    background: white;
+    border: 3px solid;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.statusHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.statusLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statusValue {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.statusBar {
+    height: 14px;
+    background: #e0e0e0;
+    border-radius: 7px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.statusFill {
+    height: 100%;
+    border-radius: 7px;
+    transition: width 0.5s ease;
+}
+
+.statusMessage {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+    text-align: center;
+}
+
+/* Boosters Section */
+.boostersSection {
+    margin-bottom: 60px;
+}
+
+.boostersGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.boosterCard {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+    border-top: 4px solid #d81b60;
+}
+
+.boosterCard:hover {
+    transform: translateY(-5px);
+}
+
+.boosterIcon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.boosterCard h4 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.boosterDesc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.boosterFreq {
+    display: inline-block;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d81b60;
+}
+
+/* Nutrition Section */
+.nutritionSection {
+    margin-bottom: 60px;
+}
+
+.categoryFilter {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.categoryFilter button {
+    padding: 12px 24px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categoryFilter button:hover {
+    border-color: #d81b60;
+    color: #d81b60;
+}
+
+.categoryFilter button.active {
+    background: linear-gradient(135deg, #d81b60 0%, #f06292 100%);
+    border-color: #d81b60;
+    color: white;
+}
+
+.foodsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.foodCard {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.foodCard:hover {
+    transform: translateY(-3px);
+}
+
+.foodIcon {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.foodCard h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.foodCard p {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.categoryTag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.categoryTag.galactagogue {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.categoryTag.nutrition {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.categoryTag.hydration {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+/* Meal Plan Section */
+.mealPlanSection {
+    margin-bottom: 60px;
+}
+
+.mealPlanCard {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.meal {
+    padding: 25px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.meal:last-child {
+    border-bottom: none;
+}
+
+.mealTime {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+    color: #d81b60;
+    margin-bottom: 12px;
+}
+
+.meal ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.meal li {
+    font-size: 15px;
+    color: #555;
+    padding: 5px 0;
+    line-height: 1.6;
+}
+
+/* Hydration Section */
+.hydrationSection {
+    margin-bottom: 60px;
+}
+
+.hydrationCard {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 24px;
+    padding: 40px;
+}
+
+.hydrationInfo {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.hydrationIcon {
+    font-size: 64px;
+}
+
+.hydrationText h4 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+}
+
+.hydrationTarget {
+    font-size: 36px;
+    font-weight: 900;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+.hydrationTip {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.hydrationBenefits {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+}
+
+.hydrationBenefits h5 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+.hydrationBenefits ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.hydrationBenefits li {
+    font-size: 14px;
+    color: #555;
+    padding: 5px 0;
+}
+
+/* Warning Section */
+.warningSection {
+    margin-bottom: 60px;
+}
+
+.warningCard {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+}
+
+.warningCard p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.warningCard ul {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    padding-left: 20px;
+}
+
+.warningCard li {
+    font-size: 15px;
+    color: #555;
+    padding: 8px 0;
+    line-height: 1.6;
+}
+
+.helpBtn {
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #f57c00 0%, #ff9800 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.helpBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(245, 124, 0, 0.3);
+}
+
+/* CTA Section */
+.ctaSection {
+    margin-top: 60px;
+}
+
+.ctaCard {
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+}
+
+.ctaCard h3 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+.ctaCard p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.primaryBtn {
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #d81b60 0%, #f06292 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(216, 27, 96, 0.3);
+}
+
+.secondaryBtn {
+    padding: 16px 32px;
+    background: white;
+    color: #d81b60;
+    border: 2px solid #d81b60;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+    background: #d81b60;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .trackerCard,
+    .hydrationCard,
+    .warningCard,
+    .ctaCard {
+        padding: 25px;
+    }
+    
+    .hydrationInfo {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hydrationTarget {
+        font-size: 28px;
+    }
+    
+    .boostersGrid,
+    .foodsGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .categoryFilter {
+        gap: 8px;
+    }
+    
+    .categoryFilter button {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    .ctaCard h3 {
+        font-size: 22px;
+    }
+}

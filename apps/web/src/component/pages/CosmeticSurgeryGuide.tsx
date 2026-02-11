@@ -17,6 +17,69 @@ interface Procedure {
     highlights: string[];
 }
 
+const POST_PREGNANCY_TREATMENTS = [
+    {
+        id: 'mommy-makeover',
+        name: 'Mommy Makeover',
+        icon: '🌟',
+        description: 'Combined procedures to restore pre-pregnancy body: tummy tuck, breast lift, and liposuction.',
+        recovery: '4-6 weeks',
+        safeAfter: '6 months postpartum',
+        includes: ['Tummy Tuck', 'Breast Lift/Augmentation', 'Liposuction', 'Skin Tightening'],
+        considerations: ['Must be done breastfeeding', 'Wait until weight stabilizes', 'Plan childcare support for recovery']
+    },
+    {
+        id: 'diastasis-repair',
+        name: 'Diastasis Recti Repair',
+        icon: '💪',
+        description: 'Surgical correction of abdominal muscle separation that occurs during pregnancy.',
+        recovery: '6-8 weeks',
+        safeAfter: '12 months postpartum',
+        includes: ['Muscle Re-approximation', 'Core Reconstruction', 'Hernia Repair if needed'],
+        considerations: ['Try physical therapy first', 'Wait until fully healed', 'No heavy lifting for 6 weeks']
+    },
+    {
+        id: 'stretch-marks',
+        name: 'Stretch Mark Treatment',
+        icon: '✨',
+        description: 'Non-invasive treatments to reduce the appearance of pregnancy stretch marks.',
+        recovery: 'Minimal - 1-3 days',
+        safeAfter: '3 months postpartum',
+        includes: ['Laser Therapy', 'Microneedling', 'Chemical Peels', 'PRP Therapy'],
+        considerations: ['Multiple sessions needed', 'Best on newer marks', 'Skin type affects results']
+    },
+    {
+        id: 'skin-rejuvenation',
+        name: 'Postpartum Skincare',
+        icon: '🧴',
+        description: 'Address hormonal skin changes like melasma, acne, and dullness after pregnancy.',
+        recovery: 'No downtime',
+        safeAfter: 'Immediately if not breastfeeding',
+        includes: ['Melasma Treatment', 'Hormonal Acne Solutions', 'Hydration Therapy', 'Anti-aging Protocols'],
+        considerations: ['Some actives unsafe while breastfeeding', 'Hormone levels must stabilize', 'SPF is essential']
+    },
+    {
+        id: 'pelvic-floor',
+        name: 'Pelvic Floor Restoration',
+        icon: '🏥',
+        description: 'Therapeutic and surgical options for pelvic floor weakness after childbirth.',
+        recovery: '2-6 weeks depending on treatment',
+        safeAfter: '6 weeks postpartum for therapy',
+        includes: ['Kegel Therapy', 'Electrical Stimulation', 'Laser Tightening', 'Surgical Repair'],
+        considerations: ['Start with non-invasive options', 'Common after vaginal birth', 'Can improve incontinence']
+    },
+    {
+        id: 'hair-restoration',
+        name: 'Postpartum Hair Loss Treatment',
+        icon: '💇‍♀️',
+        description: 'Address postpartum hair shedding with targeted treatments and nutritional support.',
+        recovery: 'No downtime',
+        safeAfter: '3 months postpartum',
+        includes: ['PRP Hair Therapy', 'Nutritional Supplements', 'Scalp Treatments', 'Low-level Laser'],
+        considerations: ['Hair loss usually peaks 3-4 months postpartum', 'Often resolves naturally by 12 months', 'Rule out thyroid issues first']
+    }
+];
+
 const PROCEDURES: Procedure[] = [
     {
         id: "rhinoplasty",
@@ -72,6 +135,7 @@ const CosmeticSurgeryGuide: React.FC = () => {
     const navigate = useNavigate();
     const [selectedPoint, setSelectedPoint] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
+    const [selectedTreatment, setSelectedTreatment] = useState<string | null>(null);
     const [activeProcedure, setActiveProcedure] = useState<Procedure | null>(null);
 
     const bodyPoints = [
@@ -163,6 +227,121 @@ const CosmeticSurgeryGuide: React.FC = () => {
                                 </div>
                             </article>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* POST-PREGNANCY BODY & AESTHETICS */}
+            <section className={styles.section} style={{ background: '#fcf8fa' }}>
+                <div className={styles.container}>
+                    <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <span style={{
+                            background: 'linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)',
+                            color: '#d81b60',
+                            fontSize: '12px',
+                            fontWeight: 800,
+                            padding: '6px 16px',
+                            borderRadius: '999px',
+                            display: 'inline-block',
+                            marginBottom: '16px',
+                            letterSpacing: '0.5px'
+                        }}>POST-PREGNANCY CARE</span>
+                        <h2 style={{ fontSize: '32px', fontWeight: 900, marginBottom: '12px', color: '#1a1a1a' }}>Body & Aesthetics Recovery</h2>
+                        <p style={{ fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+                            Safe cosmetic treatments, skincare, and recovery plans for the post-pregnancy body.
+                        </p>
+                    </div>
+
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                        gap: '24px',
+                        marginBottom: '40px'
+                    }}>
+                        {POST_PREGNANCY_TREATMENTS.map(treatment => (
+                            <div key={treatment.id} style={{
+                                background: 'white',
+                                borderRadius: '24px',
+                                padding: '32px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
+                                border: selectedTreatment === treatment.id ? '2px solid #d81b60' : '2px solid transparent'
+                            }}
+                                onClick={() => setSelectedTreatment(selectedTreatment === treatment.id ? null : treatment.id)}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                                    <span style={{ fontSize: '36px' }}>{treatment.icon}</span>
+                                    <div>
+                                        <h3 style={{ fontSize: '20px', fontWeight: 800, marginBottom: '4px', color: '#1a1a1a' }}>{treatment.name}</h3>
+                                        <span style={{ fontSize: '12px', fontWeight: 700, color: '#d81b60', background: '#fce4ec', padding: '4px 10px', borderRadius: '20px' }}>
+                                            Safe after: {treatment.safeAfter}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.7, marginBottom: '16px' }}>
+                                    {treatment.description}
+                                </p>
+
+                                <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+                                    <div style={{ flex: 1, background: '#f5f5f5', padding: '12px', borderRadius: '12px', textAlign: 'center' }}>
+                                        <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, color: '#888', marginBottom: '4px' }}>RECOVERY</span>
+                                        <span style={{ fontSize: '14px', fontWeight: 800, color: '#1a1a1a' }}>{treatment.recovery}</span>
+                                    </div>
+                                </div>
+
+                                <div style={{ marginBottom: '16px' }}>
+                                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#888', display: 'block', marginBottom: '8px' }}>INCLUDES:</span>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                        {treatment.includes.map((item, i) => (
+                                            <span key={i} style={{
+                                                background: '#e3f2fd',
+                                                color: '#1565c0',
+                                                padding: '4px 12px',
+                                                borderRadius: '20px',
+                                                fontSize: '12px',
+                                                fontWeight: 700
+                                            }}>{item}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {selectedTreatment === treatment.id && (
+                                    <div style={{
+                                        borderTop: '1px solid #f0f0f0',
+                                        paddingTop: '16px',
+                                        marginTop: '8px'
+                                    }}>
+                                        <span style={{ fontSize: '12px', fontWeight: 700, color: '#f57c00', display: 'block', marginBottom: '10px' }}>
+                                            ⚠️ IMPORTANT CONSIDERATIONS:
+                                        </span>
+                                        <ul style={{ paddingLeft: '16px', margin: 0 }}>
+                                            {treatment.considerations.map((c, i) => (
+                                                <li key={i} style={{ fontSize: '13px', color: '#555', padding: '4px 0', lineHeight: 1.6 }}>{c}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Safety Advisory */}
+                    <div style={{
+                        background: 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)',
+                        padding: '30px',
+                        borderRadius: '20px',
+                        textAlign: 'center'
+                    }}>
+                        <h4 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '12px', color: '#1a1a1a' }}>
+                            ⚕️ Important Safety Note
+                        </h4>
+                        <p style={{ fontSize: '14px', color: '#555', lineHeight: 1.7, maxWidth: '700px', margin: '0 auto' }}>
+                            Always consult with your OB/GYN and a board-certified plastic surgeon before pursuing any post-pregnancy procedures.
+                            Timing matters - most procedures should wait until you've finished breastfeeding and your body has fully recovered.
+                            Prioritize your health and your baby's wellbeing first.
+                        </p>
                     </div>
                 </div>
             </section>

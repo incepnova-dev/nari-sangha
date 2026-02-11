@@ -105,6 +105,26 @@ const Journeys: React.FC = () => {
             image: fertilityImg
         },
         {
+            id: "fertility-journey",
+            title: "Fertility Journey",
+            focus: "Understand IVF, IUI, and egg freezing with interactive biological simulators.",
+            includes: ["IVF Guide", "IUI Process", "Egg Freezing", "Success Estimator"],
+            nextSteps: ["Explore treatment options", "Calculate success rates", "Find fertility specialist"],
+            icon: "🧪",
+            path: ROUTES.FERTILITY_JOURNEY,
+            image: fertilityImg
+        },
+        {
+            id: "conception-guide",
+            title: "Conception Guide",
+            focus: "Track ovulation, understand your cycle, and get natural tips to improve conception chances.",
+            includes: ["Ovulation Tracker", "Fertility Window", "Natural Tips", "Timing Guide"],
+            nextSteps: ["Calculate fertile window", "Track ovulation signs", "Optimize lifestyle"],
+            icon: "📅",
+            path: ROUTES.CONCEPTION_GUIDE,
+            image: fertilityImg
+        },
+        {
             id: "menopause",
             title: "Menopause Counseling",
             focus: "Navigate the transition with expert advice on symptom management.",
@@ -132,6 +152,16 @@ const Journeys: React.FC = () => {
             nextSteps: ["Lactation simulation", "3D latch practice", "Meal planning"],
             icon: "🍼",
             path: ROUTES.BREASTFEEDING,
+            image: breastfeedingImg
+        },
+        {
+            id: "milk-supply",
+            title: "Milk Supply & Nutrition",
+            focus: "Dietary plans and hydration tips to naturally boost your milk supply and energy levels.",
+            includes: ["Galactagogues", "Meal Plans", "Hydration Guide", "Supply Boosters"],
+            nextSteps: ["Track milk supply", "View meal plans", "Join nursing community"],
+            icon: "🥛",
+            path: ROUTES.MILK_SUPPLY_GUIDE,
             image: breastfeedingImg
         },
 
@@ -374,19 +404,6 @@ const Journeys: React.FC = () => {
                     <div
                         className={styles.journeyCard}
                         style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
-                        onClick={() => navigate(ROUTES.OTC_GUIDE)}
-                    >
-                        <div style={{ fontSize: '40px', background: '#FFF3E0', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🧭</div>
-                        <div>
-                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Contraception Compass</h3>
-                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Interactive decision wizard for women's birth control and STI protection.</p>
-                            <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
-                        </div>
-                    </div>
-
-                    <div
-                        className={styles.journeyCard}
-                        style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
                         onClick={() => navigate(ROUTES.NUTRITION_GUIDE)}
                     >
                         <div style={{ fontSize: '40px', background: '#F3E5F5', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🥦</div>
@@ -426,12 +443,12 @@ const Journeys: React.FC = () => {
                     <div
                         className={styles.journeyCard}
                         style={{ display: 'flex', flexDirection: 'row', padding: '24px', gap: '24px', cursor: 'pointer' }}
-                        onClick={() => navigate(ROUTES.SCREENING)}
+                        onClick={() => navigate(ROUTES.OTC_GUIDE)}
                     >
-                        <div style={{ fontSize: '40px', background: '#E0F2F1', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📋</div>
+                        <div style={{ fontSize: '40px', background: '#E0F2F1', width: '80px', height: '80px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>💊</div>
                         <div>
-                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>Screening Roadmap</h3>
-                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Preventive health checkups, diagnostic guides, and life-stage roadmap.</p>
+                            <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>OTC Guide</h3>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '12px' }}>Navigate contraception options, birth control methods, and STI protection guides.</p>
                             <span style={{ fontSize: '13px', fontWeight: '700', color: 'var(--pink)' }}>Open Guide &rarr;</span>
                         </div>
                     </div>

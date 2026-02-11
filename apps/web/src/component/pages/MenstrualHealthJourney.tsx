@@ -202,7 +202,7 @@ const MenstrualHealthJourney: React.FC = () => {
                         Talk to a women's health specialist about your menstrual concerns and get personalized care.
                     </p>
                     <button
-                        onClick={() => navigate(ROUTES.APPOINTMENTS)}
+                        onClick={() => navigate(ROUTES.TELECONSULTATION)}
                         className={styles.primaryCta}
                         style={{ padding: '14px 28px', fontSize: '15px' }}
                     >

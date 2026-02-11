@@ -109,14 +109,24 @@ interface PregnancySimulatorProps {
     week: number;
     view: 'front' | 'side' | 'xray';
     layers: { baby: boolean, organs: boolean, measures: boolean };
+    isAnimating?: boolean;
 }
 
-export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, view, layers }) => {
-    const bellyRx = 80 + (week * 1.5);
-    const bellyRy = 110 + (week * 2);
-    const babyBodyRx = 35 + week * 0.3;
-    const babyBodyRy = 50 + week * 0.5;
-    const babyHeadR = 28 + (week * 0.5);
+export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, view, layers, isAnimating = false }) => {
+    // More realistic growth calculations based on fetal development
+    const growthFactor = Math.min(week / 40, 1);
+    const bellyRx = 75 + (week * 1.8); // Wider belly growth
+    const bellyRy = 95 + (week * 2.2); // More pronounced vertical growth
+    
+    // Realistic fetal proportions (head is proportionally larger in early weeks)
+    const babyScale = 0.4 + (growthFactor * 0.6); // Scales from 40% to 100%
+    const babyBodyRx = (25 + week * 0.35) * babyScale;
+    const babyBodyRy = (40 + week * 0.55) * babyScale;
+    const babyHeadR = (22 + week * 0.45) * babyScale;
+    
+    // Baby position changes with weeks (moves down as pregnancy progresses)
+    const babyY = 280 + (week * 1.2);
+    const babyHeadY = babyY - (babyBodyRy * 0.6);
 
     const getBodyOpacity = () => {
         if (view === 'front') return 1;
@@ -141,8 +151,12 @@ export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, vi
         return layers.measures ? 1 : 0;
     };
 
-    const fundalHeight = Math.max(0, week - 20 + 20);
-    const babyLength = (0.1 + (51 - 0.1) * (week / 40)).toFixed(1); // Simplified interpolation for SVG label
+    // Realistic fundal height (cm above pubic bone) - typically matches week from 20-36
+    const fundalHeight = week < 12 ? 0 : week < 20 ? (week - 12) * 0.5 : Math.min(week, 40);
+    // Crown-rump length then crown-heel length
+    const babyLength = week <= 12 
+        ? (week * 0.9).toFixed(1) // CR length in first trimester
+        : (6 + (week - 12) * 1.1).toFixed(1); // CH length after 12 weeks
 
     return (
         <svg id="pregnancySVG" viewBox="0 0 400 700" className="pregnancy-svg">
@@ -154,6 +168,11 @@ export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, vi
                 <radialGradient id="bellyGrad" cx="50%" cy="50%">
                     <stop offset="0%" style={{ stopColor: '#ffe4d1', stopOpacity: 1 }} />
                     <stop offset="100%" style={{ stopColor: '#ffc7a8', stopOpacity: 1 }} />
+                </radialGradient>
+                <radialGradient id="babyGlow" cx="50%" cy="50%">
+                    <stop offset="0%" style={{ stopColor: '#f8bbd0', stopOpacity: isAnimating ? 0.9 : 0.7 }} />
+                    <stop offset="70%" style={{ stopColor: '#f48fb1', stopOpacity: isAnimating ? 0.5 : 0.3 }} />
+                    <stop offset="100%" style={{ stopColor: '#f48fb1', stopOpacity: 0 }} />
                 </radialGradient>
                 <filter id="softShadow">
                     <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
@@ -179,7 +198,7 @@ export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, vi
                 <ellipse cx="140" cy="165" rx="35" ry="20" fill="#ec407a" opacity="0.9" />
                 <ellipse cx="260" cy="165" rx="35" ry="20" fill="#ec407a" opacity="0.9" />
                 <path d="M 120 170 Q 115 250 120 350 L 180 460 Q 200 470 220 460 L 280 350 Q 285 250 280 170 Z" fill="#ec407a" opacity="0.95" />
-                <ellipse id="bellyMain" cx="200" cy="320" rx={bellyRx} ry={bellyRy} fill="url(#bellyGrad)" filter="url(#softShadow)" className="belly-growth" />
+                <ellipse id="bellyMain" cx="200" cy="320" rx={bellyRx} ry={bellyRy} fill="url(#bellyGrad)" filter="url(#softShadow)" className={`belly-growth ${isAnimating ? 'animating' : ''}`} />
                 <ellipse cx="200" cy="300" rx="4" ry="6" fill="#d4816f" opacity="0.6" />
                 <ellipse cx="100" cy="240" rx="18" ry="65" fill="url(#skinGrad)" transform="rotate(-10 100 240)" />
                 <ellipse cx="300" cy="240" rx="18" ry="65" fill="url(#skinGrad)" transform="rotate(10 300 240)" />
@@ -187,14 +206,32 @@ export const PregnancySimulator: React.FC<PregnancySimulatorProps> = ({ week, vi
                 <ellipse cx="230" cy="540" rx="20" ry="90" fill="#5d4157" />
             </g>
 
-            <g id="babyGroup" className="baby-group" style={{ opacity: getBabyOpacity() }}>
-                <ellipse id="babyBody" cx="200" cy="320" rx={babyBodyRx} ry={babyBodyRy} fill="#f8bbd0" opacity="0.8" className="baby-growth" />
-                <circle id="babyHead" cx="200" cy="260" r={babyHeadR} fill="#f8bbd0" opacity="0.8" className="baby-growth" />
-                <ellipse cx="200" cy="270" rx="20" ry="25" fill="#fce4ec" opacity="0.6" />
-                <circle cx="193" cy="265" r="2" fill="#d81b60" />
-                <circle cx="207" cy="265" r="2" fill="#d81b60" />
-                <path d="M 196 273 Q 200 275 204 273" stroke="#d81b60" strokeWidth="1" fill="none" />
-                <path id="umbilicalCord" d="M 200 345 Q 190 365 200 380" stroke="#f06292" strokeWidth="3" fill="none" opacity="0.7" strokeLinecap="round" />
+            <g id="babyGroup" className={`baby-group ${isAnimating ? 'animating' : ''}`} style={{ opacity: getBabyOpacity() }}>
+                {/* Glow effect around baby during animation */}
+                {isAnimating && (
+                    <ellipse cx="200" cy={(babyY + babyHeadY) / 2} rx={babyBodyRx + 15} ry={(babyBodyRy + babyHeadR) + 15} fill="url(#babyGlow)" opacity="0.6" className="baby-growth" />
+                )}
+                {/* Baby body with realistic proportions */}
+                <ellipse id="babyBody" cx="200" cy={babyY} rx={babyBodyRx} ry={babyBodyRy} fill="#f8bbd0" opacity={isAnimating ? 0.95 : 0.85} className="baby-growth" />
+                {/* Baby head - proportionally larger in early weeks */}
+                <circle id="babyHead" cx="200" cy={babyHeadY} r={babyHeadR} fill="#f8bbd0" opacity={isAnimating ? 0.95 : 0.85} className="baby-growth" />
+                {/* Face details - only visible in later weeks */}
+                <ellipse cx="200" cy={babyHeadY + 5} rx={babyHeadR * 0.6} ry={babyHeadR * 0.5} fill="#fce4ec" opacity={week > 12 ? 0.5 : 0.3} />
+                {/* Eyes - closed (sleeping) */}
+                <path d={`M ${200 - babyHeadR * 0.25} ${babyHeadY - 2} Q ${200 - babyHeadR * 0.15} ${babyHeadY} ${200 - babyHeadR * 0.05} ${babyHeadY - 2}`} stroke="#d81b60" strokeWidth="1.5" fill="none" opacity={week > 8 ? 0.6 : 0.3} />
+                <path d={`M ${200 + babyHeadR * 0.05} ${babyHeadY - 2} Q ${200 + babyHeadR * 0.15} ${babyHeadY} ${200 + babyHeadR * 0.25} ${babyHeadY - 2}`} stroke="#d81b60" strokeWidth="1.5" fill="none" opacity={week > 8 ? 0.6 : 0.3} />
+                {/* Small nose */}
+                <path d={`M 200 ${babyHeadY + 3} Q ${200 - 2} ${babyHeadY + 6} 200 ${babyHeadY + 8}`} stroke="#d81b60" strokeWidth="1" fill="none" opacity={week > 10 ? 0.5 : 0.2} />
+                {/* Tiny mouth */}
+                <path d={`M ${200 - 4} ${babyHeadY + 10} Q 200 ${babyHeadY + 12} ${200 + 4} ${babyHeadY + 10}`} stroke="#d81b60" strokeWidth="1" fill="none" opacity={week > 12 ? 0.5 : 0.2} />
+                {/* Umbilical cord connecting to placenta */}
+                <path id="umbilicalCord" d={`M 200 ${babyY + babyBodyRy} Q ${195 + week * 0.2} ${babyY + babyBodyRy + 20} 200 ${babyY + babyBodyRy + 35}`} stroke="#f06292" strokeWidth="3" fill="none" opacity="0.7" strokeLinecap="round" />
+                {/* Tiny hands (visible in later weeks) */}
+                <ellipse cx={200 - babyBodyRx - 5} cy={babyY - babyBodyRy * 0.3} rx="4" ry="6" fill="#f8bbd0" opacity={week > 16 ? 0.7 : 0} className="baby-growth" />
+                <ellipse cx={200 + babyBodyRx + 5} cy={babyY - babyBodyRy * 0.3} rx="4" ry="6" fill="#f8bbd0" opacity={week > 16 ? 0.7 : 0} className="baby-growth" />
+                {/* Tiny feet (visible in later weeks) */}
+                <ellipse cx={200 - babyBodyRx * 0.5} cy={babyY + babyBodyRy + 3} rx="5" ry="4" fill="#f8bbd0" opacity={week > 20 ? 0.7 : 0} className="baby-growth" />
+                <ellipse cx={200 + babyBodyRx * 0.5} cy={babyY + babyBodyRy + 3} rx="5" ry="4" fill="#f8bbd0" opacity={week > 20 ? 0.7 : 0} className="baby-growth" />
             </g>
 
             <g id="organsGroup" className="organs-group" style={{ opacity: getOrgansOpacity() }}>

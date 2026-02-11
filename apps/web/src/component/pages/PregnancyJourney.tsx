@@ -350,8 +350,8 @@ const PregnancyJourney: React.FC = () => {
                                         </label>
                                     </div>
                                 </div>
-                                <button className="animate-btn" onClick={animateGrowth} disabled={isAnimating}>
-                                    <i className={`fas ${isAnimating ? 'fa-spinner fa-spin' : 'fa-play'}`}></i> {isAnimating ? 'Animating...' : 'Animate Growth'}
+                                <button className={`animate-btn ${isAnimating ? 'animating' : ''}`} onClick={animateGrowth} disabled={isAnimating}>
+                                    <span className="btn-icon">{isAnimating ? '👶' : '▶️'}</span> {isAnimating ? 'Growing...' : 'Animate Growth'}
                                 </button>
                             </div>
 
@@ -383,7 +383,7 @@ const PregnancyJourney: React.FC = () => {
                         </div>
 
                         <div className="simulator-visual">
-                            <PregnancySimulator week={currentWeek} view={view} layers={layers} />
+                            <PregnancySimulator week={currentWeek} view={view} layers={layers} isAnimating={isAnimating} />
                             <div className="view-label" style={{ textTransform: 'capitalize' }}>{view === 'xray' ? 'X-Ray' : view} View</div>
                         </div>
                     </div>
@@ -634,6 +634,20 @@ const PregnancyJourney: React.FC = () => {
                             <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '12px' }}>Lactation Prep</h4>
                             <p style={{ fontSize: '14px', color: '#666', marginBottom: '20px' }}>Prepare for your breastfeeding journey with interactive latch simulations.</p>
                             <button className="btn-secondary-3d" style={{ width: '100%' }} onClick={() => navigate(ROUTES.BREASTFEEDING)}>Breastfeeding Journey</button>
+                        </div>
+
+                        <div style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+                            <div style={{ fontSize: '40px', marginBottom: '16px' }}>🥛</div>
+                            <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '12px' }}>Milk Supply & Nutrition</h4>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '20px' }}>Dietary plans and hydration tips to boost your milk supply after birth.</p>
+                            <button className="btn-secondary-3d" style={{ width: '100%' }} onClick={() => navigate(ROUTES.MILK_SUPPLY_GUIDE)}>View Meal Plans</button>
+                        </div>
+
+                        <div style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center' }}>
+                            <div style={{ fontSize: '40px', marginBottom: '16px' }}>✨</div>
+                            <h4 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '12px' }}>Body Recovery</h4>
+                            <p style={{ fontSize: '14px', color: '#666', marginBottom: '20px' }}>Safe treatments, skincare, and recovery plans for the post-pregnancy body.</p>
+                            <button className="btn-secondary-3d" style={{ width: '100%' }} onClick={() => navigate(ROUTES.COSMETIC_SURGERY)}>View Options</button>
                         </div>
                     </div>
                 </section>

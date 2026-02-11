@@ -146,7 +146,7 @@ const ServicesSection: React.FC = () => {
                         <p>Our network of experienced doctors and wellness experts is available for both in-person and virtual consultations.</p>
                         <div className={styles.btnRow}>
                             <button className={styles.btnPrimary} onClick={() => navigate(ROUTES.FIND_DOCTORS)}>Find a Doctor</button>
-                            <button className={styles.btnOutline} onClick={() => navigate(ROUTES.APPOINTMENTS)}>Book Teleconsultation</button>
+                            <button className={styles.btnOutline} onClick={() => navigate(ROUTES.TELECONSULTATION)}>Book Teleconsultation</button>
                         </div>
                     </div>
                 </div>

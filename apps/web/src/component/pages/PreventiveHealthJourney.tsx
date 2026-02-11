@@ -281,6 +281,40 @@ const PreventiveHealthJourney: React.FC = () => {
                     </ul>
                 </div>
 
+                {/* Preparation Checklist & Why Screening Matters - Moved from Screening Guide */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', marginBottom: '60px' }}>
+                    <div style={{
+                        background: 'white',
+                        padding: '32px',
+                        borderRadius: '20px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                    }}>
+                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '20px', color: '#1a1a1a' }}>
+                            📋 Preparation Checklist
+                        </h3>
+                        <ul style={{ paddingLeft: '20px', fontSize: '15px', color: '#555', lineHeight: '2' }}>
+                            <li style={{ marginBottom: '8px' }}>Track your menstrual cycle (best for Pap/Mammograms)</li>
+                            <li style={{ marginBottom: '8px' }}>Gather family medical history records</li>
+                            <li style={{ marginBottom: '8px' }}>List any current medications or supplements</li>
+                            <li style={{ marginBottom: '8px' }}>Note any new or persistent symptoms</li>
+                            <li>Prepare questions regarding risk and frequency</li>
+                        </ul>
+                    </div>
+                    <div style={{
+                        background: 'linear-gradient(135deg, #f8f4f6 0%, #fce4ec 100%)',
+                        padding: '32px',
+                        borderRadius: '20px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                    }}>
+                        <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '20px', color: '#1a1a1a' }}>
+                            🛡️ Why Screening Matters
+                        </h3>
+                        <p style={{ fontSize: '15px', color: '#555', lineHeight: '1.8' }}>
+                            Early detection through regular screening significantly improves treatment outcomes for conditions like cervical and breast cancer. Preventive care isn't just about finding problems—it's about the peace of mind that comes with knowing you're taking charge of your long-term wellness.
+                        </p>
+                    </div>
+                </div>
+
                 {/* When to Seek Help */}
                 <div style={{
                     padding: '30px',
@@ -313,11 +347,11 @@ const PreventiveHealthJourney: React.FC = () => {
                         Talk to a healthcare provider about which screenings are right for you based on your age and health history.
                     </p>
                     <button
-                        onClick={() => navigate(ROUTES.APPOINTMENTS)}
+                        onClick={() => navigate(ROUTES.TELECONSULTATION)}
                         className={styles.primaryCta}
                         style={{ padding: '14px 28px', fontSize: '15px' }}
                     >
-                        Book an Appointment
+                        Book a Consultation
                     </button>
                 </div>
 

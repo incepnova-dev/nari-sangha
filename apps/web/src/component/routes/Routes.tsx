@@ -6,7 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import PublicLayout from "../layout/PublicLayout";
 
 import Community from "../pages/Community";
-import Appointments from "../pages/Appointments";
+
 import Safety from "../pages/Safety";
 import Support from "../pages/Support";
 // import Stories from "../pages/Stories";
@@ -44,6 +44,9 @@ import AestheticSimulator from "../pages/AestheticSimulator";
 import GynaecologyOB from "../pages/GynaecologyOB";
 import GestationalDiabetes from "../pages/GestationalDiabetes";
 import PreeclampsiaEducation from "../pages/PreeclampsiaEducation";
+import FertilityJourneyEnhanced from "../pages/FertilityJourney";
+import ConceptionGuide from "../pages/ConceptionGuide";
+import MilkSupplyGuide from "../pages/MilkSupplyGuide";
 
 
 import InsuranceGuide from "../pages/InsuranceGuide";
@@ -69,7 +72,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.LANDING} element={<Landing />} />
         <Route path={ROUTES.COMMUNITY} element={<Community />} />
         <Route path="/health-hub" element={<Navigate to={ROUTES.JOURNEYS} replace />} />
-        <Route path={ROUTES.APPOINTMENTS} element={<Appointments />} />
+        <Route path={ROUTES.APPOINTMENTS} element={<Teleconsultation />} />
         <Route path={ROUTES.SAFETY} element={<Safety />} />
         <Route path={ROUTES.SUPPORT} element={<Support />} />
         {/* <Route path={ROUTES.STORIES} element={<Stories />} /> */}
@@ -110,7 +113,9 @@ const AppRoutes = () => {
         <Route path={ROUTES.HORMONAL_HEALTH} element={<MenstrualHealthJourney />} />
         <Route path={ROUTES.GESTATIONAL_DIABETES} element={<GestationalDiabetes />} />
         <Route path={ROUTES.PREECLAMPSIA_EDUCATION} element={<PreeclampsiaEducation />} />
-
+        <Route path={ROUTES.FERTILITY_JOURNEY} element={<FertilityJourneyEnhanced />} />
+        <Route path={ROUTES.CONCEPTION_GUIDE} element={<ConceptionGuide />} />
+        <Route path={ROUTES.MILK_SUPPLY_GUIDE} element={<MilkSupplyGuide />} />
 
 
         {/* Internal Developer Routes */}

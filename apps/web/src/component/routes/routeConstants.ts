@@ -16,7 +16,7 @@ export const ROUTES = {
     ADOLESCENT_HEALTH: "/journeys/adolescent-health",
     MENOPAUSE: "/journeys/menopause",
     PRODUCTS: "/products",
-    APPOINTMENTS: "/appointments",
+    APPOINTMENTS: "/teleconsultation",  // Point appointments to teleconsultation page
     COMMUNITY: "/community",
     SYMPTOM_CHECKER: "/symptom-checker",
     SAFETY: "/safety",
@@ -47,4 +47,7 @@ export const ROUTES = {
     HORMONAL_HEALTH: "/journeys/hormonal-health",
     GESTATIONAL_DIABETES: "/journeys/gestational-diabetes",
     PREECLAMPSIA_EDUCATION: "/journeys/preeclampsia-education",
+    FERTILITY_JOURNEY: "/journeys/fertility-journey",
+    CONCEPTION_GUIDE: "/journeys/conception-guide",
+    MILK_SUPPLY_GUIDE: "/journeys/milk-supply-guide",
 } as const;

@@ -1,0 +1,498 @@
+.pageContainer {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #faf8f9 0%, #ffffff 100%);
+}
+
+.mainContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Calculator Section */
+.calculatorSection {
+    margin-bottom: 60px;
+}
+
+.calculatorSection h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.calculatorCard {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.inputGroup {
+    text-align: center;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.inputGroup input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #e0e0e0;
+    outline: none;
+    -webkit-appearance: none;
+    margin-bottom: 10px;
+}
+
+.inputGroup input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d81b60 0%, #f06292 100%);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(216, 27, 96, 0.3);
+}
+
+.inputGroup span {
+    font-size: 24px;
+    font-weight: 800;
+    color: #d81b60;
+}
+
+/* Cycle Visual */
+.cycleVisual {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #fafafa;
+    border-radius: 16px;
+}
+
+.cycleVisual h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.cycleBar {
+    display: flex;
+    gap: 3px;
+    height: 40px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding: 5px;
+}
+
+.dayMarker {
+    flex: 1;
+    min-width: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.dayMarker.menstrual {
+    background: #ffcdd2;
+}
+
+.dayMarker.fertile {
+    background: #c8e6c9;
+}
+
+.dayMarker.ovulation {
+    background: linear-gradient(135deg, #d81b60 0%, #f06292 100%);
+}
+
+.dayMarker.normal {
+    background: #e0e0e0;
+}
+
+.dayMarker.current {
+    box-shadow: 0 0 0 3px #1565c0;
+    transform: scale(1.2);
+    z-index: 1;
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #666;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.menstrual { background: #ffcdd2; }
+.dot.fertile { background: #c8e6c9; }
+.dot.ovulation { background: linear-gradient(135deg, #d81b60 0%, #f06292 100%); }
+.dot.normal { background: #e0e0e0; }
+
+/* Fertility Score */
+.fertilityScore {
+    background: white;
+    border: 3px solid;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.scoreHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.scoreLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.scoreValue {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.scoreBar {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.scoreFill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.scoreNote {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Key Dates */
+.keyDates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.dateCard {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.dateLabel {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1565c0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.dateValue {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+/* Signs Section */
+.signsSection {
+    margin-bottom: 60px;
+}
+
+.signsSection h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.sectionDesc {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.signsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.signCard {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #d81b60;
+}
+
+.signCard h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+}
+
+.signCard p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tips Section */
+.tipsSection {
+    margin-bottom: 60px;
+}
+
+.tipsSection h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.tipsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.tipCard {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.tipCard:hover {
+    transform: translateY(-5px);
+}
+
+.tipIcon {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.tipCard h4 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.tipCard p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Timing Section */
+.timingSection {
+    margin-bottom: 60px;
+}
+
+.timingSection h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.timingCard {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.timingItem {
+    display: grid;
+    grid-template-columns: 150px 1fr 100px;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.timingItem:last-child {
+    border-bottom: none;
+}
+
+.timingDay {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.timingBar {
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.timingFill {
+    height: 100%;
+    background: linear-gradient(90deg, #c8e6c9 0%, #d81b60 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.timingChance {
+    font-size: 14px;
+    font-weight: 800;
+    color: #d81b60;
+    text-align: right;
+}
+
+/* CTA Section */
+.ctaSection {
+    margin-top: 60px;
+}
+
+.ctaCard {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+}
+
+.ctaCard h3 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #1a1a1a;
+}
+
+.ctaCard p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.primaryBtn {
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+}
+
+.secondaryBtn {
+    padding: 16px 32px;
+    background: white;
+    color: #2e7d32;
+    border: 2px solid #2e7d32;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .calculatorCard {
+        padding: 25px;
+    }
+    
+    .cycleBar {
+        height: 30px;
+    }
+    
+    .dayMarker {
+        min-width: 6px;
+    }
+    
+    .timingItem {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .timingChance {
+        text-align: center;
+    }
+    
+    .ctaCard {
+        padding: 40px 25px;
+    }
+    
+    .ctaCard h3 {
+        font-size: 22px;
+    }
+}

@@ -1,217 +1,383 @@
 import React from 'react';
-import styles from '../landing/landing.module.css';
+import styles from './Community.module.css';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../routes/Routes';
-import InnerPageHero from '../shared/InnerPageHero';
-import CommunityAnimation from '../shared/animations/CommunityAnimation';
-
-// import { useI18n } from "../../hooks/useI18n";
 
 const Community: React.FC = () => {
     const navigate = useNavigate();
-    // const { t } = useI18n(); // Keeping for future i18n support, though we use hardcoded for now
-
-    // const { t } = useI18n(); // Keeping for future i18n support, though we use hardcoded for now
 
     const features = [
-        { title: "Discussion Forums", desc: "Ask questions, share experiences, and get advice from women who understand your journey", icon: "💬", badge: "12k+ members", color: "#667eea" },
-        { title: "Support Groups", desc: "Join topic-specific groups for pregnancy, fertility, menopause, chronic conditions", icon: "❤️", badge: "280+ groups", color: "var(--pink)" },
-        { title: "Expert Q&A", desc: "Live sessions with doctors, nutritionists, and wellness experts", icon: "🩺", badge: "Weekly", color: "#4facfe" },
+        { 
+            title: "Discussion Forums", 
+            desc: "Ask questions, share experiences, and get advice from women who understand your journey", 
+            icon: "💬", 
+            badge: "12,456 active members", 
+            badgeColor: "#ec4899"
+        },
+        { 
+            title: "Support Groups", 
+            desc: "Join topic-specific groups for pregnancy, fertility, menopause, chronic conditions", 
+            icon: "❤️", 
+            badge: "287 groups", 
+            badgeColor: "#22c55e"
+        },
+        { 
+            title: "Local Events & Meetups", 
+            desc: "Attend workshops, wellness events, and meet other community members in person", 
+            icon: "📅", 
+            badge: "42 upcoming events", 
+            badgeColor: "#f59e0b"
+        },
+        { 
+            title: "Expert Q&A Sessions", 
+            desc: "Live sessions with doctors, nutritionists, and wellness experts", 
+            icon: "👩‍⚕️", 
+            badge: "Weekly sessions", 
+            badgeColor: "#3b82f6"
+        },
+        { 
+            title: "Member Stories", 
+            desc: "Read inspiring journeys and share your own experiences", 
+            icon: "📖", 
+            badge: "2,134 stories", 
+            badgeColor: "#e91e63"
+        },
+        { 
+            title: "Resources & Guides", 
+            desc: "Member-curated resources, tips, and downloadable guides", 
+            icon: "🎁", 
+            badge: "Free access", 
+            badgeColor: "#27ae60"
+        }
     ];
 
     const topics = [
-        { title: "Pregnancy Journey", active: 3456, posts: 8234, icon: "🤰", updated: "5 min ago", color: "linear-gradient(135deg, #667eea, #764ba2)" },
-        { title: "Trying to Conceive (TTC)", active: 4123, posts: 12567, icon: "💕", updated: "12 min ago", color: "linear-gradient(135deg, #f093fb, #f5576c)" },
-        { title: "Menopause Support", active: 2890, posts: 6789, icon: "🧘‍♀️", updated: "1 hour ago", color: "linear-gradient(135deg, #fa709a, #fee140)" },
-        { title: "Mental Wellness", active: 3567, posts: 7890, icon: "🧠", updated: "3 hours ago", color: "linear-gradient(135deg, #a8edea, #fed6e3)" },
+        { 
+            title: "Pregnancy Journey", 
+            desc: "Weekly updates, symptoms, preparing for baby, sharing ultrasound moments",
+            posts: "8,234", 
+            members: "3,456", 
+            icon: "🤰", 
+            updated: "5 min ago",
+            color: "linear-gradient(135deg, #667eea, #764ba2)"
+        },
+        { 
+            title: "Trying to Conceive (TTC)", 
+            desc: "Support, tips, tracking ovulation, and encouragement during fertility journey",
+            posts: "12,567", 
+            members: "4,123", 
+            icon: "💕", 
+            updated: "12 min ago",
+            color: "linear-gradient(135deg, #f093fb, #f5576c)"
+        },
+        { 
+            title: "Menopause & Perimenopause", 
+            desc: "Managing hot flashes, mood swings, HRT discussions, lifestyle tips",
+            posts: "6,789", 
+            members: "2,890", 
+            icon: "🔥", 
+            updated: "1 hour ago",
+            color: "linear-gradient(135deg, #fa709a, #fee140)"
+        },
+        { 
+            title: "Fitness & Nutrition", 
+            desc: "Exercise routines, healthy eating, weight management, prenatal workouts",
+            posts: "5,432", 
+            members: "3,210", 
+            icon: "💪", 
+            updated: "2 hours ago",
+            color: "linear-gradient(135deg, #4facfe, #00f2fe)"
+        },
+        { 
+            title: "Mental Health & Wellness", 
+            desc: "Anxiety, depression, self-care strategies, postpartum support",
+            posts: "7,890", 
+            members: "3,567", 
+            icon: "🧘", 
+            updated: "3 hours ago",
+            color: "linear-gradient(135deg, #a8edea, #fed6e3)"
+        },
+        { 
+            title: "Chronic Conditions", 
+            desc: "PCOS, endometriosis, fibromyalgia, thyroid disorders support",
+            posts: "9,123", 
+            members: "2,456", 
+            icon: "🎗️", 
+            updated: "4 hours ago",
+            color: "linear-gradient(135deg, #ff9a9e, #fecfef)"
+        }
     ];
 
     const events = [
-        { title: "Fertility & Nutrition Workshop", month: "AUG", day: "15", time: "5:00 PM", type: "Webinar", location: "Online", desc: "Learn how nutrition impacts fertility from Dr. Lisa Chen." },
-        { title: "Prenatal Yoga Class", month: "AUG", day: "18", time: "7:00 AM", type: "Live Session", location: "NYC Center", desc: "Gentle yoga designed for expectant mothers." },
-        { title: "Mental Health Support Circle", month: "AUG", day: "20", time: "6:00 PM", type: "Group Call", location: "Online", desc: "A safe space to share and support each other." },
+        { 
+            title: "Fertility & Nutrition Workshop", 
+            month: "FEB", 
+            day: "15", 
+            time: "6:00 PM - 7:30 PM EST",
+            type: "Online Webinar",
+            desc: "Learn how nutrition impacts fertility from Dr. Lisa Chen, reproductive endocrinologist",
+            price: "Free"
+        },
+        { 
+            title: "Prenatal Yoga Class", 
+            month: "FEB", 
+            day: "22", 
+            time: "10:00 AM - 11:00 AM",
+            type: "Wellness Center, NYC",
+            desc: "Gentle yoga designed for expectant mothers. All trimesters welcome!",
+            price: "$15"
+        },
+        { 
+            title: "Women's Health Symposium", 
+            month: "MAR", 
+            day: "08", 
+            time: "9:00 AM - 5:00 PM",
+            type: "Convention Center, LA",
+            desc: "Full-day event with expert speakers, vendor exhibits, and networking opportunities",
+            price: "$50"
+        }
     ];
 
     const testimonials = [
-        { name: "Sarah M.", role: "TTC Member", content: "The TTC community has been my lifeline. The support and hope shared here kept me going during difficult times.", initial: "S", color: "#667eea" },
-        { name: "Priya K.", role: "Pregnancy Member", content: "As a first-time mom, I had so many fears. This community provided expert advice and emotional support throughout my journey.", initial: "P", color: "var(--pink)" },
-        { name: "Lisa R.", role: "Menopause Member", content: "Navigating perimenopause felt isolating until I found this group. Finally, women who understand the hot flashes and mood swings!", initial: "L", color: "#4facfe" },
+        { 
+            name: "Sarah M.", 
+            role: "TTC Community Member", 
+            content: "The TTC community has been my lifeline during this difficult journey. The support, understanding, and hope shared here kept me going. I finally got my BFP after 18 months, and I couldn't have done it without this incredible group of women.",
+            initial: "S", 
+            color: "linear-gradient(135deg, #667eea, #764ba2)"
+        },
+        { 
+            name: "Priya K.", 
+            role: "Pregnancy Journey Member", 
+            content: "As a first-time mom, I had so many questions and fears. This community provided expert advice, practical tips, and emotional support throughout my entire pregnancy. I made real friendships that continue after birth!",
+            initial: "P", 
+            color: "linear-gradient(135deg, #f093fb, #f5576c)"
+        },
+        { 
+            name: "Lisa R.", 
+            role: "Menopause Support Member", 
+            content: "Navigating perimenopause felt isolating until I found this group. Finally, women who understand the hot flashes, mood swings, and sleep issues! The shared tips and medical insights have been invaluable.",
+            initial: "L", 
+            color: "linear-gradient(135deg, #4facfe, #00f2fe)"
+        }
+    ];
+
+    const guidelines = [
+        { 
+            title: "Be Respectful", 
+            desc: "Treat all members with kindness, compassion, and understanding. Every journey is unique.", 
+            icon: "❤️",
+            color: "linear-gradient(135deg, #667eea, #764ba2)"
+        },
+        { 
+            title: "Privacy First", 
+            desc: "Never share others' personal information. What's shared in the community stays in the community.", 
+            icon: "🔒",
+            color: "linear-gradient(135deg, #f093fb, #f5576c)"
+        },
+        { 
+            title: "Support, Don't Judge", 
+            desc: "Everyone's journey is different and valid. Offer support without judgment or criticism.", 
+            icon: "🤝",
+            color: "linear-gradient(135deg, #4facfe, #00f2fe)"
+        },
+        { 
+            title: "Medical Disclaimer", 
+            desc: "Community advice doesn't replace professional medical care. Always consult your doctor.", 
+            icon: "🩺",
+            color: "linear-gradient(135deg, #fa709a, #fee140)"
+        }
     ];
 
     return (
-        <div className="app-container">
-            {/* Hero */}
-            <InnerPageHero
-                title="Women's Health Community"
-                subtitle="Connect, share, and find strength with women who understand your journey. Judgement-free, moderated, and safe."
-                badge="Safe Space"
-                illustration={<CommunityAnimation />}
-            >
-                <div style={{ marginBottom: '15px' }}>
-                    <button
-                        onClick={() => navigate(ROUTES.JOURNEYS)}
-                        style={{
-                            padding: '8px 16px',
-                            background: 'rgba(255,255,255,0.2)',
-                            border: '1px solid rgba(255,255,255,0.4)',
-                            color: 'white',
-                            borderRadius: '30px',
-                            cursor: 'pointer',
-                            fontSize: '13px',
-                            fontWeight: 600,
-                            backdropFilter: 'blur(5px)',
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '6px'
-                        }}
-                    >
-                        ← Back to Paths
-                    </button>
-                </div>
-                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '20px' }}>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>👥 12k+ Members</span>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>💬 Active Forums</span>
-                    <span style={{ background: 'rgba(255,255,255,0.2)', padding: '6px 14px', borderRadius: '20px', fontSize: '13px', fontWeight: '600' }}>📅 42 Events</span>
-                </div>
-            </InnerPageHero>
-
-            <div style={{ background: 'var(--theme-bg-accent)' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px 80px' }}>
-
-                    {/* Stats / Intro */}
-                    <div style={{ margin: '40px 0 60px', background: 'white', padding: '40px', borderRadius: '24px', boxShadow: '0 10px 40px rgba(0,0,0,0.08)', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', textAlign: 'center' }}>
-                        <div>
-                            <div style={{ fontSize: '36px', fontWeight: '900', color: 'var(--pink)' }}>12k+</div>
-                            <div style={{ fontSize: '14px', fontWeight: '700', color: '#555' }}>Active Members</div>
+        <div className={styles.communityPage}>
+            {/* Hero Section */}
+            <section className={styles.hero}>
+                <div className={styles.heroContainer}>
+                    <div className={styles.heroGrid}>
+                        <div className={styles.heroContent}>
+                            <h1 className={styles.heroTitle}>Women's Health Community 💕</h1>
+                            <p className={styles.heroSubtitle}>
+                                Connect with others, share experiences, find support, and join events focused on women's wellness. You're never alone on this journey.
+                            </p>
+                            <div className={styles.heroChips}>
+                                <span className={styles.chip}>👥 12,456 Members</span>
+                                <span className={styles.chip}>💬 Active Forums</span>
+                                <span className={styles.chip}>📅 42 Events</span>
+                            </div>
+                            <button className={styles.joinButton} onClick={() => navigate(ROUTES.DASHBOARD)}>
+                                👤 Join Community
+                            </button>
                         </div>
-                        <div>
-                            <div style={{ fontSize: '36px', fontWeight: '900', color: 'var(--pink)' }}>50+</div>
-                            <div style={{ fontSize: '14px', fontWeight: '700', color: '#555' }}>Expert Moderators</div>
-                        </div>
-                        <div>
-                            <div style={{ fontSize: '36px', fontWeight: '900', color: 'var(--pink)' }}>42</div>
-                            <div style={{ fontSize: '14px', fontWeight: '700', color: '#555' }}>Upcoming Events</div>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <button className={styles.primaryCta} style={{ width: '100%' }} onClick={() => navigate(ROUTES.DASHBOARD)}>Join Now</button>
-                        </div>
-
-                    </div>
-
-                    {/* Features */}
-                    <div style={{ marginBottom: '80px' }}>
-                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>✨ Community Features</h2>
-                        <p style={{ color: '#666', textAlign: 'center', marginBottom: '40px' }}>Everything you need to connect, learn, and find support.</p>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
-                            {features.map((f, idx) => (
-                                <div key={idx} className={styles.card} style={{ padding: '32px', background: 'white', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-                                    <div style={{ fontSize: '32px', marginBottom: '16px' }}>{f.icon}</div>
-                                    <h3 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '8px' }}>{f.title}</h3>
-                                    <p style={{ color: '#666', fontSize: '14px', lineHeight: '1.6', marginBottom: '20px' }}>{f.desc}</p>
-                                    <span style={{ background: f.color + '22', color: f.color, padding: '6px 14px', borderRadius: '20px', fontSize: '12px', fontWeight: '800' }}>{f.badge}</span>
-                                </div>
-                            ))}
+                        <div className={styles.heroImage}>
+                            <img 
+                                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800" 
+                                alt="Community" 
+                                className={styles.heroImg}
+                            />
                         </div>
                     </div>
+                </div>
+            </section>
 
-                    {/* Popular Topics */}
-                    <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>🔥 Popular Discussion Topics</h2>
-                    <p style={{ color: '#666', textAlign: 'center', marginBottom: '40px' }}>Join conversations that matter to you.</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginBottom: '80px' }}>
-                        {topics.map((t, idx) => (
-                            <div key={idx} style={{ background: 'white', padding: '24px', borderRadius: '20px', border: '1px solid #eee', display: 'grid', gridTemplateColumns: 'auto 1fr auto', alignItems: 'center', gap: '24px', transition: 'all 0.3s ease', cursor: 'pointer' }}
-                                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateX(8px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)'; }}
-                                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateX(0)'; e.currentTarget.style.boxShadow = 'none'; }}
-                            >
-                                <div style={{ fontSize: '28px', background: t.color, color: 'white', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{t.icon}</div>
-                                <div>
-                                    <h4 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '6px' }}>{t.title}</h4>
-                                    <div style={{ display: 'flex', gap: '20px', fontSize: '13px', color: '#666' }}>
-                                        <span>💬 {t.posts} posts</span>
-                                        <span>👥 {t.active} members</span>
-                                        <span>🕙 Updated {t.updated}</span>
-                                    </div>
-                                </div>
-                                {/* <button className={styles.secondaryCta} style={{ padding: '8px 24px' }} onClick={() => navigate(ROUTES.STORIES)}>Join Group</button> */}
-
+            {/* Community Features */}
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <h2 className={styles.sectionTitle}>✨ Community Features</h2>
+                    <p className={styles.sectionSubtitle}>Everything you need to connect, learn, and find support.</p>
+                    
+                    <div className={styles.featuresGrid}>
+                        {features.map((f, idx) => (
+                            <div key={idx} className={styles.featureCard}>
+                                <div className={styles.featureIcon}>{f.icon}</div>
+                                <h3 className={styles.featureTitle}>{f.title}</h3>
+                                <p className={styles.featureDesc}>{f.desc}</p>
+                                <span 
+                                    className={styles.featureBadge}
+                                    style={{ backgroundColor: f.badgeColor + '22', color: f.badgeColor }}
+                                >
+                                    {f.badge}
+                                </span>
                             </div>
                         ))}
                     </div>
-
-                    {/* Events */}
-                    <div style={{ background: '#F3E5F5', borderRadius: '40px', padding: '60px 40px', marginBottom: '80px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
-                            <div>
-                                <div style={{ fontSize: '13px', fontWeight: '800', color: '#AB47BC', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>Live & Interactive</div>
-                                <h2 style={{ fontSize: '32px', fontWeight: '900', color: '#4A148C' }}>Upcoming Events</h2>
-                            </div>
-                            <button style={{ background: 'white', color: '#4A148C', border: 'none', padding: '12px 24px', borderRadius: '24px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>View Calendar</button>
-                        </div>
-
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
-                            {events.map((e, idx) => (
-                                <div key={idx} style={{ background: 'white', padding: '24px', borderRadius: '24px', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', display: 'flex', gap: '20px', transition: 'all 0.3s' }}>
-                                    <div style={{ background: 'linear-gradient(135deg, #667eea, #764ba2)', color: 'white', borderRadius: '16px', padding: '12px', textAlign: 'center', minWidth: '80px', height: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                        <span style={{ fontSize: '12px', opacity: 0.9, fontWeight: '700' }}>{e.month}</span>
-                                        <span style={{ fontSize: '28px', fontWeight: '900', lineHeight: 1 }}>{e.day}</span>
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                                            <span style={{ color: '#AB47BC', fontSize: '12px', fontWeight: '800' }}>{e.type}</span>
-                                            <span style={{ fontSize: '12px', color: '#666', fontWeight: '600' }}>{e.time}</span>
-                                        </div>
-                                        <h3 style={{ fontSize: '18px', fontWeight: '800', marginBottom: '8px' }}>{e.title}</h3>
-                                        <p style={{ fontSize: '13px', color: '#666', lineHeight: '1.5', marginBottom: '16px' }}>{e.desc}</p>
-                                        <button className={styles.primaryCta} style={{ width: '100%', padding: '10px', fontSize: '12px' }}>Register Free</button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Testimonials */}
-                    <div style={{ marginBottom: '80px' }}>
-                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px', textAlign: 'center' }}>⭐ Member Testimonials</h2>
-                        <p style={{ color: '#666', textAlign: 'center', marginBottom: '40px' }}>Hear from women who found support and connection in our community.</p>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-                            {testimonials.map((t, idx) => (
-                                <div key={idx} style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)', position: 'relative' }}>
-                                    <div style={{ fontSize: '48px', color: 'var(--pink)', opacity: 0.1, position: 'absolute', top: '20px', right: '30px' }}>“</div>
-                                    <p style={{ fontStyle: 'italic', color: '#444', lineHeight: '1.7', marginBottom: '24px' }}>"{t.content}"</p>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                                        <div style={{ width: '50px', height: '50px', background: t.color, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '900' }}>{t.initial}</div>
-                                        <div>
-                                            <h4 style={{ fontWeight: '800', fontSize: '16px' }}>{t.name}</h4>
-                                            <p style={{ fontSize: '13px', color: '#777' }}>{t.role}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Guidelines */}
-                    <div style={{ marginTop: '40px', textAlign: 'center', maxWidth: '1000px', margin: '40px auto 0' }}>
-                        <h2 style={{ fontSize: '28px', fontWeight: '900', marginBottom: '12px' }}>🛡️ Community Guidelines</h2>
-                        <p style={{ color: '#666', marginBottom: '40px' }}>Creating a safe, supportive space for all members.</p>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
-                            {[
-                                { title: "Be Kind & Respectful", desc: "Treat all members with compassion. Every journey is unique.", icon: "❤️" },
-                                { title: "Maintain Privacy", desc: "Never share others' personal info. What's shared here stays here.", icon: "🔒" },
-                                { title: "No Judgment", desc: "Validating every journey without criticism or judgment.", icon: "🤝" },
-                                { title: "Medical Disclaimer", desc: "Advice here doesn't replace professional medical care.", icon: "🩺" }
-                            ].map(g => (
-                                <div key={g.title} style={{ background: 'white', padding: '32px', borderRadius: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', textAlign: 'center' }}>
-                                    <div style={{ fontSize: '32px', marginBottom: '16px' }}>{g.icon}</div>
-                                    <h4 style={{ fontSize: '16px', fontWeight: '800', marginBottom: '8px' }}>{g.title}</h4>
-                                    <p style={{ fontSize: '13px', color: '#666', lineHeight: '1.6' }}>{g.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
                 </div>
-            </div>
+            </section>
+
+            {/* Popular Discussion Topics */}
+            <section className={`${styles.section} ${styles.altSection}`}>
+                <div className={styles.container}>
+                    <h2 className={styles.sectionTitle}>🔥 Popular Discussion Topics</h2>
+                    <p className={styles.sectionSubtitle}>Join conversations that matter to you.</p>
+                    
+                    <div className={styles.topicsList}>
+                        {topics.map((t, idx) => (
+                            <div key={idx} className={styles.topicCard}>
+                                <div 
+                                    className={styles.topicIcon}
+                                    style={{ background: t.color }}
+                                >
+                                    {t.icon}
+                                </div>
+                                <div className={styles.topicContent}>
+                                    <h3 className={styles.topicTitle}>{t.title}</h3>
+                                    <p className={styles.topicDesc}>{t.desc}</p>
+                                    <div className={styles.topicStats}>
+                                        <span>💬 {t.posts} posts</span>
+                                        <span>👥 {t.members} members</span>
+                                        <span>🕐 Updated {t.updated}</span>
+                                    </div>
+                                </div>
+                                <button className={styles.joinTopicBtn}>Join</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Upcoming Events */}
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <h2 className={styles.sectionTitle}>📅 Upcoming Events</h2>
+                    <p className={styles.sectionSubtitle}>Workshops, webinars, and meetups to enhance your health journey.</p>
+                    
+                    <div className={styles.eventsGrid}>
+                        {events.map((e, idx) => (
+                            <div key={idx} className={styles.eventCard}>
+                                <div className={styles.eventDate}>
+                                    <span className={styles.eventMonth}>{e.month}</span>
+                                    <span className={styles.eventDay}>{e.day}</span>
+                                </div>
+                                <div className={styles.eventInfo}>
+                                    <h3 className={styles.eventTitle}>{e.title}</h3>
+                                    <p className={styles.eventMeta}>📍 {e.type}</p>
+                                    <p className={styles.eventMeta}>🕐 {e.time}</p>
+                                    <p className={styles.eventDesc}>{e.desc}</p>
+                                    <button className={styles.registerBtn}>
+                                        Register {e.price === "Free" ? "Free" : `(${e.price})`}
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Member Testimonials */}
+            <section className={`${styles.section} ${styles.altSection}`}>
+                <div className={styles.container}>
+                    <h2 className={styles.sectionTitle}>⭐ Member Testimonials</h2>
+                    <p className={styles.sectionSubtitle}>Hear from women who found support and connection in our community.</p>
+                    
+                    <div className={styles.testimonialsGrid}>
+                        {testimonials.map((t, idx) => (
+                            <div key={idx} className={styles.testimonialCard}>
+                                <span className={styles.quoteIcon}>"</span>
+                                <p className={styles.testimonialContent}>"{t.content}"</p>
+                                <div className={styles.testimonialAuthor}>
+                                    <div 
+                                        className={styles.authorAvatar}
+                                        style={{ background: t.color }}
+                                    >
+                                        {t.initial}
+                                    </div>
+                                    <div className={styles.authorInfo}>
+                                        <h4 className={styles.authorName}>{t.name}</h4>
+                                        <p className={styles.authorRole}>{t.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Community Guidelines */}
+            <section className={styles.section}>
+                <div className={styles.container}>
+                    <h2 className={styles.sectionTitle}>🛡️ Community Guidelines</h2>
+                    <p className={styles.sectionSubtitle}>Creating a safe, supportive space for all members.</p>
+                    
+                    <div className={styles.guidelinesGrid}>
+                        {guidelines.map((g, idx) => (
+                            <div key={idx} className={styles.guidelineCard}>
+                                <div 
+                                    className={styles.guidelineIcon}
+                                    style={{ background: g.color }}
+                                >
+                                    {g.icon}
+                                </div>
+                                <h3 className={styles.guidelineTitle}>{g.title}</h3>
+                                <p className={styles.guidelineDesc}>{g.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className={`${styles.section} ${styles.altSection}`}>
+                <div className={styles.container}>
+                    <div className={styles.ctaBox}>
+                        <h2 className={styles.ctaTitle}>Ready to Join?</h2>
+                        <p className={styles.ctaSubtitle}>Create your free account and become part of our supportive community.</p>
+                        <div className={styles.ctaButtons}>
+                            <button 
+                                className={styles.ctaPrimary}
+                                onClick={() => navigate(ROUTES.DASHBOARD)}
+                            >
+                                👤 Join Community
+                            </button>
+                            <button 
+                                className={styles.ctaSecondary}
+                                onClick={() => navigate(ROUTES.JOURNEYS)}
+                            >
+                                🛤️ Explore Journeys
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

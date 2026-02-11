@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { ROUTES } from "../routes/Routes";
+import { useLocation } from "react-router-dom";
 import styles from "../landing/landing.module.css";
-import { products, insurancePlans, Product, InsurancePlan } from "../../data/seed";
+import { products, Product } from "../../data/seed";
 import InnerPageHero from "../shared/InnerPageHero";
 import { useCart } from "../../context/CartContext";
-import InsuranceCard from "../shared/InsuranceCard";
 import ProductQuickView from "../shared/ProductQuickView";
 import ProductsAnimation from "../shared/animations/ProductsAnimation";
 
@@ -15,7 +13,6 @@ const Products: React.FC = () => {
     const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
     const { addToCart } = useCart();
     const location = useLocation();
-    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -43,7 +40,7 @@ const Products: React.FC = () => {
         };
     }, [location]);
 
-    const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care", "Insurance"];
+    const categories = ["All", "Pregnancy", "Fertility", "Period Care", "Wellness", "Supplements", "Devices", "Intimate Care"];
 
     const categoryGrid = [
         { name: "Pregnancy & Prenatal", icon: "💊", desc: "Prenatal vitamins, maternity wear, body pillows, stretch mark creams", color: "linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%)" },
@@ -304,56 +301,6 @@ const Products: React.FC = () => {
                             </div>
                         ))}
                     </div>
-
-                    {/* Insurance Section */}
-                    {(selectedCategory === 'All' || selectedCategory === 'Insurance') && (
-                        <div id="insurance-plans" style={{ marginTop: '80px' }}>
-                            <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                                <span style={{
-                                    background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
-                                    color: '#1565C0',
-                                    fontSize: '12px',
-                                    fontWeight: '800',
-                                    padding: '6px 16px',
-                                    borderRadius: '999px',
-                                    display: 'inline-block',
-                                    marginBottom: '16px',
-                                    letterSpacing: '0.5px'
-                                }}>PROTECT YOUR HEALTH</span>
-                                <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '12px' }}>Insurance Plans</h2>
-                                <p style={{ fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
-                                    Comprehensive coverage designed specifically for women's healthcare needs
-                                </p>
-                            </div>
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                                gap: '32px',
-                                marginBottom: '40px'
-                            }}>
-                                {insurancePlans.map((plan: InsurancePlan) => (
-                                    <InsuranceCard key={plan.id} plan={plan} />
-                                ))}
-                            </div>
-                            <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                                <button
-                                    onClick={() => navigate(ROUTES.INSURANCE_GUIDE)}
-                                    style={{
-                                        padding: '16px 32px',
-                                        background: 'white',
-                                        border: '2px solid #1565C0',
-                                        color: '#1565C0',
-                                        borderRadius: '12px',
-                                        fontWeight: '800',
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    View Full Insurance Guide →
-                                </button>
-                            </div>
-                        </div>
-
-                    )}
 
                     {/* Why Shop With Us */}
                     <div style={{ marginTop: '100px', textAlign: 'center' }}>

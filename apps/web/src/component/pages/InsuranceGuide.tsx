@@ -3,6 +3,8 @@ import styles from "./InsuranceGuide.module.css";
 import InnerPageHero from "../shared/InnerPageHero";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../routes/Routes";
+import { insurancePlans } from "../../data/seed";
+import InsuranceCard from "../shared/InsuranceCard";
 
 const InsuranceGuide: React.FC = () => {
     const coverageBasics = [
@@ -28,6 +30,39 @@ const InsuranceGuide: React.FC = () => {
                 badge="Financial Wellness"
                 centered
             />
+
+            {/* Insurance Plans Section */}
+            <section className={styles.section} style={{ background: '#fce4ec', padding: '80px 20px' }}>
+                <div className={styles.container}>
+                    <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+                        <span style={{
+                            background: 'linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%)',
+                            color: '#1565C0',
+                            fontSize: '12px',
+                            fontWeight: '800',
+                            padding: '6px 16px',
+                            borderRadius: '999px',
+                            display: 'inline-block',
+                            marginBottom: '16px',
+                            letterSpacing: '0.5px'
+                        }}>PROTECT YOUR HEALTH</span>
+                        <h2 style={{ fontSize: '32px', fontWeight: '900', marginBottom: '12px', color: '#1a1a1a' }}>Insurance Plans</h2>
+                        <p style={{ fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+                            Comprehensive coverage designed specifically for women's healthcare needs
+                        </p>
+                    </div>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                        gap: '32px',
+                        marginBottom: '40px'
+                    }}>
+                        {insurancePlans.map((plan) => (
+                            <InsuranceCard key={plan.id} plan={plan} />
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             <section className={styles.section} style={{ paddingTop: 0 }}>
                 <div className={styles.container}>

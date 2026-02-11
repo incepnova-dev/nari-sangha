@@ -1347,11 +1347,50 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .animate-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+.animate-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.animate-btn.animating {
+  background: linear-gradient(135deg, #d81b60, #ad1457);
+  animation: btnPulse 1s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(236, 64, 122, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(236, 64, 122, 0);
+  }
+}
+
+.animate-btn .btn-icon {
+  display: inline-block;
+  transition: transform 0.3s;
+}
+
+.animate-btn.animating .btn-icon {
+  animation: iconBounce 0.5s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 .simulator-stats {
@@ -1413,11 +1452,11 @@ body {
 
 /* SVG Animations */
 .belly-growth {
-  transition: all 1s ease;
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .baby-growth {
-  transition: all 1s ease;
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .body-group,
@@ -1425,6 +1464,132 @@ body {
 .organs-group,
 .measures-group {
   transition: opacity 0.5s ease;
+}
+
+/* Mother Body Breathing Animation */
+@keyframes motherBreathe {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  25% {
+    transform: scale(1.005) translateY(-1px);
+  }
+  50% {
+    transform: scale(1.01) translateY(-2px);
+  }
+  75% {
+    transform: scale(1.005) translateY(-1px);
+  }
+}
+
+.body-group {
+  animation: motherBreathe 4s ease-in-out infinite;
+  transform-origin: center 300px;
+}
+
+/* Baby Growth Pulse Animation - Heartbeat + growth */
+@keyframes babyHeartbeat {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    filter: brightness(1);
+  }
+  10% {
+    transform: scale(1.02) translateY(-1px);
+    filter: brightness(1.08);
+  }
+  20% {
+    transform: scale(1) translateY(0);
+    filter: brightness(1);
+  }
+  30% {
+    transform: scale(1.015) translateY(-0.5px);
+    filter: brightness(1.05);
+  }
+  40%, 90% {
+    transform: scale(1) translateY(0);
+    filter: brightness(1);
+  }
+}
+
+.baby-group.animating {
+  animation: babyHeartbeat 1.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Active Growth Animation - Rapid pulsing during animation */
+@keyframes activeGrowth {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    transform: scale(1.03);
+    filter: brightness(1.15) saturate(1.1);
+  }
+}
+
+.baby-growth.animating {
+  animation: activeGrowth 0.3s ease-in-out infinite;
+}
+
+/* Belly Growth During Animation */
+@keyframes bellyGrowth {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.belly-growth.animating {
+  animation: bellyGrowth 0.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Realistic fetal kicking movement */
+@keyframes fetalKick {
+  0%, 85%, 100% {
+    transform: rotate(0deg) translateX(0) translateY(0);
+  }
+  87% {
+    transform: rotate(-1.5deg) translateX(-2px) translateY(-1px);
+  }
+  89% {
+    transform: rotate(0.8deg) translateX(1px) translateY(1px);
+  }
+  91% {
+    transform: rotate(-0.5deg) translateX(-1px) translateY(0);
+  }
+  93% {
+    transform: rotate(0deg) translateX(0) translateY(0);
+  }
+}
+
+.baby-group:not(.animating) {
+  animation: fetalKick 6s ease-in-out infinite;
+  transform-origin: center 320px;
+}
+
+/* Gentle floating movement for baby in amniotic fluid */
+@keyframes babyFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-4px) rotate(0.3deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-0.2deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(0.4deg);
+  }
+}
+
+/* Combined gentle movements */
+.baby-group:not(.animating) {
+  animation: babyFloat 8s ease-in-out infinite, fetalKick 7s ease-in-out infinite 2s;
 }
 
 .view-label {

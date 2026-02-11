@@ -54,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSignInClick, isAuthenticated }) => {
     { key: "hero.nav.home", path: ROUTES.LANDING },
     { key: "hero.nav.journeys", path: ROUTES.JOURNEYS },
     { key: "hero.nav.products", path: ROUTES.PRODUCTS },
-    { key: "hero.nav.consult", path: ROUTES.APPOINTMENTS },
+    { key: "hero.nav.consult", path: ROUTES.TELECONSULTATION },
     { key: "hero.nav.symptoms", path: ROUTES.SYMPTOM_CHECKER },
     { key: "hero.nav.about", path: ROUTES.ABOUT },
   ];

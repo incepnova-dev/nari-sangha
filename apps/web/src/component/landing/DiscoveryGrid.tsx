@@ -9,8 +9,8 @@ const DiscoveryGrid: React.FC = () => {
     const categories = [
         { title: "Journeys", subtitle: "Guided health paths", path: ROUTES.JOURNEYS },
         { title: "Symptom Checker", subtitle: "AI-powered triage", path: ROUTES.SYMPTOM_CHECKER },
-        { title: "Teleconsultation", subtitle: "Connect with doctors", path: ROUTES.APPOINTMENTS },
-        { title: "Specialists", subtitle: "Find expert care", path: ROUTES.APPOINTMENTS },
+        { title: "Teleconsultation", subtitle: "Connect with doctors", path: ROUTES.TELECONSULTATION },
+        { title: "Specialists", subtitle: "Find expert care", path: ROUTES.TELECONSULTATION },
         { title: "Screening", subtitle: "Preventive health checks", path: ROUTES.PREVENTIVE_HEALTH },
         { title: "Vaccination", subtitle: "Stay protected", path: ROUTES.PREVENTIVE_HEALTH },
     ];

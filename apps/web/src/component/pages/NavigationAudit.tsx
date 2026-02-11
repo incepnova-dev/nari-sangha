@@ -14,7 +14,7 @@ const NavigationAudit: React.FC = () => {
     const PAGE_INVENTORY: PageAuditItem[] = [
         { name: 'About', path: 'About.tsx', route: ROUTES.ABOUT, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
         { name: 'AdolescentHealthJourney', path: 'AdolescentHealthJourney.tsx', route: ROUTES.ADOLESCENT_HEALTH, isRegistered: true, isReachable: true, suggestedParent: 'Journeys' },
-        { name: 'Appointments', path: 'Appointments.tsx', route: ROUTES.APPOINTMENTS, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
+        { name: 'Appointments', path: 'Teleconsultation.tsx', route: ROUTES.APPOINTMENTS, isRegistered: true, isReachable: true, suggestedParent: 'Navbar (combined with Teleconsultation)' },
         { name: 'ChronicConditionsJourney', path: 'ChronicConditionsJourney.tsx', route: ROUTES.CHRONIC_CONDITIONS, isRegistered: true, isReachable: true, suggestedParent: 'Journeys' },
         { name: 'Community', path: 'Community.tsx', route: ROUTES.COMMUNITY, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
         { name: 'CosmeticSurgeryGuide', path: 'CosmeticSurgeryGuide.tsx', route: ROUTES.COSMETIC_SURGERY, isRegistered: true, isReachable: true, suggestedParent: 'Services' },
@@ -42,7 +42,7 @@ const NavigationAudit: React.FC = () => {
         // { name: 'Stories', path: 'Stories.tsx', route: ROUTES.STORIES, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
         { name: 'Support', path: 'Support.tsx', route: ROUTES.SUPPORT, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
         { name: 'SymptomChecker', path: 'SymptomChecker.tsx', route: ROUTES.SYMPTOM_CHECKER, isRegistered: true, isReachable: true, suggestedParent: 'Navbar' },
-        { name: 'Teleconsultation', path: 'Teleconsultation.tsx', route: ROUTES.TELECONSULTATION, isRegistered: true, isReachable: true, suggestedParent: 'Appointments' },
+        { name: 'Teleconsultation', path: 'Teleconsultation.tsx', route: ROUTES.TELECONSULTATION, isRegistered: true, isReachable: true, suggestedParent: 'Combined with Appointments' },
         { name: 'VaccinationGuide', path: 'VaccinationGuide.tsx', route: ROUTES.VACCINATION, isRegistered: true, isReachable: true, suggestedParent: 'Preventive Health' },
     ];
 

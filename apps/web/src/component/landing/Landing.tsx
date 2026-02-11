@@ -32,7 +32,7 @@ const Landing: React.FC<LandingProps> = ({ handleSignInClick }) => {
             {[
               { title: "Guided Journeys", icon: "🛤️", path: ROUTES.JOURNEYS, color: "#F3E5F5" },
               { title: "Symptom Checker", icon: "🩺", path: ROUTES.SYMPTOM_CHECKER, color: "#E8F5E9" },
-              { title: "Teleconsultation", icon: "📹", path: ROUTES.APPOINTMENTS, color: "#E3F2FD" },
+              { title: "Teleconsultation", icon: "📹", path: ROUTES.TELECONSULTATION, color: "#E3F2FD" },
               { title: "Public Benefits", icon: "🏛️", path: ROUTES.GOVERNMENT_SCHEMES, color: "#FFF3E0" },
 
             ].map((item, idx) => (

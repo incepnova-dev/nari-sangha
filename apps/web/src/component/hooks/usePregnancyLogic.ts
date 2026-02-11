@@ -349,9 +349,10 @@ export const usePregnancyLogic = () => {
             if (week > 40) {
                 clearInterval(interval);
                 setIsAnimating(false);
-                setCurrentWeek(20);
+                // Keep at week 40 after animation completes
+                setCurrentWeek(40);
             }
-        }, 200);
+        }, 150); // Slightly faster for smoother animation
     }, [isAnimating]);
 
     const toggleBagItem = (itemId: string) => {

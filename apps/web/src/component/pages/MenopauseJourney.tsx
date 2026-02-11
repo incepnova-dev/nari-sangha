@@ -83,7 +83,7 @@ const MenopauseJourney: React.FC = () => {
                 badge="Premium Care Guide"
             >
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
-                    <button className="btn-primary" onClick={() => navigate(ROUTES.APPOINTMENTS)}>Consult Specialist</button>
+                    <button className="btn-primary" onClick={() => navigate(ROUTES.TELECONSULTATION)}>Consult Specialist</button>
                     <button className="btn-secondary" onClick={() => navigate(ROUTES.JOURNEYS)}>← Back to Paths</button>
                 </div>
             </InnerPageHero>
