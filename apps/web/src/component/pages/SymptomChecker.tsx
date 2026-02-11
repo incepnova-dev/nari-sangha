@@ -119,7 +119,7 @@ const SymptomChecker: React.FC = () => {
 
     const selectedDetail = useMemo(() =>
         SYMPTOM_DATA.find(s => s.id === selectedSymptom) || null,
-    [selectedSymptom]);
+        [selectedSymptom]);
 
     const filteredSymptoms = useMemo(() => {
         if (!activeBodyArea) return SYMPTOM_DATA;
@@ -221,7 +221,7 @@ const SymptomChecker: React.FC = () => {
             {/* ═══ Body Area Selector ═══ */}
             <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '60px 20px 0' }}>
                 {sectionHeading("Where does it hurt?", "Select a body area to narrow down your symptoms, or skip to the full assessment below.")}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '14px', marginBottom: '20px' }}>
+                <div className="body-area-grid" style={{ display: 'grid', gap: '14px', marginBottom: '20px' }}>
                     {BODY_AREAS.map(area => (
                         <button key={area.id} onClick={() => setActiveBodyArea(activeBodyArea === area.id ? null : area.id)}
                             style={{
@@ -568,8 +568,19 @@ const SymptomChecker: React.FC = () => {
 
             <style>{`
                 @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+                .body-area-grid {
+                    grid-template-columns: repeat(6, 1fr);
+                }
                 @media (max-width: 900px) {
+                    .body-area-grid {
+                        grid-template-columns: repeat(3, 1fr);
+                    }
                     #start > div:nth-child(2) { grid-template-columns: 1fr !important; }
+                }
+                @media (max-width: 600px) {
+                    .body-area-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                 }
             `}</style>
         </div>

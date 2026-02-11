@@ -645,111 +645,39 @@ const BoneHealthJourney: React.FC = () => {
                                         <p>Tap the highlighted areas to see health insights</p>
                                     </div>
                                     <div className={styles.bodyDiagram}>
-                                        <svg viewBox="0 0 300 600" className={styles.skeletonSvg} style={{ width: '100%', height: 'auto', maxHeight: '550px', filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.03))' }}>
-                                            <defs>
-                                                <linearGradient id="skeletonStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                    <stop offset="0%" stopColor="#ec407a" />
-                                                    <stop offset="100%" stopColor="#f48fb1" />
-                                                </linearGradient>
-                                                <filter id="skeletonGlow">
-                                                    <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                                                    <feMerge>
-                                                        <feMergeNode in="coloredBlur" />
-                                                        <feMergeNode in="SourceGraphic" />
-                                                    </feMerge>
-                                                </filter>
-                                            </defs>
+                                        <svg viewBox="0 0 400 850" xmlns="http://www.w3.org/2000/svg" id="body-map" className={styles.skeletonSvg} style={{ width: '100%', height: 'auto', maxHeight: '550px' }}>
+                                            {/* Single Continuous Organic Silhouette */}
+                                            <path className={styles.bodyOutline}
+                                                d="M200,40 c-20,0 -35,18 -35,45 s15,48 35,48 s35,-21 35,-48 s-15,-45 -35,-45 M188,133 q12,10 24,0 l4,15 h-32 z M160,148 q40,-15 80,0 q25,45 20,105 q-15,60 -25,100 h-70 q-10,-40 -25,-100 q-5,-60 20,-105 z M165,353 h70 q25,20 25,65 q0,40 -15,75 h-90 q-15,-35 -15,-75 q0,-45 25,-65 z M160,155 q-35,30 -60,130 q-5,25 -20,105 q5,15 15,10 q10,-40 25,-125 q15,-80 40,-120 z M240,155 q35,30 60,130 q5,25 20,105 q-15,15 -15,10 q-10,-40 -25,-125 q-15,-80 -40,-120 z M155,493 q-10,120 0,320 q15,5 35,0 q5,-150 10,-320 z M245,493 q10,120 0,320 q-15,5 -35,0 q-5,-150 -10,-320 z" />
 
-                                            {/* Female Body Silhouette (Soft Background) */}
-                                            <path
-                                                d="M150,10 C175,10 195,40 195,70 C195,100 175,120 150,120 C125,120 105,100 105,70 C105,40 125,10 150,10 Z
-                                                   M150,120 C155,130 165,135 180,140 C225,155 250,185 250,240 C250,290 220,300 210,320 
-                                                   C200,340 250,370 250,440 C250,510 230,580 215,595 L85,595 
-                                                   C70,580 50,510 50,440 C50,370 100,340 90,320 C80,300 50,290 50,240 
-                                                   C50,185 75,155 120,140 C135,135 145,130 150,120 Z"
-                                                fill="url(#skeletonStroke)"
-                                                opacity="0.04"
-                                            />
+                                            {/* Systemic Hotspots */}
+                                            <circle id="endocrine" className={`${styles.systemPoint} ${selectedBodyPart === 'spine' ? styles.activePoint : ''}`} cx="200" cy="75" r="12" onClick={() => setSelectedBodyPart('spine')}>
+                                                <title>Endocrine System</title>
+                                            </circle>
 
-                                            {/* Refined Internal Skeleton */}
-                                            {/* Skull */}
-                                            <ellipse cx="150" cy="65" rx="22" ry="30" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2.5" filter="url(#skeletonGlow)" />
+                                            <circle id="thyroid" className={`${styles.systemPoint} ${selectedBodyPart === 'spine' ? styles.activePoint : ''}`} cx="200" cy="130" r="10" onClick={() => setSelectedBodyPart('spine')}>
+                                                <title>Thyroid Gland</title>
+                                            </circle>
 
-                                            {/* Spine */}
-                                            <path d="M150,100 Q152,150 150,200 Q148,250 150,320"
-                                                filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="4" strokeLinecap="round" opacity="0.9" />
+                                            <circle id="cardiopulmonary" className={`${styles.systemPoint} ${selectedBodyPart === 'spine' ? styles.activePoint : ''}`} cx="200" cy="210" r="15" onClick={() => setSelectedBodyPart('spine')}>
+                                                <title>Cardiopulmonary System</title>
+                                            </circle>
 
-                                            {/* Shoulders */}
-                                            <path d="M90,145 Q150,135 210,145" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
+                                            <circle id="digestive" className={`${styles.systemPoint} ${selectedBodyPart === 'hip' ? styles.activePoint : ''}`} cx="200" cy="290" r="15" onClick={() => setSelectedBodyPart('hip')}>
+                                                <title>Digestive System</title>
+                                            </circle>
 
-                                            {/* Ribcage Highlights */}
-                                            <path d="M120,165 Q150,155 180,165" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
-                                            <path d="M115,190 Q150,180 185,190" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
-                                            <path d="M120,215 Q150,205 180,215" fill="none" stroke="url(#skeletonStroke)" strokeWidth="1.5" opacity="0.6" />
+                                            <circle id="renal" className={`${styles.systemPoint} ${selectedBodyPart === 'spine' ? styles.activePoint : ''}`} cx="225" cy="330" r="12" onClick={() => setSelectedBodyPart('spine')}>
+                                                <title>Renal System</title>
+                                            </circle>
 
-                                            {/* Pelvis (Refined Shape) */}
-                                            <path d="M110,320 C100,340 100,370 150,370 C200,370 200,340 190,320 Q150,310 110,320"
-                                                filter="url(#skeletonGlow)" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="3" />
+                                            <circle id="reproductive" className={`${styles.systemPoint} ${selectedBodyPart === 'hip' ? styles.activePoint : ''}`} cx="200" cy="410" r="18" onClick={() => setSelectedBodyPart('hip')}>
+                                                <title>Reproductive System</title>
+                                            </circle>
 
-                                            {/* Arms */}
-                                            <line x1="90" y1="145" x2="70" y2="220" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-                                            <line x1="70" y1="220" x2="65" y2="290" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-                                            <circle cx="65" cy="300" r="8" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
-
-                                            <line x1="210" y1="145" x2="230" y2="220" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-                                            <line x1="230" y1="220" x2="235" y2="290" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-                                            <circle cx="235" cy="300" r="8" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
-
-                                            {/* Legs */}
-                                            <path d="M125,365 Q120,440 120,460" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3.5" strokeLinecap="round" />
-                                            <path d="M175,365 Q180,440 180,460" filter="url(#skeletonGlow)" fill="none" stroke="url(#skeletonStroke)" strokeWidth="3.5" strokeLinecap="round" />
-
-                                            {/* Knees */}
-                                            <circle cx="120" cy="465" r="9" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
-                                            <circle cx="180" cy="465" r="9" fill="#fff" stroke="url(#skeletonStroke)" strokeWidth="2" filter="url(#skeletonGlow)" />
-
-                                            {/* Lower Legs */}
-                                            <line x1="120" y1="475" x2="115" y2="560" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-                                            <line x1="180" y1="475" x2="185" y2="560" filter="url(#skeletonGlow)" stroke="url(#skeletonStroke)" strokeWidth="3" strokeLinecap="round" />
-
-                                            {/* INTERACTIVE HOTSPOTS (Aligned to new skeleton) */}
-                                            {/* Spine Hotspot */}
-                                            <circle
-                                                cx="150" cy="200" r="14"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('spine')}
-                                            />
-
-                                            {/* Hip Hotspot */}
-                                            <circle
-                                                cx="150" cy="345" r="16"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('hip')}
-                                            />
-
-                                            {/* Wrist Hotspot */}
-                                            <circle
-                                                cx="65" cy="300" r="12"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('wrist')}
-                                            />
-                                            <circle
-                                                cx="235" cy="300" r="12"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('wrist')}
-                                            />
-
-                                            {/* Knee Hotspot */}
-                                            <circle
-                                                cx="120" cy="465" r="12"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('knee')}
-                                            />
-                                            <circle
-                                                cx="180" cy="465" r="12"
-                                                className={`${styles.hotspot} ${styles.hotspotPulse}`}
-                                                onClick={() => setSelectedBodyPart('knee')}
-                                            />
+                                            <circle id="musculoskeletal" className={`${styles.systemPoint} ${selectedBodyPart === 'knee' ? styles.activePoint : ''}`} cx="165" cy="630" r="14" onClick={() => setSelectedBodyPart('knee')}>
+                                                <title>Musculoskeletal System</title>
+                                            </circle>
                                         </svg>
                                     </div>
                                 </div>

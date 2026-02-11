@@ -40,6 +40,23 @@ const GestationalDiabetes: React.FC = () => {
 
   return (
     <div className="gestational-diabetes-page">
+      {/* Site Header */}
+      <header className="site-header">
+        <div className="nav-container">
+          <div className="logo"><a href="#">Nari Shakti</a></div>
+          <nav className="main-nav">
+            <a href="#journey">Your Journey</a>
+            <a href="#learn">Learn</a>
+            <a href="#tracker">Track Health</a>
+            <a href="#support">Support</a>
+          </nav>
+          <div className="nav-actions">
+            <a href="login.html" className="btn-nav primary">Sign In</a>
+            <a href="contact.html" className="btn-nav outline">Contact Us</a>
+          </div>
+        </div>
+      </header>
+
       <div className="page-shell">
 
         {/* Neural Network Particle Background */}
@@ -786,7 +803,6 @@ const GestationalDiabetes: React.FC = () => {
         </div>
       </div>
 
-      {/* Tracker Backdrop */}
       <div className="tracker-backdrop" id="trackerBackdrop" onClick={() => (window as any).closeSugarTracker?.()}></div>
 
     </div>
