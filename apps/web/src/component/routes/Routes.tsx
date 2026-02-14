@@ -21,7 +21,7 @@ import PostpartumJourney from "../pages/PostpartumJourney";
 import AdolescentHealthJourney from "../pages/AdolescentHealthJourney";
 import SymptomChecker from "../pages/SymptomChecker";
 import Products from "../pages/Products";
-import MenopauseJourney from "../pages/MenopauseJourney";
+import MenopauseJourneyNew from "../pages/MenopauseJourneyNew";
 import PerinatalJourney from "../pages/PerinatalJourney";
 import PerinatalWellnessJourney from "../pages/PerinatalWellnessJourney";
 import CancerVisualization from "../pages/CancerVisualization";
@@ -87,7 +87,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.ADOLESCENT_HEALTH} element={<AdolescentHealthJourney />} />
         <Route path={ROUTES.SYMPTOM_CHECKER} element={<SymptomChecker />} />
         <Route path={ROUTES.PRODUCTS} element={<Products />} />
-        <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourney />} />
+        <Route path={ROUTES.MENOPAUSE} element={<MenopauseJourneyNew />} />
         <Route path={ROUTES.PERINATAL} element={<PerinatalJourney />} />
         <Route path={ROUTES.PERINATAL_WELLNESS} element={<PerinatalWellnessJourney />} />
         <Route path={ROUTES.AUTOIMMUNE_HEALTH} element={<AutoimmuneHealthJourney />} />
