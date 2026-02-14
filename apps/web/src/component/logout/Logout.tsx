@@ -14,7 +14,7 @@ const Logout: React.FC = () => {
     };
 
     performLogout();
-  }, [navigate]);
+  }, [navigate, signOut]);
 
   // Return null while logging out
   return null;

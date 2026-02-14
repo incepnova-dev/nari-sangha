@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '../../../nari-swasthya-complete/gestational_diabetes.css';
+import '../../styles/pages/gestational-diabetes.css';
 
 const GestationalDiabetes: React.FC = () => {
   useEffect(() => {
@@ -43,7 +43,7 @@ const GestationalDiabetes: React.FC = () => {
       {/* Site Header */}
       <header className="site-header">
         <div className="nav-container">
-          <div className="logo"><a href="#">Nari Shakti</a></div>
+          <div className="logo"><a href="/" aria-label="Nari Shakti Home">Nari Shakti</a></div>
           <nav className="main-nav">
             <a href="#journey">Your Journey</a>
             <a href="#learn">Learn</a>
@@ -676,7 +676,7 @@ const GestationalDiabetes: React.FC = () => {
       </div>
 
       {/* TOPIC PANEL */}
-      <div className="topic-panel" id="topicPanel"><button className="close-panel" onClick={() => (window as any).closeTopicPanel?.()}>✕</button><div className="panel-scroll"><div className="panel-header" id="panelHeader"><div className="panel-icon" id="panelIcon"></div><div className="panel-title-block"><h2 id="panelTitle"></h2><p id="panelSubtitle"></p></div></div><div className="panel-content" id="panelContent"></div></div></div>
+      <div className="topic-panel" id="topicPanel"><button className="close-panel" onClick={() => (window as any).closeTopicPanel?.()}>✕</button><div className="panel-scroll"><div className="panel-header" id="panelHeader"><div className="panel-icon" id="panelIcon"></div><div className="panel-title-block"><h2 id="panelTitle" aria-label="Topic title"></h2><p id="panelSubtitle"></p></div></div><div className="panel-content" id="panelContent"></div></div></div>
       {/* BACKDROP */}
       <div className="backdrop" id="backdrop" onClick={() => (window as any).closeTopicPanel?.()}></div>
       {/* QUIZ MODAL */}

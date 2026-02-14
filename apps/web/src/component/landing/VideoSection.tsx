@@ -47,7 +47,7 @@ const VideoSection: React.FC = () => {
                         <h2>Expert Advice from Gynecologists 📺</h2>
                         <p className={styles.subheading}>Learn from leading women's health experts and specialists.</p>
                     </div>
-                    <a href="#" className={styles.viewAllBtn}>View All Videos</a>
+                    <button type="button" className={styles.viewAllBtn} onClick={() => window.location.href = '/videos'}>View All Videos</button>
                 </div>
 
                 <div className={styles.videoGrid}>

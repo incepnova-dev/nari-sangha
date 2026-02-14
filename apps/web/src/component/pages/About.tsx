@@ -37,7 +37,8 @@ const About: React.FC = () => {
         });
 
         return () => timers.forEach(timer => clearInterval(timer));
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // animatedStats is intentionally excluded - it's updated within the effect
 
     const enhancedStats = [
         { label: "Women supported", value: animatedStats[0].value.toLocaleString() + animatedStats[0].suffix, sub: "Across life stages", icon: "👩" },

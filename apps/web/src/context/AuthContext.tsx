@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react';
 import {
   signIn as signInService,
   signOut as signOutService,
@@ -25,7 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const bootstrapSession = async () => {
+  const bootstrapSession = useCallback(async () => {
     const tokens = getStoredTokens();
     if (!tokens.token) {
       setIsLoading(false);
@@ -39,38 +39,38 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(null);
     }
     setIsLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     bootstrapSession();
-  }, []);
+  }, [bootstrapSession]);
 
-  const signIn = async (params: { email: string; password: string }) => {
+  const signIn = useCallback(async (params: { email: string; password: string }) => {
     const result = await signInService(params);
     if (result.success && result.data) {
       setUser(result.data.user || result.data);
       return true;
     }
     return false;
-  };
+  }, []);
 
-  const signUp = async (params: { email: string; password: string; fullName?: string; confirmPassword?: string }) => {
+  const signUp = useCallback(async (params: { email: string; password: string; fullName?: string; confirmPassword?: string }) => {
     const result = await signUpService(params);
     if (result.success && result.data) {
       setUser(result.data.user || result.data);
       return true;
     }
     return false;
-  };
+  }, []);
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     await signOutService();
     setUser(null);
-  };
+  }, []);
 
-  const refreshSession = async () => {
+  const refreshSession = useCallback(async () => {
     await bootstrapSession();
-  };
+  }, [bootstrapSession]);
 
   const value = useMemo(
     () => ({
@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       signOut,
       refreshSession,
     }),
-    [user, isLoading]
+    [user, isLoading, signIn, signUp, signOut, refreshSession]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
