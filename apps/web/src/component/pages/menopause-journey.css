@@ -548,6 +548,15 @@
       flex: 1 1 auto;
       min-width: 0;
     }
+
+    .stage-badges {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
     .stage-kicker{
       font-size:.75rem;
       letter-spacing:.06em;
@@ -569,12 +578,13 @@
       max-width: 60ch;
     }
 
-    .stage-badges{
-      display:flex;
-      gap:.4rem;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
+    .stage-badges {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      margin-left: auto;
     }
     .stage-badge{
       font-size:.78rem;
@@ -720,13 +730,26 @@
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .timeline-title { 
+      flex: 1;
+      min-width: 0;
     }
     .timeline-title h3 { margin: 0; color: #8e24aa; font-size: 1.3rem; }
     .timeline-title p { margin: 2px 0 0; color: #666; font-size: 0.85rem; }
 
-    .phase-toggles { display: flex; gap: 0.5rem; background: rgba(255,255,255,0.5); padding: 5px; border-radius: 50px; flex-wrap: wrap; }
+    .phase-toggles { 
+      display: flex; 
+      gap: 0.5rem; 
+      background: rgba(255,255,255,0.5); 
+      padding: 5px; 
+      border-radius: 50px; 
+      flex-wrap: wrap;
+      align-items: center;
+      margin-left: auto;
+    }
     .toggle-btn { border: none; background: transparent; padding: 0.6rem 1.2rem; border-radius: 40px; cursor: pointer; font-weight: 600; color: #666; transition: all 0.3s; font-size: 0.85rem; }
     .toggle-btn:hover { background: rgba(255,255,255,0.8); }
     .toggle-btn.active { background: #d81b60; color: white; box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3); }

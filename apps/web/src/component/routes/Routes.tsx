@@ -28,6 +28,7 @@ import CancerVisualization from "../pages/CancerVisualization";
 import AutoimmuneHealthJourney from "../pages/AutoimmuneHealthJourney";
 import BoneHealthJourney from "../pages/BoneHealthJourney";
 import About from "../pages/About";
+import Services from "../pages/Services";
 import GovernmentSchemes from "../pages/GovernmentSchemes";
 import ResearchHub from "../pages/ResearchHub";
 import CosmeticSurgeryGuide from "../pages/CosmeticSurgeryGuide";
@@ -101,7 +102,7 @@ const AppRoutes = () => {
         <Route path={ROUTES.FIND_DOCTORS} element={<FindDoctors />} />
         <Route path={ROUTES.SCREENING} element={<ScreeningGuide />} />
         <Route path={ROUTES.VACCINATION} element={<VaccinationGuide />} />
-        <Route path={ROUTES.SERVICES} element={<Navigate to={ROUTES.JOURNEYS + "#services"} replace />} />
+        <Route path={ROUTES.SERVICES} element={<Services />} />
         <Route path={ROUTES.INSURANCE_GUIDE} element={<InsuranceGuide />} />
         <Route path={ROUTES.OTC_GUIDE} element={<OTCGUIDE />} />
         <Route path={ROUTES.NUTRITION_GUIDE} element={<NutritionGuide />} />
