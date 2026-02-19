@@ -1,0 +1,3115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LifeGuard – Your Screening Journey</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<style>
+
+/* ================================================================
+   LifeGuard — screening_new.css
+   Theme: Nari Swasthya Light (vaccination.html design system)
+   ================================================================ */
+
+/* ──────────── CORE VARIABLES ──────── */
+:root {
+  --pink:       #ec407a;
+  --deep-pink:  #d81b60;
+  --lavender:   #ede7f6;
+  --bg:         #faf5fb;
+  --card-bg:    #ffffff;
+  --text-main:  #212121;
+  --text-soft:  #555;
+  --border-soft:#e0e0e0;
+  --chip-bg:    #f3e5f5;
+  --mild:       #4caf50;
+  --moderate:   #ff9800;
+  --serious:    #9c27b0;
+  --neuron-blue:#2196f3;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+/* ──────────── BASE ─────────────────────────────────────────────── */
+body {
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{ font-weight:700; }
+
+/* ──────────── HEADER ────────────── */
+.site-header{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  padding:0;
+  box-shadow:0 2px 24px rgba(236,64,122,0.09);
+  position:sticky; top:0; z-index:1000;
+  border-bottom:1px solid rgba(236,64,122,0.08);
+}
+.nav-container{
+  max-width:1400px; margin:0 auto;
+  padding:0 1.5rem;
+  display:flex; justify-content:space-between; align-items:center;
+  height:64px;
+}
+.logo{display:flex; align-items:center; gap:.65rem; flex-shrink:0;}
+.logo-icon{
+  width:40px; height:40px; border-radius:12px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 14px rgba(236,64,122,0.35);
+  flex-shrink:0;
+}
+.logo-icon svg{width:22px; height:22px; fill:white;}
+.logo-text{display:flex; flex-direction:column; gap:0;}
+.logo-text a{
+  text-decoration:none;
+  font-family:'Playfair Display',serif;
+  font-weight:900; font-size:1.25rem; line-height:1.1;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.logo-text span{
+  font-size:.62rem; color:var(--text-soft);
+  font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+}
+.main-nav{display:flex; align-items:center; gap:.2rem;}
+.nav-item{position:relative;}
+.nav-link{
+  display:flex; align-items:center; gap:.3rem;
+  text-decoration:none; color:var(--text-main);
+  font-weight:500; font-size:.875rem;
+  padding:.55rem .75rem; border-radius:8px;
+  transition:all .25s; white-space:nowrap;
+  cursor:pointer; background:none; border:none; font-family:inherit;
+}
+.nav-link:hover,.nav-link.active{color:var(--deep-pink); background:rgba(236,64,122,0.06);}
+.nav-link .chevron{font-size:.6rem; transition:transform .25s; color:var(--text-soft); margin-top:1px;}
+.nav-item:hover .chevron{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute; top:calc(100% + 8px); left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  min-width:220px; background:white; border-radius:16px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.1); padding:.5rem;
+  opacity:0; pointer-events:none;
+  transition:all .25s cubic-bezier(.23,1.01,.32,1); z-index:200;
+}
+.nav-dropdown::before{
+  content:''; position:absolute; top:-6px; left:50%; transform:translateX(-50%);
+  border:6px solid transparent; border-bottom-color:white; border-top:none;
+  filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+}
+.nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+  opacity:1; pointer-events:all; transform:translateX(-50%) translateY(0);
+}
+.dd-item{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.65rem .9rem; border-radius:10px;
+  text-decoration:none; color:var(--text-main);
+  font-size:.85rem; font-weight:500; transition:all .2s;
+}
+.dd-item:hover{background:rgba(236,64,122,0.07); color:var(--deep-pink); padding-left:1.1rem;}
+.dd-icon{
+  width:28px; height:28px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.8rem; flex-shrink:0;
+}
+.dd-sep{height:1px; background:var(--border-soft); margin:.3rem .5rem;}
+.dd-has-flyout{position:relative;}
+.dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+.dd-flyout{
+  display:none;position:absolute;top:0;left:calc(100% + 4px);
+  min-width:190px;background:white;border-radius:12px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+}
+.dd-has-flyout:hover>.dd-flyout,
+.dd-has-flyout:focus-within>.dd-flyout{display:block;}
+.dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);}
+.dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+.dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1rem;}
+.nav-actions{display:flex; gap:.6rem; align-items:center;}
+.btn-nav{
+  padding:.46rem 1.1rem; border-radius:50px; text-decoration:none;
+  font-weight:600; font-size:.82rem; transition:all .3s; border:none; cursor:pointer;
+  font-family:inherit; display:inline-flex; align-items:center; gap:.4rem;
+}
+.btn-nav.outline{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:#fff; box-shadow:0 4px 15px rgba(236,64,122,0.3); border:none;
+}
+.btn-nav.outline:hover{transform:translateY(-2px); box-shadow:0 8px 25px rgba(236,64,122,0.4); color:#fff;}
+.btn-nav.primary{border:1.5px solid var(--deep-pink); color:var(--deep-pink); background:#fff; box-shadow:none;}
+.btn-nav.primary:hover{background:rgba(236,64,122,0.05); border-color:var(--deep-pink);}
+.hamburger{
+  display:none; width:38px; height:38px; border-radius:10px;
+  background:none; border:1.5px solid var(--border-soft);
+  align-items:center; justify-content:center; cursor:pointer;
+  flex-direction:column; gap:4px; padding:8px;
+}
+.hamburger span{display:block; height:2px; background:var(--text-main); border-radius:2px; transition:all .3s;}
+.mobile-menu{
+  display:none; position:fixed; inset:0; top:64px;
+  background:rgba(255,255,255,0.98); backdrop-filter:blur(20px);
+  z-index:999; padding:1.5rem; overflow-y:auto;
+}
+.mobile-menu.open{display:block;}
+.mm-link{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.85rem 1rem; border-radius:12px;
+  text-decoration:none; color:var(--text-main);
+  font-weight:500; font-size:1rem;
+  transition:all .2s; border-bottom:1px solid var(--border-soft);
+}
+.mm-link:hover{color:var(--deep-pink); background:rgba(236,64,122,0.05);}
+.mm-section{font-size:.72rem; font-weight:700; color:var(--text-soft); text-transform:uppercase; letter-spacing:.1em; padding:.6rem 1rem .3rem;}
+@media(max-width:1060px){.main-nav{display:none;} .hamburger{display:flex;}}
+@media(max-width:600px){.nav-actions .btn-nav{display:none;}}
+/* Always keep Sign In + Contact Us visible inside mobile menu overlay */
+.mobile-menu .btn-nav{display:inline-flex !important;}
+
+/* ──────────── FOOTER ────────────── */
+:root{
+  --bg-footer:#1e1a1e; --bg-bottom:#161316;
+  --pink-primary:#e8517a; --pink-soft:#f0748e;
+  --text-main-f:#c9bfc9; --text-muted-f:#7c7080;
+  --divider-f:rgba(232,81,122,0.18);
+  --font-display-f:'Playfair Display',Georgia,serif;
+  --font-body-f:'DM Sans',sans-serif;
+}
+footer.ns-footer{background:var(--bg-footer); color:var(--text-main-f); font-family:var(--font-body-f); border-top:1px solid var(--divider-f);}
+.footer-main{max-width:1200px; margin:0 auto; padding:56px 32px 48px; display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+.footer-col h3{font-family:var(--font-display-f); font-size:1.05rem; font-weight:600; color:var(--pink-primary); margin-bottom:18px; letter-spacing:.01em;}
+.footer-col p{font-size:.875rem; line-height:1.75; color:var(--text-main-f); font-weight:300;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{font-size:.875rem; color:var(--text-main-f); padding:5px 0; font-weight:300; position:relative; padding-left:14px; transition:color .2s;}
+.footer-col ul li::before{content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:5px; height:5px; border-radius:50%; background:var(--pink-primary); opacity:.5;}
+.footer-col ul li:hover{color:var(--pink-soft);}
+.disclaimer-text{font-size:.875rem; line-height:1.75; color:var(--text-main-f); font-weight:300;}
+.emergency-alert{font-size:.875rem; line-height:1.7; color:var(--pink-primary); font-weight:500;}
+.emergency-alert strong{font-weight:600;}
+.footer-meta{border-top:1px solid var(--divider-f); max-width:1200px; margin:0 auto; padding:28px 32px; text-align:center;}
+.footer-meta .meta-line{font-size:.8rem; color:var(--text-muted-f); letter-spacing:.04em; margin-bottom:10px;}
+.footer-meta .meta-line .sep{color:var(--pink-primary); margin:0 6px;}
+.footer-meta .tagline{font-size:.82rem; color:var(--text-muted-f); display:flex; align-items:center; justify-content:center; gap:6px;}
+.footer-meta .tagline .heart{color:var(--pink-primary); font-size:1rem; animation:footerPulse 2s ease-in-out infinite;}
+@keyframes footerPulse{0%,100%{transform:scale(1); opacity:1;} 50%{transform:scale(1.25); opacity:.8;}}
+.footer-bottom{background:var(--bg-bottom); border-top:1px solid rgba(255,255,255,.04);}
+.footer-bottom-inner{max-width:1200px; margin:0 auto; padding:22px 32px; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.footer-links{display:flex; gap:36px; flex-wrap:wrap; justify-content:center;}
+.footer-links a{font-size:.82rem; color:var(--text-muted-f); text-decoration:none; letter-spacing:.03em; transition:color .2s;}
+.footer-links a:hover{color:var(--pink-soft);}
+.footer-copy{font-size:.78rem; color:var(--text-muted-f); opacity:.7; letter-spacing:.02em;}
+@media(max-width:900px){.footer-main{grid-template-columns:repeat(2,1fr); gap:32px;}}
+@media(max-width:540px){.footer-main{grid-template-columns:1fr; padding:40px 20px 32px;} .footer-meta{padding:20px;} .footer-bottom-inner{padding:18px 20px;} .footer-links{gap:20px;}}
+
+/* ──────────── HERO CONSTELLATION ───────────────────────────────── */
+.hero-constellation {
+  position:relative;
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:3rem 1.5rem;
+  background:linear-gradient(135deg,#faf5fb 0%,#e8eaf6 50%,#fce4ec 100%);
+  overflow:hidden;
+}
+
+/* bg layer */
+.constellation-bg{ position:absolute; inset:0; pointer-events:none; z-index:1; }
+
+#particleCanvas {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  opacity:.42;
+}
+
+.gradient-morph {
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 50%, rgba(236,64,122,.12) 0%, transparent 60%);
+  animation:morph-pulse 8s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes morph-pulse {
+  0%,100%{ opacity:.5; transform:scale(1); }
+  50%    { opacity:1;   transform:scale(1.15); }
+}
+
+/* content grid */
+.hero-content-wrapper {
+  position:relative; z-index:2;
+  max-width:1200px; margin:0 auto; width:100%;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:4rem; align-items:center;
+}
+@media(max-width:968px){
+  .hero-content-wrapper{ grid-template-columns:1fr; gap:2rem; }
+}
+
+/* left col */
+.hero-left{ display:flex; flex-direction:column; gap:1.5rem; }
+
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.85rem; font-weight:600; color:var(--deep-pink);
+  text-transform:uppercase; letter-spacing:.08em;
+}
+
+.pulse-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--deep-pink);
+  animation:pulse-glow 2s infinite;
+}
+@keyframes pulse-glow {
+  0%,100%{ opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(236,64,122,.7); }
+  50%    { opacity:.7; transform:scale(1.3); box-shadow:0 0 0 10px rgba(236,64,122,0); }
+}
+
+.hero-title-3d {
+  font-size:clamp(2.2rem,5vw,4rem);
+  font-weight:800; line-height:1.1;
+  background:linear-gradient(135deg,#212121 0%,#555 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+.title-emphasis {
+  background:linear-gradient(135deg,#ec407a 0%,#d81b60 50%,#ad1457 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  display:inline-block;
+  animation:title-shimmer 3s ease-in-out infinite;
+  filter:drop-shadow(0 2px 8px rgba(236,64,122,.3));
+}
+@keyframes title-shimmer {
+  0%,100%{ filter:brightness(1) drop-shadow(0 2px 8px rgba(236,64,122,.3)); }
+  50%    { filter:brightness(1.3) drop-shadow(0 4px 16px rgba(236,64,122,.5)); }
+}
+
+.hero-description {
+  font-size:1.1rem; line-height:1.7;
+  color:var(--text-soft); max-width:48ch;
+}
+
+/* floating badges */
+.badge-constellation{ display:flex; flex-wrap:wrap; gap:.8rem; }
+
+.hero-badge-3d {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.6rem 1.2rem; border-radius:50px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(236,64,122,.2);
+  box-shadow:0 4px 15px rgba(236,64,122,.15), inset 0 1px 0 rgba(255,255,255,.6);
+  font-size:.9rem; font-weight:600; color:var(--deep-pink);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  animation:badge-float 4s ease-in-out infinite;
+}
+.hero-badge-3d:nth-child(1){ animation-delay:0s; }
+.hero-badge-3d:nth-child(2){ animation-delay:.5s; }
+.hero-badge-3d:nth-child(3){ animation-delay:1s; }
+
+@keyframes badge-float {
+  0%,100%{ transform:translateY(0); }
+  50%    { transform:translateY(-8px); }
+}
+.hero-badge-3d:hover {
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 8px 25px rgba(236,64,122,.25), inset 0 1px 0 rgba(255,255,255,.8);
+  border-color:var(--deep-pink);
+}
+
+/* CTA btn-family-guide */
+.btn-family-guide {
+  display:inline-flex; align-items:center; gap:.75rem;
+  margin-top:.5rem; padding:1rem 2.5rem;
+  background:linear-gradient(135deg,var(--deep-pink),#f06292);
+  color:#fff; border:none; border-radius:50px;
+  font-weight:700; font-size:1.1rem; cursor:pointer;
+  font-family:inherit;
+  box-shadow:0 10px 25px rgba(216,27,96,.3);
+  transition:all .3s ease;
+  animation:float-btn 3s ease-in-out infinite;
+}
+.btn-family-guide:hover {
+  transform:translateY(-3px);
+  box-shadow:0 15px 35px rgba(216,27,96,.4);
+}
+@keyframes float-btn {
+  0%,100%{ transform:translateY(0); }
+  50%    { transform:translateY(-5px); }
+}
+
+/* ──────────── SHIELD CONSTELLATION (right col) ─────────────────── */
+.hero-right {
+  position:relative; min-height:480px;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.shield-constellation {
+  position:relative; width:100%; max-width:440px;
+  aspect-ratio:1; margin:0 auto;
+}
+
+/* core + pulse rings */
+.shield-core {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:200px; height:200px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  z-index:5;
+}
+
+.core-pulse-ring {
+  position:absolute; inset:-20px;
+  border:2px solid rgba(236,64,122,.25);
+  border-radius:50%;
+  animation:ring-pulse 3s ease-in-out infinite;
+}
+.core-pulse-ring:nth-child(1){ animation-delay:0s; }
+.core-pulse-ring:nth-child(2){ animation-delay:.5s; }
+.core-pulse-ring:nth-child(3){ animation-delay:1s; }
+
+@keyframes ring-pulse {
+  0%   { transform:scale(.9); opacity:1; }
+  50%  { transform:scale(1.3); opacity:.3; }
+  100% { transform:scale(.9); opacity:1; }
+}
+
+.shield-svg{ position:relative; z-index:2; filter:drop-shadow(0 8px 25px rgba(236,64,122,.25)); }
+
+/* vaccine orbs (4 floating elements) */
+.vaccine-orbs{ position:absolute; inset:0; }
+
+.vaccine-orb {
+  position:absolute;
+  width:100px; height:100px;
+  cursor:pointer;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  animation:orb-orbit 12s ease-in-out infinite;
+}
+.vaccine-orb:hover{ transform:scale(1.15) rotate(5deg); }
+
+.orb-hpv        { top:5%;   left:15%;  animation-delay:0s; }
+.orb-mmr        { top:15%;  right:10%; animation-delay:-3s; }
+.orb-tdap       { bottom:15%; left:8%; animation-delay:-6s; }
+.orb-flu        { bottom:10%; right:12%; animation-delay:-9s; }
+
+@keyframes orb-orbit {
+  0%,100%{ transform:translate(0,0); }
+  25%    { transform:translate(10px,-10px); }
+  50%    { transform:translate(0,-20px); }
+  75%    { transform:translate(-10px,-10px); }
+}
+
+.orb-glow {
+  position:absolute; inset:-15px;
+  background:radial-gradient(circle, var(--pink) 0%, transparent 70%);
+  border-radius:50%; opacity:0; z-index:0;
+  transition:opacity .4s;
+}
+.vaccine-orb:hover .orb-glow{ opacity:.3; }
+
+.orb-inner {
+  position:relative; z-index:1;
+  width:100%; height:100%; border-radius:50%;
+  background:linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
+  backdrop-filter:blur(10px);
+  border:2px solid rgba(236,64,122,.3);
+  box-shadow:0 8px 25px rgba(0,0,0,.1), inset 0 2px 8px rgba(255,255,255,.6);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.3rem;
+  transition:all .3s;
+}
+.vaccine-orb:hover .orb-inner {
+  border-color:var(--pink);
+  box-shadow:0 12px 35px rgba(236,64,122,.2), inset 0 2px 8px rgba(255,255,255,.8);
+}
+
+.orb-icon{ font-size:1.8rem; color:var(--pink); }
+.orb-label{ font-size:.7rem; font-weight:700; color:var(--text-main); text-transform:uppercase; letter-spacing:.5px; }
+
+/* ──────────── APP CONTAINER ────────────────────────────────────── */
+.app.hidden{ display:none; }
+.app{ min-height:100vh; }
+
+.page-container {
+  max-width:1400px; margin:0 auto;
+  padding:3rem 1.5rem;
+}
+
+.section{ margin-bottom:4rem; }
+.section.hidden{ display:none; }
+
+.section-header{ text-align:center; margin-bottom:3rem; }
+.section-title {
+  font-size:2.5rem; font-weight:800;
+  background:linear-gradient(135deg, var(--deep-pink), var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:.5rem;
+}
+.section-subtitle{ color:var(--text-soft); font-size:1.1rem; }
+
+/* ──────────── AGE STAGE GRID ───────────────────────────────────── */
+.age-stage-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+  gap:2rem;
+}
+
+.stage-card {
+  background:var(--card-bg);
+  border:2px solid rgba(0,0,0,.06);
+  border-radius:24px;
+  padding:2rem;
+  cursor:pointer;
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 30px rgba(0,0,0,.06);
+  position:relative;
+  overflow:hidden;
+}
+
+.stage-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--pink), var(--mild));
+  transform:scaleX(0);
+  transition:transform .4s ease;
+}
+
+.stage-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 20px 50px rgba(236,64,122,.15);
+  border-color:rgba(236,64,122,.3);
+}
+
+.stage-card:hover::before{ transform:scaleX(1); }
+
+.stage-icon {
+  font-size:4rem;
+  margin-bottom:1rem;
+  animation:icon-float 3s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
+}
+
+.stage-title {
+  font-size:1.4rem;
+  color:var(--text-main);
+  margin-bottom:.5rem;
+  font-weight:700;
+}
+
+.stage-range {
+  font-size:.9rem;
+  color:var(--deep-pink);
+  font-weight:700;
+  margin-bottom:1rem;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.stage-desc {
+  font-size:.95rem;
+  color:var(--text-soft);
+  line-height:1.6;
+  margin-bottom:1.5rem;
+}
+
+.stage-stats {
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+}
+
+.stat-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.4rem .9rem;
+  background:var(--chip-bg);
+  color:var(--deep-pink);
+  border-radius:50px;
+  font-size:.75rem;
+  font-weight:600;
+}
+
+/* ──────────── SCREENING DETAILS SECTION ────────────────────────── */
+.back-button {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.7rem 1.3rem;
+  background:white;
+  border:1px solid var(--border-soft);
+  border-radius:50px;
+  color:var(--text-main);
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  margin-bottom:2rem;
+}
+
+.back-button:hover {
+  border-color:var(--deep-pink);
+  color:var(--deep-pink);
+  transform:translateX(-3px);
+}
+
+.stage-header-icon {
+  font-size:5rem;
+  margin-bottom:1rem;
+}
+
+.search-filter-bar {
+  margin-bottom:2.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+
+.search-box {
+  position:relative;
+  max-width:500px;
+  margin:0 auto;
+  width:100%;
+}
+
+.search-box i {
+  position:absolute;
+  left:1.2rem;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--text-soft);
+}
+
+.search-box input {
+  width:100%;
+  padding:1rem 1.5rem 1rem 3rem;
+  border-radius:50px;
+  border:2px solid var(--border-soft);
+  background:var(--card-bg);
+  font-size:.95rem;
+  transition:all .3s;
+  box-shadow:0 4px 15px rgba(0,0,0,.04);
+}
+
+.search-box input:focus {
+  outline:none;
+  border-color:var(--pink);
+  box-shadow:0 6px 25px rgba(236,64,122,.1);
+}
+
+.filter-chips {
+  display:flex;
+  justify-content:center;
+  gap:.7rem;
+  flex-wrap:wrap;
+}
+
+.filter-chip {
+  padding:.6rem 1.3rem;
+  border-radius:50px;
+  border:1.5px solid var(--border-soft);
+  background:white;
+  color:var(--text-soft);
+  font-size:.85rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  font-family:inherit;
+}
+
+.filter-chip:hover {
+  border-color:var(--pink);
+  color:var(--pink);
+}
+
+.filter-chip.active {
+  background:var(--deep-pink);
+  color:white;
+  border-color:var(--deep-pink);
+  box-shadow:0 4px 15px rgba(236,64,122,.3);
+}
+
+/* ──────────── SCREENING GRID ───────────────────────────────────── */
+.screening-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+  gap:1.5rem;
+}
+
+.screening-card {
+  background:var(--card-bg);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:20px;
+  padding:1.5rem;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  position:relative;
+  overflow:hidden;
+}
+
+.screening-card::after {
+  content:'';
+  position:absolute;
+  top:1.5rem; right:1.5rem;
+  width:10px; height:10px;
+  background:var(--mild);
+  border-radius:50%;
+  box-shadow:0 0 0 0 rgba(76,175,80,.7);
+  animation:pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform:scale(.95); box-shadow:0 0 0 0 rgba(76,175,80,.7); }
+  70% { transform:scale(1); box-shadow:0 0 0 10px rgba(76,175,80,0); }
+  100% { transform:scale(.95); box-shadow:0 0 0 0 rgba(76,175,80,0); }
+}
+
+.screening-card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 12px 35px rgba(236,64,122,.12);
+  border-color:rgba(236,64,122,.2);
+}
+
+.card-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  margin-bottom:1rem;
+}
+
+.card-icon {
+  font-size:2.5rem;
+  background:var(--chip-bg);
+  width:60px; height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+}
+
+.age-badge {
+  background:var(--chip-bg);
+  color:var(--deep-pink);
+  padding:.3rem .8rem;
+  border-radius:20px;
+  font-size:.75rem;
+  font-weight:600;
+}
+
+.screening-card h4 {
+  font-size:1.15rem;
+  margin-bottom:.5rem;
+  color:var(--text-main);
+}
+
+.card-preview {
+  color:var(--text-soft);
+  font-size:.9rem;
+  margin-bottom:1.2rem;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  line-height:1.5;
+}
+
+.card-footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:1px solid rgba(0,0,0,.06);
+  padding-top:1rem;
+}
+
+.urgency {
+  font-size:.8rem;
+  font-weight:600;
+  text-transform:uppercase;
+}
+
+.urgency.high { color:#ef5350; }
+.urgency.medium { color:var(--moderate); }
+.urgency.low { color:var(--mild); }
+
+/* ──────────── MODAL ────────────────────────────────────────────── */
+.modal {
+  display:none;
+  position:fixed;
+  z-index:2000;
+  left:0; top:0;
+  width:100%; height:100%;
+  background-color:rgba(33,33,33,.6);
+  backdrop-filter:blur(5px);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal.active {
+  display:flex;
+  animation:fadeIn .3s ease;
+}
+
+.modal-content {
+  background-color:var(--card-bg);
+  width:90%;
+  max-width:600px;
+  border-radius:24px;
+  box-shadow:0 25px 50px rgba(0,0,0,.2);
+  position:relative;
+  max-height:90vh;
+  overflow-y:auto;
+  border:1px solid white;
+}
+
+.modal-close {
+  position:absolute;
+  top:1.5rem; right:1.5rem;
+  background:#f5f5f5;
+  border:none;
+  font-size:1.2rem;
+  cursor:pointer;
+  color:var(--text-soft);
+  width:36px; height:36px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .3s;
+}
+
+.modal-close:hover { background:#e0e0e0; transform:rotate(90deg); }
+
+#modal-body {
+  padding:2.5rem;
+}
+
+.detail-header {
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin-bottom:2rem;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.detail-icon {
+  font-size:3.5rem;
+  background:var(--chip-bg);
+  width:80px; height:80px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:50%;
+  color:var(--deep-pink);
+}
+
+.info-grid {
+  display:grid;
+  gap:1.5rem;
+}
+
+.info-item h5 {
+  color:var(--pink);
+  font-size:.9rem;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:.5rem;
+  font-weight:700;
+}
+
+.info-item p {
+  color:var(--text-main);
+  line-height:1.6;
+}
+
+.action-buttons {
+  margin-top:2rem;
+  display:flex;
+  gap:1rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding:.9rem 1.5rem;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+  transition:all .3s;
+  flex:1;
+  font-family:inherit;
+  font-size:.95rem;
+}
+
+.btn-primary {
+  background:var(--deep-pink);
+  color:white;
+  box-shadow:0 4px 15px rgba(216,27,96,.4);
+}
+
+.btn-primary:hover {
+  transform:translateY(-2px);
+  background:#c2185b;
+  box-shadow:0 8px 25px rgba(216,27,96,.5);
+}
+
+.btn-secondary {
+  background:white;
+  border:2px solid var(--border-soft);
+  color:var(--text-main);
+}
+
+.btn-secondary:hover {
+  border-color:var(--deep-pink);
+  color:var(--deep-pink);
+}
+
+/* ──────────── TOAST ────────────────────────────────────────────── */
+.toast {
+  position:fixed; bottom:1.8rem; left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:#fff; border:1px solid rgba(236,64,122,.15);
+  border-radius:50px; padding:.7rem 1.5rem;
+  display:flex; align-items:center; gap:.6rem;
+  color:var(--text-main); font-size:.85rem; font-weight:600;
+  box-shadow:0 8px 35px rgba(0,0,0,.12);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  z-index:3000; white-space:nowrap;
+}
+.toast.show{ transform:translateX(-50%) translateY(0); }
+.toast-icon{ font-size:1rem; }
+
+/* ──────────── ANIMATIONS ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity:0; transform:scale(.95); }
+  to { opacity:1; transform:scale(1); }
+}
+
+/* ──────────── RESPONSIVE ───────────────────────────────────────── */
+@media(max-width:968px){
+  .hero-content-wrapper{ grid-template-columns:1fr; gap:2rem; }
+  .hero-right{ order: -1; }
+}
+
+@media(max-width:900px){
+  /* Hero adjustments */
+  .hero{ padding: 3rem 1.5rem; }
+  .hero-title-3d{ font-size: 2.5rem; }
+  
+  /* Badge constellation */
+  .badge-constellation{ gap: 0.6rem; flex-wrap: wrap; }
+  .hero-badge{ font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+  
+  /* Action buttons */
+  .action-row{ flex-direction: column; gap: 1rem; }
+  .btn-hero{ width: 100%; justify-content: center; }
+  
+  /* Stage cards */
+  .age-stage-grid{ grid-template-columns: 1fr; gap: 1.5rem; }
+  .stage-card{ padding: 1.8rem; }
+  
+  /* Section spacing */
+  .screening-section{ padding: 3.5rem 1rem; }
+}
+
+@media(max-width:768px){
+  .age-stage-grid{ grid-template-columns:1fr; }
+  .screening-grid{ grid-template-columns:1fr; }
+  .hero-title-3d{ font-size:2rem; }
+  .section-title{ font-size:2rem; }
+  .search-filter-bar{ padding:0 1rem; }
+  
+  /* Hero refinements */
+  .hero{ padding: 2.5rem 1rem; }
+  .hero-subtitle{ font-size: 1rem; line-height: 1.6; }
+  
+  /* Screening cards */
+  .screening-card{ padding: 1.3rem; }
+  .screening-card h3{ font-size: 1.1rem; }
+  .screening-card p{ font-size: 0.9rem; }
+  
+  /* Stage cards */
+  .stage-card{ padding: 1.5rem; }
+  .stage-card h3{ font-size: 1.15rem; }
+  
+  /* Search bar */
+  .search-input{ font-size: 0.95rem; padding: 0.9rem 1.2rem 0.9rem 3rem; }
+  .filter-group{ flex-wrap: wrap; gap: 0.6rem; }
+  
+  /* Timeline items */
+  .timeline-item{ padding: 1.2rem; }
+  
+  /* Section headers */
+  .section-header{ margin-bottom: 2rem; }
+}
+
+@media(max-width:600px){
+  /* Hero ultra compact */
+  .hero{ padding: 2rem 1rem; }
+  .hero-title-3d{ font-size: 1.7rem; line-height: 1.2; }
+  .hero-subtitle{ font-size: 0.95rem; }
+  
+  /* Badge constellation - stack vertically */
+  .badge-constellation{ 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 0.5rem; 
+  }
+  .hero-badge{ 
+    font-size: 0.7rem; 
+    padding: 0.35rem 0.7rem; 
+  }
+  
+  /* Action buttons */
+  .btn-hero{ 
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Section titles */
+  .section-title{ font-size: 1.6rem; }
+  .section-subtitle{ font-size: 0.9rem; }
+  
+  /* Search filter bar - stack vertically */
+  .search-filter-bar{ 
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .search-wrapper{ width: 100%; }
+  .search-input{ 
+    width: 100%; 
+    font-size: 0.9rem;
+  }
+  .filter-group{ 
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .filter-btn{
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Cards - extra compact */
+  .screening-card{
+    padding: 1.2rem;
+  }
+  .screening-card h3{
+    font-size: 1rem;
+  }
+  .screening-card p{
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  
+  .stage-card{
+    padding: 1.3rem;
+  }
+  .stage-card h3{
+    font-size: 1.05rem;
+  }
+  .stage-label{
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  /* Risk badge */
+  .risk-badge{
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  /* Icon sizes */
+  .screening-icon{
+    font-size: 1.8rem;
+  }
+  
+  /* Timeline */
+  .timeline-item{
+    padding: 1rem;
+  }
+  .timeline-item h4{
+    font-size: 1rem;
+  }
+  
+  /* Fact cards */
+  .fact-card{
+    padding: 1rem;
+  }
+  
+  /* Grid gaps */
+  .screening-grid{
+    gap: 1.2rem;
+  }
+  .age-stage-grid{
+    gap: 1.2rem;
+  }
+}
+
+@media(max-width:480px){
+  /* Extra small screens */
+  .hero-title-3d{ font-size: 1.5rem; }
+  .section-title{ font-size: 1.4rem; }
+  .hero-subtitle{ font-size: 0.9rem; }
+  
+  /* Further compact cards */
+  .screening-card{ padding: 1rem; }
+  .stage-card{ padding: 1.1rem; }
+  
+  /* Smaller icons */
+  .screening-icon{ font-size: 1.5rem; }
+  
+  /* Button adjustments */
+  .btn-hero{ 
+    padding: 0.75rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Timeline compact */
+  .timeline-item{
+    padding: 0.9rem;
+  }
+  
+  /* Search input */
+  .search-input{
+    font-size: 0.85rem;
+    padding: 0.8rem 1rem 0.8rem 2.8rem;
+  }
+  
+  /* Filter buttons */
+  .filter-btn{
+    font-size: 0.75rem;
+    padding: 0.45rem 0.9rem;
+  }
+}
+
+
+/* ──────────── MOBILE RESPONSIVENESS FIXES ──────────────────────── */
+
+/* Hero constellation — prevent overflow on all mobile sizes */
+@media(max-width:968px){
+  .hero-constellation{
+    min-height: auto;
+    padding: 2.5rem 1.5rem 3rem;
+  }
+  .hero-content-wrapper{
+    text-align: center;
+  }
+  .hero-left{
+    align-items: center;
+  }
+  .hero-description{
+    max-width: 100%;
+  }
+  .badge-constellation{
+    justify-content: center;
+  }
+  /* Shield constellation — scale down */
+  .hero-right{
+    min-height: 320px;
+    width: 100%;
+  }
+  .shield-constellation{
+    max-width: 320px;
+  }
+  .shield-core{
+    width: 150px;
+    height: 150px;
+  }
+  .shield-svg{
+    width: 120px;
+    height: 136px;
+  }
+  .vaccine-orb{
+    width: 78px;
+    height: 78px;
+  }
+  .orb-icon{ font-size: 1.4rem; }
+  .orb-label{ font-size: .6rem; }
+  .orb-hpv  { top: 3%;  left: 8%; }
+  .orb-mmr  { top: 8%;  right: 5%; }
+  .orb-tdap { bottom: 10%; left: 3%; }
+  .orb-flu  { bottom: 5%; right: 5%; }
+}
+
+@media(max-width:600px){
+  .hero-constellation{
+    padding: 2rem 1rem 2.5rem;
+  }
+  .hero-right{
+    min-height: 260px;
+  }
+  .shield-constellation{
+    max-width: 260px;
+  }
+  .shield-core{
+    width: 120px;
+    height: 120px;
+  }
+  .shield-svg{
+    width: 96px;
+    height: 110px;
+  }
+  .vaccine-orb{
+    width: 62px;
+    height: 62px;
+  }
+  .orb-icon{ font-size: 1.1rem; }
+  .orb-label{ font-size: .55rem; }
+  .orb-hpv  { top: 2%;  left: 5%; }
+  .orb-mmr  { top: 5%;  right: 2%; }
+  .orb-tdap { bottom: 8%; left: 2%; }
+  .orb-flu  { bottom: 3%; right: 3%; }
+  .btn-family-guide{
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.9rem 1.5rem;
+  }
+  /* Page container */
+  .page-container{
+    padding: 1.5rem 1rem;
+  }
+  .section{
+    margin-bottom: 2.5rem;
+  }
+  .section-header{
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media(max-width:400px){
+  .hero-right{
+    min-height: 220px;
+  }
+  .shield-constellation{
+    max-width: 220px;
+  }
+  .shield-core{
+    width: 100px;
+    height: 100px;
+  }
+  .shield-svg{
+    width: 80px;
+    height: 92px;
+  }
+  .vaccine-orb{
+    width: 52px;
+    height: 52px;
+  }
+  .orb-icon{ font-size: .9rem; }
+  .orb-label{ font-size: .5rem; letter-spacing: 0; }
+  /* Toast wrapping */
+  .toast{
+    white-space: normal;
+    text-align: center;
+    max-width: 90vw;
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Filter chips — horizontal scroll on very small screens */
+@media(max-width:480px){
+  .filter-chips{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-chips::-webkit-scrollbar{ display: none; }
+  .filter-chip{
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  /* Stage icon size */
+  .stage-icon{
+    font-size: 3rem;
+  }
+  .stage-title{
+    font-size: 1.2rem;
+  }
+  .card-icon{
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+}
+
+/* Modal — stack action buttons and fix detail-header on small mobile */
+@media(max-width:500px){
+  .action-buttons{
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .btn-primary, .btn-secondary{
+    width: 100%;
+    text-align: center;
+  }
+  .detail-header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  #modal-body{
+    padding: 1.5rem;
+  }
+  .modal-content{
+    border-radius: 16px;
+    width: 96%;
+    max-height: 92vh;
+  }
+}
+
+/* Back button — adequate touch target */
+.back-button{
+  min-height: 44px;
+}
+
+/* Respect reduced-motion for all animations */
+@media(prefers-reduced-motion: reduce){
+  .hero-badge-3d,
+  .btn-family-guide,
+  .stage-icon,
+  .vaccine-orb,
+  .pulse-dot,
+  .title-emphasis,
+  .core-pulse-ring,
+  .gradient-morph,
+  .screening-card::after{
+    animation: none;
+  }
+  .hero-badge-3d:hover,
+  .btn-family-guide:hover,
+  .stage-card:hover,
+  .screening-card:hover{
+    transform: none;
+  }
+}
+
+
+/* ================================================================
+   MOBILE RESPONSIVENESS ADDITIONS — screening.html
+   Additions only — zero existing code removed or altered.
+   Covers every identified gap from thorough line-by-line audit.
+   ================================================================ */
+
+/* ── 1. stage-header-icon: scale the 5rem emoji on mobile ── */
+@media(max-width:600px){
+  .stage-header-icon{
+    font-size: 3.5rem;
+    margin-bottom: .75rem;
+  }
+}
+@media(max-width:400px){
+  .stage-header-icon{
+    font-size: 2.75rem;
+    margin-bottom: .5rem;
+  }
+}
+
+/* ── 2. stage-icon (card emojis): extra reduction at 360px ── */
+@media(max-width:360px){
+  .stage-icon{
+    font-size: 2.5rem;
+  }
+  .stage-title{
+    font-size: 1.1rem;
+  }
+  .stage-range{
+    font-size: .8rem;
+  }
+  .stage-desc{
+    font-size: .88rem;
+  }
+}
+
+/* ── 3. page-container: tighter on ultra-small phones ── */
+@media(max-width:360px){
+  .page-container{
+    padding: 1rem .75rem;
+  }
+  .section{
+    margin-bottom: 2rem;
+  }
+  .section-header{
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* ── 4. badge-constellation: centre badges when hero is centred on mobile ──
+   The existing @600px rule sets flex-direction:column + align-items:flex-start
+   but hero-left has align-items:center at 968px+. Fix: centre on all mobile. ── */
+@media(max-width:600px){
+  .badge-constellation{
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── 5. screening-card h4: h3 overrides exist but actual element is h4 ── */
+@media(max-width:768px){
+  .screening-card h4{
+    font-size: 1.05rem;
+  }
+}
+@media(max-width:600px){
+  .screening-card h4{
+    font-size: 1rem;
+  }
+}
+@media(max-width:480px){
+  .screening-card h4{
+    font-size: .95rem;
+  }
+}
+
+/* ── 6. modal-body: padding-right to stop h2 title hiding under close button ── */
+@media(max-width:600px){
+  #modal-body{
+    padding-right: 3.5rem; /* leaves room for 36px close btn at right:1.5rem */
+  }
+}
+@media(max-width:500px){
+  /* At 500px action-buttons stacks (already handled); re-apply padding-right */
+  #modal-body{
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem; /* reset bottom/left, keep right */
+    padding-right: 3.25rem;
+  }
+  .modal-close{
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* ── 7. 360px / 320px granular breakpoint ── */
+@media(max-width:360px){
+  /* Hero */
+  .hero-title-3d{
+    font-size: 1.4rem;
+    line-height: 1.25;
+  }
+  .hero-eyebrow{
+    font-size: .72rem;
+  }
+  .hero-description{
+    font-size: .88rem;
+  }
+  .hero-badge-3d{
+    font-size: .72rem;
+    padding: .35rem .75rem;
+    gap: .3rem;
+  }
+  .btn-family-guide{
+    font-size: .9rem;
+    padding: .8rem 1.2rem;
+  }
+  /* Shield visual */
+  .hero-right{
+    min-height: 190px;
+  }
+  .shield-constellation{
+    max-width: 190px;
+  }
+  .shield-core{
+    width: 85px;
+    height: 85px;
+  }
+  .shield-svg{
+    width: 68px;
+    height: 78px;
+  }
+  .vaccine-orb{
+    width: 44px;
+    height: 44px;
+  }
+  .orb-icon{
+    font-size: .85rem;
+  }
+  .orb-label{
+    display: none; /* too small to read at this size */
+  }
+  .orb-hpv  { top: 1%;  left: 2%; }
+  .orb-mmr  { top: 2%;  right: 1%; }
+  .orb-tdap { bottom: 4%; left: 1%; }
+  .orb-flu  { bottom: 1%; right: 2%; }
+  /* core-pulse-ring: reduce inset so rings don't exit container */
+  .core-pulse-ring{
+    inset: -10px;
+  }
+  /* Sections */
+  .section-title{
+    font-size: 1.25rem;
+  }
+  .section-subtitle{
+    font-size: .85rem;
+  }
+  /* App nav area */
+  .search-box input{
+    font-size: .85rem;
+    padding: .85rem 1.2rem .85rem 2.75rem;
+  }
+  .search-box i{
+    left: 1rem;
+  }
+  .filter-chip{
+    font-size: .76rem;
+    padding: .5rem 1rem;
+  }
+  /* Stage cards */
+  .stage-card{
+    padding: 1rem .875rem;
+  }
+  .stat-badge{
+    font-size: .7rem;
+    padding: .35rem .75rem;
+  }
+  /* Screening cards */
+  .screening-card{
+    padding: .9rem;
+    border-radius: 14px;
+  }
+  .card-icon{
+    width: 44px;
+    height: 44px;
+    font-size: 1.6rem;
+  }
+  .age-badge{
+    font-size: .68rem;
+    padding: .25rem .65rem;
+  }
+  .screening-card h4{
+    font-size: .9rem;
+  }
+  .card-preview{
+    font-size: .82rem;
+  }
+  .urgency{
+    font-size: .72rem;
+  }
+  /* Back button */
+  .back-button{
+    font-size: .85rem;
+    padding: .6rem 1rem;
+  }
+  /* Modal */
+  #modal-body{
+    padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+    padding-right: 3rem;
+  }
+  .detail-icon{
+    width: 60px;
+    height: 60px;
+    font-size: 2.5rem;
+  }
+  .detail-header h2{
+    font-size: 1.1rem;
+  }
+  .info-item h5{
+    font-size: .8rem;
+  }
+  .info-item p{
+    font-size: .85rem;
+  }
+  .btn-primary,
+  .btn-secondary{
+    padding: .75rem 1rem;
+    font-size: .85rem;
+  }
+  /* Toast */
+  .toast{
+    font-size: .78rem;
+    padding: .6rem .875rem;
+    max-width: 92vw;
+  }
+  /* Footer */
+  .footer-links{
+    gap: 14px;
+  }
+  .footer-links a{
+    font-size: .76rem;
+  }
+  .footer-copy{
+    font-size: .72rem;
+  }
+}
+
+/* ── 8. Safe-area insets for notched / home-bar iPhones ── */
+
+/* Header: account for status-bar notch */
+@supports(padding-top: env(safe-area-inset-top)){
+  .site-header{
+    padding-top: env(safe-area-inset-top);
+  }
+  .nav-container{
+    height: calc(64px + env(safe-area-inset-top));
+  }
+  .mobile-menu{
+    top: calc(64px + env(safe-area-inset-top));
+  }
+}
+
+/* Toast: lift above home bar */
+@supports(padding-bottom: env(safe-area-inset-bottom)){
+  .toast{
+    bottom: calc(1.8rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Footer: safe-area at very bottom */
+@supports(padding-bottom: env(safe-area-inset-bottom)){
+  .footer-bottom-inner{
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ── 9. Prevent page-level horizontal scroll ── */
+html{
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── 10. orb-orbit amplitude: gentler on small screens ── */
+/* We introduce a smaller version of the keyframe for ≤480px.
+   The original @keyframes orb-orbit is fully preserved above. */
+@media(max-width:480px){
+  .vaccine-orb{
+    animation-name: orb-orbit-sm;
+  }
+}
+@media(max-width:360px){
+  .vaccine-orb{
+    animation-name: orb-orbit-xs;
+  }
+}
+@keyframes orb-orbit-sm {
+  0%,100%{ transform:translate(0,0); }
+  25%    { transform:translate(6px,-6px); }
+  50%    { transform:translate(0,-12px); }
+  75%    { transform:translate(-6px,-6px); }
+}
+@keyframes orb-orbit-xs {
+  0%,100%{ transform:translate(0,0); }
+  25%    { transform:translate(3px,-3px); }
+  50%    { transform:translate(0,-6px); }
+  75%    { transform:translate(-3px,-3px); }
+}
+
+/* ── 11. screening-grid: enforce single column below 480px ── */
+@media(max-width:480px){
+  .screening-grid{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ── 12. age-stage-grid: tighter gap on 360px ── */
+@media(max-width:360px){
+  .age-stage-grid{
+    gap: 1rem;
+  }
+}
+
+/* ── 13. search-filter-bar: margin-bottom on smaller screens ── */
+@media(max-width:480px){
+  .search-filter-bar{
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+}
+@media(max-width:360px){
+  .search-filter-bar{
+    margin-bottom: 1.25rem;
+    gap: .75rem;
+  }
+}
+
+/* ── 14. stat-badge: wrap correctly on very small cards ── */
+@media(max-width:360px){
+  .stage-stats{
+    gap: .5rem;
+  }
+}
+
+/* ── 15. card-footer: prevent urgency text + icon wrapping awkwardly ── */
+@media(max-width:360px){
+  .card-footer{
+    gap: .5rem;
+  }
+  .urgency{
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ── 16. section-title gradient text: ensure -webkit-text-fill-color
+   doesn't vanish on Android when font-size is very small ── */
+@media(max-width:360px){
+  .section-title{
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+/* ── 17. hero-badge-3d animation: reduce translateY so badges don't
+   clip inside a narrower hero on very small screens ── */
+@media(max-width:360px){
+  .hero-badge-3d{
+    animation-name: badge-float-xs;
+  }
+}
+@keyframes badge-float-xs {
+  0%,100%{ transform:translateY(0); }
+  50%    { transform:translateY(-4px); }
+}
+
+/* ── 18. Ensure the shield-svg hard-coded width/height attrs are
+   overridden responsively (HTML attrs set width=150 height=170) ── */
+.shield-svg{
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── 19. Reduce prefers-reduced-motion additions – extend to new anims ── */
+@media(prefers-reduced-motion: reduce){
+  .orb-orbit-sm,
+  .orb-orbit-xs,
+  .badge-float-xs{
+    animation: none;
+  }
+}
+
+/* ── 20. Footer: gap reduction for tiny phones ── */
+@media(max-width:360px){
+  .footer-main{
+    gap: 20px;
+    padding: 32px 16px 24px;
+  }
+  .footer-meta{
+    padding: 16px;
+  }
+  .footer-bottom-inner{
+    padding: 14px 16px;
+  }
+}
+
+</style>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.2 22 Q7.6 17.2 8.8 15 Q10.2 13 12 13 Q13.8 13 15.2 15 Q16.4 17.2 15.8 22Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Complete Health</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">Home</a>
+      </div>
+
+      <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:var(--deep-pink);">View Full Journeys</strong><span style="font-size:.73rem;color:var(--text-soft);">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:var(--text-soft);">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:var(--text-soft);">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:var(--text-soft);">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:var(--text-soft);">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:var(--text-soft);">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:var(--text-soft);">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:var(--text-soft);">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:var(--text-soft);">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:var(--text-soft);">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Services <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown">
+          <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-grid-2"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:var(--deep-pink);">Services Available</strong><span style="font-size:.73rem;color:var(--text-soft);">Browse all our services</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="symptom_checker.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:var(--text-soft);">AI-powered diagnosis</span></div>
+          </a>
+          <a href="dashboard.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:var(--text-soft);">Track your health</span></div>
+          </a>
+          <a href="screening.html" class="dd-item">
+            <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:var(--text-soft);">Cancer &amp; preventive</span></div>
+          </a>
+          <a href="vaccination.html" class="dd-item">
+            <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:var(--text-soft);">Immunization schedule</span></div>
+          </a>
+          <a href="otc.html" class="dd-item">
+            <div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:var(--text-soft);">Safe self-care options</span></div>
+          </a>
+          <a href="government_schemes.html" class="dd-item">
+            <div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:var(--text-soft);">Benefits you deserve</span></div>
+          </a>
+          <a href="insurance.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:var(--text-soft);">Coverage &amp; claims guide</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="nav-item">
+        <a href="stories.html" class="nav-link">Stories</a>
+      </div>
+
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Additional Info <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown" style="min-width:240px;">
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+          <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle, conceiving &amp; IVF</span></div></a>
+          <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:var(--text-soft);">All trimesters covered</span></div></a>
+          <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:var(--text-soft);">Newborn &amp; postpartum</span></div></a>
+          <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:var(--text-soft);">Menopause, bone, mental</span></div></a>
+          <div class="dd-sep"></div>
+          <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:var(--text-soft);">Share &amp; connect</span></div></a>
+          <div class="dd-sep"></div>
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+          <!-- NCD with flyout sub-items -->
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Osteoporosis prevention</span></div></a>
+          <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Anxiety, depression, support</span></div></a>
+          <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:var(--text-soft);">You are never alone</span></div></a>
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn-nav outline" href="signin.html">
+        <i class="fa-regular fa-user"></i> Sign In
+      </a>
+      <a class="btn-nav primary" href="contact.html">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-section">Navigation</div>
+  <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:var(--deep-pink);width:20px;"></i> Home</a>
+  <div class="mm-section">Journeys</div>
+  <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:var(--deep-pink);width:20px;"></i> Conceiving</a>
+  <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:var(--deep-pink);width:20px;"></i> Fertility</a>
+  <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:var(--deep-pink);width:20px;"></i> Pregnancy Journey</a>
+  <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+  <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+  <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+  <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:var(--deep-pink);width:20px;"></i> Antenatal Care</a>
+  <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:var(--deep-pink);width:20px;"></i> Newborn &amp; Postpartum</a>
+  <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:var(--deep-pink);width:20px;"></i> Breastfeeding</a>
+  <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:var(--deep-pink);width:20px;"></i> Menopause</a>
+  <div class="mm-section">Services</div>
+  <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:var(--deep-pink);width:20px;"></i> Symptom Checker</a>
+  <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:var(--deep-pink);width:20px;"></i> My Dashboard</a>
+  <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:var(--deep-pink);width:20px;"></i> Health Screening</a>
+  <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:var(--deep-pink);width:20px;"></i> Govt Schemes</a>
+  <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+  <div class="mm-section">Specialised Care</div>
+  <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+  <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+  <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+  <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+  <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+  <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+  <div class="mm-section">More</div>
+  <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:var(--deep-pink);width:20px;"></i> Stories</a>
+  <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:var(--deep-pink);width:20px;"></i> Community</a>
+  <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:var(--deep-pink);width:20px;"></i> About Us</a>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+    <a href="signin.html" class="btn-nav outline" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+    <a href="contact.html" class="btn-nav primary" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+  </div>
+</div>
+
+<!-- ================================================
+     HERO CONSTELLATION — Initial Loading Screen
+     ================================================ -->
+<div class="hero-constellation" id="heroConstellation">
+  <!-- background layer: particle network + morph blob -->
+  <div class="constellation-bg">
+    <canvas id="particleCanvas"></canvas>
+    <div class="gradient-morph" id="gradientMorph"></div>
+  </div>
+
+  <div class="hero-content-wrapper">
+    <!-- LEFT — eyebrow, title, description, badges, CTA -->
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="pulse-dot"></span>
+        Health Screening Guide for Women
+      </div>
+
+      <h1 class="hero-title-3d">
+        Guard Every<br>
+        <span class="title-emphasis">Stage of Life</span>
+      </h1>
+
+      <p class="hero-description">
+        An interactive journey through essential health screenings — from birth to 100 years.
+        Discover, understand, and plan your preventive care with confidence.
+      </p>
+
+      <div class="badge-constellation">
+        <div class="hero-badge-3d"><i class="fas fa-microscope"></i> 50+ Screenings Mapped</div>
+        <div class="hero-badge-3d"><i class="fas fa-circle-check"></i> WHO &amp; CDC Backed</div>
+        <div class="hero-badge-3d"><i class="fas fa-heart"></i> Every Life Stage</div>
+      </div>
+
+      <button class="btn-family-guide" id="heroEnter">
+        <i class="fas fa-play-circle"></i> Begin Your Health Journey
+      </button>
+    </div>
+
+    <!-- RIGHT — screening visualization with pulse rings + floating test orbs -->
+    <div class="hero-right">
+      <div class="shield-constellation">
+        <!-- central screening core -->
+        <div class="shield-core">
+          <div class="core-pulse-ring"></div>
+          <div class="core-pulse-ring"></div>
+          <div class="core-pulse-ring"></div>
+          <svg class="shield-svg" viewBox="0 0 120 140" width="150" height="170">
+            <defs>
+              <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ec407a"/>
+                <stop offset="100%" stop-color="#d81b60"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="70" r="50" fill="url(#screenGrad)" opacity="0.14" stroke="url(#screenGrad)" stroke-width="2.5"/>
+            <circle cx="60" cy="70" r="35" fill="url(#screenGrad)" opacity="0.07"/>
+            <!-- Checkmark -->
+            <path d="M40 70 L53 83 L80 53" fill="none" stroke="url(#screenGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- 4 floating orbs for different screening types -->
+        <div class="vaccine-orbs">
+          <div class="vaccine-orb orb-hpv">
+            <div class="orb-glow"></div>
+            <div class="orb-inner">
+              <i class="fas fa-ribbon orb-icon"></i>
+              <span class="orb-label">Cancer</span>
+            </div>
+          </div>
+          <div class="vaccine-orb orb-mmr">
+            <div class="orb-glow"></div>
+            <div class="orb-inner">
+              <i class="fas fa-heartbeat orb-icon"></i>
+              <span class="orb-label">Heart</span>
+            </div>
+          </div>
+          <div class="vaccine-orb orb-tdap">
+            <div class="orb-glow"></div>
+            <div class="orb-inner">
+              <i class="fas fa-bone orb-icon"></i>
+              <span class="orb-label">Bone</span>
+            </div>
+          </div>
+          <div class="vaccine-orb orb-flu">
+            <div class="orb-glow"></div>
+            <div class="orb-inner">
+              <i class="fas fa-baby orb-icon"></i>
+              <span class="orb-label">Repro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================
+     MAIN APP (revealed on hero CTA click)
+     ================================================ -->
+<div id="app" class="app hidden">
+<div class="page-container">
+
+  <!-- AGE GROUP SELECTION SECTION -->
+  <section id="section-age-select" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Choose Your Life Stage</h2>
+      <p class="section-subtitle">Select the stage that represents you or someone you care about</p>
+    </div>
+
+    <div class="age-stage-grid">
+      <!-- Newborn to Childhood -->
+      <div class="stage-card" data-stage="newborn">
+        <div class="stage-icon">👶</div>
+        <h3 class="stage-title">Newborn to Childhood</h3>
+        <p class="stage-range">0-12 years</p>
+        <p class="stage-desc">Essential early health screenings to ensure healthy development</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 15+ Tests</span>
+        </div>
+      </div>
+
+      <!-- Adolescence -->
+      <div class="stage-card" data-stage="adolescence">
+        <div class="stage-icon">🎓</div>
+        <h3 class="stage-title">Adolescence</h3>
+        <p class="stage-range">13-21 years</p>
+        <p class="stage-desc">Transition screenings for growing bodies and changing health needs</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 8+ Tests</span>
+        </div>
+      </div>
+
+      <!-- Reproductive Years -->
+      <div class="stage-card" data-stage="reproductive">
+        <div class="stage-icon">🌸</div>
+        <h3 class="stage-title">Reproductive Years</h3>
+        <p class="stage-range">21-45 years</p>
+        <p class="stage-desc">Comprehensive screenings for reproductive and general health</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 12+ Tests</span>
+        </div>
+      </div>
+
+      <!-- Perimenopause to Menopause -->
+      <div class="stage-card" data-stage="perimenopause">
+        <div class="stage-icon">🌅</div>
+        <h3 class="stage-title">Perimenopause to Menopause</h3>
+        <p class="stage-range">45-55 years</p>
+        <p class="stage-desc">Critical screenings during hormonal transition periods</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 10+ Tests</span>
+        </div>
+      </div>
+
+      <!-- Postmenopause -->
+      <div class="stage-card" data-stage="postmenopause">
+        <div class="stage-icon">🌺</div>
+        <h3 class="stage-title">Postmenopause</h3>
+        <p class="stage-range">55-74 years</p>
+        <p class="stage-desc">Age-appropriate preventive care and monitoring</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 11+ Tests</span>
+        </div>
+      </div>
+
+      <!-- Elderly -->
+      <div class="stage-card" data-stage="elderly">
+        <div class="stage-icon">🌟</div>
+        <h3 class="stage-title">Elderly</h3>
+        <p class="stage-range">75-100 years</p>
+        <p class="stage-desc">Essential health monitoring for golden years</p>
+        <div class="stage-stats">
+          <span class="stat-badge"><i class="fas fa-microscope"></i> 9+ Tests</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENING DETAILS SECTION (hidden initially) -->
+  <section id="section-screening-details" class="section hidden">
+    <div class="back-button" id="backToStages">
+      <i class="fas fa-arrow-left"></i> Back to Life Stages
+    </div>
+
+    <div class="section-header">
+      <div class="stage-header-icon" id="stageHeaderIcon">👶</div>
+      <h2 class="section-title" id="stageTitle">Newborn to Childhood</h2>
+      <p class="section-subtitle" id="stageSubtitle">0-12 years</p>
+    </div>
+
+    <div class="search-filter-bar">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search screenings...">
+      </div>
+      <div class="filter-chips" id="filterChips">
+        <button class="filter-chip active" data-filter="all">All</button>
+        <button class="filter-chip" data-filter="cancer">Cancer</button>
+        <button class="filter-chip" data-filter="reproductive">Reproductive</button>
+        <button class="filter-chip" data-filter="general">General</button>
+        <button class="filter-chip" data-filter="bone">Bone</button>
+      </div>
+    </div>
+
+    <!-- Screening Cards Grid -->
+    <div class="screening-grid" id="screeningGrid">
+      <!-- JS populated -->
+    </div>
+  </section>
+
+</div><!-- /page-container -->
+</div><!-- /app -->
+
+<!-- SCREENING DETAIL MODAL -->
+<div id="detail-modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✨</span>
+  <span class="toast-msg" id="toastMsg">Screening added!</span>
+</div>
+
+<script src="screening.js"></script>
+</body>
+<script>
+
+
+/* ================================================================
+   LifeGuard — screening_new.js
+   Interactive screening journey with vaccination-style animations
+   ================================================================ */
+
+// ─── PARTICLE NETWORK (connected-constellation style) ───
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize(){
+    const hero = canvas.parentElement.parentElement;
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  const COUNT = 100;
+
+  class Particle {
+    constructor(){
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.r  = Math.random() * 2 + 1;
+    }
+    update(){
+      this.x += this.vx;
+      this.y += this.vy;
+      if(this.x < 0 || this.x > W) this.vx *= -1;
+      if(this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+      ctx.fill();
+    }
+  }
+
+  for(let i=0; i<COUNT; i++) particles.push(new Particle());
+
+  function connectParticles(){
+    for(let i=0; i<particles.length; i++){
+      for(let j=i+1; j<particles.length; j++){
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 100){
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - dist/100)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ─── GRADIENT MORPH MOUSE TRACKER ─────────────
+(function(){
+  const hero  = document.getElementById('heroConstellation');
+  const morph = document.getElementById('gradientMorph');
+  if(!hero || !morph) return;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width)  * 100;
+    const y = ((e.clientY - r.top)  / r.height) * 100;
+    morph.style.background =
+      `radial-gradient(circle at ${x}% ${y}%, rgba(236,64,122,0.12) 0%, transparent 60%)`;
+  });
+})();
+
+// ─── HERO ENTER → REVEAL APP ─────────────────────────
+document.getElementById('heroEnter').addEventListener('click', () => {
+  const hero = document.getElementById('heroConstellation');
+  hero.style.transition = 'opacity .5s ease, transform .5s ease';
+  hero.style.opacity    = '0';
+  hero.style.transform  = 'translateY(-30px)';
+  setTimeout(() => {
+    hero.style.display = 'none';
+    document.getElementById('app').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 500);
+});
+
+// ─── SCREENING DATA BY LIFE STAGE ─────────────────────
+const screeningData = {
+  newborn: {
+    icon: '👶',
+    title: 'Newborn to Childhood',
+    range: '0-12 years',
+    screenings: [
+      {
+        name: 'Newborn Hearing Screening',
+        icon: '👂',
+        age: '0-1 month',
+        category: 'general',
+        description: 'Early detection of hearing issues to ensure proper language development.',
+        why: 'Identifies hearing problems early, critical for speech and cognitive development.',
+        frequency: 'At birth',
+        urgency: 'high'
+      },
+      {
+        name: 'PKU & Metabolic Screening',
+        icon: '🩺',
+        age: '0-1 month',
+        category: 'general',
+        description: 'Blood test for phenylketonuria and other metabolic disorders.',
+        why: 'Early detection prevents intellectual disability and other serious complications.',
+        frequency: '24-48 hours after birth',
+        urgency: 'high'
+      },
+      {
+        name: 'Developmental Screening',
+        icon: '🧠',
+        age: '9 months-4 years',
+        category: 'general',
+        description: 'Monitors developmental milestones for physical, cognitive, and social growth.',
+        why: 'Early intervention for developmental delays improves long-term outcomes.',
+        frequency: 'Every well-child visit',
+        urgency: 'medium'
+      },
+      {
+        name: 'Vision Screening',
+        icon: '👁️',
+        age: '3-5 years',
+        category: 'general',
+        description: 'Checks for visual impairment and eye conditions.',
+        why: 'Early detection prevents learning difficulties and permanent vision loss.',
+        frequency: 'At ages 3, 4, and 5',
+        urgency: 'medium'
+      },
+      {
+        name: 'Lead Screening',
+        icon: '🏭',
+        age: '1-2 years',
+        category: 'general',
+        description: 'Blood test to detect lead poisoning.',
+        why: 'Lead exposure damages brain development; early detection allows intervention.',
+        frequency: 'At ages 1 and 2',
+        urgency: 'high'
+      },
+      {
+        name: 'Dental Checkup',
+        icon: '🦷',
+        age: '1-12 years',
+        category: 'general',
+        description: 'Oral health examination and preventive care.',
+        why: 'Prevents cavities and establishes good dental hygiene habits.',
+        frequency: 'Every 6 months',
+        urgency: 'low'
+      },
+      {
+        name: 'Growth Monitoring',
+        icon: '📏',
+        age: '0-12 years',
+        category: 'general',
+        description: 'Height, weight, and BMI tracking.',
+        why: 'Identifies growth disorders, obesity, or malnutrition early.',
+        frequency: 'Every well-child visit',
+        urgency: 'medium'
+      },
+      {
+        name: 'Blood Pressure Screening',
+        icon: '🩺',
+        age: '3+ years',
+        category: 'general',
+        description: 'Monitors blood pressure to detect hypertension.',
+        why: 'Early detection of childhood hypertension prevents future complications.',
+        frequency: 'Annual',
+        urgency: 'medium'
+      }
+    ]
+  },
+  
+  adolescence: {
+    icon: '🎓',
+    title: 'Adolescence',
+    range: '13-21 years',
+    screenings: [
+      {
+        name: 'HPV Vaccination Status',
+        icon: '💉',
+        age: '11-26 years',
+        category: 'reproductive',
+        description: 'Verify completion of HPV vaccine series.',
+        why: 'Prevents cervical and other cancers caused by HPV.',
+        frequency: 'Once (verify completion)',
+        urgency: 'high'
+      },
+      {
+        name: 'Depression Screening',
+        icon: '🧠',
+        age: '12+ years',
+        category: 'general',
+        description: 'Mental health assessment for depression and anxiety.',
+        why: 'Adolescence is a high-risk period; early intervention improves outcomes.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Scoliosis Screening',
+        icon: '🦴',
+        age: '10-15 years',
+        category: 'bone',
+        description: 'Physical exam to detect spinal curvature.',
+        why: 'Early detection allows treatment before severe deformity develops.',
+        frequency: 'During growth spurts',
+        urgency: 'medium'
+      },
+      {
+        name: 'STI Screening',
+        icon: '🔬',
+        age: '15+ (if sexually active)',
+        category: 'reproductive',
+        description: 'Testing for sexually transmitted infections.',
+        why: 'Early treatment prevents complications and transmission.',
+        frequency: 'Annual or with new partners',
+        urgency: 'high'
+      },
+      {
+        name: 'Cholesterol Screening',
+        icon: '❤️',
+        age: '17-21 years',
+        category: 'general',
+        description: 'Blood test for lipid levels.',
+        why: 'Identifies cardiovascular risk early, especially with family history.',
+        frequency: 'Once between 17-21',
+        urgency: 'medium'
+      },
+      {
+        name: 'Eating Disorder Screening',
+        icon: '🍎',
+        age: '12+ years',
+        category: 'general',
+        description: 'Assessment for anorexia, bulimia, and other eating disorders.',
+        why: 'Adolescence is peak onset period; early intervention is critical.',
+        frequency: 'Annual or when concerns arise',
+        urgency: 'high'
+      },
+      {
+        name: 'Immunization Update',
+        icon: '💉',
+        age: '11-18 years',
+        category: 'general',
+        description: 'Tdap, meningococcal, and other booster vaccines.',
+        why: 'Maintains protection against preventable diseases.',
+        frequency: 'Per vaccine schedule',
+        urgency: 'high'
+      }
+    ]
+  },
+
+  reproductive: {
+    icon: '🌸',
+    title: 'Reproductive Years',
+    range: '21-45 years',
+    screenings: [
+      {
+        name: 'Pap Smear / Cervical Cancer Screening',
+        icon: '🎗️',
+        age: '21-65 years',
+        category: 'cancer',
+        description: 'Cells collected from cervix to detect abnormalities.',
+        why: 'Detects precancerous changes before cervical cancer develops.',
+        frequency: 'Every 3 years (21-29), Every 5 years with HPV co-test (30-65)',
+        urgency: 'high'
+      },
+      {
+        name: 'Breast Self-Exam Education',
+        icon: '🎗️',
+        age: '20+ years',
+        category: 'cancer',
+        description: 'Learn to perform monthly breast self-examinations.',
+        why: 'Awareness of normal breast tissue helps detect changes early.',
+        frequency: 'Monthly',
+        urgency: 'medium'
+      },
+      {
+        name: 'Clinical Breast Exam',
+        icon: '🩺',
+        age: '20-40 years',
+        category: 'cancer',
+        description: 'Physical breast examination by healthcare provider.',
+        why: 'Detects lumps and abnormalities not visible on imaging.',
+        frequency: 'Every 1-3 years',
+        urgency: 'medium'
+      },
+      {
+        name: 'Mammogram',
+        icon: '🎗️',
+        age: '40-45+ years',
+        category: 'cancer',
+        description: 'X-ray imaging of breast tissue.',
+        why: 'Most effective tool for early breast cancer detection.',
+        frequency: 'Annual (starting 40-50 depending on risk)',
+        urgency: 'high'
+      },
+      {
+        name: 'Blood Pressure',
+        icon: '🩺',
+        age: '18+ years',
+        category: 'general',
+        description: 'Monitors for hypertension.',
+        why: 'Prevents heart disease, stroke, and kidney damage.',
+        frequency: 'At least every 2 years (normal), annually (elevated)',
+        urgency: 'high'
+      },
+      {
+        name: 'Cholesterol / Lipid Panel',
+        icon: '❤️',
+        age: '20+ years',
+        category: 'general',
+        description: 'Blood test measuring cholesterol and triglycerides.',
+        why: 'Identifies cardiovascular disease risk.',
+        frequency: 'Every 4-6 years (normal risk), more often if elevated',
+        urgency: 'medium'
+      },
+      {
+        name: 'Diabetes Screening',
+        icon: '🩸',
+        age: '35-45+ years',
+        category: 'general',
+        description: 'Fasting glucose or A1C test.',
+        why: 'Early detection prevents complications like blindness, kidney failure.',
+        frequency: 'Every 3 years (normal), annually (prediabetes/risk factors)',
+        urgency: 'high'
+      },
+      {
+        name: 'Thyroid Function Test',
+        icon: '🦋',
+        age: '35+ years',
+        category: 'general',
+        description: 'Blood test for thyroid hormone levels.',
+        why: 'Thyroid disorders common in women; affects metabolism and fertility.',
+        frequency: 'Every 5 years or when symptoms arise',
+        urgency: 'medium'
+      },
+      {
+        name: 'STI Screening',
+        icon: '🔬',
+        age: 'All sexually active',
+        category: 'reproductive',
+        description: 'Testing for chlamydia, gonorrhea, HIV, syphilis.',
+        why: 'Prevents complications like infertility and transmission.',
+        frequency: 'Annual or with new partners',
+        urgency: 'high'
+      },
+      {
+        name: 'Skin Cancer Screening',
+        icon: '☀️',
+        age: '18+ years',
+        category: 'cancer',
+        description: 'Full-body skin examination by dermatologist.',
+        why: 'Melanoma is highly treatable when caught early.',
+        frequency: 'Annual (high risk), every 3 years (average risk)',
+        urgency: 'medium'
+      },
+      {
+        name: 'Dental & Oral Cancer Screening',
+        icon: '🦷',
+        age: 'All ages',
+        category: 'cancer',
+        description: 'Dental checkup with oral cancer examination.',
+        why: 'Detects cavities and oral cancers early.',
+        frequency: 'Every 6 months',
+        urgency: 'medium'
+      },
+      {
+        name: 'Mental Health Screening',
+        icon: '🧠',
+        age: '18+ years',
+        category: 'general',
+        description: 'Depression, anxiety, and stress assessment.',
+        why: 'Mental health affects overall well-being and physical health.',
+        frequency: 'Annual or when concerns arise',
+        urgency: 'high'
+      }
+    ]
+  },
+
+  perimenopause: {
+    icon: '🌅',
+    title: 'Perimenopause to Menopause',
+    range: '45-55 years',
+    screenings: [
+      {
+        name: 'Mammogram',
+        icon: '🎗️',
+        age: '40+ years',
+        category: 'cancer',
+        description: 'Annual breast cancer screening.',
+        why: 'Breast cancer risk increases with age.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Pap Smear / HPV Test',
+        icon: '🎗️',
+        age: '21-65 years',
+        category: 'cancer',
+        description: 'Cervical cancer screening.',
+        why: 'Continues to be essential during this life stage.',
+        frequency: 'Every 5 years (with HPV co-test)',
+        urgency: 'high'
+      },
+      {
+        name: 'Colonoscopy',
+        icon: '🎗️',
+        age: '45-50+ years',
+        category: 'cancer',
+        description: 'Visual examination of the colon for polyps and cancer.',
+        why: 'Colorectal cancer screening prevents cancer through polyp removal.',
+        frequency: 'Every 10 years (normal risk), more often if polyps found',
+        urgency: 'high'
+      },
+      {
+        name: 'Bone Density Scan (DEXA)',
+        icon: '🦴',
+        age: '50-65 years',
+        category: 'bone',
+        description: 'Measures bone mineral density.',
+        why: 'Detects osteoporosis early; estrogen decline increases fracture risk.',
+        frequency: 'At menopause, then per results',
+        urgency: 'high'
+      },
+      {
+        name: 'Cardiovascular Risk Assessment',
+        icon: '❤️',
+        age: '40+ years',
+        category: 'general',
+        description: 'Cholesterol, blood pressure, diabetes screening.',
+        why: 'Heart disease risk increases post-menopause.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Diabetes Screening',
+        icon: '🩸',
+        age: '45+ years',
+        category: 'general',
+        description: 'A1C or fasting glucose test.',
+        why: 'Type 2 diabetes risk increases with age.',
+        frequency: 'Every 3 years (normal), annually (prediabetes)',
+        urgency: 'high'
+      },
+      {
+        name: 'Thyroid Function Test',
+        icon: '🦋',
+        age: '50+ years',
+        category: 'general',
+        description: 'TSH blood test.',
+        why: 'Thyroid disorders become more common with age.',
+        frequency: 'Every 5 years or when symptomatic',
+        urgency: 'medium'
+      },
+      {
+        name: 'Eye Exam',
+        icon: '👁️',
+        age: '40+ years',
+        category: 'general',
+        description: 'Comprehensive eye examination.',
+        why: 'Detects glaucoma, cataracts, macular degeneration.',
+        frequency: 'Every 2-4 years (40-54), every 1-3 years (55-64)',
+        urgency: 'medium'
+      },
+      {
+        name: 'Skin Cancer Screening',
+        icon: '☀️',
+        age: '18+ years',
+        category: 'cancer',
+        description: 'Full-body skin check.',
+        why: 'Skin cancer risk accumulates with sun exposure over time.',
+        frequency: 'Annual',
+        urgency: 'medium'
+      },
+      {
+        name: 'Mental Health Screening',
+        icon: '🧠',
+        age: 'All ages',
+        category: 'general',
+        description: 'Depression and anxiety assessment.',
+        why: 'Hormonal changes can affect mental health.',
+        frequency: 'Annual',
+        urgency: 'high'
+      }
+    ]
+  },
+
+  postmenopause: {
+    icon: '🌺',
+    title: 'Postmenopause',
+    range: '55-74 years',
+    screenings: [
+      {
+        name: 'Mammogram',
+        icon: '🎗️',
+        age: 'Until 75 years',
+        category: 'cancer',
+        description: 'Continued breast cancer screening.',
+        why: 'Breast cancer risk remains significant.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Pap Smear / HPV Test',
+        icon: '🎗️',
+        age: 'Until 65 years',
+        category: 'cancer',
+        description: 'Cervical cancer screening (if adequate prior screening).',
+        why: 'Can discontinue at 65 if adequate negative prior screens.',
+        frequency: 'Every 5 years (until 65)',
+        urgency: 'high'
+      },
+      {
+        name: 'Colonoscopy',
+        icon: '🎗️',
+        age: 'Until 75 years',
+        category: 'cancer',
+        description: 'Colorectal cancer screening.',
+        why: 'Critical cancer prevention tool.',
+        frequency: 'Every 10 years (or per polyp findings)',
+        urgency: 'high'
+      },
+      {
+        name: 'Bone Density Scan (DEXA)',
+        icon: '🦴',
+        age: '65+ years',
+        category: 'bone',
+        description: 'Osteoporosis screening.',
+        why: 'Universal recommendation for all women 65+.',
+        frequency: 'Every 2 years (or per results)',
+        urgency: 'high'
+      },
+      {
+        name: 'Cardiovascular Screening',
+        icon: '❤️',
+        age: '55+ years',
+        category: 'general',
+        description: 'Blood pressure, cholesterol, diabetes.',
+        why: 'Heart disease is leading cause of death in women.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Diabetes Screening',
+        icon: '🩸',
+        age: '55+ years',
+        category: 'general',
+        description: 'A1C or fasting glucose.',
+        why: 'Prevalence increases with age.',
+        frequency: 'Every 3 years (normal), annually (prediabetes)',
+        urgency: 'high'
+      },
+      {
+        name: 'Lung Cancer Screening (if smoker)',
+        icon: '🫁',
+        age: '50-80 years',
+        category: 'cancer',
+        description: 'Low-dose CT scan for current/former smokers.',
+        why: 'Detects lung cancer early in high-risk individuals.',
+        frequency: 'Annual (if 20+ pack-year history)',
+        urgency: 'high'
+      },
+      {
+        name: 'Eye Exam',
+        icon: '👁️',
+        age: '65+ years',
+        category: 'general',
+        description: 'Comprehensive eye examination.',
+        why: 'Monitors for age-related eye diseases.',
+        frequency: 'Every 1-2 years',
+        urgency: 'medium'
+      },
+      {
+        name: 'Hearing Test',
+        icon: '👂',
+        age: '50+ years',
+        category: 'general',
+        description: 'Audiometry screening.',
+        why: 'Hearing loss is common and treatable.',
+        frequency: 'Every 3 years',
+        urgency: 'low'
+      },
+      {
+        name: 'Cognitive Screening',
+        icon: '🧠',
+        age: '65+ years',
+        category: 'general',
+        description: 'Memory and cognitive function assessment.',
+        why: 'Early detection of dementia allows planning and intervention.',
+        frequency: 'Annual',
+        urgency: 'medium'
+      },
+      {
+        name: 'Skin Cancer Screening',
+        icon: '☀️',
+        age: 'All ages',
+        category: 'cancer',
+        description: 'Full-body skin examination.',
+        why: 'Lifetime sun exposure increases risk.',
+        frequency: 'Annual',
+        urgency: 'medium'
+      }
+    ]
+  },
+
+  elderly: {
+    icon: '🌟',
+    title: 'Elderly',
+    range: '75-100 years',
+    screenings: [
+      {
+        name: 'Fall Risk Assessment',
+        icon: '🚶',
+        age: '65+ years',
+        category: 'general',
+        description: 'Evaluation of balance, gait, and home safety.',
+        why: 'Falls are leading cause of injury and death in elderly.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Bone Density Scan',
+        icon: '🦴',
+        age: '65+ years',
+        category: 'bone',
+        description: 'Continued osteoporosis monitoring.',
+        why: 'Fracture risk remains high.',
+        frequency: 'Every 2 years',
+        urgency: 'high'
+      },
+      {
+        name: 'Cardiovascular Screening',
+        icon: '❤️',
+        age: '75+ years',
+        category: 'general',
+        description: 'Blood pressure, cholesterol (individualized).',
+        why: 'Heart disease remains leading cause of death.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Diabetes Screening',
+        icon: '🩸',
+        age: '75+ years',
+        category: 'general',
+        description: 'Blood glucose monitoring.',
+        why: 'Diabetes management critical for quality of life.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Cognitive Screening',
+        icon: '🧠',
+        age: '75+ years',
+        category: 'general',
+        description: 'Dementia and cognitive decline assessment.',
+        why: 'Early diagnosis allows planning and support.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Depression Screening',
+        icon: '💭',
+        age: '75+ years',
+        category: 'general',
+        description: 'Mental health assessment.',
+        why: 'Depression is common but often undiagnosed in elderly.',
+        frequency: 'Annual',
+        urgency: 'high'
+      },
+      {
+        name: 'Vision Screening',
+        icon: '👁️',
+        age: '75+ years',
+        category: 'general',
+        description: 'Eye examination for cataracts, glaucoma, macular degeneration.',
+        why: 'Vision loss affects independence and fall risk.',
+        frequency: 'Annual',
+        urgency: 'medium'
+      },
+      {
+        name: 'Hearing Test',
+        icon: '👂',
+        age: '75+ years',
+        category: 'general',
+        description: 'Audiometry screening.',
+        why: 'Hearing aids improve quality of life and safety.',
+        frequency: 'Every 1-2 years',
+        urgency: 'medium'
+      },
+      {
+        name: 'Cancer Screening (individualized)',
+        icon: '🎗️',
+        age: '75+ years',
+        category: 'cancer',
+        description: 'Mammogram, colonoscopy - discuss with doctor.',
+        why: 'Benefits vs. risks should be individualized based on health status.',
+        frequency: 'Per physician recommendation',
+        urgency: 'medium'
+      }
+    ]
+  }
+};
+
+// ─── STATE MANAGEMENT ─────────────────────────
+let currentStage = null;
+let currentScreenings = [];
+let filteredScreenings = [];
+
+// ─── STAGE SELECTION ─────────────────────────
+document.querySelectorAll('.stage-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const stage = card.dataset.stage;
+    loadStage(stage);
+  });
+});
+
+function loadStage(stage) {
+  currentStage = stage;
+  const data = screeningData[stage];
+  currentScreenings = data.screenings;
+  filteredScreenings = [...currentScreenings];
+
+  // Update header
+  document.getElementById('stageHeaderIcon').textContent = data.icon;
+  document.getElementById('stageTitle').textContent = data.title;
+  document.getElementById('stageSubtitle').textContent = data.range;
+
+  // Show details section
+  document.getElementById('section-age-select').classList.add('hidden');
+  document.getElementById('section-screening-details').classList.remove('hidden');
+
+  // Reset filters
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.classList.remove('active');
+  });
+  document.querySelector('.filter-chip[data-filter="all"]').classList.add('active');
+  document.getElementById('searchInput').value = '';
+
+  // Render screenings
+  renderScreenings();
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── BACK BUTTON ─────────────────────────
+document.getElementById('backToStages').addEventListener('click', () => {
+  document.getElementById('section-screening-details').classList.add('hidden');
+  document.getElementById('section-age-select').classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ─── FILTER CHIPS ─────────────────────────
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    // Update active state
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+
+    // Filter screenings
+    const filter = chip.dataset.filter;
+    if(filter === 'all') {
+      filteredScreenings = [...currentScreenings];
+    } else {
+      filteredScreenings = currentScreenings.filter(s => s.category === filter);
+    }
+    renderScreenings();
+  });
+});
+
+// ─── SEARCH ─────────────────────────
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase();
+  const activeFilter = document.querySelector('.filter-chip.active').dataset.filter;
+  
+  let base = activeFilter === 'all' ? currentScreenings : 
+             currentScreenings.filter(s => s.category === activeFilter);
+  
+  if(query) {
+    filteredScreenings = base.filter(s => 
+      s.name.toLowerCase().includes(query) ||
+      s.description.toLowerCase().includes(query)
+    );
+  } else {
+    filteredScreenings = base;
+  }
+  renderScreenings();
+});
+
+// ─── RENDER SCREENINGS ─────────────────────────
+function renderScreenings() {
+  const grid = document.getElementById('screeningGrid');
+  
+  if(filteredScreenings.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-soft);">
+        <i class="fas fa-search" style="font-size:3rem; opacity:0.3; margin-bottom:1rem;"></i>
+        <p style="font-size:1.1rem;">No screenings found</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = filteredScreenings.map(screening => `
+    <div class="screening-card" onclick="openModal('${screening.name}')">
+      <div class="card-header">
+        <div class="card-icon">${screening.icon}</div>
+        <div class="age-badge">${screening.age}</div>
+      </div>
+      <h4>${screening.name}</h4>
+      <p class="card-preview">${screening.description}</p>
+      <div class="card-footer">
+        <span class="urgency ${screening.urgency}">${screening.urgency} priority</span>
+        <i class="fas fa-arrow-right" style="color:var(--pink);"></i>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── MODAL ─────────────────────────
+function openModal(screeningName) {
+  const screening = currentScreenings.find(s => s.name === screeningName);
+  if(!screening) return;
+
+  const modal = document.getElementById('detail-modal');
+  const body = document.getElementById('modal-body');
+
+  body.innerHTML = `
+    <div class="detail-header">
+      <div class="detail-icon">${screening.icon}</div>
+      <div>
+        <h2>${screening.name}</h2>
+        <p style="color:var(--deep-pink); font-weight:700; margin-top:0.3rem;">${screening.age}</p>
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="info-item">
+        <h5>What It Is</h5>
+        <p>${screening.description}</p>
+      </div>
+      <div class="info-item">
+        <h5>Why It Matters</h5>
+        <p>${screening.why}</p>
+      </div>
+      <div class="info-item">
+        <h5>Frequency</h5>
+        <p>${screening.frequency}</p>
+      </div>
+      <div class="info-item">
+        <h5>Priority Level</h5>
+        <p><span class="urgency ${screening.urgency}" style="font-size:1rem;">${screening.urgency.toUpperCase()}</span></p>
+      </div>
+    </div>
+    <div class="action-buttons">
+      <button class="btn-primary" onclick="scheduleScreening('${screening.name}')">
+        <i class="fas fa-calendar-plus"></i> Schedule Appointment
+      </button>
+      <button class="btn-secondary" onclick="closeModal()">Close</button>
+    </div>
+  `;
+
+  modal.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('detail-modal').classList.remove('active');
+}
+
+function scheduleScreening(name) {
+  showToast(`${name} added to your health planner!`);
+  closeModal();
+}
+
+// ─── TOAST ─────────────────────────
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// Close modal on outside click
+document.getElementById('detail-modal').addEventListener('click', (e) => {
+  if(e.target.id === 'detail-modal') {
+    closeModal();
+  }
+});
+
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+
+</script>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

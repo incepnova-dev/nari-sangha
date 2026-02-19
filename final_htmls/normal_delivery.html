@@ -1,0 +1,3400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Normal Vaginal Delivery — Complete Guide | Nari Swasthya</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* ============================================================
+   DESIGN SYSTEM — exact match to journeys.html
+   ============================================================ */
+:root{
+  --pink:#ec407a;
+  --deep-pink:#d81b60;
+  --primary:#ec407a;
+  --primary-dark:#ad1457;
+  --primary-light:#f48fb1;
+  --rose:#ff6090;
+  --lavender:#ede7f6;
+  --purple:#7c3aed;
+  --soft-purple:#9c5cf7;
+  --mint:#00bcd4;
+  --gold:#ffb300;
+  --bg:#faf5fb;
+  --card-bg:#ffffff;
+  --text-main:#212121;
+  --text-soft:#666;
+  --border-soft:#f0e6f0;
+  --shadow:0 8px 30px rgba(0,0,0,0.07);
+  --shadow-pink:0 15px 40px rgba(236,64,122,0.18);
+  --shadow-strong:0 20px 60px rgba(236,64,122,0.22);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;}
+
+/* ===== HEADER — exact journeys.html ===== */
+.site-header{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  padding:0;box-shadow:0 2px 24px rgba(236,64,122,0.09);
+  position:sticky;top:0;z-index:1000;
+  border-bottom:1px solid rgba(236,64,122,0.08);
+}
+.nav-container{
+  max-width:1400px;margin:0 auto;padding:0 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;height:64px;
+}
+/* Header-style particle canvas rendered over the hero background */
+#headerParticleCanvas{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:1;
+}
+.logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+}
+.logo-icon svg{width:22px;height:22px;fill:white;}
+.logo-text{display:flex;flex-direction:column;gap:0;}
+.logo-text a{
+  text-decoration:none;font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.25rem;line-height:1.1;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-text span{font-size:.62rem;color:var(--text-soft);font-family:'Manrope',sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;}
+.main-nav{display:flex;align-items:center;gap:.2rem;margin-left:-9px;}
+.nav-item{position:relative;}
+.nav-link{
+  display:flex;align-items:center;gap:.3rem;text-decoration:none;
+  color:var(--text-main);font-weight:500;font-size:.875rem;
+  padding:.55rem .75rem;border-radius:8px;transition:all .25s;
+  white-space:nowrap;cursor:pointer;background:none;border:none;font-family:inherit;
+}
+.nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
+.nav-link .chevron{font-size:.6rem;transition:transform .25s;color:var(--text-soft);margin-top:1px;}
+.nav-item:hover .chevron{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  min-width:220px;background:white;border-radius:16px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+  opacity:0;pointer-events:none;
+  transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+}
+.nav-dropdown::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-bottom-color:white;
+  border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+}
+.nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+  opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+}
+.dd-item{
+  display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;
+  border-radius:10px;text-decoration:none;color:var(--text-main);
+  font-size:.85rem;font-weight:500;transition:all .2s;
+}
+.dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1.1rem;}
+.dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.dd-sep{height:1px;background:var(--border-soft);margin:.3rem .5rem;}
+.dd-has-flyout{position:relative;}
+.dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+.dd-flyout{display:none;position:absolute;top:0;left:calc(100% + 4px);min-width:190px;background:white;border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;}
+.dd-has-flyout:hover>.dd-flyout,.dd-has-flyout:focus-within>.dd-flyout{display:block;}
+.dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);}
+.dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+.dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1rem;}
+.nav-actions{display:flex;gap:.6rem;align-items:center;}
+.btn-nav{
+  padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+  font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+  font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-nav.outline{background:linear-gradient(135deg,#ec407a,#ad1457);color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);border:none;}
+.btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+.btn-nav.primary{border:1.5px solid var(--deep-pink);color:var(--deep-pink);background:#fff;}
+.btn-nav.primary:hover{background:rgba(236,64,122,0.05);}
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;
+  background:none;border:1.5px solid var(--border-soft);
+  align-items:center;justify-content:center;cursor:pointer;
+  flex-direction:column;gap:4px;padding:8px;
+}
+.hamburger span{display:block;height:2px;background:var(--text-main);border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+  z-index:999;padding:1.5rem;overflow-y:auto;
+}
+.mobile-menu.open{display:block;}
+.mm-link{
+  display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;
+  border-radius:12px;text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:1rem;transition:all .2s;border-bottom:1px solid var(--border-soft);
+}
+.mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
+.mm-section{font-size:.72rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+@media(max-width:1060px){.main-nav{display:none;}.hamburger{display:flex;}}
+@media(max-width:600px){.nav-actions .btn-nav{display:none;}}
+/* Always keep Sign In + Contact Us visible inside mobile menu overlay */
+.mobile-menu .btn-nav{display:inline-flex !important;}
+
+/* ===== SCROLL PROGRESS DOTS ===== */
+.scroll-progress{
+  position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.6rem;z-index:500;
+}
+.sp-dot{width:8px;height:8px;border-radius:50%;background:rgba(236,64,122,0.25);transition:all .3s;cursor:pointer;}
+.sp-dot.active{background:var(--deep-pink);transform:scale(1.4);}
+
+/* ===== SECTION COMMON — exact journeys.html ===== */
+.section{padding:5rem 0;overflow:hidden;}
+.section.alt{background:linear-gradient(180deg,#faf5fb 0%,#f5eef8 100%);}
+.section-inner{max-width:1400px;margin:0 auto;padding:0 2rem;}
+.section-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(236,64,122,0.08);border:1px solid rgba(236,64,122,0.15);
+  color:var(--deep-pink);padding:.35rem .9rem;border-radius:50px;
+  font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.section-heading{
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.15;margin-bottom:.75rem;
+}
+.section-heading .em{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-sub{font-size:1.05rem;color:var(--text-soft);max-width:600px;line-height:1.8;}
+
+/* ===== HERO — journeys-matching structure, ENHANCED visuals ===== */
+.hero{
+  position:relative;
+  min-height:96vh;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:3rem;
+  align-items:center;
+  padding:3.5rem 2rem 3rem;
+  max-width:1400px;
+  margin:0 auto;
+  overflow:visible;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 70% at 60% 40%,rgba(236,64,122,0.07) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%,rgba(102,187,106,0.06) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+#heroParticleCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;opacity:.75;
+  top:0;left:0;
+}
+
+/* Enhanced petal layer */
+.petal-layer{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.petal{
+  position:absolute;border-radius:0 80% 0 80%;
+  opacity:0;animation:petal-fall linear infinite;
+}
+@keyframes petal-fall{
+  0%{opacity:0;transform:translateY(-30px) rotate(0deg) scale(.5);}
+  10%{opacity:.65;}
+  90%{opacity:.25;}
+  100%{opacity:0;transform:translateY(110vh) rotate(540deg) scale(1.2);}
+}
+/* Heartbeat pulse rings on hero right */
+.hero-pulse-wrap{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+}
+
+.hero-content{position:relative;z-index:2;padding-left:1rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(236,64,122,0.1);border:1px solid rgba(236,64,122,0.2);
+  color:var(--deep-pink);padding:.4rem 1rem;border-radius:50px;
+  font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:1.4rem;
+  animation:badge-glow 3s ease-in-out infinite;
+}
+@keyframes badge-glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(236,64,122,0);}
+  50%{box-shadow:0 0 18px 3px rgba(236,64,122,0.18);}
+}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--text-soft);
+  margin-bottom:1.4rem;line-height:1.9;max-width:500px;
+}
+/* Sentimental quote block under subtitle */
+.hero-quote{
+  margin-bottom:1.8rem;
+  padding:1rem 1.4rem;
+  border-left:4px solid var(--pink);
+  background:rgba(236,64,122,0.05);
+  border-radius:0 14px 14px 0;
+  position:relative;
+  max-width:500px;
+}
+.hero-quote::before{
+  content:'\201C';
+  position:absolute;top:-.4rem;left:.6rem;
+  font-size:3.5rem;color:rgba(236,64,122,0.2);
+  font-family:'Playfair Display',serif;line-height:1;
+}
+.hero-quote p{
+  font-size:.97rem;font-style:italic;color:var(--text-soft);
+  line-height:1.75;padding-left:.4rem;
+}
+.hero-quote cite{
+  display:block;margin-top:.5rem;
+  font-size:.72rem;font-weight:700;color:var(--deep-pink);
+  text-transform:uppercase;letter-spacing:.5px;font-style:normal;
+  padding-left:.4rem;
+}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1rem;margin-bottom:1.75rem;
+}
+.stat-card{
+  background:white;border-radius:16px;padding:1rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  text-align:center;border:1px solid var(--border-soft);transition:transform .3s;
+}
+.stat-card:hover{transform:translateY(-3px);}
+.stat-num{
+  font-size:1.6rem;font-weight:800;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;
+}
+.stat-label{font-size:.72rem;color:var(--text-soft);font-weight:600;margin-top:.15rem;}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-hero{
+  padding:.75rem 1.8rem;border-radius:50px;font-weight:700;
+  font-size:.95rem;text-decoration:none;border:none;cursor:pointer;
+  transition:all .35s;display:inline-flex;align-items:center;gap:.5rem;font-family:inherit;
+}
+.btn-hero.primary{
+  background:linear-gradient(135deg,#ec407a,#ad1457);color:white;
+  box-shadow:0 6px 25px rgba(236,64,122,0.35);
+}
+.btn-hero.primary:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(236,64,122,0.45);}
+.btn-hero.secondary{
+  background:white;color:var(--deep-pink);
+  border:1.5px solid rgba(236,64,122,0.25);
+  box-shadow:0 4px 15px rgba(0,0,0,0.06);
+}
+.btn-hero.secondary:hover{border-color:var(--deep-pink);transform:translateY(-2px);}
+
+/* Hero right — Living Womb Canvas */
+.hero-visual{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;overflow:visible;}
+.hero-canvas-wrap{
+  position:relative;width:480px;height:480px;max-width:min(100%,480px);
+}
+#heroWombCanvas{width:100%;height:100%;border-radius:30px;display:block;}
+/* Floating emotional chips around hero canvas */
+.hero-float-chip{
+  position:absolute;
+  background:white;
+  border-radius:12px;
+  padding:.55rem 1rem;
+  font-size:.78rem;font-weight:700;
+  color:var(--text-main);
+  box-shadow:0 6px 20px rgba(0,0,0,0.1);
+  border-left:3px solid var(--pink);
+  white-space:nowrap;
+  animation:chipFloat 4s ease-in-out infinite;
+  z-index:10;
+  max-width:calc(100% + 4rem);
+}
+.hero-float-chip:nth-child(1){top:5%;left:2%;animation-delay:0s;}
+.hero-float-chip:nth-child(2){top:32%;right:2%;animation-delay:1s;}
+.hero-float-chip:nth-child(3){bottom:28%;left:2%;animation-delay:2s;}
+.hero-float-chip:nth-child(4){bottom:6%;right:2%;animation-delay:1.5s;}
+@keyframes chipFloat{
+  0%,100%{transform:translateY(0) rotate(-1deg);}
+  50%{transform:translateY(-10px) rotate(1deg);}
+}
+
+/* ===== JOURNEY MAP STRIP ===== */
+.journey-map{
+  background:white;border-radius:32px;padding:3rem;margin:3rem 0;
+  box-shadow:0 10px 50px rgba(236,64,122,0.1);border:1px solid var(--border-soft);
+}
+.journey-map h3{text-align:center;font-size:1.5rem;margin-bottom:2rem;}
+.journey-steps{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
+.j-step{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:1rem .8rem;cursor:pointer;transition:transform .3s;min-width:100px;
+  text-decoration:none;color:inherit;
+}
+.j-step:hover{transform:translateY(-4px);}
+.j-dot{
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:1.1rem;margin-bottom:.5rem;
+  box-shadow:0 6px 20px rgba(236,64,122,0.3);transition:all .3s;
+}
+.j-dot.active-step{
+  background:linear-gradient(135deg,#2e7d32,#66bb6a);
+  box-shadow:0 6px 20px rgba(46,125,50,0.35);
+}
+.j-step:hover .j-dot{transform:scale(1.1);box-shadow:0 10px 30px rgba(236,64,122,0.4);}
+.j-step span{font-size:.75rem;font-weight:600;color:var(--text-soft);}
+.j-connector{flex:1;height:2px;min-width:20px;max-width:60px;background:linear-gradient(90deg,#ec407a,#ad1457);opacity:.3;margin-bottom:24px;}
+
+/* ===== SECTION 1 — LABOUR STAGES TIMELINE ===== */
+.s1-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+/* Timeline left side */
+.stages-timeline{position:relative;padding-left:2.5rem;}
+.stages-timeline::before{
+  content:'';position:absolute;left:20px;top:0;bottom:0;
+  width:3px;background:linear-gradient(to bottom,#ec407a,#ad1457,#ec407a);
+  border-radius:3px;
+}
+.stage-item{
+  position:relative;margin-bottom:1.6rem;
+  background:white;border-radius:18px;padding:1.3rem 1.5rem;
+  box-shadow:0 4px 18px rgba(0,0,0,0.06);border:1px solid var(--border-soft);
+  cursor:pointer;transition:all .35s cubic-bezier(.23,1.01,.32,1);
+  border-left:4px solid transparent;
+}
+.stage-item:hover,.stage-item.active{
+  box-shadow:0 10px 32px rgba(236,64,122,0.14);
+  border-left-color:var(--pink);
+  transform:translateX(5px);
+}
+.stage-item::before{
+  content:'';position:absolute;left:-2.75rem;top:50%;
+  transform:translateY(-50%);
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  border:3px solid white;
+  box-shadow:0 4px 12px rgba(236,64,122,0.35);
+}
+.stage-item.active::before{animation:nodePulse 1.5s ease-in-out infinite;}
+@keyframes nodePulse{
+  0%,100%{box-shadow:0 4px 12px rgba(236,64,122,0.35);}
+  50%{box-shadow:0 4px 22px rgba(236,64,122,0.65);}
+}
+.stage-num{
+  font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--pink);margin-bottom:.3rem;
+}
+.stage-title-text{font-size:1rem;font-weight:700;color:var(--text-main);margin-bottom:.3rem;}
+.stage-time-pill{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.22rem .7rem;border-radius:50px;font-size:.68rem;font-weight:700;
+  background:rgba(236,64,122,0.08);color:var(--deep-pink);margin-bottom:.5rem;
+}
+.stage-desc-short{font-size:.83rem;color:var(--text-soft);line-height:1.6;}
+
+/* Detail panel right */
+.stage-detail-panel{
+  background:white;border-radius:24px;padding:2.5rem;
+  box-shadow:var(--shadow-pink);border:2px solid rgba(236,64,122,0.1);
+  position:sticky;top:90px;
+}
+.sdp-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.sdp-icon{
+  width:56px;height:56px;border-radius:16px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  background:linear-gradient(135deg,#fce4ec,#f8bbd9);
+}
+.sdp-title{font-size:1.4rem;font-weight:900;color:var(--text-main);}
+.sdp-subtitle{font-size:.85rem;color:var(--text-soft);margin-top:.15rem;}
+#stageSvgCanvas{
+  width:100%;height:200px;margin-bottom:1.5rem;
+  background:linear-gradient(135deg,#faf5fb,#f5eef8);
+  border-radius:16px;display:block;
+}
+.sdp-facts{list-style:none;padding:0;display:flex;flex-direction:column;gap:.6rem;}
+.sdp-facts li{
+  font-size:.88rem;color:var(--text-soft);
+  padding:.55rem .8rem .55rem 2rem;position:relative;
+  background:rgba(236,64,122,0.04);border-radius:10px;line-height:1.6;
+}
+.sdp-facts li::before{
+  content:'→';position:absolute;left:.7rem;
+  color:var(--pink);font-weight:900;
+}
+.sdp-source{
+  margin-top:1rem;padding:.55rem .9rem;
+  background:rgba(236,64,122,0.06);border-radius:10px;
+  font-size:.72rem;font-weight:700;color:var(--deep-pink);
+  text-transform:uppercase;letter-spacing:.4px;
+}
+
+/* ===== SECTION 2 — CONTRACTION MONITOR ===== */
+.monitor-wrap{
+  background:#0d1f17;border-radius:28px;padding:2.5rem;
+  position:relative;overflow:hidden;
+  border:2px solid rgba(102,187,106,0.2);
+}
+.monitor-wrap::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(0,200,83,0.06) 0%,transparent 65%);
+  pointer-events:none;
+}
+.monitor-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;
+}
+.monitor-title-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:900;color:#e8f5e9;
+}
+.monitor-subtitle-text{color:rgba(255,255,255,.55);font-size:.82rem;margin-top:.2rem;}
+.monitor-live{
+  display:flex;align-items:center;gap:.6rem;
+  background:rgba(105,240,174,0.1);border:1px solid rgba(105,240,174,0.25);
+  padding:.45rem .95rem;border-radius:999px;
+}
+.live-dot{
+  width:9px;height:9px;border-radius:50%;background:#69f0ae;
+  box-shadow:0 0 8px #69f0ae;animation:livePulse 1.3s ease-in-out infinite;
+}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.5);}}
+.monitor-live span{color:#69f0ae;font-weight:700;font-size:.8rem;}
+.ctg-canvas-box{
+  background:#071009;border-radius:14px;padding:.8rem;
+  margin-bottom:1.2rem;border:1px solid rgba(105,240,174,0.08);
+  position:relative;
+}
+#ctgCanvas{width:100%;height:160px;display:block;border-radius:8px;}
+.ctg-legend{
+  position:absolute;bottom:.9rem;left:1.2rem;
+  display:flex;gap:1.2rem;
+}
+.ctg-legend-item{display:flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;}
+.ctg-dot{width:8px;height:8px;border-radius:50%;}
+.monitor-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.2rem;}
+.met-card{background:rgba(255,255,255,0.04);border:1px solid rgba(105,240,174,0.1);border-radius:12px;padding:.9rem;text-align:center;}
+.met-val{display:block;font-size:1.4rem;font-weight:900;color:#69f0ae;font-family:'Playfair Display',serif;line-height:1;margin-bottom:.25rem;}
+.met-lbl{font-size:.67rem;color:rgba(255,255,255,0.45);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.monitor-phase-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.phase-pill{
+  flex:1;min-width:110px;padding:.65rem 1rem;
+  border-radius:11px;text-align:center;border:1px solid rgba(255,255,255,0.07);
+}
+.phase-pill .pp-name{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:.2rem;}
+.phase-pill .pp-val{font-size:.84rem;font-weight:700;color:white;}
+.phase-pill.latent{background:rgba(100,181,246,0.09);}
+.phase-pill.latent .pp-name{color:#64b5f6;}
+.phase-pill.active-ph{background:rgba(255,183,77,0.09);}
+.phase-pill.active-ph .pp-name{color:#ffb74d;}
+.phase-pill.second{background:rgba(239,83,80,0.09);}
+.phase-pill.second .pp-name{color:#ef5350;}
+.monitor-btns{display:flex;gap:.7rem;flex-wrap:wrap;}
+.mon-btn{
+  padding:.55rem 1.3rem;border-radius:999px;border:none;cursor:pointer;
+  font-weight:700;font-size:.84rem;transition:all .25s;font-family:inherit;
+}
+.mon-btn.play{background:#00c853;color:#003300;}
+.mon-btn.play:hover{background:#00e676;}
+.mon-btn.pause{background:rgba(255,255,255,0.09);color:white;border:1px solid rgba(255,255,255,0.18);}
+.mon-btn.pause:hover{background:rgba(255,255,255,0.16);}
+.mon-btn.reset{background:rgba(239,83,80,0.13);color:#ef5350;border:1px solid rgba(239,83,80,0.22);}
+.mon-btn.phase-btn{background:rgba(100,181,246,0.13);color:#64b5f6;border:1px solid rgba(100,181,246,0.22);}
+
+/* ===== SECTION 3 — PAINLESS DELIVERY ===== */
+.painless-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.pain-scale-card{
+  background:white;border-radius:24px;padding:2rem;
+  box-shadow:var(--shadow);border:1px solid var(--border-soft);
+  margin-bottom:1.5rem;
+}
+.pain-scale-title-text{
+  font-size:.8rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.6px;color:var(--deep-pink);margin-bottom:1.2rem;
+}
+.pain-bar-bg{
+  height:18px;border-radius:9px;
+  background:linear-gradient(to right,#66bb6a,#ffb74d,#ef5350);
+  position:relative;margin-bottom:.5rem;
+}
+.pain-needle{
+  position:absolute;top:-7px;width:3px;height:32px;
+  background:var(--text-main);border-radius:2px;
+  transition:left .9s cubic-bezier(.34,1.56,.64,1);
+}
+.pain-needle::before{
+  content:'';position:absolute;top:-5px;left:-5px;
+  width:13px;height:13px;border-radius:50%;background:var(--deep-pink);
+}
+.pain-bar-labels{display:flex;justify-content:space-between;font-size:.68rem;font-weight:700;color:#aaa;margin-bottom:1rem;}
+.pain-stage-btns{display:flex;flex-direction:column;gap:.5rem;}
+.pain-btn{
+  padding:.5rem .9rem;border-radius:10px;border:1.5px solid;
+  cursor:pointer;font-weight:700;font-size:.78rem;text-align:left;
+  transition:all .2s;font-family:inherit;background:white;
+}
+/* Epidural tabs */
+.ep-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.ep-tab{
+  padding:.6rem 1.3rem;border-radius:50px;border:2px solid var(--border-soft);
+  background:white;color:var(--text-soft);cursor:pointer;font-weight:700;
+  font-size:.84rem;transition:all .25s;font-family:inherit;
+}
+.ep-tab.active{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:white;border-color:transparent;
+  box-shadow:0 5px 18px rgba(236,64,122,0.3);
+}
+.ep-tab:hover:not(.active){border-color:var(--pink);color:var(--pink);}
+.ep-panel{display:none;animation:fadeInUp .35s ease;}
+.ep-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* Epidural info card */
+.fert-card{
+  background:white;border-radius:20px;padding:1.4rem 1.6rem;
+  box-shadow:0 6px 25px rgba(0,0,0,0.06);
+  border:1px solid var(--border-soft);
+  display:flex;gap:1.2rem;align-items:flex-start;
+  transform:translateX(40px);opacity:0;
+  transition:all .6s cubic-bezier(.23,1.01,.32,1);
+}
+.fert-card.visible{transform:translateX(0);opacity:1;}
+.fert-card:hover{box-shadow:0 12px 40px rgba(236,64,122,0.15);transform:translateX(4px);}
+.fert-card.noslide{transform:none;opacity:1;}
+.fert-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.fert-icon.pink{background:linear-gradient(135deg,#fce4ec,#f8bbd9);color:#c2185b;}
+.fert-icon.purple{background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#7b1fa2;}
+.fert-icon.teal{background:linear-gradient(135deg,#e0f7fa,#b2ebf2);color:#00838f;}
+.fert-icon.gold{background:linear-gradient(135deg,#fff8e1,#ffecb3);color:#f57f17;}
+.fert-icon.green{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32;}
+.fert-icon.blue{background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#1565c0;}
+.fert-card h4{font-size:.98rem;font-weight:700;margin-bottom:.3rem;}
+.fert-card p{font-size:.83rem;color:var(--text-soft);line-height:1.6;}
+.fert-card .tag{
+  display:inline-block;padding:.2rem .6rem;border-radius:50px;
+  font-size:.7rem;font-weight:600;margin-top:.4rem;
+  background:rgba(236,64,122,0.1);color:var(--deep-pink);
+}
+
+/* Epidural SVG card */
+.ep-svg-card{
+  background:linear-gradient(135deg,#f5f0ff,#ede7f6);
+  border-radius:20px;padding:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+  min-height:240px;
+}
+
+/* ===== SECTION 4 — BENEFITS GRID ===== */
+.benefits-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.4rem;
+}
+.benefit-card{
+  background:white;border-radius:20px;padding:1.8rem;
+  box-shadow:0 6px 22px rgba(0,0,0,0.06);border:1px solid var(--border-soft);
+  border-top:4px solid;transition:all .35s cubic-bezier(.23,1.01,.32,1);
+  transform:translateY(24px);opacity:0;
+}
+.benefit-card.visible{transform:translateY(0);opacity:1;}
+.benefit-card:hover{transform:translateY(-5px);box-shadow:0 16px 42px rgba(236,64,122,0.13);}
+.benefit-card.bc-green{border-top-color:#66bb6a;}
+.benefit-card.bc-blue{border-top-color:#4fc3f7;}
+.benefit-card.bc-purple{border-top-color:#ce93d8;}
+.benefit-card.bc-pink{border-top-color:#f48fb1;}
+.benefit-card.bc-amber{border-top-color:#ffb74d;}
+.benefit-card.bc-teal{border-top-color:#80cbc4;}
+.bc-stat{font-size:1.7rem;font-weight:900;margin-bottom:.3rem;}
+.bc-stat.green{color:#2e7d32;}
+.bc-stat.blue{color:#0288d1;}
+.bc-stat.purple{color:#7b1fa2;}
+.bc-stat.pink{color:#c2185b;}
+.bc-stat.amber{color:#e65100;}
+.bc-stat.teal{color:#00695c;}
+.bc-icon{font-size:1.9rem;margin-bottom:.7rem;}
+.bc-title{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--text-main);}
+.bc-desc{font-size:.85rem;color:var(--text-soft);line-height:1.7;margin-bottom:.8rem;}
+.bc-source{
+  font-size:.68rem;font-weight:700;color:#aaa;
+  text-transform:uppercase;letter-spacing:.4px;
+  background:rgba(0,0,0,0.04);padding:.3rem .65rem;border-radius:6px;display:inline-block;
+}
+
+/* ===== SECTION 5 — VBAC ===== */
+.vbac-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;}
+.vbac-cards{display:flex;flex-direction:column;gap:1.1rem;}
+/* using pp-card from journeys */
+.pp-card{
+  background:white;border-radius:20px;padding:1.3rem 1.5rem;
+  box-shadow:0 5px 22px rgba(0,0,0,0.06);border:1px solid var(--border-soft);
+  display:flex;gap:1.1rem;align-items:flex-start;
+  transform:translateX(-30px);opacity:0;
+  transition:all .65s cubic-bezier(.23,1.01,.32,1);cursor:pointer;
+}
+.pp-card.visible{transform:translateX(0);opacity:1;}
+.pp-card:hover{box-shadow:0 12px 36px rgba(236,64,122,0.13);transform:translateX(4px);}
+.pp-icon{
+  width:46px;height:46px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.pp-card h4{font-size:.96rem;font-weight:700;margin-bottom:.3rem;}
+.pp-card p{font-size:.82rem;color:var(--text-soft);line-height:1.6;}
+.badge{
+  display:inline-block;padding:.18rem .6rem;border-radius:50px;
+  font-size:.68rem;font-weight:700;margin-top:.4rem;
+}
+.badge-calm{background:rgba(102,187,106,0.12);color:#2e7d32;}
+.badge-care{background:rgba(124,58,237,0.1);color:var(--purple);}
+.badge-alert{background:rgba(236,64,122,0.1);color:var(--deep-pink);}
+.badge-warm{background:rgba(255,179,0,0.15);color:#a57800;}
+/* VBAC radial */
+.vbac-visual{
+  background:white;border-radius:24px;padding:2rem;
+  box-shadow:var(--shadow-pink);border:2px solid rgba(236,64,122,0.1);
+  text-align:center;
+}
+.vbac-vis-title{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--deep-pink);margin-bottom:1.5rem;}
+.vbac-radial{position:relative;width:160px;height:160px;margin:0 auto 1.2rem;}
+.vbac-radial svg{transform:rotate(-90deg);}
+.vr-track{fill:none;stroke:#fce4ec;stroke-width:14;}
+.vr-fill{fill:none;stroke:url(#vbacG);stroke-width:14;stroke-linecap:round;stroke-dasharray:408;stroke-dashoffset:102;animation:vrFill 2.5s ease forwards;}
+@keyframes vrFill{from{stroke-dashoffset:408;}to{stroke-dashoffset:102;}}
+.vr-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.vr-num{font-size:2rem;font-weight:900;color:var(--deep-pink);font-family:'Playfair Display',serif;line-height:1;}
+.vr-unit{font-size:.72rem;font-weight:700;color:var(--pink);}
+.vbac-feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem;}
+.vbac-feat{
+  background:linear-gradient(135deg,#faf5fb,#fce4ec10);
+  border-radius:12px;padding:.9rem 1rem;text-align:left;
+  border:1px solid var(--border-soft);
+}
+.vbac-feat h5{font-size:.82rem;font-weight:700;color:var(--text-main);margin-bottom:.25rem;}
+.vbac-feat p{font-size:.72rem;color:var(--text-soft);line-height:1.55;}
+
+/* ===== SECTION 6 — PREPARATION ===== */
+/* uses s4-hcard pattern from journeys */
+.prep-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.2rem;
+}
+.s4-hcard{
+  background:white;border-radius:18px;padding:1.2rem 1.3rem 1.2rem 1.1rem;
+  box-shadow:0 5px 22px rgba(0,0,0,0.06);border:1px solid var(--border-soft);
+  display:flex;gap:1.1rem;align-items:center;
+  transition:all .35s cubic-bezier(.23,1.01,.32,1);
+  cursor:pointer;
+  transform:translateY(24px);opacity:0;
+  border-left:4px solid var(--hc-color,#ec407a);
+}
+.s4-hcard.visible{transform:translateY(0);opacity:1;}
+.s4-hcard:hover{
+  box-shadow:0 12px 36px rgba(0,0,0,0.1);
+  transform:translateY(-3px);
+}
+.s4-hcard-icon{
+  width:48px;height:48px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.s4-hcard-body h4{font-size:.95rem;font-weight:700;margin-bottom:.3rem;}
+.s4-hcard-body p{font-size:.81rem;color:var(--text-soft);line-height:1.6;}
+.s4-hcard-body .pc-src{font-size:.67rem;font-weight:700;color:#bbb;text-transform:uppercase;margin-top:.4rem;}
+.s4-hcard-arrow{margin-left:auto;color:var(--hc-color,#ec407a);font-size:.8rem;flex-shrink:0;transition:transform .25s;}
+.s4-hcard:hover .s4-hcard-arrow{transform:translateX(5px);}
+
+/* ===== SECTION 7 — COMPARE TABLE ===== */
+.compare-table-wrap{overflow-x:auto;border-radius:18px;border:2px solid rgba(0,0,0,0.06);margin-top:2rem;}
+.compare-table{width:100%;border-collapse:collapse;font-size:.88rem;}
+.compare-table th{
+  padding:1.1rem 1.4rem;font-family:'Playfair Display',serif;font-weight:900;
+  text-align:left;font-size:.95rem;background:#f5f5f5;
+}
+.compare-table th.vd-col{background:rgba(102,187,106,0.12);color:#1b5e20;border-bottom:3px solid #66bb6a;}
+.compare-table th.cs-col{background:rgba(236,64,122,0.08);color:#880e4f;border-bottom:3px solid #ec407a;}
+.compare-table td{
+  padding:.95rem 1.4rem;border-bottom:1px solid #f5f5f5;
+  vertical-align:top;color:var(--text-soft);line-height:1.6;
+}
+.compare-table td.row-label{font-weight:700;color:var(--text-main);background:rgba(0,0,0,0.015);font-size:.82rem;}
+.compare-table tr:hover td{background:rgba(102,187,106,0.025);}
+.compare-table tr:last-child td{border-bottom:none;}
+.t-good{color:#2e7d32;font-weight:700;}
+.t-caution{color:#c62828;font-weight:700;}
+
+/* ===== SECTION 8 — MYTHS + RIGHTS ===== */
+/* uses s5 style from journeys */
+.s5-section{
+  background:linear-gradient(135deg,#1b1028 0%,#2d1b3d 50%,#1a1428 100%);
+  padding:5rem 0;position:relative;overflow:hidden;
+}
+#mythNetCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.25;}
+.s5-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.3rem;position:relative;z-index:2;}
+.s5-card{
+  background:rgba(255,255,255,0.06);
+  border-radius:22px;padding:2rem 1.5rem;
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(12px);
+  transition:all .35s;overflow:hidden;position:relative;
+  transform:translateY(30px);opacity:0;
+}
+.s5-card.visible{transform:translateY(0);opacity:1;}
+.s5-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+.s5-card-icon-wrap{
+  width:52px;height:52px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:1rem;position:relative;z-index:2;
+  animation:s5core-breathe 4s ease-in-out infinite;
+}
+@keyframes s5core-breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.08);box-shadow:0 8px 26px rgba(0,0,0,0.2);}}
+.myth-x{
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-size:.8rem;font-weight:900;color:rgba(239,83,80,0.7);
+  background:rgba(239,83,80,0.1);border-radius:6px;padding:.2rem .5rem;
+}
+.s5-card-content h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.5rem;color:rgba(255,255,255,.9);}
+.s5-card-content p{font-size:.82rem;color:rgba(255,255,255,.55);line-height:1.72;margin-bottom:.8rem;}
+.s5-pills-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.8rem;}
+.s5-pill{
+  padding:.22rem .65rem;border-radius:50px;font-size:.66rem;font-weight:700;
+  background:rgba(236,64,122,.12);color:#f48fb1;border:1px solid rgba(236,64,122,.2);
+}
+.s5-cta-link{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.55);display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s;text-decoration:none;}
+.s5-card:hover .s5-cta-link{gap:.6rem;color:rgba(255,255,255,.8);}
+
+/* Dashboard CTA strip — exact journeys.html */
+.s5-dashboard-cta{
+  background:linear-gradient(135deg,#ad1457 0%,#ec407a 55%,#ff6090 100%);
+  border-radius:28px;padding:2.6rem 3rem;
+  box-shadow:0 20px 60px rgba(236,64,122,0.32);
+  position:relative;overflow:hidden;margin-top:3rem;z-index:2;
+}
+.s5-dashboard-cta::before{content:'';position:absolute;top:-50%;right:-8%;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none;}
+.s5-dashboard-cta::after{content:'';position:absolute;bottom:-70%;left:3%;width:290px;height:290px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none;}
+.s5-cta-inner{display:flex;align-items:center;gap:2.2rem;position:relative;z-index:1;}
+.s5-cta-icon{position:relative;width:72px;height:72px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.s5-cta-icon i{font-size:1.9rem;color:white;position:relative;z-index:2;filter:drop-shadow(0 2px 8px rgba(0,0,0,.2));}
+.s5-cta-pulse,.s5-cta-pulse-2{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.45);animation:s5cta-ring 2.5s ease-out infinite;}
+.s5-cta-pulse-2{animation-delay:1.25s;}
+@keyframes s5cta-ring{0%{transform:scale(.4);opacity:1;}100%{transform:scale(1.8);opacity:0;}}
+.s5-cta-text{flex:1;}
+.s5-cta-text h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:white;margin-bottom:.4rem;}
+.s5-cta-text p{color:rgba(255,255,255,.82);font-size:.88rem;line-height:1.6;}
+.s5-cta-btn{
+  background:white;color:var(--deep-pink);
+  padding:.72rem 1.7rem;border-radius:50px;font-weight:700;font-size:.9rem;
+  text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;flex-shrink:0;
+  box-shadow:0 6px 20px rgba(0,0,0,.16);transition:all .3s;
+}
+.s5-cta-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.22);}
+
+/* ===== GOVT SCHEME CARDS ===== */
+.govt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;}
+.govt-card{border-radius:18px;padding:1.5rem;border:2px solid;transition:all .3s;}
+.govt-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.1);}
+.govt-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;margin-bottom:.5rem;}
+.govt-card .ga{font-size:1.3rem;font-weight:900;display:block;margin-bottom:.3rem;}
+.govt-card p{font-size:.84rem;color:var(--text-soft);line-height:1.65;}
+.govt-card.jssk{background:#e8f5e9;border-color:#81c784;}
+.govt-card.jssk h4,.govt-card.jssk .ga{color:#1b5e20;}
+.govt-card.jsy{background:#fff8e1;border-color:#ffcc02;}
+.govt-card.jsy h4,.govt-card.jsy .ga{color:#e65100;}
+.govt-card.pmjay{background:#e3f2fd;border-color:#64b5f6;}
+.govt-card.pmjay h4,.govt-card.pmjay .ga{color:#0d47a1;}
+.govt-card.icmr{background:#fce4ec;border-color:#f48fb1;}
+.govt-card.icmr h4{color:#880e4f;}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s cubic-bezier(.23,1.01,.32,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+
+/* ===== ENHANCED 3D HERO TITLE ===== */
+.hero-title-3d{
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:900;line-height:1.08;margin-bottom:1.2rem;
+  perspective:800px;
+  transform-style:preserve-3d;
+  position:relative;
+}
+.hero-title-3d .title-word{
+  display:inline-block;
+  transform:translateZ(0) rotateX(0deg);
+  animation:word3d-float 6s ease-in-out infinite;
+  text-shadow:0 4px 24px rgba(0,0,0,0.08),0 8px 32px rgba(236,64,122,0.06);
+  background:linear-gradient(135deg,#212121 0%,#444 40%,#2a2a2a 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-title-3d .title-word:nth-child(2){animation-delay:.15s;}
+.hero-title-3d br + .title-word,.hero-title-3d br + span{animation-delay:.3s;}
+@keyframes word3d-float{
+  0%,100%{transform:translateZ(0) translateY(0) rotateX(0deg);}
+  30%{transform:translateZ(18px) translateY(-4px) rotateX(2deg);}
+  60%{transform:translateZ(8px) translateY(-2px) rotateX(-1deg);}
+}
+.title-emphasis{
+  display:inline-block;
+  background:linear-gradient(135deg,#ec407a 0%,#d81b60 40%,#ad1457 70%,#ec407a 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:title-shimmer 3s ease-in-out infinite, title-3d-lift 5s ease-in-out infinite;
+  filter:drop-shadow(0 2px 12px rgba(236,64,122,.4));
+  transform-style:preserve-3d;
+}
+@keyframes title-shimmer{
+  0%,100%{background-position:0% 50%;filter:brightness(1) drop-shadow(0 2px 12px rgba(236,64,122,.4));}
+  50%{background-position:100% 50%;filter:brightness(1.4) drop-shadow(0 6px 22px rgba(236,64,122,.65));}
+}
+@keyframes title-3d-lift{
+  0%,100%{transform:translateZ(0) rotateX(0deg) scale(1);}
+  50%{transform:translateZ(28px) rotateX(-3deg) scale(1.02);}
+}
+
+/* Shimmer sweep overlay on title emphasis */
+.title-emphasis::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,0.4) 50%,transparent 70%);
+  background-size:200% 100%;
+  animation:shimmer-sweep 3s ease-in-out infinite;
+  -webkit-background-clip:text;background-clip:text;
+  pointer-events:none;
+}
+@keyframes shimmer-sweep{
+  0%{background-position:200% 0;}
+  100%{background-position:-200% 0;}
+}
+
+/* 3D Floating orbs */
+.hero-3d-orbs{
+  position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;
+}
+.orb-3d{
+  position:absolute;border-radius:50%;
+  animation:orb-drift 8s ease-in-out infinite;
+  filter:blur(1px);
+}
+.orb-3d:nth-child(1){
+  width:120px;height:120px;
+  background:radial-gradient(circle at 35% 35%,rgba(252,228,236,0.7),rgba(236,64,122,0.08));
+  top:8%;left:55%;
+  animation-duration:9s;animation-delay:0s;
+  box-shadow:inset 0 -8px 20px rgba(236,64,122,0.1),0 8px 30px rgba(236,64,122,0.06);
+}
+.orb-3d:nth-child(2){
+  width:80px;height:80px;
+  background:radial-gradient(circle at 35% 35%,rgba(243,229,245,0.8),rgba(124,58,237,0.08));
+  top:55%;left:72%;
+  animation-duration:11s;animation-delay:2s;
+  box-shadow:inset 0 -6px 15px rgba(124,58,237,0.1),0 6px 24px rgba(124,58,237,0.06);
+}
+.orb-3d:nth-child(3){
+  width:60px;height:60px;
+  background:radial-gradient(circle at 35% 35%,rgba(255,249,196,0.8),rgba(255,179,0,0.1));
+  top:25%;left:88%;
+  animation-duration:7s;animation-delay:1s;
+  box-shadow:inset 0 -4px 12px rgba(255,179,0,0.15),0 4px 18px rgba(255,179,0,0.08);
+}
+.orb-3d:nth-child(4){
+  width:45px;height:45px;
+  background:radial-gradient(circle at 35% 35%,rgba(224,247,250,0.9),rgba(0,188,212,0.1));
+  top:70%;left:48%;
+  animation-duration:10s;animation-delay:3s;
+}
+@keyframes orb-drift{
+  0%,100%{transform:translateY(0) translateX(0) scale(1) rotateZ(0deg);}
+  25%{transform:translateY(-18px) translateX(8px) scale(1.05) rotateZ(5deg);}
+  50%{transform:translateY(-8px) translateX(-12px) scale(.97) rotateZ(-3deg);}
+  75%{transform:translateY(-22px) translateX(5px) scale(1.03) rotateZ(4deg);}
+}
+
+/* ===================================================
+   FULLY RESPONSIVE — all breakpoints
+   =================================================== */
+
+/* ── 1100px: tablet landscape / collapse sidebars ── */
+@media(max-width:1100px){
+  .section-inner{padding:0 1.5rem;}
+
+  /* Hero */
+  .hero{
+    grid-template-columns:1fr;gap:2rem;
+    padding:2.5rem 1.5rem 2.5rem;min-height:auto;
+  }
+  .hero-visual{order:-1;}
+  .hero-canvas-wrap{width:340px;height:340px;margin:0 auto;}
+  .hero-3d-orbs{display:none;}
+  .hero-float-chip{font-size:.68rem;padding:.4rem .75rem;white-space:normal;max-width:55%;}
+
+  /* Section layouts */
+  .s1-layout{grid-template-columns:1fr;gap:2rem;}
+  .stage-detail-panel{position:relative;top:0;}
+  .painless-layout{grid-template-columns:1fr;gap:2rem;}
+  .vbac-layout{grid-template-columns:1fr;gap:2rem;}
+
+  /* Epidural panel */
+  .ep-panel.active{grid-template-columns:1fr;gap:1rem;}
+
+  /* Scroll dots */
+  .scroll-progress{display:none;}
+
+  /* Monitor metrics 2-col */
+  .monitor-metrics{grid-template-columns:repeat(2,1fr);}
+
+  /* Journey map */
+  .journey-map{padding:2rem 1.5rem;}
+  .j-connector{min-width:14px;max-width:40px;}
+}
+
+/* ── 900px: tablet portrait ── */
+@media(max-width:900px){
+  .section{padding:3.5rem 0;}
+  .section-heading{font-size:clamp(1.7rem,4.5vw,2.6rem);}
+  .section-sub{font-size:.95rem;}
+
+  /* Hero */
+  .hero-title-3d{font-size:clamp(2rem,6vw,3rem);}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:.6rem;}
+  .hero-subtitle{font-size:1rem;}
+  .hero-canvas-wrap{width:300px;height:300px;}
+
+  /* Journey steps */
+  .journey-steps{flex-wrap:wrap;justify-content:center;gap:0;}
+  .j-connector{min-width:10px;max-width:28px;}
+  .j-step{min-width:78px;padding:.7rem .45rem;}
+
+  /* Monitor */
+  .monitor-metrics{grid-template-columns:repeat(2,1fr);}
+  .monitor-btns{flex-wrap:wrap;gap:.5rem;}
+  .mon-btn{
+    flex:1 1 calc(50% - .5rem);min-width:120px;
+    font-size:.78rem;padding:.5rem .7rem;text-align:center;
+  }
+  .monitor-phase-pills{flex-direction:column;}
+  .phase-pill{min-width:auto;flex:none;}
+
+  /* VBAC */
+  .vbac-feat-grid{grid-template-columns:1fr 1fr;}
+
+  /* CTA strip */
+  .s5-cta-inner{flex-direction:column;text-align:center;gap:1rem;}
+  .s5-cta-btn{width:100%;justify-content:center;}
+  .s5-dashboard-cta{padding:2rem 1.5rem;}
+
+  /* Prep grid */
+  .prep-grid{grid-template-columns:1fr 1fr;}
+
+  /* Benefits */
+  .benefits-grid{grid-template-columns:repeat(2,1fr);}
+
+  /* Compare table */
+  .compare-table-wrap{-webkit-overflow-scrolling:touch;}
+  .compare-table{min-width:540px;}
+}
+
+/* ── 700px: large phones / small tablets ── */
+@media(max-width:700px){
+  /* Header */
+  .logo-text span{display:none;}
+
+  /* Hero */
+  .hero{padding:2rem 1.2rem 2rem;}
+  .hero-title-3d{font-size:clamp(1.9rem,7vw,2.8rem);}
+  .hero-badge{font-size:.74rem;padding:.35rem .85rem;}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:.5rem;}
+  .stat-card{padding:.75rem .5rem;}
+  .stat-num{font-size:1.35rem;}
+  .stat-label{font-size:.65rem;}
+  .hero-cta-row{flex-direction:column;gap:.7rem;}
+  .btn-hero{width:100%;justify-content:center;font-size:.9rem;}
+  .hero-quote{max-width:100%;}
+  .hero-quote p{font-size:.88rem;}
+  .hero-quote cite{font-size:.66rem;}
+  .hero-canvas-wrap{width:260px;height:260px;}
+
+  /* Journey map */
+  .journey-map{padding:1.5rem 1rem;border-radius:20px;margin:2rem 0;}
+  .journey-map h3{font-size:1.15rem;margin-bottom:1.2rem;}
+  .j-step{min-width:68px;padding:.6rem .3rem;}
+  .j-step span{font-size:.64rem;}
+  .j-dot{width:38px;height:38px;font-size:.85rem;}
+  .j-connector{min-width:5px;max-width:16px;}
+
+  /* Section 1 stages */
+  .stages-timeline{padding-left:2rem;}
+  .stage-item{padding:1rem 1.1rem;}
+  .stage-detail-panel{padding:1.5rem 1.2rem;border-radius:18px;}
+  .sdp-icon{width:48px;height:48px;font-size:1.3rem;}
+  .sdp-title{font-size:1.15rem;}
+  .sdp-subtitle{font-size:.78rem;}
+  #stageSvgCanvas{height:150px;}
+  .sdp-facts li{font-size:.8rem;padding:.45rem .7rem .45rem 1.8rem;}
+
+  /* Monitor */
+  .monitor-wrap{padding:1.5rem 1.2rem;border-radius:20px;}
+  .monitor-title-text{font-size:1.1rem;}
+  .monitor-subtitle-text{font-size:.74rem;}
+  .monitor-metrics{grid-template-columns:repeat(2,1fr);gap:.6rem;}
+  .met-val{font-size:1.2rem;}
+  .met-lbl{font-size:.6rem;}
+  .mon-btn{font-size:.74rem;padding:.45rem .6rem;}
+
+  /* Painless delivery */
+  .pain-scale-card{padding:1.4rem 1.2rem;}
+  .pain-btn{font-size:.74rem;padding:.45rem .75rem;}
+  .ep-tabs{gap:.35rem;flex-wrap:wrap;}
+  .ep-tab{padding:.45rem .85rem;font-size:.76rem;flex:1 1 auto;text-align:center;}
+  .ep-svg-card{min-height:200px;}
+  .fert-card{flex-direction:column;gap:.65rem;padding:1.1rem 1.2rem;}
+  .fert-icon{width:42px;height:42px;font-size:1rem;}
+  .fert-card h4{font-size:.9rem;}
+  .fert-card p{font-size:.78rem;}
+
+  /* Benefits */
+  .benefits-grid{grid-template-columns:1fr;}
+
+  /* VBAC */
+  .vbac-visual{padding:1.5rem;}
+  .vbac-feat-grid{grid-template-columns:1fr 1fr;}
+  .pp-card{padding:1rem 1.1rem;}
+  .pp-card h4{font-size:.88rem;}
+  .pp-card p{font-size:.78rem;}
+
+  /* Prep grid */
+  .prep-grid{grid-template-columns:1fr;}
+  .s4-hcard{padding:1rem 1.1rem;}
+  .s4-hcard-body h4{font-size:.88rem;}
+  .s4-hcard-body p{font-size:.76rem;}
+
+  /* Compare table */
+  .compare-table{font-size:.75rem;min-width:480px;}
+  .compare-table th,.compare-table td{padding:.65rem .85rem;}
+  .compare-table th{font-size:.78rem;}
+
+  /* Dark myths section */
+  .s5-section{padding:3.5rem 0;}
+  .s5-grid{grid-template-columns:1fr;}
+  .s5-card{padding:1.5rem 1.2rem;border-radius:18px;}
+  .s5-card-content h3{font-size:.95rem;}
+  .s5-card-content p{font-size:.78rem;}
+
+  /* Govt grid */
+  .govt-grid{grid-template-columns:1fr;}
+  .govt-card{padding:1.2rem;}
+  .govt-card .ga{font-size:1.1rem;}
+
+  /* CTA */
+  .s5-dashboard-cta{padding:1.75rem 1.2rem;border-radius:20px;margin-top:2rem;}
+  .s5-cta-text h3{font-size:1.3rem;}
+  .s5-cta-icon{width:56px;height:56px;}
+  .s5-cta-icon i{font-size:1.5rem;}
+}
+
+/* ── 480px: standard smartphones ── */
+@media(max-width:480px){
+  .section-inner{padding:0 1rem;}
+  .section{padding:3rem 0;}
+  .section-heading{font-size:clamp(1.5rem,6vw,2.1rem);}
+
+  /* Header */
+  .nav-container{padding:0 1rem;}
+  .logo-text a{font-size:1.1rem;}
+
+  /* Hero */
+  .hero{padding:1.75rem 1rem 1.75rem;gap:1.5rem;}
+  .hero-title-3d{font-size:clamp(1.65rem,7.5vw,2.2rem);line-height:1.12;}
+  .hero-badge{font-size:.7rem;padding:.3rem .7rem;}
+  .hero-subtitle{font-size:.92rem;line-height:1.75;}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:.4rem;}
+  .stat-card{padding:.65rem .35rem;border-radius:12px;}
+  .stat-num{font-size:1.2rem;}
+  .stat-label{font-size:.6rem;}
+  .hero-canvas-wrap{width:240px;height:240px;}
+  .btn-hero{font-size:.86rem;padding:.65rem 1.2rem;}
+
+  /* Journey map */
+  .journey-map{padding:1.1rem .75rem;border-radius:16px;}
+  .journey-map h3{font-size:1rem;margin-bottom:1rem;}
+  .j-step{min-width:60px;padding:.5rem .2rem;}
+  .j-step span{font-size:.6rem;}
+  .j-dot{width:34px;height:34px;font-size:.78rem;}
+  .j-connector{min-width:3px;max-width:10px;}
+
+  /* Stage timeline */
+  .stages-timeline{padding-left:1.8rem;}
+  .stage-item{padding:.85rem 1rem;margin-bottom:1.2rem;}
+  .stage-item::before{left:-2.3rem;width:16px;height:16px;}
+  .stage-title-text{font-size:.9rem;}
+  .stage-desc-short{font-size:.78rem;}
+  .stage-detail-panel{padding:1.2rem 1rem;border-radius:16px;}
+  .sdp-icon{width:42px;height:42px;font-size:1.15rem;}
+  .sdp-title{font-size:1.05rem;}
+  .sdp-facts li{font-size:.76rem;}
+  #stageSvgCanvas{height:130px;}
+
+  /* Monitor */
+  .monitor-wrap{padding:1.2rem 1rem;border-radius:16px;}
+  .monitor-title-text{font-size:1rem;}
+  .monitor-metrics{grid-template-columns:repeat(2,1fr);gap:.5rem;}
+  .met-val{font-size:1.1rem;}
+  .met-lbl{font-size:.56rem;letter-spacing:.2px;}
+  .met-card{padding:.7rem .5rem;}
+  .mon-btn{font-size:.7rem;padding:.4rem .5rem;}
+  #ctgCanvas{height:130px;}
+
+  /* Painless */
+  .pain-scale-card{padding:1.2rem 1rem;border-radius:18px;}
+  .ep-tab{padding:.4rem .7rem;font-size:.72rem;}
+  .ep-svg-card{min-height:160px;padding:1rem;}
+  .fert-card{padding:1rem;}
+  .fert-icon{width:38px;height:38px;font-size:.9rem;}
+  .fert-card h4{font-size:.86rem;}
+  .fert-card p{font-size:.75rem;}
+
+  /* Benefits */
+  .benefit-card{padding:1.3rem;}
+  .bc-stat{font-size:1.4rem;}
+  .bc-icon{font-size:1.6rem;}
+  .bc-title{font-size:1rem;}
+  .bc-desc{font-size:.8rem;}
+
+  /* VBAC */
+  .vbac-visual{padding:1.2rem;}
+  .vbac-feat-grid{grid-template-columns:1fr;}
+  .vbac-radial{width:140px;height:140px;}
+  .vr-num{font-size:1.7rem;}
+  .pp-icon{width:38px;height:38px;font-size:.95rem;}
+
+  /* Prep */
+  .s4-hcard{padding:.85rem 1rem;align-items:flex-start;}
+  .s4-hcard-icon{width:40px;height:40px;font-size:.95rem;border-radius:10px;}
+  .s4-hcard-body h4{font-size:.84rem;}
+  .s4-hcard-body p{font-size:.73rem;}
+  .s4-hcard-arrow{display:none;}
+
+  /* Compare table */
+  .compare-table{min-width:400px;font-size:.7rem;}
+  .compare-table th,.compare-table td{padding:.55rem .65rem;}
+  .compare-table th{font-size:.72rem;}
+
+  /* Myths */
+  .s5-section{padding:3rem 0;}
+  .s5-card{padding:1.2rem 1rem;border-radius:16px;}
+  .s5-card-content h3{font-size:.9rem;}
+  .s5-card-content p{font-size:.75rem;}
+  .s5-pill{font-size:.6rem;}
+
+  /* Govt */
+  .govt-card{padding:1rem;border-radius:14px;}
+  .govt-card h4{font-size:.88rem;}
+  .govt-card .ga{font-size:1rem;}
+  .govt-card p{font-size:.78rem;}
+
+  /* CTA */
+  .s5-dashboard-cta{padding:1.4rem 1rem;border-radius:18px;}
+  .s5-cta-text h3{font-size:1.15rem;}
+  .s5-cta-text p{font-size:.8rem;}
+  .s5-cta-btn{font-size:.82rem;padding:.6rem 1.2rem;}
+}
+
+/* ── 360px: very small phones (Galaxy S series, older iPhones) ── */
+@media(max-width:360px){
+  .nav-container{padding:0 .75rem;}
+  .logo-icon{width:34px;height:34px;border-radius:10px;}
+  .logo-text a{font-size:1rem;}
+
+  .hero{padding:1.5rem .75rem;}
+  .hero-title-3d{font-size:1.5rem;}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:.3rem;}
+  .stat-card{padding:.55rem .25rem;}
+  .stat-num{font-size:1rem;}
+  .stat-label{font-size:.55rem;}
+  .hero-canvas-wrap{width:210px;height:210px;}
+
+  .journey-map{padding:.9rem .6rem;}
+  .j-dot{width:30px;height:30px;font-size:.72rem;}
+  .j-step{min-width:52px;}
+  .j-connector{min-width:2px;max-width:8px;}
+
+  .monitor-metrics{grid-template-columns:repeat(2,1fr);}
+  .met-val{font-size:1rem;}
+  .met-lbl{font-size:.52rem;}
+
+  .section-inner{padding:0 .75rem;}
+  .stage-detail-panel{padding:1rem .85rem;}
+  .sdp-title{font-size:.95rem;}
+
+  .compare-table{min-width:340px;font-size:.65rem;}
+  .compare-table th,.compare-table td{padding:.45rem .5rem;}
+
+  .s5-dashboard-cta{padding:1.2rem .85rem;}
+  .s5-cta-text h3{font-size:1.05rem;}
+  .s5-cta-btn{font-size:.78rem;padding:.55rem 1rem;}
+}
+
+/* ============================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS PATCHES — FINAL
+   Full audit of every component, layout, animation, canvas.
+   Rules: additive only — no deletions, no HTML changes.
+   ============================================================ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   1. GLOBAL OVERFLOW GUARDS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+html,body{overflow-x:hidden;max-width:100vw;}
+.section{max-width:100vw;overflow-x:hidden;}
+.section-inner{box-sizing:border-box;max-width:100%;width:100%;}
+img,canvas,video{max-width:100%;}
+/* SVGs inside content cards stay contained */
+svg{max-width:100%;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   2. MOBILE MENU — always hidden above hamburger breakpoint
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(min-width:1061px){.mobile-menu{display:none!important;}}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   3. HEADER — nav button overflow on smallest screens
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:360px){
+  .btn-nav.primary{font-size:.7rem;padding:.38rem .65rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   4. HERO SECTION — canvas & content containment
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* The hero section already has overflow:hidden but let the parent also clip */
+#hero{overflow:hidden;}
+
+/* hero-canvas-wrap: let width drive height so it's always square & fits viewport */
+.hero-canvas-wrap{
+  max-width:100%;
+  overflow:visible;
+  position:relative;
+}
+/* canvas fills parent which has explicit width+height per breakpoint */
+#heroWombCanvas{width:100%;height:100%;display:block;border-radius:30px;}
+
+/* hero-content: remove left indent on single-column layout */
+@media(max-width:1100px){
+  .hero-content{padding-left:0;}
+  .hero-subtitle{max-width:100%;}
+  .hero-quote{max-width:100%;}
+}
+/* hero badge: allow wrap on tiny phones */
+.hero-badge{
+  white-space:normal;
+  word-break:break-word;
+  text-align:left;
+  max-width:100%;
+}
+@media(max-width:360px){
+  .hero-badge{font-size:.65rem;padding:.28rem .65rem;text-align:center;justify-content:center;}
+  .hero-subtitle{font-size:.85rem;line-height:1.65;}
+  .hero-quote{padding:.75rem 1rem;}
+  .hero-quote::before{font-size:2.8rem;}
+  .hero-quote p{font-size:.85rem;max-width:100%;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   5. HERO PETAL LAYER — must stay inside hero, no bleed
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.petal-layer{overflow:hidden;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   6. HERO 3D TITLE — safe animations on mobile
+      Keep animations alive, just simplify transforms
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.title-emphasis{position:relative;} /* ::after shimmer sweep needs this */
+@media(max-width:700px){
+  .hero-title-3d{perspective:none;transform-style:flat;}
+  /* Simplify 3D float to plain Y-only translateY so no Z-axis paint cost */
+  @keyframes word3d-float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+  }
+  @keyframes title-3d-lift{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.015);}
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   7. SECTION-LABEL — no overflow
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-label{max-width:100%;flex-wrap:wrap;word-break:break-word;overflow-wrap:anywhere;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   8. SECTION-SUB — full width on mobile
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:700px){.section-sub{max-width:100%;}}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   9. STAT CARDS — text overflow + disable hover lift on touch
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.stat-label{word-break:break-word;overflow-wrap:anywhere;}
+@media(max-width:900px){.stat-card:hover{transform:none;}}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   10. JOURNEY MAP — overflow + steps fit all screens
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section-inner>.journey-map{overflow:hidden;}
+.journey-steps{flex-wrap:wrap;}
+.j-step{flex-shrink:0;}
+/* Connectors must collapse gracefully; allow them to shrink to zero */
+.j-connector{flex-shrink:1;}
+@media(max-width:900px){
+  .j-step:hover{transform:none;}
+  .j-step:hover .j-dot{transform:none;}
+}
+@media(max-width:360px){
+  /* On smallest phones, hide connectors so steps don't force a scroll */
+  .j-connector{display:none;}
+  .journey-steps{gap:.4rem;justify-content:center;}
+  .j-step{min-width:46px;padding:.4rem .12rem;}
+  .j-dot{width:28px;height:28px;font-size:.62rem;margin-bottom:.3rem;}
+  .j-step span{font-size:.52rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   11. STAGE TIMELINE — translateX hover disabled on mobile
+       (prevents horizontal scroll trigger from animation)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:1100px){
+  /* Keep shadow & border highlight, remove the X-shift */
+  .stage-item:hover,.stage-item.active{transform:none;}
+}
+/* Timeline dot positioning at 480px */
+@media(max-width:480px){
+  .stages-timeline{padding-left:1.8rem;}
+  .stages-timeline::before{left:16px;width:2px;}
+  .stage-item::before{left:-2.3rem;width:16px;height:16px;}
+}
+@media(max-width:360px){
+  .stages-timeline{padding-left:1.55rem;}
+  .stages-timeline::before{left:13px;}
+  .stage-item::before{left:-1.95rem;width:13px;height:13px;}
+}
+/* sdp-header wraps on very small screens */
+@media(max-width:420px){
+  .sdp-header{gap:.6rem;flex-wrap:wrap;}
+  .sdp-icon{width:40px;height:40px;font-size:1.05rem;}
+  .sdp-title{font-size:.95rem;}
+  .sdp-subtitle{font-size:.72rem;}
+}
+@media(max-width:360px){
+  .sdp-icon{width:36px;height:36px;font-size:.92rem;}
+  .sdp-title{font-size:.9rem;}
+  .sdp-source{font-size:.67rem;word-break:break-word;overflow-wrap:anywhere;}
+  .sdp-facts li{font-size:.73rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   12. STAGE SVG CANVAS — always fills container width
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#stageSvgCanvas{width:100%;display:block;border-radius:16px;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   13. CTG MONITOR — canvas, legend, header, buttons
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.monitor-wrap{overflow:hidden;} /* clip canvas bleed */
+#ctgCanvas{width:100%;display:block;border-radius:8px;}
+/* CTG legend: absolute-positioned inside canvas box, move to static below 480px */
+@media(max-width:480px){
+  .ctg-canvas-box{padding:.6rem;}
+  .ctg-legend{
+    position:static;
+    display:flex;
+    gap:.8rem;
+    padding:.4rem 0 0 .2rem;
+    flex-wrap:wrap;
+  }
+}
+/* Monitor header: stack on very narrow */
+@media(max-width:420px){
+  .monitor-header{flex-direction:column;align-items:flex-start;gap:.5rem;}
+  .monitor-live{align-self:flex-start;}
+}
+/* Phase pill values: text wrap */
+.phase-pill .pp-val{word-break:break-word;overflow-wrap:anywhere;}
+@media(max-width:360px){
+  .phase-pill{min-width:auto;flex:1 1 100%;} /* stack pills vertically */
+  .phase-pill .pp-val{font-size:.76rem;}
+  .phase-pill .pp-name{font-size:.6rem;}
+}
+/* Monitor buttons: remove min-width on small screens */
+@media(max-width:900px){
+  .mon-btn{min-width:0;} /* override the min-width:120px set at 900px */
+}
+@media(max-width:480px){
+  .monitor-btns{gap:.4rem;}
+  .mon-btn{
+    flex:1 1 calc(50% - .35rem);
+    font-size:.68rem;
+    padding:.4rem .4rem;
+    text-align:center;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+}
+@media(max-width:360px){
+  .mon-btn{font-size:.62rem;padding:.35rem .3rem;}
+  .monitor-btns{gap:.3rem;}
+}
+/* live-dot animation — fine on mobile, keep it */
+/* @keyframes livePulse — no change needed */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   14. PAINLESS DELIVERY — pain bar, ep-tabs, ep-panels
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Epidural panel — force single column on all mobile screens */
+@media(max-width:1100px){
+  .ep-panel.active{grid-template-columns:1fr!important;gap:.9rem;}
+}
+/* EP SVG inside card: fully fluid */
+.ep-svg-card svg{width:100%;height:auto;max-width:260px;display:block;margin:0 auto;}
+/* Ep tabs — wrap and fit */
+@media(max-width:480px){
+  .ep-tabs{gap:.3rem;}
+  .ep-tab{flex:1 1 auto;min-width:0;padding:.38rem .6rem;font-size:.7rem;}
+}
+@media(max-width:360px){
+  .ep-tabs{gap:.22rem;}
+  .ep-tab{padding:.3rem .45rem;font-size:.63rem;}
+}
+/* Pain bar labels — no overlap on tiny screens */
+@media(max-width:380px){
+  .pain-bar-labels{font-size:.6rem;}
+}
+@media(max-width:320px){
+  .pain-bar-labels{flex-direction:column;align-items:center;gap:.1rem;font-size:.58rem;}
+}
+/* fert-card hover: disable X-shift on mobile */
+@media(max-width:1100px){
+  .fert-card:hover{transform:none;}
+  /* Keep the visible state correct — it was translateX(0) */
+  .fert-card.visible{transform:none;opacity:1;}
+  /* Initial entry animation: switch to Y-axis on mobile to prevent horizontal scroll */
+  .fert-card{transform:translateY(20px);}
+  .fert-card.visible{transform:none;}
+  .fert-card.noslide{transform:none!important;opacity:1!important;}
+}
+@media(max-width:360px){
+  .fert-card{padding:.85rem;gap:.55rem;}
+  .fert-icon{width:34px;height:34px;font-size:.8rem;}
+  .fert-card h4{font-size:.8rem;}
+  .fert-card p{font-size:.7rem;}
+  .fert-card .tag{font-size:.62rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   15. BENEFIT CARDS — disable hover lift on touch screens
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:900px){
+  .benefit-card:hover{transform:none;}
+}
+.bc-source{word-break:break-word;overflow-wrap:anywhere;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   16. VBAC SECTION — pp-card, radial SVG, action buttons
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* pp-card initial animation: use Y-axis on mobile to prevent horizontal scroll */
+@media(max-width:1100px){
+  .pp-card{transform:translateY(20px);}
+  .pp-card.visible{transform:none;opacity:1;}
+  .pp-card:hover{transform:none;}
+  .pp-card.visible:hover{transform:none;}
+}
+/* VBAC radial SVG: the inline width/height="160" must be overridden */
+.vbac-radial svg{
+  display:block;
+  width:100%!important;   /* override inline width attr */
+  height:auto!important;  /* override inline height attr */
+  max-width:160px;
+  margin:0 auto;
+  /* preserve the rotate(-90deg) transform */
+  transform:rotate(-90deg);
+}
+@media(max-width:480px){
+  .vbac-radial{width:140px;height:140px;}
+  .vbac-radial svg{max-width:140px;}
+}
+@media(max-width:360px){
+  .vbac-radial{width:120px;height:120px;}
+  .vbac-radial svg{max-width:120px;}
+  .vr-num{font-size:1.45rem;}
+  .vbac-feat-grid{grid-template-columns:1fr;}
+}
+/* VBAC action buttons: stack on mobile */
+@media(max-width:600px){
+  .vbac-visual .btn-hero{width:100%;justify-content:center;}
+  /* Target the inline flex div holding both buttons */
+  .vbac-visual div[style*="display:flex"][style*="gap:.8rem"]{flex-direction:column!important;gap:.6rem!important;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   17. PREPARATION GRID — s4-hcard
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:900px){
+  .s4-hcard:hover{transform:none;}
+  .s4-hcard.visible:hover{transform:none;}
+  .s4-hcard:hover .s4-hcard-arrow{transform:none;}
+}
+@media(max-width:360px){
+  .s4-hcard{padding:.78rem .88rem;gap:.78rem;}
+  .s4-hcard-icon{width:36px;height:36px;font-size:.85rem;border-radius:10px;}
+  .s4-hcard-body h4{font-size:.78rem;}
+  .s4-hcard-body p{font-size:.7rem;}
+  .s4-hcard-body .pc-src{font-size:.58rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   18. COMPARE TABLE — always scrollable, text breaks
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.compare-table-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  max-width:100%;
+  border-radius:18px;
+}
+.compare-table td,.compare-table th{word-break:break-word;overflow-wrap:anywhere;}
+@media(max-width:360px){
+  .compare-table{min-width:300px;font-size:.62rem;}
+  .compare-table th,.compare-table td{padding:.4rem .45rem;}
+  .compare-table th{font-size:.65rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   19. MYTHS / DARK SECTION — s5-card, myth-x, icon
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* s5-card hover lift disabled on mobile */
+@media(max-width:900px){
+  .s5-card:hover{transform:none;}
+}
+/* s5-card-icon-wrap: breathe animation kept; just size it smaller on mobile */
+@media(max-width:480px){
+  .s5-card-icon-wrap{width:44px;height:44px;border-radius:13px;font-size:1.05rem;}
+}
+@media(max-width:360px){
+  .s5-card{padding:1.1rem .9rem;}
+  .s5-card-icon-wrap{width:38px;height:38px;border-radius:11px;font-size:.92rem;}
+  .myth-x{top:.75rem;right:.75rem;font-size:.65rem;padding:.15rem .38rem;}
+  .s5-card-content h3{font-size:.85rem;}
+  .s5-card-content p{font-size:.72rem;}
+  .s5-pill{font-size:.58rem;padding:.18rem .48rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   20. GOVT CARDS — text overflow + hover disabled on touch
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.govt-card .ga{word-break:break-word;overflow-wrap:anywhere;}
+.govt-card h4,.govt-card p{word-break:break-word;overflow-wrap:anywhere;}
+@media(max-width:900px){.govt-card:hover{transform:none;box-shadow:none;}}
+@media(max-width:360px){
+  .govt-card{padding:.9rem;border-radius:13px;}
+  .govt-card h4{font-size:.82rem;}
+  .govt-card .ga{font-size:.9rem;}
+  .govt-card p{font-size:.74rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   21. GOVT INSET BOX — reduce inline padding on mobile
+       The inline-style div has padding:2.5rem; border-radius:28px
+       We target it with the style attribute selector
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Wrap it in a class via JS isn't possible; use the attribute approach */
+.s5-section .section-inner>[style*="border-radius:28px"]{box-sizing:border-box;}
+@media(max-width:700px){
+  .s5-section .section-inner>[style*="border-radius:28px"]{
+    padding:1.75rem 1.2rem!important;
+    margin-top:2rem!important;
+  }
+  .s5-section .section-inner>[style*="border-radius:28px"] h3{font-size:1.35rem!important;}
+}
+@media(max-width:480px){
+  .s5-section .section-inner>[style*="border-radius:28px"]{
+    padding:1.2rem 1rem!important;
+    border-radius:20px!important;
+    margin-top:1.5rem!important;
+  }
+  .s5-section .section-inner>[style*="border-radius:28px"] h3{font-size:1.1rem!important;}
+}
+@media(max-width:360px){
+  .s5-section .section-inner>[style*="border-radius:28px"]{
+    padding:1rem .85rem!important;
+    border-radius:16px!important;
+  }
+  .s5-section .section-inner>[style*="border-radius:28px"] h3{font-size:.98rem!important;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   22. CTA STRIP — orbs clip, layout, button text
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* s5-dashboard-cta already has overflow:hidden — the ::before/::after orbs
+   are clipped. But cap their pixel sizes with CSS min() so paint is cheaper */
+.s5-dashboard-cta::before{width:min(360px,80vw)!important;height:min(360px,80vw)!important;}
+.s5-dashboard-cta::after{width:min(290px,70vw)!important;height:min(290px,70vw)!important;}
+/* s5-cta-ring animation is fine — it's contained by the icon circle */
+@media(max-width:480px){
+  .s5-cta-icon{width:48px;height:48px;}
+  .s5-cta-icon i{font-size:1.3rem;}
+}
+@media(max-width:360px){
+  .s5-dashboard-cta{padding:1.1rem .85rem;border-radius:16px;}
+  .s5-cta-text h3{font-size:1rem;}
+  .s5-cta-text p{font-size:.76rem;}
+  .s5-cta-btn{font-size:.76rem;padding:.5rem .9rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   23. MYTH NETWORK CANVAS — always fills its section
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* #mythNetCanvas already position:absolute;inset:0;width:100%;height:100% — OK */
+/* JS resizes it on window.resize — animation is safe on all screens */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   24. HERO PARTICLE CANVAS — already position:absolute; inset:0 — OK
+       Header particle canvas — same — OK
+       Both JS resize on window.resize — animation safe
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   25. REVEAL ANIMATIONS — translateY is safe; ensure no
+       translateX on narrow — handled per component above
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   26. TOUCH-DEVICE HOVER STATES
+       Use hover:none + pointer:coarse to catch all touch devices
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(hover:none)and(pointer:coarse){
+  .stat-card:hover{transform:none;}
+  .j-step:hover{transform:none;}
+  .j-step:hover .j-dot{transform:none;box-shadow:0 6px 20px rgba(236,64,122,.3);}
+  .stage-item:hover,.stage-item.active{transform:none;}
+  .benefit-card:hover{transform:none;box-shadow:0 6px 22px rgba(0,0,0,.06);}
+  .pp-card:hover{transform:none;}
+  .pp-card.visible:hover{transform:none;}
+  .s4-hcard:hover{transform:none;}
+  .s4-hcard.visible:hover{transform:none;}
+  .s4-hcard:hover .s4-hcard-arrow{transform:none;}
+  .govt-card:hover{transform:none;box-shadow:none;}
+  .fert-card:hover{transform:none;}
+  .btn-hero.primary:hover{transform:none;}
+  .btn-hero.secondary:hover{transform:none;}
+  .s5-cta-btn:hover{transform:none;}
+  .btn-nav.outline:hover{transform:none;}
+  .s5-card:hover{transform:none;}
+  .stat-card:hover{transform:none;}
+  .j-connector{display:none;} /* remove connectors on touch — they eat space */
+  .journey-steps{gap:.5rem;justify-content:center;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   27. MISC TEXT OVERFLOW — all small text nodes
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.badge,.stage-time-pill,.s5-pill,.fert-card .tag,.pc-src,.sdp-source,.bc-source{
+  word-break:break-word;overflow-wrap:anywhere;
+}
+.phase-pill .pp-val{word-break:break-word;overflow-wrap:anywhere;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   28. HERO MIN-HEIGHT — collapse on all mobile sizes
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:1100px){
+  .hero{min-height:unset;}
+  #hero{min-height:unset;}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.2 22 Q7.6 17.2 8.8 15 Q10.2 13 12 13 Q13.8 13 15.2 15 Q16.4 17.2 15.8 22Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Complete Health</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+      <div class="nav-item">
+        <button class="nav-link active" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+        <div class="nav-dropdown">
+          <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-map"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:var(--deep-pink);">View Full Journeys</strong><span style="font-size:.73rem;color:var(--text-soft);">Browse all her journeys</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:var(--text-soft);">Preparation &amp; planning</span></div></a>
+          <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle &amp; ovulation</span></div></a>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+            <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:var(--text-soft);">Week by week guide</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="normal_delivery.html" class="dd-item" style="background:rgba(102,187,106,0.07);"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;color:#2e7d32;">Normal Delivery</strong><span style="font-size:.73rem;color:var(--text-soft);">Vaginal birth guide</span></div></a>
+              <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:var(--text-soft);">Surgical birth info</span></div></a>
+              <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:var(--text-soft);">Support &amp; care</span></div></a>
+            </div>
+          </div>
+          <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:var(--text-soft);">ANC visits &amp; checklist</span></div></a>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:var(--text-soft);">4th trimester care</span></div></a>
+          <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:var(--text-soft);">Latch, supply, nutrition</span></div></a>
+          <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:var(--text-soft);">Perimenopause &amp; beyond</span></div></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+        <div class="nav-dropdown">
+          <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:var(--text-soft);">AI-powered guidance</span></div></a>
+          <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:var(--text-soft);">Track your health</span></div></a>
+          <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:var(--text-soft);">Cancer &amp; preventive</span></div></a>
+          <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:var(--text-soft);">Benefits you deserve</span></div></a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+      <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+        <div class="nav-dropdown" style="min-width:240px;">
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+          <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle, conceiving &amp; IVF</span></div></a>
+          <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:var(--text-soft);">All trimesters covered</span></div></a>
+          <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:var(--text-soft);">Newborn &amp; postpartum</span></div></a>
+          <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:var(--text-soft);">Menopause, bone, mental</span></div></a>
+          <div class="dd-sep"></div>
+          <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:var(--text-soft);">Share &amp; connect</span></div></a>
+          <div class="dd-sep"></div>
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Osteoporosis prevention</span></div></a>
+          <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Anxiety, depression, support</span></div></a>
+          <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:var(--text-soft);">You are never alone</span></div></a>
+        </div>
+      </div>
+
+    <div class="nav-actions">
+      <a class="btn-nav outline" href="signin.html"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-section">Navigation</div>
+  <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:var(--deep-pink);width:20px;"></i> Home</a>
+  <div class="mm-section">Journeys</div>
+  <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:var(--deep-pink);width:20px;"></i> Conceiving</a>
+  <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:var(--deep-pink);width:20px;"></i> Fertility</a>
+  <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:var(--deep-pink);width:20px;"></i> Pregnancy Journey</a>
+  <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#2e7d32;width:20px;"></i> Normal Delivery</a>
+  <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:var(--deep-pink);width:20px;"></i> C-Section</a>
+  <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+  <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:var(--deep-pink);width:20px;"></i> Antenatal Care</a>
+  <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:var(--deep-pink);width:20px;"></i> Newborn &amp; Postpartum</a>
+  <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:var(--deep-pink);width:20px;"></i> Breastfeeding</a>
+  <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:var(--deep-pink);width:20px;"></i> Menopause</a>
+  <div class="mm-section">Services</div>
+  <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:var(--deep-pink);width:20px;"></i> Symptom Checker</a>
+  <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:var(--deep-pink);width:20px;"></i> My Dashboard</a>
+  <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:var(--deep-pink);width:20px;"></i> Govt Schemes</a>
+  <div class="mm-section">Specialised Care</div>
+  <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+  <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+  <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+  <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+  <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+  <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+  <div class="mm-section">More</div>
+  <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:var(--deep-pink);width:20px;"></i> Stories</a>
+  <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:var(--deep-pink);width:20px;"></i> Community</a>
+  <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:var(--deep-pink);width:20px;"></i> About Us</a>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+    <a href="signin.html" class="btn-nav outline" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+    <a href="contact.html" class="btn-nav primary" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+  </div>
+</div>
+
+<!-- ===== SCROLL PROGRESS DOTS ===== -->
+<div class="scroll-progress" id="scrollProgress">
+  <div class="sp-dot active" data-section="hero" title="Home"></div>
+  <div class="sp-dot" data-section="s1" title="Labour Stages"></div>
+  <div class="sp-dot" data-section="s2" title="Contraction Monitor"></div>
+  <div class="sp-dot" data-section="s3" title="Painless Delivery"></div>
+  <div class="sp-dot" data-section="s4" title="Benefits"></div>
+  <div class="sp-dot" data-section="s5" title="VBAC"></div>
+  <div class="sp-dot" data-section="s6" title="Myths &amp; Rights"></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" style="background:linear-gradient(180deg,#faf5fb 0%,#f0e8f5 100%);position:relative;overflow:hidden;">
+  <div class="hero">
+    <!-- Particle Background — stays inside hero section -->
+    <canvas id="heroParticleCanvas"></canvas>
+    <!-- Header-style particle effect over hero background -->
+    <canvas id="headerParticleCanvas"></canvas>
+    <!-- Petal Layer -->
+    <div class="petal-layer" id="petalLayer"></div>
+    <!-- Soft radial glow -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 65% 35%,rgba(236,64,122,0.08) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+    <!-- 3D Floating Orbs -->
+    <div class="hero-3d-orbs">
+      <div class="orb-3d"></div>
+      <div class="orb-3d"></div>
+      <div class="orb-3d"></div>
+      <div class="orb-3d"></div>
+    </div>
+
+    <!-- LEFT: Content -->
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-heart-pulse"></i>
+        Normal &amp; Painless Vaginal Delivery Guide
+      </div>
+
+      <h1 class="hero-title-3d">
+        <span class="title-word">Your</span> <span class="title-word">Body</span> <span class="title-word">Was</span><br>
+        <span class="title-emphasis" style="position:relative;">Born for This Moment</span> <span class="title-word"></span><br>
+      </h1>
+
+      <p class="hero-subtitle">
+        Every contraction is a step closer. Every breath, a prayer answered. 
+        Normal vaginal delivery is not just the world's oldest birth — 
+        it is physiologically the most optimal, the most healing, 
+        and the most empowering journey a woman can take.
+      </p>
+
+      <div class="hero-quote">
+        <p>Every woman deserves access to respectful, high-quality care during pregnancy, childbirth and after. The overwhelming majority of healthy women with uncomplicated pregnancies will give birth naturally — and this should be supported, not interrupted.</p>
+        <cite>— World Health Organization · Intrapartum Care for a Positive Childbirth Experience, 2018</cite>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num">75%</span>
+          <span class="stat-label">VBAC Success Rate (ACOG)</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">3×</span>
+          <span class="stat-label">Faster Recovery vs Surgery</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">400+</span>
+          <span class="stat-label">Microbes Seeded at Birth</span>
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#s1" class="btn-hero primary">
+          <i class="fa-solid fa-compass"></i> Explore Labour Stages
+        </a>
+        <a href="#s3" class="btn-hero secondary">
+          <i class="fa-solid fa-syringe"></i> Painless Birth Guide
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Living Womb Canvas + floating chips -->
+    <div class="hero-visual">
+      <div class="hero-canvas-wrap">
+        <canvas id="heroWombCanvas"></canvas>
+        <div class="hero-float-chip">🧬 400+ microbes seeded at first breath</div>
+        <div class="hero-float-chip">💗 Oxytocin surge — nature's bonding gift</div>
+        <div class="hero-float-chip">🫁 Lungs cleared by birth canal pressure</div>
+        <div class="hero-float-chip">⭐ Average active labour: 6–12 hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JOURNEY MAP ===== -->
+<div class="section-inner">
+  <div class="journey-map reveal">
+    <h3 style="font-family:'Playfair Display',serif;">Your <span style="color:var(--deep-pink);">Birth Journey</span> — Navigate Each Chapter</h3>
+    <div class="journey-steps">
+      <a href="pregnancy_journey.html" class="j-step">
+        <div class="j-dot"><i class="fa-solid fa-baby-carriage"></i></div>
+        <span>Pregnancy<br>Journey</span>
+      </a>
+      <div class="j-connector"></div>
+      <a href="antenatal_care.html" class="j-step">
+        <div class="j-dot"><i class="fa-solid fa-clipboard-list"></i></div>
+        <span>Antenatal<br>Care</span>
+      </a>
+      <div class="j-connector"></div>
+      <a href="normal_delivery.html" class="j-step">
+        <div class="j-dot active-step"><i class="fa-solid fa-heart-pulse"></i></div>
+        <span style="color:#2e7d32;font-weight:700;">Normal<br>Delivery ✓</span>
+      </a>
+      <div class="j-connector"></div>
+      <a href="csection_postpartum.html" class="j-step">
+        <div class="j-dot"><i class="fa-solid fa-hospital"></i></div>
+        <span>C-Section<br>Guide</span>
+      </a>
+      <div class="j-connector"></div>
+      <a href="newborn_postpartum_care.html" class="j-step">
+        <div class="j-dot"><i class="fa-solid fa-baby"></i></div>
+        <span>Newborn &amp;<br>Postpartum</span>
+      </a>
+      <div class="j-connector"></div>
+      <a href="breastfeeding_journey.html" class="j-step">
+        <div class="j-dot"><i class="fa-solid fa-heart"></i></div>
+        <span>Breastfeeding<br>Journey</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 1: SIX STAGES OF LABOUR ===== -->
+<section class="section alt" id="s1">
+  <div class="section-inner">
+    <div class="s1-layout">
+      <!-- Left: Timeline -->
+      <div>
+        <div class="section-label reveal"><i class="fa-solid fa-timeline"></i> Chapter One</div>
+        <h2 class="section-heading reveal reveal-delay-1">The Six Stages of<br><span class="em">Natural Labour</span></h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-bottom:2rem;">
+          Your body has been preparing for 40 weeks. Every contraction, every centimetre — 
+          a precisely orchestrated physiological masterwork. Click each stage to explore.
+        </p>
+
+        <div class="stages-timeline reveal reveal-delay-3">
+
+          <div class="stage-item active" onclick="selectStage(this,0)" data-stage="0">
+            <div class="stage-num">Stage 1A</div>
+            <div class="stage-title-text">Latent Phase — Early Labour</div>
+            <div class="stage-time-pill"><i class="fa-regular fa-clock"></i> 0–6 cm · Up to 20 hrs (first-time mothers)</div>
+            <div class="stage-desc-short">Cervix softens and opens. Contractions begin irregularly — every 5–30 min. Most women are comfortably at home. ACOG 2014: this phase can last 20 hours in primiparous women — no intervention needed.</div>
+          </div>
+
+          <div class="stage-item" onclick="selectStage(this,1)" data-stage="1">
+            <div class="stage-num">Stage 1B</div>
+            <div class="stage-title-text">Active Phase — Labour Accelerates</div>
+            <div class="stage-time-pill"><i class="fa-regular fa-clock"></i> 6–10 cm · ≥0.5 cm/hr (WHO 2018)</div>
+            <div class="stage-desc-short">Contractions every 3–5 min, 45–90 seconds long. WHO 2018 revised the threshold to 0.5 cm/hr — the old 1 cm/hr standard led to millions of unnecessary C-sections worldwide.</div>
+          </div>
+
+          <div class="stage-item" onclick="selectStage(this,2)" data-stage="2">
+            <div class="stage-num">Stage 2</div>
+            <div class="stage-title-text">Pushing &amp; Delivery — The Moment</div>
+            <div class="stage-time-pill"><i class="fa-solid fa-star"></i> 20 min – 3 hrs · Full dilation to birth</div>
+            <div class="stage-desc-short">7 cardinal movements guide baby through the pelvis. Upright positions reduce perineal tears. Warm compresses cut 3rd/4th degree tears by 51%. Delayed pushing ("labouring down") reduces operative delivery.</div>
+          </div>
+
+          <div class="stage-item" onclick="selectStage(this,3)" data-stage="3">
+            <div class="stage-num">Stage 3</div>
+            <div class="stage-title-text">Placenta Delivery</div>
+            <div class="stage-time-pill"><i class="fa-regular fa-clock"></i> 5–30 min after birth</div>
+            <div class="stage-desc-short">Oxytocin 10 IU IM recommended for all vaginal deliveries. Delayed cord clamping (≥1–3 min) increases infant iron stores by 50 mg. Active management prevents postpartum haemorrhage — leading cause of maternal death.</div>
+          </div>
+
+          <div class="stage-item" onclick="selectStage(this,4)" data-stage="4">
+            <div class="stage-num">The Golden Hour</div>
+            <div class="stage-title-text">First Hour — Sacred Bonding Window</div>
+            <div class="stage-time-pill"><i class="fa-solid fa-heart"></i> 0–60 min · Uninterrupted skin-to-skin</div>
+            <div class="stage-desc-short">Oxytocin, endorphins, prolactin peak simultaneously. Uninterrupted skin-to-skin for ≥1 hour doubles breastfeeding success at 4 months. 80% of PPH occurs in first 4 hours — close monitoring essential.</div>
+          </div>
+
+          <div class="stage-item" onclick="selectStage(this,5)" data-stage="5">
+            <div class="stage-num">Recovery</div>
+            <div class="stage-title-text">Postpartum Recovery &amp; Healing</div>
+            <div class="stage-time-pill"><i class="fa-solid fa-leaf"></i> 24 hrs – 4 weeks to full function</div>
+            <div class="stage-desc-short">Hospital stay: 24–48 hrs vs 4–5 days for C-section. Early ambulation within 6 hrs reduces DVT risk. Pelvic floor physiotherapy resolves incontinence in ~70% of women. Return to normal activity: 2–4 weeks.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: Detail Panel -->
+      <div>
+        <div class="stage-detail-panel reveal">
+          <div class="sdp-header">
+            <div class="sdp-icon" id="sdpIcon">🌙</div>
+            <div>
+              <div class="sdp-title" id="sdpTitle">Latent Phase</div>
+              <div class="sdp-subtitle" id="sdpSubtitle">0–6 cm cervical dilation · Early Labour</div>
+            </div>
+          </div>
+          <canvas id="stageSvgCanvas"></canvas>
+          <ul class="sdp-facts" id="sdpFacts">
+            <li>Mucus plug may pass (bloody show) — a normal sign of cervical ripening</li>
+            <li>Rest, eat lightly, stay hydrated — energy conservation is critical now</li>
+            <li>Walking and position changes support natural labour progress</li>
+            <li>If membranes rupture, note colour and call your provider immediately</li>
+            <li>This phase can last up to 20 hours in first-time mothers — patience is evidence-based</li>
+          </ul>
+          <div class="sdp-source" id="sdpSource">ACOG Practice Bulletin No. 107 · WHO Intrapartum Care 2018</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: CONTRACTION MONITOR ===== -->
+<section class="section" id="s2">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label reveal" style="display:inline-flex;"><i class="fa-solid fa-wave-square"></i> Interactive Simulation</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">Live Labour <span class="em">Contraction Monitor</span></h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;text-align:center;">
+        An interactive CTG (Cardiotocograph) simulation — exactly as seen in labour wards. 
+        WHO recommends intermittent auscultation for all low-risk labours.
+      </p>
+    </div>
+
+    <div class="monitor-wrap reveal">
+      <div class="monitor-header">
+        <div>
+          <div class="monitor-title-text">Fetal Heart Rate &amp; Contraction Monitor</div>
+          <div class="monitor-subtitle-text">Simulated CTG · Not real patient data · For educational purposes only</div>
+        </div>
+        <div class="monitor-live">
+          <div class="live-dot"></div>
+          <span id="monStatus">Active Phase Labour</span>
+        </div>
+      </div>
+
+      <div class="ctg-canvas-box">
+        <canvas id="ctgCanvas" height="160"></canvas>
+        <div class="ctg-legend">
+          <div class="ctg-legend-item">
+            <div class="ctg-dot" style="background:#69f0ae;"></div>
+            <span style="color:rgba(255,255,255,.5);">Fetal HR</span>
+          </div>
+          <div class="ctg-legend-item">
+            <div class="ctg-dot" style="background:#ffb74d;"></div>
+            <span style="color:rgba(255,255,255,.5);">Contractions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="monitor-metrics">
+        <div class="met-card"><span class="met-val" id="metFhr">140</span><div class="met-lbl">Fetal HR (bpm)</div></div>
+        <div class="met-card"><span class="met-val" id="metFreq">4:10</span><div class="met-lbl">Contractions/10min</div></div>
+        <div class="met-card"><span class="met-val" id="metDur">55s</span><div class="met-lbl">Duration</div></div>
+        <div class="met-card"><span class="met-val" id="metDil">7 cm</span><div class="met-lbl">Cervical Dilation</div></div>
+      </div>
+
+      <div class="monitor-phase-pills">
+        <div class="phase-pill latent">
+          <span class="pp-name">Latent Phase</span>
+          <span class="pp-val">0–6 cm · Up to 20 hrs primiparous</span>
+        </div>
+        <div class="phase-pill active-ph">
+          <span class="pp-name">Active Phase</span>
+          <span class="pp-val">6–10 cm · ≥0.5 cm/hr (WHO 2018)</span>
+        </div>
+        <div class="phase-pill second">
+          <span class="pp-name">Second Stage</span>
+          <span class="pp-val">Pushing · ≤3 hrs primiparous</span>
+        </div>
+      </div>
+
+      <div class="monitor-btns">
+        <button class="mon-btn play" onclick="ctgPlay()">▶ Play Simulation</button>
+        <button class="mon-btn pause" onclick="ctgPause()">⏸ Pause</button>
+        <button class="mon-btn reset" onclick="ctgReset()">↺ Reset</button>
+        <button class="mon-btn phase-btn" onclick="ctgCyclePhase()">🔄 Change Phase</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: PAINLESS DELIVERY ===== -->
+<section class="section alt" id="s3">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label reveal" style="display:inline-flex;"><i class="fa-solid fa-syringe"></i> Chapter Three</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">
+        Painless Birth: <span class="em">You Deserve Comfort</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;text-align:center;">
+        Labour pain is one of the most intense human experiences — but suffering is not a requirement. 
+        ACOG states: <em>"A woman's request for pain relief is sufficient medical indication."</em>
+      </p>
+    </div>
+
+    <div class="painless-layout">
+      <!-- Left -->
+      <div>
+        <div class="pain-scale-card reveal">
+          <div class="pain-scale-title-text">Pain Intensity Across Labour — Interactive Scale</div>
+          <div class="pain-bar-bg">
+            <div class="pain-needle" id="painNeedle" style="left:68%"></div>
+          </div>
+          <div class="pain-bar-labels"><span>Mild (1–3)</span><span>Moderate (4–6)</span><span>Severe (7–10)</span></div>
+          <div style="font-size:.82rem;font-weight:700;color:var(--deep-pink);margin-bottom:.9rem;" id="painLabel">Active Labour: 6–8 / 10 on VAS Scale</div>
+          <div class="pain-stage-btns">
+            <button class="pain-btn" style="border-color:#66bb6a;color:#2e7d32;" onclick="setPain(12,'Early Labour: 3–4/10 — mild cramps, manageable')">🌿 Early Labour (3–4/10)</button>
+            <button class="pain-btn" style="border-color:#ffb74d;color:#e65100;" onclick="setPain(50,'Active Labour: 6–7/10 — strong, rhythmic waves')">⚡ Active Labour (6–7/10)</button>
+            <button class="pain-btn" style="border-color:#ef5350;color:#c62828;" onclick="setPain(80,'Transition: 8–9/10 — peak intensity, nearly there')">🔥 Transition Phase (8–9/10)</button>
+            <button class="pain-btn" style="border-color:#7b1fa2;color:#7b1fa2;" onclick="setPain(5,'With Epidural: 1–2/10 — pressure only, comfortable ✓')">💜 With Epidural: 1–2/10 ✓</button>
+          </div>
+        </div>
+
+        <!-- Epidural Tabs -->
+        <div class="ep-tabs reveal">
+          <button class="ep-tab active" onclick="epTab(this,'howit')">How It Works</button>
+          <button class="ep-tab" onclick="epTab(this,'types')">Pain Relief Options</button>
+          <button class="ep-tab" onclick="epTab(this,'safety')">Safety &amp; Evidence</button>
+          <button class="ep-tab" onclick="epTab(this,'rights')">Your Rights</button>
+        </div>
+
+        <!-- Tab: How It Works -->
+        <div class="ep-panel active" id="ep-howit">
+          <div class="fert-card noslide">
+            <div class="fert-icon purple"><i class="fa-solid fa-syringe"></i></div>
+            <div>
+              <h4>Epidural Anaesthesia</h4>
+              <p>Catheter placed in epidural space at L3–L4. Local anaesthetic (bupivacaine/ropivacaine) + fentanyl blocks pain signals while preserving motor function — you can still push. Takes 10–20 min for full effect; topped up throughout labour. CSE ("walking epidural") acts in 5 minutes.</p>
+              <span class="tag">Cochrane 2018 · 40 RCTs · 11,000+ women</span>
+            </div>
+          </div>
+          <div class="ep-svg-card">
+            <svg viewBox="0 0 280 260" style="width:100%;max-width:260px;">
+              <defs><radialGradient id="spGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f3e5f5"/><stop offset="100%" stop-color="#ede7f6"/></radialGradient></defs>
+              <rect width="280" height="260" fill="#faf5ff" rx="16"/>
+              <ellipse cx="140" cy="105" rx="58" ry="70" fill="#e8eaf6" stroke="#9575cd" stroke-width="2"/>
+              <ellipse cx="140" cy="105" rx="46" ry="62" fill="rgba(126,87,194,0.09)" stroke="none"/>
+              <ellipse cx="140" cy="105" rx="30" ry="46" fill="#e1bee7" stroke="#7b1fa2" stroke-width="1.5"/>
+              <line x1="215" y1="72" x2="175" y2="103" stroke="#5e35b1" stroke-width="3" stroke-linecap="round"/>
+              <polygon points="172,100 180,95 181,108" fill="#5e35b1"/>
+              <line x1="175" y1="103" x2="140" y2="105" stroke="#9c27b0" stroke-width="2" stroke-dasharray="4,2"/>
+              <circle cx="152" cy="99" r="3" fill="#ce93d8" opacity=".85"><animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite"/></circle>
+              <circle cx="132" cy="112" r="3" fill="#ce93d8" opacity=".85"><animate attributeName="r" values="3;5;3" dur="2.4s" repeatCount="indefinite"/></circle>
+              <circle cx="146" cy="120" r="3" fill="#ce93d8" opacity=".85"><animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite"/></circle>
+              <text x="140" y="105" text-anchor="middle" fill="#4a148c" font-size="8.5" font-weight="700" font-family="sans-serif">Spinal Cord</text>
+              <text x="200" y="64" text-anchor="start" fill="#5e35b1" font-size="8" font-weight="700" font-family="sans-serif">Epidural</text>
+              <text x="200" y="75" text-anchor="start" fill="#5e35b1" font-size="8" font-weight="700" font-family="sans-serif">Catheter</text>
+              <text x="140" y="248" text-anchor="middle" fill="#aaa" font-size="7.5" font-family="sans-serif">Simplified schematic · Not anatomically precise</text>
+              <text x="20" y="185" fill="#7b1fa2" font-size="8" font-family="sans-serif" font-weight="700">Epidural Space →</text>
+              <text x="20" y="205" fill="#4a148c" font-size="8" font-family="sans-serif" font-weight="700">Drug diffusion →</text>
+              <circle cx="30" cy="215" r="3.5" fill="#ce93d8" opacity=".85"><animate attributeName="r" values="3.5;6;3.5" dur="2s" repeatCount="indefinite"/></circle>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tab: Types -->
+        <div class="ep-panel" id="ep-types">
+          <div class="fert-card noslide">
+            <div class="fert-icon pink"><i class="fa-solid fa-capsules"></i></div>
+            <div>
+              <h4>Pharmacological Options</h4>
+              <p><strong>Standard Epidural:</strong> Most flexible; continuous infusion.<br>
+              <strong>CSE ("Walking Epidural"):</strong> Fastest onset (5 min); preserves mobility.<br>
+              <strong>PCEA:</strong> Patient-controlled dosing; highest satisfaction.<br>
+              <strong>Entonox (N₂O):</strong> Self-administered; reduces pain 30–50%; zero neonatal harm.</p>
+              <span class="tag">ACOG Committee Opinion No. 847 (2021)</span>
+            </div>
+          </div>
+          <div class="fert-card noslide">
+            <div class="fert-icon green"><i class="fa-solid fa-spa"></i></div>
+            <div>
+              <h4>Non-Pharmacological</h4>
+              <p><strong>Hydrotherapy:</strong> Reduces pain VAS by 1.5 points; RCOG 2018 supports.<br>
+              <strong>Doula Support:</strong> Reduces C-section by 25%; 26 trials, 15,000 women.<br>
+              <strong>TENS:</strong> Safe; gate-control theory pain reduction.<br>
+              <strong>Sterile Water Injections:</strong> 1–3 hrs back pain relief.</p>
+              <span class="tag">Bohren MA · Cochrane 2017</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Safety -->
+        <div class="ep-panel" id="ep-safety">
+          <div class="fert-card noslide">
+            <div class="fert-icon teal"><i class="fa-solid fa-shield-check"></i></div>
+            <div>
+              <h4>Evidence on Safety</h4>
+              <p>Epidural does <strong>NOT</strong> increase C-section risk (Cochrane 2018, 40 RCTs). Does NOT cause chronic back pain (BMJ 2002, Howell et al., 5-year follow-up). Does NOT harm baby Apgar scores or NICU rates. May slightly lengthen second stage by ~13 min — clinically insignificant.</p>
+              <span class="tag">Anim-Somuah M · Cochrane 2018</span>
+            </div>
+          </div>
+          <div class="fert-card noslide">
+            <div class="fert-icon gold"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <h4>Genuine Risks to Discuss</h4>
+              <p><strong>Hypotension:</strong> 20–30%; managed with IV fluids, ephedrine.<br>
+              <strong>Dural puncture headache:</strong> 1%; treated with blood patch.<br>
+              <strong>Pruritus:</strong> 20–80% (when opioids added); antihistamines help.<br>
+              <strong>Fever:</strong> 10–15% low-grade fever.<br>
+              <strong>Serious complications:</strong> &lt;1:100,000 (meningitis, paralysis).</p>
+              <span class="tag">ACOG Practice Bulletin No. 209 (2019)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Rights -->
+        <div class="ep-panel" id="ep-rights">
+          <div class="fert-card noslide">
+            <div class="fert-icon blue"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div>
+              <h4>Your Legal Rights in India</h4>
+              <p><strong>Right to pain relief:</strong> Your request alone is sufficient — ACOG 2019.<br>
+              <strong>Right to informed consent:</strong> Every procedure requires your explicit consent (IMA, Consumer Protection Act 2019).<br>
+              <strong>Right to refuse:</strong> Any non-emergency intervention including episiotomy.<br>
+              <strong>Right to a birth companion:</strong> WHO recommends throughout all stages.</p>
+              <span class="tag">MoHFW India · FIGO Respectful Care Statement 2021</span>
+            </div>
+          </div>
+          <div class="fert-card noslide">
+            <div class="fert-icon pink"><i class="fa-solid fa-comment-medical"></i></div>
+            <div>
+              <h4>Questions to Ask Your Doctor</h4>
+              <p>"At what dilation can I request epidural?" (Any time — ACOG 2019)<br>
+              "Will it increase my C-section risk?" (No — Cochrane 2018)<br>
+              "Is a walking epidural available here?"<br>
+              "What is your hospital's epidural rate?" (India avg: ~8%; USA: 73%)</p>
+              <span class="tag">NFHS-5 · HCUP 2019 · ACOG</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Source list -->
+      <div>
+        <div class="section-label"><i class="fa-solid fa-microscope"></i> Why It Matters</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;margin-bottom:.75rem;line-height:1.2;">
+          Pain in Labour is Real.<br><span style="color:var(--deep-pink);">Relief is Your Right.</span>
+        </h3>
+        <p style="color:var(--text-soft);font-size:.95rem;line-height:1.85;margin-bottom:1.5rem;">
+          For decades, women were told to "endure" labour pain as though suffering were a rite of passage. 
+          The science says otherwise. Modern epidural analgesia achieves complete pain relief in 
+          85–95% of women while preserving the full ability to push, feel baby's arrival, and bond immediately.
+        </p>
+
+        <div style="display:flex;flex-direction:column;gap:.9rem;">
+          <div class="fert-card noslide" style="cursor:default;">
+            <div class="fert-icon pink"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div>
+              <h4>Oxytocin Still Flows</h4>
+              <p>Epidural does not block the emotional experience of birth. Oxytocin receptors in the brain remain fully active — you feel the love, the bond, the magic.</p>
+              <span class="tag">Neuroendocrinology · Harvard Medical, 2021</span>
+            </div>
+          </div>
+          <div class="fert-card noslide" style="cursor:default;">
+            <div class="fert-icon green"><i class="fa-solid fa-baby"></i></div>
+            <div>
+              <h4>Baby Is Safe</h4>
+              <p>No significant effect on Apgar scores, NICU admission, or neonatal neurobehavioural outcomes in 40 randomised controlled trials covering over 11,000 women.</p>
+              <span class="tag">Cochrane Database Syst Rev · 2018</span>
+            </div>
+          </div>
+          <div class="fert-card noslide" style="cursor:default;">
+            <div class="fert-icon teal"><i class="fa-solid fa-shield-check"></i></div>
+            <div>
+              <h4>The Back Pain Myth — Busted</h4>
+              <p>MacArthur BMJ 1992 &amp; Howell BMJ 2002 five-year follow-up: NO causal link between epidural and chronic back pain. Postpartum backache is common after all births, related to posture not epidural.</p>
+              <span class="tag">BMJ 1992 &amp; 2002 · Longitudinal Studies</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: WHY VAGINAL DELIVERY IS OPTIMAL ===== -->
+<section class="section" id="s4">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label reveal" style="display:inline-flex;"><i class="fa-solid fa-microscope"></i> Chapter Four · Peer-Reviewed Evidence</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">
+        Why Vaginal Delivery Is <span class="em">Physiologically Optimal</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;text-align:center;">
+        Evidence from WHO, ACOG, ICMR, Harvard, Johns Hopkins, Oxford, 
+        Lancet and Nature Medicine — not preference, but biology.
+      </p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card bc-green" style="transition-delay:.05s;">
+        <div class="bc-stat green">3× Faster</div>
+        <div class="bc-icon">🩹</div>
+        <div class="bc-title">Recovery Time</div>
+        <div class="bc-desc">Hospital stay averages 1–2 days vs 4–5 days for C-section. Women resume normal activity in 2–4 weeks vs 8–12 weeks. No surgical wound complications, no paralytic ileus, no abdominal adhesion risk.</div>
+        <span class="bc-source">ACOG FAQs · Cochrane Review 2020</span>
+      </div>
+
+      <div class="benefit-card bc-blue" style="transition-delay:.1s;">
+        <div class="bc-stat blue">40% Lower</div>
+        <div class="bc-icon">🫁</div>
+        <div class="bc-title">Respiratory Risk in Baby</div>
+        <div class="bc-desc">Birth canal compression squeezes fetal lung fluid — a critical physiological step. C-section babies have 40% higher rates of Transient Tachypnoea of the Newborn (TTN) and higher NICU admissions.</div>
+        <span class="bc-source">Lancet 2021 · Hansen AK, Eur J Pediatr 2008</span>
+      </div>
+
+      <div class="benefit-card bc-purple" style="transition-delay:.15s;">
+        <div class="bc-stat purple">800+ Species</div>
+        <div class="bc-icon">🧬</div>
+        <div class="bc-title">Microbiome Seeding</div>
+        <div class="bc-desc">Baby colonised by maternal vaginal &amp; gut flora (Lactobacillus, Bifidobacterium). This foundational microbiome reduces risk of asthma, allergies, type 1 diabetes and obesity by up to 20% in later life.</div>
+        <span class="bc-source">Dominguez-Bello MG, PNAS 2010 · Shao Y, Nature 2019</span>
+      </div>
+
+      <div class="benefit-card bc-pink" style="transition-delay:.2s;">
+        <div class="bc-stat pink">Oxytocin Peak</div>
+        <div class="bc-icon">🧠</div>
+        <div class="bc-title">Mental Health &amp; Bonding</div>
+        <div class="bc-desc">Oxytocin surge during vaginal birth activates the brain's reward pathways — the "love hormone" floods both mother and baby. C-section mothers show 2× higher rates of postpartum depression in some cohort studies.</div>
+        <span class="bc-source">Silverman ME, BMJ Open 2020 · Harvard Health 2022</span>
+      </div>
+
+      <div class="benefit-card bc-amber" style="transition-delay:.25s;">
+        <div class="bc-stat amber">0.03% vs 6.7%</div>
+        <div class="bc-icon">🌸</div>
+        <div class="bc-title">Future Fertility Preserved</div>
+        <div class="bc-desc">Each C-section increases risk of placenta praevia and accreta in subsequent pregnancies. Placenta accreta risk: 0.03% after vaginal birth vs up to 6.74% after 4 C-sections. Critical in India where family sizes remain larger.</div>
+        <span class="bc-source">Silver RM, Obstet Gynecol 2006 · ICMR 2022</span>
+      </div>
+
+      <div class="benefit-card bc-teal" style="transition-delay:.3s;">
+        <div class="bc-stat teal">₹40,000+ Saved</div>
+        <div class="bc-icon">💚</div>
+        <div class="bc-title">Financial Protection</div>
+        <div class="bc-desc">C-section in private hospitals: ₹1–3 lakh. Vaginal delivery: ₹20,000–60,000. Under JSSK, government facility vaginal delivery is completely free. Unnecessary C-sections cause catastrophic health expenditure in 16% of Indian families.</div>
+        <span class="bc-source">NITI Aayog Health Study 2019 · NFHS-5 2021</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: VBAC ===== -->
+<section class="section alt" id="s5">
+  <div class="section-inner">
+    <div class="vbac-layout">
+      <!-- Left: Cards -->
+      <div>
+        <div class="section-label reveal"><i class="fa-solid fa-medal"></i> Chapter Five</div>
+        <h2 class="section-heading reveal reveal-delay-1">
+          VBAC: Vaginal Birth<br><span class="em">After Caesarean</span>
+        </h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-bottom:1.8rem;">
+          India's "once a C-section, always a C-section" belief is medically outdated and has led to 
+          millions of unnecessary repeat surgeries. ACOG, WHO, RCOG and FOGSI all support VBAC 
+          as a safe, evidence-supported choice for carefully selected women.
+        </p>
+
+        <div class="vbac-cards">
+          <div class="pp-card" style="transition-delay:.05s;">
+            <div class="pp-icon" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32;"><i class="fa-solid fa-check-circle"></i></div>
+            <div>
+              <h4>Good VBAC Candidates</h4>
+              <p>One previous low transverse C-section, singleton pregnancy, no placenta praevia, no previous uterine rupture, hospital with 24-hr surgical capability, and a motivated, informed woman after thorough counselling.</p>
+              <span class="badge badge-calm">ACOG PB No. 205 (2019)</span>
+            </div>
+          </div>
+
+          <div class="pp-card" style="transition-delay:.1s;">
+            <div class="pp-icon" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);color:#f57f17;"><i class="fa-solid fa-chart-bar"></i></div>
+            <div>
+              <h4>Uterine Rupture Risk in Context</h4>
+              <p>0.2–0.7% with one prior low-transverse C-section — comparable to other obstetric emergencies managed routinely every day. Risk is NOT a justification for automatic repeat surgery. Maternal mortality: 0.004% VBAC vs 0.013% repeat C-section.</p>
+              <span class="badge badge-warm">Guise JM · AHRQ 2010</span>
+            </div>
+          </div>
+
+          <div class="pp-card" style="transition-delay:.15s;">
+            <div class="pp-icon" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);color:#c2185b;"><i class="fa-solid fa-landmark"></i></div>
+            <div>
+              <h4>FOGSI India Position</h4>
+              <p>The Federation of Obstetric &amp; Gynaecological Societies of India (FOGSI) 2018 guidelines support Trial of Labour After C-Section (TOLAC) in appropriately equipped centres. Recommends against routine repeat C-section for prior LSCS alone.</p>
+              <span class="badge badge-alert">FOGSI Guidelines 2018</span>
+            </div>
+          </div>
+
+          <div class="pp-card" style="transition-delay:.2s;">
+            <div class="pp-icon" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#1565c0;"><i class="fa-solid fa-arrow-trend-up"></i></div>
+            <div>
+              <h4>Factors That Improve VBAC Success</h4>
+              <p>Previous vaginal birth raises success to 87%. Spontaneous (non-induced) labour onset. No prior labour dystocia. Younger maternal age. Normal BMI. Favourable cervix (Bishop score ≥6) at admission.</p>
+              <span class="badge badge-care">RCOG Green-top Guideline No. 45</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Radial + Feature Grid -->
+      <div>
+        <div class="vbac-visual reveal">
+          <div class="vbac-vis-title">VBAC Success Rate — Evidence Summary</div>
+          <div class="vbac-radial">
+            <svg viewBox="0 0 160 160" width="160" height="160">
+              <defs>
+                <linearGradient id="vbacG" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ec407a"/>
+                  <stop offset="100%" stop-color="#ad1457"/>
+                </linearGradient>
+              </defs>
+              <circle class="vr-track" cx="80" cy="80" r="65"/>
+              <circle class="vr-fill" cx="80" cy="80" r="65"/>
+            </svg>
+            <div class="vr-center">
+              <span class="vr-num">75%</span>
+              <span class="vr-unit">Average Success</span>
+            </div>
+          </div>
+          <div style="font-size:.75rem;color:var(--pink);font-weight:700;margin-bottom:1.5rem;">ACOG Practice Bulletin No. 205 · 2019</div>
+
+          <div class="vbac-feat-grid">
+            <div class="vbac-feat">
+              <h5>Previous vaginal birth</h5>
+              <p>Success rate rises to <strong>87%</strong> — the strongest predictor of VBAC success.</p>
+            </div>
+            <div class="vbac-feat">
+              <h5>Spontaneous labour</h5>
+              <p>Higher success vs induced labour; avoid unnecessary early induction.</p>
+            </div>
+            <div class="vbac-feat">
+              <h5>Maternal mortality</h5>
+              <p>VBAC <strong>0.004%</strong> vs elective repeat C-section <strong>0.013%</strong>.</p>
+            </div>
+            <div class="vbac-feat">
+              <h5>FOGSI supports TOLAC</h5>
+              <p>India's national obstetric society endorses VBAC in equipped centres.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;display:flex;gap:.8rem;flex-wrap:wrap;">
+            <a href="csection_postpartum.html" class="btn-hero primary" style="font-size:.84rem;padding:.6rem 1.4rem;">
+              <i class="fa-solid fa-hospital"></i> C-Section Guide
+            </a>
+            <a href="antenatal_care.html" class="btn-hero secondary" style="font-size:.84rem;padding:.6rem 1.4rem;">
+              <i class="fa-solid fa-clipboard-list"></i> Birth Plan Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6: PREPARATION ROADMAP ===== -->
+<section class="section" id="s6">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label reveal" style="display:inline-flex;"><i class="fa-solid fa-road"></i> Chapter Six</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">
+        Your <span class="em">Vaginal Birth Preparation</span> Roadmap
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;text-align:center;">
+        Start from 28 weeks. Prepared women have shorter labours, lower C-section rates, and higher breastfeeding success — every strategy here is supported by peer-reviewed evidence.
+      </p>
+    </div>
+
+    <div class="prep-grid">
+      <div class="s4-hcard" style="--hc-color:#66bb6a;transition-delay:.05s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32;"><i class="fa-solid fa-person-running"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Exercise 150 min/Week</h4>
+          <p>Walking, swimming, prenatal yoga reduce C-section risk by up to 30%. Fit women have stronger contractions and better labour tolerance. Start before 20 weeks for maximum benefit.</p>
+          <div class="pc-src">ACOG Committee Opinion 804 · Barakat 2019 RCT</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <div class="s4-hcard" style="--hc-color:#4fc3f7;transition-delay:.1s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#0288d1;"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Childbirth Education Classes</h4>
+          <p>Structured classes reduce labour duration by up to 2 hours, decrease anxiety significantly, and reduce epidural requests in informed women. Lamaze International, Bradley Method.</p>
+          <div class="pc-src">Akbarzadeh M, Iran J Nursing 2015 · Cochrane 2021</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <div class="s4-hcard" style="--hc-color:#ec407a;transition-delay:.15s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);color:#c2185b;"><i class="fa-solid fa-hands-holding-heart"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Hire a Doula</h4>
+          <p>Continuous labour support reduces C-section by 25%, oxytocin use by 31%, and increases spontaneous vaginal birth. The single most evidence-supported intervention in obstetrics today.</p>
+          <div class="pc-src">Bohren MA · Cochrane 2017 · 27 RCTs · 15,000+ women</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <div class="s4-hcard" style="--hc-color:#ffb74d;transition-delay:.2s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);color:#e65100;"><i class="fa-solid fa-spa"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Perineal Massage (34+ Weeks)</h4>
+          <p>5 minutes daily with almond or olive oil reduces 3rd/4th degree perineal tears by 10% in primiparous women. Also reduces episiotomy rates significantly in RCT evidence.</p>
+          <div class="pc-src">Beckmann MM · Cochrane 2013 · 2,497 women</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <div class="s4-hcard" style="--hc-color:#ce93d8;transition-delay:.25s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#7b1fa2;"><i class="fa-solid fa-file-pen"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Write a Birth Plan at 32 Weeks</h4>
+          <p>Women with birth plans receive fewer unnecessary interventions and report higher satisfaction regardless of outcome. Discuss at 32–34 weeks. Include: positions, pain relief preferences, who cuts the cord.</p>
+          <div class="pc-src">Whitford HM · BMC Pregnancy Childbirth 2014</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+
+      <div class="s4-hcard" style="--hc-color:#80cbc4;transition-delay:.3s;">
+        <div class="s4-hcard-icon" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2);color:#00695c;"><i class="fa-solid fa-apple-whole"></i></div>
+        <div class="s4-hcard-body">
+          <h4>Optimal Nutrition</h4>
+          <p>Iron 30–60 mg/day, folic acid 400 mcg, calcium 1g/day (cuts pre-eclampsia risk 50%), Vitamin D 400 IU. Adequate iron prevents anaemia that leads to induction and C-section.</p>
+          <div class="pc-src">WHO ANC Recommendations 2016 · ICMR-NIN 2020</div>
+        </div>
+        <div class="s4-hcard-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7: COMPARISON TABLE ===== -->
+<section class="section alt">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <div class="section-label reveal" style="display:inline-flex;"><i class="fa-solid fa-table-list"></i> Chapter Seven</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;">
+        Vaginal vs Caesarean: <span class="em">Honest Evidence</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;text-align:center;">
+        For uncomplicated pregnancies — what the peer-reviewed evidence actually shows. 
+        Sources: WHO, ACOG, Lancet, RCOG, ICMR.
+      </p>
+    </div>
+
+    <div class="compare-table-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:26%;">Outcome</th>
+            <th class="vd-col"><i class="fa-solid fa-heart-pulse"></i> Vaginal Delivery</th>
+            <th class="cs-col"><i class="fa-solid fa-hospital"></i> Caesarean Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="row-label">Recovery time</td><td><span class="t-good">1–2 days hospital · full recovery 2–4 weeks</span></td><td><span class="t-caution">4–5 days hospital · full recovery 8–12 weeks</span></td></tr>
+          <tr><td class="row-label">Baby's microbiome</td><td><span class="t-good">Full maternal flora seeded (800+ species)</span></td><td><span class="t-caution">Skin flora only — reduced diversity; higher allergy risk</span></td></tr>
+          <tr><td class="row-label">Baby's lung maturity</td><td><span class="t-good">Fluid cleared physiologically by birth canal</span></td><td><span class="t-caution">40% higher Transient Tachypnoea of Newborn</span></td></tr>
+          <tr><td class="row-label">Breastfeeding initiation</td><td><span class="t-good">Higher rates of early &amp; sustained initiation</span></td><td><span class="t-caution">Often delayed due to anaesthesia &amp; surgical recovery</span></td></tr>
+          <tr><td class="row-label">Future pregnancy risk</td><td><span class="t-good">Minimal cumulative risk</span></td><td><span class="t-caution">Placenta accreta spectrum risk rises with each surgery</span></td></tr>
+          <tr><td class="row-label">Maternal mortality (low-risk)</td><td><span class="t-good">Lower: 0.004% VBAC vs 0.013% repeat C-section</span></td><td><span class="t-caution">Higher: anaesthesia, haemorrhage, thromboembolism</span></td></tr>
+          <tr><td class="row-label">Pelvic floor</td><td style="color:#555;">Risk of prolapse/incontinence — reducible with physiotherapy</td><td style="color:#555;">Lower immediate pelvic floor risk (but pregnancy itself is a major contributor)</td></tr>
+          <tr><td class="row-label">Cost (India private)</td><td><span class="t-good">₹20,000–60,000 · Completely free under JSSK</span></td><td><span class="t-caution">₹1–3 lakh · Limited free coverage in private sector</span></td></tr>
+          <tr><td class="row-label">Postpartum mental health</td><td><span class="t-good">Lower PPD rates in most cohort studies</span></td><td><span class="t-caution">2× higher PPD in some studies (BMJ Open 2020)</span></td></tr>
+          <tr><td class="row-label">Pain experience</td><td style="color:#555;">Significant labour pain — completely manageable with epidural/support</td><td style="color:#555;">Surgical pain postoperatively; neuropathic pain in ~10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 8: MYTHS + GOVT SCHEMES (dark section like journeys s5) ===== -->
+<section class="s5-section" id="s7">
+  <canvas id="mythNetCanvas"></canvas>
+
+  <div class="section-inner" style="position:relative;z-index:2;">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <div class="section-label reveal" style="display:inline-flex;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,.85);">
+        <i class="fa-solid fa-lightbulb"></i> Chapter Eight · Myth Busters
+      </div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;color:white;">
+        What Science <span style="background:linear-gradient(135deg,#f48fb1,#ec407a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Actually Says</span>
+      </h2>
+      <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:600px;margin:0 auto;line-height:1.8;" class="reveal reveal-delay-2">
+        Six persistent myths — demolished by evidence from WHO, ACOG, Harvard &amp; peer-reviewed journals spanning decades of research.
+      </p>
+    </div>
+
+    <div class="s5-grid">
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);color:#c2185b;"><i class="fa-solid fa-hospital"></i></div>
+        <div class="s5-card-content">
+          <h3>"C-section is safer than vaginal delivery"</h3>
+          <p>For uncomplicated pregnancies, vaginal delivery has lower maternal mortality, fewer serious complications, and dramatically faster recovery. WHO 2015: "C-sections should only be performed when medically necessary."</p>
+          <div class="s5-pills-row"><span class="s5-pill">WHO 2015</span><span class="s5-pill">Lancet 2021</span><span class="s5-pill">ACOG</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#e8eaf6,#c5cae9);color:#3949ab;"><i class="fa-solid fa-bone"></i></div>
+        <div class="s5-card-content">
+          <h3>"Vaginal birth permanently damages the pelvic floor"</h3>
+          <p>Pelvic floor dysfunction is multifactorial — pregnancy itself (not birth mode) is the major driver. Targeted physiotherapy resolves incontinence in ~70% of women. C-section does NOT fully protect.</p>
+          <div class="s5-pills-row"><span class="s5-pill">Cochrane 2010</span><span class="s5-pill">BJOG 2018</span><span class="s5-pill">RCOG</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32;"><i class="fa-solid fa-rotate"></i></div>
+        <div class="s5-card-content">
+          <h3>"Once a C-section, always a C-section"</h3>
+          <p>VBAC success rates are 60–80%. ACOG, RCOG, WHO and FOGSI all support trial of labour after one prior low-transverse C-section. This myth has caused millions of unnecessary repeat surgeries across India.</p>
+          <div class="s5-pills-row"><span class="s5-pill">ACOG PB No.205</span><span class="s5-pill">FOGSI 2018</span><span class="s5-pill">WHO</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);color:#f57f17;"><i class="fa-solid fa-syringe"></i></div>
+        <div class="s5-card-content">
+          <h3>"Epidural always causes chronic backache"</h3>
+          <p>Both BMJ MacArthur 1992 and BMJ Howell 2002 (5-year follow-up) found NO causal link between epidural and chronic back pain. Postpartum backache is common after all births and is related to posture, not epidural.</p>
+          <div class="s5-pills-row"><span class="s5-pill">BMJ 1992</span><span class="s5-pill">BMJ 2002</span><span class="s5-pill">5-Year Follow-up</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#7b1fa2;"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="s5-card-content">
+          <h3>"Epidural leads to C-section"</h3>
+          <p>Cochrane 2018 meta-analysis (40 RCTs, 11,000+ women) conclusively shows epidural does NOT increase C-section rates — regardless of when it is administered. ACOG 2019: maternal request alone is sufficient indication.</p>
+          <div class="s5-pills-row"><span class="s5-pill">Cochrane 2018</span><span class="s5-pill">40 RCTs</span><span class="s5-pill">ACOG 2019</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+      <div class="s5-card">
+        <div class="myth-x">MYTH ✕</div>
+        <div class="s5-card-icon-wrap" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb);color:#1565c0;"><i class="fa-solid fa-baby"></i></div>
+        <div class="s5-card-content">
+          <h3>"C-section babies are smarter or healthier"</h3>
+          <p>No evidence supports cognitive advantage from C-section. Vaginal birth microbiome seeding is associated with lower rates of asthma, allergies, obesity and type 1 diabetes in longitudinal studies up to age 21.</p>
+          <div class="s5-pills-row"><span class="s5-pill">Nature 2019</span><span class="s5-pill">PNAS 2010</span><span class="s5-pill">Age-21 Follow-up</span></div>
+          <span class="s5-cta-link">Read full evidence →</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Government Schemes (light inset) -->
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:28px;padding:2.5rem;margin-top:3rem;position:relative;z-index:2;">
+      <div style="text-align:center;margin-bottom:2rem;">
+        <div class="section-label" style="display:inline-flex;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18);color:rgba(255,255,255,.85);margin-bottom:.8rem;">
+          <i class="fa-solid fa-landmark"></i> Government of India
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;color:white;font-size:1.7rem;margin-bottom:.4rem;">Free Delivery — <span style="color:#f48fb1;">Your Entitlements</span></h3>
+        <p style="color:rgba(255,255,255,.55);font-size:.9rem;">Every woman in India is entitled to free, high-quality maternity care. Know your rights.</p>
+      </div>
+      <div class="govt-grid">
+        <div class="govt-card jssk">
+          <h4><i class="fa-solid fa-hospital" style="margin-right:.4rem;"></i> JSSK — Janani Shishu Suraksha</h4>
+          <span class="ga">100% Free</span>
+          <p>All deliveries in government facilities — delivery, medicines, tests, blood, diet, transport. Launched 2011, covers all states. Source: MoHFW India.</p>
+        </div>
+        <div class="govt-card jsy">
+          <h4><i class="fa-solid fa-hand-holding-heart" style="margin-right:.4rem;"></i> JSY — Janani Suraksha Yojana</h4>
+          <span class="ga">₹1,400 (Rural) / ₹1,000 (Urban)</span>
+          <p>Cash incentive for institutional delivery in government hospitals. Over 10 million beneficiaries annually. Proven to reduce home births and maternal mortality. Source: MoHFW.</p>
+        </div>
+        <div class="govt-card pmjay">
+          <h4><i class="fa-solid fa-shield-heart" style="margin-right:.4rem;"></i> Ayushman Bharat PM-JAY</h4>
+          <span class="ga">₹5 Lakh Coverage</span>
+          <p>World's largest health insurance scheme. Covers maternity care, delivery complications, newborn care in 500+ million beneficiaries. Source: NHA India 2023.</p>
+        </div>
+        <div class="govt-card icmr">
+          <h4><i class="fa-solid fa-microscope" style="margin-right:.4rem;"></i> ICMR — Maternal Health Guidelines</h4>
+          <p>ICMR 2022 Maternal Health Report recommends active reduction of unnecessary C-sections. Supports WHO 2018 labour management protocols and respectful maternity care for every delivery in India.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Strip — exact journeys.html pattern -->
+    <div class="s5-dashboard-cta">
+      <div class="s5-cta-inner">
+        <div class="s5-cta-icon">
+          <i class="fa-solid fa-heart-pulse"></i>
+          <div class="s5-cta-pulse"></div>
+          <div class="s5-cta-pulse s5-cta-pulse-2"></div>
+        </div>
+        <div class="s5-cta-text">
+          <h3>Ready to Plan Your <span>Birth Journey?</span></h3>
+          <p>Get personalised guidance, create your birth plan, and connect with a certified midwife through Nari Swasthya's maternity care platform.</p>
+        </div>
+        <a href="antenatal_care.html" class="s5-cta-btn">
+          <i class="fa-solid fa-compass"></i> Start Your Birth Plan
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+/* ============================================================
+   MOBILE NAV TOGGLE
+============================================================ */
+function toggleMobile(){
+  const m=document.getElementById('mobileMenu');
+  const b=document.getElementById('hamburgerBtn');
+  const open=m.classList.toggle('open');
+  document.body.style.overflow=open?'hidden':'';
+  b.classList.toggle('active',open);
+  const [s1,s2,s3]=document.querySelectorAll('#hb1,#hb2,#hb3');
+  if(open){s1.style.transform='rotate(45deg) translate(4px,4px)';s2.style.opacity='0';s3.style.transform='rotate(-45deg) translate(4px,-4px)';}
+  else{s1.style.transform='';s2.style.opacity='';s3.style.transform='';}
+}
+
+/* ============================================================
+   HERO — PARTICLE CANVAS
+============================================================ */
+(function(){
+  const canvas=document.getElementById('heroParticleCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<70;i++) pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+.5,hue:320+Math.random()*60,a:Math.random()*.4+.15});
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${p.hue},75%,70%,${p.a})`;ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(236,64,122,${.07*(1-d/90)})`;ctx.lineWidth=.6;ctx.stroke();}
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ============================================================
+   HERO — PETAL LAYER (exact journeys.html pattern)
+============================================================ */
+(function(){
+  const layer=document.getElementById('petalLayer');
+  if(!layer)return;
+  const colors=['#f8bbd9','#fce4ec','#f48fb1','#ffcdd2','#ffd7e3','#ede7f6','#e1bee7'];
+  for(let i=0;i<22;i++){
+    const p=document.createElement('div');
+    p.className='petal';
+    const size=8+Math.random()*14;
+    p.style.cssText=`
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      animation-duration:${7+Math.random()*10}s;
+      animation-delay:${Math.random()*8}s;
+      opacity:.7;
+    `;
+    layer.appendChild(p);
+  }
+})();
+
+/* ============================================================
+   HERO — LIVING WOMB CANVAS (right side)
+============================================================ */
+(function(){
+  const canvas=document.getElementById('heroWombCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,t=0;
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  // Hearts for emotional layer
+  const hearts=[];
+  for(let i=0;i<8;i++) hearts.push({
+    x:Math.random()*1,y:Math.random()*1,
+    speed:.0008+Math.random()*.0012,
+    r:.02+Math.random()*.025,
+    alpha:Math.random()*.4+.15,
+    phase:Math.random()*Math.PI*2
+  });
+
+  function drawHeart(x,y,size,alpha){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.globalAlpha=alpha;
+    ctx.fillStyle='#f48fb1';
+    ctx.beginPath();
+    const s=size;
+    ctx.moveTo(0,s*.3);
+    ctx.bezierCurveTo(-s*1.1,-s*.4,-s*2.2,s*.6,-s*.05,s*1.5);
+    ctx.bezierCurveTo(s*2.2,s*.6,s*1.1,-s*.4,0,s*.3);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t+=0.016;
+    const cx=W/2,cy=H/2;
+
+    // Subtle background glow
+    const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*.55);
+    bg.addColorStop(0,'rgba(252,228,236,0.5)');
+    bg.addColorStop(.5,'rgba(243,229,245,0.3)');
+    bg.addColorStop(1,'rgba(250,245,251,0)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+    // Outer pulse rings
+    for(let ring=4;ring>=1;ring--){
+      const pulse=Math.sin(t*1.1+ring*.6)*.07+1;
+      const r=(ring/4)*Math.min(W,H)*.44*pulse;
+      const alpha=.05+ring*.02;
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(236,64,122,${alpha})`;ctx.lineWidth=2;ctx.stroke();
+    }
+
+    // Main womb blob — breathing, organic
+    const wR=Math.min(W,H)*.26*(1+Math.sin(t*.9)*.035);
+    const wG=ctx.createRadialGradient(cx-wR*.15,cy-wR*.1,0,cx,cy,wR*1.1);
+    wG.addColorStop(0,'rgba(252,228,236,0.92)');
+    wG.addColorStop(.45,'rgba(248,187,217,0.75)');
+    wG.addColorStop(.8,'rgba(236,64,122,0.2)');
+    wG.addColorStop(1,'rgba(236,64,122,0)');
+    ctx.beginPath();
+    for(let i=0;i<=64;i++){
+      const angle=(i/64)*Math.PI*2;
+      const w=1+.055*Math.sin(t*1.3+i*.42)+.035*Math.cos(t*.7+i*.8);
+      const rx=wR*w*1.0,ry=wR*w*1.15;
+      ctx.lineTo(cx+rx*Math.cos(angle),cy+ry*Math.sin(angle));
+    }
+    ctx.closePath();
+    ctx.fillStyle=wG;ctx.fill();
+    ctx.strokeStyle='rgba(236,64,122,0.22)';ctx.lineWidth=1.5;ctx.stroke();
+
+    // Baby silhouette inside womb
+    const bs=Math.min(W,H)*.1;
+    const bx=cx,by=cy;
+    ctx.save();
+    ctx.translate(bx,by);
+    // Head
+    ctx.beginPath();ctx.arc(0,-bs*.42,bs*.35,0,Math.PI*2);
+    ctx.fillStyle='rgba(248,187,217,0.85)';ctx.fill();
+    // Body
+    ctx.beginPath();ctx.ellipse(0,bs*.22,bs*.22,bs*.42,0,0,Math.PI*2);
+    ctx.fill();
+    // Arms
+    ctx.beginPath();
+    ctx.arc(-bs*.38,bs*.05,bs*.13,0,Math.PI*2);
+    ctx.arc(bs*.38,bs*.05,bs*.13,0,Math.PI*2);
+    ctx.fill();
+    // Little heart beat line
+    ctx.strokeStyle='rgba(236,64,122,0.5)';ctx.lineWidth=1.5;ctx.beginPath();
+    const hbx=-bs*.15,hby=bs*.2;
+    ctx.moveTo(hbx-bs*.12,hby);
+    ctx.lineTo(hbx-bs*.04,hby);
+    ctx.lineTo(hbx,hby-bs*.12*(1+Math.abs(Math.sin(t*3))*.5));
+    ctx.lineTo(hbx+bs*.04,hby+bs*.08);
+    ctx.lineTo(hbx+bs*.12,hby);
+    ctx.lineTo(hbx+bs*.18,hby);
+    ctx.stroke();
+    ctx.restore();
+
+    // Floating hearts
+    hearts.forEach((h,i)=>{
+      h.y-=h.speed;
+      h.x+=Math.sin(t+h.phase)*.0008;
+      if(h.y<-0.05) h.y=1.1;
+      const al=h.alpha*(0.7+0.3*Math.sin(t*1.5+i));
+      drawHeart(h.x*W,h.y*H,h.r*Math.min(W,H),al);
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================================================
+   STAGE DETAIL PANEL DATA
+============================================================ */
+const stageData=[
+  {
+    icon:'🌙',title:'Latent Phase',subtitle:'0–6 cm cervical dilation · Early Labour',
+    facts:['Mucus plug may pass (bloody show) — a normal sign of cervical ripening','Rest, eat lightly, stay hydrated — energy conservation is critical now','Walking and upright positions support natural labour progress','If membranes rupture, note colour and call your provider immediately','Up to 20 hours in first-time mothers — patience is evidence-based care'],
+    source:'ACOG Practice Bulletin No. 107 · WHO Intrapartum Care 2018',
+    draw:function(ctx,W,H){
+      // Cervical dilation diagram
+      ctx.fillStyle='rgba(252,228,236,0.5)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.55;
+      // Uterus outline
+      ctx.beginPath();ctx.ellipse(cx,cy,W*.3,H*.38,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.4)';ctx.fill();
+      ctx.strokeStyle='rgba(236,64,122,0.4)';ctx.lineWidth=2;ctx.stroke();
+      // Cervix — slightly open
+      ctx.beginPath();ctx.moveTo(cx-W*.04,cy+H*.32);ctx.lineTo(cx+W*.04,cy+H*.32);
+      ctx.strokeStyle='rgba(216,27,96,0.7)';ctx.lineWidth=3;ctx.stroke();
+      // Baby shape
+      ctx.beginPath();ctx.arc(cx,cy-H*.08,W*.12,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.7)';ctx.fill();
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.08,W*.09,H*.16,0,0,Math.PI*2);ctx.fill();
+      // label
+      ctx.fillStyle='rgba(216,27,96,0.7)';ctx.font=`700 ${Math.min(W,H)*.065}px Manrope,sans-serif`;
+      ctx.textAlign='center';ctx.fillText('~2 cm dilation',cx,H*.96);
+    }
+  },
+  {
+    icon:'⚡',title:'Active Labour',subtitle:'6–10 cm cervical dilation · Accelerating',
+    facts:['Contractions every 3–5 min, lasting 45–90 seconds — consistent and powerful','WHO 2018 revised threshold: 0.5 cm/hr is adequate — not 1 cm/hr as previously believed','Continuous doula support reduces C-section risk by 25% (Cochrane 2017, 27 RCTs)','Upright positions shorten active labour by ~1.4 hours (Cochrane 2013)','Request epidural any time — ACOG 2019 confirms no increased C-section risk'],
+    source:'WHO Intrapartum Care 2018 · Cochrane Database Syst Rev 2017',
+    draw:function(ctx,W,H){
+      ctx.fillStyle='rgba(252,228,236,0.5)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.52;
+      ctx.beginPath();ctx.ellipse(cx,cy,W*.3,H*.38,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.4)';ctx.fill();
+      ctx.strokeStyle='rgba(236,64,122,0.5)';ctx.lineWidth=2;ctx.stroke();
+      // Wider cervix opening
+      ctx.beginPath();ctx.moveTo(cx-W*.1,cy+H*.32);ctx.lineTo(cx+W*.1,cy+H*.32);
+      ctx.strokeStyle='rgba(216,27,96,0.8)';ctx.lineWidth=3;ctx.stroke();
+      // Contractions waves
+      for(let w=1;w<=3;w++){
+        ctx.beginPath();ctx.arc(cx,cy,W*.15*w,0,Math.PI*2);
+        ctx.strokeStyle=`rgba(236,64,122,${0.15/w})`;ctx.lineWidth=1.5;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(cx,cy-H*.08,W*.12,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.8)';ctx.fill();
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.08,W*.09,H*.16,0,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(216,27,96,0.7)';ctx.font=`700 ${Math.min(W,H)*.065}px Manrope,sans-serif`;
+      ctx.textAlign='center';ctx.fillText('~7 cm dilation',cx,H*.96);
+    }
+  },
+  {
+    icon:'💪',title:'Second Stage — Pushing',subtitle:'Full dilation to delivery · The Moment of Birth',
+    facts:['7 Cardinal Movements guide baby: Engagement → Descent → Flexion → Internal rotation → Extension → External rotation → Expulsion','Upright or lateral positions reduce perineal tears vs supine (BMJ 2017, 22 RCTs)','Warm perineal compresses reduce 3rd/4th degree tears by 51% (Cochrane 2017)','Delayed pushing ("labouring down") with epidural reduces operative delivery rates','Average duration: 20 min–2 hrs (experienced); up to 3 hrs for first-time mothers'],
+    source:'ACOG Practice Bulletin No. 49 · Aasheim V, Cochrane 2017',
+    draw:function(ctx,W,H){
+      ctx.fillStyle='rgba(252,228,236,0.5)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.45;
+      ctx.beginPath();ctx.ellipse(cx,cy,W*.3,H*.35,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.35)';ctx.fill();
+      ctx.strokeStyle='rgba(236,64,122,0.35)';ctx.lineWidth=2;ctx.stroke();
+      // Fully open cervix
+      ctx.beginPath();ctx.moveTo(cx-W*.2,cy+H*.3);ctx.lineTo(cx+W*.2,cy+H*.3);
+      ctx.strokeStyle='rgba(216,27,96,0.9)';ctx.lineWidth=3;ctx.stroke();
+      // Baby descending
+      ctx.beginPath();ctx.arc(cx,cy+H*.1,W*.13,0,Math.PI*2);
+      ctx.fillStyle='rgba(248,187,217,0.9)';ctx.fill();
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.3,W*.1,H*.18,0,0,Math.PI*2);ctx.fill();
+      // Arrow showing descent
+      ctx.fillStyle='rgba(216,27,96,0.55)';
+      ctx.font=`bold ${W*.1}px sans-serif`;ctx.textAlign='center';ctx.fillText('↓',cx,cy-.05*H);
+      ctx.fillStyle='rgba(216,27,96,0.7)';ctx.font=`700 ${Math.min(W,H)*.065}px Manrope,sans-serif`;
+      ctx.fillText('Full dilation · Pushing',cx,H*.97);
+    }
+  },
+  {
+    icon:'🎯',title:'Third Stage — Placenta',subtitle:'5–30 minutes after delivery',
+    facts:['Delayed cord clamping ≥1–3 min: increases infant iron stores by 50 mg (WHO 2014)','Active management: Oxytocin 10 IU IM recommended for all vaginal deliveries (WHO 2012)','Immediate skin-to-skin contact enhances bonding and breastfeeding initiation simultaneously','Retained placenta (>30 min) occurs in 0.5–3% — manual removal may be needed','80% of postpartum haemorrhage occurs in first 4 hours — active monitoring essential'],
+    source:'WHO Guidelines for Management of PPH 2012 · FIGO 2022',
+    draw:function(ctx,W,H){
+      ctx.fillStyle='rgba(237,231,246,0.5)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.4;
+      // Placenta shape
+      ctx.beginPath();ctx.ellipse(cx,cy-H*.05,W*.28,H*.22,0,0,Math.PI*2);
+      ctx.fillStyle='rgba(206,147,216,0.5)';ctx.fill();
+      ctx.strokeStyle='rgba(123,31,162,0.4)';ctx.lineWidth=2;ctx.stroke();
+      // Umbilical cord
+      ctx.beginPath();
+      ctx.moveTo(cx,cy+H*.15);
+      for(let i=0;i<=30;i++){const t=i/30;ctx.lineTo(cx+Math.sin(t*Math.PI*3)*W*.06,cy+H*.15+t*H*.35);}
+      ctx.strokeStyle='rgba(186,104,200,0.7)';ctx.lineWidth=3;ctx.stroke();
+      ctx.fillStyle='rgba(123,31,162,0.6)';ctx.font=`700 ${Math.min(W,H)*.062}px Manrope,sans-serif`;
+      ctx.textAlign='center';ctx.fillText('Delayed cord clamping ≥1min',cx,H*.97);
+    }
+  },
+  {
+    icon:'🌟',title:'The Golden Hour',subtitle:'Sacred bonding window · 0–60 minutes',
+    facts:['Oxytocin, endorphins and prolactin peak simultaneously — nature\'s complete reward system','Uninterrupted skin-to-skin for ≥1 hour doubles breastfeeding success at 4 months (Cochrane 2016)','Baby\'s temperature regulation, blood glucose, and heart rate stabilise during skin-to-skin','First latch within 1 hour: WHO recommendation for all vaginal deliveries worldwide','80% of postpartum haemorrhage occurs in first 4 hours — close monitoring continues'],
+    source:'Moore ER et al., Cochrane 2016 · WHO Breastfeeding Guidelines 2017',
+    draw:function(ctx,W,H){
+      ctx.fillStyle='rgba(255,248,225,0.6)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.48;
+      // Mother outline (simplified)
+      ctx.fillStyle='rgba(248,187,217,0.6)';
+      ctx.beginPath();ctx.ellipse(cx,cy-H*.18,W*.32,H*.22,0,0,Math.PI*2);ctx.fill();
+      // Chest / skin-to-skin area
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.12,W*.25,H*.32,0,0,Math.PI*2);ctx.fill();
+      // Baby on chest
+      ctx.fillStyle='rgba(252,228,236,0.85)';
+      ctx.beginPath();ctx.arc(cx,cy,W*.11,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.14,W*.08,H*.14,0,0,Math.PI*2);ctx.fill();
+      // Golden glow
+      const gg=ctx.createRadialGradient(cx,cy,0,cx,cy,W*.35);
+      gg.addColorStop(0,'rgba(255,215,0,0.15)');gg.addColorStop(1,'rgba(255,215,0,0)');
+      ctx.fillStyle=gg;ctx.beginPath();ctx.arc(cx,cy,W*.35,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='rgba(230,115,0,0.6)';ctx.font=`700 ${Math.min(W,H)*.062}px Manrope,sans-serif`;
+      ctx.textAlign='center';ctx.fillText('The Sacred Golden Hour',cx,H*.97);
+    }
+  },
+  {
+    icon:'💗',title:'Postpartum Recovery',subtitle:'24 hrs – 4 weeks to full function',
+    facts:['Hospital stay: 24–48 hours vs 4–5 days for C-section — back home faster','Early ambulation within 6 hours reduces DVT risk significantly','Pelvic floor physiotherapy: effective for urinary incontinence in ~70% of women (BJOG 2018)','Perineal tears (if any): 80–90% heal fully within 6 weeks with proper care','Return to normal activity: 2–4 weeks. Return to sex: 4–6 weeks (vs 8–12 for C-section)'],
+    source:'RCOG · ACOG · BJOG 2018 · Johns Hopkins Medicine Postpartum Care',
+    draw:function(ctx,W,H){
+      ctx.fillStyle='rgba(232,245,233,0.5)';ctx.fillRect(0,0,W,H);
+      const cx=W*.5,cy=H*.48;
+      // Mother recovering
+      ctx.fillStyle='rgba(200,230,201,0.7)';
+      ctx.beginPath();ctx.ellipse(cx,cy-H*.2,W*.3,H*.2,0,0,Math.PI*2);ctx.fill();
+      ctx.beginPath();ctx.ellipse(cx,cy+H*.15,W*.22,H*.33,0,0,Math.PI*2);ctx.fill();
+      // Healing heart
+      ctx.fillStyle='rgba(236,64,122,0.5)';
+      const hs=W*.06;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy-H*.12);
+      ctx.bezierCurveTo(cx-hs*1.1,cy-H*.12-hs*.8,cx-hs*2.2,cy-H*.12+hs*.5,cx,cy-H*.12+hs*1.3);
+      ctx.bezierCurveTo(cx+hs*2.2,cy-H*.12+hs*.5,cx+hs*1.1,cy-H*.12-hs*.8,cx,cy-H*.12);
+      ctx.fill();
+      // Growth trend line
+      ctx.strokeStyle='rgba(46,125,50,0.5)';ctx.lineWidth=2;ctx.beginPath();
+      ctx.moveTo(W*.15,H*.82);ctx.lineTo(W*.35,H*.7);ctx.lineTo(W*.55,H*.6);ctx.lineTo(W*.8,H*.5);ctx.stroke();
+      ctx.fillStyle='rgba(46,125,50,0.7)';ctx.font=`700 ${Math.min(W,H)*.062}px Manrope,sans-serif`;
+      ctx.textAlign='center';ctx.fillText('Recovery: 2–4 weeks',cx,H*.97);
+    }
+  }
+];
+
+let currentStage=0;
+
+function selectStage(el,idx){
+  document.querySelectorAll('.stage-item').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  currentStage=idx;
+  updateDetailPanel(idx);
+}
+
+function updateDetailPanel(idx){
+  const d=stageData[idx];
+  document.getElementById('sdpIcon').textContent=d.icon;
+  document.getElementById('sdpTitle').textContent=d.title;
+  document.getElementById('sdpSubtitle').textContent=d.subtitle;
+  document.getElementById('sdpSource').textContent=d.source;
+  const flist=document.getElementById('sdpFacts');
+  flist.innerHTML=d.facts.map(f=>`<li>${f}</li>`).join('');
+  // Draw stage canvas
+  const canvas=document.getElementById('stageSvgCanvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth||400;
+  canvas.height=canvas.offsetHeight||180;
+  d.draw(ctx,canvas.width,canvas.height);
+}
+
+// Init
+updateDetailPanel(0);
+// Re-render stage canvas on resize/orientation change
+window.addEventListener('resize',function(){
+  clearTimeout(window._sdpResizeTimer);
+  window._sdpResizeTimer=setTimeout(function(){if(typeof currentStage!=='undefined')updateDetailPanel(currentStage);},150);
+});
+
+/* ============================================================
+   CTG MONITOR
+============================================================ */
+let ctgPlaying=false,ctgRaf=null,ctgPhase=1,ctgFhrPhase=0,ctgCxPhase=0;
+const ctgPhases=[
+  {name:'Latent Phase',fhrRange:[135,145],freq:'2:10',dur:'35s',dil:'4 cm'},
+  {name:'Active Phase',fhrRange:[128,152],freq:'4:10',dur:'55s',dil:'7 cm'},
+  {name:'Transition',fhrRange:[122,158],freq:'5:10',dur:'70s',dil:'9 cm'}
+];
+
+function ctgPlay(){if(!ctgPlaying){ctgPlaying=true;runCtg();}}
+function ctgPause(){ctgPlaying=false;if(ctgRaf)cancelAnimationFrame(ctgRaf);}
+function ctgReset(){
+  ctgPause();
+  const c=document.getElementById('ctgCanvas');
+  if(c){const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);}
+  ctgFhrPhase=0;ctgCxPhase=0;
+}
+function ctgCyclePhase(){
+  ctgPhase=(ctgPhase+1)%3;
+  const pd=ctgPhases[ctgPhase];
+  document.getElementById('monStatus').textContent=pd.name;
+  document.getElementById('metFreq').textContent=pd.freq;
+  document.getElementById('metDur').textContent=pd.dur;
+  document.getElementById('metDil').textContent=pd.dil;
+}
+function runCtg(){
+  const canvas=document.getElementById('ctgCanvas');
+  if(!canvas||!ctgPlaying)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||700;const H=160;
+  canvas.width=W;canvas.height=H;
+
+  function step(){
+    if(!ctgPlaying)return;
+    // Scroll image left by 1px
+    const img=ctx.getImageData(1,0,W-1,H);
+    ctx.putImageData(img,0,0);
+    // Fill new column
+    ctx.fillStyle='#071009';ctx.fillRect(W-1,0,1,H);
+    // Grid lines
+    ctx.strokeStyle='rgba(105,240,174,0.05)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(W-1,0);ctx.lineTo(W-1,H);ctx.stroke();
+
+    ctgFhrPhase+=0.058;ctgCxPhase+=0.022;
+    const pd=ctgPhases[ctgPhase];
+    // Dip on strong contraction
+    const cxStr=Math.max(0,Math.sin(ctgCxPhase)-.4)*2.5;
+    const dip=cxStr>1?-Math.sin(ctgFhrPhase*2.8)*18:0;
+    const fhrY=H*.28+Math.sin(ctgFhrPhase)*7+Math.sin(ctgFhrPhase*2.1)*3+dip+(Math.random()-.5)*2.5;
+    const cxY=H*.84-Math.max(0,Math.pow(Math.sin(ctgCxPhase),8)*H*.42);
+
+    ctx.fillStyle='#69f0ae';ctx.fillRect(W-2,fhrY-1,2,2);
+    ctx.fillStyle='#ffb74d';ctx.fillRect(W-2,cxY-1,2,2);
+
+    // Update FHR display
+    const fhr=Math.round(pd.fhrRange[0]+(pd.fhrRange[1]-pd.fhrRange[0])*(.5+.5*Math.sin(ctgFhrPhase*.4)));
+    const el=document.getElementById('metFhr');if(el)el.textContent=fhr;
+
+    ctgRaf=requestAnimationFrame(step);
+  }
+  step();
+}
+
+/* ============================================================
+   PAIN NEEDLE
+============================================================ */
+function setPain(pct,label){
+  const n=document.getElementById('painNeedle');const l=document.getElementById('painLabel');
+  if(n)n.style.left=pct+'%';if(l)l.textContent=label;
+}
+
+/* ============================================================
+   EPIDURAL TABS
+============================================================ */
+function epTab(btn,id){
+  document.querySelectorAll('.ep-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ep-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const p=document.getElementById('ep-'+id);if(p)p.classList.add('active');
+}
+
+/* ============================================================
+   MYTH SECTION — NETWORK CANVAS (exact journeys s5 pattern)
+============================================================ */
+(function(){
+  const canvas=document.getElementById('mythNetCanvas');
+  if(!canvas)return;
+  const parent=canvas.closest('.s5-section');
+  const ctx=canvas.getContext('2d');
+  let W,H,nodes=[],ripples=[],t=0;
+  function resize(){W=canvas.width=parent.offsetWidth;H=canvas.height=parent.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  class Node{
+    constructor(){
+      this.x=Math.random()*W;this.y=Math.random()*H;
+      this.vx=(Math.random()-.5)*.4;this.vy=(Math.random()-.5)*.4;
+      this.r=Math.random()*2+1.5;
+      this.hue=Math.random()>.5?'#ec407a':'#ad1457';
+      this.alpha=Math.random()*.4+.2;this.pulse=Math.random()*Math.PI*2;
+    }
+    update(){
+      this.x+=this.vx;this.y+=this.vy;
+      if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1;
+      this.pulse+=.04;
+    }
+    draw(){
+      const pr=this.r+Math.sin(this.pulse)*1.2;
+      const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,pr*4);
+      g.addColorStop(0,this.hue+'44');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(this.x,this.y,pr*4,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();ctx.arc(this.x,this.y,pr,0,Math.PI*2);
+      ctx.fillStyle=this.hue;ctx.globalAlpha=this.alpha;ctx.fill();ctx.globalAlpha=1;
+    }
+  }
+  for(let i=0;i<50;i++)nodes.push(new Node());
+  function spawnRipple(){const n=nodes[Math.floor(Math.random()*nodes.length)];ripples.push({x:n.x,y:n.y,r:0,maxR:70+Math.random()*60,alpha:.5,color:n.hue});}
+  setInterval(spawnRipple,800);
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=ripples.length-1;i>=0;i--){
+      const rp=ripples[i];rp.r+=2;rp.alpha-=.01;
+      if(rp.alpha<=0){ripples.splice(i,1);continue;}
+      ctx.beginPath();ctx.arc(rp.x,rp.y,rp.r,0,Math.PI*2);
+      ctx.strokeStyle=rp.color;ctx.globalAlpha=rp.alpha*(1-rp.r/rp.maxR);
+      ctx.lineWidth=1.5;ctx.stroke();ctx.globalAlpha=1;
+    }
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){
+        const g=ctx.createLinearGradient(nodes[i].x,nodes[i].y,nodes[j].x,nodes[j].y);
+        g.addColorStop(0,nodes[i].hue+'55');g.addColorStop(1,nodes[j].hue+'55');
+        ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.strokeStyle=g;ctx.globalAlpha=.15*(1-d/120);ctx.lineWidth=1;ctx.stroke();ctx.globalAlpha=1;
+      }
+    }
+    nodes.forEach(n=>{n.update();n.draw();});
+    t++;requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.1});
+
+document.querySelectorAll('.reveal,.fert-card,.pp-card,.s4-hcard,.s5-card,.benefit-card').forEach(el=>revealObserver.observe(el));
+
+/* ============================================================
+   SECTION DOTS
+============================================================ */
+const sections=['hero','s1','s2','s3','s4','s5','s6','s7'];
+const secObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.sp-dot').forEach(d=>d.classList.remove('active'));
+      const dot=document.querySelector(`.sp-dot[data-section="${id}"]`);
+      if(dot)dot.classList.add('active');
+    }
+  });
+},{threshold:.3});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)secObserver.observe(el);});
+document.querySelectorAll('.sp-dot').forEach(dot=>{
+  dot.addEventListener('click',()=>{
+    const id=dot.dataset.section;
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* ============================================================
+   HEADER PARTICLE CANVAS
+============================================================ */
+(function(){
+  const canvas = document.getElementById('headerParticleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  const particleCount = 80;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - distance / 100)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+</body>
+</html>

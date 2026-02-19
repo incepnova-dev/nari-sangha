@@ -1,0 +1,3587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emergency Guide - Nari Swasthya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<style>
+
+:root{
+  --pink:#ec407a;
+  --deep-pink:#d81b60;
+  --primary:#ec407a;
+  --primary-dark:#d81b60;
+  --primary-light:#f48fb1;
+  --lavender:#ede7f6;
+  --bg:#faf5fb;
+  --card-bg:#ffffff;
+  --text-main:#212121;
+  --text-soft:#555;
+  --border-soft:#e0e0e0;
+  --success:#66bb6a;
+  --warning:#ffa726;
+  --critical:#ef5350;
+  --info:#4fc3f7;
+
+  /* Emergency-specific colors */
+  --emergency:#ff1744;
+  --emergency-dark:#d50000;
+  --emergency-light:#ff5252;
+  --urgent:#ff9100;
+  --urgent-dark:#ff6d00;
+  --urgent-light:#ffab40;
+  --monitor:#42a5f5;
+  --monitor-dark:#1976d2;
+  --monitor-light:#64b5f6;
+
+  --shadow: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-strong: 0 15px 40px rgba(236, 64, 122, 0.18);
+  --shadow-emergency: 0 15px 40px rgba(255, 23, 68, 0.25);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display', Georgia, serif;}
+button,input,select{font-family:inherit;}
+a{color:inherit;}
+.center{text-align:center;}
+.muted{color:var(--text-soft);}
+.hidden{display:none !important;}
+
+/* ===================== HEADER ===================== */
+.site-header{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  padding:0;
+  box-shadow:0 2px 24px rgba(236,64,122,0.09);
+  position:sticky;top:0;z-index:1000;
+  border-bottom:1px solid rgba(236,64,122,0.08);
+}
+.nav-container{
+  max-width:1400px;margin:0 auto;
+  padding:0 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  height:64px;
+}
+.logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(236,64,122,0.35);
+  flex-shrink:0;
+}
+.logo-icon svg{width:22px;height:22px;fill:white;}
+.logo-text{display:flex;flex-direction:column;gap:0;}
+.logo-text a{
+  text-decoration:none;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.25rem;line-height:1.1;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-text span{
+  font-size:.62rem;color:var(--text-soft);
+  font-family:'Manrope',sans-serif;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.main-nav{display:flex;align-items:center;gap:.2rem;}
+.nav-item{position:relative;}
+.nav-link{
+  display:flex;align-items:center;gap:.3rem;
+  text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:.875rem;
+  padding:.55rem .75rem;border-radius:8px;
+  transition:all .25s;white-space:nowrap;
+  cursor:pointer;background:none;border:none;font-family:inherit;
+}
+.nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
+.nav-link .chevron{
+  font-size:.6rem;transition:transform .25s;
+  color:var(--text-soft);margin-top:1px;
+}
+.nav-item:hover .chevron{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  min-width:220px;
+  background:white;
+  border-radius:16px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.1);
+  padding:.5rem;
+  opacity:0;pointer-events:none;
+  transition:all .25s cubic-bezier(.23,1.01,.32,1);
+  z-index:200;
+}
+.nav-dropdown::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-bottom-color:white;
+  border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+}
+.nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+  opacity:1;pointer-events:all;
+  transform:translateX(-50%) translateY(0);
+}
+.dd-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.65rem .9rem;border-radius:10px;
+  text-decoration:none;color:var(--text-main);
+  font-size:.85rem;font-weight:500;
+  transition:all .2s;
+}
+.dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1.1rem;}
+.dd-icon{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;flex-shrink:0;
+}
+.dd-sep{height:1px;background:var(--border-soft);margin:.3rem .5rem;}
+.dd-has-flyout{position:relative;}
+.dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+.dd-flyout{display:none;position:absolute;top:0;left:calc(100% + 4px);min-width:190px;background:white;border-radius:12px;box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;}
+.dd-has-flyout:hover>.dd-flyout,.dd-has-flyout:focus-within>.dd-flyout{display:block;}
+.dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);}
+.dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+.dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1rem;}
+.nav-actions{display:flex;gap:.6rem;align-items:center;}
+.btn-nav{
+  padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+  font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+  font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-nav.outline{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);border:none;
+}
+.btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+.btn-nav.primary{
+  border:1.5px solid var(--deep-pink);
+  color:var(--deep-pink);background:#fff;box-shadow:none;
+}
+.btn-nav.primary:hover{background:rgba(236,64,122,0.05);border-color:var(--deep-pink);}
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;
+  background:none;border:1.5px solid var(--border-soft);
+  align-items:center;justify-content:center;cursor:pointer;
+  flex-direction:column;gap:4px;padding:8px;
+}
+.hamburger span{display:block;height:2px;background:var(--text-main);border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+  z-index:999;padding:1.5rem;overflow-y:auto;
+}
+.mm-action-btn{display:inline-flex !important;}
+.mobile-menu.open{display:block;}
+.mm-link{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.85rem 1rem;border-radius:12px;
+  text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:1rem;
+  transition:all .2s;border-bottom:1px solid var(--border-soft);
+}
+.mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
+.mm-section{font-size:.72rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+@media(max-width:1060px){
+  .main-nav{display:none;}
+  .hamburger{display:flex;}
+  /* Hide both header buttons at tablet/mobile — they live in the mobile menu */
+  .nav-actions .btn-nav{display:none;}
+}
+
+/* Page shell */
+.page-shell{
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+
+/* Background - Enhanced Particle Effect */
+.hero-constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.gradient-morph {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(255, 23, 68, 0.15) 0%,
+    transparent 65%
+  );
+  animation: morph-pulse 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes morph-pulse {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.15); 
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 4rem 0 2rem;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    #fff5f5 0%, 
+    #ffebee 50%, 
+    #fce4ec 100%
+  );
+  border-radius: 32px;
+  margin-bottom: 3rem;
+  min-height: 85vh;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation:slideInLeft .8s ease;
+}
+
+@keyframes slideInLeft{
+  from{opacity:0; transform:translateX(-35px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  background:linear-gradient(135deg, rgba(236,64,122,0.10), rgba(168,230,207,0.10));
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:2px solid rgba(236,64,122,0.18);
+  margin-bottom:1.5rem;
+  animation:float 3s ease-in-out infinite;
+}
+
+.hero-badge.emergency-badge{
+  background:linear-gradient(135deg, rgba(255,23,68,0.15), rgba(255,82,82,0.10));
+  border-color:rgba(255,23,68,0.25);
+  animation:emergency-pulse 2s ease-in-out infinite;
+}
+
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes emergency-pulse{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-10px) scale(1.05);}
+}
+
+.badge-icon{font-size:1.4rem;}
+.badge-text{font-weight:800;color:var(--primary-dark);font-size:.92rem;}
+
+.hero-title-3d{
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:900;
+  line-height:1.08;
+  margin-bottom:1.2rem;
+  background:linear-gradient(135deg,#212121 0%, #555 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.title-emphasis{
+  background:linear-gradient(135deg, #ff1744 0%, #d50000 50%, #b71c1c 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:title-shimmer 3s ease-in-out infinite;
+  filter:drop-shadow(0 2px 10px rgba(255,23,68,.35));
+}
+@keyframes title-shimmer{
+  0%,100%{filter:brightness(1) drop-shadow(0 2px 10px rgba(255,23,68,.35));}
+  50%{filter:brightness(1.35) drop-shadow(0 5px 18px rgba(255,23,68,.55));}
+}
+.hero-subtitle{
+  font-size:1.15rem;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  line-height:1.85;
+}
+.hero-stats{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1rem;
+  margin-bottom:1.75rem;
+}
+.stat-item{
+  background:#fff;
+  border-radius:16px;
+  padding:1.1rem;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  border:2px solid transparent;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  text-align:center;
+}
+.stat-item.emergency{
+  border-color:rgba(255,23,68,0.3);
+}
+.stat-item.urgent{
+  border-color:rgba(255,145,0,0.3);
+}
+.stat-item.monitor{
+  border-color:rgba(66,165,245,0.3);
+}
+.stat-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(255,107,157,0.18);
+}
+.stat-item.emergency:hover{
+  border-color:var(--emergency);
+  box-shadow:0 8px 25px rgba(255,23,68,0.3);
+}
+.stat-item.urgent:hover{
+  border-color:var(--urgent);
+  box-shadow:0 8px 25px rgba(255,145,0,0.3);
+}
+.stat-item.monitor:hover{
+  border-color:var(--monitor);
+  box-shadow:0 8px 25px rgba(66,165,245,0.3);
+}
+.stat-number{
+  display:block;
+  font-size:1.9rem;
+  font-weight:900;
+  color:var(--primary);
+  font-family:'Playfair Display', serif;
+}
+.stat-item.emergency .stat-number{color:var(--emergency);}
+.stat-item.urgent .stat-number{color:var(--urgent);}
+.stat-item.monitor .stat-number{color:var(--monitor);}
+.stat-label{display:block;font-size:.9rem;color:var(--text-soft);font-weight:600;}
+
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary,.btn-secondary,.btn-emergency{
+  padding:1rem 2rem;
+  border-radius:999px;
+  font-weight:900;
+  font-size:1rem;
+  cursor:pointer;
+  border:none;
+  transition:all .25s ease;
+  text-decoration:none;
+  display:inline-block;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--deep-pink), #f06292);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(216, 27, 96, 0.30);
+  animation:float-btn 3s ease-in-out infinite;
+}
+.btn-emergency{
+  background:linear-gradient(135deg, var(--emergency), var(--emergency-light));
+  color:#fff;
+  box-shadow:0 10px 25px rgba(255, 23, 68, 0.40);
+  animation:emergency-pulse 2s ease-in-out infinite;
+}
+@keyframes float-btn{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 15px 35px rgba(216,27,96,0.42);}
+.btn-emergency:hover{transform:translateY(-3px) scale(1.05); box-shadow:0 15px 35px rgba(255,23,68,0.50);}
+.btn-secondary{
+  background:#fff;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+.btn-secondary:hover{background:var(--primary); color:#fff;}
+
+.emergency-alert{
+  margin-top:2rem;
+  max-width:900px;
+  padding:1.5rem 1.8rem;
+  background:linear-gradient(135deg,#fff3e0 0%, #ffe0b2 100%);
+  border-radius:16px;
+  border-left:6px solid var(--emergency);
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  box-shadow:0 6px 20px rgba(255,23,68,0.20);
+  animation:alert-pulse 3s ease-in-out infinite;
+}
+
+@keyframes alert-pulse{
+  0%,100%{box-shadow:0 6px 20px rgba(255,23,68,0.20);}
+  50%{box-shadow:0 10px 30px rgba(255,23,68,0.35);}
+}
+
+.alert-icon{font-size:2.5rem;}
+.emergency-alert p{font-weight:800;color:#e65100;}
+.emergency-alert strong{color:var(--emergency);}
+
+/* Hero Visual 3D - Emergency Theme */
+.hero-visual-3d {
+  position: relative;
+  z-index: 2;
+}
+
+.pregnancy-3d-container{
+  position:relative;
+  width:100%;
+  height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pregnancy-core{
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(236,64,122,0.08), rgba(237,231,246,0.12));
+  box-shadow:0 15px 50px rgba(236,64,122,0.20);
+  animation:core-pulse 4s ease-in-out infinite;
+}
+
+.pregnancy-core.emergency-core{
+  background:linear-gradient(135deg, rgba(255,23,68,0.12), rgba(255,82,82,0.15));
+  box-shadow:0 15px 50px rgba(255,23,68,0.30);
+}
+
+@keyframes core-pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+
+.center-glow{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle, #ec407a 0%, rgba(236,64,122,0.3) 70%, transparent 100%);
+  transform:translate(-50%,-50%);
+  animation:glow-breathe 3s ease-in-out infinite;
+}
+
+.center-glow.emergency-glow{
+  background:radial-gradient(circle, #ff1744 0%, rgba(255,23,68,0.4) 70%, transparent 100%);
+}
+
+@keyframes glow-breathe{
+  0%,100%{opacity:0.6; transform:translate(-50%,-50%) scale(1);}
+  50%{opacity:1; transform:translate(-50%,-50%) scale(1.15);}
+}
+
+.pulse-ring{
+  position:absolute;
+  top:50%;
+  left:50%;
+  border-radius:50%;
+  border:2px solid rgba(236,64,122,0.3);
+  animation:ring-expand 3s ease-out infinite;
+}
+
+.pulse-ring.emergency-ring{
+  border-color:rgba(255,23,68,0.4);
+}
+
+.pulse-ring.ring-1{
+  width:140px;
+  height:140px;
+  margin-left:-70px;
+  margin-top:-70px;
+  animation-delay:0s;
+}
+.pulse-ring.ring-2{
+  width:180px;
+  height:180px;
+  margin-left:-90px;
+  margin-top:-90px;
+  animation-delay:1s;
+}
+.pulse-ring.ring-3{
+  width:220px;
+  height:220px;
+  margin-left:-110px;
+  margin-top:-110px;
+  animation-delay:2s;
+}
+
+@keyframes ring-expand{
+  0%{transform:scale(0.8); opacity:0;}
+  50%{opacity:1;}
+  100%{transform:scale(1.2); opacity:0;}
+}
+
+/* Health Icons with Emergency Colors */
+.health-icon{
+  position:absolute;
+  width:90px;
+  height:90px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  border:3px solid rgba(236,64,122,0.15);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .3s ease;
+  animation:orbit-float 3s ease-in-out infinite;
+}
+
+.health-icon.emergency-icon{
+  border-color:rgba(255,23,68,0.25);
+}
+
+.health-icon.urgent-icon{
+  border-color:rgba(255,145,0,0.25);
+}
+
+.health-icon.monitor-icon{
+  border-color:rgba(66,165,245,0.25);
+}
+
+.health-icon:hover{
+  transform:translateY(-8px) scale(1.12);
+  box-shadow:0 15px 45px rgba(236,64,122,0.28);
+  border-color:var(--primary);
+}
+
+.health-icon.emergency-icon:hover{
+  border-color:var(--emergency);
+  box-shadow:0 15px 45px rgba(255,23,68,0.35);
+}
+
+.health-icon.urgent-icon:hover{
+  border-color:var(--urgent);
+  box-shadow:0 15px 45px rgba(255,145,0,0.35);
+}
+
+.health-icon.monitor-icon:hover{
+  border-color:var(--monitor);
+  box-shadow:0 15px 45px rgba(66,165,245,0.35);
+}
+
+.icon-inner{
+  font-size:2.2rem;
+  margin-bottom:0.25rem;
+}
+
+.icon-label{
+  font-size:0.75rem;
+  font-weight:700;
+  color:var(--primary-dark);
+}
+
+.health-icon.icon-1{
+  top:10%;
+  left:15%;
+  animation-delay:0s;
+}
+.health-icon.icon-2{
+  top:25%;
+  right:8%;
+  animation-delay:0.6s;
+}
+.health-icon.icon-3{
+  bottom:25%;
+  right:12%;
+  animation-delay:1.2s;
+}
+.health-icon.icon-4{
+  bottom:12%;
+  left:18%;
+  animation-delay:1.8s;
+}
+.health-icon.icon-5{
+  top:45%;
+  left:5%;
+  animation-delay:2.4s;
+}
+
+@keyframes orbit-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+/* Emergency Dial */
+.week-dial{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 10px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  width:180px;
+  z-index:10;
+}
+
+.week-dial.emergency-dial{
+  border:3px solid var(--emergency);
+}
+
+.meter-reading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:0.5rem;
+}
+
+.reading-icon{
+  font-size:3rem;
+  animation:emergency-pulse 2s ease-in-out infinite;
+}
+
+.meter-status{
+  font-size:0.9rem;
+  font-weight:900;
+  color:var(--emergency);
+  margin-bottom:0.3rem;
+  text-transform:uppercase;
+}
+
+.meter-substatus{
+  font-size:0.75rem;
+  font-weight:600;
+  color:var(--text-soft);
+}
+
+/* Hero Info Box */
+.hero-info-box{
+  margin-top:2rem;
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  border:2px solid rgba(236,64,122,0.12);
+}
+
+.hero-info-box.emergency-info-box{
+  border-color:rgba(255,23,68,0.20);
+}
+
+.info-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  background:rgba(236,64,122,0.08);
+  padding:0.5rem 1rem;
+  border-radius:20px;
+  margin-bottom:1rem;
+}
+
+.info-badge .badge-icon{
+  font-size:1.2rem;
+}
+
+.info-badge .badge-text{
+  font-size:0.8rem;
+  font-weight:700;
+  color:var(--primary-dark);
+}
+
+.info-title{
+  font-size:1.5rem;
+  margin-bottom:0.8rem;
+  color:var(--text-main);
+}
+
+.info-text{
+  color:var(--text-soft);
+  line-height:1.7;
+}
+
+/* Section Styling */
+.journey-section{
+  padding:3rem 0;
+  margin:2rem 0;
+}
+
+.section-header{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 3rem;
+}
+
+.header-badge-prominent{
+  display:inline-flex;
+  align-items:center;
+  gap:0.8rem;
+  background:linear-gradient(135deg, rgba(236,64,122,0.1), rgba(237,231,246,0.2));
+  padding:0.7rem 1.4rem;
+  border-radius:999px;
+  border:2px solid rgba(236,64,122,0.2);
+  margin-bottom:1.5rem;
+}
+
+.header-badge-prominent.emergency-badge-header{
+  background:linear-gradient(135deg, rgba(255,23,68,0.12), rgba(255,82,82,0.15));
+  border-color:rgba(255,23,68,0.3);
+}
+
+.header-badge-prominent.urgent-badge-header{
+  background:linear-gradient(135deg, rgba(255,145,0,0.12), rgba(255,171,64,0.15));
+  border-color:rgba(255,145,0,0.3);
+}
+
+.header-badge-prominent.monitor-badge-header{
+  background:linear-gradient(135deg, rgba(66,165,245,0.12), rgba(100,181,246,0.15));
+  border-color:rgba(66,165,245,0.3);
+}
+
+.badge-pulse{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--primary);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+.badge-pulse.emergency-pulse{
+  background:var(--emergency);
+  animation:emergency-badge-pulse 1.5s ease-in-out infinite;
+}
+
+.badge-pulse.urgent-pulse{
+  background:var(--urgent);
+}
+
+.badge-pulse.monitor-pulse{
+  background:var(--monitor);
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1; transform:scale(1);}
+  50%{opacity:0.5; transform:scale(1.3);}
+}
+
+@keyframes emergency-badge-pulse{
+  0%,100%{opacity:1; transform:scale(1);}
+  50%{opacity:0.3; transform:scale(1.5);}
+}
+
+.section-title-prominent{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;
+  line-height:1.2;
+  margin-bottom:1rem;
+  color:var(--text-main);
+}
+
+.title-highlight{
+  background:linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.title-highlight.emergency-title{
+  background:linear-gradient(135deg, #ff1744 0%, #d50000 50%, #b71c1c 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.title-highlight.urgent-title{
+  background:linear-gradient(135deg, #ff9100 0%, #ff6d00 50%, #e65100 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.title-highlight.monitor-title{
+  background:linear-gradient(135deg, #42a5f5 0%, #1976d2 50%, #0d47a1 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.section-subtitle-prominent{
+  font-size:1.1rem;
+  color:var(--text-soft);
+  line-height:1.75;
+}
+
+/* Triage Flow */
+.triage-flow{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.triage-question{
+  background:#fff;
+  border-radius:24px;
+  padding:3rem;
+  box-shadow:0 8px 35px rgba(0,0,0,0.10);
+  border:3px solid rgba(255,23,68,0.15);
+  margin-bottom:2rem;
+}
+
+.triage-question h3{
+  font-size:1.8rem;
+  margin-bottom:2rem;
+  color:var(--text-main);
+  text-align:center;
+}
+
+.symptoms-checklist{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.symptom-check{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding:1.2rem;
+  background:rgba(236,64,122,0.03);
+  border-radius:12px;
+  border-left:4px solid transparent;
+  transition:all .3s ease;
+  cursor:pointer;
+}
+
+.symptom-check.emergency-symptom{
+  border-left-color:var(--emergency);
+}
+
+.symptom-check.urgent-symptom{
+  border-left-color:var(--urgent);
+}
+
+.symptom-check.monitor-symptom{
+  border-left-color:var(--monitor);
+}
+
+.symptom-check:hover{
+  background:rgba(236,64,122,0.08);
+  transform:translateX(5px);
+}
+
+.symptom-check input[type="checkbox"]{
+  width:24px;
+  height:24px;
+  cursor:pointer;
+  accent-color:var(--emergency);
+}
+
+.symptom-check label{
+  font-size:1.05rem;
+  font-weight:600;
+  color:var(--text-main);
+  cursor:pointer;
+  flex:1;
+}
+
+/* Triage Result */
+.triage-result{
+  background:#fff;
+  border-radius:24px;
+  padding:3rem;
+  box-shadow:0 12px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  animation:slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.triage-result.emergency-result{
+  border:4px solid var(--emergency);
+  background:linear-gradient(135deg, rgba(255,23,68,0.05), rgba(255,82,82,0.08));
+}
+
+.triage-result.urgent-result{
+  border:4px solid var(--urgent);
+  background:linear-gradient(135deg, rgba(255,145,0,0.05), rgba(255,171,64,0.08));
+}
+
+.triage-result.monitor-result{
+  border:4px solid var(--monitor);
+  background:linear-gradient(135deg, rgba(66,165,245,0.05), rgba(100,181,246,0.08));
+}
+
+.result-icon{
+  font-size:5rem;
+  margin-bottom:1.5rem;
+  animation:bounce 1s ease infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+.result-title{
+  font-size:2.5rem;
+  font-weight:900;
+  margin-bottom:1rem;
+}
+
+.result-description{
+  font-size:1.2rem;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  line-height:1.7;
+}
+
+.result-action{
+  display:inline-block;
+  padding:1.2rem 3rem;
+  font-size:1.1rem;
+  font-weight:900;
+  border-radius:999px;
+  text-decoration:none;
+  transition:all .3s ease;
+}
+
+/* Emergency Grid */
+.emergency-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
+  gap:2rem;
+}
+
+.emergency-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2.5rem;
+  box-shadow:0 6px 25px rgba(0,0,0,0.10);
+  border:3px solid transparent;
+  transition:all .3s ease;
+}
+
+.emergency-card.severe{
+  border-color:rgba(255,23,68,0.25);
+}
+
+.emergency-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 45px rgba(255,23,68,0.25);
+  border-color:var(--emergency);
+}
+
+.emergency-header{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin-bottom:2rem;
+}
+
+.emergency-icon{
+  width:70px;
+  height:70px;
+  background:linear-gradient(135deg, var(--emergency), var(--emergency-light));
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.5rem;
+  flex-shrink:0;
+  box-shadow:0 8px 20px rgba(255,23,68,0.3);
+}
+
+.emergency-header h3{
+  font-size:1.5rem;
+  color:var(--text-main);
+  line-height:1.3;
+}
+
+.emergency-symptoms h4{
+  color:var(--emergency);
+  font-size:1.1rem;
+  margin-bottom:1rem;
+  font-weight:700;
+}
+
+.emergency-symptoms ul{
+  list-style:none;
+  padding:0;
+  margin-bottom:1.5rem;
+}
+
+.emergency-symptoms li{
+  padding:0.6rem 0;
+  padding-left:1.8rem;
+  position:relative;
+  color:var(--text-soft);
+  line-height:1.6;
+}
+
+.emergency-symptoms li:before{
+  content:'⚠️';
+  position:absolute;
+  left:0;
+  font-size:1rem;
+}
+
+.emergency-action{
+  background:rgba(255,23,68,0.08);
+  padding:1.2rem;
+  border-radius:12px;
+  border-left:4px solid var(--emergency);
+  font-size:0.95rem;
+  line-height:1.6;
+}
+
+.emergency-action strong{
+  color:var(--emergency);
+  display:block;
+  margin-bottom:0.5rem;
+}
+
+/* Urgent Grid */
+.urgent-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+  gap:2rem;
+}
+
+.urgent-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  border:2px solid rgba(255,145,0,0.20);
+  transition:all .3s ease;
+}
+
+.urgent-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 35px rgba(255,145,0,0.20);
+  border-color:var(--urgent);
+}
+
+.urgent-header{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.5rem;
+}
+
+.urgent-icon{
+  width:60px;
+  height:60px;
+  background:linear-gradient(135deg, var(--urgent), var(--urgent-light));
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  flex-shrink:0;
+  box-shadow:0 6px 18px rgba(255,145,0,0.3);
+}
+
+.urgent-header h3{
+  font-size:1.3rem;
+  color:var(--text-main);
+}
+
+.urgent-symptoms ul{
+  list-style:none;
+  padding:0;
+  margin-bottom:1.5rem;
+}
+
+.urgent-symptoms li{
+  padding:0.5rem 0;
+  padding-left:1.5rem;
+  position:relative;
+  color:var(--text-soft);
+  line-height:1.6;
+}
+
+.urgent-symptoms li:before{
+  content:'⚡';
+  position:absolute;
+  left:0;
+}
+
+.urgent-action{
+  background:rgba(255,145,0,0.08);
+  padding:1rem;
+  border-radius:12px;
+  border-left:4px solid var(--urgent);
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--text-main);
+}
+
+/* Monitor Grid */
+.monitor-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));
+  gap:2rem;
+}
+
+.monitor-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  border:2px solid rgba(66,165,245,0.20);
+  transition:all .3s ease;
+}
+
+.monitor-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 35px rgba(66,165,245,0.20);
+  border-color:var(--monitor);
+}
+
+.monitor-header{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.5rem;
+}
+
+.monitor-icon{
+  width:60px;
+  height:60px;
+  background:linear-gradient(135deg, var(--monitor), var(--monitor-light));
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  flex-shrink:0;
+  box-shadow:0 6px 18px rgba(66,165,245,0.3);
+}
+
+.monitor-header h3{
+  font-size:1.3rem;
+  color:var(--text-main);
+}
+
+.monitor-details{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  margin-bottom:1rem;
+}
+
+.monitor-symptoms, .monitor-care{
+  background:rgba(66,165,245,0.03);
+  padding:1rem;
+  border-radius:12px;
+}
+
+.monitor-symptoms strong, .monitor-care strong{
+  display:block;
+  color:var(--monitor);
+  margin-bottom:0.5rem;
+  font-size:0.9rem;
+}
+
+.monitor-symptoms ul, .monitor-care ul{
+  list-style:none;
+  padding:0;
+}
+
+.monitor-symptoms li, .monitor-care li{
+  padding:0.3rem 0;
+  color:var(--text-soft);
+  font-size:0.85rem;
+  line-height:1.5;
+  padding-left:1.2rem;
+  position:relative;
+}
+
+.monitor-symptoms li:before{
+  content:'•';
+  position:absolute;
+  left:0;
+  color:var(--monitor);
+  font-weight:900;
+}
+
+.monitor-care li:before{
+  content:'✓';
+  position:absolute;
+  left:0;
+  color:var(--success);
+  font-size:0.8rem;
+}
+
+.monitor-warning{
+  background:rgba(255,145,0,0.08);
+  padding:0.8rem;
+  border-radius:12px;
+  border-left:3px solid var(--urgent);
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--text-main);
+}
+
+/* Red Flags Table */
+.red-flags-table{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:2rem;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.flags-column{
+  background:#fff;
+  border-radius:20px;
+  padding:2.5rem;
+  box-shadow:0 6px 25px rgba(0,0,0,0.10);
+}
+
+.flags-column.emergency-column{
+  border:3px solid var(--emergency);
+  background:linear-gradient(135deg, rgba(255,23,68,0.03), rgba(255,82,82,0.05));
+}
+
+.flags-column.urgent-column{
+  border:3px solid var(--urgent);
+  background:linear-gradient(135deg, rgba(255,145,0,0.03), rgba(255,171,64,0.05));
+}
+
+.flags-column.monitor-column{
+  border:3px solid var(--monitor);
+  background:linear-gradient(135deg, rgba(66,165,245,0.03), rgba(100,181,246,0.05));
+}
+
+.flags-column h3{
+  font-size:1.5rem;
+  margin-bottom:1.5rem;
+  text-align:center;
+}
+
+.flags-column ul{
+  list-style:none;
+  padding:0;
+}
+
+.flags-column li{
+  padding:0.8rem 0;
+  padding-left:1.8rem;
+  position:relative;
+  color:var(--text-main);
+  line-height:1.6;
+  font-weight:500;
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.flags-column li:last-child{
+  border-bottom:none;
+}
+
+.emergency-column li:before{
+  content:'🚨';
+  position:absolute;
+  left:0;
+  font-size:1rem;
+}
+
+.urgent-column li:before{
+  content:'📞';
+  position:absolute;
+  left:0;
+  font-size:1rem;
+}
+
+.monitor-column li:before{
+  content:'👁️';
+  position:absolute;
+  left:0;
+  font-size:1rem;
+}
+
+/* Emergency Numbers Grid */
+.numbers-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:2rem;
+}
+
+.number-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2.5rem;
+  box-shadow:0 6px 25px rgba(0,0,0,0.10);
+  text-align:center;
+  transition:all .3s ease;
+  border:3px solid transparent;
+}
+
+.number-card.emergency-number{
+  border-color:var(--emergency);
+}
+
+.number-card.crisis-number{
+  border-color:#9c27b0;
+}
+
+.number-card.support-number{
+  border-color:var(--primary);
+}
+
+.number-card.poison-number{
+  border-color:#4caf50;
+}
+
+.number-card.nurse-number{
+  border-color:var(--info);
+}
+
+.number-card.personal-number{
+  border-color:var(--urgent);
+}
+
+.number-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.number-icon{
+  font-size:4rem;
+  margin-bottom:1.5rem;
+}
+
+.number-card h3{
+  font-size:1.3rem;
+  margin-bottom:1rem;
+  color:var(--text-main);
+}
+
+.number-display{
+  font-size:2rem;
+  font-weight:900;
+  color:var(--emergency);
+  margin:1.5rem 0;
+  font-family:'Playfair Display', serif;
+}
+
+.number-card.crisis-number .number-display{
+  color:#9c27b0;
+}
+
+.number-card.support-number .number-display{
+  color:var(--primary);
+}
+
+.number-card.poison-number .number-display{
+  color:#4caf50;
+}
+
+.number-card.nurse-number .number-display{
+  color:var(--info);
+}
+
+.number-card.personal-number .number-display{
+  color:var(--urgent);
+}
+
+.number-card p{
+  color:var(--text-soft);
+  line-height:1.6;
+  font-size:0.95rem;
+}
+
+.number-input-container{
+  display:flex;
+  gap:0.5rem;
+  margin:1rem 0;
+}
+
+.number-input{
+  flex:1;
+  padding:0.8rem 1rem;
+  border:2px solid var(--border-soft);
+  border-radius:12px;
+  font-size:1rem;
+  transition:border-color .3s;
+}
+
+.number-input:focus{
+  outline:none;
+  border-color:var(--urgent);
+}
+
+.save-btn{
+  padding:0.8rem 1.5rem;
+  background:var(--urgent);
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all .3s;
+}
+
+.save-btn:hover{
+  background:var(--urgent-dark);
+  transform:translateY(-2px);
+}
+
+/* CTA Section */
+.cta-section{
+  background:linear-gradient(135deg, rgba(255,23,68,0.08), rgba(255,82,82,0.12));
+  border-radius:30px;
+  padding:4rem 2rem;
+  text-align:center;
+  margin:3rem 0;
+}
+
+.cta-content{
+  max-width:700px;
+  margin:0 auto;
+}
+
+.cta-title{
+  font-size:clamp(2rem,4vw,2.8rem);
+  font-weight:900;
+  margin-bottom:1rem;
+  color:var(--text-main);
+}
+
+.cta-subtitle{
+  font-size:1.1rem;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  line-height:1.7;
+}
+
+.cta-buttons{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* Footer */
+.site-footer{
+  padding:2rem 0;
+  margin-top:3rem;
+  border-top:2px solid rgba(236,64,122,0.1);
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+}
+
+.mini-btn{
+  padding:0.5rem 1rem;
+  border-radius:50px;
+  font-weight:600;
+  font-size:0.85rem;
+  cursor:pointer;
+  transition:all .3s;
+}
+
+.mini-btn.outline{
+  background:transparent;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+
+.mini-btn.outline:hover{
+  background:var(--primary);
+  color:white;
+}
+
+/* Responsive */
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr; gap:2rem;}
+  .pregnancy-3d-container{height:460px;}
+  .emergency-grid, .urgent-grid, .monitor-grid, .numbers-grid{grid-template-columns:1fr;}
+  .red-flags-table{grid-template-columns:1fr;}
+  .monitor-details{grid-template-columns:1fr;}
+  .hero{padding:3rem 1.5rem 2rem;}
+  .page-shell{padding:0 1.25rem;}
+  .hero-title-3d{font-size:clamp(2rem,4.5vw,3.2rem);}
+  .section-title-prominent{font-size:clamp(1.7rem,3.5vw,2.5rem);}
+  .hero-info-box{padding:1.5rem;}
+  .flags-column{padding:1.75rem;}
+}
+
+@media(max-width:768px){
+  .page-shell{padding:0 1rem;}
+  .hero{padding:2.5rem 1rem 2rem; border-radius:20px; margin-bottom:2rem; min-height:auto;}
+  .hero-stats{grid-template-columns:repeat(3,1fr); gap:.6rem;}
+  .stat-item{padding:.8rem .5rem;}
+  .stat-number{font-size:1.4rem;}
+  .stat-label{font-size:.75rem;}
+  .hero-subtitle{font-size:1rem;}
+  .hero-cta-row{flex-direction:column; gap:.75rem;}
+  .btn-primary,.btn-secondary,.btn-emergency{width:100%;text-align:center;padding:.85rem 1.5rem;font-size:.95rem;}
+  .emergency-alert{flex-direction:column;text-align:center;padding:1.2rem;gap:.75rem;}
+  .alert-icon{font-size:2rem;}
+  .pregnancy-3d-container{height:340px;}
+  .health-icon{width:72px;height:72px;}
+  .icon-inner{font-size:1.7rem;}
+  .icon-label{font-size:.65rem;}
+  .week-dial{width:150px;padding:1rem;}
+  .hero-info-box{padding:1.25rem;margin-top:1.5rem;}
+  .info-title{font-size:1.2rem;}
+  .journey-section{padding:2rem 0;}
+  .section-header{margin-bottom:2rem;}
+  .triage-question{padding:1.75rem 1.25rem; border-radius:16px;}
+  .triage-question h3{font-size:1.4rem; margin-bottom:1.5rem;}
+  .symptom-check{padding:1rem;}
+  .symptom-check label{font-size:.95rem;}
+  .triage-result{padding:2rem 1.25rem; border-radius:16px;}
+  .result-title{font-size:1.8rem;}
+  .result-description{font-size:1rem;}
+  .result-action{padding:1rem 2rem;font-size:1rem;}
+  .emergency-card,.urgent-card,.monitor-card{padding:1.5rem; border-radius:16px;}
+  .emergency-header{gap:1rem;margin-bottom:1.5rem;}
+  .emergency-icon{width:56px;height:56px;font-size:2rem;}
+  .emergency-header h3{font-size:1.25rem;}
+  .flags-column{padding:1.5rem; border-radius:16px;}
+  .flags-column h3{font-size:1.25rem;}
+  .number-card{padding:1.75rem;}
+  .number-display{font-size:1.6rem;}
+  .number-icon{font-size:3rem;margin-bottom:1rem;}
+  .number-input-container{flex-direction:column;}
+  .save-btn{width:100%;padding:1rem;}
+  .cta-section{padding:2.5rem 1.25rem; border-radius:20px;}
+  .cta-buttons{flex-direction:column;align-items:center;}
+  .cta-buttons .btn-primary,.cta-buttons .btn-secondary,.cta-buttons .btn-emergency{width:100%;max-width:320px;}
+  .footer-inner{flex-direction:column;text-align:center;gap:.75rem;}
+  .monitor-details{grid-template-columns:1fr;}
+  .header-badge-prominent{font-size:.85rem;padding:.55rem 1rem;}
+  .result-icon{font-size:3.5rem;}
+}
+
+@media(max-width:600px){
+  .page-shell{padding:0 .875rem;}
+  .hero{padding:2rem .875rem 1.75rem; border-radius:16px;}
+  .hero-badge{padding:.5rem 1rem;font-size:.82rem;}
+  .badge-text{font-size:.82rem;}
+  .hero-title-3d{font-size:clamp(1.8rem,6vw,2.4rem);}
+  .hero-stats{grid-template-columns:1fr; gap:.75rem;}
+  .stat-item{padding:1rem; display:flex; align-items:center; justify-content:space-between; text-align:left; gap:.5rem;}
+  .stat-number{font-size:1.6rem; flex-shrink:0;}
+  .triage-question, .emergency-card, .urgent-card, .monitor-card{padding:1.25rem;}
+  .emergency-grid{gap:1.25rem;}
+  .urgent-grid{gap:1.25rem;}
+  .monitor-grid{gap:1.25rem;}
+  .red-flags-table{gap:1.25rem;}
+  .numbers-grid{gap:1.25rem;}
+  .pregnancy-3d-container{height:280px;}
+  .health-icon{width:60px;height:60px;}
+  .health-icon.icon-1{top:5%;left:5%;}
+  .health-icon.icon-2{top:20%;right:2%;}
+  .health-icon.icon-3{bottom:20%;right:4%;}
+  .health-icon.icon-4{bottom:5%;left:8%;}
+  .health-icon.icon-5{top:45%;left:0%;}
+  .week-dial{width:130px;padding:.85rem;}
+  .meter-status{font-size:.75rem;}
+  .reading-icon{font-size:2.2rem;}
+  .triage-question h3{font-size:1.2rem;}
+  .result-title{font-size:1.5rem;}
+  .section-title-prominent{font-size:clamp(1.5rem,5vw,2rem);}
+  .section-subtitle-prominent{font-size:1rem;}
+  .number-display{font-size:1.4rem; margin:1rem 0;}
+  .number-card h3{font-size:1.1rem;}
+  .cta-title{font-size:clamp(1.5rem,5vw,2rem);}
+  .cta-section{padding:2rem 1rem;}
+  .nav-container{padding:0 1rem;}
+  .footer-inner{gap:.5rem;}
+  .mini-btn{font-size:.78rem;padding:.4rem .8rem;}
+  .emergency-card .emergency-symptoms li{font-size:.9rem;}
+  .urgent-card .urgent-symptoms li{font-size:.9rem;}
+  .monitor-symptoms li, .monitor-care li{font-size:.8rem;}
+  .emergency-action{font-size:.88rem;}
+  .urgent-action{font-size:.85rem;}
+  .monitor-warning{font-size:.82rem;}
+  .flags-column li{font-size:.9rem;padding:.65rem 0 .65rem 1.8rem;}
+  .symptom-check input[type="checkbox"]{width:20px;height:20px;}
+}
+
+@media(max-width:400px){
+  .page-shell{padding:0 .75rem;}
+  .hero{padding:1.75rem .75rem 1.5rem;}
+  .hero-title-3d{font-size:1.7rem;}
+  .hero-cta-row .btn-emergency,.hero-cta-row .btn-secondary{font-size:.88rem;padding:.75rem 1.25rem;}
+  .health-icon{width:52px;height:52px;}
+  .icon-inner{font-size:1.4rem;}
+  .icon-label{display:none;}
+  .week-dial{width:110px;padding:.7rem;}
+  .pregnancy-3d-container{height:250px;}
+  .result-action{padding:.85rem 1.5rem;font-size:.9rem;}
+}
+
+/* =====================================================
+   MOBILE RESPONSIVENESS ENHANCEMENTS
+   All animations fully preserved — layout fixes only
+   ===================================================== */
+
+/* ── Global overflow guards ── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+.page-shell {
+  overflow-x: hidden;
+}
+
+/* ── Safe grid minmax: prevent cards forcing horizontal scroll ── */
+.emergency-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+}
+.urgent-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+.monitor-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+}
+.numbers-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+/* ── Red flags table: safe 3-col with overflow guard ── */
+.red-flags-table {
+  overflow-x: hidden;
+}
+
+/* ── Hero animation container: clip any icon overflow ── */
+.pregnancy-3d-container {
+  overflow: hidden;
+}
+
+/* ── hero-badge text wrapping ── */
+.hero-badge {
+  max-width: 100%;
+  flex-wrap: wrap;
+  word-break: break-word;
+}
+
+/* ── header-badge-prominent wrapping ── */
+.header-badge-prominent {
+  max-width: 100%;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+}
+
+/* ── Emergency alert text ── */
+.emergency-alert {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* ── Triage result action button: full-width on mobile ── */
+@media(max-width:768px){
+  .result-action {
+    display: block;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  /* Larger touch targets for interactive elements */
+  .btn-primary,
+  .btn-secondary,
+  .btn-emergency {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .result-action {
+    min-height: 48px;
+  }
+  .save-btn {
+    min-height: 48px;
+  }
+  /* Symptom checkboxes — easier to tap */
+  .symptom-check {
+    min-height: 52px;
+  }
+  .symptom-check input[type="checkbox"] {
+    flex-shrink: 0;
+  }
+  /* Triage question padding tweak */
+  .triage-question {
+    padding: 1.75rem 1.25rem;
+  }
+  /* Triage result: full width padding */
+  .triage-result {
+    padding: 2rem 1.25rem;
+  }
+  /* Number display: scale for longer numbers */
+  .number-display {
+    word-break: break-all;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.3;
+  }
+  /* Flags column heading with emoji */
+  .flags-column h3 {
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  /* Hero info box */
+  .hero-info-box {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  /* Emergency alert columns layout */
+  .emergency-alert {
+    flex-direction: column;
+    text-align: center;
+  }
+  /* CTA buttons on mobile */
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cta-buttons .btn-emergency,
+  .cta-buttons .btn-secondary {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+/* ── Small phones: 600px ── */
+@media(max-width:600px){
+
+  /* Page */
+  .page-shell { padding: 0 .875rem; }
+
+  /* Hero */
+  .hero {
+    padding: 2rem .875rem 1.75rem;
+    border-radius: 16px;
+    min-height: unset;
+  }
+  .hero-content { overflow-x: hidden; }
+
+  /* Hero badge */
+  .hero-badge { padding: .45rem .9rem; }
+  .badge-icon { font-size: 1.1rem; }
+  .badge-text { font-size: .8rem; }
+
+  /* Hero title */
+  .hero-title-3d { font-size: clamp(1.7rem, 6.5vw, 2.2rem); }
+
+  /* Hero subtitle */
+  .hero-subtitle { font-size: .93rem; margin-bottom: 1.5rem; line-height: 1.7; }
+
+  /* Hero stats: keep horizontal row on mobile for emergency (911, 24h, 48h) */
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+    margin-bottom: 1.25rem;
+  }
+  .stat-item {
+    padding: .75rem .4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 12px;
+  }
+  .stat-number { font-size: 1.35rem; }
+  .stat-label { font-size: .68rem; line-height: 1.3; }
+
+  /* Hero CTA row */
+  .hero-cta-row { gap: .6rem; }
+  .btn-primary, .btn-secondary, .btn-emergency {
+    padding: .85rem 1.25rem;
+    font-size: .9rem;
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Emergency alert */
+  .emergency-alert {
+    padding: 1rem;
+    gap: .65rem;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+  }
+  .alert-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .emergency-alert p { font-size: .88rem; }
+
+  /* Sections */
+  .journey-section { padding: 1.75rem 0; margin: .75rem 0; }
+  .section-header { margin-bottom: 1.75rem; padding: 0 .25rem; }
+
+  /* Section badge */
+  .header-badge-prominent {
+    padding: .55rem 1rem;
+    font-size: .82rem;
+    gap: .5rem;
+  }
+  .badge-pulse { width: 8px; height: 8px; flex-shrink: 0; }
+
+  /* Section title */
+  .section-title-prominent { font-size: clamp(1.45rem, 5.5vw, 1.9rem); }
+  .section-subtitle-prominent { font-size: .92rem; }
+
+  /* Triage */
+  .triage-flow { padding: 0; }
+  .triage-question {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+  .triage-question h3 { font-size: 1.1rem; margin-bottom: 1.25rem; }
+  .symptom-check {
+    padding: .85rem .75rem;
+    gap: .75rem;
+  }
+  .symptom-check label { font-size: .88rem; }
+  .symptom-check input[type="checkbox"] { width: 20px; height: 20px; }
+  .triage-result {
+    padding: 1.5rem 1rem;
+    border-radius: 14px;
+  }
+  .result-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .result-title { font-size: 1.4rem; margin-bottom: .75rem; }
+  .result-description { font-size: .92rem; margin-bottom: 1.5rem; }
+  .result-action {
+    padding: .9rem 1.5rem;
+    font-size: .9rem;
+    width: 100%;
+    display: block;
+    text-align: center;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+
+  /* Emergency cards */
+  .emergency-grid { gap: 1rem; }
+  .emergency-card { padding: 1.25rem 1rem; border-radius: 14px; border-width: 2px; }
+  .emergency-header { gap: .85rem; margin-bottom: 1.25rem; }
+  .emergency-icon { width: 52px; height: 52px; font-size: 1.8rem; }
+  .emergency-header h3 { font-size: 1.15rem; line-height: 1.3; }
+  .emergency-symptoms h4 { font-size: 1rem; margin-bottom: .75rem; }
+  .emergency-symptoms li { font-size: .88rem; padding: .5rem 0 .5rem 1.6rem; }
+  .emergency-action { font-size: .85rem; padding: 1rem; border-radius: 10px; }
+
+  /* Urgent cards */
+  .urgent-grid { gap: 1rem; }
+  .urgent-card { padding: 1.25rem 1rem; border-radius: 14px; }
+  .urgent-header { gap: .85rem; margin-bottom: 1.25rem; }
+  .urgent-icon { width: 52px; height: 52px; font-size: 1.7rem; }
+  .urgent-header h3 { font-size: 1.1rem; }
+  .urgent-symptoms li { font-size: .88rem; padding: .4rem 0 .4rem 1.4rem; }
+  .urgent-action { font-size: .85rem; padding: .9rem; }
+
+  /* Monitor cards */
+  .monitor-grid { gap: 1rem; }
+  .monitor-card { padding: 1.25rem 1rem; border-radius: 14px; }
+  .monitor-header { gap: .85rem; margin-bottom: 1.25rem; }
+  .monitor-icon { width: 52px; height: 52px; font-size: 1.7rem; }
+  .monitor-header h3 { font-size: 1.1rem; }
+  .monitor-details { gap: .75rem; }
+  .monitor-symptoms, .monitor-care { padding: .85rem .75rem; border-radius: 10px; }
+  .monitor-symptoms strong, .monitor-care strong { font-size: .82rem; margin-bottom: .4rem; }
+  .monitor-symptoms li, .monitor-care li { font-size: .82rem; }
+  .monitor-warning { font-size: .82rem; padding: .75rem; border-radius: 10px; }
+
+  /* Red flags table */
+  .red-flags-table { gap: 1rem; }
+  .flags-column { padding: 1.25rem 1rem; border-radius: 14px; border-width: 2px; }
+  .flags-column h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .flags-column li { font-size: .88rem; padding: .55rem 0 .55rem 1.6rem; }
+
+  /* Emergency numbers */
+  .numbers-grid { gap: 1rem; }
+  .number-card { padding: 1.5rem 1rem; border-radius: 14px; border-width: 2px; }
+  .number-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+  .number-card h3 { font-size: 1.1rem; margin-bottom: .75rem; }
+  .number-display { font-size: 1.35rem; margin: .85rem 0; line-height: 1.3; }
+  .number-card p { font-size: .88rem; }
+  .number-input { padding: .75rem .85rem; font-size: .9rem; }
+  .number-input-container { flex-direction: column; gap: .45rem; }
+  .save-btn { width: 100%; padding: .9rem; font-size: .9rem; min-height: 48px; }
+
+  /* CTA */
+  .cta-section { padding: 2rem 1rem; border-radius: 16px; }
+  .cta-title { font-size: clamp(1.45rem, 5.5vw, 1.9rem); }
+  .cta-subtitle { font-size: .92rem; }
+  .cta-buttons { flex-direction: column; align-items: stretch; gap: .75rem; }
+  .cta-buttons .btn-emergency,
+  .cta-buttons .btn-secondary { width: 100%; max-width: 100%; margin: 0; }
+
+  /* Footer footer inner row */
+  .footer-inner { flex-direction: column; text-align: center; gap: .6rem; }
+  .mini-btn { font-size: .78rem; padding: .4rem .8rem; min-height: 40px; }
+}
+
+/* ── 480px tweaks ── */
+@media(max-width:480px){
+  /* Nav */
+  .nav-container { padding: 0 .875rem; height: 58px; }
+  .logo-icon { width: 36px; height: 36px; border-radius: 10px; }
+  .logo-icon svg { width: 19px; height: 19px; }
+  .logo-text a { font-size: 1.15rem; }
+  .logo-text span { font-size: .58rem; }
+
+  /* Hero animation: smaller on mid-phone */
+  .pregnancy-3d-container { height: 300px; }
+  .health-icon { width: 64px; height: 64px; }
+  .icon-inner { font-size: 1.6rem; }
+  .icon-label { font-size: .62rem; }
+  .week-dial { width: 125px; padding: .9rem; }
+  .meter-status { font-size: .72rem; }
+  .reading-icon { font-size: 2rem; }
+
+  /* Flags column headings: emoji + text can wrap */
+  .flags-column h3 {
+    font-size: 1rem;
+    word-break: break-word;
+  }
+
+  /* Number display long numbers */
+  .number-display { font-size: 1.2rem; letter-spacing: -.01em; }
+
+  /* Section title */
+  .section-title-prominent { font-size: 1.4rem; }
+  .hero-title-3d { font-size: clamp(1.65rem, 6.5vw, 2rem); }
+}
+
+/* ── Very small: 380px ── */
+@media(max-width:380px){
+
+  /* Page */
+  .page-shell { padding: 0 .7rem; }
+  .nav-container { padding: 0 .75rem; }
+  .logo-text a { font-size: 1.05rem; }
+
+  /* Hero */
+  .hero { padding: 1.6rem .7rem 1.4rem; border-radius: 12px; }
+  .hero-title-3d { font-size: 1.55rem; }
+  .hero-badge { padding: .4rem .8rem; }
+  .badge-text { font-size: .78rem; }
+
+  /* Hero stats: shrink to 3-col with smaller text OR switch to compact row */
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .35rem;
+  }
+  .stat-item { padding: .6rem .25rem; border-radius: 10px; }
+  .stat-number { font-size: 1.15rem; }
+  .stat-label { font-size: .6rem; }
+
+  /* Section */
+  .section-title-prominent { font-size: 1.35rem; }
+
+  /* Triage */
+  .triage-question { padding: 1rem .85rem; border-radius: 12px; }
+  .triage-question h3 { font-size: 1rem; margin-bottom: 1rem; }
+  .symptom-check { padding: .75rem .6rem; gap: .6rem; }
+  .symptom-check label { font-size: .84rem; }
+  .triage-result { padding: 1.25rem .85rem; border-radius: 12px; }
+  .result-title { font-size: 1.25rem; }
+
+  /* Cards */
+  .emergency-card, .urgent-card, .monitor-card { padding: 1.1rem .85rem; }
+  .emergency-icon, .urgent-icon, .monitor-icon { width: 46px; height: 46px; font-size: 1.5rem; }
+  .emergency-header h3, .urgent-header h3, .monitor-header h3 { font-size: 1.05rem; }
+
+  /* Flags */
+  .flags-column { padding: 1rem .85rem; }
+  .flags-column h3 { font-size: .95rem; }
+  .flags-column li { font-size: .84rem; padding-left: 1.5rem; }
+
+  /* Numbers */
+  .number-card { padding: 1.25rem .85rem; }
+  .number-display { font-size: 1.1rem; }
+  .number-card h3 { font-size: 1rem; }
+
+  /* CTA */
+  .cta-section { padding: 1.75rem .85rem; border-radius: 14px; }
+  .cta-title { font-size: 1.35rem; }
+  .cta-subtitle { font-size: .88rem; }
+
+  /* Hero animation */
+  .pregnancy-3d-container { height: 250px; overflow: hidden; }
+  .health-icon { width: 50px; height: 50px; }
+  .icon-inner { font-size: 1.35rem; }
+  .icon-label { display: none; }
+  .week-dial { width: 105px; padding: .65rem; }
+  .meter-status { font-size: .7rem; }
+  .reading-icon { font-size: 1.8rem; }
+}
+
+/* ── Landscape mobile: prevent tall hero ── */
+@media(max-width:768px) and (orientation:landscape){
+  .hero {
+    min-height: unset;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+  }
+  .pregnancy-3d-container { height: 240px; }
+  .hero-info-box { margin-top: 1rem; padding: 1rem; }
+}
+
+/* ── Touch device improvements ── */
+@media(hover:none) and (pointer:coarse){
+  /* Remove desktop hover lifts on touch — prevents layout flicker */
+  .emergency-card:hover,
+  .urgent-card:hover,
+  .monitor-card:hover,
+  .number-card:hover,
+  .flags-column:hover {
+    transform: none;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.10);
+  }
+  .emergency-card.severe:hover { border-color: rgba(255,23,68,0.25); }
+  .urgent-card:hover { border-color: rgba(255,145,0,0.20); }
+  .monitor-card:hover { border-color: rgba(66,165,245,0.20); }
+  /* Active state feedback */
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-emergency:active,
+  .result-action:active,
+  .save-btn:active {
+    transform: scale(0.97);
+    opacity: .9;
+  }
+  /* Triage checkboxes: larger touch area */
+  .symptom-check { cursor: pointer; }
+  /* Nav links: larger tap area */
+  .mm-link { padding: 1rem 1rem; min-height: 52px; }
+}
+
+</style>
+
+<body>
+  <!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Health Platform</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <!-- Home -->
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">Home</a>
+      </div>
+
+      <!-- Journeys dropdown -->
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+        <div class="nav-dropdown">
+          <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-map"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:var(--deep-pink);">View Full Journeys</strong><span style="font-size:.73rem;color:var(--text-soft);">Browse all her journeys</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:var(--text-soft);">Preparation &amp; planning</span></div></a>
+          <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle &amp; ovulation</span></div></a>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+            <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:var(--text-soft);">Week by week guide</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:var(--text-soft);">Vaginal birth guide</span></div></a>
+              <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:var(--text-soft);">Surgical birth info</span></div></a>
+              <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:var(--text-soft);">Support &amp; care</span></div></a>
+            </div>
+          </div>
+          <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:var(--text-soft);">ANC visits &amp; checklist</span></div></a>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:var(--text-soft);">4th trimester care</span></div></a>
+          <a href="breastfeeding-journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:var(--text-soft);">Latch, supply, nutrition</span></div></a>
+          <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:var(--text-soft);">Perimenopause &amp; beyond</span></div></a>
+        </div>
+      </div>
+
+      <!-- Services dropdown — untouched -->
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Services <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown">
+          <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-grid-2"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:var(--deep-pink);">Services Available</strong><span style="font-size:.73rem;color:var(--text-soft);">Browse all our services</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="symptom_checker.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:var(--text-soft);">AI-powered diagnosis</span></div>
+          </a>
+          <a href="dashboard.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:var(--text-soft);">Track your health</span></div>
+          </a>
+          <a href="screening.html" class="dd-item">
+            <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:var(--text-soft);">Cancer &amp; preventive</span></div>
+          </a>
+          <a href="vaccination.html" class="dd-item">
+            <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:var(--text-soft);">Immunization schedule</span></div>
+          </a>
+          <a href="otc.html" class="dd-item">
+            <div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:var(--text-soft);">Safe self-care options</span></div>
+          </a>
+          <a href="government_schemes.html" class="dd-item">
+            <div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:var(--text-soft);">Benefits you deserve</span></div>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+
+          </a>
+        </div>
+      </div>
+
+      <!-- Stories -->
+      <div class="nav-item">
+        <a href="stories.html" class="nav-link">Stories</a>
+      </div>
+
+      <!-- About Us -->
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <!-- Additional Info dropdown -->
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Additional Info <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown" style="min-width:240px;">
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+          <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:var(--text-soft);">Cycle, conceiving &amp; IVF</span></div></a>
+          <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:var(--text-soft);">All trimesters covered</span></div></a>
+          <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:var(--text-soft);">Newborn &amp; postpartum</span></div></a>
+          <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:var(--text-soft);">Menopause, bone, mental</span></div></a>
+          <div class="dd-sep"></div>
+          <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:var(--text-soft);">Share &amp; connect</span></div></a>
+          <div class="dd-sep"></div>
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:var(--text-soft);">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:var(--text-soft);">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:var(--text-soft);">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:var(--text-soft);">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Osteoporosis prevention</span></div></a>
+          <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:var(--text-soft);">Anxiety, depression, support</span></div></a>
+          <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:var(--text-soft);">You are never alone</span></div></a>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- Right: Sign In + Contact Us -->
+    <div class="nav-actions">
+      <a class="btn-nav outline" href="signin.html">
+        <i class="fa-regular fa-user"></i> Sign In
+      </a>
+      <a class="btn-nav primary" href="contact.html">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-section">Navigation</div>
+  <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:var(--deep-pink);width:20px;"></i> Home</a>
+  <div class="mm-section">Journeys</div>
+  <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:var(--deep-pink);width:20px;"></i> Conceiving</a>
+  <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:var(--deep-pink);width:20px;"></i> Fertility</a>
+  <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:var(--deep-pink);width:20px;"></i> Pregnancy Journey</a>
+  <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+  <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+  <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+  <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:var(--deep-pink);width:20px;"></i> Antenatal Care</a>
+  <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:var(--deep-pink);width:20px;"></i> Newborn &amp; Postpartum</a>
+  <a href="breastfeeding-journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:var(--deep-pink);width:20px;"></i> Breastfeeding</a>
+  <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:var(--deep-pink);width:20px;"></i> Menopause</a>
+  <div class="mm-section">Services</div>
+  <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:var(--deep-pink);width:20px;"></i> Symptom Checker</a>
+  <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:var(--deep-pink);width:20px;"></i> My Dashboard</a>
+  <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:var(--deep-pink);width:20px;"></i> Health Screening</a>
+  <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:var(--deep-pink);width:20px;"></i> Govt Schemes</a>
+  <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+  <div class="mm-section">Specialised Care</div>
+  <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+  <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+  <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+  <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+  <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+  <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+  <div class="mm-section">More</div>
+  <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:var(--deep-pink);width:20px;"></i> Stories</a>
+  <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:var(--deep-pink);width:20px;"></i> Community</a>
+  <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:var(--deep-pink);width:20px;"></i> About Us</a>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+    <a href="signin.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+    <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+  </div>
+</div>
+
+  <div class="page-shell">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <!-- Particle Background -->
+    <div class="hero-constellation-bg" aria-hidden="true">
+      <canvas id="particleCanvas"></canvas>
+      <div class="gradient-morph"></div>
+    </div>
+    
+    <div class="hero-content">
+
+        <div class="hero-badge emergency-badge">
+          <span class="badge-icon">🚨</span>
+          <span class="badge-text">Emergency Decision Helper</span>
+        </div>
+
+        <h1 class="hero-title-3d">
+          Know When to <span class="title-emphasis">Act Fast</span> for Your Safety
+        </h1>
+
+        <p class="hero-subtitle">
+          Quick triage guidance for urgent situations. Clear direction on when to go to ER, call your doctor, or monitor at home—with red flag warnings for serious conditions.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item emergency">
+            <span class="stat-number">911</span>
+            <span class="stat-label">Severe Emergency</span>
+          </div>
+          <div class="stat-item urgent">
+            <span class="stat-number">24h</span>
+            <span class="stat-label">Call Doctor</span>
+          </div>
+          <div class="stat-item monitor">
+            <span class="stat-number">48h</span>
+            <span class="stat-label">Monitor & Track</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-emergency" type="button" onclick="Emergency.scrollTo('#go-to-er')">🚨 Emergency Signs</button>
+          <button class="btn-secondary" type="button" onclick="Emergency.scrollTo('#quick-triage')">Quick Triage Tool</button>
+        </div>
+
+        <div class="emergency-alert">
+          <div class="alert-icon">⚠️</div>
+          <p><strong>Life-Threatening Emergency?</strong> Call 911 immediately if you experience chest pain, difficulty breathing, severe bleeding, or loss of consciousness.</p>
+        </div>
+      </div>
+
+      <!-- Emergency visual navigation (right side animation) -->
+      <div class="hero-visual-3d">
+        <div class="pregnancy-3d-container" aria-label="Interactive emergency navigation">
+          <div class="pregnancy-core emergency-core" aria-hidden="true">
+            <div class="center-glow emergency-glow"></div>
+            <div class="pulse-ring ring-1 emergency-ring"></div>
+            <div class="pulse-ring ring-2 emergency-ring"></div>
+            <div class="pulse-ring ring-3 emergency-ring"></div>
+          </div>
+
+          <button class="health-icon icon-1 emergency-icon" type="button" onclick="Emergency.scrollTo('#go-to-er')">
+            <div class="icon-inner">🚨</div>
+            <div class="icon-label">Go to ER</div>
+          </button>
+          <button class="health-icon icon-2 urgent-icon" type="button" onclick="Emergency.scrollTo('#call-doctor')">
+            <div class="icon-inner">📞</div>
+            <div class="icon-label">Call Doctor</div>
+          </button>
+          <button class="health-icon icon-3 monitor-icon" type="button" onclick="Emergency.scrollTo('#monitor')">
+            <div class="icon-inner">👁️</div>
+            <div class="icon-label">Monitor</div>
+          </button>
+          <button class="health-icon icon-4" type="button" onclick="Emergency.scrollTo('#red-flags')">
+            <div class="icon-inner">🚩</div>
+            <div class="icon-label">Red Flags</div>
+          </button>
+          <button class="health-icon icon-5" type="button" onclick="Emergency.scrollTo('#emergency-numbers')">
+            <div class="icon-inner">☎️</div>
+            <div class="icon-label">Numbers</div>
+          </button>
+
+          <!-- Emergency status indicator -->
+          <div class="week-dial emergency-dial" role="group" aria-label="Emergency assessment">
+            <div class="meter-reading">
+              <span class="reading-icon">🚨</span>
+            </div>
+            <div class="meter-status">Emergency</div>
+            <div class="meter-substatus">Assessment</div>
+          </div>
+        </div>
+
+        <div class="hero-info-box emergency-info-box">
+          <div class="info-badge">
+            <span class="badge-icon">⚡</span>
+            <span class="badge-text">Life-Saving Guidance</span>
+          </div>
+          <h3 class="info-title">Trust Your Instincts</h3>
+          <p class="info-text">
+            When in doubt, seek immediate medical attention. This guide helps you make informed decisions, but always err on the side of caution with your health and safety.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK TRIAGE TOOL -->
+    <section id="quick-triage" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse emergency-pulse"></span>
+          <span class="badge-text">Quick Triage Tool</span>
+        </div>
+        <h2 class="section-title-prominent">
+          3-Second <span class="title-highlight">Decision Guide</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Answer one question to know your next step. Simple, fast, and potentially life-saving.
+        </p>
+      </div>
+
+      <div class="triage-flow">
+        <div class="triage-question">
+          <h3>Are you experiencing any of these RIGHT NOW?</h3>
+          <div class="symptoms-checklist">
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="chest-pain" onchange="Emergency.checkTriage()">
+              <label for="chest-pain">Severe chest pain or pressure</label>
+            </div>
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="breathing" onchange="Emergency.checkTriage()">
+              <label for="breathing">Difficulty breathing or shortness of breath</label>
+            </div>
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="bleeding" onchange="Emergency.checkTriage()">
+              <label for="bleeding">Heavy bleeding (soaking pad in 1 hour)</label>
+            </div>
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="consciousness" onchange="Emergency.checkTriage()">
+              <label for="consciousness">Loss of consciousness or severe confusion</label>
+            </div>
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="vision" onchange="Emergency.checkTriage()">
+              <label for="vision">Sudden vision changes or severe headache</label>
+            </div>
+            <div class="symptom-check emergency-symptom">
+              <input type="checkbox" id="seizure" onchange="Emergency.checkTriage()">
+              <label for="seizure">Seizures or convulsions</label>
+            </div>
+            <div class="symptom-check urgent-symptom">
+              <input type="checkbox" id="fever" onchange="Emergency.checkTriage()">
+              <label for="fever">High fever (>103°F / 39.4°C)</label>
+            </div>
+            <div class="symptom-check urgent-symptom">
+              <input type="checkbox" id="pain" onchange="Emergency.checkTriage()">
+              <label for="pain">Severe abdominal pain</label>
+            </div>
+            <div class="symptom-check monitor-symptom">
+              <input type="checkbox" id="mild-symptoms" onchange="Emergency.checkTriage()">
+              <label for="mild-symptoms">Mild symptoms that concern me</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="triage-result" class="triage-result hidden">
+          <!-- Result will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- GO TO ER NOW -->
+    <section id="go-to-er" class="journey-section emergency-section">
+      <div class="section-header">
+        <div class="header-badge-prominent emergency-badge-header">
+          <span class="badge-pulse emergency-pulse"></span>
+          <span class="badge-text">🚨 GO TO ER NOW</span>
+        </div>
+        <h2 class="section-title-prominent">
+          <span class="title-highlight emergency-title">Life-Threatening</span> Emergencies
+        </h2>
+        <p class="section-subtitle-prominent">
+          Call 911 or go to the nearest emergency room immediately if you experience any of these symptoms.
+        </p>
+      </div>
+
+      <div class="emergency-grid">
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">🫀</div>
+            <h3>Preeclampsia Crisis</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Severe headache that won't go away</li>
+              <li>Visual disturbances (flashing lights, spots)</li>
+              <li>Upper right abdominal pain</li>
+              <li>Sudden swelling of face and hands</li>
+              <li>Sudden weight gain (>5 lbs in a week)</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Call 911 immediately. This can lead to seizures (eclampsia) and is life-threatening.
+          </div>
+        </div>
+
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">🩸</div>
+            <h3>Severe Hemorrhage</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Soaking through 1+ pad per hour</li>
+              <li>Passing large clots (larger than golf ball)</li>
+              <li>Dizziness or fainting</li>
+              <li>Rapid heartbeat</li>
+              <li>Cold, clammy skin</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Go to ER now. Severe bleeding can lead to shock and requires immediate intervention.
+          </div>
+        </div>
+
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">💔</div>
+            <h3>Miscarriage Emergency</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Heavy bleeding with severe cramping</li>
+              <li>Tissue passing with blood</li>
+              <li>Severe abdominal pain</li>
+              <li>Fever with bleeding</li>
+              <li>Foul-smelling discharge</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Seek immediate care. Risk of infection or incomplete miscarriage requiring intervention.
+          </div>
+        </div>
+
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">🫁</div>
+            <h3>Severe Respiratory Distress</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Difficulty breathing or catching breath</li>
+              <li>Chest pain with breathing</li>
+              <li>Blue lips or fingertips</li>
+              <li>Rapid breathing (>30 breaths/min)</li>
+              <li>Wheezing or gasping</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Call 911. Could indicate pulmonary embolism, severe asthma, or heart issues.
+          </div>
+        </div>
+
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">🧠</div>
+            <h3>Mental Health Crisis</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Thoughts of harming self or baby</li>
+              <li>Hallucinations or delusions</li>
+              <li>Severe confusion or disorientation</li>
+              <li>Extreme paranoia</li>
+              <li>Unable to care for self or baby</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Call 988 (Suicide & Crisis Lifeline) or go to ER. Postpartum psychosis is a medical emergency.
+          </div>
+        </div>
+
+        <div class="emergency-card severe">
+          <div class="emergency-header">
+            <div class="emergency-icon">🌡️</div>
+            <h3>Severe Infection</h3>
+          </div>
+          <div class="emergency-symptoms">
+            <h4>Red Flag Symptoms:</h4>
+            <ul>
+              <li>Fever >103°F (39.4°C)</li>
+              <li>Chills and shaking</li>
+              <li>Rapid heartbeat (>120 bpm)</li>
+              <li>Severe pain (mastitis, incision)</li>
+              <li>Red streaking from wound or breast</li>
+            </ul>
+          </div>
+          <div class="emergency-action">
+            <strong>Action:</strong> Go to ER. Sepsis can develop rapidly and is life-threatening without treatment.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL DOCTOR WITHIN 24H -->
+    <section id="call-doctor" class="journey-section urgent-section">
+      <div class="section-header">
+        <div class="header-badge-prominent urgent-badge-header">
+          <span class="badge-pulse urgent-pulse"></span>
+          <span class="badge-text">📞 CALL DOCTOR WITHIN 24H</span>
+        </div>
+        <h2 class="section-title-prominent">
+          <span class="title-highlight urgent-title">Urgent</span> But Not Emergency
+        </h2>
+        <p class="section-subtitle-prominent">
+          These symptoms require medical attention soon, but you have time to contact your provider during business hours or use an urgent care clinic.
+        </p>
+      </div>
+
+      <div class="urgent-grid">
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">🤒</div>
+            <h3>Moderate Fever</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Fever 100.4-103°F (38-39.4°C)</li>
+              <li>Persisting more than 24 hours</li>
+              <li>With body aches or fatigue</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call your OB/GYN or primary care within 24 hours.
+          </div>
+        </div>
+
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">🤰</div>
+            <h3>Decreased Fetal Movement</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Less than 10 movements in 2 hours</li>
+              <li>Significant change from normal pattern</li>
+              <li>No movement after cold drink/snack</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call your OB immediately—same day assessment needed.
+          </div>
+        </div>
+
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">💧</div>
+            <h3>Possible Water Breaking</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Continuous fluid leaking</li>
+              <li>Clear or pale yellow fluid</li>
+              <li>Before 37 weeks gestation</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call your OB immediately—may need immediate evaluation.
+          </div>
+        </div>
+
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">🩹</div>
+            <h3>Mastitis Symptoms</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Breast pain with redness</li>
+              <li>Fever and flu-like symptoms</li>
+              <li>Warm, swollen area on breast</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call within 24h. Antibiotics usually needed to prevent abscess.
+          </div>
+        </div>
+
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">🩺</div>
+            <h3>Blood Sugar Issues (GDM)</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Consistently high readings (>200 mg/dL)</li>
+              <li>Very low readings (<60 mg/dL)</li>
+              <li>Symptoms not improving with treatment</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call your OB or endocrinologist within 24h for adjustment.
+          </div>
+        </div>
+
+        <div class="urgent-card">
+          <div class="urgent-header">
+            <div class="urgent-icon">😰</div>
+            <h3>Severe Depression/Anxiety</h3>
+          </div>
+          <div class="urgent-symptoms">
+            <ul>
+              <li>Unable to function or care for baby</li>
+              <li>Panic attacks or extreme anxiety</li>
+              <li>Overwhelming sadness for 2+ weeks</li>
+            </ul>
+          </div>
+          <div class="urgent-action">
+            Call your OB or mental health provider. This needs treatment.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MONITOR AT HOME -->
+    <section id="monitor" class="journey-section monitor-section">
+      <div class="section-header">
+        <div class="header-badge-prominent monitor-badge-header">
+          <span class="badge-pulse monitor-pulse"></span>
+          <span class="badge-text">👁️ MONITOR AT HOME</span>
+        </div>
+        <h2 class="section-title-prominent">
+          <span class="title-highlight monitor-title">Self-Care</span> and Watch
+        </h2>
+        <p class="section-subtitle-prominent">
+          These symptoms can often be managed at home with monitoring. Call if they worsen or persist beyond 48 hours.
+        </p>
+      </div>
+
+      <div class="monitor-grid">
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">🤢</div>
+            <h3>Mild Nausea/Vomiting</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Can keep some fluids down</li>
+                <li>No severe dehydration</li>
+                <li>Occasional vomiting only</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Small, frequent meals</li>
+                <li>Ginger tea or candies</li>
+                <li>Stay hydrated</li>
+                <li>Rest when needed</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Can't keep fluids down for 12+ hours
+          </div>
+        </div>
+
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">😴</div>
+            <h3>Fatigue & Mild Mood Changes</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Feeling tired but functioning</li>
+                <li>Mild baby blues (first 2 weeks)</li>
+                <li>Still bonding with baby</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Accept help from others</li>
+                <li>Nap when baby naps</li>
+                <li>Talk to supportive friends</li>
+                <li>Light exercise/fresh air</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Not improving after 2 weeks or worsening
+          </div>
+        </div>
+
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">🩹</div>
+            <h3>Minor Incision Discomfort</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Mild redness around edges</li>
+                <li>Normal healing pain</li>
+                <li>No drainage or foul smell</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Keep incision clean and dry</li>
+                <li>Wear loose clothing</li>
+                <li>Take prescribed pain meds</li>
+                <li>Avoid heavy lifting</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Increasing redness, pus, or opening of incision
+          </div>
+        </div>
+
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">🤱</div>
+            <h3>Mild Breastfeeding Issues</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Sore nipples without cracks</li>
+                <li>Mild engorgement</li>
+                <li>Baby learning to latch</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Ensure proper latch</li>
+                <li>Use lanolin cream</li>
+                <li>Apply warm compresses</li>
+                <li>Feed on demand</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Fever, severe pain, or red streaking on breast
+          </div>
+        </div>
+
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">🌊</div>
+            <h3>Mild Swelling</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Gradual, mild swelling</li>
+                <li>Improves with elevation</li>
+                <li>Both sides equal</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Elevate legs when sitting</li>
+                <li>Avoid standing long periods</li>
+                <li>Stay hydrated</li>
+                <li>Wear compression socks</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Sudden swelling of face/hands or one-sided leg swelling
+          </div>
+        </div>
+
+        <div class="monitor-card">
+          <div class="monitor-header">
+            <div class="monitor-icon">🤕</div>
+            <h3>Mild Headaches</h3>
+          </div>
+          <div class="monitor-details">
+            <div class="monitor-symptoms">
+              <strong>When to monitor:</strong>
+              <ul>
+                <li>Tension-type headaches</li>
+                <li>Responds to rest/hydration</li>
+                <li>No visual changes</li>
+              </ul>
+            </div>
+            <div class="monitor-care">
+              <strong>Self-care:</strong>
+              <ul>
+                <li>Stay hydrated</li>
+                <li>Rest in dark, quiet room</li>
+                <li>Cold compress on forehead</li>
+                <li>Acetaminophen if approved</li>
+              </ul>
+            </div>
+          </div>
+          <div class="monitor-warning">
+            ⚠️ Call if: Severe, sudden, or with vision changes
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RED FLAGS SUMMARY -->
+    <section id="red-flags" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Red Flags Summary</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Quick <span class="title-highlight">Reference Guide</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Print or save this section for quick reference during emergencies.
+        </p>
+      </div>
+
+      <div class="red-flags-table">
+        <div class="flags-column emergency-column">
+          <h3>🚨 GO TO ER NOW</h3>
+          <ul>
+            <li>Severe headache + vision changes</li>
+            <li>Chest pain or trouble breathing</li>
+            <li>Heavy bleeding (1+ pad/hour)</li>
+            <li>Thoughts of self-harm</li>
+            <li>Seizures or loss of consciousness</li>
+            <li>Severe abdominal pain</li>
+            <li>Fever >103°F with chills</li>
+          </ul>
+        </div>
+
+        <div class="flags-column urgent-column">
+          <h3>📞 CALL WITHIN 24H</h3>
+          <ul>
+            <li>Decreased fetal movement</li>
+            <li>Moderate fever (100.4-103°F)</li>
+            <li>Possible water breaking</li>
+            <li>Mastitis symptoms</li>
+            <li>Consistently high/low blood sugar</li>
+            <li>Severe depression lasting 2+ weeks</li>
+            <li>Regular contractions before 37 weeks</li>
+          </ul>
+        </div>
+
+        <div class="flags-column monitor-column">
+          <h3>👁️ MONITOR 48H</h3>
+          <ul>
+            <li>Mild nausea (keeping fluids down)</li>
+            <li>Normal fatigue and baby blues</li>
+            <li>Minor incision discomfort</li>
+            <li>Sore nipples without cracks</li>
+            <li>Mild, gradual swelling</li>
+            <li>Tension headaches</li>
+            <li>Mild constipation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMERGENCY NUMBERS -->
+    <section id="emergency-numbers" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Emergency Contacts</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Save These <span class="title-highlight">Numbers Now</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Keep these contacts easily accessible on your phone and shared with family members.
+        </p>
+      </div>
+
+      <div class="numbers-grid">
+        <div class="number-card emergency-number">
+          <div class="number-icon">🚨</div>
+          <h3>Emergency Services</h3>
+          <div class="number-display">911</div>
+          <p>For life-threatening emergencies requiring immediate medical attention</p>
+        </div>
+
+        <div class="number-card crisis-number">
+          <div class="number-icon">💭</div>
+          <h3>Suicide & Crisis Lifeline</h3>
+          <div class="number-display">988</div>
+          <p>24/7 mental health crisis support, completely confidential</p>
+        </div>
+
+        <div class="number-card support-number">
+          <div class="number-icon">🤱</div>
+          <h3>Postpartum Support International</h3>
+          <div class="number-display">1-800-944-4773</div>
+          <p>Helpline for perinatal mood and anxiety disorders</p>
+        </div>
+
+        <div class="number-card poison-number">
+          <div class="number-icon">☠️</div>
+          <h3>Poison Control</h3>
+          <div class="number-display">1-800-222-1222</div>
+          <p>24/7 help for poisoning or medication questions</p>
+        </div>
+
+        <div class="number-card nurse-number">
+          <div class="number-icon">👩‍⚕️</div>
+          <h3>Nurse Advice Line</h3>
+          <div class="number-display">Check Your Insurance Card</div>
+          <p>Most insurance plans have 24/7 nurse hotlines</p>
+        </div>
+
+        <div class="number-card personal-number">
+          <div class="number-icon">👨‍⚕️</div>
+          <h3>Your OB/GYN</h3>
+          <div class="number-input-container">
+            <input type="tel" id="ob-number" class="number-input" placeholder="Enter number">
+            <button onclick="Emergency.saveNumber('ob')" class="save-btn">Save</button>
+          </div>
+          <p>Add your doctor's after-hours emergency line</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHEN IN DOUBT -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">When In Doubt, Seek Help</h2>
+        <p class="cta-subtitle">Trust your instincts. It's always better to be checked and reassured than to wait and risk serious complications. Your health and safety come first.</p>
+        <div class="cta-buttons">
+          <button class="btn-emergency" onclick="Emergency.call911()">🚨 Call 911</button>
+          <button class="btn-secondary" onclick="Emergency.scrollTo('#emergency-numbers')">View All Numbers</button>
+        </div>
+      </div>
+    </section>
+
+    <style>
+  :root {
+    --bg-footer:    #1e1a1e;
+    --bg-bottom:    #161316;
+    --pink-primary: #e8517a;
+    --pink-soft:    #f0748e;
+    --text-main-f:  #c9bfc9;
+    --text-muted-f: #7c7080;
+    --divider-f:    rgba(232,81,122,0.18);
+    --font-display-f:'Playfair Display', Georgia, serif;
+    --font-body-f:  'DM Sans', sans-serif;
+  }
+  footer.ns-footer {
+    background: var(--bg-footer);
+    color: var(--text-main-f);
+    font-family: var(--font-body-f);
+    border-top: 1px solid var(--divider-f);
+  }
+  .footer-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .footer-col h3 {
+    font-family: var(--font-display-f);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--pink-primary);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+  }
+  .footer-col p {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--text-main-f);
+    font-weight: 300;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    font-size: 0.875rem;
+    color: var(--text-main-f);
+    padding: 5px 0;
+    font-weight: 300;
+    position: relative;
+    padding-left: 14px;
+    transition: color 0.2s;
+  }
+  .footer-col ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--pink-primary);
+    opacity: 0.5;
+  }
+  .footer-col ul li:hover { color: var(--pink-soft); }
+  .disclaimer-text { font-size: 0.875rem; line-height: 1.75; color: var(--text-main-f); font-weight: 300; }
+  .emergency-alert-f { font-size: 0.875rem; line-height: 1.7; color: var(--pink-primary); font-weight: 500; }
+  .emergency-alert-f strong { font-weight: 600; }
+  .footer-meta {
+    border-top: 1px solid var(--divider-f);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  .footer-meta .meta-line { font-size: 0.8rem; color: var(--text-muted-f); letter-spacing: 0.04em; margin-bottom: 10px; }
+  .footer-meta .meta-line .sep { color: var(--pink-primary); margin: 0 6px; }
+  .footer-meta .tagline { font-size: 0.82rem; color: var(--text-muted-f); display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .footer-meta .tagline .heart { color: var(--pink-primary); font-size: 1rem; animation: footerPulse 2s ease-in-out infinite; }
+  @keyframes footerPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.8; } }
+  .footer-bottom { background: var(--bg-bottom); border-top: 1px solid rgba(255,255,255,0.04); }
+  .footer-bottom-inner { max-width: 1200px; margin: 0 auto; padding: 22px 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { font-size: 0.82rem; color: var(--text-muted-f); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--pink-soft); }
+  .footer-copy { font-size: 0.78rem; color: var(--text-muted-f); opacity: 0.7; letter-spacing: 0.02em; }
+  @media (max-width: 900px) { .footer-main { grid-template-columns: repeat(2,1fr); gap: 32px; } }
+  @media (max-width: 540px) { .footer-main { grid-template-columns: 1fr; padding: 40px 20px 32px; } .footer-meta { padding: 20px; } .footer-bottom-inner { padding: 18px 20px; } .footer-links { gap: 20px; } }
+</style>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert-f">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+  </div>
+
+  <script>
+
+    /* emergency_guide.js
+   Nari Swasthya — Emergency Decision Helper
+   Matches antenatal_care.js animation patterns with emergency features
+*/
+(function () {
+  "use strict";
+
+  /* Global Emergency object for inline onclick handlers */
+  window.Emergency = window.Emergency || {};
+  const Emergency = window.Emergency;
+
+  /* Helper functions */
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  /* Smooth scroll function */
+  Emergency.scrollTo = function(selector) {
+    const el = $(selector);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  /* Call 911 function */
+  Emergency.call911 = function() {
+    if (confirm('This will dial 911. Do you want to proceed?')) {
+      window.location.href = 'tel:911';
+    }
+  };
+
+  /* Save personal doctor number */
+  Emergency.saveNumber = function(type) {
+    const input = $('#ob-number');
+    if (!input) return;
+    
+    const number = input.value.trim();
+    if (number) {
+      localStorage.setItem('emergency_ob_number', number);
+      alert('✅ Number saved! It will be stored securely on your device.');
+      input.style.borderColor = 'var(--success)';
+      setTimeout(() => {
+        input.style.borderColor = '';
+      }, 2000);
+    } else {
+      alert('Please enter a valid phone number.');
+    }
+  };
+
+  /* Load saved number */
+  function loadSavedNumber() {
+    const saved = localStorage.getItem('emergency_ob_number');
+    const input = $('#ob-number');
+    if (saved && input) {
+      input.value = saved;
+      input.placeholder = saved;
+    }
+  }
+
+  /* Triage Assessment Logic */
+  Emergency.checkTriage = function() {
+    const emergencySymptoms = [
+      'chest-pain', 'breathing', 'bleeding', 
+      'consciousness', 'vision', 'seizure'
+    ];
+    const urgentSymptoms = ['fever', 'pain'];
+    const monitorSymptoms = ['mild-symptoms'];
+
+    let hasEmergency = false;
+    let hasUrgent = false;
+    let hasMonitor = false;
+
+    // Check which symptoms are selected
+    emergencySymptoms.forEach(id => {
+      const checkbox = $(`#${id}`);
+      if (checkbox && checkbox.checked) {
+        hasEmergency = true;
+      }
+    });
+
+    urgentSymptoms.forEach(id => {
+      const checkbox = $(`#${id}`);
+      if (checkbox && checkbox.checked) {
+        hasUrgent = true;
+      }
+    });
+
+    monitorSymptoms.forEach(id => {
+      const checkbox = $(`#${id}`);
+      if (checkbox && checkbox.checked) {
+        hasMonitor = true;
+      }
+    });
+
+    // Display appropriate result
+    const resultDiv = $('#triage-result');
+    if (!resultDiv) return;
+
+    resultDiv.classList.remove('hidden');
+
+    if (hasEmergency) {
+      showEmergencyResult(resultDiv);
+    } else if (hasUrgent) {
+      showUrgentResult(resultDiv);
+    } else if (hasMonitor) {
+      showMonitorResult(resultDiv);
+    } else {
+      resultDiv.classList.add('hidden');
+    }
+  };
+
+  function showEmergencyResult(container) {
+    container.className = 'triage-result emergency-result';
+    container.innerHTML = `
+      <div class="result-icon">🚨</div>
+      <h3 class="result-title" style="color: var(--emergency);">GO TO ER NOW</h3>
+      <p class="result-description">
+        You are experiencing symptoms that could be life-threatening. <strong>Call 911</strong> or go to the nearest emergency room immediately. Do not drive yourself—call an ambulance or have someone take you.
+      </p>
+      <button class="result-action btn-emergency" onclick="Emergency.call911()">
+        🚨 Call 911 Now
+      </button>
+    `;
+  }
+
+  function showUrgentResult(container) {
+    container.className = 'triage-result urgent-result';
+    container.innerHTML = `
+      <div class="result-icon">📞</div>
+      <h3 class="result-title" style="color: var(--urgent);">CALL DOCTOR WITHIN 24 HOURS</h3>
+      <p class="result-description">
+        Your symptoms require medical attention but are not immediately life-threatening. Contact your OB/GYN or primary care provider within the next 24 hours for evaluation. If symptoms worsen, go to the ER.
+      </p>
+      <button class="result-action" style="background: var(--urgent); color: white;" onclick="Emergency.scrollTo('#emergency-numbers')">
+        📞 View Contact Numbers
+      </button>
+    `;
+  }
+
+  function showMonitorResult(container) {
+    container.className = 'triage-result monitor-result';
+    container.innerHTML = `
+      <div class="result-icon">👁️</div>
+      <h3 class="result-title" style="color: var(--monitor);">MONITOR AT HOME</h3>
+      <p class="result-description">
+        Your symptoms can likely be managed at home with self-care. Monitor closely for the next 24-48 hours. If symptoms worsen or new symptoms develop, contact your healthcare provider. Trust your instincts—when in doubt, call.
+      </p>
+      <button class="result-action" style="background: var(--monitor); color: white;" onclick="Emergency.scrollTo('#monitor')">
+        👁️ View Self-Care Tips
+      </button>
+    `;
+  }
+
+  /* Enhanced Particle Animation with Emergency Red Theme */
+  (function initEnhancedParticles() {
+    const particleCanvas = document.getElementById('particleCanvas');
+    if (!particleCanvas) return;
+    
+    const ctx = particleCanvas.getContext('2d');
+    
+    function resizeCanvas() {
+      particleCanvas.width = particleCanvas.offsetWidth;
+      particleCanvas.height = particleCanvas.offsetHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    const particleCount = 100;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * particleCanvas.width;
+        this.y = Math.random() * particleCanvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        if (this.x < 0 || this.x > particleCanvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > particleCanvas.height) this.vy *= -1;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 23, 68, 0.6)'; // Emergency red
+        ctx.fill();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255, 23, 68, ${0.2 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      connectParticles();
+      
+      requestAnimationFrame(animateParticles);
+    }
+    
+    animateParticles();
+  })();
+
+  /* Initialize on DOM ready */
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Nari Swasthya Emergency Guide initialized');
+    
+    // Load saved doctor number
+    loadSavedNumber();
+
+    // Add smooth scroll behavior to all internal links
+    $$('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href !== '#') {
+          e.preventDefault();
+          Emergency.scrollTo(href);
+        }
+      });
+    });
+
+    // Animate cards on scroll
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            entry.target.style.transition = 'all 0.6s ease';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 100);
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe cards for scroll animation
+    $$('.emergency-card, .urgent-card, .monitor-card, .number-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Add emergency number click-to-call functionality
+    $$('.number-display').forEach(display => {
+      const text = display.textContent.trim();
+      // Check if it's a phone number (contains digits and dashes/parentheses)
+      if (/[\d\-\(\)]+/.test(text) && !text.includes('Check')) {
+        display.style.cursor = 'pointer';
+        display.style.textDecoration = 'underline';
+        display.title = 'Click to call';
+        
+        display.addEventListener('click', function() {
+          const number = this.textContent.replace(/\D/g, ''); // Remove non-digits
+          if (number) {
+            if (confirm(`Call ${this.textContent}?`)) {
+              window.location.href = `tel:${number}`;
+            }
+          }
+        });
+      }
+    });
+
+    // Make symptom check labels clickable
+    $$('.symptom-check label').forEach(label => {
+      label.addEventListener('click', function(e) {
+        // Prevent double-toggling
+        if (e.target.tagName !== 'INPUT') {
+          const checkbox = this.parentElement.querySelector('input[type="checkbox"]');
+          if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+            Emergency.checkTriage();
+          }
+        }
+      });
+    });
+
+    // Emergency alert auto-hide option
+    const emergencyAlert = $('.emergency-alert');
+    if (emergencyAlert) {
+      emergencyAlert.addEventListener('click', function() {
+        this.style.opacity = '0.7';
+        setTimeout(() => {
+          this.style.opacity = '1';
+        }, 200);
+      });
+    }
+
+    // Print functionality for red flags section
+    const redFlagsSection = $('#red-flags');
+    if (redFlagsSection) {
+      const printBtn = document.createElement('button');
+      printBtn.className = 'btn-secondary';
+      printBtn.textContent = '🖨️ Print Reference Guide';
+      printBtn.style.marginTop = '2rem';
+      printBtn.style.display = 'block';
+      printBtn.style.margin = '2rem auto 0';
+      
+      printBtn.addEventListener('click', function() {
+        window.print();
+      });
+      
+      redFlagsSection.appendChild(printBtn);
+    }
+
+    // Keyboard shortcuts for emergency
+    document.addEventListener('keydown', function(e) {
+      // Press 'E' for emergency section
+      if (e.key === 'e' || e.key === 'E') {
+        if (!e.target.matches('input, textarea')) {
+          Emergency.scrollTo('#go-to-er');
+        }
+      }
+      // Press '9' for quick 911
+      if (e.key === '9' && e.ctrlKey) {
+        e.preventDefault();
+        Emergency.call911();
+      }
+    });
+  });
+
+  /* Expose utility functions */
+  Emergency.printGuide = function() {
+    window.print();
+  };
+
+  Emergency.resetTriage = function() {
+    $$('input[type="checkbox"]').forEach(cb => {
+      cb.checked = false;
+    });
+    const resultDiv = $('#triage-result');
+    if (resultDiv) {
+      resultDiv.classList.add('hidden');
+    }
+  };
+
+})();
+
+
+  </script>
+
+  <script>
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+  </script>
+</body>
+</html>

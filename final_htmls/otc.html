@@ -1,0 +1,3430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contraception Compass – Interactive Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<style>
+  /* Design tokens aligned to menopause.html palette + typography [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+:root{
+  --pink: #ec407a;
+  --deep-pink: #d81b60;
+  --lavender: #ede7f6;
+  --bg: #faf5fb;
+  --card-bg: #ffffff;
+  --text-main: #212121;
+  --text-soft: #555;
+  --border-soft: #e0e0e0;
+  --chip-bg: #f3e5f5;
+
+  --shadow-lg: 0 18px 45px rgba(0,0,0,0.08);
+  --shadow-md: 0 16px 40px rgba(0,0,0,0.06);
+  --shadow-sm: 0 10px 28px rgba(0,0,0,0.06);
+
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base */
+*{ box-sizing: border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height:1.5;
+}
+
+/* ===================== HEADER ===================== */
+    .site-header{
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      padding:0;
+      box-shadow:0 2px 24px rgba(236,64,122,0.09);
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(236,64,122,0.08);
+    }
+
+    /* Floating Hearts Background Animation */
+    .site-header::before {
+      content: '💗 ✨ 🌸 💕 ⭐ 🦋 💗 ✨ 🌸 💕';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      gap: 3rem;
+      opacity: 0.08;
+      animation: float-emojis 40s linear infinite;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @keyframes float-emojis {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+
+    /* Sparkle Effect on Hover */
+    .site-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(236, 64, 122, 0.1) 0%, 
+        transparent 25%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .site-header:hover::after {
+      opacity: 1;
+    }
+
+    .nav-container{
+      max-width:1400px;margin:0 auto;
+      padding:0 1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      height:64px;
+    }
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+    }
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{
+      text-decoration:none;font-family:'Playfair Display',serif;
+      font-weight:900;font-size:1.25rem;line-height:1.1;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .logo-text span{
+      font-size:.62rem;color:#555;font-family:'Manrope',sans-serif;
+      font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:.3rem;
+      text-decoration:none;color:#212121;
+      font-weight:500;font-size:.875rem;
+      padding:.55rem .75rem;border-radius:8px;
+      transition:all .25s;white-space:nowrap;
+      cursor:pointer;background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-link.active{color:#d81b60;background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{font-size:.6rem;transition:transform .25s;color:#555;margin-top:1px;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{
+      position:absolute;top:calc(100% + 8px);left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      min-width:220px;background:white;border-radius:16px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+      opacity:0;pointer-events:none;
+      transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+    }
+    .nav-dropdown::before{
+      content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+      border:6px solid transparent;border-bottom-color:white;
+      border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+    }
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+      opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+    }
+    .dd-item{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.65rem .9rem;border-radius:10px;
+      text-decoration:none;color:#212121;font-size:.85rem;font-weight:500;transition:all .2s;
+    }
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1.1rem;}
+    .dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .dd-sep{height:1px;background:#e0e0e0;margin:.3rem .5rem;}
+    /* Flyout submenu — appears to the right of the parent row */
+    .dd-has-flyout{position:relative;}
+    .dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      display:none;position:absolute;top:0;left:calc(100% + 4px);
+      min-width:190px;background:white;border-radius:12px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+    }
+    .dd-has-flyout:hover>.dd-flyout,
+    .dd-has-flyout:focus-within>.dd-flyout{display:block;}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:#d81b60;}
+    .dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+    .dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{
+      padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+      font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    .btn-nav.outline{
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);
+    }
+    .btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+    .btn-nav.primary{border:1.5px solid #d81b60;color:#d81b60;background:#fff;}
+    .btn-nav.primary:hover{background:rgba(236,64,122,0.05);}
+    .hamburger{
+      display:none;width:38px;height:38px;border-radius:10px;
+      background:none;border:1.5px solid #e0e0e0;
+      align-items:center;justify-content:center;cursor:pointer;
+      flex-direction:column;gap:4px;padding:8px;
+    }
+    .hamburger span{display:block;height:2px;background:#212121;border-radius:2px;transition:all .3s;}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+      z-index:999;padding:1.5rem;overflow-y:auto;
+    }
+    .mm-action-btn{display:inline-flex !important;}
+    .mobile-menu.open{display:block;}
+    .mm-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.85rem 1rem;border-radius:12px;
+      text-decoration:none;color:#212121;font-weight:500;font-size:1rem;
+      transition:all .2s;border-bottom:1px solid #e0e0e0;
+    }
+    .mm-link:hover{color:#d81b60;background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){
+      .main-nav{display:none;}
+      .hamburger{display:flex;}
+      .nav-actions .btn-nav{display:none;}
+    }
+
+
+/* Layout shell [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+.page-shell{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 6rem;
+}
+.section-block{ margin-bottom: 2.5rem; }
+.section-title-row{
+  display:flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+.section-tagline{
+  font-size: .88rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+h1,h2,h3,h4{ margin:0 0 .5rem; }
+
+/* Cards (bible) [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+.card{
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.card-header-label{
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--deep-pink);
+  margin-bottom: .25rem;
+}
+
+/* Buttons (bible style) [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+.btn-primary{
+  background: var(--deep-pink);
+  color: #fff;
+  border-radius: var(--radius-pill);
+  padding: .6rem 1.2rem;
+  border: none;
+  cursor: pointer;
+  font-size: .92rem;
+  font-weight: 750;
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+  box-shadow: 0 12px 26px rgba(216,27,96,0.22);
+}
+.btn-primary:hover{ transform: translateY(-2px); }
+.btn-secondary{
+  background: transparent;
+  color: var(--deep-pink);
+  border-radius: var(--radius-pill);
+  padding: .55rem 1.1rem;
+  border: 1px solid rgba(216,27,96,0.35);
+  cursor:pointer;
+  font-size: .92rem;
+  font-weight: 750;
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.btn-secondary:hover{ transform: translateY(-2px); background: rgba(236,64,122,0.06); }
+
+.icon-btn{
+  border: none;
+  background: rgba(0,0,0,0.04);
+  border-radius: 12px;
+  padding: .45rem .6rem;
+  cursor:pointer;
+  transition: transform .2s var(--ease), background .2s var(--ease);
+}
+.icon-btn:hover{ transform: translateY(-1px); background: rgba(236,64,122,0.10); }
+
+/* Hero constellation section (borrowed vibe) [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+.hero-constellation{
+  position: relative;
+  overflow: hidden;
+  display:flex;
+  align-items:center;
+  padding: 2rem 1rem;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, #faf5fb 0%, #ede7f6 50%, #fce4ec 100%);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 1.8rem;
+}
+.constellation-bg{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+#particleCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.gradient-morph{
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(236,64,122,0.08) 0%, transparent 55%);
+  transition: background .25s var(--ease);
+  pointer-events:none;
+}
+.hero-content-wrapper{
+  position: relative;
+  z-index:2;
+  max-width: 1400px;
+  margin: 0 auto;
+  display:grid;
+  grid-template-columns: 1.1fr 1.2fr;
+  gap: 3rem;
+  align-items:center;
+  width: 100%;
+}
+@media (max-width: 1024px){
+  .hero-content-wrapper{ grid-template-columns: 1fr; gap: 2rem; }
+}
+.hero-left{
+  display:flex;
+  flex-direction:column;
+  gap: 1.1rem;
+}
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  font-size: .85rem;
+  font-weight: 750;
+  color: var(--deep-pink);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.pulse-dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--deep-pink);
+  animation: pulse-glow 2s infinite;
+}
+@keyframes pulse-glow{
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:.5; transform:scale(1.3); }
+}
+.hero-title-3d{
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 900;
+  line-height: 1.06;
+  margin: 0;
+  display:flex;
+  flex-direction:column;
+  gap: .12rem;
+}
+.title-line{
+  display:block;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color: transparent;
+  background-clip:text;
+  will-change: transform;
+  animation: title-float 3s ease-in-out infinite;
+}
+.title-line:nth-child(2){ animation-delay:.18s; }
+.title-line:nth-child(3){ animation-delay:.36s; }
+.title-emphasis{
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 60%, #ad1457 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color: transparent;
+  background-clip:text;
+  text-shadow: 0 10px 30px rgba(236,64,122,0.25);
+  transform: scale(1.03);
+}
+@keyframes title-float{
+  0%,100%{ transform: translateY(0px); }
+  50%{ transform: translateY(-5px); }
+}
+.hero-description{
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 58ch;
+  margin:0;
+}
+.badge-orbit{
+  display:flex;
+  flex-wrap:wrap;
+  gap: .85rem;
+}
+.hero-badge-3d{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding: .6rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236,64,122,0.2);
+  box-shadow: 0 4px 15px rgba(236,64,122,0.10),
+              inset 0 1px 0 rgba(255,255,255,0.5);
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  will-change: transform;
+  animation: badge-float 4s ease-in-out infinite;
+}
+.hero-badge-3d:hover{
+  transform: translateY(-3px) scale(1.03);
+  transition: all .25s var(--ease);
+}
+.badge-2{ animation-delay:.5s; }
+.badge-3{ animation-delay:1s; }
+@keyframes badge-float{
+  0%,100%{ transform: translateY(0px) rotate(0deg); }
+  50%{ transform: translateY(-8px) rotate(1.2deg); }
+}
+.badge-icon{ font-size: 1.1rem; }
+
+.hero-cta-constellation{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 1rem;
+}
+.btn-primary-3d, .btn-secondary-3d{
+  position: relative;
+  display:inline-flex;
+  align-items:center;
+  gap: .6rem;
+  padding: .9rem 1.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 800;
+  border:none;
+  cursor:pointer;
+  transition: all .3s var(--ease);
+  overflow:hidden;
+}
+.btn-primary-3d{
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+  color:#fff;
+  box-shadow: 0 10px 30px rgba(236,64,122,0.30);
+}
+.btn-primary-3d:hover{ transform: translateY(-3px); }
+.btn-secondary-3d{
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  color: var(--deep-pink);
+  border: 2px solid rgba(236,64,122,0.3);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.btn-secondary-3d:hover{ transform: translateY(-3px); background: #fff; border-color: var(--deep-pink); }
+.btn-shine{
+  position:absolute;
+  top:0; left:-100%;
+  width:100%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+  transition: left .5s var(--ease);
+}
+.btn-primary-3d:hover .btn-shine{ left:100%; }
+.btn-arrow{ transition: transform .3s var(--ease); }
+.btn-primary-3d:hover .btn-arrow{ transform: translateY(3px); }
+.btn-icon{ font-size: 1.2rem; }
+
+/* Orb constellation */
+.hero-right{ position:relative; min-height: 420px; display:flex; align-items:center; justify-content:center; overflow: hidden; }
+.stage-constellation{ position:relative; width:100%; max-width:520px; aspect-ratio: 1; }
+.hormone-core{
+  position:absolute; top:50%; left:50%;
+  transform: translate(-50%, -50%);
+  width: 86px; height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.8) 0%, rgba(216,27,96,0.35) 100%);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 0 40px rgba(236,64,122,0.45), 0 0 80px rgba(236,64,122,0.22),
+              inset 0 0 20px rgba(255,255,255,0.25);
+  z-index:10;
+  will-change: transform;
+  animation: core-pulse 3s ease-in-out infinite;
+}
+@keyframes core-pulse{
+  0%,100%{ transform: translate(-50%, -50%) scale(1); }
+  50%{ transform: translate(-50%, -50%) scale(1.1); }
+}
+.core-pulse{
+  position:absolute; inset:-18px;
+  border-radius:50%;
+  border:2px solid rgba(236,64,122,0.25);
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring{
+  0%{ transform:scale(1); opacity:1; }
+  100%{ transform:scale(1.5); opacity:0; }
+}
+.core-label{
+  font-size: .72rem;
+  font-weight: 900;
+  color:#fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  text-align:center;
+}
+
+.stage-orb{
+  position:absolute;
+  width: 150px;
+  height: 150px;
+  text-decoration:none;
+  cursor:pointer;
+  will-change: transform, opacity;
+  animation: orb-entrance .65s cubic-bezier(0.34, 1.56, 0.64, 1) backwards,
+             orb-float 4s ease-in-out infinite;
+  animation-delay: var(--delay), var(--delay);
+}
+@keyframes orb-entrance{
+  from{ opacity:0; transform: scale(0) rotate(-180deg); }
+  to{ opacity:1; transform: scale(1) rotate(0deg); }
+}
+@keyframes orb-float{
+  0%,100%{ transform: translateY(0px); }
+  50%{ transform: translateY(-14px); }
+}
+.orb-1{ top: 8%; left: 10%; }
+.orb-2{ top: 8%; right: 10%; }
+/* Fix: translateX(-50%) was overridden by orb-float translateY — use margin-left instead */
+.orb-3{ bottom: 10%; left: 50%; margin-left: -75px; }
+
+.orb-glow{
+  position:absolute; inset:-10px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.35) 0%, transparent 70%);
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+}
+.stage-orb:hover .orb-glow{ opacity: 1; }
+
+.orb-content{
+  position:relative;
+  width:100%; height:100%;
+  border-radius:50%;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(236,64,122,0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.10),
+              inset 0 1px 0 rgba(255,255,255,0.8);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap: .25rem;
+  transition: all .35s var(--ease);
+}
+.stage-orb:hover .orb-content{
+  transform: scale(1.08);
+  border-color: var(--deep-pink);
+  box-shadow: 0 15px 50px rgba(236,64,122,0.25),
+              inset 0 1px 0 rgba(255,255,255,1);
+}
+.orb-number{
+  position:absolute;
+  top: 10px;
+  right: 16px;
+  font-size: .7rem;
+  font-weight: 900;
+  color: rgba(236,64,122,0.35);
+}
+.orb-icon{ font-size: 2.35rem; transition: transform .25s var(--ease); }
+.stage-orb:hover .orb-icon{ transform: scale(1.15) rotate(8deg); }
+.orb-label{ font-size: .92rem; font-weight: 900; color: var(--text-main); text-align:center; }
+.orb-sublabel{ font-size: .72rem; color: var(--text-soft); text-align:center; }
+
+.orb-tooltip{
+  position:absolute;
+  bottom: -86px;
+  left: 50%;
+  transform: translateX(-50%) scale(.95);
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(10px);
+  padding: .9rem 1.05rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.14);
+  border: 1px solid rgba(236,64,122,0.2);
+  min-width: 220px;
+  opacity: 0;
+  pointer-events:none;
+  transition: all .25s var(--ease);
+  z-index: 20;
+}
+.stage-orb:hover .orb-tooltip{
+  opacity:1;
+  transform: translateX(-50%) scale(1);
+  bottom: -96px;
+}
+.tooltip-arrow{
+  position:absolute; top:-8px; left:50%;
+  transform: translateX(-50%);
+  width:0; height:0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(255,255,255,0.98);
+}
+.connection-lines{ position:absolute; inset:0; pointer-events:none; opacity:.6; }
+
+/* Explorer */
+.explorer{ overflow:hidden; }
+.explorer-top{
+  display:flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items:center;
+  margin-bottom: 1rem;
+}
+.explorer-actions{ display:flex; gap: .6rem; flex-wrap:wrap; }
+
+.chip-row{ display:flex; flex-wrap:wrap; gap: .35rem; }
+.chip{
+  font-size: .78rem;
+  padding: .16rem .6rem;
+  border-radius: var(--radius-pill);
+  background: var(--chip-bg);
+  color: #6a1b9a;
+  border: 1px solid rgba(106,27,154,0.15);
+}
+
+.filter-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: .8rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 480px){
+  .filter-grid{ grid-template-columns: 1fr; }
+}
+.filter{
+  display:flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.filter label{ font-size: .82rem; color: var(--text-soft); font-weight: 650; }
+.filter select{
+  padding: .55rem .6rem;
+  border-radius: 12px;
+  border: 1px solid #d0c4e6;
+  font-size: .92rem;
+  background: #fff;
+}
+
+/* Method cards */
+.method-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .9rem;
+}
+@media (max-width: 980px){ .method-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px){ .method-grid{ grid-template-columns: 1fr; } }
+
+.method-card{
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 1rem 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.04);
+  position:relative;
+  overflow:hidden;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.method-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 55px rgba(0,0,0,0.10);
+}
+.method-top{
+  display:flex;
+  justify-content: space-between;
+  gap: .8rem;
+  align-items:flex-start;
+  margin-bottom: .6rem;
+}
+.method-title{
+  font-size: 1.02rem;
+  margin: .1rem 0 .15rem;
+}
+.method-kicker{
+  font-size: .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #8e24aa;
+}
+.badge-row{
+  display:flex;
+  gap: .35rem;
+  flex-wrap: wrap;
+  justify-content:flex-end;
+}
+.badge{
+  font-size: .78rem;
+  padding: .18rem .55rem;
+  border-radius: var(--radius-pill);
+  background: rgba(236,64,122,0.10);
+  color: var(--deep-pink);
+  border: 1px solid rgba(216,27,96,0.18);
+}
+.badge.info{
+  background: rgba(21,101,192,0.08);
+  border-color: rgba(21,101,192,0.15);
+  color: #1565c0;
+}
+.method-desc{ margin:0; color: var(--text-soft); font-size: .92rem; }
+.method-meta{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .45rem;
+  margin-top: .75rem;
+}
+.meta-pill{
+  font-size: .82rem;
+  padding: .45rem .55rem;
+  border-radius: 12px;
+  background: #fafafa;
+  border: 1px dashed #e0e0e0;
+}
+.method-actions{
+  margin-top: .85rem;
+  display:flex;
+  gap: .55rem;
+  flex-wrap:wrap;
+}
+.small-btn{
+  padding: .48rem .9rem;
+  border-radius: var(--radius-pill);
+  font-weight: 800;
+  font-size: .88rem;
+  cursor:pointer;
+  border: 1px solid rgba(216,27,96,0.35);
+  color: var(--deep-pink);
+  background: transparent;
+  transition: all .22s var(--ease);
+}
+.small-btn:hover{ background: rgba(236,64,122,0.08); transform: translateY(-1px); }
+.small-btn.primary{
+  background: var(--deep-pink);
+  color:#fff;
+  border-color: transparent;
+}
+.small-btn.primary:hover{ box-shadow: 0 12px 26px rgba(216,27,96,0.22); }
+
+/* Category grids */
+.category-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .9rem;
+}
+@media (max-width: 980px){ .category-grid{ grid-template-columns: 1fr; } }
+
+/* System grid (bible pattern) */
+.system-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .9rem;
+}
+@media (max-width: 900px){ .system-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 560px){ .system-grid{ grid-template-columns: 1fr; } }
+.system-card h4{ font-size: 1rem; margin-bottom: .25rem; }
+.system-chip-row{ display:flex; flex-wrap:wrap; gap:.3rem; margin-top: .3rem; }
+.system-chip{
+  font-size: .74rem;
+  padding: .14rem .5rem;
+  border-radius: var(--radius-pill);
+  background: #e3f2fd;
+  color: #1565c0;
+}
+.system-list{
+  margin: .3rem 0 0;
+  padding-left: 1.1rem;
+  font-size: .88rem;
+  color: var(--text-soft);
+}
+
+/* Care strip (bible pattern) */
+.care-strip{
+  display:grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  align-items:center;
+  padding: 1.1rem 1.2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  margin-top: 1.2rem;
+  border: 1px solid rgba(216,27,96,0.10);
+}
+@media (max-width: 900px){ .care-strip{ grid-template-columns: 1fr; } }
+.care-pills{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top: .5rem; }
+.care-pill{
+  font-size: .78rem;
+  padding: .2rem .65rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,0.9);
+  color: #6a1b9a;
+  border: 1px solid rgba(255,255,255,0.7);
+}
+.care-actions{ display:flex; flex-wrap:wrap; gap:.55rem; justify-content:flex-end; }
+.care-cta{
+  font-size: .9rem;
+  padding: .55rem 1rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor:pointer;
+  font-weight: 850;
+  transition: transform .2s var(--ease);
+}
+.care-cta:hover{ transform: translateY(-2px); }
+.care-cta.primary{ background: var(--deep-pink); color:#fff; }
+.care-cta.ghost{ background: transparent; color: var(--deep-pink); border: 1px solid rgba(216,27,96,0.4); }
+
+/* Modal + Drawer */
+.modal, .drawer{
+  position:fixed;
+  inset:0;
+  display:none;
+  z-index: 2000;
+}
+.modal[aria-hidden="false"], .drawer[aria-hidden="false"]{ display:block; }
+
+.modal-scrim, .drawer-scrim{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+}
+.modal-panel, .drawer-panel{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(680px, calc(100% - 2rem));
+  max-height: min(88vh, 820px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: rgba(255,255,255,0.97);
+  border-radius: 22px;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.22);
+  border: 1px solid rgba(236,64,122,0.18);
+}
+.modal-body{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(236,64,122,0.4) transparent;
+  padding: 1rem 1.1rem;
+}
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb {
+  background: rgba(236,64,122,0.35);
+  border-radius: 99px;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(216,27,96,0.55);
+}
+.drawer-panel{
+  top: auto;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 1.5rem));
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  max-height: 85vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 768px){
+  .drawer-panel{
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+}
+.modal-head, .drawer-head{
+  display:flex;
+  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items:flex-start;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: linear-gradient(135deg, rgba(252,228,236,0.65), rgba(243,229,245,0.45));
+}
+/* modal-body styles defined above with scroll */
+.modal-foot, .drawer-foot{
+  display:flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: .7rem;
+  flex-wrap:wrap;
+  padding: .95rem 1.1rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.drawer-foot{ background: rgba(255,255,255,0.9); }
+
+/* Wizard */
+.wizard-panel{ width: min(980px, calc(100% - 2rem)); }
+.journey-track{
+  display:flex;
+  gap:.6rem;
+  flex-wrap: nowrap;
+  align-items:center;
+  padding:.6rem;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: var(--radius-pill);
+  margin: .6rem 0 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.journey-track::-webkit-scrollbar { display: none; }
+.track-dot{
+  border:none;
+  cursor:pointer;
+  padding:.55rem .85rem;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color:#555;
+  font-weight: 850;
+  font-size:.86rem;
+  transition: transform .15s ease, background .2s ease, color .2s ease;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+}
+.track-dot:hover{ transform: translateY(-1px); background: rgba(236,64,122,0.08); }
+.track-dot.active{
+  background: var(--deep-pink);
+  color:#fff;
+  box-shadow: 0 10px 22px rgba(216,27,96,0.25);
+}
+.journey-stage-card{
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  padding: 1.1rem 1.1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.04);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Animated entrance (bible stageIn) [Source](https://www.genspark.ai/api/files/s/n7HXbDaa) */
+.stage-enter{ animation: stageIn .35s ease both; }
+@keyframes stageIn{
+  from{ opacity:0; transform: translateY(8px) scale(.99); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+/* Modal panels need translate(-50%,-50%) for centering preserved through animation */
+.modal-panel.stage-enter{ animation: modalStageIn .35s ease both; }
+@keyframes modalStageIn{
+  from{ opacity:0; transform: translate(-50%, calc(-50% + 8px)) scale(.99); }
+  to{   opacity:1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Compare grid */
+.compare-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .9rem;
+  padding: 1rem 1.1rem;
+}
+@media (max-width: 980px){ .compare-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 620px){ .compare-grid{ grid-template-columns: 1fr; } }
+
+.compare-card{
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background:#fff;
+  padding: .95rem .95rem;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.06);
+}
+.compare-card h4{ margin: 0 0 .3rem; }
+.compare-list{ margin:.35rem 0 0; padding-left: 1.1rem; color: var(--text-soft); font-size: .9rem; }
+
+/* Wizard content helpers */
+.wiz-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .8rem;
+  margin-top: .8rem;
+}
+@media (max-width: 780px){ .wiz-grid{ grid-template-columns: 1fr; } }
+.wiz-q{
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background:#fff;
+  padding: .85rem .85rem;
+}
+.wiz-q label{
+  display:block;
+  font-size: .82rem;
+  color: var(--text-soft);
+  margin-bottom: .25rem;
+  font-weight: 750;
+}
+.wiz-q select, .wiz-q input[type="checkbox"]{
+  font-size: .95rem;
+}
+.wiz-q select{
+  width:100%;
+  padding: .55rem .6rem;
+  border-radius: 12px;
+  border: 1px solid #d0c4e6;
+}
+.result-stack{
+  display:grid;
+  gap: .7rem;
+  margin-top: .8rem;
+}
+.result-card{
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background:#fff;
+  padding: .9rem .9rem;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.06);
+}
+.result-top{
+  display:flex;
+  justify-content: space-between;
+  gap: .7rem;
+  align-items:flex-start;
+  flex-wrap: wrap;
+}
+.warn{
+  background: rgba(255,243,224,0.95);
+  border: 1px solid rgba(255,152,0,0.25);
+  color: #7a4a00;
+  padding: .55rem .65rem;
+  border-radius: 14px;
+  margin-top: .6rem;
+  font-size: .88rem;
+}
+.mini{
+  color: var(--text-soft);
+  font-size: .88rem;
+}
+
+/* ============================================================
+   BASE OVERFLOW GUARD — prevents horizontal scroll on mobile
+   ============================================================ */
+html, body { overflow-x: hidden; }
+
+/* ============================================================
+   MISSING CSS DEFINITIONS (used in HTML but never defined)
+   ============================================================ */
+
+/* badge-constellation wrapper — already has badge-orbit child */
+.badge-constellation { display: block; }
+
+/* hero-pill-stack: trust-signal strip below CTAs */
+.hero-pill-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(236,64,122,0.14);
+  border-radius: var(--radius-pill);
+  padding: .28rem .8rem;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   ACCESSIBILITY: Reduced Motion — respect OS animation settings
+   Also prevents animation-blank bugs in iOS Low Power mode
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .title-line,
+  .hero-badge-3d,
+  .stage-orb,
+  .hormone-core,
+  .core-pulse,
+  .pulse-dot { animation: none !important; }
+  .stage-orb { opacity: 1 !important; }
+  .btn-primary-3d:hover,
+  .btn-secondary-3d:hover { transform: none; }
+}
+
+/* ============================================================
+   TOUCH DEVICE GUARD — disable hover-lift states on touch
+   (prevents sticky "hover" after tap on iOS/Android)
+   ============================================================ */
+@media (hover: none) {
+  .method-card:hover      { transform: none; box-shadow: var(--shadow-md); }
+  .btn-primary:hover      { transform: none; }
+  .btn-secondary:hover    { transform: none; }
+  .btn-primary-3d:hover   { transform: none; }
+  .btn-secondary-3d:hover { transform: none; }
+  .hero-badge-3d:hover    { transform: none; }
+  .stage-orb .orb-tooltip { display: none; }           /* tooltips need hover; hide on touch */
+  .stage-orb:hover .orb-content { transform: none; }
+}
+
+/* ============================================================
+   ── 1024 px  TABLET / COLLAPSED HERO ──────────────────────
+   Already partially handled; fill in the missing pieces
+   ============================================================ */
+@media (max-width: 1024px) {
+  /* hero-content-wrapper already collapses to 1fr — but hero-right needs tuning */
+  .hero-right {
+    min-height: 320px;
+  }
+  .stage-constellation {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  /* Orbs smaller to fit the narrower space */
+  .stage-orb { width: 120px; height: 120px; }
+  .orb-3 { margin-left: -60px; }
+  .orb-icon  { font-size: 1.9rem; }
+  .orb-label { font-size: .82rem; }
+  .orb-sublabel { font-size: .65rem; }
+  .hormone-core { width: 70px; height: 70px; }
+  .core-label   { font-size: .62rem; }
+  /* hero-right orb tooltips: flip above on tablet so they don't cut off */
+  .orb-tooltip  { bottom: auto; top: -80px; }
+  .stage-orb:hover .orb-tooltip { bottom: auto; top: -90px; }
+  .tooltip-arrow { top: auto; bottom: -8px; border-bottom: none; border-top: 8px solid rgba(255,255,255,0.98); }
+}
+
+/* ============================================================
+   ── 768 px  STANDARD MOBILE ───────────────────────────────
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Page shell */
+  .page-shell { padding: 1rem .9rem 4rem; }
+
+  /* ── Hero ── */
+  .hero-constellation { padding: 1.6rem 1rem; border-radius: 16px; }
+  .hero-title-3d { font-size: clamp(1.9rem, 7vw, 2.8rem); line-height: 1.08; }
+  .hero-description { font-size: .95rem; max-width: 100%; }
+  .badge-orbit { gap: .5rem; }
+  .hero-badge-3d { font-size: .8rem; padding: .5rem .9rem; }
+  .hero-pill-stack { gap: .4rem; }
+  .hero-pill { font-size: .75rem; padding: .25rem .65rem; }
+
+  /* ── Hero right: scale down further ── */
+  .hero-right { min-height: 260px; }
+  .stage-constellation { max-width: 300px; }
+  .stage-orb { width: 100px; height: 100px; }
+  .orb-3 { margin-left: -50px; }
+  .orb-icon  { font-size: 1.6rem; }
+  .orb-label { font-size: .75rem; }
+  .orb-sublabel { font-size: .6rem; }
+  .hormone-core { width: 58px; height: 58px; }
+  .core-label   { font-size: .55rem; }
+  .orb-number   { font-size: .6rem; top: 6px; right: 10px; }
+
+  /* ── Section title rows ── */
+  .section-title-row { flex-wrap: wrap; gap: .35rem; }
+  .section-title-row h2 { font-size: 1.35rem; }
+  .section-tagline { font-size: .84rem; }
+  .section-block { margin-bottom: 2rem; }
+
+  /* ── Explorer top bar ── */
+  .explorer-top { flex-direction: column; align-items: stretch; gap: .6rem; }
+  .explorer-actions { display: flex; flex-direction: column; gap: .5rem; }
+  .explorer-actions .btn-secondary,
+  .explorer-actions .btn-primary { width: 100%; justify-content: center; text-align: center; }
+
+  /* ── Filter grid: 2-col on tablet (already 1-col at 950px) ── */
+  /* already handled by existing 950px rule */
+
+  /* ── Method grid: 2-col intermediate ── */
+  .method-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+
+  /* ── Method cards ── */
+  .method-top { gap: .5rem; }
+  .method-meta { grid-template-columns: 1fr; }
+  .meta-pill   { font-size: .8rem; padding: .38rem .45rem; }
+  .badge-row   { justify-content: flex-start; }
+
+  /* ── Category grid: 1-col ── */
+  .category-grid { grid-template-columns: 1fr; }
+
+  /* ── System grid: 1-col ── */
+  .system-grid { grid-template-columns: 1fr; }
+
+  /* ── Care strip already collapses at 900px ── */
+  .care-actions { justify-content: flex-start; gap: .5rem; }
+  .care-cta { font-size: .85rem; padding: .5rem .85rem; }
+
+  /* ── Modals / Drawer ── */
+  .modal-panel {
+    width: calc(100% - 1.5rem);
+    max-height: 88vh;
+  }
+  .drawer-panel {
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 20px 20px 0 0;
+  }
+  .modal-head, .drawer-head { padding: .85rem 1rem; }
+  .modal-body  { padding: .85rem 1rem; }
+  .modal-foot, .drawer-foot {
+    padding: .75rem 1rem;
+    flex-direction: column;
+    gap: .45rem;
+  }
+  .modal-foot .btn-secondary,
+  .modal-foot .btn-primary,
+  .drawer-foot .btn-secondary,
+  .drawer-foot .btn-primary { width: 100%; justify-content: center; }
+
+  /* ── Wizard ── */
+  .wizard-panel { width: 100%; }
+  .journey-track {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: .45rem .6rem;
+  }
+  .journey-track::-webkit-scrollbar { display: none; }
+  .track-dot { font-size: .8rem; padding: .42rem .65rem; white-space: nowrap; }
+  .journey-stage-card { padding: .9rem; border-radius: 18px; }
+  .wiz-grid { grid-template-columns: 1fr; gap: .6rem; }
+  .wiz-q    { padding: .75rem; }
+
+  /* ── Compare grid ── */
+  .compare-grid { grid-template-columns: 1fr; padding: .75rem .9rem; }
+  .compare-card { padding: .85rem; }
+
+  /* ── Result cards ── */
+  .result-card { padding: .85rem; }
+  .result-top  { flex-direction: column; gap: .4rem; }
+}
+
+/* ============================================================
+   ── 480 px  SMALL PHONES (iPhone SE, Galaxy A series) ─────
+   ============================================================ */
+@media (max-width: 480px) {
+
+  /* Page shell */
+  .page-shell { padding: .85rem .75rem 3.5rem; }
+
+  /* ── Hero ── */
+  .hero-constellation { padding: 1.25rem .85rem 1.5rem; border-radius: 12px; }
+  .hero-title-3d { font-size: clamp(1.65rem, 8.5vw, 2rem); }
+  .hero-description { font-size: .88rem; line-height: 1.6; }
+  .hero-eyebrow { font-size: .75rem; }
+
+  /* Hero right: show a compact version on 421–480px, hide only on tiny screens */
+  .hero-right { min-height: 200px; }
+  .stage-constellation { max-width: 240px; }
+  .stage-orb { width: 80px; height: 80px; }
+  .orb-3 { margin-left: -40px; }
+  .orb-icon  { font-size: 1.35rem; }
+  .orb-label { font-size: .68rem; }
+  .orb-sublabel { display: none; }
+  .hormone-core { width: 46px; height: 46px; }
+  .core-label   { font-size: .48rem; }
+  .orb-number   { display: none; }
+
+  /* CTA buttons: stack full-width */
+  .hero-cta-constellation { flex-direction: column; gap: .6rem; }
+  .btn-primary-3d, .btn-secondary-3d {
+    width: 100%;
+    justify-content: center;
+    font-size: .95rem;
+    padding: .8rem 1.2rem;
+  }
+
+  /* Badges: smaller */
+  .hero-badge-3d { font-size: .75rem; padding: .4rem .75rem; }
+  .badge-orbit { gap: .4rem; }
+
+  /* ── Section headings ── */
+  .section-title-row h2 { font-size: 1.2rem; }
+
+  /* ── Method grid: 1-col ── */
+  .method-grid { grid-template-columns: 1fr; }
+
+  /* ── Method cards ── */
+  .method-card { padding: .85rem; border-radius: 16px; }
+  .method-title { font-size: .95rem; }
+  .method-kicker { font-size: .7rem; }
+  .method-desc { font-size: .88rem; }
+  .small-btn { font-size: .82rem; padding: .4rem .75rem; }
+  .badge { font-size: .72rem; }
+
+  /* ── Filter selects: larger tap target ── */
+  .filter select { padding: .65rem .6rem; font-size: 1rem; min-height: 44px; }
+  .filter label  { font-size: .8rem; }
+
+  /* ── Card base ── */
+  .card { padding: .9rem 1rem; border-radius: 14px; }
+
+  /* ── Compare grid ── */
+  .compare-grid { padding: .6rem .75rem; gap: .65rem; }
+
+  /* ── Wizard track ── */
+  .track-dot { font-size: .75rem; padding: .38rem .55rem; gap: .3rem; }
+  /* Show step numbers but shorten labels on very small screens */
+  .track-dot .step-label { display: none; }
+
+  /* ── Modals ── */
+  .modal-head h3, .drawer-head h3 { font-size: 1rem; }
+  .modal-body { padding: .75rem .85rem; }
+  .modal-foot, .drawer-foot { padding: .65rem .85rem; }
+
+  /* ── Care strip ── */
+  .care-strip { padding: .85rem; border-radius: 14px; }
+  .care-pill  { font-size: .74rem; }
+
+  /* ── System cards ── */
+  .system-chip { font-size: .7rem; }
+  .system-list { font-size: .84rem; }
+
+  /* ── Chip row ── */
+  .chip { font-size: .74rem; }
+
+  /* ── Warn box ── */
+  .warn { font-size: .84rem; padding: .5rem .6rem; }
+  .mini { font-size: .84rem; }
+}
+
+/* ── 380px and below: hide constellation — truly too small ── */
+@media (max-width: 380px) {
+  .hero-right { display: none; }
+}
+
+/* ============================================================
+   ── 360 px  VERY SMALL (Galaxy Fold closed, old Androids) ──
+   ============================================================ */
+@media (max-width: 360px) {
+  .page-shell { padding: .7rem .6rem 3rem; }
+  .hero-title-3d { font-size: 1.5rem; }
+  .hero-badge-3d { font-size: .7rem; padding: .32rem .6rem; }
+  .btn-primary-3d, .btn-secondary-3d { font-size: .88rem; padding: .72rem 1rem; }
+  .section-title-row h2 { font-size: 1.1rem; }
+  .method-card { padding: .7rem; border-radius: 12px; }
+  .small-btn   { font-size: .78rem; padding: .35rem .6rem; }
+  .card        { padding: .75rem .8rem; }
+  .track-dot   { padding: .32rem .45rem; gap: .2rem; }
+  .explorer-actions .btn-secondary,
+  .explorer-actions .btn-primary { font-size: .85rem; padding: .5rem .9rem; }
+  .modal-foot .btn-secondary,
+  .modal-foot .btn-primary,
+  .drawer-foot .btn-secondary,
+  .drawer-foot .btn-primary { font-size: .85rem; }
+}
+
+</style>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <circle cx="12" cy="5.5" r="2.8"/>
+            <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+            <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+            <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+            <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+            <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <a href="index.html">Nari Swasthya</a>
+          <span>Women's Complete Health</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+
+        <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+        <!-- Services dropdown (active) -->
+        <div class="nav-item">
+          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
+            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
+            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
+            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
+            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
+            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+
+        <!-- Additional Info dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
+            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <!-- NCD with flyout sub-items — first item -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
+            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
+            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right: Sign In + Contact Us -->
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Mobile Menu -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
+    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <div class="mm-section">Specialised Care</div>
+    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+
+
+
+  <main class="page-shell" id="top">
+    <!-- Hero (radial gradient + badges + CTAs like bible) -->
+    <section class="hero hero-constellation" aria-label="Hero">
+      <div class="constellation-bg" aria-hidden="true">
+        <canvas id="particleCanvas"></canvas>
+        <div class="gradient-morph"></div>
+      </div>
+
+      <div class="hero-content-wrapper">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="pulse-dot"></span>
+            Interactive Guide
+          </div>
+
+          <h1 class="hero-title-3d">
+            <span class="title-line">Comprehensive</span>
+            <span class="title-line">Guide to</span>
+            <span class="title-line title-emphasis">Women’s Contraceptives</span>
+          </h1>
+
+          <p class="hero-description">
+            Explore options by goals (STI protection, hormone‑free, postpartum, perimenopause),
+            compare methods side‑by‑side, and use the decision wizard to get tailored
+            recommendations with safety callouts.
+          </p>
+
+          <div class="badge-constellation">
+            <div class="badge-orbit">
+              <div class="hero-badge-3d badge-1"><span class="badge-icon">🛡️</span> STI protection lens</div>
+              <div class="hero-badge-3d badge-2"><span class="badge-icon">🧬</span> Hormone vs non‑hormone</div>
+              <div class="hero-badge-3d badge-3"><span class="badge-icon">⏱️</span> Short vs long‑acting</div>
+            </div>
+          </div>
+
+          <div class="hero-cta-constellation">
+            <button class="btn-primary-3d" id="jumpExplorerBtn">
+              Explore methods
+              <span class="btn-arrow">↓</span>
+              <span class="btn-shine" aria-hidden="true"></span>
+            </button>
+            <button class="btn-secondary-3d" id="openWizardBtn2">
+              <span class="btn-icon">✨</span>
+              Find my options
+            </button>
+          </div>
+
+          <div class="hero-pill-stack" aria-hidden="true">
+            <div class="hero-pill">✅ Evidence‑based summaries</div>
+            <div class="hero-pill">🧭 Wizard recommendations</div>
+            <div class="hero-pill">⚠️ Safety warnings surfaced</div>
+          </div>
+        </div>
+
+        <!-- Right: “constellation” selector (innovative overview) -->
+        <div class="hero-right">
+          <div class="stage-constellation" aria-label="Method constellation">
+            <div class="hormone-core" title="Tap an orb to jump">
+              <div class="core-pulse" aria-hidden="true"></div>
+              <div class="core-label">METHOD MAP</div>
+            </div>
+
+            <a class="stage-orb orb-1" href="#barrier" style="--delay:0.05s">
+              <div class="orb-glow" aria-hidden="true"></div>
+              <div class="orb-content">
+                <div class="orb-number">01</div>
+                <div class="orb-icon">🛡️</div>
+                <div class="orb-label">Barrier</div>
+                <div class="orb-sublabel">Condoms, diaphragm</div>
+              </div>
+              <div class="orb-tooltip" role="tooltip">
+                <div class="tooltip-arrow" aria-hidden="true"></div>
+                <h4>Barrier</h4>
+                <p>Non‑hormonal, some protect against STIs.</p>
+              </div>
+            </a>
+
+            <a class="stage-orb orb-2" href="#hormonal" style="--delay:0.18s">
+              <div class="orb-glow" aria-hidden="true"></div>
+              <div class="orb-content">
+                <div class="orb-number">02</div>
+                <div class="orb-icon">🧬</div>
+                <div class="orb-label">Hormonal</div>
+                <div class="orb-sublabel">Pill, patch, ring, shot, implant</div>
+              </div>
+              <div class="orb-tooltip" role="tooltip">
+                <div class="tooltip-arrow" aria-hidden="true"></div>
+                <h4>Hormonal</h4>
+                <p>Cycle control + high effectiveness; no STI protection.</p>
+              </div>
+            </a>
+
+            <a class="stage-orb orb-3" href="#iuds" style="--delay:0.28s">
+              <div class="orb-glow" aria-hidden="true"></div>
+              <div class="orb-content">
+                <div class="orb-number">03</div>
+                <div class="orb-icon">🧲</div>
+                <div class="orb-label">IUDs</div>
+                <div class="orb-sublabel">Hormonal & copper</div>
+              </div>
+              <div class="orb-tooltip" role="tooltip">
+                <div class="tooltip-arrow" aria-hidden="true"></div>
+                <h4>IUDs</h4>
+                <p>Long‑acting, “set & forget”; clinician insertion.</p>
+              </div>
+            </a>
+
+            <svg class="connection-lines" viewBox="0 0 100 100" aria-hidden="true">
+              <path class="connection-path" d="M50 50 C25 25, 25 25, 25 25" stroke="rgba(236,64,122,0.35)" stroke-width="1.2" fill="none"/>
+              <path class="connection-path" d="M50 50 C75 25, 75 25, 75 25" stroke="rgba(236,64,122,0.35)" stroke-width="1.2" fill="none"/>
+              <path class="connection-path" d="M50 50 C50 75, 50 75, 50 75" stroke="rgba(236,64,122,0.35)" stroke-width="1.2" fill="none"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explorer controls -->
+    <section class="section-block" id="explorer">
+      <div class="section-title-row">
+        <h2>Method Explorer</h2>
+        <p class="section-tagline">Filter, compare, and open details fast.</p>
+      </div>
+
+      <div class="explorer card">
+        <div class="explorer-top">
+          <div class="chip-row" id="activeChips" aria-label="Active filters"></div>
+
+          <div class="explorer-actions">
+            <button class="btn-secondary" id="resetFiltersBtn">Reset filters</button>
+            <button class="btn-primary" id="openCompareBtn">Open comparison tray</button>
+          </div>
+        </div>
+
+        <div class="filter-grid" aria-label="Filters">
+          <div class="filter">
+            <label for="f_sti">STI protection needed?</label>
+            <select id="f_sti">
+              <option value="any" selected>Any</option>
+              <option value="yes">Yes (must protect)</option>
+              <option value="no">No / not required</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="f_hormones">Hormones</label>
+            <select id="f_hormones">
+              <option value="any" selected>Any</option>
+              <option value="no">Prefer hormone‑free</option>
+              <option value="yes">Hormonal OK</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="f_duration">Duration</label>
+            <select id="f_duration">
+              <option value="any" selected>Any</option>
+              <option value="short">Short‑acting / per use</option>
+              <option value="medium">Monthly / weekly</option>
+              <option value="long">Long‑acting (months/years)</option>
+              <option value="permanent">Permanent</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="f_postpartum">Postpartum / breastfeeding</label>
+            <select id="f_postpartum">
+              <option value="any" selected>Any</option>
+              <option value="breastfeeding">Breastfeeding now</option>
+              <option value="notBreastfeeding">Not breastfeeding</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="f_estrogen">Estrogen allowed?</label>
+            <select id="f_estrogen">
+              <option value="any" selected>Not sure / doesn’t matter</option>
+              <option value="avoid">Avoid estrogen</option>
+              <option value="ok">Estrogen OK</option>
+            </select>
+          </div>
+
+          <div class="filter">
+            <label for="f_weight">Weight note (for patch / EC)</label>
+            <select id="f_weight">
+              <option value="any" selected>Prefer not to say</option>
+              <option value="over198">Over ~198 lb (patch note)</option>
+              <option value="over165">Over ~165–175 lb (EC note)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="method-grid" id="methodGrid" aria-label="Methods list">
+          <!-- JS renders cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections (anchors for nav; cards render by category too) -->
+    <section class="section-block" id="barrier">
+      <div class="section-title-row">
+        <h2>Barrier</h2>
+        <p class="section-tagline">Non‑hormonal options; some protect against STIs.</p>
+      </div>
+      <div class="category-grid" id="cat_barrier"></div>
+    </section>
+
+    <section class="section-block" id="hormonal">
+      <div class="section-title-row">
+        <h2>Hormonal</h2>
+        <p class="section-tagline">Cycle control + high effectiveness; no STI protection.</p>
+      </div>
+      <div class="category-grid" id="cat_hormonal"></div>
+    </section>
+
+    <section class="section-block" id="iuds">
+      <div class="section-title-row">
+        <h2>IUDs</h2>
+        <p class="section-tagline">Long‑acting, low‑maintenance, clinician insertion.</p>
+      </div>
+      <div class="category-grid" id="cat_iuds"></div>
+    </section>
+
+    <section class="section-block" id="emergency">
+      <div class="section-title-row">
+        <h2>Emergency</h2>
+        <p class="section-tagline">After unprotected sex or contraceptive failure.</p>
+      </div>
+      <div class="category-grid" id="cat_emergency"></div>
+    </section>
+
+    <section class="section-block" id="permanent">
+      <div class="section-title-row">
+        <h2>Permanent</h2>
+        <p class="section-tagline">For completed families; not reversible in practice.</p>
+      </div>
+      <div class="category-grid" id="cat_permanent"></div>
+    </section>
+
+    <section class="section-block" id="behavioral">
+      <div class="section-title-row">
+        <h2>Behavioral</h2>
+        <p class="section-tagline">No hormones/devices, but requires consistency.</p>
+      </div>
+      <div class="category-grid" id="cat_behavioral"></div>
+    </section>
+
+    <section class="section-block" id="special">
+      <div class="section-title-row">
+        <h2>Special Considerations</h2>
+        <p class="section-tagline">Postpartum, perimenopause, and medical-condition selection notes.</p>
+      </div>
+
+      <div class="system-grid">
+        <div class="card system-card">
+          <div class="card-header-label">Postpartum</div>
+          <h4>Timing matters</h4>
+          <p class="section-tagline">
+            Fertility can return before the first period. Breastfeeding affects choices and timing.
+          </p>
+          <div class="system-chip-row">
+            <span class="system-chip">LAM</span>
+            <span class="system-chip">Progestin‑only</span>
+            <span class="system-chip">Implant</span>
+            <span class="system-chip">IUD (timing)</span>
+          </div>
+        </div>
+
+        <div class="card system-card">
+          <div class="card-header-label">Perimenopause</div>
+          <h4>Pregnancy still possible</h4>
+          <p class="section-tagline">
+            Irregular cycles make FAM less reliable. Contraception needed until menopause confirmed.
+          </p>
+          <div class="system-chip-row">
+            <span class="system-chip">Hormonal IUD</span>
+            <span class="system-chip">Barrier</span>
+            <span class="system-chip">Progestin options</span>
+          </div>
+        </div>
+
+        <div class="card system-card">
+          <div class="card-header-label">Medical conditions</div>
+          <h4>Match method to risk profile</h4>
+          <ul class="system-list">
+            <li>Avoid estrogen with migraines w/ aura, clot history, smokers 35+.</li>
+            <li>Avoid hormones in breast cancer.</li>
+            <li>Consider interactions (e.g., seizure meds).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety section -->
+    <section class="section-block" id="safety">
+      <div class="section-title-row">
+        <h2>Safety Hub</h2>
+        <p class="section-tagline">Warnings surfaced when you compare or use the wizard.</p>
+      </div>
+
+      <div class="care-strip">
+        <div>
+          <div class="card-header-label">Quick reminders</div>
+          <h3 style="margin:0.15rem 0 0.25rem;">Use protection correctly, every time</h3>
+          <p class="section-tagline" style="margin:0;">
+            This tool supports education—not diagnosis. Always confirm contraindications with a clinician.
+          </p>
+          <div class="care-pills">
+            <span class="care-pill">Condom expiry/storage</span>
+            <span class="care-pill">Estrogen “ACHES” symptoms</span>
+            <span class="care-pill">IUD strings check</span>
+            <span class="care-pill">Depo bone health</span>
+          </div>
+        </div>
+
+        <div class="care-actions">
+          <button class="care-cta ghost" id="openCompareBtn2">Compare methods</button>
+          <button class="care-cta primary" id="openWizardBtn3">Find my options</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Compare Drawer -->
+  <aside class="drawer" id="compareDrawer" aria-hidden="true">
+    <div class="drawer-scrim" data-close="compare"></div>
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Comparison tray">
+      <div class="drawer-head">
+        <div>
+          <div class="card-header-label">Comparison tray</div>
+          <h3 style="margin:0.15rem 0 0;">Pick up to 3 methods to compare</h3>
+        </div>
+        <button class="icon-btn" data-close="compare" aria-label="Close comparison">✕</button>
+      </div>
+
+      <div class="compare-grid" id="compareGrid"></div>
+
+      <div class="drawer-foot">
+        <button class="btn-secondary" id="clearCompareBtn">Clear</button>
+        <button class="btn-primary" data-close="compare">Done</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Detail Modal -->
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="modal-scrim" data-close="detail"></div>
+    <div class="modal-panel stage-enter" role="dialog" aria-modal="true" aria-label="Method details">
+      <div class="modal-head">
+        <div>
+          <div class="card-header-label" id="detailKicker">Method</div>
+          <h3 class="modal-title" id="detailTitle" style="margin:0.15rem 0 0;"></h3>
+        </div>
+        <button class="icon-btn" data-close="detail" aria-label="Close details">✕</button>
+      </div>
+
+      <div class="modal-body" id="detailBody"></div>
+
+      <div class="modal-foot">
+        <button class="btn-secondary" data-close="detail">Close</button>
+        <button class="btn-primary" id="detailAddCompareBtn">Add to compare</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wizard Modal -->
+  <div class="modal" id="wizardModal" aria-hidden="true">
+    <div class="modal-scrim" data-close="wizard"></div>
+    <div class="modal-panel stage-enter wizard-panel" role="dialog" aria-modal="true" aria-label="Find my options wizard">
+      <div class="modal-head">
+        <div>
+          <div class="card-header-label">Find my options</div>
+          <h3 class="modal-title" style="margin:0.15rem 0 0;">Decision Wizard</h3>
+        </div>
+        <button class="icon-btn" data-close="wizard" aria-label="Close wizard">✕</button>
+      </div>
+
+      <div class="wizard-steps">
+        <div class="journey-track" role="tablist" aria-label="Wizard steps">
+          <button class="track-dot active" data-step="0"><span>1</span> Goals</button>
+          <button class="track-dot" data-step="1"><span>2</span> Body & timing</button>
+          <button class="track-dot" data-step="2"><span>3</span> Preferences</button>
+          <button class="track-dot" data-step="3"><span>4</span> Results</button>
+        </div>
+
+        <div class="wizard-card journey-stage-card" id="wizardCard"></div>
+      </div>
+
+      <div class="modal-foot wizard-foot">
+        <button class="btn-secondary" id="wizBackBtn">Back</button>
+        <button class="btn-primary" id="wizNextBtn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Contraception Compass
+   - Renders methods by category
+   - Explorer filters + chips
+   - Details modal
+   - Compare tray (up to 3)
+   - “Find my options” wizard that returns 3 recommendations with reasons + warnings
+*/
+
+const METHODS = [
+  // Barrier
+  {
+    id: "male_condom",
+    name: "Male Condom",
+    category: "Barrier",
+    tags: ["STI", "Non-hormonal", "OTC"],
+    duration: "short",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 85,
+    effectivenessPerfect: 98,
+    pros: [
+      "Protects against STIs (incl. HIV)",
+      "No hormonal/systemic effects",
+      "Immediately reversible",
+      "Affordable and accessible"
+    ],
+    cons: [
+      "Can break/slip",
+      "May reduce sensation",
+      "Needs correct storage and use",
+      "Latex allergy for some"
+    ],
+    whenUse: [
+      "Need pregnancy + STI protection",
+      "Prefer non-hormonal",
+      "Backup with other methods",
+      "Postpartum/breastfeeding hormone-free option"
+    ],
+    whenNot: [
+      "Severe latex allergy (use non-latex)",
+      "Persistent erection difficulty with condom despite trials"
+    ],
+    safety: [
+      "Check expiry; store cool/dry",
+      "Never reuse",
+      "Use water/silicone lube with latex (avoid oils)"
+    ],
+    notes: [
+      "Lambskin does not protect against STIs"
+    ]
+  },
+  {
+    id: "female_condom",
+    name: "Female Condom",
+    category: "Barrier",
+    tags: ["STI", "Non-hormonal"],
+    duration: "short",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 79,
+    effectivenessPerfect: 95,
+    pros: [
+      "Woman-controlled",
+      "STI protection",
+      "Latex-free options"
+    ],
+    cons: [
+      "More expensive, less available",
+      "Learning curve",
+      "Can slip/bunch or be noisy"
+    ],
+    whenUse: [
+      "Want barrier control",
+      "Latex allergy",
+      "Prefer advance insertion"
+    ],
+    whenNot: [
+      "Not designed for menstruation",
+      "Insertion difficult due to anatomy"
+    ],
+    safety: [
+      "Do not use with male condom",
+      "Ensure ring position; check for slippage"
+    ]
+  },
+  {
+    id: "diaphragm",
+    name: "Diaphragm + Spermicide",
+    category: "Barrier",
+    tags: ["Non-hormonal", "Reusable"],
+    duration: "short",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 83,
+    effectivenessPerfect: 94,
+    pros: [
+      "Reusable (up to ~2 years)",
+      "Can insert before sex",
+      "Woman-controlled"
+    ],
+    cons: [
+      "Needs fitting + spermicide",
+      "Must stay 6 hours after sex",
+      "UTI risk for some"
+    ],
+    whenUse: [
+      "Non-hormonal reusable option",
+      "STI protection not primary (monogamous + tested)"
+    ],
+    whenNot: [
+      "First 6 weeks postpartum",
+      "History of toxic shock syndrome",
+      "Frequent UTIs"
+    ],
+    safety: [
+      "Never leave in >24 hours",
+      "Watch for toxic shock symptoms"
+    ]
+  },
+
+  // Hormonal
+  {
+    id: "combined_pill",
+    name: "Combined Oral Contraceptive (The Pill)",
+    category: "Hormonal",
+    tags: ["Estrogen+Progestin", "Cycle control"],
+    duration: "short",
+    hormones: true,
+    estrogen: "yes",
+    breastfeedingOk: false,
+    effectivenessTypical: 93,
+    effectivenessPerfect: 99,
+    pros: [
+      "Highly effective when taken correctly",
+      "Cycle regulation; less cramps/flow",
+      "May improve acne; helps PCOS/endometriosis symptoms"
+    ],
+    cons: [
+      "Daily adherence",
+      "No STI protection",
+      "Small increased clot risk",
+      "Medication interactions possible"
+    ],
+    whenUse: [
+      "Want reversible contraception + cycle benefits",
+      "Acne/PCOS/endometriosis management",
+      "Postpartum if not breastfeeding after waiting period"
+    ],
+    whenNot: [
+      "Breastfeeding early postpartum",
+      "Smoker >35",
+      "Clot/stroke/heart disease history",
+      "Migraine with aura"
+    ],
+    safety: [
+      "Know ACHES signs (clot warning symptoms)",
+      "Use backup for first 7 days"
+    ]
+  },
+  {
+    id: "mini_pill",
+    name: "Progestin‑Only Pill (Mini‑Pill)",
+    category: "Hormonal",
+    tags: ["Progestin-only", "Breastfeeding-friendly"],
+    duration: "short",
+    hormones: true,
+    estrogen: "no",
+    breastfeedingOk: true,
+    effectivenessTypical: 93,
+    effectivenessPerfect: 99,
+    pros: [
+      "Safe for breastfeeding",
+      "Option when estrogen not allowed",
+      "Lower clot risk than combined"
+    ],
+    cons: [
+      "Strict timing (3-hour window)",
+      "Irregular bleeding/spotting"
+    ],
+    whenUse: [
+      "Breastfeeding",
+      "Estrogen contraindications (e.g., migraine with aura)",
+      "Immediately postpartum"
+    ],
+    whenNot: [
+      "Unable to keep strict schedule",
+      "Current/history of breast cancer"
+    ],
+    safety: [
+      "Use backup if >3 hours late",
+      "Set a daily alarm"
+    ]
+  },
+  {
+    id: "patch",
+    name: "Contraceptive Patch",
+    category: "Hormonal",
+    tags: ["Estrogen+Progestin", "Weekly"],
+    duration: "medium",
+    hormones: true,
+    estrogen: "yes",
+    breastfeedingOk: false,
+    effectivenessTypical: 93,
+    effectivenessPerfect: 99,
+    pros: ["Weekly (not daily)", "Cycle regulation benefits"],
+    cons: ["Visible; skin irritation", "May be less effective over ~198 lb"],
+    whenUse: ["Prefer weekly method", "Forget daily pills"],
+    whenNot: ["Breastfeeding", "Estrogen contraindications", "Very sensitive skin"],
+    safety: ["Check adherence daily", "Replace if off >24 hours"]
+  },
+  {
+    id: "ring",
+    name: "Vaginal Ring",
+    category: "Hormonal",
+    tags: ["Estrogen+Progestin", "Monthly"],
+    duration: "medium",
+    hormones: true,
+    estrogen: "yes",
+    breastfeedingOk: false,
+    effectivenessTypical: 93,
+    effectivenessPerfect: 99,
+    pros: ["Monthly insertion", "Lower hormone dose than some methods"],
+    cons: ["Insertion required", "May slip out; irritation/discharge"],
+    whenUse: ["Prefer monthly dosing", "Comfortable with insertion"],
+    whenNot: ["Breastfeeding", "Estrogen contraindications"],
+    safety: ["If expelled, rinse cool water and reinsert within 3 hours"]
+  },
+  {
+    id: "depo",
+    name: "Depo‑Provera (Injection)",
+    category: "Hormonal",
+    tags: ["Progestin-only", "Every 3 months"],
+    duration: "long",
+    hormones: true,
+    estrogen: "no",
+    breastfeedingOk: true,
+    effectivenessTypical: 96,
+    effectivenessPerfect: 99,
+    pros: ["Only 4x/year", "Private", "May stop periods"],
+    cons: ["Delayed fertility return", "Weight gain common", "Bone density concerns"],
+    whenUse: ["Want long-acting non-estrogen", "Breastfeeding (commonly start after 6 weeks)"],
+    whenNot: ["Plan pregnancy in ~12–18 months", "Bone density concerns", "Breast cancer history"],
+    safety: ["Keep injection schedule", "Ensure calcium/vitamin D"]
+  },
+  {
+    id: "implant",
+    name: "Contraceptive Implant",
+    category: "Hormonal",
+    tags: ["Progestin-only", "Up to 3 years"],
+    duration: "long",
+    hormones: true,
+    estrogen: "no",
+    breastfeedingOk: true,
+    effectivenessTypical: 99.5,
+    effectivenessPerfect: 99.5,
+    pros: ["Extremely effective", "3 years", "Nothing to remember", "Rapidly reversible"],
+    cons: ["Procedure needed", "Irregular bleeding common initially"],
+    whenUse: ["Set-and-forget", "Breastfeeding", "Estrogen not allowed"],
+    whenNot: ["Breast cancer history", "Cannot tolerate irregular bleeding"],
+    safety: ["Check site for infection; track insertion date"]
+  },
+
+  // IUDs
+  {
+    id: "hormonal_iud",
+    name: "Hormonal IUD",
+    category: "IUDs",
+    tags: ["Progestin-only", "3–8 years"],
+    duration: "long",
+    hormones: true,
+    estrogen: "no",
+    breastfeedingOk: true,
+    effectivenessTypical: 99.5,
+    effectivenessPerfect: 99.5,
+    pros: ["Extremely effective", "Less bleeding/cramps", "Long-lasting"],
+    cons: ["Insertion procedure", "Initial cramping/spotting", "No STI protection"],
+    whenUse: ["Long-term contraception", "Heavy/painful periods", "Breastfeeding (commonly 6+ weeks postpartum)"],
+    whenNot: ["Active pelvic infection", "Uterine cavity distortion", "Pregnant/suspected"],
+    safety: ["Check strings monthly", "Know infection/expulsion signs"]
+  },
+  {
+    id: "copper_iud",
+    name: "Copper IUD",
+    category: "IUDs",
+    tags: ["Non-hormonal", "10–12 years", "EC option"],
+    duration: "long",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 99.5,
+    effectivenessPerfect: 99.5,
+    pros: ["Most effective non-hormonal", "Longest reversible", "Emergency contraception option"],
+    cons: ["Heavier bleeding/cramps (often early)", "Insertion discomfort", "No STI protection"],
+    whenUse: ["Long-term hormone-free", "When hormones undesired/contraindicated", "Emergency contraception (highly effective)"],
+    whenNot: ["Wilson’s disease", "Severe bleeding/anemia", "Active pelvic infection"],
+    safety: ["Expect heavier periods early", "NSAIDs may help cramps; check strings"]
+  },
+
+  // Emergency
+  {
+    id: "morning_after_pill",
+    name: "Emergency Contraception Pills",
+    category: "Emergency",
+    tags: ["Time-sensitive"],
+    duration: "short",
+    hormones: true,
+    estrogen: "varies",
+    breastfeedingOk: true,
+    effectivenessTypical: 0, // varies; not a routine method
+    effectivenessPerfect: 0,
+    pros: ["OTC for many types", "After failure/unprotected sex", "Does not cause abortion"],
+    cons: ["Less effective than ongoing methods", "Effectiveness decreases with time", "Weight/BMI may reduce effectiveness for some types"],
+    whenUse: ["After unprotected sex", "After condom break/missed pills", "After assault"],
+    whenNot: ["Not for routine contraception", "If already pregnant it won’t work (won’t harm pregnancy)"],
+    safety: ["Take ASAP", "If vomiting within 2 hours, may need repeat dose", "If period >1 week late, test"]
+  },
+
+  // Permanent
+  {
+    id: "tubal_ligation",
+    name: "Tubal Ligation",
+    category: "Permanent",
+    tags: ["Surgery", "Permanent"],
+    duration: "permanent",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 99.5,
+    effectivenessPerfect: 99.5,
+    pros: ["Permanent; no ongoing maintenance", "No hormones"],
+    cons: ["Surgery/anesthesia", "Regret possible", "No STI protection"],
+    whenUse: ["Certain about no future pregnancies", "Often postpartum/C-section timing"],
+    whenNot: ["Any uncertainty; under pressure; crisis/stress period"],
+    safety: ["Counseling recommended; consider LARC alternatives"]
+  },
+  {
+    id: "hysteroscopic_sterilization",
+    name: "Hysteroscopic Sterilization (Limited availability)",
+    category: "Permanent",
+    tags: ["Permanent", "Office procedure (historical)"],
+    duration: "permanent",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 99,
+    effectivenessPerfect: 99,
+    pros: ["No incisions (historically)"],
+    cons: ["Limited availability", "Backup contraception needed for months", "Not reversible"],
+    whenUse: ["Discuss current options with provider"],
+    whenNot: ["If you cannot use backup contraception for 3 months"],
+    safety: ["If you have an existing device and symptoms, consult clinician"]
+  },
+
+  // Behavioral
+  {
+    id: "fam",
+    name: "Fertility Awareness Methods (FAM)",
+    category: "Behavioral",
+    tags: ["Non-hormonal", "Daily tracking"],
+    duration: "short",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: false,
+    effectivenessTypical: 82,
+    effectivenessPerfect: 99,
+    pros: ["No hormones/devices", "Low cost", "Body literacy"],
+    cons: ["Daily tracking", "Less effective typical use", "Not good with irregular cycles"],
+    whenUse: ["Highly motivated couples", "Regular cycles", "Beliefs preclude other methods"],
+    whenNot: ["Irregular cycles", "Perimenopause", "Early postpartum breastfeeding"],
+    safety: ["Training recommended; use backup during learning period"]
+  },
+  {
+    id: "lam",
+    name: "Lactational Amenorrhea Method (LAM)",
+    category: "Behavioral",
+    tags: ["Postpartum only", "Exclusive breastfeeding"],
+    duration: "short",
+    hormones: false,
+    estrogen: "none",
+    breastfeedingOk: true,
+    effectivenessTypical: 98,
+    effectivenessPerfect: 98,
+    pros: ["Free; natural", "Effective when criteria met"],
+    cons: ["Only up to 6 months", "Strict criteria", "No STI protection"],
+    whenUse: ["<6 months postpartum", "Exclusive breastfeeding", "No return of menses"],
+    whenNot: [">6 months postpartum", "Supplementing formula", "Menses returned"],
+    safety: ["Have backup method ready; plan transition"]
+  },
+
+  // Combination
+  {
+    id: "dual_protection",
+    name: "Dual Protection (Condom + another method)",
+    category: "Special",
+    tags: ["STI + pregnancy", "Redundancy"],
+    duration: "varies",
+    hormones: "varies",
+    estrogen: "varies",
+    breastfeedingOk: true,
+    effectivenessTypical: 99,
+    effectivenessPerfect: 99.9,
+    pros: ["Best STI + pregnancy protection", "Backup if one fails"],
+    cons: ["Requires using two methods consistently"],
+    whenUse: ["New/non-monogamous relationships", "Maximum protection", "Postpartum transition"],
+    whenNot: ["Personal choice in mutually monogamous tested relationships"],
+    safety: ["Use condoms correctly every time; keep up with the other method"]
+  }
+];
+
+// ---------- Utilities ----------
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => [...root.querySelectorAll(sel)];
+
+const CATS = ["Barrier","Hormonal","IUDs","Emergency","Permanent","Behavioral","Special"];
+
+function pct(v){
+  if (!v) return "Varies";
+  if (v >= 99.5) return "Over 99%";
+  return `${Math.round(v)}%`;
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[m]));
+}
+
+// ---------- Rendering ----------
+function makeMethodCard(m, {compact=false}={}){
+  const stiBadge = m.tags?.includes("STI") ? `<span class="badge">STI</span>` : ``;
+  const hormoneBadge = (m.hormones === true)
+    ? `<span class="badge info">Hormonal</span>`
+    : (m.hormones === false ? `<span class="badge info">Non‑hormonal</span>` : `<span class="badge info">Varies</span>`);
+
+  const durationLabel =
+    m.duration === "short" ? "Per use / daily" :
+    m.duration === "medium" ? "Weekly / monthly" :
+    m.duration === "long" ? "Months / years" :
+    m.duration === "permanent" ? "Permanent" : "Varies";
+
+  const desc = (m.pros?.[0] ? m.pros[0] : "Open details to learn more.");
+
+  return `
+    <article class="method-card" data-id="${m.id}">
+      <div class="method-top">
+        <div>
+          <div class="method-kicker">${esc(m.category)}</div>
+          <h3 class="method-title">${esc(m.name)}</h3>
+        </div>
+        <div class="badge-row">
+          ${stiBadge}
+          ${hormoneBadge}
+        </div>
+      </div>
+
+      <p class="method-desc">${esc(desc)}</p>
+
+      <div class="method-meta">
+        <div class="meta-pill"><strong>Typical:</strong> ${pct(m.effectivenessTypical)}</div>
+        <div class="meta-pill"><strong>Duration:</strong> ${esc(durationLabel)}</div>
+      </div>
+
+      <div class="chip-row" style="margin-top:.6rem;">
+        ${(m.tags || []).slice(0,4).map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+      </div>
+
+      <div class="method-actions">
+        <button class="small-btn" data-action="details">Details</button>
+        <button class="small-btn" data-action="compare">Compare</button>
+        <button class="small-btn primary" data-action="wizard">Find fit</button>
+      </div>
+    </article>
+  `;
+}
+
+function renderAll(){
+  // Explorer grid
+  $("#methodGrid").innerHTML = METHODS
+    .filter(m => m.category !== "Special")
+    .map(m => makeMethodCard(m))
+    .join("");
+
+  // Categories
+  const barrier = METHODS.filter(m => m.category === "Barrier");
+  const hormonal = METHODS.filter(m => m.category === "Hormonal");
+  const iuds = METHODS.filter(m => m.category === "IUDs");
+  const emergency = METHODS.filter(m => m.category === "Emergency");
+  const permanent = METHODS.filter(m => m.category === "Permanent");
+  const behavioral = METHODS.filter(m => m.category === "Behavioral");
+
+  $("#cat_barrier").innerHTML = barrier.map(m => makeMethodCard(m, {compact:true})).join("");
+  $("#cat_hormonal").innerHTML = hormonal.map(m => makeMethodCard(m, {compact:true})).join("");
+  $("#cat_iuds").innerHTML = iuds.map(m => makeMethodCard(m, {compact:true})).join("");
+  $("#cat_emergency").innerHTML = emergency.map(m => makeMethodCard(m, {compact:true})).join("");
+  $("#cat_permanent").innerHTML = permanent.map(m => makeMethodCard(m, {compact:true})).join("");
+  $("#cat_behavioral").innerHTML = behavioral.map(m => makeMethodCard(m, {compact:true})).join("");
+
+  attachCardHandlers(document);
+}
+
+// ---------- Filters ----------
+const state = {
+  filters: {
+    sti: "any",
+    hormones: "any",
+    duration: "any",
+    postpartum: "any",
+    estrogen: "any",
+    weight: "any"
+  },
+  compare: [],
+  lastDetailId: null,
+  wizard: {
+    step: 0,
+    answers: {
+      needSti: "unknown",
+      wantHormoneFree: "unknown",
+      breastfeeding: "unknown",
+      estrogenAvoid: "unknown",
+      preferLowMaintenance: "unknown",
+      okWithProcedure: "unknown",
+      needEmergencyNow: "no",
+      surePermanent: "no",
+      weightNote: "unknown"
+    }
+  }
+};
+
+function applyFilters(){
+  const f = state.filters;
+  const methods = METHODS.filter(m => m.category !== "Special");
+
+  const filtered = methods.filter(m => {
+    // STI
+    if (f.sti === "yes" && !m.tags?.includes("STI")) return false;
+    if (f.sti === "no" && m.tags?.includes("STI")) {
+      // "no" means STI protection not required; allow STI methods too (they still work)
+      // so do nothing.
+    }
+
+    // Hormones
+    if (f.hormones === "no" && m.hormones !== false) return false;
+    if (f.hormones === "yes" && m.hormones !== true) return false;
+
+    // Duration
+    if (f.duration !== "any" && m.duration !== f.duration) return false;
+
+    // Postpartum / breastfeeding
+    if (f.postpartum === "breastfeeding" && m.breastfeedingOk !== true) return false;
+    if (f.postpartum === "notBreastfeeding") {
+      // allow all
+    }
+
+    // Estrogen
+    if (f.estrogen === "avoid" && m.estrogen === "yes") return false;
+    if (f.estrogen === "ok") {
+      // allow all
+    }
+
+    // Weight notes (soft filters: don't exclude, just downgrade by chips)
+    return true;
+  });
+
+  $("#methodGrid").innerHTML = filtered.map(m => makeMethodCard(m)).join("");
+  attachCardHandlers($("#methodGrid"));
+  renderActiveChips();
+}
+
+function renderActiveChips(){
+  const chips = [];
+  const f = state.filters;
+
+  const map = {
+    sti: { any:null, yes:"STI protection: required", no:"STI: not required" },
+    hormones: { any:null, no:"Prefer: hormone‑free", yes:"Hormonal: OK" },
+    duration: { any:null, short:"Duration: short", medium:"Duration: medium", long:"Duration: long", permanent:"Duration: permanent" },
+    postpartum: { any:null, breastfeeding:"Breastfeeding", notBreastfeeding:"Not breastfeeding" },
+    estrogen: { any:null, avoid:"Avoid estrogen", ok:"Estrogen OK" },
+    weight: { any:null, over198:"Weight note: patch", over165:"Weight note: EC" }
+  };
+
+  for (const k of Object.keys(map)){
+    const label = map[k][f[k]];
+    if (label) chips.push(label);
+  }
+
+  $("#activeChips").innerHTML = chips.length
+    ? chips.map(t => `<span class="chip">${esc(t)}</span>`).join("")
+    : `<span class="section-tagline">No filters active.</span>`;
+}
+
+// ---------- Details modal ----------
+function openModal(which){
+  const el = which === "detail" ? $("#detailModal") : $("#wizardModal");
+  el.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(which){
+  const el = which === "detail" ? $("#detailModal") : $("#wizardModal");
+  el.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+function openDrawer(){
+  $("#compareDrawer").setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+function closeDrawer(){
+  $("#compareDrawer").setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+function openDetails(id){
+  const m = METHODS.find(x => x.id === id);
+  if (!m) return;
+  state.lastDetailId = id;
+
+  $("#detailKicker").textContent = m.category;
+  $("#detailTitle").textContent = m.name;
+
+  const blocks = [
+    detailBlock("At a glance", [
+      `Typical effectiveness: <strong>${pct(m.effectivenessTypical)}</strong>`,
+      `Perfect use: <strong>${pct(m.effectivenessPerfect)}</strong>`,
+      `Hormones: <strong>${m.hormones === true ? "Yes" : (m.hormones === false ? "No" : "Varies")}</strong>`,
+      `STI protection: <strong>${m.tags?.includes("STI") ? "Yes" : "No"}</strong>`,
+      `Breastfeeding: <strong>${m.breastfeedingOk ? "Generally OK" : "Often not recommended"}</strong>`
+    ]),
+    detailList("Pros", m.pros || []),
+    detailList("Cons", m.cons || []),
+    detailList("When to use", m.whenUse || []),
+    detailList("When not to use", m.whenNot || []),
+    detailList("Safety", m.safety || []),
+    ...(m.notes ? [detailList("Notes", m.notes)] : [])
+  ];
+
+  $("#detailBody").innerHTML = blocks.join("");
+  openModal("detail");
+}
+
+function detailBlock(title, lines){
+  return `
+    <div class="card" style="margin-bottom:.8rem;">
+      <div class="card-header-label">${esc(title)}</div>
+      <div class="stage-mini-grid">
+        ${lines.map(l => `<div class="pill-stat">${l}</div>`).join("")}
+      </div>
+    </div>
+  `;
+}
+function detailList(title, items){
+  if (!items.length) return "";
+  return `
+    <div class="card" style="margin-bottom:.8rem;">
+      <div class="card-header-label">${esc(title)}</div>
+      <ul class="system-list">
+        ${items.map(i => `<li>${esc(i)}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+}
+
+// ---------- Compare tray ----------
+function addToCompare(id){
+  if (state.compare.includes(id)) return;
+  if (state.compare.length >= 3) {
+    // Replace the oldest for a “fluid” feel
+    state.compare.shift();
+  }
+  state.compare.push(id);
+  renderCompare();
+}
+function removeFromCompare(id){
+  state.compare = state.compare.filter(x => x !== id);
+  renderCompare();
+}
+function renderCompare(){
+  const chosen = state.compare.map(id => METHODS.find(m => m.id === id)).filter(Boolean);
+  if (!chosen.length){
+    $("#compareGrid").innerHTML = `
+      <div class="compare-card" style="grid-column: 1 / -1;">
+        <div class="card-header-label">No methods selected</div>
+        <p class="section-tagline" style="margin:0;">
+          Tap “Compare” on any method card to pin it here (up to 3).
+        </p>
+      </div>`;
+    return;
+  }
+  $("#compareGrid").innerHTML = chosen.map(m => `
+    <div class="compare-card">
+      <div class="method-kicker">${esc(m.category)}</div>
+      <h4>${esc(m.name)}</h4>
+      <div class="chip-row">
+        ${(m.tags||[]).slice(0,5).map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+      </div>
+      <ul class="compare-list">
+        <li><strong>Typical:</strong> ${pct(m.effectivenessTypical)}</li>
+        <li><strong>STI protection:</strong> ${m.tags?.includes("STI") ? "Yes" : "No"}</li>
+        <li><strong>Hormones:</strong> ${m.hormones === true ? "Yes" : (m.hormones === false ? "No" : "Varies")}</li>
+        <li><strong>Duration:</strong> ${esc(m.duration)}</li>
+      </ul>
+      <div class="method-actions">
+        <button class="small-btn" data-compare-remove="${m.id}">Remove</button>
+        <button class="small-btn primary" data-action="details" data-id="${m.id}">Details</button>
+      </div>
+    </div>
+  `).join("");
+
+  // attach remove handlers
+
+  $$("[data-compare-remove]").forEach(btn => {
+    btn.addEventListener("click", () => removeFromCompare(btn.getAttribute("data-compare-remove")));
+  });
+  // attach details handlers inside compare
+
+  $$("#compareGrid [data-action='details']").forEach(btn => {
+    btn.addEventListener("click", () => openDetails(btn.getAttribute("data-id")));
+  });
+}
+
+// ---------- Wizard ----------
+function setWizardStep(step){
+  state.wizard.step = Math.max(0, Math.min(3, step));
+
+  $$(".track-dot").forEach(d => d.classList.toggle("active", Number(d.dataset.step) === state.wizard.step));
+  renderWizardCard();
+  $("#wizBackBtn").disabled = (state.wizard.step === 0);
+  $("#wizNextBtn").textContent = (state.wizard.step === 3) ? "Done" : "Next";
+}
+
+function renderWizardCard(){
+  const a = state.wizard.answers;
+  const step = state.wizard.step;
+
+  let html = "";
+
+  if (step === 0){
+    html = `
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker">Step 1</div>
+          <h3 class="stage-title">What’s your primary goal?</h3>
+          <p class="stage-one-liner">We’ll prioritize STI protection, hormone preferences, and urgency.</p>
+        </div>
+        <div class="stage-badges">
+          <span class="stage-badge">Fast</span>
+          <span class="stage-badge">Private</span>
+          <span class="stage-badge">Safety-first</span>
+        </div>
+      </div>
+
+      <div class="wiz-grid">
+        <div class="wiz-q">
+          <label for="w_needSti">Do you need STI protection?</label>
+          <select id="w_needSti">
+            <option value="unknown" ${sel(a.needSti,"unknown")}>Not sure</option>
+            <option value="yes" ${sel(a.needSti,"yes")}>Yes</option>
+            <option value="no" ${sel(a.needSti,"no")}>No</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_needEmergencyNow">Are you seeking emergency contraception right now?</label>
+          <select id="w_needEmergencyNow">
+            <option value="no" ${sel(a.needEmergencyNow,"no")}>No</option>
+            <option value="yes" ${sel(a.needEmergencyNow,"yes")}>Yes (after unprotected sex / failure)</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_wantHormoneFree">Do you prefer hormone-free?</label>
+          <select id="w_wantHormoneFree">
+            <option value="unknown" ${sel(a.wantHormoneFree,"unknown")}>Not sure</option>
+            <option value="yes" ${sel(a.wantHormoneFree,"yes")}>Yes, prefer hormone-free</option>
+            <option value="no" ${sel(a.wantHormoneFree,"no")}>Hormonal is OK</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_surePermanent">Are you certain you want something permanent?</label>
+          <select id="w_surePermanent">
+            <option value="no" ${sel(a.surePermanent,"no")}>No / not sure</option>
+            <option value="yes" ${sel(a.surePermanent,"yes")}>Yes, completed family</option>
+          </select>
+        </div>
+      </div>
+    `;
+  }
+
+  if (step === 1){
+    html = `
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker">Step 2</div>
+          <h3 class="stage-title">Body & timing</h3>
+          <p class="stage-one-liner">These answers affect hormone choices and postpartum safety.</p>
+        </div>
+      </div>
+
+      <div class="wiz-grid">
+        <div class="wiz-q">
+          <label for="w_breastfeeding">Are you breastfeeding?</label>
+          <select id="w_breastfeeding">
+            <option value="unknown" ${sel(a.breastfeeding,"unknown")}>Prefer not to say</option>
+            <option value="yes" ${sel(a.breastfeeding,"yes")}>Yes</option>
+            <option value="no" ${sel(a.breastfeeding,"no")}>No</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_estrogenAvoid">Do you need to avoid estrogen? (e.g., migraine with aura, clot risk)</label>
+          <select id="w_estrogenAvoid">
+            <option value="unknown" ${sel(a.estrogenAvoid,"unknown")}>Not sure</option>
+            <option value="yes" ${sel(a.estrogenAvoid,"yes")}>Yes, avoid estrogen</option>
+            <option value="no" ${sel(a.estrogenAvoid,"no")}>No restrictions known</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_weightNote">Any weight-related note you want included?</label>
+          <select id="w_weightNote">
+            <option value="unknown" ${sel(a.weightNote,"unknown")}>No / not sure</option>
+            <option value="over198" ${sel(a.weightNote,"over198")}>Over ~198 lb (patch note)</option>
+            <option value="over165" ${sel(a.weightNote,"over165")}>Over ~165–175 lb (EC note)</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label for="w_okWithProcedure">Are you okay with a procedure (implant/IUD insertion)?</label>
+          <select id="w_okWithProcedure">
+            <option value="unknown" ${sel(a.okWithProcedure,"unknown")}>Not sure</option>
+            <option value="yes" ${sel(a.okWithProcedure,"yes")}>Yes</option>
+            <option value="no" ${sel(a.okWithProcedure,"no")}>No, prefer no procedures</option>
+          </select>
+        </div>
+      </div>
+    `;
+  }
+
+  if (step === 2){
+    html = `
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker">Step 3</div>
+          <h3 class="stage-title">Preferences</h3>
+          <p class="stage-one-liner">We’ll tune for “set & forget” vs. routine, and privacy.</p>
+        </div>
+      </div>
+
+      <div class="wiz-grid">
+        <div class="wiz-q">
+          <label for="w_preferLowMaintenance">Prefer low‑maintenance (“set & forget”)?</label>
+          <select id="w_preferLowMaintenance">
+            <option value="unknown" ${sel(a.preferLowMaintenance,"unknown")}>Not sure</option>
+            <option value="yes" ${sel(a.preferLowMaintenance,"yes")}>Yes</option>
+            <option value="no" ${sel(a.preferLowMaintenance,"no")}>No, routine is fine</option>
+          </select>
+        </div>
+
+        <div class="wiz-q">
+          <label>Tip</label>
+          <p class="mini" style="margin:.2rem 0 0;">
+            If STI protection is needed, the wizard will always include condoms or dual protection
+            in the top 3.
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
+  if (step === 3){
+    const results = wizardRecommend(state.wizard.answers);
+    html = `
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker">Step 4</div>
+          <h3 class="stage-title">Your top 3 options</h3>
+          <p class="stage-one-liner">These are educational suggestions—confirm contraindications with a clinician.</p>
+        </div>
+      </div>
+
+      <div class="result-stack">
+        ${results.map(r => `
+          <div class="result-card">
+            <div class="result-top">
+              <div>
+                <div class="method-kicker">${esc(r.method.category)}</div>
+                <h4 style="margin:.15rem 0 .25rem;">${esc(r.method.name)}</h4>
+                <div class="chip-row">
+                  ${(r.method.tags||[]).slice(0,5).map(t => `<span class="chip">${esc(t)}</span>`).join("")}
+                </div>
+              </div>
+              <div class="badge-row">
+                ${r.method.tags?.includes("STI") ? `<span class="badge">STI</span>` : ``}
+                <span class="badge info">${r.method.hormones === true ? "Hormonal" : (r.method.hormones === false ? "Non‑hormonal" : "Varies")}</span>
+              </div>
+            </div>
+
+            <p class="mini" style="margin:.55rem 0 0;">
+              <strong>Why it fits:</strong> ${esc(r.why.join(" · "))}
+            </p>
+
+            ${r.warnings.length ? `
+              <div class="warn">
+                <strong>Safety notes:</strong>
+                <ul style="margin:.35rem 0 0; padding-left: 1.1rem;">
+                  ${r.warnings.map(w => `<li>${esc(w)}</li>`).join("")}
+                </ul>
+              </div>
+            ` : ``}
+
+            <div class="method-actions">
+              <button class="small-btn" data-action="details" data-id="${r.method.id}">Details</button>
+              <button class="small-btn" data-action="compare" data-id="${r.method.id}">Compare</button>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+
+  $("#wizardCard").innerHTML = `<div class="stage-enter">${html}</div>`;
+  wireWizardControlsForStep();
+}
+
+function sel(val, expected){ return val === expected ? "selected" : ""; }
+
+function wireWizardControlsForStep(){
+  const a = state.wizard.answers;
+
+  const bind = (id, key) => {
+    const el = $("#"+id);
+    if (!el) return;
+    el.addEventListener("change", e => {
+      a[key] = e.target.value;
+    });
+  };
+
+  bind("w_needSti","needSti");
+  bind("w_needEmergencyNow","needEmergencyNow");
+  bind("w_wantHormoneFree","wantHormoneFree");
+  bind("w_surePermanent","surePermanent");
+
+  bind("w_breastfeeding","breastfeeding");
+  bind("w_estrogenAvoid","estrogenAvoid");
+  bind("w_weightNote","weightNote");
+  bind("w_okWithProcedure","okWithProcedure");
+
+  bind("w_preferLowMaintenance","preferLowMaintenance");
+
+  // results step: attach detail/compare
+
+  $$("#wizardCard [data-action='details']").forEach(btn => {
+    btn.addEventListener("click", () => openDetails(btn.getAttribute("data-id")));
+  });
+
+  $$("#wizardCard [data-action='compare']").forEach(btn => {
+    btn.addEventListener("click", () => addToCompare(btn.getAttribute("data-id")));
+  });
+}
+
+function wizardRecommend(ans){
+  // Score methods
+  const candidates = METHODS.filter(m => m.category !== "Special");
+
+  const scores = candidates.map(m => {
+    let s = 0;
+    const why = [];
+    const warnings = [];
+
+    // Emergency now => prioritize EC + copper IUD
+    if (ans.needEmergencyNow === "yes"){
+      if (m.id === "copper_iud"){ s += 60; why.push("Most effective EC option"); }
+      if (m.id === "morning_after_pill"){ s += 55; why.push("Time-sensitive EC option"); }
+      // In emergency context, condoms are still useful
+      if (m.id === "male_condom" || m.id === "female_condom"){ s += 18; why.push("Useful immediately + STI protection"); }
+    }
+
+    // STI protection
+    if (ans.needSti === "yes"){
+      if (m.tags?.includes("STI")) { s += 45; why.push("Provides STI protection"); }
+      else { s -= 25; }
+    } else if (ans.needSti === "no"){
+      // mild preference for higher efficacy methods
+      if (m.duration === "long") s += 10;
+    }
+
+    // Hormone-free preference
+    if (ans.wantHormoneFree === "yes"){
+      if (m.hormones === false) { s += 28; why.push("Hormone-free"); }
+      if (m.hormones === true) { s -= 18; warnings.push("Contains hormones (may not match preference)"); }
+    } else if (ans.wantHormoneFree === "no"){
+      if (m.hormones === true) { s += 10; }
+    }
+
+    // Breastfeeding
+    if (ans.breastfeeding === "yes"){
+      if (m.breastfeedingOk) { s += 18; why.push("Generally compatible with breastfeeding"); }
+      else { s -= 22; warnings.push("Often not recommended while breastfeeding"); }
+    }
+
+    // Estrogen avoidance
+    if (ans.estrogenAvoid === "yes"){
+      if (m.estrogen === "yes") { s -= 35; warnings.push("Contains estrogen—may be contraindicated"); }
+      if (m.estrogen === "no" || m.estrogen === "none") { s += 12; why.push("No estrogen"); }
+    }
+
+    // Low maintenance
+    if (ans.preferLowMaintenance === "yes"){
+      if (m.duration === "long") { s += 22; why.push("Low maintenance / long-acting"); }
+      if (m.id === "implant" || m.id === "hormonal_iud" || m.id === "copper_iud") s += 10;
+      if (m.duration === "short") s -= 8;
+    }
+
+    // Procedures
+    if (ans.okWithProcedure === "no"){
+      if (m.id === "implant" || m.id.includes("_iud")) { s -= 18; warnings.push("Requires insertion procedure"); }
+    } else if (ans.okWithProcedure === "yes"){
+      if (m.id === "implant" || m.id.includes("_iud")) { s += 8; }
+    }
+
+    // Permanent certainty
+    if (ans.surePermanent === "yes"){
+      if (m.duration === "permanent") { s += 32; why.push("Permanent option"); }
+      if (m.duration !== "permanent") { s -= 6; }
+      if (m.id === "tubal_ligation") warnings.push("Requires surgery/anesthesia; consider counseling");
+    } else {
+      // avoid pushing permanent if not asked
+      if (m.duration === "permanent") s -= 18;
+    }
+
+    // Weight notes
+    if (ans.weightNote === "over198" && m.id === "patch"){
+      warnings.push("May be less effective over ~198 lb");
+      s -= 12;
+    }
+    if (ans.weightNote === "over165" && m.id === "morning_after_pill"){
+      warnings.push("Some EC pills may be less effective at higher weight/BMI (type-dependent)");
+      s -= 8;
+    }
+
+    // Method-specific safety highlights (surface warnings without excluding)
+    if (m.id === "combined_pill" || m.id === "patch" || m.id === "ring"){
+      warnings.push("No STI protection—use condoms if STI risk exists");
+    }
+    if (m.id === "depo"){
+      warnings.push("May delay return to fertility after stopping; bone density considerations");
+    }
+    if (m.id === "diaphragm"){
+      warnings.push("No STI protection; must use spermicide and follow timing rules");
+    }
+    if (m.id.includes("_iud")){
+      warnings.push("No STI protection; watch for severe pain/fever; check strings");
+    }
+
+    // Encourage dual protection when STI needed
+    if (ans.needSti === "yes" && !m.tags?.includes("STI")){
+      // soften penalty for very high-efficacy methods by suggesting dual
+      if (m.duration === "long"){
+        warnings.push("Consider dual protection: condoms + this method for STI + pregnancy protection");
+        s += 8;
+      }
+    }
+
+    // keep reasons concise
+    const whyUnique = [...new Set(why)].slice(0,4);
+    const warnUnique = [...new Set(warnings)].slice(0,5);
+
+    return { method: m, score: s, why: whyUnique, warnings: warnUnique };
+  });
+
+  // Sort
+  scores.sort((a,b) => b.score - a.score);
+
+  // Always ensure condoms appear when STI required:
+  let top = scores.slice(0,6);
+
+  if (ans.needSti === "yes"){
+    const hasStiMethod = top.some(x => x.method.tags?.includes("STI"));
+    if (!hasStiMethod){
+      const condom = scores.find(x => x.method.id === "male_condom") || scores.find(x => x.method.tags?.includes("STI"));
+      if (condom) top = [condom, ...top].slice(0,6);
+    }
+  }
+
+  // Pick 3 with diversity (avoid 3 near-identical estrogen methods)
+  const picked = [];
+  const usedCats = new Set();
+  const usedHormoneFlag = new Set();
+
+  for (const r of top){
+    if (picked.length >= 3) break;
+
+    // light diversity rules
+    const hormoneFlag = r.method.hormones === true ? "hormonal" : (r.method.hormones === false ? "nonhormonal" : "varies");
+    const cat = r.method.category;
+
+    if (picked.length === 0){
+      picked.push(r); usedCats.add(cat); usedHormoneFlag.add(hormoneFlag);
+      continue;
+    }
+
+    // avoid all same category unless emergency path
+    if (ans.needEmergencyNow !== "yes" && usedCats.has(cat) && cat !== "Barrier") continue;
+
+    // allow mixture of hormonal/nonhormonal when possible
+    if (picked.length === 2 && usedHormoneFlag.size === 1 && !usedHormoneFlag.has(hormoneFlag)) {
+      picked.push(r); usedCats.add(cat); usedHormoneFlag.add(hormoneFlag);
+      continue;
+    }
+
+    picked.push(r); usedCats.add(cat); usedHormoneFlag.add(hormoneFlag);
+  }
+
+  // fallback
+  while (picked.length < 3 && scores[picked.length]) picked.push(scores[picked.length]);
+
+  return picked.slice(0,3);
+}
+
+// ---------- Event wiring ----------
+function attachCardHandlers(root){
+
+  $$(".method-card", root).forEach(card => {
+    card.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const id = card.getAttribute("data-id");
+      const action = btn.getAttribute("data-action");
+      if (action === "details") openDetails(id);
+      if (action === "compare") addToCompare(id);
+      if (action === "wizard") {
+        // Pre-fill wizard with a gentle nudge based on this method’s category
+        openWizard();
+      }
+      e.stopPropagation();
+    });
+  });
+}
+
+// ---------- Hero particle canvas ----------
+function startParticles(){
+  const canvas = $("#particleCanvas");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let rafId = null;
+  let started = false;
+
+  // Reduce particle count on mobile for performance
+  const isMobile = window.innerWidth < 768;
+  const N = isMobile ? 35 : 70;
+
+  const parts = Array.from({length:N}).map(() => ({
+    x: Math.random(),
+    y: Math.random(),
+    r: Math.random()*1.8 + 0.6,
+    vx: (Math.random()-0.5)*0.08,
+    vy: (Math.random()-0.5)*0.05,
+    a: Math.random()*0.6 + 0.15
+  }));
+
+  const resize = () => {
+    // Use getBoundingClientRect for reliable dimensions after layout
+    const rect = canvas.parentElement ? canvas.parentElement.getBoundingClientRect() : null;
+    const w = rect ? rect.width : canvas.clientWidth;
+    const h = rect ? rect.height : canvas.clientHeight;
+    if (w > 0 && h > 0) {
+      canvas.width  = w * devicePixelRatio;
+      canvas.height = h * devicePixelRatio;
+    }
+  };
+
+  // Use ResizeObserver if available for reliable mobile resize events
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => { resize(); });
+    ro.observe(canvas.parentElement || canvas);
+  } else {
+    window.addEventListener("resize", resize);
+  }
+
+  // Pause/resume RAF based on visibility to prevent thermal throttling on mobile
+  const visObs = typeof IntersectionObserver !== 'undefined'
+    ? new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (!started) { started = true; resize(); }
+          if (!rafId) rafId = requestAnimationFrame(frame);
+        } else {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        }
+      }, { threshold: 0.1 })
+    : null;
+
+  if (visObs) {
+    visObs.observe(canvas);
+  } else {
+    // Fallback: defer one frame so layout is complete before reading dimensions
+    requestAnimationFrame(() => { resize(); rafId = requestAnimationFrame(frame); });
+  }
+
+  function frame(){
+    const w = canvas.width, h = canvas.height;
+    // Guard: don't draw on a 0-size canvas
+    if (!w || !h) { rafId = requestAnimationFrame(frame); return; }
+
+    ctx.clearRect(0,0,w,h);
+
+    // subtle connection lines
+    for (let i=0;i<N;i++){
+      const p = parts[i];
+      const px = p.x*w, py = p.y*h;
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(216,27,96,${p.a})`;
+      ctx.arc(px,py,p.r*devicePixelRatio,0,Math.PI*2);
+      ctx.fill();
+
+      for (let j=i+1;j<N;j++){
+        const q = parts[j];
+        const qx = q.x*w, qy = q.y*h;
+        const dx = px - qx, dy = py - qy;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120*devicePixelRatio){
+          ctx.strokeStyle = `rgba(236,64,122,${0.10 * (1 - d/(120*devicePixelRatio))})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(px,py);
+          ctx.lineTo(qx,qy);
+          ctx.stroke();
+        }
+      }
+
+      p.x += p.vx / devicePixelRatio;
+      p.y += p.vy / devicePixelRatio;
+      if (p.x < -0.1) p.x = 1.1;
+      if (p.x > 1.1) p.x = -0.1;
+      if (p.y < -0.1) p.y = 1.1;
+      if (p.y > 1.1) p.y = -0.1;
+    }
+
+    rafId = requestAnimationFrame(frame);
+  }
+
+  // gradient morph follow mouse
+  document.addEventListener("mousemove", (e) => {
+    const hero = $(".hero-constellation");
+    if (!hero) return;
+    const rect = hero.getBoundingClientRect();
+    const x = ((e.clientX - rect.left)/rect.width)*100;
+    const y = ((e.clientY - rect.top)/rect.height)*100;
+    hero.style.setProperty("--mouse-x", `${x}%`);
+    hero.style.setProperty("--mouse-y", `${y}%`);
+  });
+
+  // gradient morph follow touch (mobile)
+  document.addEventListener("touchmove", (e) => {
+    const hero = $(".hero-constellation");
+    if (!hero || !e.touches.length) return;
+    const rect = hero.getBoundingClientRect();
+    const x = ((e.touches[0].clientX - rect.left)/rect.width)*100;
+    const y = ((e.touches[0].clientY - rect.top)/rect.height)*100;
+    hero.style.setProperty("--mouse-x", `${x}%`);
+    hero.style.setProperty("--mouse-y", `${y}%`);
+  }, { passive: true });
+}
+
+// ---------- Openers ----------
+function openWizard(){
+  renderWizardCard();
+  setWizardStep(0);
+  openModal("wizard");
+}
+function init(){
+  renderAll();
+  renderActiveChips();
+  startParticles();
+
+  // Explorer buttons
+  $("#jumpExplorerBtn").addEventListener("click", () => $("#explorer").scrollIntoView({behavior:"smooth"}));
+  $("#resetFiltersBtn").addEventListener("click", () => {
+    state.filters = { sti:"any", hormones:"any", duration:"any", postpartum:"any", estrogen:"any", weight:"any" };
+    $("#f_sti").value="any";
+    $("#f_hormones").value="any";
+    $("#f_duration").value="any";
+    $("#f_postpartum").value="any";
+    $("#f_estrogen").value="any";
+    $("#f_weight").value="any";
+    applyFilters();
+  });
+
+  // filter changes
+  $("#f_sti").addEventListener("change", e => { state.filters.sti = e.target.value; applyFilters(); });
+  $("#f_hormones").addEventListener("change", e => { state.filters.hormones = e.target.value; applyFilters(); });
+  $("#f_duration").addEventListener("change", e => { state.filters.duration = e.target.value; applyFilters(); });
+  $("#f_postpartum").addEventListener("change", e => { state.filters.postpartum = e.target.value; applyFilters(); });
+  $("#f_estrogen").addEventListener("change", e => { state.filters.estrogen = e.target.value; applyFilters(); });
+  $("#f_weight").addEventListener("change", e => { state.filters.weight = e.target.value; applyFilters(); });
+
+  // compare tray
+  $("#openCompareBtn").addEventListener("click", () => { renderCompare(); openDrawer(); });
+  $("#openCompareBtn2").addEventListener("click", () => { renderCompare(); openDrawer(); });
+  $("#clearCompareBtn").addEventListener("click", () => { state.compare = []; renderCompare(); });
+
+  // wizard open buttons
+  ["openWizardBtn","openWizardBtn2","openWizardBtn3"].forEach(id => {
+    const el = $("#"+id);
+    if (el) el.addEventListener("click", openWizard);
+  });
+
+  // modal/drawer close
+
+  $$("[data-close]").forEach(el => {
+    el.addEventListener("click", () => {
+      const which = el.getAttribute("data-close");
+      if (which === "detail") closeModal("detail");
+      if (which === "wizard") closeModal("wizard");
+      if (which === "compare") closeDrawer();
+    });
+  });
+
+  // detail add to compare
+  $("#detailAddCompareBtn").addEventListener("click", () => {
+    if (state.lastDetailId) addToCompare(state.lastDetailId);
+  });
+
+  // wizard nav
+  $("#wizBackBtn").addEventListener("click", () => setWizardStep(state.wizard.step - 1));
+  $("#wizNextBtn").addEventListener("click", () => {
+    if (state.wizard.step === 3) closeModal("wizard");
+    else setWizardStep(state.wizard.step + 1);
+  });
+
+  // direct step tapping
+
+  $$(".track-dot").forEach(dot => {
+    dot.addEventListener("click", () => setWizardStep(Number(dot.dataset.step)));
+  });
+
+  // Escape key close
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if ($("#detailModal").getAttribute("aria-hidden") === "false") closeModal("detail");
+    if ($("#wizardModal").getAttribute("aria-hidden") === "false") closeModal("wizard");
+    if ($("#compareDrawer").getAttribute("aria-hidden") === "false") closeDrawer();
+  });
+
+  renderCompare();
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+
+  </script>
+
+<!-- FOOTER -->
+<style>
+  :root {
+    --bg-footer:     #1e1a1e;
+    --bg-bottom:     #161316;
+    --pink-primary:  #e8517a;
+    --pink-soft:     #f0748e;
+    --text-main-f:   #c9bfc9;
+    --text-muted-f:  #7c7080;
+    --divider-f:     rgba(232,81,122,0.18);
+    --font-display-f:'Playfair Display', Georgia, serif;
+    --font-body-f:   'DM Sans', sans-serif;
+  }
+  footer.ns-footer{background:var(--bg-footer);color:var(--text-main-f);font-family:var(--font-body-f);border-top:1px solid var(--divider-f);}
+  .footer-main{max-width:1200px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+  .footer-col h3{font-family:var(--font-display-f);font-size:1.05rem;font-weight:600;color:var(--pink-primary);margin-bottom:18px;letter-spacing:.01em;}
+  .footer-col p{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{font-size:.875rem;color:var(--text-main-f);padding:5px 0;font-weight:300;position:relative;padding-left:14px;transition:color .2s;}
+  .footer-col ul li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--pink-primary);opacity:.5;}
+  .footer-col ul li:hover{color:var(--pink-soft);}
+  .disclaimer-text{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+  .emergency-alert{font-size:.875rem;line-height:1.7;color:var(--pink-primary);font-weight:500;}
+  .emergency-alert strong{font-weight:600;}
+  .footer-meta{border-top:1px solid var(--divider-f);max-width:1200px;margin:0 auto;padding:28px 32px;text-align:center;}
+  .footer-meta .meta-line{font-size:.8rem;color:var(--text-muted-f);letter-spacing:.04em;margin-bottom:10px;}
+  .footer-meta .meta-line .sep{color:var(--pink-primary);margin:0 6px;}
+  .footer-meta .tagline{font-size:.82rem;color:var(--text-muted-f);display:flex;align-items:center;justify-content:center;gap:6px;}
+  .footer-meta .tagline .heart{color:var(--pink-primary);font-size:1rem;animation:footerPulse 2s ease-in-out infinite;}
+  @keyframes footerPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.25);opacity:.8;}}
+  .footer-bottom{background:var(--bg-bottom);border-top:1px solid rgba(255,255,255,0.04);}
+  .footer-bottom-inner{max-width:1200px;margin:0 auto;padding:22px 32px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .footer-links{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;}
+  .footer-links a{font-size:.82rem;color:var(--text-muted-f);text-decoration:none;letter-spacing:.03em;transition:color .2s;}
+  .footer-links a:hover{color:var(--pink-soft);}
+  .footer-copy{font-size:.78rem;color:var(--text-muted-f);opacity:.7;letter-spacing:.02em;}
+  @media(max-width:900px){.footer-main{grid-template-columns:repeat(2,1fr);gap:32px;}}
+  @media(max-width:540px){.footer-main{grid-template-columns:1fr;padding:40px 20px 32px;}.footer-meta{padding:20px;}.footer-bottom-inner{padding:18px 20px;}.footer-links{gap:20px;}}
+</style>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+  </script>
+  <script>
+    (function initHeaderSparkle() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      header.addEventListener('mousemove', (e) => {
+        const rect = header.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        header.style.setProperty('--mouse-x', `${x}%`);
+        header.style.setProperty('--mouse-y', `${y}%`);
+      });
+    })();
+  </script>
+</body>
+</html>

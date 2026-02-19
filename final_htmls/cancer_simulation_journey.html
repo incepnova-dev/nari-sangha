@@ -1,0 +1,3624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research & Insights – Nari Swasthya</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+
+    /* EQUAL HEIGHT CONTAINERS WITH SCROLL */
+    .anatomy-visualization,
+    .cancer-viz {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+      height: 950px !important; /* FIXED HEIGHT FOR EQUAL SIZE */
+      display: flex;
+      flex-direction: column;
+      overflow: hidden; /* PREVENT OVERFLOW */
+    }
+
+    /* SCROLLABLE CONTENT AREAS */
+    .anatomy-scroll-container,
+    .cancer-scroll-container {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 10px;
+    }
+
+    /* CUSTOM SCROLLBAR STYLING */
+    .anatomy-scroll-container::-webkit-scrollbar,
+    .cancer-scroll-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .anatomy-scroll-container::-webkit-scrollbar-track,
+    .cancer-scroll-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .anatomy-scroll-container::-webkit-scrollbar-thumb,
+    .cancer-scroll-container::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #ec407a, #ab47bc);
+      border-radius: 10px;
+    }
+
+    .anatomy-scroll-container::-webkit-scrollbar-thumb:hover,
+    .cancer-scroll-container::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #d81b60, #8e24aa);
+    }
+
+    /* SVG CONTAINERS - POSITIONED AT TOP, NO TOP MARGIN */
+    .body-anatomy,
+    .anatomy-svg {
+      width: 100%;
+      height: 520px !important; /* REDUCED HEIGHT TO PREVENT OVERLAP */
+      margin: 0 0 20px 0; /* REMOVED TOP MARGIN - PULLS IMAGES UP */
+      flex-shrink: 0;
+    }
+
+    /* VIZ LABELS - LARGER & MORE READABLE */
+    .viz-label {
+      font-size: 18px !important; /* INCREASED */
+      font-weight: 800 !important;
+      letter-spacing: 0.8px !important;
+    }
+
+    .viz-sub {
+      font-size: 14px !important; /* INCREASED */
+      opacity: 0.95 !important;
+      font-weight: 600 !important;
+    }
+
+    .edu-desc-box p {
+      font-size: 0.92rem !important; /* DECREASED FROM 1.15rem (3 points smaller) */
+      line-height: 1.8;
+    }
+
+    .edu-desc-box strong {
+      font-size: 1.05rem !important; /* DECREASED FROM 1.3rem (3 points smaller) */
+    }
+
+    .journey-header h2 {
+      font-size: 3rem !important; /* INCREASED */
+    }
+
+    .journey-header .sub {
+      font-size: 1.4rem !important; /* INCREASED */
+    }
+
+    .stat-value {
+      font-size: 1.3rem !important; /* INCREASED */
+    }
+
+    .intel-desc h4 {
+      font-size: 1.25rem !important; /* INCREASED */
+    }
+
+    .intel-desc p {
+      font-size: 1.05rem !important; /* INCREASED */
+    }
+
+    .stage-num {
+      font-size: 1.6rem !important; /* INCREASED */
+    }
+
+    /* ============================================================
+       NARI SWASTHYA THEME - BASE STYLES
+       ============================================================ */
+    :root {
+      --primary: #ec407a;
+      --primary-dark: #d81b60;
+      --primary-light: #f48fb1;
+      --secondary: #ab47bc;
+      --accent: #7e57c2;
+      --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+      --text-primary: #1a1a1a;
+      --text-soft: #666;
+      --border: rgba(0,0,0,0.08);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --shadow-xl: 0 12px 40px rgba(236,64,122,0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    /* Variable aliases so new header works with this file's theme */
+    :root {
+      --text-main: var(--text-primary);
+      --deep-pink: var(--primary-dark);
+      --border-soft: var(--border);
+    }
+    .site-header{
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      padding:0;
+      box-shadow:0 2px 24px rgba(236,64,122,0.09);
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(236,64,122,0.08);
+    }
+    .nav-container{
+      max-width:1400px;margin:0 auto;
+      padding:0 1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      height:64px;
+    }
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(236,64,122,0.35);
+      flex-shrink:0;
+    }
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{
+      text-decoration:none;
+      font-family:'Playfair Display',serif;
+      font-weight:900;font-size:1.25rem;line-height:1.1;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .logo-text span{
+      font-size:.62rem;color:#666;
+      font-family:'Manrope',sans-serif;font-weight:500;
+      letter-spacing:.1em;text-transform:uppercase;
+    }
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:.3rem;
+      text-decoration:none;color:#1a1a1a;
+      font-weight:500;font-size:.875rem;
+      padding:.55rem .75rem;border-radius:8px;
+      transition:all .25s;white-space:nowrap;
+      cursor:pointer;background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-link.active{color:#d81b60;background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{
+      font-size:.6rem;transition:transform .25s;
+      color:#666;margin-top:1px;
+    }
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{
+      position:absolute;top:calc(100% + 8px);left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      min-width:220px;
+      background:white;
+      border-radius:16px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);
+      padding:.5rem;
+      opacity:0;pointer-events:none;
+      transition:all .25s cubic-bezier(.23,1.01,.32,1);
+      z-index:200;
+    }
+    .nav-dropdown::before{
+      content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+      border:6px solid transparent;border-bottom-color:white;
+      border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+    }
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+      opacity:1;pointer-events:all;
+      transform:translateX(-50%) translateY(0);
+    }
+    .dd-item{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.65rem .9rem;border-radius:10px;
+      text-decoration:none;color:#1a1a1a;
+      font-size:.85rem;font-weight:500;
+      transition:all .2s;
+    }
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1.1rem;}
+    .dd-icon{
+      width:28px;height:28px;border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.8rem;flex-shrink:0;
+    }
+    .dd-sep{height:1px;background:rgba(0,0,0,0.08);margin:.3rem .5rem;}
+    /* Flyout submenu — appears to the right of the parent row */
+    .dd-has-flyout{position:relative;}
+    .dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      display:none;position:absolute;top:0;left:calc(100% + 4px);
+      min-width:190px;background:white;border-radius:12px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+    }
+    .dd-has-flyout:hover>.dd-flyout,
+    .dd-has-flyout:focus-within>.dd-flyout{display:block;}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:#d81b60;}
+    .dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+    .dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{
+      padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+      font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    .btn-nav.outline{
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);border:none;
+    }
+    .btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+    .btn-nav.primary{
+      border:1.5px solid #d81b60;
+      color:#d81b60;background:#fff;box-shadow:none;
+    }
+    .btn-nav.primary:hover{background:rgba(236,64,122,0.05);border-color:#d81b60;}
+    .hamburger{
+      display:none;width:38px;height:38px;border-radius:10px;
+      background:none;border:1.5px solid rgba(0,0,0,0.08);
+      align-items:center;justify-content:center;cursor:pointer;
+      flex-direction:column;gap:4px;padding:8px;
+    }
+    .hamburger span{display:block;height:2px;background:#1a1a1a;border-radius:2px;transition:all .3s;}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+      z-index:999;padding:1.5rem;overflow-y:auto;
+    }
+    .mobile-menu.open{display:block;}
+    .mm-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.85rem 1rem;border-radius:12px;
+      text-decoration:none;color:#1a1a1a;
+      font-weight:500;font-size:1rem;
+      transition:all .2s;border-bottom:1px solid rgba(0,0,0,0.08);
+    }
+    .mm-link:hover{color:#d81b60;background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){.main-nav{display:none;}.hamburger{display:flex;}}
+    @media(max-width:600px){.nav-actions .btn-nav{display:none;}}
+    /* Always keep Sign In + Contact Us visible inside mobile menu overlay */
+    .mobile-menu .btn-nav{display:inline-flex !important;}
+
+    /* ============================================================
+       HERO CONSTELLATION
+       ============================================================ */
+    .hero-constellation {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(160deg, #faf5fb 0%, #f9eef5 50%, #f3e5f5 100%);
+    }
+
+    @media (max-width: 768px) {
+      .hero-constellation { min-height: auto; }
+    }
+
+    .constellation-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .gradient-morph {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(236,64,122,0.12) 0%, transparent 60%);
+      transition: background 0.3s ease;
+    }
+
+    .hero-content-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(236,64,122,0.1);
+      border: 1px solid rgba(236,64,122,0.2);
+      padding: 0.4rem 1.1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      animation: badge-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes badge-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(236,64,122,0); }
+      50% { box-shadow: 0 0 18px 3px rgba(236,64,122,0.18); }
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+
+    .hero-title-3d {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-emphasis {
+      display: block;
+      background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: title-shimmer 3s ease-in-out infinite;
+      filter: drop-shadow(0 2px 10px rgba(236,64,122,.35));
+    }
+
+    @keyframes title-shimmer {
+      0%, 100% { filter: brightness(1) drop-shadow(0 2px 10px rgba(236,64,122,.35)); }
+      50% { filter: brightness(1.3) drop-shadow(0 5px 18px rgba(236,64,122,.55)); }
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--text-soft);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .badge-constellation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge-3d {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 12px;
+      box-shadow: var(--shadow-md);
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .hero-badge-3d i {
+      color: var(--primary);
+    }
+
+    .btn-family-guide {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+
+    .btn-family-guide:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .research-orb {
+      width: 520px;
+      height: 520px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .research-canvas-wrap {
+      width: 520px;
+      height: 520px;
+      max-width: 100%;
+      position: relative;
+      aspect-ratio: 1 / 1;
+    }
+
+    #researchCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .research-floating-tags {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .r-tag {
+      position: absolute;
+      background: white;
+      border-radius: 50px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+      border: 1px solid rgba(236,64,122,0.18);
+      color: var(--primary-dark);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'Manrope', sans-serif;
+      animation: r-tag-pulse 3s ease-in-out infinite;
+    }
+    .r-tag-1 { top: 8%; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+    .r-tag-2 { top: 25%; right: 2%; animation-delay: 0.6s; }
+    .r-tag-3 { bottom: 30%; right: 2%; animation-delay: 1.2s; }
+    .r-tag-4 { bottom: 12%; left: 50%; transform: translateX(-50%); animation-delay: 1.8s; }
+    .r-tag-5 { top: 25%; left: 2%; animation-delay: 2.4s; }
+
+    @keyframes r-tag-pulse {
+      0%, 100% { box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
+      50% { box-shadow: 0 6px 24px rgba(236,64,122,0.22); transform: scale(1.04); }
+    }
+    .r-tag-1 { animation-name: r-tag-pulse-center; }
+    @keyframes r-tag-pulse-center {
+      0%, 100% { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateX(-50%) scale(1); }
+      50% { box-shadow: 0 6px 24px rgba(236,64,122,0.22); transform: translateX(-50%) scale(1.04); }
+    }
+    .r-tag-4 { animation-name: r-tag-pulse-center4; }
+    @keyframes r-tag-pulse-center4 {
+      0%, 100% { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateX(-50%) scale(1); }
+      50% { box-shadow: 0 6px 24px rgba(236,64,122,0.22); transform: translateX(-50%) scale(1.04); }
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+       ============================================================ */
+    .page-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .section-title .title-black {
+      color: #1a1a1a;
+    }
+
+    .section-title .title-pink {
+      background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-style: italic;
+    }
+
+    .section-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-soft);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ============================================================
+       SIMULATION GRID - EQUAL HEIGHTS
+       ============================================================ */
+    .simulation-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .simulation-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      height: 950px; /* FIXED HEIGHT FOR EQUAL CONTAINERS */
+      overflow: hidden; /* PREVENT OVERFLOW */
+    }
+
+    .simulation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-light);
+    }
+
+    @media (hover: none) {
+      .simulation-card:hover {
+        transform: none;
+      }
+    }
+
+    .simulation-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(236,64,122,0.1);
+    }
+
+    .simulation-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .simulation-title-group h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .simulation-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    /* FIXED HEIGHT VISUALIZATION */
+    .simulation-viz {
+      flex: 1; /* TAKE UP REMAINING SPACE */
+      background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow-y: auto; /* ADD VERTICAL SCROLLING */
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* CUSTOM SCROLLBAR FOR SIMULATION-VIZ */
+    .simulation-viz::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .simulation-viz::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.3);
+      border-radius: 10px;
+    }
+
+    .simulation-viz::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #ec407a, #ab47bc);
+      border-radius: 10px;
+    }
+
+    .simulation-viz::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #d81b60, #8e24aa);
+    }
+
+    .control-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .control-label .pulse-dot {
+      width: 10px;
+      height: 10px;
+    }
+
+    .simulation-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .mode-btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 0.75rem 1rem;
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--primary-light);
+      background: rgba(236,64,122,0.05);
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .mode-btn i {
+      font-size: 1rem;
+    }
+
+    /* SVG CONTAINER */
+    .svg-container {
+      flex-shrink: 0;
+      position: relative;
+      height: 520px; /* FIXED HEIGHT TO PREVENT OVERLAP */
+      margin-bottom: 1rem;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .anatomy-svg {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+    }
+
+    /* EDUCATIONAL TEXT BOX */
+    .edu-desc-box {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      margin-top: 1rem;
+      border-left: 4px solid var(--primary);
+      flex-shrink: 0;
+    }
+
+    .edu-desc-box p {
+      font-size: 0.85rem; /* DECREASED FROM 0.9rem */
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-desc-box strong {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.9rem; /* SLIGHTLY LARGER THAN BODY BUT STILL REDUCED */
+    }
+
+    /* ============================================================
+       CANCER STAGING CONTROLS
+       ============================================================ */
+    .stage-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .stage-btn {
+      padding: 0.75rem;
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stage-btn:hover {
+      border-color: var(--primary-light);
+      background: rgba(236,64,122,0.05);
+    }
+
+    .stage-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .stage-btn.visited {
+      background: rgba(236,64,122,0.1);
+      border-color: var(--primary-light);
+    }
+
+    .stage-num {
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .stage-name {
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+
+    /* STAGE INTEL PANEL */
+    .stage-intel {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .stage-description {
+      padding: 1rem;
+      background: rgba(236,64,122,0.05);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .intel-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intel-row:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .intel-label {
+      font-weight: 600;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    .intel-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .survival-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(0,0,0,0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .survival-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #66bb6a, #43a047);
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+
+    .treatment-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .treatment-tag {
+      padding: 0.4rem 0.9rem;
+      background: linear-gradient(135deg, rgba(236,64,122,0.1), rgba(171,71,188,0.1));
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    /* ============================================================
+       SVG LABEL STYLES
+       ============================================================ */
+    .viz-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .viz-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      fill: #666;
+      font-weight: 500;
+    }
+
+    .stage-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    /* ANIMATION CLASSES */
+    .cancer-stage {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .cancer-stage.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .mode-elements {
+      display: none;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    /* ============================================================
+       1100px — LARGE TABLET / SMALL DESKTOP
+       ============================================================ */
+    @media (max-width: 1100px) {
+      .hero-constellation { min-height: auto; }
+      .hero-content-wrapper {
+        grid-template-columns: 1fr;
+        padding: 4rem 2rem 3rem;
+        gap: 3rem;
+        text-align: center;
+      }
+      .hero-left { display: flex; flex-direction: column; align-items: center; }
+      .badge-constellation { justify-content: center; }
+      .hero-right { order: -1; }
+      .research-canvas-wrap { width: 380px; height: 380px; }
+      .research-floating-tags { display: none; } /* hide on tablet to avoid clutter */
+
+      .simulation-grid { grid-template-columns: 1fr; }
+
+      .hero-title-3d { font-size: clamp(2.2rem, 5vw, 3.5rem); }
+    }
+
+    /* ============================================================
+       768px — TABLET / LARGE PHONE
+       ============================================================ */
+    @media (max-width: 768px) {
+
+      /* ── Hero ── */
+      .hero-constellation { min-height: auto; }
+      .hero-content-wrapper {
+        padding: 3rem 1.25rem 2.5rem;
+        gap: 2rem;
+      }
+      .hero-eyebrow { font-size: 0.72rem; padding: 0.35rem 0.9rem; }
+      .hero-title-3d { font-size: clamp(1.9rem, 6vw, 2.6rem); }
+      .title-emphasis { font-size: inherit; }
+      .hero-description { font-size: 1rem; }
+      .research-canvas-wrap { width: 300px; height: 300px; }
+
+      /* Hero badges — wrap nicely */
+      .badge-constellation { gap: 0.6rem; }
+      .hero-badge-3d {
+        font-size: 0.8rem;
+        padding: 0.6rem 1rem;
+      }
+
+      /* CTA button full-width */
+      .btn-family-guide {
+        font-size: 0.95rem;
+        padding: 0.85rem 1.5rem;
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* ── Section header ── */
+      .section-header { margin-bottom: 2rem; }
+      .section-title { font-size: 1.8rem; }
+      .section-subtitle { font-size: 0.95rem; }
+      .page-container { padding: 2rem 1.25rem; }
+
+      /* ── Simulation cards ── */
+      .simulation-grid { gap: 1.5rem; }
+      .simulation-card {
+        height: auto !important;
+        min-height: unset !important;
+        padding: 1.25rem;
+        border-radius: 18px;
+      }
+      .simulation-header { gap: 0.75rem; margin-bottom: 1rem; }
+      .simulation-icon { width: 44px; height: 44px; font-size: 1.25rem; border-radius: 12px; }
+      .simulation-title-group h3 { font-size: 1.2rem; }
+      .simulation-subtitle { font-size: 0.82rem; }
+      .simulation-viz { padding: 1rem; margin-bottom: 1rem; }
+
+      /* ── Equal-height viz containers ── */
+      .anatomy-visualization,
+      .cancer-viz {
+        height: auto !important;
+        min-height: unset !important;
+        padding: 16px;
+      }
+
+      /* ── SVG containers ── */
+      .svg-container { height: 280px; }
+      .body-anatomy, .anatomy-svg { height: 280px !important; }
+
+      /* ── Mode buttons ── */
+      .simulation-controls { gap: 0.5rem; }
+      .mode-btn {
+        min-width: 80px;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.65rem;
+        gap: 0.3rem;
+        border-radius: 10px;
+      }
+      .mode-btn i { font-size: 0.9rem; }
+
+      /* ── Stage buttons ── */
+      .stage-controls { gap: 0.5rem; margin-bottom: 1rem; }
+      .stage-btn { padding: 0.6rem; font-size: 0.8rem; border-radius: 10px; }
+      .stage-num { font-size: 1.1rem !important; }
+      .stage-name { font-size: 0.68rem; }
+
+      /* ── Intel panel ── */
+      .stage-intel { padding: 1rem; border-radius: 12px; }
+      .stage-description { font-size: 0.88rem; padding: 0.8rem; }
+      .intel-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      .intel-label { font-size: 0.8rem; }
+      .intel-value { font-size: 1rem; }
+      .treatment-tags { gap: 0.4rem; margin-top: 0.5rem; }
+      .treatment-tag { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+
+      /* ── Educational text box ── */
+      .edu-desc-box { padding: 0.85rem 1rem; margin-top: 0.75rem; }
+      .edu-desc-box p { font-size: 0.87rem !important; }
+      .edu-desc-box strong { font-size: 0.95rem !important; }
+
+      /* ── Control label ── */
+      .control-label { font-size: 0.85rem; padding: 0.6rem 0.85rem; margin-bottom: 0.75rem; }
+
+      /* ── Journey / stat overrides ── */
+      .journey-header h2 { font-size: 2rem !important; }
+      .journey-header .sub { font-size: 1.1rem !important; }
+      .stat-value { font-size: 1.1rem !important; }
+      .intel-desc h4 { font-size: 1.05rem !important; }
+      .intel-desc p { font-size: 0.9rem !important; }
+
+      /* ── Nav mobile: handled globally at 1060px ── */
+    }
+
+    /* ============================================================
+       480px — SMALL PHONES (iPhone SE, Galaxy A-series, etc.)
+       ============================================================ */
+    @media (max-width: 480px) {
+
+      /* ── Hero ── */
+      .hero-content-wrapper { padding: 2.5rem 1rem 2rem; gap: 1.5rem; }
+      .hero-title-3d { font-size: clamp(1.65rem, 8vw, 2.1rem); line-height: 1.12; }
+      .hero-description { font-size: 0.9rem; }
+      .hero-eyebrow { font-size: 0.68rem; }
+      .research-canvas-wrap { width: 240px; height: 240px; }
+
+      /* Hero badges — 2 per row */
+      .badge-constellation { gap: 0.5rem; }
+      .hero-badge-3d { font-size: 0.75rem; padding: 0.5rem 0.85rem; }
+
+      /* CTA button */
+      .btn-family-guide {
+        font-size: 0.88rem;
+        padding: 0.8rem 1.1rem;
+      }
+
+      /* ── Section ── */
+      .section-title { font-size: 1.5rem; }
+      .section-subtitle { font-size: 0.88rem; }
+      .page-container { padding: 1.5rem 0.85rem; }
+
+      /* ── Simulation cards ── */
+      .simulation-card { padding: 0.9rem; border-radius: 14px; }
+      .simulation-header { gap: 0.6rem; margin-bottom: 0.85rem; padding-bottom: 0.85rem; }
+      .simulation-icon { width: 38px; height: 38px; font-size: 1.1rem; border-radius: 10px; }
+      .simulation-title-group h3 { font-size: 1.05rem; }
+      .simulation-subtitle { font-size: 0.78rem; }
+      .simulation-viz { padding: 0.85rem; }
+
+      /* ── SVG ── */
+      .svg-container { height: 220px; }
+      .body-anatomy, .anatomy-svg { height: 220px !important; }
+
+      /* ── Mode buttons — 2 per row ── */
+      .simulation-controls { gap: 0.4rem; }
+      .mode-btn {
+        min-width: calc(50% - 0.25rem);
+        font-size: 0.72rem;
+        padding: 0.45rem 0.5rem;
+        gap: 0.25rem;
+        border-radius: 8px;
+      }
+      .mode-btn i { font-size: 0.82rem; }
+
+      /* ── Stage buttons — 2 per row ── */
+      .stage-controls { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+      .stage-btn { padding: 0.5rem; border-radius: 8px; }
+      .stage-num { font-size: 1rem !important; }
+      .stage-name { font-size: 0.64rem; }
+
+      /* ── Intel panel ── */
+      .stage-intel { padding: 0.85rem; }
+      .stage-description { font-size: 0.82rem; padding: 0.7rem; }
+      .intel-label { font-size: 0.76rem; }
+      .intel-value { font-size: 0.92rem; }
+      .treatment-tag { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+
+      /* ── Educational text box ── */
+      .edu-desc-box { padding: 0.75rem 0.9rem; }
+      .edu-desc-box p { font-size: 0.82rem !important; }
+      .edu-desc-box strong { font-size: 0.88rem !important; }
+
+      /* ── Control label ── */
+      .control-label { font-size: 0.8rem; padding: 0.55rem 0.75rem; }
+
+      /* ── Header overrides ── */
+      .journey-header h2 { font-size: 1.6rem !important; }
+      .journey-header .sub { font-size: 0.95rem !important; }
+      .logo-text a { font-size: 1.1rem; }
+      .logo-text span { font-size: 0.58rem; }
+
+      /* ── Nav actions ── */
+      .logo-text a { font-size: 1.1rem; }
+      .logo-text span { font-size: 0.58rem; }
+    }
+
+    /* ============================================================
+       360px — VERY SMALL PHONES
+       ============================================================ */
+    @media (max-width: 360px) {
+      .hero-content-wrapper { padding: 2rem 0.75rem 1.5rem; }
+      .hero-title-3d { font-size: 1.5rem; }
+      .research-canvas-wrap { width: 200px; height: 200px; }
+      .badge-constellation { flex-direction: column; align-items: center; }
+      .hero-badge-3d { width: 100%; justify-content: center; }
+      .section-title { font-size: 1.35rem; }
+      .mode-btn { font-size: 0.68rem; padding: 0.4rem 0.4rem; }
+      .simulation-card { padding: 0.75rem; }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.2 22 Q7.6 17.2 8.8 15 Q10.2 13 12 13 Q13.8 13 15.2 15 Q16.4 17.2 15.8 22Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Complete Health</span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="main-nav">
+
+      <!-- Home -->
+      <div class="nav-item">
+        <a href="index.html" class="nav-link">Home</a>
+      </div>
+
+      <!-- Journeys dropdown -->
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Journeys <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown">
+          <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-map"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#666;">Browse all her journeys</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="conceiving.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#666;">Preparation &amp; planning</span></div>
+          </a>
+          <a href="fertility.html" class="dd-item">
+            <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#666;">Cycle &amp; ovulation</span></div>
+          </a>
+          <!-- Pregnancy Journey with flyout sub-items -->
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+            <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#666;">Week by week guide</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#666;">Vaginal birth guide</span></div></a>
+              <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#666;">Surgical birth info</span></div></a>
+              <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#666;">Support &amp; care</span></div></a>
+            </div>
+          </div>
+          <a href="antenatal_care.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#666;">ANC visits &amp; checklist</span></div>
+          </a>
+          <!-- NCD with flyout sub-items -->
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#666;">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#666;">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#666;">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#666;">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="newborn_postpartum_care.html" class="dd-item">
+            <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#666;">4th trimester care</span></div>
+          </a>
+          <a href="breastfeeding-journey.html" class="dd-item">
+            <div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#666;">Latch, supply, nutrition</span></div>
+          </a>
+          <a href="menopause.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#666;">Perimenopause &amp; beyond</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services dropdown -->
+      <div class="nav-item">
+        <button class="nav-link" aria-haspopup="true">
+          Services <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown">
+          <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+            <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-grid-2"></i></div>
+            <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#666;">Browse all our services</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="symptom_checker.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#666;">AI-powered diagnosis</span></div>
+          </a>
+          <a href="dashboard.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#666;">Track your health</span></div>
+          </a>
+          <a href="screening.html" class="dd-item">
+            <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#666;">Cancer &amp; preventive</span></div>
+          </a>
+          <a href="vaccination.html" class="dd-item">
+            <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#666;">Immunization schedule</span></div>
+          </a>
+          <a href="otc.html" class="dd-item">
+            <div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#666;">Safe self-care options</span></div>
+          </a>
+          <a href="government_schemes.html" class="dd-item">
+            <div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#666;">Benefits you deserve</span></div>
+          </a>
+          <a href="insurance.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#666;">Coverage &amp; claims guide</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stories -->
+      <div class="nav-item">
+        <a href="stories.html" class="nav-link">Stories</a>
+      </div>
+
+      <!-- About Us -->
+      <div class="nav-item">
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <!-- Additional Information dropdown (active – Research & Insights is under here) -->
+      <div class="nav-item">
+        <button class="nav-link active" aria-haspopup="true">
+          Additional Info <i class="fa-solid fa-chevron-down chevron"></i>
+        </button>
+        <div class="nav-dropdown" style="min-width:240px;">
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+          <a href="fertility.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#666;">Cycle, conceiving &amp; IVF</span></div>
+          </a>
+          <a href="pregnancy_journey.html" class="dd-item">
+            <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#666;">All trimesters covered</span></div>
+          </a>
+          <a href="newborn_postpartum_care.html" class="dd-item">
+            <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#666;">Newborn &amp; postpartum</span></div>
+          </a>
+          <a href="menopause.html" class="dd-item">
+            <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#666;">Menopause, bone, mental</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="community.html" class="dd-item">
+            <div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#666;">Share &amp; connect</span></div>
+          </a>
+          <div class="dd-sep"></div>
+          <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+          <!-- NCD with flyout sub-items -->
+          <div class="dd-item dd-has-flyout">
+            <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#666;">Diabetes, hypertension &amp; more</span></a>
+            <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+            <div class="dd-flyout">
+              <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#666;">Manage blood sugar</span></div></a>
+              <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#666;">Blood pressure care</span></div></a>
+              <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#666;">Simulation journey</span></div></a>
+            </div>
+          </div>
+          <a href="bone_health.html" class="dd-item">
+            <div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#666;">Osteoporosis prevention</span></div>
+          </a>
+          <a href="depression.html" class="dd-item">
+            <div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#666;">Anxiety, depression, support</span></div>
+          </a>
+          <a href="loss_support.html" class="dd-item">
+            <div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div>
+            <div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#666;">You are never alone</span></div>
+          </a>
+        </div>
+      </div>
+
+    </nav>
+
+    <!-- Right: Sign In + Contact Us -->
+    <div class="nav-actions">
+      <a class="btn-nav outline" href="signin.html">
+        <i class="fa-regular fa-user"></i> Sign In
+      </a>
+      <a class="btn-nav primary" href="contact.html">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+      <!-- Mobile hamburger -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-section">Navigation</div>
+  <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#ec407a;width:20px;"></i> Home</a>
+  <div class="mm-section">Journeys</div>
+  <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#ec407a;width:20px;"></i> Conceiving</a>
+  <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#ec407a;width:20px;"></i> Fertility</a>
+  <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#ec407a;width:20px;"></i> Pregnancy Journey</a>
+  <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+  <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+  <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+  <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#ec407a;width:20px;"></i> Antenatal Care</a>
+  <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#ec407a;width:20px;"></i> Newborn &amp; Postpartum</a>
+  <a href="breastfeeding-journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#ec407a;width:20px;"></i> Breastfeeding</a>
+  <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#ec407a;width:20px;"></i> Menopause</a>
+  <div class="mm-section">Services</div>
+  <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#ec407a;width:20px;"></i> Symptom Checker</a>
+  <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#ec407a;width:20px;"></i> My Dashboard</a>
+  <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#ec407a;width:20px;"></i> Health Screening</a>
+  <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#ec407a;width:20px;"></i> Govt Schemes</a>
+  <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+  <div class="mm-section">Specialised Care</div>
+  <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+  <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+  <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+  <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+  <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+  <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+  <div class="mm-section">More</div>
+  <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#ec407a;width:20px;"></i> Stories</a>
+  <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#ec407a;width:20px;"></i> Community</a>
+  <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#ec407a;width:20px;"></i> About Us</a>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+    <a href="signin.html" class="btn-nav outline" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+    <a href="contact.html" class="btn-nav primary" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero-constellation" id="heroConstellation">
+  <div class="constellation-bg">
+    <canvas id="particleCanvas"></canvas>
+    <div class="gradient-morph" id="gradientMorph"></div>
+  </div>
+
+  <div class="hero-content-wrapper">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="pulse-dot"></span>
+        🔬 Research & Health Insights
+      </div>
+
+      <h1 class="hero-title-3d">
+        Explore the Science of<br>
+        <span class="title-emphasis">Her Body</span>
+        Revealed
+      </h1>
+
+      <p class="hero-description">
+        Interactive visualizations of reproductive health, menstrual cycles, and women's cancers. 
+        Evidence-based insights made simple and engaging.
+      </p>
+
+      <div class="badge-constellation">
+        <div class="hero-badge-3d"><i class="fas fa-microscope"></i> Evidence-Based</div>
+        <div class="hero-badge-3d"><i class="fas fa-user-doctor"></i> Expert Reviewed</div>
+        <div class="hero-badge-3d"><i class="fas fa-book-medical"></i> Interactive Learning</div>
+      </div>
+
+      <button class="btn-family-guide" onclick="document.getElementById('simulations').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-play-circle"></i> Explore Simulations
+      </button>
+    </div>
+
+    <div class="hero-right">
+      <div class="research-canvas-wrap">
+        <canvas id="researchCanvas"></canvas>
+        <div class="research-floating-tags">
+          <div class="r-tag r-tag-1"><i class="fas fa-dna" style="color:#ec407a"></i> Reproductive Health</div>
+          <div class="r-tag r-tag-2"><i class="fas fa-flask" style="color:#ab47bc"></i> Live Simulations</div>
+          <div class="r-tag r-tag-3"><i class="fas fa-heartbeat" style="color:#e53935"></i> Cancer Insights</div>
+          <div class="r-tag r-tag-4"><i class="fas fa-microscope" style="color:#0097a7"></i> Evidence-Based</div>
+          <div class="r-tag r-tag-5"><i class="fas fa-user-md" style="color:#43a047"></i> Expert Reviewed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN SIMULATIONS -->
+<div class="page-container" id="simulations">
+  
+  <div class="section-header">
+    <h2 class="section-title"><span class="title-black">Interactive</span> <span class="title-pink">Health Simulations</span></h2>
+    <p class="section-subtitle">Explore the science of women's health through engaging, interactive visualizations</p>
+  </div>
+
+  <div class="simulation-grid">
+    
+    <!-- ================================================
+         SIMULATION 1: ANATOMY & REPRODUCTIVE HEALTH
+         ================================================ -->
+    <div class="simulation-card fade-in">
+      <div class="simulation-header">
+        <div class="simulation-icon">
+          <i class="fas fa-rotate"></i>
+        </div>
+        <div class="simulation-title-group">
+          <h3>Live Anatomy: Healthy Cycle</h3>
+          <p class="simulation-subtitle">Explore ovulation, fertilization, and reproductive health conditions</p>
+        </div>
+      </div>
+
+      <div class="simulation-viz" id="anatomy-viz">
+        <div class="control-label">
+          <span class="pulse-dot"></span>
+          <span id="activeModeLabel">Ovulation Cycle</span>
+        </div>
+
+        <div class="simulation-controls">
+          <button onclick="setMode('cycle')" class="mode-btn active" id="btn-cycle">
+            <i class="fa-solid fa-rotate"></i> Ovulation
+          </button>
+          <button onclick="setMode('fertilization')" class="mode-btn" id="btn-fertilization">
+            <i class="fa-solid fa-baby-carriage"></i> Fertilization
+          </button>
+          <button onclick="setMode('menstruation')" class="mode-btn" id="btn-menstruation">
+            <i class="fa-solid fa-droplet"></i> Menstruation
+          </button>
+          <button onclick="setMode('pcos')" class="mode-btn" id="btn-pcos">
+            <i class="fa-solid fa-circle-nodes"></i> PCOS
+          </button>
+          <button onclick="setMode('endo')" class="mode-btn" id="btn-endo">
+            <i class="fa-solid fa-fire-flame-curved"></i> Endometriosis
+          </button>
+          <button onclick="setMode('protection')" class="mode-btn" id="btn-protection">
+            <i class="fa-solid fa-shield-heart"></i> Protection
+          </button>
+          <button onclick="setMode('adeno')" class="mode-btn" id="btn-adeno">
+            <i class="fa-solid fa-weight-hanging"></i> Adenomyosis
+          </button>
+        </div>
+
+        <div class="svg-container">
+          <svg class="anatomy-svg" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="strongGlow">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+
+              <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ffd54f;stop-opacity:0.0" />
+                <stop offset="30%" style="stop-color:#ffd54f;stop-opacity:1" />
+                <stop offset="70%" style="stop-color:#ff6b9d;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:0.0" />
+              </linearGradient>
+
+              <pattern id="ciliaPattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 2 10 Q 5 5, 8 10" stroke="#f48fb1" stroke-width="1" fill="none" opacity="0.5">
+                  <animate attributeName="d" values="M 2 10 Q 5 5, 8 10; M 2 10 Q 5 2, 8 10; M 2 10 Q 5 5, 8 10" dur="1s" repeatCount="indefinite"/>
+                </path>
+              </pattern>
+
+              <linearGradient id="uterusGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#f8bbd0;stop-opacity:1" />
+              </linearGradient>
+              
+              <linearGradient id="ovaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#e1bee7;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ce93d8;stop-opacity:1" />
+              </linearGradient>
+
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+
+              <linearGradient id="pcosGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ef9a9a;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#e57373;stop-opacity:1" />
+              </linearGradient>
+
+              <radialGradient id="shieldGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:0" />
+                <stop offset="80%" style="stop-color:#66bb6a;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#43a047;stop-opacity:0.6" />
+              </radialGradient>
+              
+              <filter id="spermGlow">
+                 <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#fff"/>
+              </filter>
+            </defs>
+
+            <!-- Background guides -->
+            <g opacity="0.1">
+              <ellipse cx="200" cy="150" rx="80" ry="100" fill="#e1bee7"/>
+              <ellipse cx="200" cy="300" rx="90" ry="150" fill="#f8bbd0"/>
+            </g>
+
+            <!-- CORE ANATOMY -->
+            <g class="anatomy-core">
+              <!-- Uterus -->
+              <path id="mainUterus" class="uterus" d="M 200 320 Q 170 300, 160 280 L 160 250 Q 160 230, 180 220 L 200 210 L 220 220 Q 240 230, 240 250 L 240 280 Q 230 300, 200 320 Z" 
+                fill="url(#uterusGrad)" 
+                stroke="#ec407a" 
+                stroke-width="2"
+                filter="url(#softGlow)">
+              </path>
+
+              <!-- Fallopian Tubes -->
+              <path class="tube-left" d="M 160 240 Q 120 230, 100 240" stroke="#ec407a" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path class="tube-right" d="M 240 240 Q 280 230, 300 240" stroke="#ec407a" stroke-width="3" fill="none" stroke-linecap="round" />
+
+              <!-- Ovaries -->
+              <ellipse id="ovaryL" cx="95" cy="250" rx="22" ry="28" fill="url(#ovaryGrad)" stroke="#ab47bc" stroke-width="2" />
+              <ellipse id="ovaryR" cx="305" cy="250" rx="22" ry="28" fill="url(#ovaryGrad)" stroke="#ab47bc" stroke-width="2" />
+
+              <!-- Cervix -->
+              <path d="M 190 320 L 190 360 Q 190 370, 200 370 Q 210 370, 210 360 L 210 320" 
+                    fill="#f8bbd0" stroke="#ec407a" stroke-width="2" opacity="0.8"/>
+
+              <!-- Vaginal Canal -->
+              <rect x="195" y="370" width="10" height="60" rx="3" fill="#fce4ec" stroke="#f48fb1" stroke-width="1.5" opacity="0.7"/>
+            </g>
+
+            <!-- Labels for anatomy -->
+            <text x="200" y="190" text-anchor="middle" class="viz-sub">Uterus</text>
+            <text x="80" y="290" text-anchor="middle" class="viz-sub">Left Ovary</text>
+            <text x="320" y="290" text-anchor="middle" class="viz-sub">Right Ovary</text>
+
+            <!-- MODE 1: OVULATION CYCLE -->
+            <g id="cycle-animation" class="mode-elements" style="display:block;">
+              <!-- Developing follicle -->
+              <circle cx="88" cy="245" r="4" fill="#fff" opacity="0.8">
+                <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              
+              <!-- Egg release and travel -->
+              <circle r="5" fill="#ffd54f">
+                <animateMotion path="M 88 245 Q 120 230, 160 240" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Endometrium thickening -->
+              <ellipse cx="200" cy="260" rx="30" ry="25" fill="#fce4ec" opacity="0.4">
+                <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite"/>
+              </ellipse>
+
+              <!-- Ovary highlight halo -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="95" cy="250" r="44" fill="none" stroke="#e30b5d" stroke-width="6" opacity=".18">
+                  <animate attributeName="opacity" values=".10;.32;.10" dur="2.2s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Egg travel path -->
+              <path class="flow-path" d="M 95 250 Q 120 230, 160 240"
+                    stroke="url(#flowGrad)" stroke-width="5" stroke-dasharray="14 10">
+                <animate attributeName="stroke-dashoffset" values="0;48" dur="1.25s" repeatCount="indefinite"/>
+              </path>
+
+              <!-- Labels -->
+              <text x="58" y="206" class="viz-label" fill="#c2185b">Ovulation</text>
+              <text x="58" y="220" class="viz-sub">Egg releases & enters tube</text>
+
+              <!-- Hormone indicators -->
+              <text x="10" y="180" class="viz-sub" fill="#7b1fa2">FSH ↑</text>
+              <text x="330" y="180" class="viz-sub" fill="#6a1b9a">LH Surge</text>
+            </g>
+
+            <!-- MODE 2: FERTILIZATION -->
+            <g id="fertilization-animation" class="mode-elements" style="display:none;">
+              <!-- Swimming sperm -->
+              <g filter="url(#softGlow)">
+                <circle r="1.5" fill="#fff">
+                    <animateMotion path="M 200 320 Q 200 280, 240 240" dur="2s" repeatCount="indefinite" rotate="auto"/>
+                </circle>
+                <circle r="1.5" fill="#fff">
+                    <animateMotion path="M 200 320 Q 190 280, 235 242" dur="2.2s" begin="0.2s" repeatCount="indefinite" rotate="auto"/>
+                </circle>
+              </g>
+
+              <!-- Fertilization flash -->
+              <circle cx="240" cy="240" r="0" fill="#fff">
+                <animate attributeName="r" values="0;15;0" dur="1s" begin="1.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0" dur="1s" begin="1.5s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Zygote forming and dividing -->
+              <g>
+                <animateMotion path="M 240 240 Q 210 230, 200 260" dur="4s" begin="0s" repeatCount="indefinite"/>
+                
+                <circle r="6" fill="#81c784" stroke="#fff" stroke-width="1">
+                   <animate attributeName="fill" values="#81c784;#66bb6a;#43a047" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <line x1="0" y1="-6" x2="0" y2="6" stroke="#fff" stroke-width="1" opacity="0">
+                   <animate attributeName="opacity" values="0;0;1;1" dur="4s" repeatCount="indefinite"/>
+                </line>
+                <line x1="-6" y1="0" x2="6" y2="0" stroke="#fff" stroke-width="1" opacity="0">
+                   <animate attributeName="opacity" values="0;0;0;1" dur="4s" repeatCount="indefinite"/>
+                </line>
+              </g>
+
+              <!-- Tube emphasis -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="240" cy="240" r="56" fill="none" stroke="#7c3aed" stroke-width="6" opacity=".14">
+                  <animate attributeName="opacity" values=".08;.28;.08" dur="2.4s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Sperm travel guide -->
+              <path class="flow-path" d="M 200 330 Q 210 285, 240 240"
+                    stroke="#ffffff" stroke-width="4" opacity=".75" stroke-dasharray="10 8">
+                <animate attributeName="stroke-dashoffset" values="0;36" dur="1.0s" repeatCount="indefinite"/>
+              </path>
+
+              <text x="165" y="375" class="viz-label" fill="#2e7d32">Fertilization</text>
+              <text x="165" y="389" class="viz-sub">Sperm meets egg in tube</text>
+            </g>
+
+            <!-- MODE 3: MENSTRUATION -->
+            <g id="menstruation-animation" class="mode-elements" style="display:none;">
+              <!-- Shedding lining -->
+              <path d="M 180 250 Q 200 240, 220 250 L 220 280 Q 200 300, 180 280 Z" fill="#ef5350" opacity="0.3">
+                 <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+              </path>
+
+              <!-- Blood drops -->
+              <g fill="#ef5350">
+                <circle r="3">
+                  <animateMotion path="M 200 280 L 200 350" dur="1.5s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle r="2.5">
+                  <animateMotion path="M 195 280 L 198 340" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0" dur="1.8s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Uterus halo -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="200" cy="260" r="70" fill="none" stroke="#d32f2f" stroke-width="7" opacity=".10">
+                  <animate attributeName="opacity" values=".06;.22;.06" dur="2.0s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Flow indicator -->
+              <path class="flow-path" d="M 200 285 C 200 310, 200 330, 200 360"
+                    stroke="#ef5350" stroke-width="6" opacity=".55" stroke-dasharray="12 10">
+                <animate attributeName="stroke-dashoffset" values="0;44" dur="1.1s" repeatCount="indefinite"/>
+              </path>
+
+              <text x="132" y="200" class="viz-label" fill="#b71c1c">Menstruation</text>
+              <text x="132" y="214" class="viz-sub">Lining sheds & cycle resets</text>
+            </g>
+
+            <!-- MODE 4: PCOS -->
+            <g id="pcos-animation" class="mode-elements" style="display:none;">
+              <!-- Enlarged ovary with multiple cysts -->
+              <ellipse cx="305" cy="250" rx="28" ry="34" fill="#ef9a9a" opacity="0.8">
+                <animate attributeName="rx" values="28;30;28" dur="2s" repeatCount="indefinite"/>
+              </ellipse>
+              
+              <!-- Multiple follicles -->
+              <g fill="#fff" stroke="#e57373">
+                <circle cx="290" cy="235" r="2.5" />
+                <circle cx="300" cy="230" r="2.5" />
+                <circle cx="310" cy="230" r="2.5" />
+                <circle cx="320" cy="235" r="2.5" />
+                <circle cx="325" cy="245" r="2.5" />
+                <circle cx="325" cy="255" r="2.5" />
+                <circle cx="320" cy="265" r="2.5" />
+                <circle cx="310" cy="270" r="2.5" />
+              </g>
+              
+              <!-- Pulsing effect -->
+              <circle cx="305" cy="250" r="40" fill="none" stroke="#e57373" stroke-width="1" opacity="0">
+                <animate attributeName="r" values="30;50" dur="1.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.8;0" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Ovary halo -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="305" cy="250" r="52" fill="none" stroke="#ff7043" stroke-width="7" opacity=".12">
+                  <animate attributeName="opacity" values=".06;.24;.06" dur="2.0s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Follicle ring -->
+              <circle cx="305" cy="250" r="34" fill="none" stroke="#ffab91" stroke-width="4" opacity=".6"
+                      stroke-dasharray="6 10">
+                <animateTransform attributeName="transform" type="rotate"
+                                  from="0 305 250" to="360 305 250" dur="6s" repeatCount="indefinite"/>
+              </circle>
+
+              <text x="250" y="330" class="viz-label" fill="#e65100">PCOS</text>
+              <text x="250" y="344" class="viz-sub">Multiple follicles; irregular ovulation</text>
+            </g>
+
+            <!-- MODE 5: ENDOMETRIOSIS -->
+            <g id="endo-animation" class="mode-elements" style="display:none;">
+              <!-- Endometrial implants -->
+              <g fill="#880e4f" stroke="#fff" stroke-width="0.5">
+                <circle cx="150" cy="230" r="4"><animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite"/></circle>
+                <circle cx="250" cy="230" r="3"><animate attributeName="r" values="3;4;3" dur="2.5s" repeatCount="indefinite"/></circle>
+                <circle cx="180" cy="330" r="5"><animate attributeName="r" values="5;6;5" dur="1.8s" repeatCount="indefinite"/></circle>
+              </g>
+              
+              <!-- Inflammation -->
+              <circle cx="150" cy="230" r="10" fill="red" opacity="0.2">
+                <animate attributeName="opacity" values="0.2;0;0.2" dur="1s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="180" cy="330" r="12" fill="red" opacity="0.2">
+                <animate attributeName="opacity" values="0.2;0;0.2" dur="1s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Region halo -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="200" cy="260" r="74" fill="none" stroke="#6a1b9a" stroke-width="7" opacity=".10">
+                  <animate attributeName="opacity" values=".06;.22;.06" dur="2.2s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Callout -->
+              <path d="M 150 230 L 110 200" stroke="#6a1b9a" stroke-width="3" opacity=".7"/>
+              <text x="42" y="198" class="viz-label" fill="#6a1b9a">Lesions</text>
+              <text x="42" y="212" class="viz-sub">Tissue grows outside uterus</text>
+
+              <text x="120" y="390" class="viz-label" fill="#4a148c">Endometriosis</text>
+              <text x="120" y="404" class="viz-sub">Inflammation & pain hotspots</text>
+            </g>
+
+            <!-- MODE 6: PROTECTION -->
+            <g id="protection-animation" class="mode-elements" style="display:none;">
+              <!-- Protective shields around ovaries -->
+              <circle cx="95" cy="250" r="40" fill="url(#shieldGrad)" stroke="#4caf50" stroke-width="1" stroke-dasharray="4,4">
+                <animate attributeName="r" values="35;45;35" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+                <animateTransform attributeName="transform" type="rotate" from="0 95 250" to="360 95 250" dur="10s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="305" cy="250" r="40" fill="url(#shieldGrad)" stroke="#4caf50" stroke-width="1" stroke-dasharray="4,4">
+                <animate attributeName="r" values="35;45;35" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+                <animateTransform attributeName="transform" type="rotate" from="360 305 250" to="0 305 250" dur="10s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Ovary halos -->
+              <g class="organ-halo" filter="url(#strongGlow)">
+                <circle cx="95" cy="250" r="52" fill="none" stroke="#2e7d32" stroke-width="7" opacity=".10">
+                  <animate attributeName="opacity" values=".06;.22;.06" dur="2.3s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="305" cy="250" r="52" fill="none" stroke="#2e7d32" stroke-width="7" opacity=".10">
+                  <animate attributeName="opacity" values=".06;.22;.06" dur="2.3s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Protection arc -->
+              <path class="flow-path" d="M 95 250 Q 200 170, 305 250"
+                    stroke="#66bb6a" stroke-width="6" opacity=".35" stroke-dasharray="18 14">
+                <animate attributeName="stroke-dashoffset" values="0;64" dur="1.6s" repeatCount="indefinite"/>
+              </path>
+
+              <text x="140" y="170" class="viz-label" fill="#1b5e20">Protection</text>
+              <text x="140" y="184" class="viz-sub">Lifestyle & contraception reduce risks</text>
+            </g>
+
+            <!-- MODE 7: ADENOMYOSIS -->
+            <g id="adeno-animation" class="mode-elements" style="display:none;">
+              <!-- Tissue in muscle wall -->
+              <g fill="#880e4f" stroke="#fff" stroke-width="0.5">
+                <circle cx="200" cy="260" r="3"><animate attributeName="r" values="3;4.5;3" dur="2s" repeatCount="indefinite"/></circle>
+                <circle cx="190" cy="250" r="2.5"><animate attributeName="r" values="2.5;3.5;2.5" dur="2.2s" repeatCount="indefinite"/></circle>
+                <circle cx="210" cy="255" r="3"><animate attributeName="r" values="3;4;3" dur="2.1s" repeatCount="indefinite"/></circle>
+                <circle cx="200" cy="280" r="2.5"><animate attributeName="r" values="2.5;3.5;2.5" dur="2.3s" repeatCount="indefinite"/></circle>
+                <circle cx="185" cy="240" r="2"><animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/></circle>
+                <circle cx="215" cy="240" r="2"><animate attributeName="r" values="2;3;2" dur="1.9s" repeatCount="indefinite"/></circle>
+              </g>
+              
+              <!-- Enlarged uterus -->
+              <circle cx="200" cy="260" r="35" fill="red" opacity="0.15">
+                <animate attributeName="r" values="35;42;35" dur="1.5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.15;0;0.15" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+              
+              <!-- Halo -->
+              <g class="organ-halo"> 
+                <circle cx="200" cy="260" r="60" fill="none" stroke="#6a1b9a" stroke-width="5" opacity=".10">
+                  <animate attributeName="opacity" values=".06;.2;.06" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="r" values="60;62;60" dur="3s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+
+              <!-- Callout -->
+              <path d="M 220 240 L 260 210" stroke="#6a1b9a" stroke-width="2" opacity=".7"/>
+              
+              <text x="265" y="205" class="viz-label" fill="#6a1b9a">Adenomyosis</text>
+              <text x="265" y="220" class="viz-sub">Tissue grows *inside* muscle</text>
+              
+              <text x="120" y="390" class="viz-label" fill="#c2185b">Heavy Bleeding</text>
+              <text x="120" y="404" class="viz-sub">Enlarged "boggy" uterus</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="edu-desc-box">
+          <p id="edu-text">
+            <strong>Healthy Cycle:</strong> This is the monthly rhythm of your body. An egg matures in the ovary, is released (ovulation), and travels down the fallopian tube. If not fertilized, the cycle resets with menstruation.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================
+         SIMULATION 2: CANCER STAGING
+         ================================================ -->
+    <div class="simulation-card fade-in">
+      <div class="simulation-header">
+        <div class="simulation-icon">
+          <i class="fas fa-ribbon"></i>
+        </div>
+        <div class="simulation-title-group">
+          <h3>Understanding Women's Cancers</h3>
+          <p class="simulation-subtitle">Interactive staging for breast, cervical, ovarian & endometrial cancers</p>
+        </div>
+      </div>
+
+      <div class="simulation-viz" id="cancer-viz">
+        <div class="control-label">
+          <span class="pulse-dot"></span>
+          <span id="activeCancerLabel">Breast Cancer - Stage I</span>
+        </div>
+
+        <div class="simulation-controls">
+          <button onclick="setCancerType('breast')" class="mode-btn active" id="btn-breast">
+            <i class="fas fa-ribbon"></i> Breast
+          </button>
+          <button onclick="setCancerType('cervical')" class="mode-btn" id="btn-cervical">
+            <i class="fas fa-venus"></i> Cervical
+          </button>
+          <button onclick="setCancerType('ovarian')" class="mode-btn" id="btn-ovarian">
+            <i class="fas fa-egg"></i> Ovarian
+          </button>
+          <button onclick="setCancerType('endometrial')" class="mode-btn" id="btn-endometrial">
+            <i class="fas fa-hospital"></i> Endometrial
+          </button>
+        </div>
+
+        <div class="stage-controls" id="stageControls">
+          <button class="stage-btn active" onclick="setCancerStage(1)">
+            <span class="stage-num">I</span>
+            <span class="stage-name">Early</span>
+          </button>
+          <button class="stage-btn" onclick="setCancerStage(2)">
+            <span class="stage-num">II</span>
+            <span class="stage-name">Local</span>
+          </button>
+          <button class="stage-btn" onclick="setCancerStage(3)">
+            <span class="stage-num">III</span>
+            <span class="stage-name">Regional</span>
+          </button>
+          <button class="stage-btn" onclick="setCancerStage(4)">
+            <span class="stage-num">IV</span>
+            <span class="stage-name">Distant</span>
+          </button>
+        </div>
+
+        <div class="svg-container" id="cancerSvgContainer">
+          <!-- SVG will be dynamically generated -->
+        </div>
+
+        <div class="stage-intel">
+          <p class="stage-description" id="stageDescription">
+            Cancer is confined to the breast tissue. Tumor is small (usually ≤2cm) and has not spread to lymph nodes.
+          </p>
+
+          <div class="intel-row">
+            <span class="intel-label">5-Year Survival</span>
+            <span class="intel-value" id="survivalRate">99%</span>
+          </div>
+          <div class="survival-bar">
+            <div class="survival-fill" id="survivalFill" style="width: 99%;"></div>
+          </div>
+
+          <div class="intel-row">
+            <span class="intel-label">Tumor Size</span>
+            <span class="intel-value" id="tumorSize">≤ 2cm</span>
+          </div>
+
+          <div class="intel-row">
+            <span class="intel-label">Spread</span>
+            <span class="intel-value" id="spreadInfo">Localized</span>
+          </div>
+
+          <div class="intel-row">
+            <span class="intel-label">Treatments</span>
+            <div class="treatment-tags" id="treatmentTags">
+              <span class="treatment-tag">Lumpectomy</span>
+              <span class="treatment-tag">Radiation</span>
+              <span class="treatment-tag">Hormone Therapy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ============================================================
+// PARTICLE NETWORK BACKGROUND
+// ============================================================
+(function(){
+  const canvas = document.getElementById('particleCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize(){
+    const hero = canvas.parentElement.parentElement;
+    W = canvas.width  = hero.offsetWidth;
+    H = canvas.height = hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const particles = [];
+  const COUNT = 80;
+
+  class Particle {
+    constructor(){
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+      this.r  = Math.random() * 2 + 0.5;
+    }
+    update(){
+      this.x += this.vx;
+      this.y += this.vy;
+      if(this.x < 0 || this.x > W) this.vx *= -1;
+      if(this.y < 0 || this.y > H) this.vy *= -1;
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(236, 64, 122, 0.5)';
+      ctx.fill();
+    }
+  }
+
+  for(let i=0; i<COUNT; i++) particles.push(new Particle());
+
+  function connectParticles(){
+    for(let i=0; i<particles.length; i++){
+      for(let j=i+1; j<particles.length; j++){
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 120){
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(236, 64, 122, ${0.15 * (1 - dist/120)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connectParticles();
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ============================================================
+// HERO RIGHT: RESEARCH DNA/FLOWER ANIMATION CANVAS
+// ============================================================
+(function(){
+  const canvas = document.getElementById('researchCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let SIZE;
+
+  function resize() {
+    const wrap = canvas.parentElement;
+    SIZE = Math.min(wrap.clientWidth, wrap.clientHeight, 520);
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let t = 0;
+
+  // Petal flower particles
+  const PETALS = 8;
+  const petalColors = ['#ec407a','#f48fb1','#ab47bc','#ce93d8','#e91e63','#7e57c2','#f06292','#ba68c8'];
+
+  // Orbiting molecules
+  const orbitRings = [
+    { r: 0.346, speed: 0.008, particles: [], color: 'rgba(236,64,122,', count: 10 },
+    { r: 0.269, speed: -0.012, particles: [], color: 'rgba(171,71,188,', count: 8 },
+    { r: 0.192, speed: 0.018, particles: [], color: 'rgba(255,100,144,', count: 6 },
+  ];
+
+  orbitRings.forEach(ring => {
+    for(let i = 0; i < ring.count; i++) {
+      ring.particles.push({
+        angle: (Math.PI * 2 / ring.count) * i,
+        size: Math.random() * 3 + 2,
+        pulse: Math.random() * Math.PI * 2,
+      });
+    }
+  });
+
+  // Floating sparkles
+  const sparkles = [];
+  for(let i = 0; i < 30; i++) {
+    sparkles.push({
+      x: Math.random(),
+      y: Math.random(),
+      r: Math.random() * 2 + 0.5,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * 0.02 + 0.005,
+    });
+  }
+
+  function drawFlowerCore(cx, cy) {
+    // Glow bloom
+    const bloom = SIZE * 0.173;
+    const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, bloom);
+    grd.addColorStop(0, 'rgba(236,64,122,0.35)');
+    grd.addColorStop(0.5, 'rgba(236,64,122,0.12)');
+    grd.addColorStop(1, 'rgba(236,64,122,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, bloom, 0, Math.PI * 2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+
+    // Petals
+    const petalLen0 = SIZE * 0.163;
+    for(let p = 0; p < PETALS; p++) {
+      const angle = (p / PETALS) * Math.PI * 2 + t * 0.3;
+      const petalLen = petalLen0 + Math.sin(t * 1.2 + p * 0.8) * SIZE * 0.019;
+      const near = SIZE * 0.058;
+      const px1 = cx + Math.cos(angle) * near;
+      const py1 = cy + Math.sin(angle) * near;
+      const px2 = cx + Math.cos(angle) * petalLen;
+      const py2 = cy + Math.sin(angle) * petalLen;
+      const cpx1 = cx + Math.cos(angle + 0.4) * petalLen * 0.7;
+      const cpy1 = cy + Math.sin(angle + 0.4) * petalLen * 0.7;
+      const cpx2 = cx + Math.cos(angle - 0.4) * petalLen * 0.7;
+      const cpy2 = cy + Math.sin(angle - 0.4) * petalLen * 0.7;
+
+      ctx.save();
+      ctx.globalAlpha = 0.7 + Math.sin(t + p) * 0.15;
+      const pg = ctx.createLinearGradient(px1, py1, px2, py2);
+      pg.addColorStop(0, petalColors[p]);
+      pg.addColorStop(1, petalColors[(p + 4) % PETALS] + '44');
+      ctx.fillStyle = pg;
+      ctx.beginPath();
+      ctx.moveTo(px1, py1);
+      ctx.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, px2, py2);
+      ctx.bezierCurveTo(cpx2, cpy2, cpx1, cpy1, px1, py1);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Inner core circle
+    const coreR = SIZE * 0.073;
+    const coreGrd = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
+    coreGrd.addColorStop(0, '#ffffff');
+    coreGrd.addColorStop(0.4, '#fce4ec');
+    coreGrd.addColorStop(1, '#ec407a');
+    ctx.beginPath();
+    ctx.arc(cx, cy, coreR, 0, Math.PI * 2);
+    ctx.fillStyle = coreGrd;
+    ctx.fill();
+
+    // Center icon
+    ctx.save();
+    ctx.font = `bold ${Math.max(16, SIZE * 0.054)}px serif`;
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🧬', cx, cy);
+    ctx.restore();
+  }
+
+  function drawOrbits(cx, cy) {
+    orbitRings.forEach(ring => {
+      const r = ring.r * SIZE;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.strokeStyle = ring.color + '0.1)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ring.particles.forEach(p => {
+        p.angle += ring.speed;
+        p.pulse += 0.05;
+        const px = cx + Math.cos(p.angle) * r;
+        const py = cy + Math.sin(p.angle) * r;
+        const alpha = 0.6 + Math.sin(p.pulse) * 0.3;
+        const size = p.size + Math.sin(p.pulse) * 1;
+
+        const g = ctx.createRadialGradient(px, py, 0, px, py, size * 2);
+        g.addColorStop(0, ring.color + alpha + ')');
+        g.addColorStop(1, ring.color + '0)');
+        ctx.beginPath();
+        ctx.arc(px, py, size * 2, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fillStyle = ring.color + (Math.min(1, alpha * 1.2)) + ')';
+        ctx.fill();
+      });
+    });
+  }
+
+  function drawSparkles() {
+    sparkles.forEach(s => {
+      s.phase += s.speed;
+      const alpha = (Math.sin(s.phase) + 1) / 2 * 0.8;
+      ctx.beginPath();
+      ctx.arc(s.x * SIZE, s.y * SIZE, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,64,122,${alpha})`;
+      ctx.fill();
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, SIZE, SIZE);
+    t += 0.015;
+    const cx = SIZE / 2, cy = SIZE / 2;
+    drawSparkles();
+    drawOrbits(cx, cy);
+    drawFlowerCore(cx, cy);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ============================================================
+// GRADIENT MORPH MOUSE TRACKER
+// ============================================================
+(function(){
+  const hero  = document.getElementById('heroConstellation');
+  const morph = document.getElementById('gradientMorph');
+  if(!hero || !morph) return;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width)  * 100;
+    const y = ((e.clientY - r.top)  / r.height) * 100;
+    morph.style.background =
+      `radial-gradient(circle at ${x}% ${y}%, rgba(236,64,122,0.12) 0%, transparent 60%)`;
+  });
+})();
+
+// ============================================================
+// ANATOMY SIMULATION CONTROLS
+// ============================================================
+let currentMode = 'cycle';
+
+const modeDescriptions = {
+  'cycle': '<strong>Ovulation Cycle:</strong> Every month, your ovaries release an egg (ovulation). The egg travels down the fallopian tube. Meanwhile, the uterine lining thickens to prepare for potential pregnancy. This is your fertile window.',
+  'fertilization': '<strong>Fertilization:</strong> When sperm meets egg in the fallopian tube, fertilization occurs. The resulting zygote begins dividing as it travels toward the uterus. After 5-7 days, it implants in the uterine wall, marking the start of pregnancy.',
+  'menstruation': '<strong>Menstruation:</strong> If fertilization doesn\'t occur, hormone levels drop. The thickened uterine lining sheds through the vagina. This is your period, typically lasting 3-7 days. The cycle then begins anew.',
+  'pcos': '<strong>PCOS (Polycystic Ovary Syndrome):</strong> Instead of releasing one mature egg, multiple small follicles develop but don\'t fully mature. This causes irregular periods, hormone imbalances, and potential fertility challenges. Affects 1 in 10 women.',
+  'endo': '<strong>Endometriosis:</strong> Tissue similar to the uterine lining grows outside the uterus—on ovaries, tubes, or pelvic organs. During periods, this tissue bleeds but has nowhere to go, causing inflammation, pain, and scarring. Affects 1 in 10 women.',
+  'protection': '<strong>Protection & Prevention:</strong> Healthy lifestyle choices, regular screening, HPV vaccination, and contraception all help protect reproductive health. Exercise, balanced diet, and stress management support hormone balance.',
+  'adeno': '<strong>Adenomyosis:</strong> The endometrial tissue grows into the muscular wall of the uterus itself. This causes the uterus to become enlarged and "boggy." Symptoms include heavy bleeding, severe cramping, and chronic pelvic pain.'
+};
+
+function setMode(mode) {
+  currentMode = mode;
+  
+  // Update buttons
+  document.querySelectorAll('#anatomy-viz .mode-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('btn-' + mode).classList.add('active');
+  
+  // Hide all mode elements
+  document.querySelectorAll('.mode-elements').forEach(el => {
+    el.style.display = 'none';
+  });
+  
+  // Show selected mode
+  const modeMap = {
+    'cycle': 'cycle-animation',
+    'fertilization': 'fertilization-animation',
+    'menstruation': 'menstruation-animation',
+    'pcos': 'pcos-animation',
+    'endo': 'endo-animation',
+    'protection': 'protection-animation',
+    'adeno': 'adeno-animation'
+  };
+  
+  const elementId = modeMap[mode];
+  if(elementId) {
+    document.getElementById(elementId).style.display = 'block';
+  }
+  
+  // Update label and description
+  const labels = {
+    'cycle': 'Ovulation Cycle',
+    'fertilization': 'Fertilization Process',
+    'menstruation': 'Menstrual Period',
+    'pcos': 'Polycystic Ovary Syndrome',
+    'endo': 'Endometriosis',
+    'protection': 'Contraception & Prevention',
+    'adeno': 'Adenomyosis'
+  };
+  
+  document.getElementById('activeModeLabel').textContent = labels[mode];
+  document.getElementById('edu-text').innerHTML = modeDescriptions[mode];
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  setMode('cycle');
+});
+
+// ============================================================
+// CANCER VISUALIZATION
+// ============================================================
+const cancerData = {
+  breast: {
+    1: {
+      title: "Stage I",
+      desc: "Cancer is confined to the breast tissue. Tumor is small (usually ≤2cm) and has not spread to lymph nodes. Highly treatable with excellent prognosis.",
+      survival: "99%",
+      survivalVal: 99,
+      size: "≤ 2cm",
+      spread: "Localized",
+      treatments: ["Lumpectomy", "Radiation", "Hormone Therapy"]
+    },
+    2: {
+      title: "Stage II",
+      desc: "Tumor is 2-5cm, or cancer has spread to nearby lymph nodes (1-3 nodes) under the arm. May require more aggressive treatment.",
+      survival: "93%",
+      survivalVal: 93,
+      size: "2-5cm",
+      spread: "1-3 Lymph Nodes",
+      treatments: ["Surgery", "Chemotherapy", "Radiation", "Targeted Therapy"]
+    },
+    3: {
+      title: "Stage III",
+      desc: "Larger tumor (>5cm) or extensive lymph node involvement (4-9 nodes). May affect chest wall or skin. Requires multimodal treatment.",
+      survival: "72%",
+      survivalVal: 72,
+      size: "> 5cm",
+      spread: "4-9 Nodes / Chest Wall",
+      treatments: ["Neoadjuvant Chemo", "Mastectomy", "Radiation", "Immunotherapy"]
+    },
+    4: {
+      title: "Stage IV (Metastatic)",
+      desc: "Cancer has spread beyond the breast to distant organs like bones, liver, lungs, or brain. Treatment focuses on controlling disease and maintaining quality of life.",
+      survival: "28%",
+      survivalVal: 28,
+      size: "Variable",
+      spread: "Distant Organs",
+      treatments: ["Systemic Chemo", "Targeted Therapy", "Hormone Therapy", "Immunotherapy"]
+    }
+  },
+  cervical: {
+    1: {
+      title: "Stage I",
+      desc: "Cancer has invaded the cervix but has not spread nearby. May be microscopic or visible. Usually detected through Pap smear screening.",
+      survival: "92%",
+      survivalVal: 92,
+      size: "< 4cm",
+      spread: "Cervix only",
+      treatments: ["Surgery (Hysterectomy)", "Fertility-sparing surgery", "Radiation"]
+    },
+    2: {
+      title: "Stage II",
+      desc: "Spread to the upper vagina or tissue around the uterus (parametrium), but has not reached the pelvic wall.",
+      survival: "60%",
+      survivalVal: 60,
+      size: "Variable",
+      spread: "Upper Vagina",
+      treatments: ["Chemoradiation", "Brachytherapy"]
+    },
+    3: {
+      title: "Stage III",
+      desc: "Spread to the lower vagina, pelvic wall, or blocking the kidneys (hydronephrosis). Requires intensive combined treatment.",
+      survival: "35%",
+      survivalVal: 35,
+      size: "Extensive",
+      spread: "Pelvic Wall / Kidney",
+      treatments: ["Chemoradiation", "Systemic Chemo"]
+    },
+    4: {
+      title: "Stage IV",
+      desc: "Spread to the bladder, rectum, or distant organs like lungs or liver. Most advanced stage requiring palliative care focus.",
+      survival: "17%",
+      survivalVal: 17,
+      size: "Invasive",
+      spread: "Bladder/Rectum/Distant",
+      treatments: ["Chemotherapy", "Targeted Therapy", "Immunotherapy", "Palliative Care"]
+    }
+  },
+  ovarian: {
+    1: {
+      title: "Stage I",
+      desc: "Cancer is found in one or both ovaries or fallopian tubes. Best prognosis when detected early, but often asymptomatic.",
+      survival: "90%",
+      survivalVal: 90,
+      size: "Confined",
+      spread: "None",
+      treatments: ["Surgery", "Chemotherapy"]
+    },
+    2: {
+      title: "Stage II",
+      desc: "Spread to the uterus, fallopian tubes, or other pelvic tissues. Still considered locally confined disease.",
+      survival: "70%",
+      survivalVal: 70,
+      size: "Local extension",
+      spread: "Pelvis",
+      treatments: ["Debulking Surgery", "Chemotherapy"]
+    },
+    3: {
+      title: "Stage III",
+      desc: "Spread to the abdominal lining (peritoneum) or lymph nodes. Most common stage at diagnosis due to vague early symptoms.",
+      survival: "39%",
+      survivalVal: 39,
+      size: "Widespread",
+      spread: "Abdomen / Nodes",
+      treatments: ["Aggressive Surgery", "Intraperitoneal Chemo", "PARP Inhibitors"]
+    },
+    4: {
+      title: "Stage IV",
+      desc: "Spread to the inside of the liver, spleen, or fluid around lungs (pleural effusion). Systemic disease requiring ongoing management.",
+      survival: "17%",
+      survivalVal: 17,
+      size: "Metastatic",
+      spread: "Distant Organs",
+      treatments: ["Chemotherapy", "Targeted Therapy", "Immunotherapy", "Palliative Care"]
+    }
+  },
+  endometrial: {
+    1: {
+      title: "Stage I",
+      desc: "Cancer is found only in the uterus. Stage IA: Less than halfway through muscle. Stage IB: More than halfway. Most favorable prognosis.",
+      survival: "95%",
+      survivalVal: 95,
+      size: "< 50% Myometrium",
+      spread: "None",
+      treatments: ["Surgery (Hysterectomy)", "Observation", "Hormone Therapy"]
+    },
+    2: {
+      title: "Stage II",
+      desc: "Tumor has spread from the body of the uterus to the connective tissue of the cervix, but not outside the uterus.",
+      survival: "69%",
+      survivalVal: 69,
+      size: "Cervical Stroma",
+      spread: "Cervix",
+      treatments: ["Surgery", "Radiation", "Chemotherapy"]
+    },
+    3: {
+      title: "Stage III",
+      desc: "Cancer has spread to the outer layer of the uterus, ovaries, fallopian tubes, vagina, or nearby lymph nodes.",
+      survival: "55%",
+      survivalVal: 55,
+      size: "Serosa/Adnexa",
+      spread: "Ovaries/Nodes",
+      treatments: ["Surgery", "Chemo", "Radiation"]
+    },
+    4: {
+      title: "Stage IV",
+      desc: "Cancer has spread to the inner lining of the bladder or rectum (IVA) or distant organs like lungs, liver, or bones (IVB).",
+      survival: "17%",
+      survivalVal: 17,
+      size: "Extensive",
+      spread: "Bladder/Lungs/Liver",
+      treatments: ["Chemotherapy", "Immunotherapy", "Hormone Therapy", "Palliative Care"]
+    }
+  }
+};
+
+let currentCancerType = 'breast';
+let currentStage = 1;
+
+function setCancerType(type) {
+  currentCancerType = type;
+  currentStage = 1;
+  
+  // Update cancer type buttons
+  document.querySelectorAll('#cancer-viz .simulation-controls .mode-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.getElementById('btn-' + type).classList.add('active');
+  
+  // Reset stage buttons
+  document.querySelectorAll('.stage-btn').forEach(btn => {
+    btn.classList.remove('active', 'visited');
+  });
+  document.querySelector('.stage-btn').classList.add('active');
+  
+  updateCancerVisualization();
+}
+
+function setCancerStage(stage) {
+  currentStage = stage;
+  
+  // Update stage buttons
+  document.querySelectorAll('.stage-btn').forEach((btn, idx) => {
+    btn.classList.remove('active', 'visited');
+    if(idx + 1 === stage) {
+      btn.classList.add('active');
+    } else if(idx + 1 < stage) {
+      btn.classList.add('visited');
+    }
+  });
+  
+  updateCancerVisualization();
+}
+
+function updateCancerVisualization() {
+  const data = cancerData[currentCancerType][currentStage];
+  
+  // Update label
+  const typeLabels = {
+    'breast': 'Breast Cancer',
+    'cervical': 'Cervical Cancer',
+    'ovarian': 'Ovarian Cancer',
+    'endometrial': 'Endometrial Cancer'
+  };
+  document.getElementById('activeCancerLabel').textContent = 
+    `${typeLabels[currentCancerType]} - ${data.title}`;
+  
+  // Update intel panel
+  document.getElementById('stageDescription').textContent = data.desc;
+  document.getElementById('survivalRate').textContent = data.survival;
+  document.getElementById('tumorSize').textContent = data.size;
+  document.getElementById('spreadInfo').textContent = data.spread;
+  
+  // Update survival bar
+  const fillEl = document.getElementById('survivalFill');
+  fillEl.style.width = data.survivalVal + '%';
+  
+  if(data.survivalVal > 80) {
+    fillEl.style.background = 'linear-gradient(90deg, #66bb6a, #43a047)';
+  } else if(data.survivalVal > 50) {
+    fillEl.style.background = 'linear-gradient(90deg, #ffa726, #ff9800)';
+  } else {
+    fillEl.style.background = 'linear-gradient(90deg, #ef5350, #e53935)';
+  }
+  
+  // Update treatment tags
+  const tagsContainer = document.getElementById('treatmentTags');
+  tagsContainer.innerHTML = '';
+  data.treatments.forEach(treatment => {
+    const tag = document.createElement('span');
+    tag.className = 'treatment-tag';
+    tag.textContent = treatment;
+    tagsContainer.appendChild(tag);
+  });
+  
+  // Render SVG
+  renderCancerSVG();
+}
+
+function renderCancerSVG() {
+  const container = document.getElementById('cancerSvgContainer');
+  const svgContent = generateCancerSVG(currentCancerType, currentStage);
+  container.innerHTML = svgContent;
+}
+
+function generateCancerSVG(type, stage) {
+  // Enhanced color palettes for all cancer types
+  const colors = {
+    breast: {
+      tissue: ['#fce4ec', '#f8bbd0', '#f48fb1'],
+      tumor: ['#ef5350', '#e53935', '#c62828', '#b71c1c'],
+      necrotic: '#311b92',
+      infection: ['#ff6b6b', '#ff5252', '#d32f2f'],
+      inflammation: ['#ffab91', '#ff7043', '#f4511e'],
+      lymph: ['#ff9800', '#f57c00', '#ef6c00']
+    },
+    cervical: {
+      tissue: ['#fff0f3', '#ffd4d4', '#f8bbd0'],
+      tumor: ['#e53935', '#d32f2f', '#c62828'],
+      infection: ['#ff5252', '#f44336', '#d32f2f'],
+      inflammation: ['#ffb74d', '#ff9800', '#f57c00'],
+      spread: ['#ff6f00', '#f57c00', '#c62828']
+    },
+    ovarian: {
+      tissue: ['#f3e5f5', '#e1bee7', '#ce93d8'],
+      tumor: ['#8e24aa', '#7b1fa2', '#6a1b9a', '#4a148c'],
+      infection: ['#ab47bc', '#9c27b0', '#7b1fa2'],
+      inflammation: ['#ba68c8', '#ab47bc', '#9c27b0'],
+      necrotic: '#1a237e',
+      spread: ['#6a1b9a', '#4a148c']
+    },
+    endometrial: {
+      tissue: ['#fce4ec', '#f8bbd0', '#f48fb1'],
+      tumor: ['#e53935', '#d32f2f', '#c62828', '#b71c1c'],
+      infection: ['#ff5252', '#f44336', '#d32f2f'],
+      inflammation: ['#ffb74d', '#ff9800', '#f57c00'],
+      necrotic: '#311b92'
+    }
+  };
+
+  // Helper: Generate infection wave rings
+  const infectionWaves = (cx, cy, baseR, stage, colorSet) => {
+    const waves = [];
+    for(let i = 0; i < Math.min(stage * 2, 6); i++) {
+      const r = baseR + (i * 10);
+      const op = 0.4 - (i * 0.06);
+      waves.push(`
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" 
+                stroke="${colorSet[Math.min(i, colorSet.length-1)]}" 
+                stroke-width="${3 - i * 0.4}" opacity="${op}">
+          <animate attributeName="r" values="${r*0.85};${r*1.2};${r*0.85}" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="${op};${op*0.6};${op}" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+      `);
+    }
+    return waves.join('');
+  };
+
+  // Helper: Generate invasion tendrils
+  const invasionTendrils = (cx, cy, length, count, color) => {
+    const tendrils = [];
+    for(let i = 0; i < count; i++) {
+      const angle = (i * (360 / count)) * Math.PI / 180;
+      const len = length * (0.8 + Math.random() * 0.4);
+      const x1 = cx + Math.cos(angle) * length * 0.6;
+      const y1 = cy + Math.sin(angle) * length * 0.6;
+      const x2 = cx + Math.cos(angle) * len;
+      const y2 = cy + Math.sin(angle) * len;
+      tendrils.push(`
+        <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" 
+              stroke="${color}" stroke-width="2.5" opacity="0.6" stroke-linecap="round">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="${2+i*0.1}s" repeatCount="indefinite"/>
+        </line>
+      `);
+    }
+    return tendrils.join('');
+  };
+
+  // Helper: Generate infection particles
+  const infectionParticles = (cx, cy, radius, count, color) => {
+    const particles = [];
+    for(let i = 0; i < count; i++) {
+      const angle = (Math.random() * 360) * Math.PI / 180;
+      const dist = radius + Math.random() * 30;
+      const x = cx + Math.cos(angle) * dist;
+      const y = cy + Math.sin(angle) * dist;
+      const size = 2 + Math.random() * 2;
+      particles.push(`
+        <circle cx="${x}" cy="${y}" r="${size}" fill="${color}" opacity="0.7">
+          <animate attributeName="r" values="${size};${size*1.5};${size}" dur="${1+Math.random()}s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.4;0.9;0.4" dur="${1+Math.random()}s" repeatCount="indefinite"/>
+        </circle>
+      `);
+    }
+    return particles.join('');
+  };
+
+  // ============================================
+  // BREAST CANCER
+  // ============================================
+  if(type === 'breast') {
+    const tumorSize = 15 + (stage * 12);
+    const infectionR = tumorSize + (stage * 10);
+    const lymphNodes = stage >= 2 ? (stage === 2 ? 3 : stage === 3 ? 5 : 7) : 0;
+    
+    return `
+      <svg viewBox="0 0 500 400" style="width:100%;height:100%;">
+        <defs>
+          <radialGradient id="breast3D">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+            <stop offset="40%" stop-color="${colors.breast.tissue[0]}"/>
+            <stop offset="80%" stop-color="${colors.breast.tissue[1]}"/>
+            <stop offset="100%" stop-color="${colors.breast.tissue[2]}"/>
+          </radialGradient>
+          <radialGradient id="tumor3D">
+            <stop offset="0%" stop-color="#ffcdd2"/>
+            <stop offset="40%" stop-color="${colors.breast.tumor[0]}"/>
+            <stop offset="80%" stop-color="${colors.breast.tumor[2]}"/>
+            <stop offset="100%" stop-color="${colors.breast.tumor[3]}"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="shadow"><feDropShadow dx="3" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+        </defs>
+        
+        <circle cx="240" cy="190" r="105" fill="${colors.breast.tissue[0]}" opacity="0.25" filter="url(#shadow)"/>
+        <circle cx="240" cy="190" r="95" fill="url(#breast3D)" opacity="0.8" filter="url(#shadow)"/>
+        
+        ${Array.from({length: 12}, (_, i) => {
+          const angle = (i * 30) * Math.PI / 180;
+          return `<line x1="${240 + Math.cos(angle)*45}" y1="${190 + Math.sin(angle)*45}" 
+                        x2="${240 + Math.cos(angle)*85}" y2="${190 + Math.sin(angle)*85}" 
+                        stroke="#f48fb1" stroke-width="0.8" opacity="0.3"/>`;
+        }).join('')}
+        
+        <circle cx="240" cy="190" r="20" fill="none" stroke="#ec407a" stroke-width="2" opacity="0.5"/>
+        <circle cx="240" cy="190" r="35" fill="none" stroke="#ec407a" stroke-width="1.5" opacity="0.4"/>
+        
+        ${stage >= 2 ? `
+          <circle cx="240" cy="190" r="${infectionR + 15}" fill="${colors.breast.inflammation[0]}" 
+                  opacity="0.3" filter="url(#glow)">
+            <animate attributeName="r" values="${infectionR+12};${infectionR+18};${infectionR+12}" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.25;0.4;0.25" dur="3s" repeatCount="indefinite"/>
+          </circle>
+        ` : ''}
+        
+        ${stage >= 2 ? infectionWaves(240, 190, tumorSize, stage, colors.breast.infection) : ''}
+        
+        <circle cx="240" cy="190" r="${tumorSize+3}" fill="${colors.breast.tumor[3]}" opacity="0.35" filter="url(#shadow)"/>
+        <circle cx="240" cy="190" r="${tumorSize}" fill="url(#tumor3D)" opacity="0.95" filter="url(#glow)">
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="r" values="${tumorSize*0.98};${tumorSize*1.02};${tumorSize*0.98}" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        
+        <ellipse cx="${240-tumorSize*0.2}" cy="${190-tumorSize*0.2}" rx="${tumorSize*0.4}" ry="${tumorSize*0.3}" 
+                 fill="#fff" opacity="0.35"/>
+        
+        ${stage >= 3 ? `
+          <circle cx="240" cy="190" r="${tumorSize*0.35}" fill="${colors.breast.necrotic}" opacity="0.75">
+            <animate attributeName="opacity" values="0.65;0.85;0.65" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+        ` : ''}
+        
+        ${stage >= 2 ? invasionTendrils(240, 190, tumorSize, 16, colors.breast.tumor[2]) : ''}
+        ${stage >= 2 ? infectionParticles(240, 190, infectionR, stage*12, colors.breast.infection[1]) : ''}
+        
+        ${stage >= 1 ? `
+          <path d="M 240 190 Q 290 170 330 150" fill="none" stroke="#64b5f6" stroke-width="3" 
+                opacity="0.5" stroke-dasharray="5,3">
+            <animate attributeName="stroke-dashoffset" from="0" to="-8" dur="2s" repeatCount="indefinite"/>
+          </path>
+        ` : ''}
+        
+        ${lymphNodes > 0 ? Array.from({length: lymphNodes}, (_, i) => {
+          const positions = [{x:330,y:145},{x:340,y:175},{x:325,y:200},{x:350,y:160},{x:335,y:220}];
+          const pos = positions[i] || positions[0];
+          return `
+            <ellipse cx="${pos.x}" cy="${pos.y}" rx="11" ry="14" fill="${colors.breast.inflammation[1]}" 
+                     opacity="0.4" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.3;0.5;0.3" dur="${1.8+i*0.2}s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="${pos.x}" cy="${pos.y}" rx="9" ry="11" fill="${colors.breast.lymph[2]}" 
+                     opacity="0.85" filter="url(#glow)">
+              <animate attributeName="opacity" values="0.75;0.95;0.75" dur="${1.8+i*0.2}s" repeatCount="indefinite"/>
+            </ellipse>
+            ${stage >= 3 ? `<ellipse cx="${pos.x}" cy="${pos.y}" rx="5" ry="7" fill="${colors.breast.tumor[2]}" opacity="0.8"/>` : ''}
+          `;
+        }).join('') : ''}
+        
+        ${stage >= 4 ? `
+          <path d="M 240 190 Q 200 120 160 80" fill="none" stroke="${colors.breast.tumor[0]}" 
+                stroke-width="3" opacity="0.6" stroke-dasharray="6,4" filter="url(#glow)">
+            <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <ellipse cx="160" cy="80" rx="18" ry="13" fill="${colors.breast.inflammation[1]}" 
+                   opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="160" cy="80" rx="15" ry="10" fill="${colors.breast.tumor[3]}" 
+                   opacity="0.9" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.75;0.95;0.75" dur="1.5s" repeatCount="indefinite"/>
+          </ellipse>
+          ${infectionWaves(160, 80, 15, 3, colors.breast.infection)}
+          <text x="125" y="68" font-size="10" fill="${colors.breast.tumor[3]}" font-weight="700">Lung Met</text>
+          <rect x="15" y="20" width="165" height="40" rx="8" fill="#ffebee" opacity="0.98" filter="url(#shadow)"/>
+          <text x="25" y="40" font-size="14" fill="${colors.breast.tumor[3]}" font-weight="700">⚠ STAGE IV</text>
+          <text x="25" y="54" font-size="10" fill="#666">Metastatic Disease</text>
+        ` : ''}
+        
+        <rect x="165" y="340" width="170" height="50" rx="10" fill="white" opacity="0.98" filter="url(#shadow)"/>
+        <text x="250" y="363" font-size="18" fill="${colors.breast.tissue[2]}" font-weight="700" text-anchor="middle">
+          STAGE ${['I','II','III','IV'][stage-1]}
+        </text>
+        <text x="250" y="380" font-size="10" fill="#666" text-anchor="middle">
+          ${['Localized • 95% survival', 'Regional • 85% survival', 'Advanced • 70% survival', 'Metastatic • 25% survival'][stage-1]}
+        </text>
+        
+        <line x1="${240-tumorSize}" y1="${190+tumorSize+18}" x2="${240+tumorSize}" y2="${190+tumorSize+18}" 
+              stroke="#666" stroke-width="2"/>
+        <text x="240" y="${190+tumorSize+32}" font-size="10" fill="#666" font-weight="700" text-anchor="middle">
+          ${tumorSize*2}mm
+        </text>
+        
+        <rect x="15" y="340" width="140" height="50" rx="8" fill="#f3e5f5" opacity="0.98" filter="url(#shadow)"/>
+        <text x="25" y="360" font-size="11" fill="#7c3aed" font-weight="700">🔍 Early Detection</text>
+        <text x="25" y="375" font-size="9" fill="#666">• Monthly self-exam</text>
+        <text x="25" y="387" font-size="9" fill="#666">• Mammogram 40+</text>
+      </svg>
+    `;
+  }
+  
+  // ============================================
+  // CERVICAL CANCER
+  // ============================================
+  else if(type === 'cervical') {
+    const lesionWidth = 15 + (stage * 9);
+    const lesionHeight = 18 + (stage * 11);
+    const infectionR = Math.max(lesionWidth, lesionHeight) + (stage * 8);
+    
+    return `
+      <svg viewBox="0 0 500 400" style="width:100%;height:100%;">
+        <defs>
+          <linearGradient id="cervix3D" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+            <stop offset="40%" stop-color="${colors.cervical.tissue[0]}"/>
+            <stop offset="80%" stop-color="${colors.cervical.tissue[1]}"/>
+            <stop offset="100%" stop-color="${colors.cervical.tissue[2]}"/>
+          </linearGradient>
+          <radialGradient id="lesion3D">
+            <stop offset="0%" stop-color="#ffcdd2"/>
+            <stop offset="40%" stop-color="${colors.cervical.tumor[0]}"/>
+            <stop offset="80%" stop-color="${colors.cervical.tumor[1]}"/>
+            <stop offset="100%" stop-color="${colors.cervical.tumor[2]}"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="shadow"><feDropShadow dx="3" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+        </defs>
+        
+        <!-- Uterus body -->
+        <path d="M 185,120 Q 245,95 305,120 L 305,180 Q 245,205 185,180 Z" 
+              fill="${colors.cervical.tissue[1]}" opacity="0.4" filter="url(#shadow)"/>
+        <path d="M 195,125 Q 245,105 295,125 L 295,175 Q 245,195 195,175 Z" 
+              fill="${colors.cervical.tissue[0]}" opacity="0.6"/>
+        
+        <ellipse cx="245" cy="150" rx="32" ry="37" fill="#fce4ec" opacity="0.5"/>
+        
+        <!-- Cervix structure -->
+        <ellipse cx="248" cy="203" rx="52" ry="42" fill="#000" opacity="0.2" filter="url(#shadow)"/>
+        <ellipse cx="245" cy="200" rx="52" ry="42" fill="url(#cervix3D)" opacity="0.9" filter="url(#shadow)"/>
+        <ellipse cx="235" cy="190" rx="25" ry="20" fill="#fff" opacity="0.3"/>
+        
+        <ellipse cx="245" cy="185" rx="10" ry="8" fill="#f48fb1" opacity="0.7"/>
+        <rect x="242" y="185" width="6" height="35" rx="3" fill="#f48fb1" opacity="0.6"/>
+        <ellipse cx="245" cy="220" rx="12" ry="9" fill="#f48fb1" opacity="0.7"/>
+        
+        <ellipse cx="245" cy="200" rx="24" ry="18" fill="${colors.cervical.tumor[0]}" 
+                 opacity="0.25" stroke="${colors.cervical.tumor[0]}" stroke-width="1.5" stroke-dasharray="3,2"/>
+        
+        <!-- Inflammation zone -->
+        ${stage >= 2 ? `
+          <ellipse cx="245" cy="200" rx="${infectionR + 18}" ry="${infectionR + 12}" 
+                   fill="${colors.cervical.inflammation[0]}" opacity="0.3" filter="url(#glow)">
+            <animate attributeName="rx" values="${infectionR+15};${infectionR+22};${infectionR+15}" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="ry" values="${infectionR+10};${infectionR+15};${infectionR+10}" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.25;0.4;0.25" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+        ` : ''}
+        
+        ${stage >= 2 ? infectionWaves(245, 200, Math.max(lesionWidth, lesionHeight), stage, colors.cervical.infection) : ''}
+        
+        <!-- Cancer lesion -->
+        <ellipse cx="248" cy="203" rx="${lesionWidth+2}" ry="${lesionHeight+2}" 
+                 fill="#000" opacity="0.3" filter="url(#shadow)"/>
+        <ellipse cx="245" cy="200" rx="${lesionWidth}" ry="${lesionHeight}" 
+                 fill="url(#lesion3D)" opacity="0.9" filter="url(#glow)">
+          <animate attributeName="opacity" values="0.8;0.95;0.8" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="rx" values="${lesionWidth*0.98};${lesionWidth*1.02};${lesionWidth*0.98}" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="${lesionHeight*0.98};${lesionHeight*1.02};${lesionHeight*0.98}" dur="3s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        ${stage >= 3 ? `
+          <ellipse cx="245" cy="200" rx="${lesionWidth*0.4}" ry="${lesionHeight*0.4}" 
+                   fill="#4a148c" opacity="0.7">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="2s" repeatCount="indefinite"/>
+          </ellipse>
+        ` : ''}
+        
+        <ellipse cx="${245-lesionWidth*0.25}" cy="${200-lesionHeight*0.25}" 
+                 rx="${lesionWidth*0.3}" ry="${lesionHeight*0.2}" fill="#fff" opacity="0.35"/>
+        
+        ${stage >= 2 ? invasionTendrils(245, 200, Math.max(lesionWidth, lesionHeight), 14, colors.cervical.tumor[2]) : ''}
+        ${stage >= 2 ? infectionParticles(245, 200, infectionR, stage*10, colors.cervical.infection[1]) : ''}
+        
+        <!-- Parametrial invasion -->
+        ${stage >= 2 ? `
+          <rect x="170" y="185" width="38" height="44" fill="${colors.cervical.inflammation[1]}" 
+                opacity="0.4" rx="7" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="175" y="190" width="35" height="40" fill="${colors.cervical.spread[1]}" 
+                opacity="0.7" rx="6">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="2s" repeatCount="indefinite"/>
+          </rect>
+          <text x="180" y="210" font-size="9" fill="white" font-weight="700">Para-</text>
+          <text x="180" y="222" font-size="9" fill="white" font-weight="700">metrium</text>
+          
+          <rect x="297" y="185" width="38" height="44" fill="${colors.cervical.inflammation[1]}" 
+                opacity="0.4" rx="7" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2.2s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="302" y="190" width="35" height="40" fill="${colors.cervical.spread[1]}" 
+                opacity="0.7" rx="6">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="2.2s" repeatCount="indefinite"/>
+          </rect>
+          
+          ${infectionParticles(193, 210, 20, 5, colors.cervical.infection[1])}
+          ${infectionParticles(320, 210, 20, 5, colors.cervical.infection[1])}
+        ` : ''}
+        
+        <!-- Pelvic wall extension -->
+        ${stage >= 3 ? `
+          <rect x="138" y="125" width="8" height="140" fill="#000" opacity="0.2" rx="4" filter="url(#shadow)"/>
+          <rect x="135" y="125" width="8" height="140" fill="${colors.cervical.spread[2]}" opacity="0.9" rx="4">
+            <animate attributeName="opacity" values="0.8;0.95;0.8" dur="2.5s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="360" y="125" width="8" height="140" fill="#000" opacity="0.2" rx="4" filter="url(#shadow)"/>
+          <rect x="357" y="125" width="8" height="140" fill="${colors.cervical.spread[2]}" opacity="0.9" rx="4">
+            <animate attributeName="opacity" values="0.8;0.95;0.8" dur="2.5s" repeatCount="indefinite"/>
+          </rect>
+          
+          <ellipse cx="100" cy="160" rx="18" ry="25" fill="#64b5f6" opacity="0.7" filter="url(#shadow)">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="2.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <text x="75" y="150" font-size="9" fill="#1976d2" font-weight="700">Kidney</text>
+          <text x="75" y="162" font-size="9" fill="#1976d2" font-weight="700">affected</text>
+        ` : ''}
+        
+        <!-- Stage IV metastases -->
+        ${stage >= 4 ? `
+          <ellipse cx="245" cy="270" rx="42" ry="30" fill="#ffb74d" opacity="0.5" filter="url(#shadow)"/>
+          <circle cx="245" cy="270" r="14" fill="${colors.cervical.tumor[2]}" opacity="0.85" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.7;0.95;0.7" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="13;15;13" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(245, 270, 14, 3, colors.cervical.infection)}
+          <text x="215" y="258" font-size="10" fill="#e65100" font-weight="700">Bladder</text>
+          
+          <ellipse cx="410" cy="130" rx="20" ry="14" fill="${colors.cervical.inflammation[1]}" 
+                   opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+          </ellipse>
+          <circle cx="410" cy="130" r="14" fill="${colors.cervical.tumor[2]}" opacity="0.85" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.7;0.95;0.7" dur="1.6s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(410, 130, 14, 3, colors.cervical.infection)}
+          <text x="375" y="115" font-size="10" fill="${colors.cervical.tumor[2]}" font-weight="700">Distant Met</text>
+          
+          <rect x="15" y="20" width="160" height="42" rx="8" fill="#ffebee" opacity="0.98" filter="url(#shadow)"/>
+          <text x="25" y="42" font-size="14" fill="${colors.cervical.tumor[2]}" font-weight="700">⚠ STAGE IV</text>
+          <text x="25" y="56" font-size="10" fill="#666">Advanced Disease</text>
+        ` : ''}
+        
+        <rect x="165" y="340" width="170" height="50" rx="10" fill="white" opacity="0.98" filter="url(#shadow)"/>
+        <text x="250" y="363" font-size="18" fill="${colors.cervical.tissue[2]}" font-weight="700" text-anchor="middle">
+          STAGE ${['I','II','III','IV'][stage-1]}
+        </text>
+        <text x="250" y="380" font-size="10" fill="#666" text-anchor="middle">
+          ${['Cervix Only • 92% survival', 'Beyond Cervix • 65% survival', 'Pelvic Wall • 40% survival', 'Advanced • 15% survival'][stage-1]}
+        </text>
+        
+        <!-- HPV vaccine shield -->
+        <path d="M 380,260 L 405,235 L 430,260 L 430,300 Q 405,320 380,300 Z" 
+              fill="#10b981" opacity="0.2" filter="url(#shadow)"/>
+        <path d="M 380,260 L 405,235 L 430,260 L 430,300 Q 405,320 380,300 Z" 
+              fill="none" stroke="#10b981" stroke-width="4"/>
+        <text x="394" y="280" font-size="26" fill="#10b981" font-weight="700">✓</text>
+        
+        <rect x="355" y="325" width="135" height="58" rx="8" fill="#d1fae5" opacity="0.98" filter="url(#shadow)"/>
+        <text x="365" y="344" font-size="11" fill="#10b981" font-weight="700">HPV Vaccine</text>
+        <text x="365" y="359" font-size="9" fill="#047857">Prevents 90% of cases</text>
+        <text x="365" y="372" font-size="9" fill="#047857">Ages 9-45 recommended</text>
+        
+        <rect x="15" y="325" width="130" height="58" rx="8" fill="#fef3c7" opacity="0.98" filter="url(#shadow)"/>
+        <text x="25" y="344" font-size="11" fill="#d97706" font-weight="700">🔬 Screening</text>
+        <text x="25" y="359" font-size="9" fill="#92400e">• Pap test every 3 years</text>
+        <text x="25" y="372" font-size="9" fill="#92400e">• HPV test available</text>
+      </svg>
+    `;
+  }
+  
+  // ============================================
+  // OVARIAN CANCER
+  // ============================================
+  else if(type === 'ovarian') {
+    const tumorWidth = 20 + (stage * 10);
+    const tumorHeight = 24 + (stage * 12);
+    const infectionR = Math.max(tumorWidth, tumorHeight) + (stage * 8);
+    
+    return `
+      <svg viewBox="0 0 500 400" style="width:100%;height:100%;">
+        <defs>
+          <radialGradient id="ovary3D">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+            <stop offset="40%" stop-color="${colors.ovarian.tissue[0]}"/>
+            <stop offset="80%" stop-color="${colors.ovarian.tissue[1]}"/>
+            <stop offset="100%" stop-color="${colors.ovarian.tissue[2]}"/>
+          </radialGradient>
+          <radialGradient id="tumorOv3D">
+            <stop offset="0%" stop-color="#e1bee7"/>
+            <stop offset="40%" stop-color="${colors.ovarian.tumor[0]}"/>
+            <stop offset="80%" stop-color="${colors.ovarian.tumor[1]}"/>
+            <stop offset="100%" stop-color="${colors.ovarian.tumor[2]}"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="shadow"><feDropShadow dx="3" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+        </defs>
+        
+        <!-- Uterus -->
+        <path d="M 205,180 Q 250,160 295,180 L 295,240 Q 250,260 205,240 Z" 
+              fill="${colors.ovarian.tissue[1]}" opacity="0.3" filter="url(#shadow)"/>
+        <path d="M 210,185 Q 250,167 290,185 L 290,235 Q 250,253 210,235 Z" 
+              fill="${colors.ovarian.tissue[0]}" opacity="0.5"/>
+        
+        <!-- Fallopian tubes -->
+        <path d="M 210,190 Q 180,175 165,185" fill="none" stroke="#ce93d8" stroke-width="4" opacity="0.7"/>
+        <path d="M 290,190 Q 320,175 335,185" fill="none" stroke="#ce93d8" stroke-width="4" opacity="0.7"/>
+        
+        <!-- Normal ovary (right) -->
+        <ellipse cx="338" cy="193" rx="37" ry="45" fill="#000" opacity="0.2" filter="url(#shadow)"/>
+        <ellipse cx="335" cy="190" rx="37" ry="45" fill="url(#ovary3D)" opacity="0.7" filter="url(#shadow)"/>
+        <ellipse cx="335" cy="190" rx="30" ry="38" fill="${colors.ovarian.tissue[0]}" opacity="0.5"/>
+        <circle cx="325" cy="180" r="6" fill="#fff" opacity="0.7"/>
+        <circle cx="340" cy="195" r="5" fill="#fff" opacity="0.6"/>
+        <circle cx="330" cy="205" r="5" fill="#fff" opacity="0.6"/>
+        <ellipse cx="325" cy="175" rx="15" ry="12" fill="#fff" opacity="0.3"/>
+        
+        <!-- Inflammation around affected ovary -->
+        ${stage >= 2 ? `
+          <ellipse cx="165" cy="190" rx="${tumorWidth+22}" ry="${tumorHeight+25}" 
+                   fill="${colors.ovarian.inflammation[0]}" opacity="0.35" filter="url(#glow)">
+            <animate attributeName="rx" values="${tumorWidth+18};${tumorWidth+26};${tumorWidth+18}" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="ry" values="${tumorHeight+20};${tumorHeight+30};${tumorHeight+20}" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.3;0.45;0.3" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+        ` : ''}
+        
+        ${stage >= 2 ? infectionWaves(165, 190, Math.max(tumorWidth, tumorHeight), stage, colors.ovarian.infection) : ''}
+        
+        <!-- Affected ovary -->
+        <ellipse cx="168" cy="193" rx="40" ry="47" fill="#000" opacity="0.25" filter="url(#shadow)"/>
+        <ellipse cx="165" cy="190" rx="40" ry="47" fill="url(#ovary3D)" opacity="0.8" filter="url(#shadow)"/>
+        
+        <!-- Primary tumor -->
+        <ellipse cx="165" cy="190" rx="${tumorWidth}" ry="${tumorHeight}" 
+                 fill="url(#tumorOv3D)" opacity="0.95" filter="url(#glow)">
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="rx" values="${tumorWidth*0.97};${tumorWidth*1.03};${tumorWidth*0.97}" dur="3.5s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="${tumorHeight*0.97};${tumorHeight*1.03};${tumorHeight*0.97}" dur="3.5s" repeatCount="indefinite"/>
+        </ellipse>
+        
+        <!-- Cystic components -->
+        ${stage >= 1 ? `
+          <ellipse cx="165" cy="185" rx="${tumorWidth*0.45}" ry="${tumorHeight*0.42}" 
+                   fill="${colors.ovarian.tumor[3]}" opacity="0.6">
+            <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="170" cy="198" rx="${tumorWidth*0.35}" ry="${tumorHeight*0.32}" 
+                   fill="${colors.ovarian.necrotic}" opacity="0.7">
+            <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.8s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="158" cy="192" rx="${tumorWidth*0.25}" ry="${tumorHeight*0.28}" 
+                   fill="${colors.ovarian.tumor[2]}" opacity="0.8"/>
+        ` : ''}
+        
+        <ellipse cx="${165-tumorWidth*0.25}" cy="${190-tumorHeight*0.25}" 
+                 rx="${tumorWidth*0.35}" ry="${tumorHeight*0.25}" fill="#fff" opacity="0.35"/>
+        
+        ${stage >= 2 ? invasionTendrils(165, 190, Math.max(tumorWidth, tumorHeight), 12, colors.ovarian.tumor[2]) : ''}
+        ${stage >= 2 ? infectionParticles(165, 190, infectionR, stage*10, colors.ovarian.infection[1]) : ''}
+        
+        <!-- Stage II: Spread to other ovary -->
+        ${stage >= 2 ? `
+          <ellipse cx="335" cy="190" rx="28" ry="34" fill="${colors.ovarian.inflammation[1]}" 
+                   opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="335" cy="190" rx="20" ry="26" fill="${colors.ovarian.tumor[1]}" 
+                   opacity="0.85" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.75;0.95;0.75" dur="2.2s" repeatCount="indefinite"/>
+            <animate attributeName="rx" values="19;21;19" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="ry" values="25;27;25" dur="3s" repeatCount="indefinite"/>
+          </ellipse>
+          ${infectionWaves(335, 190, 20, 2, colors.ovarian.infection)}
+          
+          <circle cx="250" cy="270" r="8" fill="${colors.ovarian.inflammation[1]}" opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="250" cy="270" r="7" fill="${colors.ovarian.tumor[2]}" opacity="0.8">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+        ` : ''}
+        
+        <!-- Stage III: Peritoneal spread -->
+        ${stage >= 3 ? `
+          <ellipse cx="250" cy="195" rx="155" ry="108" fill="${colors.ovarian.inflammation[0]}" 
+                   opacity="0.15" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.1;0.2;0.1" dur="4s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="250" cy="195" rx="150" ry="105" fill="none" stroke="#e1bee7" 
+                   stroke-width="3" opacity="0.5" stroke-dasharray="8,5"/>
+          
+          ${Array.from({length: 8}, (_, i) => {
+            const positions = [
+              {x:250,y:110}, {x:210,y:280}, {x:290,y:270}, {x:180,y:150},
+              {x:320,y:140}, {x:230,y:250}, {x:270,y:260}, {x:190,y:200}
+            ];
+            const pos = positions[i];
+            const size = 7 + Math.random() * 4;
+            return `
+              <circle cx="${pos.x}" cy="${pos.y}" r="${size+3}" fill="${colors.ovarian.inflammation[1]}" 
+                      opacity="0.4" filter="url(#glow)">
+                <animate attributeName="opacity" values="0.3;0.5;0.3" dur="${1.5+i*0.2}s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="${pos.x}" cy="${pos.y}" r="${size}" fill="${colors.ovarian.spread[0]}" 
+                      opacity="0.85" filter="url(#glow)">
+                <animate attributeName="opacity" values="0.7;0.95;0.7" dur="${1.5+i*0.2}s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="${size*0.95};${size*1.05};${size*0.95}" dur="${2+i*0.15}s" repeatCount="indefinite"/>
+              </circle>
+              ${infectionParticles(pos.x, pos.y, size, 3, colors.ovarian.infection[1])}
+            `;
+          }).join('')}
+          
+          <path d="M 185,115 Q 250,100 315,115" fill="${colors.ovarian.tumor[3]}" opacity="0.4">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <path d="M 190,120 Q 250,107 310,120" fill="${colors.ovarian.tumor[2]}" opacity="0.5"/>
+          <text x="225" y="95" font-size="9" fill="${colors.ovarian.tumor[3]}" font-weight="700">Omental cake</text>
+          
+          <ellipse cx="370" cy="200" rx="11" ry="14" fill="${colors.ovarian.inflammation[1]}" 
+                   opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="370" cy="200" rx="10" ry="12" fill="#ff6f00" opacity="0.85">
+            <animate attributeName="opacity" values="0.7;0.95;0.7" dur="1.8s" repeatCount="indefinite"/>
+          </ellipse>
+          <text x="350" y="225" font-size="8" fill="#e65100" font-weight="700">Lymph node+</text>
+        ` : ''}
+        
+        <!-- Stage IV: Distant metastases -->
+        ${stage >= 4 ? `
+          <ellipse cx="250" cy="220" rx="135" ry="80" fill="#64b5f6" opacity="0.25" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.2;0.3;0.2" dur="4s" repeatCount="indefinite"/>
+          </ellipse>
+          <text x="200" y="295" font-size="10" fill="#1976d2" font-weight="700">Ascites fluid</text>
+          
+          <ellipse cx="410" cy="120" rx="22" ry="16" fill="${colors.ovarian.inflammation[1]}" 
+                   opacity="0.4" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2.2s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="410" cy="120" rx="18" ry="13" fill="#8d6e63" opacity="0.5"/>
+          <circle cx="410" cy="120" r="10" fill="${colors.ovarian.tumor[3]}" opacity="0.9" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.8;0.95;0.8" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="9;11;9" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(410, 120, 10, 3, colors.ovarian.infection)}
+          <text x="380" y="105" font-size="10" fill="${colors.ovarian.tumor[3]}" font-weight="700">Liver mets</text>
+          
+          <ellipse cx="85" cy="120" rx="32" ry="42" fill="#90caf9" opacity="0.35" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.4;0.3" dur="3.5s" repeatCount="indefinite"/>
+          </ellipse>
+          <circle cx="85" cy="120" r="10" fill="${colors.ovarian.tumor[3]}" opacity="0.85" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.7;0.95;0.7" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(85, 120, 10, 3, colors.ovarian.infection)}
+          <text x="60" y="170" font-size="9" fill="${colors.ovarian.tumor[3]}" font-weight="700">Pleural</text>
+          
+          <rect x="15" y="20" width="165" height="42" rx="8" fill="#ffebee" opacity="0.98" filter="url(#shadow)"/>
+          <text x="25" y="42" font-size="14" fill="${colors.ovarian.tumor[3]}" font-weight="700">⚠ STAGE IV</text>
+          <text x="25" y="56" font-size="10" fill="#666">Metastatic</text>
+        ` : ''}
+        
+        <rect x="165" y="340" width="170" height="50" rx="10" fill="white" opacity="0.98" filter="url(#shadow)"/>
+        <text x="250" y="363" font-size="18" fill="${colors.ovarian.tissue[2]}" font-weight="700" text-anchor="middle">
+          STAGE ${['I','II','III','IV'][stage-1]}
+        </text>
+        <text x="250" y="380" font-size="10" fill="#666" text-anchor="middle">
+          ${['Ovaries Only • 90% survival', 'Pelvic Spread • 70% survival', 'Abdominal • 40% survival', 'Distant Mets • 20% survival'][stage-1]}
+        </text>
+        
+        <rect x="330" y="240" width="155" height="80" rx="8" fill="#fff3cd" opacity="0.98" filter="url(#shadow)"/>
+        <text x="340" y="260" font-size="12" fill="#c41e3a" font-weight="700">⚠ Silent Killer</text>
+        <text x="340" y="276" font-size="9" fill="#666" font-weight="700">Vague symptoms:</text>
+        <text x="340" y="290" font-size="9" fill="#666">• Bloating</text>
+        <text x="340" y="303" font-size="9" fill="#666">• Pelvic pressure</text>
+        <text x="340" y="316" font-size="9" fill="#666">• Feeling full quickly</text>
+        
+        <rect x="15" y="240" width="140" height="60" rx="8" fill="#e8f5e9" opacity="0.98" filter="url(#shadow)"/>
+        <text x="25" y="260" font-size="11" fill="#2e7d32" font-weight="700">🔬 CA-125 Test</text>
+        <text x="25" y="276" font-size="9" fill="#1b5e20">Tumor marker screening</text>
+        <text x="25" y="291" font-size="9" fill="#1b5e20">High-risk women</text>
+      </svg>
+    `;
+  }
+  
+  // ============================================
+  // ENDOMETRIAL CANCER
+  // ============================================
+  else if(type === 'endometrial') {
+    const cancerOpacity = 0.5 + (stage * 0.15);
+    const infectionExtent = 35 + (stage * 12);
+    
+    return `
+      <svg viewBox="0 0 500 400" style="width:100%;height:100%;">
+        <defs>
+          <linearGradient id="uterus3D" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+            <stop offset="40%" stop-color="${colors.endometrial.tissue[0]}"/>
+            <stop offset="80%" stop-color="${colors.endometrial.tissue[1]}"/>
+            <stop offset="100%" stop-color="${colors.endometrial.tissue[2]}"/>
+          </linearGradient>
+          <radialGradient id="cancerEndo3D">
+            <stop offset="0%" stop-color="#ffcdd2"/>
+            <stop offset="40%" stop-color="${colors.endometrial.tumor[0]}"/>
+            <stop offset="80%" stop-color="${colors.endometrial.tumor[1]}"/>
+            <stop offset="100%" stop-color="${colors.endometrial.tumor[3]}"/>
+          </radialGradient>
+          <filter id="glow"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <filter id="shadow"><feDropShadow dx="3" dy="3" stdDeviation="3" flood-opacity="0.3"/></filter>
+        </defs>
+        
+        <!-- Uterus structure -->
+        <path d="M 248 118 Q 193 133 193 185 L 193 230 Q 193 255 213 262 L 273 262 Q 293 255 293 230 L 293 185 Q 293 133 248 118 Z"
+              fill="#000" opacity="0.2" filter="url(#shadow)"/>
+        <path d="M 245 115 Q 190 130 190 185 L 190 230 Q 190 255 210 262 L 270 262 Q 290 255 290 230 L 290 185 Q 290 130 245 115 Z"
+              fill="url(#uterus3D)" opacity="0.9" filter="url(#shadow)"/>
+        <path d="M 245 120 Q 197 135 197 185 L 197 225 Q 197 247 215 253 L 265 253 Q 283 247 283 225 L 283 185 Q 283 135 245 120 Z"
+              fill="${colors.endometrial.tissue[1]}" opacity="0.7"/>
+        <path d="M 245 128 Q 207 140 207 185 L 207 220 Q 207 238 222 243 L 258 243 Q 273 238 273 220 L 273 185 Q 273 140 245 128 Z"
+              fill="${colors.endometrial.tissue[0]}" opacity="0.8"/>
+        <ellipse cx="225" cy="160" rx="20" ry="30" fill="#fff" opacity="0.2"/>
+        
+        <!-- Inflammation response -->
+        ${stage >= 2 ? `
+          <path d="M 245 130 Q 210 143 210 185 L 210 218 Q 210 233 223 238 L 257 238 Q 270 233 270 218 L 270 185 Q 270 143 245 130 Z"
+                fill="${colors.endometrial.inflammation[0]}" opacity="0.35" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.3;0.45;0.3" dur="3s" repeatCount="indefinite"/>
+          </path>
+        ` : ''}
+        
+        ${stage >= 2 ? infectionWaves(240, 185, infectionExtent, stage, colors.endometrial.infection) : ''}
+        
+        <!-- Endometrial cancer -->
+        <path d="M 245 110 Q 195 123 195 185 L 195 195 Q 195 210 208 215 L 242 215 Q 255 210 255 195 L 255 185 Q 255 123 245 110 Z"
+              fill="url(#cancerEndo3D)" opacity="${cancerOpacity}" filter="url(#glow)">
+          <animate attributeName="opacity" values="${cancerOpacity*0.8};${cancerOpacity*1.1};${cancerOpacity*0.8}" 
+                   dur="2.5s" repeatCount="indefinite"/>
+        </path>
+        
+        ${stage >= 3 ? `
+          <ellipse cx="225" cy="175" rx="20" ry="30" fill="${colors.endometrial.necrotic}" opacity="0.7">
+            <animate attributeName="opacity" values="0.6;0.8;0.6" dur="2s" repeatCount="indefinite"/>
+          </ellipse>
+        ` : ''}
+        
+        ${stage >= 2 ? invasionTendrils(240, 175, 30, 12, colors.endometrial.tumor[2]) : ''}
+        ${stage >= 2 ? infectionParticles(240, 185, infectionExtent, stage*10, colors.endometrial.infection[1]) : ''}
+        
+        <!-- Fallopian tubes and ovaries -->
+        <path d="M 190,145 Q 160,130 140,140" fill="none" stroke="#f48fb1" stroke-width="3" opacity="0.5"/>
+        <ellipse cx="135" cy="150" rx="18" ry="22" fill="#e1bee7" opacity="0.5"/>
+        <path d="M 290,145 Q 320,130 340,140" fill="none" stroke="#f48fb1" stroke-width="3" opacity="0.5"/>
+        <ellipse cx="345" cy="150" rx="18" ry="22" fill="#e1bee7" opacity="0.5"/>
+        
+        <!-- Cervix -->
+        <rect x="225" y="262" width="20" height="30" fill="${colors.endometrial.tissue[2]}" 
+              opacity="0.6" rx="4" filter="url(#shadow)"/>
+        
+        <!-- Stage II: Cervical involvement -->
+        ${stage >= 2 ? `
+          <rect x="225" y="262" width="20" height="30" fill="${colors.endometrial.tumor[1]}" 
+                opacity="0.8" rx="4">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+          </rect>
+          <text x="255" y="277" font-size="8" fill="${colors.endometrial.tumor[2]}" font-weight="600">
+            Cervix involved
+          </text>
+        ` : ''}
+        
+        <!-- Stage III: Regional spread -->
+        ${stage >= 3 ? `
+          <ellipse cx="135" cy="150" rx="12" ry="15" fill="${colors.endometrial.tumor[2]}" 
+                   opacity="0.8" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.6s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="345" cy="150" rx="12" ry="15" fill="${colors.endometrial.tumor[2]}" 
+                   opacity="0.8" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.8s" repeatCount="indefinite"/>
+          </ellipse>
+          
+          <ellipse cx="310" cy="210" rx="9" ry="11" fill="#ff6f00" opacity="0.8">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.7s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="325" cy="190" rx="8" ry="10" fill="#ff6f00" opacity="0.8">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.9s" repeatCount="indefinite"/>
+          </ellipse>
+          <text x="295" y="235" font-size="7" fill="#e65100" font-weight="600">Pelvic nodes+</text>
+          
+          <rect x="227" y="292" width="16" height="25" fill="${colors.endometrial.tumor[2]}" 
+                opacity="0.7" rx="3">
+            <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.2s" repeatCount="indefinite"/>
+          </rect>
+        ` : ''}
+        
+        <!-- Stage IV: Advanced disease -->
+        ${stage >= 4 ? `
+          <ellipse cx="240" cy="305" rx="40" ry="28" fill="#ffb74d" opacity="0.4" filter="url(#shadow)"/>
+          <circle cx="240" cy="305" r="12" fill="${colors.endometrial.tumor[3]}" opacity="0.8" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(240, 305, 12, 3, colors.endometrial.infection)}
+          <text x="210" y="295" font-size="8" fill="#e65100" font-weight="600">Bladder</text>
+          
+          <rect x="175" y="250" width="30" height="50" rx="8" fill="#a1887f" opacity="0.3"/>
+          <circle cx="190" cy="275" r="10" fill="${colors.endometrial.tumor[3]}" opacity="0.7">
+            <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <text x="165" y="265" font-size="8" fill="#5d4037" font-weight="600">Rectum</text>
+          
+          <circle cx="400" cy="120" r="11" fill="${colors.endometrial.tumor[3]}" opacity="0.8" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.7s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(400, 120, 11, 3, colors.endometrial.infection)}
+          <text x="375" y="110" font-size="9" fill="${colors.endometrial.tumor[3]}" font-weight="600">Liver</text>
+          
+          <circle cx="80" cy="145" r="10" fill="${colors.endometrial.tumor[3]}" opacity="0.8" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.9s" repeatCount="indefinite"/>
+          </circle>
+          ${infectionWaves(80, 145, 10, 3, colors.endometrial.infection)}
+          <text x="55" y="135" font-size="9" fill="${colors.endometrial.tumor[3]}" font-weight="600">Lung</text>
+          
+          <rect x="15" y="20" width="150" height="40" rx="8" fill="#ffebee" opacity="0.98" filter="url(#shadow)"/>
+          <text x="25" y="40" font-size="14" fill="${colors.endometrial.tumor[3]}" font-weight="700">⚠ STAGE IV</text>
+          <text x="25" y="54" font-size="10" fill="#666">Advanced</text>
+        ` : ''}
+        
+        <rect x="165" y="340" width="170" height="50" rx="10" fill="white" opacity="0.98" filter="url(#shadow)"/>
+        <text x="250" y="363" font-size="18" fill="${colors.endometrial.tissue[2]}" font-weight="700" text-anchor="middle">
+          STAGE ${['I','II','III','IV'][stage-1]}
+        </text>
+        <text x="250" y="380" font-size="10" fill="#666" text-anchor="middle">
+          ${['Uterus Only • 95% survival', 'Cervix Involved • 75% survival', 'Regional Spread • 45% survival', 'Advanced • 15% survival'][stage-1]}
+        </text>
+        
+        <rect x="305" y="210" width="185" height="90" rx="8" fill="#fff3cd" opacity="0.98" filter="url(#shadow)"/>
+        <text x="315" y="230" font-size="12" fill="#c41e3a" font-weight="700">⚠ Key Symptoms</text>
+        <text x="315" y="248" font-size="9" fill="#666" font-weight="700">Most common:</text>
+        <text x="315" y="263" font-size="9" fill="#666">• Abnormal vaginal bleeding</text>
+        <text x="315" y="278" font-size="9" fill="#666">• Post-menopausal bleeding</text>
+        <text x="315" y="293" font-size="9" fill="#c41e3a" font-weight="700">→ See doctor immediately</text>
+        
+        <rect x="15" y="210" width="130" height="85" rx="8" fill="#fce4ec" opacity="0.98" filter="url(#shadow)"/>
+        <text x="25" y="230" font-size="10" fill="#c2185b" font-weight="700">Risk Factors:</text>
+        <text x="25" y="248" font-size="9" fill="#666">• Obesity</text>
+        <text x="25" y="263" font-size="9" fill="#666">• Diabetes</text>
+        <text x="25" y="278" font-size="9" fill="#666">• Unopposed estrogen</text>
+        <text x="25" y="293" font-size="9" fill="#666">• Lynch syndrome</text>
+      </svg>
+    `;
+  }
+  
+  return `<svg viewBox="0 0 500 400"><text x="250" y="200" text-anchor="middle">Invalid cancer type: ${type}</text></svg>`;
+}
+
+// Export for use in browser or Node.js
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { generateCancerSVG };
+}
+
+
+// Usage examples with educational context
+const cancerTypes = {
+  breast: {
+    name: 'Breast Cancer',
+    description: 'Most common cancer in women worldwide',
+    earlyDetection: 'Monthly self-exam, annual mammogram 40+',
+    riskFactors: ['Age', 'Family history', 'BRCA mutations', 'Hormones'],
+    prevention: ['Regular screening', 'Healthy weight', 'Limited alcohol']
+  },
+  cervical: {
+    name: 'Cervical Cancer',
+    description: 'HPV-related cancer, highly preventable',
+    earlyDetection: 'Pap test every 3 years, HPV test',
+    riskFactors: ['HPV infection', 'Smoking', 'Weakened immune system'],
+    prevention: ['HPV vaccine (90% prevention)', 'Regular Pap tests', 'Safe sex practices']
+  },
+  ovarian: {
+    name: 'Ovarian Cancer',
+    description: 'Silent killer - often diagnosed late',
+    earlyDetection: 'No reliable screening, symptom awareness crucial',
+    riskFactors: ['Age', 'Family history', 'BRCA mutations', 'Never pregnant'],
+    prevention: ['Oral contraceptives reduce risk', 'Genetic counseling if high-risk']
+  },
+  endometrial: {
+    name: 'Endometrial (Uterine) Cancer',
+    description: 'Most common gynecologic cancer',
+    earlyDetection: 'Report any abnormal bleeding immediately',
+    riskFactors: ['Obesity', 'Diabetes', 'Unopposed estrogen', 'Lynch syndrome'],
+    prevention: ['Maintain healthy weight', 'Manage diabetes', 'Combined HRT if needed']
+  }
+};
+
+// Interactive demo function
+function createInteractiveDemo() {
+  const container = document.createElement('div');
+  container.style.cssText = 'max-width: 800px; margin: 0 auto; padding: 20px;';
+  
+  Object.entries(cancerTypes).forEach(([type, info]) => {
+    const section = document.createElement('div');
+    section.style.cssText = 'margin-bottom: 40px; border: 2px solid #ddd; border-radius: 12px; padding: 20px;';
+    
+    const title = document.createElement('h2');
+    title.textContent = info.name;
+    title.style.cssText = 'color: #c62828; margin-top: 0;';
+    section.appendChild(title);
+    
+    const desc = document.createElement('p');
+    desc.textContent = info.description;
+    desc.style.cssText = 'color: #666; font-style: italic;';
+    section.appendChild(desc);
+    
+    // Stage selector
+    const stageContainer = document.createElement('div');
+    stageContainer.style.cssText = 'margin: 20px 0; display: flex; gap: 10px;';
+    
+    for(let stage = 1; stage <= 4; stage++) {
+      const btn = document.createElement('button');
+      btn.textContent = `Stage ${stage}`;
+      btn.style.cssText = 'padding: 10px 20px; border: 2px solid #c62828; background: white; color: #c62828; border-radius: 6px; cursor: pointer; font-weight: 600;';
+      btn.onclick = () => {
+        const svgContainer = section.querySelector('.svg-container');
+        svgContainer.innerHTML = generateCancerSVG(type, stage);
+      };
+      stageContainer.appendChild(btn);
+    }
+    section.appendChild(stageContainer);
+    
+    // SVG container
+    const svgContainer = document.createElement('div');
+    svgContainer.className = 'svg-container';
+    svgContainer.innerHTML = generateCancerSVG(type, 1);
+    section.appendChild(svgContainer);
+    
+    container.appendChild(section);
+  });
+  
+  return container;
+}
+
+// Export for use
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { generateCancerSVG, cancerTypes, createInteractiveDemo };
+}
+
+// Initialize cancer visualization
+document.addEventListener('DOMContentLoaded', () => {
+  updateCancerVisualization();
+});
+</script>
+
+<style>
+  footer.ns-footer {
+    background: #1e1a1e;
+    color: #c9bfc9;
+    font-family: 'Manrope', sans-serif;
+    border-top: 1px solid rgba(232,81,122,0.18);
+  }
+  .footer-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .footer-col h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #e8517a;
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+  }
+  .footer-col p {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: #c9bfc9;
+    font-weight: 300;
+  }
+  .footer-col ul { list-style: none; padding: 0; }
+  .footer-col ul li {
+    font-size: 0.875rem;
+    color: #c9bfc9;
+    padding: 5px 0 5px 14px;
+    font-weight: 300;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .footer-col ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #e8517a;
+    opacity: 0.5;
+  }
+  .footer-col ul li:hover { color: #f0748e; }
+  .disclaimer-text { font-size: 0.875rem; line-height: 1.75; color: #c9bfc9; font-weight: 300; }
+  .emergency-alert { font-size: 0.875rem; line-height: 1.7; color: #e8517a; font-weight: 500; }
+  .emergency-alert strong { font-weight: 600; }
+  .footer-meta {
+    border-top: 1px solid rgba(232,81,122,0.18);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  .footer-meta .meta-line { font-size: 0.8rem; color: #7c7080; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .footer-meta .meta-line .sep { color: #e8517a; margin: 0 6px; }
+  .footer-meta .tagline { font-size: 0.82rem; color: #7c7080; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .footer-meta .tagline .heart { color: #e8517a; font-size: 1rem; animation: footerPulse 2s ease-in-out infinite; }
+  @keyframes footerPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.8; } }
+  .footer-bottom { background: #161316; border-top: 1px solid rgba(255,255,255,0.04); }
+  .footer-bottom-inner { max-width: 1200px; margin: 0 auto; padding: 22px 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { font-size: 0.82rem; color: #7c7080; text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+  .footer-links a:hover { color: #f0748e; }
+  .footer-copy { font-size: 0.78rem; color: #7c7080; opacity: 0.7; letter-spacing: 0.02em; }
+  @media (max-width: 900px) { .footer-main { grid-template-columns: repeat(2,1fr); gap: 32px; } }
+  @media (max-width: 540px) { .footer-main { grid-template-columns: 1fr; padding: 40px 20px 32px; } .footer-meta { padding: 20px; } .footer-bottom-inner { padding: 18px 20px; } .footer-links { gap: 20px; } }
+</style>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMobile(){
+    const menu=document.getElementById('mobileMenu');
+    const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+    const open=menu.classList.toggle('open');
+    if(open){
+      b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+      b2.style.cssText='opacity:0;';
+      b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+    } else {
+      b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+    }
+  }
+  document.addEventListener('click',function(e){
+    const menu=document.getElementById('mobileMenu');
+    const btn=document.getElementById('hamburgerBtn');
+    if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+      menu.classList.remove('open');
+      document.getElementById('hb1').style.cssText='';
+      document.getElementById('hb2').style.cssText='';
+      document.getElementById('hb3').style.cssText='';
+    }
+  });
+</script>
+</body>
+</html>

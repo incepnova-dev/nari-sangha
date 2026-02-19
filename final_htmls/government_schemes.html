@@ -1,0 +1,3873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Government Health Schemes | Nari Swasthya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<style>
+:root{
+  --pink:#ec407a;
+  --deep-pink:#d81b60;
+  --primary:#ec407a;
+  --primary-dark:#d81b60;
+  --primary-light:#f48fb1;
+  --lavender:#ede7f6;
+  --bg:#faf5fb;
+  --card-bg:#ffffff;
+  --text-main:#212121;
+  --text-soft:#555;
+  --border-soft:#e0e0e0;
+  --success:#66bb6a;
+  --warning:#ffa726;
+  --critical:#ef5350;
+  --info:#4fc3f7;
+  --emergency:#ff1744;
+  --urgent:#ff9100;
+  --monitor:#42a5f5;
+  --shadow: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-strong: 0 15px 40px rgba(236, 64, 122, 0.18);
+  --color-primary: #ec407a;
+  --color-text-secondary: #555;
+  --radius-lg: 16px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display', Georgia, serif;}
+button,input,select{font-family:inherit;}
+a{color:inherit;}
+.center{text-align:center;}
+.muted{color:var(--text-soft);}
+
+/* ===================== HEADER ===================== */
+    .site-header{
+      background:#ffffff;
+      padding:0;
+      box-shadow:0 2px 24px rgba(236,64,122,0.09);
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(236,64,122,0.08);
+      height:64px;
+      isolation:isolate;
+    }
+
+    /* ── Header floating emoji animation ──
+       Uses a wrapper that covers the FULL header width via negative margins
+       to escape the max-width constraint of nav-container.
+       JS sets the animation; CSS just styles the element. */
+
+
+    /* Sparkle Effect on Hover */
+    .site-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(236, 64, 122, 0.1) 0%, 
+        transparent 25%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .site-header:hover::after {
+      opacity: 1;
+    }
+
+    .nav-container{
+      max-width:1400px;margin:0 auto;
+      padding:0 1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      height:64px;
+      position:relative;z-index:1;
+    }
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+    }
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{
+      text-decoration:none;font-family:'Playfair Display',serif;
+      font-weight:900;font-size:1.25rem;line-height:1.1;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .logo-text span{
+      font-size:.62rem;color:#555;font-family:'Manrope',sans-serif;
+      font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:.3rem;
+      text-decoration:none;color:#212121;
+      font-weight:500;font-size:.875rem;
+      padding:.55rem .75rem;border-radius:8px;
+      transition:all .25s;white-space:nowrap;
+      cursor:pointer;background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-link.active{color:#d81b60;background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{font-size:.6rem;transition:transform .25s;color:#555;margin-top:1px;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{
+      position:absolute;top:calc(100% + 8px);left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      min-width:220px;background:white;border-radius:16px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+      opacity:0;pointer-events:none;
+      transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+    }
+    .nav-dropdown::before{
+      content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+      border:6px solid transparent;border-bottom-color:white;
+      border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+    }
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+      opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+    }
+    .dd-item{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.65rem .9rem;border-radius:10px;
+      text-decoration:none;color:#212121;font-size:.85rem;font-weight:500;transition:all .2s;
+    }
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1.1rem;}
+    .dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .dd-sep{height:1px;background:#e0e0e0;margin:.3rem .5rem;}
+    /* Flyout submenu — appears to the right of the parent row */
+    .dd-has-flyout{position:relative;}
+    .dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      display:none;position:absolute;top:0;left:calc(100% + 4px);
+      min-width:190px;background:white;border-radius:12px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+    }
+    .dd-has-flyout:hover>.dd-flyout,
+    .dd-has-flyout:focus-within>.dd-flyout{display:block;}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:#d81b60;}
+    .dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+    .dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{
+      padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+      font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    /* Sign In = outline (pink border, pink text, white bg) */
+    .btn-nav.outline{
+      background:#fff;
+      color:#d81b60;
+      border:1.5px solid #d81b60;
+    }
+    .btn-nav.outline:hover{background:rgba(236,64,122,0.05);}
+    /* Contact Us = solid filled (pink bg, white text) */
+    .btn-nav.primary{
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      color:#fff;
+      border:none;
+      box-shadow:0 4px 15px rgba(236,64,122,0.3);
+    }
+    .btn-nav.primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);}
+    .hamburger{
+      display:none;width:38px;height:38px;border-radius:10px;
+      background:none;border:1.5px solid #e0e0e0;
+      align-items:center;justify-content:center;cursor:pointer;
+      flex-direction:column;gap:4px;padding:8px;
+    }
+    .hamburger span{display:block;height:2px;background:#212121;border-radius:2px;transition:all .3s;}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+      z-index:999;padding:1.5rem;overflow-y:auto;
+    }
+    .mm-action-btn{display:inline-flex !important;}
+    .mobile-menu.open{display:block;}
+    .mm-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.85rem 1rem;border-radius:12px;
+      text-decoration:none;color:#212121;font-weight:500;font-size:1rem;
+      transition:all .2s;border-bottom:1px solid #e0e0e0;
+    }
+    .mm-link:hover{color:#d81b60;background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){
+      .main-nav{display:none;}
+      .hamburger{display:flex;}
+      .nav-actions .btn-nav{display:none;}
+    }
+
+    @media(max-width:480px){
+      .nav-container{padding:0 1rem; height:64px;}
+      .logo-text a{font-size:1.05rem;}
+      .logo-text span{font-size:.55rem;}
+      .logo-icon{width:34px;height:34px;border-radius:10px;}
+      .logo-icon svg{width:18px;height:18px;}
+      .hamburger{width:34px;height:34px;}
+    }
+
+    @media(max-width:360px){
+      .logo-text span{display:none;}
+      .nav-container{padding:0 0.75rem;}
+    }
+
+
+.page-shell{max-width:1400px;margin:0 auto;padding:0 2rem;}
+
+.hero-constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.gradient-morph {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(236, 64, 122, 0.15) 0%, transparent 65%);
+  animation: morph-pulse 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes morph-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 4rem 0 2rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #faf5fb 0%, #f5f0fa 50%, #ede7f6 100%);
+  border-radius: 32px;
+  margin-bottom: 3rem;
+  min-height: 85vh;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding-left: 3rem;
+  animation: slideInLeft 0.8s ease;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, rgba(236,64,122,0.10), rgba(168,230,207,0.10));
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid rgba(236,64,122,0.18);
+  margin-bottom: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.badge-icon { font-size: 1.4rem; }
+.badge-text { font-weight: 800; color: var(--primary-dark); font-size: 0.92rem; }
+
+.hero-title-3d {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.08;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-emphasis {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-shimmer 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 10px rgba(236,64,122,0.35));
+}
+
+@keyframes title-shimmer {
+  0%, 100% { filter: brightness(1) drop-shadow(0 2px 10px rgba(236,64,122,0.35)); }
+  50% { filter: brightness(1.35) drop-shadow(0 5px 18px rgba(236,64,122,0.55)); }
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-soft);
+  margin-bottom: 2rem;
+  line-height: 1.85;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.stat-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border: 2px solid transparent;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-align: center;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255,107,157,0.18);
+  border-color: rgba(244,143,177,0.55);
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--primary);
+  font-family: 'Playfair Display', serif;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.hero-cta-row {display: flex;gap: 1rem;flex-wrap: wrap;}
+
+.btn-primary, .btn-secondary {
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--deep-pink), #f06292);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(216, 27, 96, 0.30);
+  animation: float-btn 3s ease-in-out infinite;
+}
+
+@keyframes float-btn {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(216,27,96,0.42);
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {background: var(--primary);color: #fff;}
+
+.hero-visual-3d {
+  position: relative;
+  z-index: 2;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideInRight 0.8s ease;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.visual-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#schemeVisualization {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+}
+
+.floating-icon {
+  position: absolute;
+  background: #fff;
+  border: 2px solid rgba(236,64,122,0.15);
+  border-radius: 20px;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(236,64,122,0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  z-index: 10;
+}
+
+.floating-icon:hover {
+  transform: scale(1.1) !important;
+  box-shadow: 0 15px 40px rgba(236,64,122,0.35);
+  border-color: rgba(236,64,122,0.35);
+}
+
+.floating-icon-emoji {font-size: 2rem;}
+.floating-icon-label {font-size: 0.76rem;font-weight: 900;color: var(--text-soft);white-space: nowrap;}
+
+.icon-1 { animation: orbit1 12s ease-in-out infinite; }
+.icon-2 { animation: orbit2 14s ease-in-out infinite; }
+.icon-3 { animation: orbit3 16s ease-in-out infinite; }
+.icon-4 { animation: orbit4 18s ease-in-out infinite; }
+.icon-5 { animation: orbit5 13s ease-in-out infinite; }
+
+@keyframes orbit1 {
+  0%, 100% { transform: translate(-220px, -20px); }
+  25%       { transform: translate(-225px, -30px); }
+  50%       { transform: translate(-220px, -20px); }
+  75%       { transform: translate(-215px, -10px); }
+}
+
+@keyframes orbit2 {
+  0%, 100% { transform: translate(-150px, -180px); }
+  25%       { transform: translate(-155px, -185px); }
+  50%       { transform: translate(-150px, -180px); }
+  75%       { transform: translate(-145px, -175px); }
+}
+
+@keyframes orbit3 {
+  0%, 100% { transform: translate(150px, -180px); }
+  25%       { transform: translate(155px, -185px); }
+  50%       { transform: translate(150px, -180px); }
+  75%       { transform: translate(145px, -175px); }
+}
+
+@keyframes orbit4 {
+  0%, 100% { transform: translate(220px, -20px); }
+  25%       { transform: translate(225px, -10px); }
+  50%       { transform: translate(220px, -20px); }
+  75%       { transform: translate(215px, -30px); }
+}
+
+@keyframes orbit5 {
+  0%, 100% { transform: translate(0px, 200px); }
+  25%       { transform: translate(5px, 205px); }
+  50%       { transform: translate(0px, 200px); }
+  75%       { transform: translate(-5px, 195px); }
+}
+
+.section-header {text-align: center;margin: 1rem 0 2.5rem;}
+
+.header-badge-prominent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, rgba(236,64,122,0.1), rgba(168,230,207,0.15));
+  padding: 0.6rem 1.3rem;
+  border-radius: 999px;
+  border: 2px solid rgba(236,64,122,0.18);
+  margin-bottom: 1rem;
+}
+
+.badge-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(236,64,122,0.7); }
+  50% { opacity: 0.7; transform: scale(1.3); box-shadow: 0 0 0 10px rgba(236,64,122,0); }
+}
+
+.section-title-prominent {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-highlight {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 40%, #ad1457 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 3px 12px rgba(236,64,122,0.35));
+}
+
+.section-subtitle-prominent {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.section {padding: 5rem 0;position: relative;}
+
+.key-programs-quest {background: white;padding: 5rem 0;position: relative;}
+
+.kp-hud {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.kp-hud__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: var(--shadow);
+}
+
+.kp-hud__icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.kp-hud__txt strong {display: block;font-size: 0.85rem;color: var(--text-main);}
+.kp-hud__txt span {display: block;font-size: 1.2rem;font-weight: 700;color: var(--deep-pink);}
+
+.kp-filters {display: flex;gap: 1rem;justify-content: center;margin: 2rem 0;flex-wrap: wrap;}
+
+.kp-filter {
+  padding: 0.7rem 1.5rem;
+  border: 2px solid var(--border-soft);
+  background: white;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kp-filter:hover {border-color: var(--deep-pink);color: var(--deep-pink);}
+.kp-filter.active {background: var(--deep-pink);color: white;border-color: var(--deep-pink);}
+
+.kp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.kp-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.kp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--deep-pink), var(--primary-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+
+.kp-card:hover::before {transform: scaleX(1);}
+.kp-card:hover {transform: translateY(-10px);box-shadow: var(--shadow-strong);}
+
+.kp-emblem {position: relative;width: 80px;height: 80px;margin: 0 auto 1.5rem;}
+
+.kp-emblem__orb {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--deep-pink), var(--primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.kp-emblem__ring {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 3px solid rgba(236, 64, 122, 0.2);
+  border-radius: 50%;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.kp-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.kp-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(236, 64, 122, 0.1);
+  color: var(--deep-pink);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.kp-benefits {list-style: none;margin: 1.5rem 0;}
+
+.kp-benefits li {
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.kp-benefits li:last-child {border-bottom: none;}
+.kp-benefits i {color: var(--success);font-size: 1.2rem;margin-top: 0.2rem;flex-shrink: 0;}
+
+.kp-actions {display: flex;gap: 1rem;margin-top: 1.5rem;}
+
+.kp-btn {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.kp-btn--primary {background: var(--deep-pink);color: white;}
+.kp-btn--primary:hover {background: var(--primary-dark);transform: translateY(-2px);}
+.kp-btn--outline {border: 2px solid var(--deep-pink);color: var(--deep-pink);background: transparent;}
+.kp-btn--outline:hover {background: var(--deep-pink);color: white;}
+
+.process-section {background: white;padding: 4rem 0;margin: 3rem 0;border-radius: 32px;}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.step-card {
+  background: linear-gradient(135deg, #faf5fb 0%, #f5f0fa 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.step-card:hover {transform: translateY(-5px);box-shadow: var(--shadow);}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--primary-light));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.3);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.step-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.step-card p {color: var(--text-soft);line-height: 1.6;}
+
+.comparison-section {margin: 4rem 0;}
+
+.comparison-table {
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.comparison-table table {width: 100%;border-collapse: collapse;}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.comparison-table th {
+  background: linear-gradient(135deg, #faf5fb 0%, #f5f0fa 100%);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  color: var(--deep-pink);
+  font-size: 1.1rem;
+}
+
+.comparison-table tbody tr:hover {background: rgba(236, 64, 122, 0.02);}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.contact-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+}
+
+.contact-card:hover {transform: translateY(-5px);box-shadow: var(--shadow-strong);}
+
+.contact-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--deep-pink), var(--primary-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.8rem;
+  color: white;
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.3);
+}
+
+.contact-card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.contact-card .phone {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin: 1rem 0;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, var(--deep-pink), var(--primary-light));
+  border-radius: 32px;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+  margin: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: morph-pulse 8s ease-in-out infinite;
+}
+
+.cta-section h2 {color: white;font-size: 2.5rem;margin-bottom: 1rem;}
+.cta-section p {font-size: 1.2rem;margin-bottom: 2rem;opacity: 0.9;}
+
+.cta-buttons {display: flex;gap: 1rem;justify-content: center;flex-wrap: wrap;}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-white {background: white;color: var(--deep-pink);}
+.btn-white:hover {background: rgba(255, 255, 255, 0.9);transform: translateY(-2px);}
+.btn-outline {border: 2px solid white;color: white;background: transparent;}
+.btn-outline:hover {background: rgba(255, 255, 255, 0.1);}
+
+.reveal {opacity: 0;transform: translateY(30px);}
+.reveal.is-visible {opacity: 1;transform: translateY(0);transition: opacity 0.8s ease, transform 0.8s ease;}
+
+/* West Bengal Government Initiatives Styles */
+.initiatives-banner {
+  background: linear-gradient(135deg, #faf5fb 0%, #f5f0fa 100%);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  border-left: 6px solid var(--deep-pink);
+}
+
+.initiatives-banner h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--deep-pink);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.initiative-item {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+}
+
+.initiative-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+}
+
+.initiative-item strong {
+  display: block;
+  color: var(--deep-pink);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.initiative-item p {
+  color: var(--text-soft);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.map-section {
+  margin: 3rem 0;
+  background: white;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+}
+
+.map-section h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--deep-pink);
+  font-size: 1.8rem;
+}
+
+.map-container {
+  margin-top: 1.5rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.district-list {
+  margin: 3rem 0;
+}
+
+.district-list h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--deep-pink);
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.district-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  border-left: 5px solid var(--primary-light);
+}
+
+.district-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+  border-left-color: var(--deep-pink);
+}
+
+.district-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--deep-pink);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.district-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.district-card li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.district-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.district-card li strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .hero {grid-template-columns: 1fr;padding: 3rem 2rem;min-height: auto;}
+  .hero-content {padding-left: 0;}
+  .hero-title-3d {font-size: 2rem;}
+  .hero-subtitle {font-size: 1rem;}
+  .hero-stats {grid-template-columns: 1fr;}
+  .hero-visual-3d {height: 400px;}
+  .section-title-prominent {font-size: 2rem;}
+  .kp-grid {grid-template-columns: 1fr;}
+  .process-steps {grid-template-columns: 1fr;}
+  .initiatives-grid {grid-template-columns: 1fr;}
+}
+
+@keyframes fadeInUp {
+  from {opacity: 0;transform: translateY(30px);}
+  to {opacity: 1;transform: translateY(0);}
+}
+
+.fade-in-up {animation: fadeInUp 0.8s ease-out forwards;}
+
+@media (prefers-reduced-motion: reduce) {
+  * {animation: none !important;transition: none !important;}
+}
+
+/* =====================================================
+   MOBILE RESPONSIVENESS — comprehensive fixes
+   ===================================================== */
+
+/* ── kp-grid: prevent 350px min from overflowing narrow phones ── */
+@media (max-width: 420px) {
+  .kp-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+
+/* ── kp-card buttons: stack on small cards ── */
+@media (max-width: 480px) {
+  .kp-actions {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .kp-btn {
+    width: 100%;
+  }
+  .kp-card {
+    padding: 1.4rem 1.1rem;
+  }
+  .kp-card h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ── kp-hud: ensure wrapping & readable on narrow screens ── */
+@media (max-width: 600px) {
+  .kp-hud {
+    gap: 0.75rem;
+  }
+  .kp-hud__item {
+    padding: 0.7rem 1rem;
+    gap: 0.6rem;
+  }
+  .kp-hud__txt strong { font-size: 0.78rem; }
+  .kp-hud__txt span  { font-size: 1rem; }
+}
+
+/* ── kp-filters: allow wrapping with tighter gaps ── */
+@media (max-width: 600px) {
+  .kp-filters {
+    gap: 0.5rem;
+  }
+  .kp-filter {
+    padding: 0.55rem 1rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* ── Hero visual: show on mobile with reduced height ── */
+@media (max-width: 900px) {
+  .hero-visual-3d {
+    display: flex;
+    height: 320px;
+    width: 100%;
+  }
+  /* When visual is below content, hero is single-column — give more breathing room */
+  .hero {
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-badge {
+    justify-content: center;
+  }
+  .hero-cta-row {
+    justify-content: center;
+  }
+  /* Scale down floating icons for mobile */
+  .floating-icon {
+    padding: 0.7rem 0.9rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(236,64,122,0.18);
+  }
+  .floating-icon-emoji { font-size: 1.4rem; }
+  .floating-icon-label { font-size: 0.62rem; }
+  /* Mobile-scale orbit animations */
+  @keyframes orbit1 {
+    0%, 100% { transform: translate(-110px, -10px); }
+    25%       { transform: translate(-115px, -18px); }
+    50%       { transform: translate(-110px, -10px); }
+    75%       { transform: translate(-105px, -2px); }
+  }
+  @keyframes orbit2 {
+    0%, 100% { transform: translate(-75px, -95px); }
+    25%       { transform: translate(-80px, -100px); }
+    50%       { transform: translate(-75px, -95px); }
+    75%       { transform: translate(-70px, -90px); }
+  }
+  @keyframes orbit3 {
+    0%, 100% { transform: translate(75px, -95px); }
+    25%       { transform: translate(80px, -100px); }
+    50%       { transform: translate(75px, -95px); }
+    75%       { transform: translate(70px, -90px); }
+  }
+  @keyframes orbit4 {
+    0%, 100% { transform: translate(110px, -10px); }
+    25%       { transform: translate(115px, -2px); }
+    50%       { transform: translate(110px, -10px); }
+    75%       { transform: translate(105px, -18px); }
+  }
+  @keyframes orbit5 {
+    0%, 100% { transform: translate(0px, 110px); }
+    25%       { transform: translate(5px, 115px); }
+    50%       { transform: translate(0px, 110px); }
+    75%       { transform: translate(-5px, 105px); }
+  }
+}
+
+/* ── Hero stats: 3 cols → 1 col on small phones ── */
+@media (max-width: 480px) {
+  .hero-visual-3d {
+    height: 260px;
+  }
+  /* Smaller orbit animations for very small phones */
+  @keyframes orbit1 {
+    0%, 100% { transform: translate(-82px, -8px); }
+    25%       { transform: translate(-87px, -14px); }
+    50%       { transform: translate(-82px, -8px); }
+    75%       { transform: translate(-77px, -2px); }
+  }
+  @keyframes orbit2 {
+    0%, 100% { transform: translate(-57px, -72px); }
+    25%       { transform: translate(-62px, -77px); }
+    50%       { transform: translate(-57px, -72px); }
+    75%       { transform: translate(-52px, -67px); }
+  }
+  @keyframes orbit3 {
+    0%, 100% { transform: translate(57px, -72px); }
+    25%       { transform: translate(62px, -77px); }
+    50%       { transform: translate(57px, -72px); }
+    75%       { transform: translate(52px, -67px); }
+  }
+  @keyframes orbit4 {
+    0%, 100% { transform: translate(82px, -8px); }
+    25%       { transform: translate(87px, -2px); }
+    50%       { transform: translate(82px, -8px); }
+    75%       { transform: translate(77px, -14px); }
+  }
+  @keyframes orbit5 {
+    0%, 100% { transform: translate(0px, 82px); }
+    25%       { transform: translate(4px, 87px); }
+    50%       { transform: translate(0px, 82px); }
+    75%       { transform: translate(-4px, 77px); }
+  }
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  .stat-item {
+    padding: 0.75rem 0.5rem;
+  }
+  .stat-number {
+    font-size: 1.4rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── page-shell: reduce side padding on very small screens ── */
+@media (max-width: 480px) {
+  .page-shell {
+    padding: 0 1rem;
+  }
+}
+
+/* ── Section titles & subtitles: scale down for small screens ── */
+@media (max-width: 600px) {
+  .section-title-prominent {
+    font-size: 1.7rem;
+  }
+  .section-subtitle-prominent {
+    font-size: 0.95rem;
+  }
+  .hero-title-3d {
+    font-size: 1.75rem;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .section-title-prominent { font-size: 1.45rem; }
+  .hero-title-3d           { font-size: 1.55rem; }
+}
+
+/* ── CTA section heading: no breakpoint existed ── */
+@media (max-width: 600px) {
+  .cta-section {
+    padding: 2.5rem 1.25rem;
+    border-radius: 20px;
+    margin: 2rem 0;
+  }
+  .cta-section h2 {
+    font-size: 1.6rem;
+  }
+  .cta-section p {
+    font-size: 1rem;
+  }
+}
+
+/* ── Comparison table: readable on mobile ── */
+@media (max-width: 700px) {
+  .comparison-table {
+    padding: 1.2rem 0.5rem;
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.75rem 0.55rem;
+    font-size: 0.8rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+  .comparison-table th {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* On very small phones, allow horizontal scroll on the table only */
+  .comparison-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .comparison-table table {
+    min-width: 420px;
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.76rem;
+  }
+}
+
+/* ── Contact grid: single column on phones ── */
+@media (max-width: 480px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .contact-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ── Map iframe: shorter on mobile ── */
+@media (max-width: 600px) {
+  .map-container iframe {
+    height: 320px;
+  }
+}
+@media (max-width: 480px) {
+  .map-container iframe {
+    height: 260px;
+  }
+}
+
+/* ── Initiatives banner: fix padding on mobile ── */
+@media (max-width: 600px) {
+  .initiatives-banner {
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+  }
+  .initiatives-banner h3 {
+    font-size: 1.35rem;
+  }
+}
+
+/* ── District cards: reduce padding ── */
+@media (max-width: 480px) {
+  .district-card {
+    padding: 1.2rem 1rem;
+    border-radius: 14px;
+  }
+  .district-card h4 { font-size: 1.15rem; }
+  .district-list h3 { font-size: 1.35rem; }
+}
+
+/* ── Process steps: reduce padding on mobile ── */
+@media (max-width: 480px) {
+  .process-section {
+    padding: 2.5rem 0;
+    border-radius: 20px;
+  }
+  .step-card {
+    padding: 1.5rem 1rem;
+  }
+  .step-card h4 { font-size: 1.1rem; }
+}
+
+/* ── Section padding: reduce vertical whitespace on mobile ── */
+@media (max-width: 600px) {
+  .section {
+    padding: 3rem 0;
+  }
+  .key-programs-quest {
+    padding: 3rem 0;
+  }
+  .section-header {
+    margin: 0.5rem 0 1.75rem;
+  }
+}
+
+/* ── CTA buttons: stack on small screens ── */
+@media (max-width: 480px) {
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* ── Hero CTA row: stack on very small phones ── */
+@media (max-width: 400px) {
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* =============================================================
+   COMPREHENSIVE MOBILE RESPONSIVE ADDITIONS
+   All animations preserved — layout/spacing only
+   ============================================================= */
+
+/* ── page-shell: tighter padding at mid-range ── */
+@media (max-width: 768px) {
+  .page-shell {
+    padding: 0 1.25rem;
+  }
+}
+
+/* ── Hero: reduce min-height & border-radius on mobile ── */
+@media (max-width: 768px) {
+  .hero {
+    border-radius: 20px;
+    min-height: auto;
+    gap: 2rem;
+    padding: 2.5rem 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .hero-content {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    border-radius: 16px;
+    padding: 2rem 1.25rem 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    border-radius: 12px;
+    padding: 1.75rem 1rem 1.5rem;
+  }
+  .hero-visual-3d {
+    height: 220px;
+  }
+  @keyframes orbit1 {
+    0%, 100% { transform: translate(-65px, -6px); }
+    25%       { transform: translate(-70px, -12px); }
+    50%       { transform: translate(-65px, -6px); }
+    75%       { transform: translate(-60px, 0px); }
+  }
+  @keyframes orbit2 {
+    0%, 100% { transform: translate(-45px, -58px); }
+    25%       { transform: translate(-50px, -63px); }
+    50%       { transform: translate(-45px, -58px); }
+    75%       { transform: translate(-40px, -53px); }
+  }
+  @keyframes orbit3 {
+    0%, 100% { transform: translate(45px, -58px); }
+    25%       { transform: translate(50px, -63px); }
+    50%       { transform: translate(45px, -58px); }
+    75%       { transform: translate(40px, -53px); }
+  }
+  @keyframes orbit4 {
+    0%, 100% { transform: translate(65px, -6px); }
+    25%       { transform: translate(70px, 0px); }
+    50%       { transform: translate(65px, -6px); }
+    75%       { transform: translate(60px, -12px); }
+  }
+  @keyframes orbit5 {
+    0%, 100% { transform: translate(0px, 65px); }
+    25%       { transform: translate(4px, 70px); }
+    50%       { transform: translate(0px, 65px); }
+    75%       { transform: translate(-4px, 60px); }
+  }
+}
+
+/* ── Hero badge: scale icon on tiny screens ── */
+@media (max-width: 360px) {
+  .hero-badge {
+    padding: 0.5rem 0.9rem;
+    gap: 0.4rem;
+  }
+  .badge-icon { font-size: 1.1rem; }
+  .badge-text { font-size: 0.8rem; }
+}
+
+/* ── Hero visual: keep hidden ≤900px (already set).
+      Floating orbit icons use fixed pixel translations
+      that are desktop-only — safe because .hero-visual-3d
+      is display:none at ≤900px so icons never render. ── */
+
+/* ── Hero subtitle: comfortable read on mid-screens ── */
+@media (max-width: 600px) {
+  .hero-subtitle {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ── Section vertical padding: progressive reduction ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+  /* The inline-styled white section (contacts) uses style="padding:5rem 0"
+     We can't override inline styles with a class selector, so we target
+     it via its unique child .contact-grid structure and reduce its parent
+     padding through a wrapper approach — but since the padding is inline,
+     we instead ensure its internal elements are properly spaced.
+     The section still pads fine at tablet; on mobile the page-shell
+     side padding provides the containment. */
+  .key-programs-quest {
+    padding: 2.5rem 0;
+  }
+  .process-section {
+    padding: 2.5rem 0;
+    margin: 2rem 0;
+    border-radius: 24px;
+  }
+  .comparison-section {
+    margin: 2.5rem 0;
+  }
+  .cta-section {
+    margin: 2.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+  .key-programs-quest {
+    padding: 2rem 0;
+  }
+  .process-section {
+    padding: 2rem 0;
+    margin: 1.5rem 0;
+    border-radius: 18px;
+  }
+  .comparison-section {
+    margin: 2rem 0;
+  }
+  .cta-section {
+    margin: 1.5rem 0;
+  }
+}
+
+/* ── Section header: padding guard for flush sections ── */
+@media (max-width: 768px) {
+  .section-header {
+    margin: 0.5rem 0 2rem;
+    padding: 0 0.25rem;
+  }
+  .header-badge-prominent {
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header {
+    margin: 0.25rem 0 1.5rem;
+  }
+  .header-badge-prominent {
+    padding: 0.45rem 0.85rem;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+  }
+}
+
+/* ── Section subtitle: tighter on small screens ── */
+@media (max-width: 480px) {
+  .section-subtitle-prominent {
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+}
+
+/* ── kp-hud: wrap gracefully on 360px ── */
+@media (max-width: 360px) {
+  .kp-hud {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .kp-hud__item {
+    width: 100%;
+    justify-content: center;
+    padding: 0.65rem 1rem;
+  }
+}
+
+/* ── kp-filters: wrap with smaller padding on 360px ── */
+@media (max-width: 360px) {
+  .kp-filters {
+    gap: 0.4rem;
+  }
+  .kp-filter {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.75rem;
+    gap: 0.35rem;
+  }
+}
+
+/* ── kp-card: further tighten on 360px ── */
+@media (max-width: 360px) {
+  .kp-card {
+    padding: 1.2rem 0.9rem;
+    border-radius: 18px;
+  }
+  .kp-card h3 {
+    font-size: 1.15rem;
+  }
+  .kp-emblem {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.1rem;
+  }
+  .kp-emblem__orb {
+    font-size: 1.6rem;
+  }
+  .kp-badge {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.8rem;
+  }
+  .kp-benefits li {
+    font-size: 0.9rem;
+    padding: 0.6rem 0;
+    gap: 0.75rem;
+  }
+}
+
+/* ── kp-grid: also force single-column at 360px explicitly ── */
+@media (max-width: 360px) {
+  .kp-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ── process-section: inner padding on mobile ── */
+@media (max-width: 768px) {
+  .process-section .section-header,
+  .process-section .process-steps {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .step-card {
+    padding: 1.25rem 0.85rem;
+    border-radius: 14px;
+  }
+  .step-card h4 { font-size: 1rem; }
+  .step-card p  { font-size: 0.88rem; }
+}
+
+/* ── comparison-table: tighter wrapper radius on mobile ── */
+@media (max-width: 768px) {
+  .comparison-table {
+    border-radius: 18px;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .comparison-table table {
+    min-width: 380px;
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* ── contact-grid: reduce card padding on 360px ── */
+@media (max-width: 360px) {
+  .contact-card {
+    padding: 1.25rem 0.85rem;
+    border-radius: 16px;
+  }
+  .contact-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .contact-card h3 { font-size: 1.2rem; }
+  .contact-card .phone { font-size: 1.1rem; }
+}
+
+/* ── cta-section: border-radius on small screens ── */
+@media (max-width: 768px) {
+  .cta-section {
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-section {
+    padding: 2rem 1rem;
+    border-radius: 16px;
+  }
+  .cta-section h2 { font-size: 1.4rem; }
+  .cta-section p  { font-size: 0.9rem; }
+}
+
+/* ── initiatives-banner: 360px ── */
+@media (max-width: 360px) {
+  .initiatives-banner {
+    padding: 1.25rem 0.85rem;
+    border-radius: 14px;
+  }
+  .initiatives-banner h3 { font-size: 1.2rem; }
+  .initiative-item {
+    padding: 1.1rem 0.9rem;
+    border-radius: 12px;
+  }
+  .initiative-item strong { font-size: 0.98rem; }
+  .initiative-item p { font-size: 0.85rem; }
+}
+
+/* ── map-section: padding & radius on mobile ── */
+@media (max-width: 768px) {
+  .map-section {
+    padding: 1.75rem 1.5rem;
+    border-radius: 18px;
+    margin: 2rem 0;
+  }
+  .map-section h3 { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+  .map-section {
+    padding: 1.25rem 1rem;
+    border-radius: 14px;
+  }
+  .map-section h3 { font-size: 1.25rem; }
+}
+
+/* ── district-list: spacing on mobile ── */
+@media (max-width: 768px) {
+  .district-list {
+    margin: 2rem 0;
+  }
+  .district-card {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .district-card {
+    padding: 1rem 0.85rem;
+    border-radius: 12px;
+  }
+  .district-card h4   { font-size: 1.05rem; }
+  .district-card li   { font-size: 0.85rem; padding-left: 1.2rem; }
+  .district-list h3   { font-size: 1.2rem; }
+}
+
+/* ── btn-primary / btn-secondary: prevent overflow on small screens ── */
+@media (max-width: 600px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ── .btn (CTA section buttons): full-width on 360px ── */
+@media (max-width: 360px) {
+  .btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.88rem;
+  }
+}
+
+/* ── Touch: boost tap targets for filter & kp buttons ── */
+@media (hover: none) and (pointer: coarse) {
+  .kp-filter       { min-height: 44px; }
+  .kp-btn          { min-height: 48px; padding-top: 0.9rem; padding-bottom: 0.9rem; }
+  .btn-primary,
+  .btn-secondary   { min-height: 48px; }
+  .btn             { min-height: 44px; }
+  /* Disable hover-only transforms — keeps animations running */
+  .kp-card:hover         { transform: none; box-shadow: var(--shadow); }
+  .step-card:hover       { transform: none; box-shadow: none; }
+  .contact-card:hover    { transform: none; box-shadow: var(--shadow); }
+  .initiative-item:hover { transform: none; box-shadow: var(--shadow); }
+  .district-card:hover   { transform: none; box-shadow: var(--shadow); border-left-color: var(--primary-light); }
+  .floating-icon:hover   { box-shadow: 0 10px 30px rgba(236,64,122,0.22); }
+  .stat-item:hover       { transform: none; }
+}
+
+/* ── Prevent horizontal overflow globally ── */
+.hero,
+.key-programs-quest,
+.process-section,
+.comparison-section,
+.cta-section,
+.map-section,
+.initiatives-banner {
+  overflow: hidden;
+}
+
+/* ── hero-constellation-bg: ensure it doesn't bleed ── */
+.hero-constellation-bg {
+  border-radius: inherit;
+}
+
+/* ── Floating icons: visual-container clips icons that escape their bounds ──
+   Orbit keyframes are scaled down in mobile media queries (≤900px, ≤480px).
+   overflow:hidden prevents any overflow on small containers. ── */
+.visual-container {
+  overflow: hidden;
+}
+
+/* ── kp-benefits text: wrap gracefully ── */
+@media (max-width: 480px) {
+  .kp-benefits li span {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .kp-benefits i {
+    font-size: 1rem;
+    margin-top: 0.1rem;
+  }
+}
+
+/* ── Section title at 768px mid-range (clamp already covers most cases) ── */
+@media (max-width: 768px) {
+  .section-title-prominent {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
+}
+
+/* ── Map iframe: also constrain at 360px ── */
+@media (max-width: 360px) {
+  .map-container iframe {
+    height: 220px;
+  }
+}
+
+/* ================================================================
+   SUB-450PX COMPREHENSIVE FIXES
+   Dedicated pass for every component at 450px and below.
+   Ordered from widest (450px) down to narrowest (320px).
+   ================================================================ */
+
+/* ── CRITICAL: Override inline style="padding:5rem 0" on contact section ──
+   Inline styles cannot be overridden by normal CSS; !important wins. */
+@media (max-width: 768px) {
+  .section[style*="padding"] {
+    padding-top:   3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+@media (max-width: 600px) {
+  .section[style*="padding"] {
+    padding-top:   2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+@media (max-width: 450px) {
+  .section[style*="padding"] {
+    padding-top:   1.75rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+}
+
+/* ── page-shell: tighter side padding below 400px ── */
+@media (max-width: 400px) {
+  .page-shell { padding: 0 0.75rem; }
+}
+
+/* ── Hero section ── */
+@media (max-width: 450px) {
+  .hero {
+    padding: 1.75rem 1rem 1.5rem;
+    border-radius: 14px;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .hero-content { padding-left: 0; }
+}
+
+/* ── Hero badge ── */
+@media (max-width: 450px) {
+  .hero-badge {
+    padding: 0.5rem 1rem;
+    gap: 0.45rem;
+    margin-bottom: 1.1rem;
+  }
+  .badge-icon  { font-size: 1.2rem; }
+  .badge-text  { font-size: 0.83rem; }
+}
+@media (max-width: 390px) {
+  .hero-badge {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    padding: 0.45rem 0.8rem;
+    gap: 0.3rem;
+  }
+  .badge-text { font-size: 0.78rem; }
+}
+
+/* ── Hero title & subtitle ── */
+@media (max-width: 450px) {
+  .hero-title-3d  { font-size: 1.6rem;  line-height: 1.1; }
+  .hero-subtitle  { font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.25rem; }
+}
+@media (max-width: 390px) {
+  .hero-title-3d { font-size: 1.45rem; }
+}
+
+/* ── Hero stats: tighten at 420px to prevent label overflow in 3-col layout ── */
+@media (max-width: 420px) {
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+  }
+  .stat-item {
+    padding: 0.6rem 0.2rem;
+    border-radius: 12px;
+  }
+  .stat-number { font-size: 1.15rem; }
+  .stat-label  { font-size: 0.62rem; line-height: 1.25; }
+}
+/* Below 390px: switch to 2-column stats (last item spans full width) */
+@media (max-width: 390px) {
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+  }
+  .hero-stats .stat-item:last-child { grid-column: 1 / -1; }
+  .stat-number { font-size: 1.3rem; }
+  .stat-label  { font-size: 0.7rem; }
+  .stat-item   { padding: 0.65rem 0.5rem; }
+}
+
+/* ── Hero CTA buttons ── */
+@media (max-width: 450px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.8rem 1.25rem;
+    font-size: 0.88rem;
+  }
+}
+@media (max-width: 390px) {
+  .hero-cta-row  { flex-direction: column; align-items: center; }
+  .btn-primary,
+  .btn-secondary { width: 100%; max-width: 260px; }
+}
+
+/* ── Hero visual (3D animation) ── */
+@media (max-width: 450px) {
+  .hero-visual-3d { height: 245px; }
+  .floating-icon {
+    padding: 0.55rem 0.7rem;
+    border-radius: 11px;
+    box-shadow: 0 5px 15px rgba(236,64,122,0.18);
+  }
+  .floating-icon-emoji { font-size: 1.15rem; }
+  .floating-icon-label { font-size: 0.56rem; }
+  /* Orbit translations: proportionally scaled for 245px container */
+  @keyframes orbit1 {
+    0%,100% { transform: translate(-70px,-6px); }
+    25%      { transform: translate(-75px,-12px); }
+    50%      { transform: translate(-70px,-6px); }
+    75%      { transform: translate(-65px,0px); }
+  }
+  @keyframes orbit2 {
+    0%,100% { transform: translate(-48px,-60px); }
+    25%      { transform: translate(-53px,-65px); }
+    50%      { transform: translate(-48px,-60px); }
+    75%      { transform: translate(-43px,-55px); }
+  }
+  @keyframes orbit3 {
+    0%,100% { transform: translate(48px,-60px); }
+    25%      { transform: translate(53px,-65px); }
+    50%      { transform: translate(48px,-60px); }
+    75%      { transform: translate(43px,-55px); }
+  }
+  @keyframes orbit4 {
+    0%,100% { transform: translate(70px,-6px); }
+    25%      { transform: translate(75px,0px); }
+    50%      { transform: translate(70px,-6px); }
+    75%      { transform: translate(65px,-12px); }
+  }
+  @keyframes orbit5 {
+    0%,100% { transform: translate(0px,70px); }
+    25%      { transform: translate(4px,75px); }
+    50%      { transform: translate(0px,70px); }
+    75%      { transform: translate(-4px,65px); }
+  }
+}
+
+/* ── Section headings & badges ── */
+@media (max-width: 450px) {
+  .section-title-prominent   { font-size: clamp(1.45rem, 4.5vw, 1.85rem); }
+  .section-subtitle-prominent { font-size: 0.85rem; line-height: 1.6; }
+  .header-badge-prominent {
+    padding: 0.4rem 0.8rem;
+    gap: 0.45rem;
+    font-size: 0.76rem;
+  }
+  .badge-text { font-size: 0.76rem; }
+  .section-header { margin: 0.25rem 0 1.4rem; }
+}
+
+/* ── kp-hud ── */
+@media (max-width: 450px) {
+  .kp-hud { gap: 0.5rem; margin-top: 1.25rem; }
+  .kp-hud__item {
+    padding: 0.6rem 0.85rem;
+    gap: 0.5rem;
+    border-radius: 40px;
+  }
+  .kp-hud__icon {
+    width: 32px; height: 32px; font-size: 0.95rem;
+  }
+  .kp-hud__txt strong { font-size: 0.72rem; }
+  .kp-hud__txt span   { font-size: 0.88rem; }
+}
+
+/* ── kp-filters ── */
+@media (max-width: 450px) {
+  .kp-filters { gap: 0.38rem; margin: 1.25rem 0; }
+  .kp-filter {
+    padding: 0.48rem 0.85rem;
+    font-size: 0.78rem;
+    gap: 0.3rem;
+  }
+}
+
+/* ── kp-grid & cards ── */
+@media (max-width: 450px) {
+  .kp-grid { gap: 1rem; margin-top: 1.5rem; }
+  .kp-card {
+    padding: 1.25rem 0.95rem;
+    border-radius: 20px;
+  }
+  .kp-card h3   { font-size: 1.15rem; margin-bottom: 0.75rem; }
+  .kp-badge     { font-size: 0.78rem; padding: 0.3rem 0.8rem; margin-bottom: 0.75rem; }
+  .kp-emblem    { width: 68px; height: 68px; margin-bottom: 1.1rem; }
+  .kp-emblem__orb { font-size: 1.7rem; }
+  .kp-benefits  { margin: 1rem 0; }
+  .kp-benefits li { padding: 0.55rem 0; gap: 0.7rem; font-size: 0.86rem; }
+  .kp-benefits i  { font-size: 0.95rem; }
+  .kp-actions   { gap: 0.5rem; margin-top: 1.1rem; }
+  .kp-btn       { padding: 0.7rem; font-size: 0.86rem; border-radius: 40px; }
+}
+
+/* ── Process section ── */
+@media (max-width: 450px) {
+  .process-section { padding: 1.75rem 0; margin: 1.25rem 0; border-radius: 16px; }
+  .process-steps   { gap: 0.9rem; margin-top: 1.25rem; }
+  .step-card       { padding: 1.3rem 0.9rem; border-radius: 14px; }
+  .step-number     { width: 46px; height: 46px; font-size: 1.4rem; margin-bottom: 1rem; }
+  .step-card h4    { font-size: 1rem; margin-bottom: 0.6rem; }
+  .step-card p     { font-size: 0.85rem; }
+}
+
+/* ── Comparison table ── */
+@media (max-width: 450px) {
+  .comparison-section { margin: 1.5rem 0; }
+  .comparison-table   { padding: 1rem 0.4rem; border-radius: 14px; margin-top: 1rem; }
+  .comparison-table table { min-width: 400px; }
+  .comparison-table th,
+  .comparison-table td    { padding: 0.55rem 0.4rem; font-size: 0.74rem; }
+  .comparison-table th    { font-size: 0.76rem; }
+}
+
+/* ── Contact cards ── */
+@media (max-width: 450px) {
+  .contact-grid { gap: 0.85rem; margin-top: 1.5rem; }
+  .contact-card { padding: 1.35rem 0.9rem; border-radius: 16px; }
+  .contact-icon {
+    width: 58px; height: 58px;
+    font-size: 1.5rem;
+    margin-bottom: 1.1rem;
+  }
+  .contact-card h3     { font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .contact-card .phone { font-size: 1.1rem; margin: 0.6rem 0; }
+  .contact-card p      { font-size: 0.85rem; }
+}
+
+/* ── CTA section ── */
+@media (max-width: 450px) {
+  .cta-section   { padding: 2.1rem 1rem; border-radius: 18px; margin: 1.5rem 0; }
+  .cta-section h2 { font-size: 1.45rem; }
+  .cta-section p  { font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .cta-buttons    { gap: 0.65rem; }
+  .cta-buttons .btn { width: 100%; max-width: 250px; padding: 0.72rem 1.2rem; font-size: 0.88rem; }
+}
+
+/* ── Initiatives banner ── */
+@media (max-width: 450px) {
+  .initiatives-banner {
+    padding: 1.25rem 0.9rem;
+    border-radius: 14px;
+    margin: 1.25rem 0;
+  }
+  .initiatives-banner h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+  .initiatives-grid      { gap: 0.85rem; margin-top: 1rem; }
+  .initiative-item       { padding: 1.05rem 0.9rem; border-radius: 12px; }
+  .initiative-item strong { font-size: 0.98rem; }
+  .initiative-item p      { font-size: 0.83rem; }
+}
+
+/* ── Map section ── */
+@media (max-width: 450px) {
+  .map-section   { padding: 1.1rem 0.9rem; border-radius: 12px; margin: 1.25rem 0; }
+  .map-section h3 { font-size: 1.1rem; }
+  .map-section p  { font-size: 0.83rem; }
+  .map-container iframe { height: 240px; }
+}
+
+/* ── District list ── */
+@media (max-width: 450px) {
+  .district-list   { margin: 1.5rem 0; }
+  .district-list h3 { font-size: 1.2rem; }
+  .district-card   { padding: 1.05rem 0.9rem; border-radius: 12px; margin-bottom: 0.8rem; }
+  .district-card h4 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+  .district-card li { font-size: 0.83rem; padding: 0.35rem 0; padding-left: 1.25rem; }
+}
+
+/* ── Mobile menu ── */
+@media (max-width: 450px) {
+  .mobile-menu  { padding: 1rem 0.9rem; }
+  .mm-link      { padding: 0.75rem 0.85rem; font-size: 0.92rem; gap: 0.6rem; }
+  .mm-section   { font-size: 0.66rem; padding: 0.5rem 0.85rem 0.2rem; }
+}
+
+/* ── Footer ── */
+@media (max-width: 450px) {
+  .footer-main        { padding: 28px 14px 24px; gap: 20px; }
+  .footer-col h3      { font-size: 0.95rem; margin-bottom: 12px; }
+  .footer-col p,
+  .footer-col ul li   { font-size: 0.8rem; }
+  .footer-meta        { padding: 14px; }
+  .footer-meta .meta-line { font-size: 0.72rem; }
+  .footer-meta .tagline   { font-size: 0.75rem; }
+  .footer-bottom-inner    { padding: 12px 14px; }
+  .footer-links           { gap: 12px; }
+  .footer-links a         { font-size: 0.75rem; }
+  .footer-copy            { font-size: 0.7rem; }
+}
+
+/* ── 320px extreme narrow: last resort compression ── */
+@media (max-width: 320px) {
+  .page-shell    { padding: 0 0.6rem; }
+  .hero          { padding: 1.5rem 0.75rem 1.25rem; }
+  .hero-title-3d { font-size: 1.3rem; }
+  .section-title-prominent { font-size: 1.3rem; }
+  .hero-visual-3d { height: 200px; }
+  .floating-icon { padding: 0.4rem 0.55rem; }
+  .floating-icon-emoji { font-size: 1rem; }
+  .floating-icon-label { font-size: 0.5rem; }
+  @keyframes orbit1 {
+    0%,100% { transform: translate(-55px,-5px); }
+    25%      { transform: translate(-59px,-9px); }
+    50%      { transform: translate(-55px,-5px); }
+    75%      { transform: translate(-51px,-1px); }
+  }
+  @keyframes orbit2 {
+    0%,100% { transform: translate(-38px,-48px); }
+    25%      { transform: translate(-42px,-52px); }
+    50%      { transform: translate(-38px,-48px); }
+    75%      { transform: translate(-34px,-44px); }
+  }
+  @keyframes orbit3 {
+    0%,100% { transform: translate(38px,-48px); }
+    25%      { transform: translate(42px,-52px); }
+    50%      { transform: translate(38px,-48px); }
+    75%      { transform: translate(34px,-44px); }
+  }
+  @keyframes orbit4 {
+    0%,100% { transform: translate(55px,-5px); }
+    25%      { transform: translate(59px,-1px); }
+    50%      { transform: translate(55px,-5px); }
+    75%      { transform: translate(51px,-9px); }
+  }
+  @keyframes orbit5 {
+    0%,100% { transform: translate(0px,55px); }
+    25%      { transform: translate(3px,59px); }
+    50%      { transform: translate(0px,55px); }
+    75%      { transform: translate(-3px,51px); }
+  }
+  .kp-card h3     { font-size: 1.05rem; }
+  .kp-card        { padding: 1rem 0.8rem; }
+  .kp-btn         { font-size: 0.8rem; }
+  .step-card      { padding: 1.1rem 0.75rem; }
+  .cta-section h2 { font-size: 1.25rem; }
+  .contact-card   { padding: 1.1rem 0.75rem; }
+  .footer-main    { padding: 24px 12px 20px; }
+}
+</style>
+
+<!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <circle cx="12" cy="5.5" r="2.8"/>
+            <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+            <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+            <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+            <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+            <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <a href="index.html">Nari Swasthya</a>
+          <span>Women's Complete Health</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+
+        <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+        <!-- Services dropdown (active) -->
+        <div class="nav-item">
+          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
+            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
+            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
+            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
+            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
+            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+
+        <!-- Additional Info dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
+            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <!-- NCD with flyout sub-items — first item -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
+            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
+            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right: Sign In + Contact Us -->
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="login.html">Sign In</a>
+        <a class="btn-nav primary" href="contact.html">Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+<!-- Mobile Menu -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
+    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <div class="mm-section">Specialised Care</div>
+    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;">Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;">Contact Us</a>
+    </div>
+  </div>
+
+
+
+<div class="page-shell">
+  <section class="hero" id="top">
+    <div class="hero-constellation-bg" aria-hidden="true">
+      <canvas id="particleCanvas"></canvas>
+      <div class="gradient-morph"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-icon">🏛️</span>
+        <span class="badge-text">Your Complete Benefits Guide</span>
+      </div>
+
+      <h1 class="hero-title-3d">
+        Access <span class="title-emphasis">Government Health Schemes</span> for Women's Care
+      </h1>
+
+      <p class="hero-subtitle">
+        Discover public programs, benefits, and financial assistance designed to support your health journey. 
+        Learn about free or low-cost services, cash benefits, and comprehensive coverage that's available to you.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">40+</span>
+          <span class="stat-label">Active Programs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">₹5000+</span>
+          <span class="stat-label">Cash Benefits</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Free Coverage</span>
+        </div>
+      </div>
+
+      <div class="hero-cta-row">
+        <button class="btn-primary" type="button">Check Eligibility</button>
+        <button class="btn-secondary" type="button">Find Nearby Center</button>
+      </div>
+    </div>
+
+    <div class="hero-visual-3d">
+      <div class="visual-container">
+        <canvas id="schemeVisualization"></canvas>
+        
+        <div class="floating-icon icon-1">
+          <div class="floating-icon-emoji">💰</div>
+          <div class="floating-icon-label">Cash Benefits</div>
+        </div>
+        <div class="floating-icon icon-2">
+          <div class="floating-icon-emoji">🏥</div>
+          <div class="floating-icon-label">Healthcare</div>
+        </div>
+        <div class="floating-icon icon-3">
+          <div class="floating-icon-emoji">👶</div>
+          <div class="floating-icon-label">Maternity</div>
+        </div>
+        <div class="floating-icon icon-4">
+          <div class="floating-icon-emoji">🛡️</div>
+          <div class="floating-icon-label">Insurance</div>
+        </div>
+        <div class="floating-icon icon-5">
+          <div class="floating-icon-emoji">💉</div>
+          <div class="floating-icon-label">Vaccines</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="key-programs-quest" id="key-programs">
+    <div class="section-header">
+      <div class="header-badge-prominent">
+        <span class="badge-pulse"></span>
+        <span class="badge-text">Benefits Unlocked</span>
+      </div>
+      <h2 class="section-title-prominent">
+        Navigate Your <span class="title-highlight">Government Benefits</span>
+      </h2>
+      <p class="section-subtitle-prominent">
+        Not a static list—this is a <strong>guided "benefit quest"</strong>. Tap a program to unlock
+        coverage, who qualifies, what to bring, and next steps—fast, clear, and memorable.
+      </p>
+    </div>
+
+    <div class="kp-hud reveal">
+      <div class="kp-hud__item">
+        <div class="kp-hud__icon"><i class="fa-solid fa-trophy"></i></div>
+        <div class="kp-hud__txt"><strong>Quest</strong><span>Complete all</span></div>
+      </div>
+      <div class="kp-hud__item">
+        <div class="kp-hud__icon"><i class="fa-solid fa-gem"></i></div>
+        <div class="kp-hud__txt"><strong>Saved</strong><span id="kpSavedCount">0</span></div>
+      </div>
+      <div class="kp-hud__item">
+        <div class="kp-hud__icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="kp-hud__txt"><strong>Unlocked</strong><span id="kpUnlockedCount">0/32</span></div>
+      </div>
+    </div>
+
+    <div class="kp-filters reveal">
+      <button class="kp-filter active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All</button>
+      <button class="kp-filter" data-filter="pregnancy"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</button>
+      <button class="kp-filter" data-filter="kids"><i class="fa-solid fa-children"></i> Kids</button>
+      <button class="kp-filter" data-filter="family"><i class="fa-solid fa-people-roof"></i> Family</button>
+      <button class="kp-filter" data-filter="preventive"><i class="fa-solid fa-stethoscope"></i> Preventive</button>
+    </div>
+
+    <div class="kp-grid" id="kpGrid">
+      <article class="kp-card reveal" data-tags="pregnancy delivery cash">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-hospital-user"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Janani Suraksha Yojana (JSY)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Cash assistance for institutional delivery. Promotes safe childbirth and reduces maternal mortality.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>₹1,400 cash for urban delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>₹1,600 cash for rural delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free institutional delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Transport allowance provided</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Apply Now</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy cash nutrition">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Pradhan Mantri Matru Vandana Yojana (PMMVY)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Direct cash transfer for pregnant and lactating mothers for improved nutrition and health.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>₹5,000 in three installments</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>For first living child only</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Nutrition support during pregnancy</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Direct bank transfer</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Apply Now</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family health insurance">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Ayushman Bharat - PM-JAY</h3>
+        <span class="kp-badge"><i class="fa-solid fa-people-roof"></i> Family</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          World's largest health insurance scheme providing coverage up to ₹5 lakh per family per year.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>₹5 lakh coverage per family/year</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>1,400+ procedures covered</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Cashless hospitalization</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Pre and post-hospitalization</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Check Eligibility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="preventive maternal child">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-stethoscope"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>National Health Mission (NHM)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Comprehensive health services including maternal, child health, and disease control programs.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free antenatal care services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Immunization programs</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Family planning services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Disease prevention programs</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Find Center</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy kids delivery">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-children"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Janani Shishu Suraksha Karyakram (JSSK)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Free delivery and care for pregnant women and sick newborns up to one year.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free delivery in public facilities</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free cesarean section</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free medicines and diagnostics</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Sick newborn care up to 1 year</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Find Hospital</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids immunization preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-syringe"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Mission Indradhanush</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Immunization program ensuring full vaccination coverage for all children and pregnant women.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>12 vaccine-preventable diseases</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free immunization services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Regular vaccination drives</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Track vaccination schedule</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Vaccination Schedule</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy nutrition cash">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-apple-whole"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>POSHAN Abhiyaan</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Flagship program to reduce malnutrition, anemia, low birth weight and stunting among pregnant women, lactating mothers and children under 6 years.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Growth monitoring for children under 6 years</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Nutrition counseling for pregnant and lactating women</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Supplementary nutrition through Anganwadi centres</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Community-based events on diet and breastfeeding</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Locate Anganwadi</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids early-childhood nutrition">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-child-reaching"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Integrated Child Development Services (ICDS)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Early childhood care, nutrition and pre-school education for children under 6 and health services for pregnant and lactating women.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Supplementary nutrition for children 0–6 years</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Pre-school education for 3–6 years</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Health check-ups and referral services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Nutrition and health education for mothers</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Learn More</button>
+          <button class="kp-btn kp-btn--outline">Find Anganwadi</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy delivery surgery insurance">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-notes-medical"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>LaQshya – Labour Room Quality Improvement</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Quality improvement initiative to ensure respectful, safe and complication-free care during childbirth in public facilities.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Upgraded labour rooms and maternity OTs</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Standard protocols for normal and high-risk delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Timely referral for obstetric emergencies</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Respectful maternity care standards</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Quality Standards</button>
+          <button class="kp-btn kp-btn--outline">Find LaQshya Facility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy high-risk surgery">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-truck-medical"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Maternal Health – Emergency Obstetric Care (EmOC)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Network of First Referral Units and higher centres to handle high-risk pregnancies and emergency obstetric surgeries.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>24×7 Caesarean and obstetric surgery services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Blood transfusion and ICU support where available</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Skilled obstetrician and anesthetist teams</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Referral transport for emergency cases</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Know More</button>
+          <button class="kp-btn kp-btn--outline">Locate FRU</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy newborn preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-baby-carriage"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Maternal and Newborn Health (RMNCAH+N)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Package of antenatal, intrapartum and postnatal services to reduce maternal and newborn deaths and complications.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Recommended ANC check-ups and lab tests</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Skilled birth attendance and safe delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Essential newborn care and breastfeeding support</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Postpartum home visits by frontline workers</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Service Package</button>
+          <button class="kp-btn kp-btn--outline">Find Facility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy anemia preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-droplet"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Anemia Mukt Bharat (AMB)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Intensified strategy to reduce anemia in women of reproductive age, pregnant women, adolescents and young children.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Iron-folic acid supplementation for pregnant women</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Deworming for women and children</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Point-of-care hemoglobin testing at facilities</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Counseling on iron-rich diet and spacing of births</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Check Interventions</button>
+          <button class="kp-btn kp-btn--outline">Find Session</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids newborn intensive-care">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-baby"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>SNCU / NBSU Newborn Care</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Special Newborn Care Units and Newborn Stabilization Units for sick and low-birth-weight babies in public hospitals.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free intensive care for sick newborns</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Support for preterm and low-birth-weight babies</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Specialized neonatal equipment and trained staff</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Linkage with follow-up and early intervention services</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Know More</button>
+          <button class="kp-btn kp-btn--outline">Find SNCU</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids screening disability preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-eye"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Rashtriya Bal Swasthya Karyakram (RBSK)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Child health screening and early intervention to detect birth defects, diseases and developmental delays from 0–18 years.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Screening at schools, Anganwadis and facilities</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free treatment for selected conditions</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Referral to District Early Intervention Centres</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Focus on developmental and learning issues</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Screening Package</button>
+          <button class="kp-btn kp-btn--outline">Find RBSK Team</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids adolescent preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-user-group"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Rashtriya Kishor Swasthya Karyakram (RKSK)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Adolescent health program focusing on nutrition, mental health, menstrual hygiene and reproductive health for girls and boys 10–19 years.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Adolescent-friendly health clinics</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Weekly iron-folic acid supplementation in schools</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Counseling on menstrual hygiene and safe relationships</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Peer educator-led community sessions</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Know Services</button>
+          <button class="kp-btn kp-btn--outline">Find Clinic</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy transport emergency">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-ambulance"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Janani Express / 108 Ambulance Services</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Free ambulance and referral transport for pregnant women, newborns and emergency maternal cases to public health facilities.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>24×7 toll-free emergency number</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Home-to-facility and inter-facility transfers</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Basic life support in transit</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Priority for pregnant women and newborns</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Call Details</button>
+          <button class="kp-btn kp-btn--outline">Check Coverage</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family insurance surgery">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-heart-circle-plus"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Ayushman Bharat – Health and Wellness Centres (AB-HWC)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-people-roof"></i> Family</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Upgraded Sub-Centres and PHCs providing free comprehensive primary care for women, children and families close to home.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Antenatal, postnatal and newborn care</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Screening for NCDs, anemia and mental health</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Family planning and counseling services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Linkage to higher centres for surgery and admissions</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Service List</button>
+          <button class="kp-btn kp-btn--outline">Find HWC</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy newborn nutrition">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-mug-hot"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Mamata / MDM-like Hot Cooked Meal for Pregnant Women</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          State-linked scheme model that provides hot cooked meals or take-home rations to pregnant and lactating women through Anganwadi centres.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>One additional meal during pregnancy and lactation</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Ensures minimum calorie and protein intake</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Often combined with health and nutrition education</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Reduces risk of low birth weight and anemia</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">State Details</button>
+          <button class="kp-btn kp-btn--outline">Find Centre</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids girl-child cash education">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-venus"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Beti Bachao Beti Padhao (BBBP)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          National campaign to improve survival, protection and education of the girl child and correct declining child sex ratio.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Awareness on preventing sex-selective practices</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Support for girl child education initiatives</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Convergence with scholarships and savings schemes</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Community mobilization for protecting girls</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Campaign Info</button>
+          <button class="kp-btn kp-btn--outline">Local Cell</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids girl-child savings">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-piggy-bank"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Sukanya Samriddhi Yojana (SSY)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Long-term savings scheme for parents of a girl child to support future education and marriage expenses with tax benefits.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Account can be opened for girls below 10 years</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Attractive interest rate notified by Government</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Income tax benefits on deposits</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Partial withdrawal for higher education</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Scheme Details</button>
+          <button class="kp-btn kp-btn--outline">Open Account</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family nutrition preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-bowl-food"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Mid-Day Meal / PM POSHAN for School Children</h3>
+        <span class="kp-badge"><i class="fa-solid fa-people-roof"></i> Family</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Nutritious cooked meals in schools to improve child nutrition, learning outcomes and reduce gender gaps in enrolment.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free hot cooked lunch on school days</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Calorie and protein norms by age group</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Special focus on girls and disadvantaged groups</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Platform for deworming and health education</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Menu Norms</button>
+          <button class="kp-btn kp-btn--outline">Check Coverage</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy registration preventive">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-id-card"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Mother and Child Tracking System / RCH Portal</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Digital tracking of pregnant women and children to ensure timely antenatal, delivery and immunization services.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Registration of every pregnancy and newborn</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>SMS reminders for due services</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Better follow-up for high-risk pregnancies</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Improved coverage of vaccines and check-ups</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">See How It Works</button>
+          <button class="kp-btn kp-btn--outline">Update Details</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family insurance surgery chronic">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-hospital"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Central Government Health Scheme (CGHS) – Women & Children</h3>
+        <span class="kp-badge"><i class="fa-solid fa-people-roof"></i> Family</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Comprehensive health care including maternity, gynecological and pediatric services for eligible central government employees and dependents.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>OPD and IPD care in empanelled hospitals</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Coverage for obstetric and gynecological surgeries</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Childhood immunization and specialist pediatric care</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Cashless treatment as per CGHS package rates</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">CGHS Cities</button>
+          <button class="kp-btn kp-btn--outline">Check Eligibility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family surgery rare-diseases insurance">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-ribbon"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>National Policy for Rare Diseases – Financial Support</h3>
+        <span class="kp-badge"><i class="fa-solid fa-people-roof"></i> Family</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Financial assistance for eligible children and adults with specified rare diseases requiring high-cost treatment or surgery.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Support up to a defined ceiling for one-time treatments</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Treatment at designated Centres of Excellence</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Benefit available in addition to other schemes</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Special focus on children from low-income families</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Eligible Diseases</button>
+          <button class="kp-btn kp-btn--outline">Apply Support</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids girl-child cash birth">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-gift"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Ladli / Girl Child Protection Schemes (State Models)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          State-backed conditional cash transfer and savings schemes that encourage birth, survival and education of the girl child.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Lump-sum benefits at key life stages (birth, schooling)</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Incentives linked to immunization and school attendance</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Support for education till secondary or higher</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Higher benefits for girls from vulnerable groups</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">State Variants</button>
+          <button class="kp-btn kp-btn--outline">Check Eligibility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy safe-abortion surgery">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-person-dress-burst"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Safe Abortion and Family Planning Services (under NHM)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Free or subsidized access to safe abortion, contraception and counseling at public facilities as per MTP Act provisions.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Safe procedures by trained providers</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Range of contraceptive choices for women and couples</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Post-abortion care and counseling</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Protection of privacy and confidentiality</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Service Details</button>
+          <button class="kp-btn kp-btn--outline">Find Facility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids disability rehabilitation">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-wheelchair-move"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>Schemes for Children with Disabilities (SAD / DDRC Models)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Financial and rehabilitation support for children with disabilities, including assistive devices, therapy and inclusive education support.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free or subsidized assistive devices</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Physiotherapy, speech therapy and counseling</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Educational support and linkage to scholarships</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Guidance for parents on home-based care</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Support Options</button>
+          <button class="kp-btn kp-btn--outline">Find DDRC</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="family insurance surgery cancer">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-ribbon"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>National Programme for Prevention and Control of Cancer, Diabetes, CVD & Stroke (NPCDCS)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-stethoscope"></i> Preventive</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Screening and early diagnosis of common cancers and NCDs among adults, with focus on women for breast, cervical and oral cancers.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Screening camps at HWCs and CHCs</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Referral for diagnostic tests and biopsies</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Linkage with schemes covering cancer surgery and treatment</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Lifestyle counseling and follow-up care</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Screening Protocols</button>
+          <button class="kp-btn kp-btn--outline">Find Camp</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="pregnancy institutional-delivery cash">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-hands-holding-child"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>State-level Maternity Assistance Schemes (e.g., Dr. Muthulakshmi / KCR / Mamta Models)</h3>
+        <span class="kp-badge"><i class="fa-solid fa-person-pregnant"></i> Pregnancy</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Additional state maternity benefit schemes that top up central benefits for pregnant women opting for institutional delivery and child immunization.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Cash incentives linked to ANC visits and delivery</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Installments tied to child immunization milestones</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Extra support for SC/ST and BPL women</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Often include nutrition kits or baby care kits</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">State-wise Details</button>
+          <button class="kp-btn kp-btn--outline">Check Eligibility</button>
+        </div>
+      </article>
+
+      <article class="kp-card reveal" data-tags="kids orphan care cash">
+        <div class="kp-emblem">
+          <div class="kp-emblem__orb"><i class="fa-solid fa-house-chimney-user"></i></div>
+          <div class="kp-emblem__ring"></div>
+        </div>
+        <h3>PM CARES for Children</h3>
+        <span class="kp-badge"><i class="fa-solid fa-children"></i> Kids</span>
+        <p style="color: var(--text-soft); margin-bottom: 1.5rem;">
+          Support for children who lost both parents or primary caregivers in specified emergencies, covering education, health insurance and livelihood support.
+        </p>
+        <ul class="kp-benefits">
+          <li><i class="fa-solid fa-circle-check"></i> <span>Free education and scholarship support</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Health insurance cover up to a defined limit</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Monthly stipend after 18 years</span></li>
+          <li><i class="fa-solid fa-circle-check"></i> <span>Lump-sum amount at 23 years for higher education or self-employment</span></li>
+        </ul>
+        <div class="kp-actions">
+          <button class="kp-btn kp-btn--primary">Scheme Portal</button>
+          <button class="kp-btn kp-btn--outline">Check Eligibility</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- West Bengal Government Healthcare Initiatives Section -->
+  <section id="government" class="section">
+    <div id="government-en" style="display: block;">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">West Bengal Programs</span>
+        </div>
+        <h2 class="section-title-prominent">
+          <span class="title-highlight">Government Healthcare Initiatives</span> in West Bengal
+        </h2>
+      </div>
+      
+      <!-- Key Initiatives Overview -->
+      <div class="initiatives-banner">
+        <h3>🎯 Key Women's Health Programs</h3>
+        <div class="initiatives-grid">
+          <div class="initiative-item">
+            <strong>Swasthya Sathi Scheme</strong>
+            <p>Health cover up to ₹5 lakh per annum for secondary and tertiary care</p>
+          </div>
+          <div class="initiative-item">
+            <strong>Kanyashree Prakalpa</strong>
+            <p>Conditional cash transfers for girls' education and delaying marriage</p>
+          </div>
+          <div class="initiative-item">
+            <strong>AYUSH Suswasthya Kendra</strong>
+            <p>Health and Wellness Centres across West Bengal</p>
+          </div>
+          <div class="initiative-item">
+            <strong>Triple Elimination Program</strong>
+            <p>Eliminating mother-to-child transmission of HIV, Syphilis, and Hepatitis B</p>
+          </div>
+          <div class="initiative-item">
+            <strong>Mahila Samridhi Yojana (MSY)</strong>
+            <p>Financial assistance for SC women entrepreneurs (Bankura)</p>
+          </div>
+          <div class="initiative-item">
+            <strong>Rupashree Prakalpa</strong>
+            <p>₹25,000 grant for marriages of girls from financially backward families</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Map Section -->
+      <div class="map-section">
+        <h3 style="margin-bottom: 1rem;">📍 Healthcare Drives & Centers in West Bengal Districts</h3>
+        <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
+          <strong>Districts Highlighted:</strong> Murshidabad, Bankura, Birbhum, Asansol (Paschim Bardhaman), Purulia, Bardhaman (Purba Bardhaman)
+        </p>
+        
+        <!-- Google My Maps Embed -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/d/embed?mid=10LcqEx9WHKcxQhEku84mG6lJoVGvE-Q" 
+            width="100%" 
+            height="600" 
+            style="border:0; border-radius: var(--radius-lg);" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- District-wise Healthcare Centers -->
+      <div class="district-list">
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">🏥 Key Healthcare Centers by District</h3>
+        
+        <div class="district-card">
+          <h4>📍 Murshidabad</h4>
+          <ul>
+            <li><strong>Murshidabad Medical College & Hospital</strong> - Berhampore</li>
+            <li>District Women & Child Health Centre - Berhampore</li>
+            <li>Community Health Centres in Kandi, Lalgola, Domkal</li>
+          </ul>
+        </div>
+
+        <div class="district-card">
+          <h4>📍 Bankura</h4>
+          <ul>
+            <li><strong>Bankura Sammilani Medical College</strong> - Bankura</li>
+            <li>Mahila Samridhi Yojana (MSY) Centers</li>
+            <li>AYUSH Suswasthya Kendras across blocks</li>
+          </ul>
+        </div>
+
+        <div class="district-card">
+          <h4>📍 Birbhum</h4>
+          <ul>
+            <li><strong>Rampurhat Government Medical College</strong> - Rampurhat</li>
+            <li>Swasthya Sathi empanelled hospitals</li>
+            <li>Community Health Centres in Bolpur, Suri</li>
+          </ul>
+        </div>
+
+        <div class="district-card">
+          <h4>📍 Asansol (Paschim Bardhaman)</h4>
+          <ul>
+            <li><strong>Asansol District Hospital</strong> - Asansol</li>
+            <li>Durgapur Sub-Divisional Hospital</li>
+            <li>Women's health camps & screening drives</li>
+          </ul>
+        </div>
+
+        <div class="district-card">
+          <h4>📍 Purulia</h4>
+          <ul>
+            <li><strong>Purulia Government Medical College</strong> - Purulia</li>
+            <li>Muktidhara initiative for tribal women</li>
+            <li>Mobile health vans for rural areas</li>
+          </ul>
+        </div>
+
+        <div class="district-card">
+          <h4>📍 Bardhaman (Purba Bardhaman)</h4>
+          <ul>
+            <li><strong>Burdwan Medical College & Hospital</strong> - Bardhaman</li>
+            <li>Maternal health services under Swasthya Ingit</li>
+            <li>District health centres in Katwa, Kalna</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process-section">
+    <div class="section-header">
+      <div class="header-badge-prominent">
+        <span class="badge-pulse"></span>
+        <span class="badge-text">Application Guide</span>
+      </div>
+      <h2 class="section-title-prominent">
+        Simple Steps to <span class="title-highlight">Access Benefits</span>
+      </h2>
+      <p class="section-subtitle-prominent">
+        Follow these easy steps to apply for government health schemes and start receiving benefits
+      </p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step-card reveal">
+        <div class="step-number">1</div>
+        <h4>Verify Eligibility</h4>
+        <p>Check if you meet the income and residency requirements for the program</p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-number">2</div>
+        <h4>Gather Documents</h4>
+        <p>Collect Aadhaar card, income proof, residence proof, and pregnancy documents</p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-number">3</div>
+        <h4>Visit Health Center</h4>
+        <p>Go to your nearest government hospital or health center with documents</p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-number">4</div>
+        <h4>Submit Application</h4>
+        <p>Fill out forms and submit with required documents to the designated officer</p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-number">5</div>
+        <h4>Receive Confirmation</h4>
+        <p>Get acknowledgment receipt and wait for verification and approval</p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-number">6</div>
+        <h4>Access Benefits</h4>
+        <p>Once approved, benefits will be transferred directly to your bank account</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section comparison-section">
+    <div class="section-header">
+      <div class="header-badge-prominent">
+        <span class="badge-pulse"></span>
+        <span class="badge-text">Compare & Choose</span>
+      </div>
+      <h2 class="section-title-prominent">
+        <span class="title-highlight">Coverage Comparison</span>
+      </h2>
+      <p class="section-subtitle-prominent">
+        Compare benefits across different government programs to find the best fit for you
+      </p>
+    </div>
+
+    <div class="comparison-table reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>JSY</th>
+            <th>PMMVY</th>
+            <th>PM-JAY</th>
+            <th>JSSK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Prenatal Care</strong></td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Nutrition Support</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Free Services</td>
+          </tr>
+          <tr>
+            <td><strong>Delivery</strong></td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Cash Incentive</td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Free Delivery</td>
+          </tr>
+          <tr>
+            <td><strong>Postnatal Care</strong></td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Basic</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Cash Support</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Free Services</td>
+          </tr>
+          <tr>
+            <td><strong>Newborn Care</strong></td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Full Coverage</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Up to 1 Year</td>
+          </tr>
+          <tr>
+            <td><strong>Immunization</strong></td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Free Vaccines</td>
+          </tr>
+          <tr>
+            <td><strong>Transport</strong></td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Allowance</td>
+            <td><i class="fa-solid fa-circle-xmark" style="color: #e74c3c;"></i> Not Covered</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Ambulance</td>
+            <td><i class="fa-solid fa-circle-check" style="color: #27ae60;"></i> Free Transport</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="contact-section" style="background: white; padding: 5rem 0;">
+    <div class="section-header">
+      <div class="header-badge-prominent">
+        <span class="badge-pulse"></span>
+        <span class="badge-text">Get Help</span>
+      </div>
+      <h2 class="section-title-prominent">
+        <span class="title-highlight">Important Contacts</span> & Resources
+      </h2>
+      <p class="section-subtitle-prominent">
+        Get help applying for benefits and finding services near you
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-icon"><i class="fa-solid fa-headset"></i></div>
+        <h3>National Helpline</h3>
+        <p class="phone">1800-180-1104</p>
+        <p style="color: var(--text-soft);">Monday-Friday: 8am-8pm IST</p>
+      </div>
+
+      <div class="contact-card reveal">
+        <div class="contact-icon"><i class="fa-solid fa-hospital"></i></div>
+        <h3>Find Health Center</h3>
+        <p class="phone">nhm.gov.in</p>
+        <p style="color: var(--text-soft);">Locate nearby government health facilities</p>
+      </div>
+
+      <div class="contact-card reveal">
+        <div class="contact-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+        <h3>State Helpline (WB)</h3>
+        <p class="phone">1800-313-444-555</p>
+        <p style="color: var(--text-soft);">West Bengal health schemes assistance</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section reveal">
+    <h2>Start Your Benefit Journey Today</h2>
+    <p>Access comprehensive healthcare support through government programs designed for you</p>
+    <div class="cta-buttons">
+      <button class="btn btn-white">Check Eligibility</button>
+      <button class="btn btn-outline" style="color: white; border-color: white;">Find Nearby Center</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function initEnhancedParticles() {
+  const particleCanvas = document.getElementById('particleCanvas');
+  if (!particleCanvas) return;
+  
+  const ctx = particleCanvas.getContext('2d');
+  
+  function resizeCanvas() {
+    particleCanvas.width = particleCanvas.offsetWidth;
+    particleCanvas.height = particleCanvas.offsetHeight;
+  }
+  
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  
+  const particles = [];
+  const particleCount = 100;
+  
+  class Particle {
+    constructor() {
+      this.x = Math.random() * particleCanvas.width;
+      this.y = Math.random() * particleCanvas.height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2 + 1;
+    }
+    
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      
+      if (this.x < 0 || this.x > particleCanvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > particleCanvas.height) this.vy *= -1;
+    }
+    
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+  
+  function connectParticles() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - distance / 100)})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  
+  function animateParticles() {
+    ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+    
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+    });
+    
+    connectParticles();
+    
+    requestAnimationFrame(animateParticles);
+  }
+  
+  animateParticles();
+})();
+
+(function init3DVisualization() {
+  const canvas = document.getElementById('schemeVisualization');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+  
+  function getW() { return canvas.offsetWidth || canvas.parentElement.offsetWidth || 300; }
+  function getH() { return canvas.offsetHeight || canvas.parentElement.offsetHeight || 300; }
+
+  const camera = new THREE.PerspectiveCamera(75, getW() / getH(), 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  
+  renderer.setSize(getW(), getH());
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  const schemes = [];
+  const colors = [0xec407a, 0xd81b60, 0xf48fb1, 0xe91e63, 0xc2185b];
+  
+  for (let i = 0; i < 8; i++) {
+    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
+    const material = new THREE.MeshPhongMaterial({ 
+      color: colors[i % colors.length],
+      shininess: 100,
+      transparent: true,
+      opacity: 0.8
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    
+    const angle = (i / 8) * Math.PI * 2;
+    sphere.position.x = Math.cos(angle) * 2;
+    sphere.position.y = Math.sin(angle) * 2;
+    sphere.position.z = (Math.random() - 0.5) * 1;
+    
+    scene.add(sphere);
+    schemes.push(sphere);
+  }
+
+  const lineMaterial = new THREE.LineBasicMaterial({ 
+    color: 0xec407a,
+    transparent: true,
+    opacity: 0.3
+  });
+
+  for (let i = 0; i < schemes.length; i++) {
+    for (let j = i + 1; j < schemes.length; j++) {
+      const points = [];
+      points.push(schemes[i].position);
+      points.push(schemes[j].position);
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(lineGeometry, lineMaterial);
+      scene.add(line);
+    }
+  }
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0xec407a, 1, 100);
+  pointLight.position.set(5, 5, 5);
+  scene.add(pointLight);
+
+  camera.position.z = 5;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    
+    schemes.forEach((sphere, index) => {
+      sphere.rotation.x += 0.01;
+      sphere.rotation.y += 0.01;
+      sphere.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
+    });
+
+    scene.rotation.y += 0.002;
+    
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = getW() / getH();
+    camera.updateProjectionMatrix();
+    renderer.setSize(getW(), getH());
+  });
+})();
+
+(function initFilters() {
+  const filters = document.querySelectorAll('.kp-filter');
+  const cards = document.querySelectorAll('.kp-card');
+
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      filters.forEach(f => f.classList.remove('active'));
+      filter.classList.add('active');
+
+      const filterValue = filter.dataset.filter;
+
+      cards.forEach(card => {
+        const tags = card.dataset.tags || '';
+        if (filterValue === 'all' || tags.includes(filterValue)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+
+(function initReveal() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach((el, idx) => {
+    el.style.transitionDelay = (idx * 70) + 'ms';
+    io.observe(el);
+  });
+})();
+
+let savedPrograms = [];
+let unlockedPrograms = [];
+
+function updateTrackers() {
+  document.getElementById('kpSavedCount').textContent = savedPrograms.length;
+  document.getElementById('kpUnlockedCount').textContent = `${unlockedPrograms.length}/32`;
+}
+
+document.querySelectorAll('.kp-btn--outline').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const card = this.closest('.kp-card');
+    const programName = card.querySelector('h3').textContent;
+    
+    if (!savedPrograms.includes(programName)) {
+      savedPrograms.push(programName);
+      this.textContent = 'Saved ✓';
+      this.style.background = 'var(--success)';
+      this.style.color = 'white';
+      updateTrackers();
+    }
+  });
+});
+
+document.querySelectorAll('.kp-btn--primary').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const card = this.closest('.kp-card');
+    const programName = card.querySelector('h3').textContent;
+    
+    if (!unlockedPrograms.includes(programName)) {
+      unlockedPrograms.push(programName);
+      updateTrackers();
+      alert(`You've unlocked: ${programName}\n\nDetailed information would be shown in a modal here.`);
+    }
+  });
+});
+</script>
+
+<style>
+  :root {
+    --bg-footer:    #1e1a1e;
+    --bg-bottom:    #161316;
+    --pink-primary: #e8517a;
+    --pink-soft:    #f0748e;
+    --text-main-f:  #c9bfc9;
+    --text-muted-f: #7c7080;
+    --divider-f:    rgba(232,81,122,0.18);
+    --font-display-f:'Playfair Display', Georgia, serif;
+    --font-body-f:  'Manrope', sans-serif;
+  }
+  footer.ns-footer {
+    background: var(--bg-footer);
+    color: var(--text-main-f);
+    font-family: var(--font-body-f);
+    border-top: 1px solid var(--divider-f);
+  }
+  .footer-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .footer-col h3 {
+    font-family: var(--font-display-f);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--pink-primary);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+  }
+  .footer-col p {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--text-main-f);
+    font-weight: 300;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    font-size: 0.875rem;
+    color: var(--text-main-f);
+    padding: 5px 0;
+    font-weight: 300;
+    position: relative;
+    padding-left: 14px;
+    transition: color 0.2s;
+  }
+  .footer-col ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--pink-primary);
+    opacity: 0.5;
+  }
+  .footer-col ul li:hover { color: var(--pink-soft); }
+  .disclaimer-text { font-size: 0.875rem; line-height: 1.75; color: var(--text-main-f); font-weight: 300; }
+  .emergency-alert { font-size: 0.875rem; line-height: 1.7; color: var(--pink-primary); font-weight: 500; }
+  .emergency-alert strong { font-weight: 600; }
+  .footer-meta {
+    border-top: 1px solid var(--divider-f);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    text-align: center;
+  }
+  .footer-meta .meta-line { font-size: 0.8rem; color: var(--text-muted-f); letter-spacing: 0.04em; margin-bottom: 10px; }
+  .footer-meta .meta-line .sep { color: var(--pink-primary); margin: 0 6px; }
+  .footer-meta .tagline { font-size: 0.82rem; color: var(--text-muted-f); display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .footer-meta .tagline .heart { color: var(--pink-primary); font-size: 1rem; animation: footerPulse 2s ease-in-out infinite; }
+  @keyframes footerPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.8; } }
+  .footer-bottom { background: var(--bg-bottom); border-top: 1px solid rgba(255,255,255,0.04); }
+  .footer-bottom-inner { max-width: 1200px; margin: 0 auto; padding: 22px 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { font-size: 0.82rem; color: var(--text-muted-f); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--pink-soft); }
+  .footer-copy { font-size: 0.78rem; color: var(--text-muted-f); opacity: 0.7; letter-spacing: 0.02em; }
+  @media (max-width: 900px) { .footer-main { grid-template-columns: repeat(2,1fr); gap: 32px; } }
+  @media (max-width: 540px) { .footer-main { grid-template-columns: 1fr; padding: 40px 20px 32px; } .footer-meta { padding: 20px; } .footer-bottom-inner { padding: 18px 20px; } .footer-links { gap: 20px; } }
+</style>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+  </script>
+  <script>
+    (function initHeaderSparkle() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      header.addEventListener('mousemove', (e) => {
+        const rect = header.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        header.style.setProperty('--mouse-x', `${x}%`);
+        header.style.setProperty('--mouse-y', `${y}%`);
+      });
+    })();
+  </script>
+</body>
+</html>

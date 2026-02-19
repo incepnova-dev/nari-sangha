@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nari Shakti – Footer Component</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Design Tokens ──────────────────────── */
+    :root {
+      --bg-footer:      #1e1a1e;
+      --bg-bottom:      #161316;
+      --pink-primary:   #e8517a;
+      --pink-soft:      #f0748e;
+      --text-main:      #c9bfc9;
+      --text-muted:     #7c7080;
+      --text-light:     #e4dce4;
+      --divider:        rgba(232, 81, 122, 0.18);
+      --font-display:   'Playfair Display', Georgia, serif;
+      --font-body:      'DM Sans', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #2a242a;   /* simulates a page body above footer */
+    }
+
+    /* ── Spacer so footer isn't at top ─────── */
+    .page-demo {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER COMPONENT
+       ════════════════════════════════════════ */
+    footer.ns-footer {
+      background: var(--bg-footer);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      border-top: 1px solid var(--divider);
+    }
+
+    /* ── Top Section: 4-column grid ─────────── */
+    .footer-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--pink-primary);
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .footer-col p {
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--text-main);
+      font-weight: 300;
+    }
+
+    /* Evidence Sources list */
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      font-size: 0.875rem;
+      color: var(--text-main);
+      padding: 5px 0;
+      font-weight: 300;
+      position: relative;
+      padding-left: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--pink-primary);
+      opacity: 0.5;
+    }
+
+    .footer-col ul li:hover {
+      color: var(--pink-soft);
+    }
+
+    /* Important Disclaimer */
+    .disclaimer-text {
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--text-main);
+      font-weight: 300;
+    }
+
+    /* Emergency */
+    .emergency-alert {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: var(--pink-primary);
+      font-weight: 500;
+    }
+
+    .emergency-alert strong {
+      font-weight: 600;
+    }
+
+    /* ── Mid Divider + Meta ──────────────────── */
+    .footer-meta {
+      border-top: 1px solid var(--divider);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      text-align: center;
+    }
+
+    .footer-meta .meta-line {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .footer-meta .meta-line .sep {
+      color: var(--pink-primary);
+      margin: 0 6px;
+    }
+
+    .footer-meta .tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .footer-meta .tagline .heart {
+      color: var(--pink-primary);
+      font-size: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.25); opacity: 0.8; }
+    }
+
+    /* ── Bottom Bar ─────────────────────────── */
+    .footer-bottom {
+      background: var(--bg-bottom);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .footer-bottom-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 36px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--pink-soft);
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Responsive ─────────────────────────── */
+    @media (max-width: 900px) {
+      .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .footer-main {
+        grid-template-columns: 1fr;
+        padding: 40px 20px 32px;
+      }
+      .footer-meta { padding: 20px; }
+      .footer-bottom-inner { padding: 18px 20px; }
+      .footer-links { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page body placeholder (remove in production) -->
+  <div class="page-demo">↑ Your page content above ↑</div>
+
+  <!-- ════════════════════════════════════════
+       FOOTER — copy everything below this line
+       ════════════════════════════════════════ -->
+  <footer class="ns-footer" aria-label="Site footer">
+
+    <!-- 4-column information grid -->
+    <div class="footer-main">
+
+      <!-- Col 1: About -->
+      <div class="footer-col">
+        <h3>About This Guide</h3>
+        <p>
+          Comprehensive, evidence-based information synthesized from WHO,
+          ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data
+          (724,115+ women).
+        </p>
+      </div>
+
+      <!-- Col 2: Evidence Sources -->
+      <div class="footer-col">
+        <h3>Evidence Sources</h3>
+        <ul>
+          <li>World Health Organization</li>
+          <li>ACOG Guidelines</li>
+          <li>ICMR India</li>
+          <li>NFHS-5 Survey</li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Disclaimer -->
+      <div class="footer-col">
+        <h3>Important Disclaimer</h3>
+        <p class="disclaimer-text">
+          This provides general information only. Each pregnancy is unique.
+          Medical decisions should be made with qualified healthcare providers
+          who can assess your individual circumstances.
+        </p>
+      </div>
+
+      <!-- Col 4: Emergency -->
+      <div class="footer-col">
+        <h3>Emergency</h3>
+        <p class="emergency-alert">
+          Heavy bleeding, fever, chest pain, or severe abdominal pain require
+          immediate medical attention. <strong>Don't delay.</strong>
+        </p>
+      </div>
+
+    </div><!-- /footer-main -->
+
+    <!-- Meta / last updated -->
+    <div class="footer-meta">
+      <p class="meta-line">
+        Last Updated: February 2026
+        <span class="sep">|</span>
+        Evidence-Based
+        <span class="sep">•</span>
+        Comprehensive
+        <span class="sep">•</span>
+        Empowering
+      </p>
+      <p class="tagline">
+        <span class="heart">🩷</span>
+        Dedicated to empowering every mother
+      </p>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <nav class="footer-links" aria-label="Legal and support links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact Support</a>
+        </nav>
+        <p class="footer-copy">&copy; 2026 Nari Shakti. Empowering Women's Health.</p>
+      </div>
+    </div>
+
+  </footer>
+  <!-- ════ END FOOTER ════ -->
+
+</body>
+</html>

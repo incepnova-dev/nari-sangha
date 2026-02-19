@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Nari Swasthya — Every Woman. Every Stage. Every Story.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* ============================================================
+   ROOT — exact journeys.html token system
+============================================================ */
+:root{
+  --pink:#ec407a;
+  --deep-pink:#d81b60;
+  --primary:#ec407a;
+  --primary-dark:#ad1457;
+  --primary-light:#f48fb1;
+  --rose:#ff6090;
+  --lavender:#ede7f6;
+  --purple:#7c3aed;
+  --soft-purple:#9c5cf7;
+  --mint:#00bcd4;
+  --gold:#ffb300;
+  --bg:#faf5fb;
+  --card-bg:#ffffff;
+  --text-main:#212121;
+  --text-soft:#666;
+  --border-soft:#f0e6f0;
+  --shadow:0 8px 30px rgba(0,0,0,0.07);
+  --shadow-pink:0 15px 40px rgba(236,64,122,0.18);
+  --shadow-strong:0 20px 60px rgba(236,64,122,0.22);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;}
+
+/* ============================================================
+   HEADER — identical to journeys.html
+============================================================ */
+.site-header{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  padding:0;
+  box-shadow:0 2px 24px rgba(236,64,122,0.09);
+  position:sticky;top:0;z-index:1000;
+  border-bottom:1px solid rgba(236,64,122,0.08);
+}
+.nav-container{
+  max-width:1400px;margin:0 auto;padding:0 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;height:64px;
+}
+.logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+}
+.logo-icon svg{width:22px;height:22px;fill:white;}
+.logo-text{display:flex;flex-direction:column;gap:0;}
+.logo-text a{
+  text-decoration:none;font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.25rem;line-height:1.1;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-text span{
+  font-size:.62rem;color:var(--text-soft);
+  font-family:'Manrope',sans-serif;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.main-nav{display:flex;align-items:center;gap:.2rem;}
+.nav-item{position:relative;}
+.nav-link{
+  display:flex;align-items:center;gap:.3rem;
+  text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:.875rem;
+  padding:.55rem .75rem;border-radius:8px;
+  transition:all .25s;white-space:nowrap;
+  cursor:pointer;background:none;border:none;font-family:inherit;
+}
+.nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
+.nav-actions{display:flex;gap:.6rem;align-items:center;}
+.btn-nav{
+  padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+  font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+  font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-nav.outline{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);
+}
+.btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+.btn-nav.primary{
+  border:1.5px solid var(--deep-pink);color:var(--deep-pink);background:#fff;
+}
+.btn-nav.primary:hover{background:rgba(236,64,122,0.05);}
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;
+  background:none;border:1.5px solid var(--border-soft);
+  align-items:center;justify-content:center;cursor:pointer;
+  flex-direction:column;gap:4px;padding:8px;
+}
+.hamburger span{display:block;height:2px;background:var(--text-main);border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+  z-index:999;padding:1.5rem;overflow-y:auto;
+}
+.mobile-menu.open{display:block;}
+.mm-link{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.85rem 1rem;border-radius:12px;
+  text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:1rem;
+  transition:all .2s;border-bottom:1px solid var(--border-soft);
+}
+.mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
+.mm-section{font-size:.72rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+@media(max-width:1060px){.main-nav{display:none;}.hamburger{display:flex;}}
+@media(max-width:600px){.nav-actions .btn-nav{display:none;}}
+@media(max-width:420px){.nav-container{gap:.5rem;}}
+/* Always show buttons inside mobile menu overlay */
+.mobile-menu .btn-nav{display:inline-flex !important;}
+
+/* ============================================================
+   SECTION COMMON — journeys.html patterns
+============================================================ */
+.section-inner{max-width:1400px;margin:0 auto;padding:0 2rem;}
+.section-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(236,64,122,0.08);border:1px solid rgba(236,64,122,0.15);
+  color:var(--deep-pink);padding:.35rem .9rem;border-radius:50px;
+  font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.section-heading{
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:900;
+  line-height:1.15;margin-bottom:.75rem;
+}
+.section-heading .em{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-sub{font-size:1.05rem;color:var(--text-soft);max-width:620px;line-height:1.8;}
+
+/* Reveal utility */
+.reveal{opacity:0;transform:translateY(28px);transition:all .75s cubic-bezier(.23,1.01,.32,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:all .75s cubic-bezier(.23,1.01,.32,1);}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(32px);transition:all .75s cubic-bezier(.23,1.01,.32,1);}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* Scroll progress dots */
+.scroll-progress{
+  position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:.6rem;z-index:500;
+}
+.sp-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(236,64,122,0.25);transition:all .3s;cursor:pointer;
+}
+.sp-dot.active{background:var(--deep-pink);transform:scale(1.5);}
+
+/* ============================================================
+   HERO — Breathing Heart + floating words animation
+============================================================ */
+#hero{position:relative;}
+.hero{
+  position:relative;min-height:96vh;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:3rem;align-items:center;
+  padding:3.5rem 2rem 3rem;
+  max-width:1400px;margin:0 auto;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 70% at 65% 40%,rgba(236,64,122,0.07) 0%,transparent 70%),
+    radial-gradient(ellipse 40% 50% at 5% 80%,rgba(124,58,237,0.05) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+#heroParticleCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.7;}
+
+.hero-content{position:relative;z-index:2;padding-left:1rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(236,64,122,0.1);border:1px solid rgba(236,64,122,0.2);
+  color:var(--deep-pink);padding:.4rem 1rem;border-radius:50px;
+  font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:1.4rem;animation:badge-glow 3s ease-in-out infinite;
+}
+@keyframes badge-glow{
+  0%,100%{box-shadow:0 0 0 0 rgba(236,64,122,0);}
+  50%{box-shadow:0 0 18px 3px rgba(236,64,122,0.18);}
+}
+.hero-title-3d{
+  font-size:clamp(2.6rem,5.5vw,4.4rem);
+  font-weight:900;line-height:1.06;margin-bottom:1.2rem;
+  background:linear-gradient(135deg,#212121 0%,#555 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.title-emphasis{
+  background:linear-gradient(135deg,#ec407a 0%,#d81b60 50%,#ad1457 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:title-shimmer 3s ease-in-out infinite;
+  filter:drop-shadow(0 2px 10px rgba(236,64,122,.35));
+}
+@keyframes title-shimmer{
+  0%,100%{filter:brightness(1) drop-shadow(0 2px 10px rgba(236,64,122,.35));}
+  50%{filter:brightness(1.4) drop-shadow(0 5px 20px rgba(236,64,122,.55));}
+}
+.hero-subtitle{
+  font-size:1.12rem;color:var(--text-soft);
+  margin-bottom:2.2rem;line-height:1.9;max-width:520px;
+}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+.btn-hero{
+  padding:.8rem 2rem;border-radius:50px;font-weight:700;
+  font-size:.95rem;text-decoration:none;border:none;cursor:pointer;
+  transition:all .35s;display:inline-flex;align-items:center;gap:.55rem;
+}
+.btn-hero.primary{
+  background:linear-gradient(135deg,#ec407a,#ad1457);color:white;
+  box-shadow:0 8px 28px rgba(236,64,122,0.38);
+  animation:btn-float 3s ease-in-out infinite;
+}
+@keyframes btn-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.btn-hero.primary:hover{animation:none;transform:translateY(-4px);box-shadow:0 14px 38px rgba(236,64,122,0.5);}
+.btn-hero.secondary{
+  background:white;color:var(--deep-pink);
+  border:1.5px solid rgba(236,64,122,0.25);
+  box-shadow:0 4px 15px rgba(0,0,0,0.06);
+}
+.btn-hero.secondary:hover{border-color:var(--deep-pink);transform:translateY(-2px);}
+.hero-trust{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.82rem;color:var(--text-soft);font-weight:500;
+}
+.trust-avatars{display:flex;}
+.trust-avatar{
+  width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  border:2px solid white;margin-left:-8px;
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:.65rem;font-weight:700;
+}
+.trust-avatar:first-child{margin-left:0;}
+
+/* Hero Right — Pulsing Heartbeat + floating emotion words */
+.hero-visual{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;}
+.heartbeat-scene{
+  position:relative;width:460px;height:460px;max-width:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+.hb-rings-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.hb-ring{
+  position:absolute;border-radius:50%;
+  border:1.5px solid rgba(236,64,122,0.25);
+  animation:hb-expand 4s ease-out infinite;
+}
+.hb-ring:nth-child(1){width:460px;height:460px;animation-delay:0s;}
+.hb-ring:nth-child(2){width:360px;height:360px;animation-delay:1s;}
+.hb-ring:nth-child(3){width:260px;height:260px;animation-delay:2s;}
+.hb-ring:nth-child(4){width:160px;height:160px;animation-delay:3s;}
+@keyframes hb-expand{
+  0%{transform:scale(.3);opacity:.9;}
+  100%{transform:scale(1);opacity:0;}
+}
+.hb-core{
+  position:relative;z-index:3;
+  width:160px;height:160px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 0 0 16px rgba(236,64,122,0.1),0 25px 60px rgba(236,64,122,0.4);
+  animation:hb-core-beat 1.6s ease-in-out infinite;
+  cursor:pointer;color:white;text-align:center;
+}
+@keyframes hb-core-beat{
+  0%,100%{transform:scale(1);}
+  14%{transform:scale(1.1);}
+  28%{transform:scale(1);}
+  42%{transform:scale(1.07);}
+  70%{transform:scale(1);}
+}
+.hb-core-icon{font-size:2.2rem;margin-bottom:.3rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.2));}
+.hb-core-text{font-size:.72rem;font-weight:800;line-height:1.35;letter-spacing:.04em;text-transform:uppercase;}
+
+/* Floating emotion words orbiting the heart */
+.emotion-word{
+  position:absolute;
+  background:white;border-radius:50px;
+  padding:.38rem 1rem;
+  font-size:.78rem;font-weight:700;
+  box-shadow:0 6px 22px rgba(0,0,0,0.1);
+  border:1px solid rgba(236,64,122,0.15);
+  color:var(--deep-pink);
+  white-space:nowrap;
+  animation:word-orbit-generic linear infinite;
+}
+.ew1{top:5%;left:50%;transform:translateX(-50%);animation:word-float-1 7s ease-in-out infinite;}
+.ew2{top:22%;right:5%;animation:word-float-2 8s ease-in-out infinite;}
+.ew3{bottom:20%;right:8%;animation:word-float-3 6s ease-in-out infinite;}
+.ew4{bottom:5%;left:50%;transform:translateX(-50%);animation:word-float-4 9s ease-in-out infinite;}
+.ew5{bottom:22%;left:5%;animation:word-float-5 7.5s ease-in-out infinite;}
+.ew6{top:20%;left:7%;animation:word-float-6 8.5s ease-in-out infinite;}
+@keyframes word-float-1{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-14px);}}
+@keyframes word-float-2{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-12px) rotate(2deg);}}
+@keyframes word-float-3{0%,100%{transform:translateY(0) rotate(1deg);}50%{transform:translateY(-10px) rotate(-3deg);}}
+@keyframes word-float-4{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(12px);}}
+@keyframes word-float-5{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-16px) rotate(-2deg);}}
+@keyframes word-float-6{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-10px) rotate(3deg);}}
+
+/* ECG line on hero */
+.ecg-wrap{
+  position:absolute;bottom:20px;left:0;right:0;height:60px;
+  overflow:hidden;pointer-events:none;opacity:.35;
+}
+#ecgCanvas{width:100%;height:100%;}
+
+/* ============================================================
+   SECTION 1 — PAIN POINTS: The Lonely Midnight Search
+   NEW ANIMATION: "Shattered Mirror" — pain cards shatter in
+   and a morphing anxiety blob shifts between each pain point
+============================================================ */
+.s1-section{
+  padding:6rem 0;
+  background:linear-gradient(180deg,#faf5fb 0%,#f5eef8 100%);
+  position:relative;overflow:hidden;
+}
+.s1-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(236,64,122,0.05) 0%,transparent 60%);
+  pointer-events:none;
+}
+.s1-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+}
+/* Morphing anxiety blob canvas */
+.blob-scene{
+  position:relative;width:440px;height:440px;max-width:100%;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;
+}
+#blobCanvas{width:100%;height:100%;display:block;}
+.blob-label{
+  position:absolute;
+  background:white;border-radius:16px;
+  padding:.9rem 1.2rem;
+  box-shadow:0 8px 30px rgba(236,64,122,0.15);
+  border-left:4px solid var(--primary);
+  max-width:200px;
+  font-size:.82rem;font-weight:600;color:var(--text-main);
+  line-height:1.5;
+  animation:label-breathe 5s ease-in-out infinite;
+}
+.blob-label span{display:block;font-size:.7rem;color:var(--text-soft);font-weight:500;margin-top:.2rem;}
+.bl1{top:4%;right:4%;animation-delay:0s;}
+.bl2{bottom:4%;right:4%;animation-delay:1.5s;}
+.bl3{bottom:4%;left:4%;animation-delay:3s;}
+@keyframes label-breathe{
+  0%,100%{transform:translateY(0);box-shadow:0 8px 30px rgba(236,64,122,0.12);}
+  50%{transform:translateY(-6px);box-shadow:0 14px 40px rgba(236,64,122,0.22);}
+}
+
+/* Shatter pain cards */
+.pain-cards{display:flex;flex-direction:column;gap:1.2rem;}
+.pain-card{
+  background:white;border-radius:20px;padding:1.4rem 1.6rem;
+  box-shadow:0 6px 25px rgba(0,0,0,0.06);
+  border:1px solid var(--border-soft);
+  display:flex;gap:1.2rem;align-items:flex-start;
+  cursor:pointer;
+  opacity:0;transform:translateX(50px) rotate(3deg);
+  transition:all .7s cubic-bezier(.23,1.01,.32,1);
+  position:relative;overflow:hidden;
+}
+.pain-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(236,64,122,0.04),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.pain-card:hover::after{opacity:1;}
+.pain-card.visible{opacity:1;transform:translateX(0) rotate(0deg);}
+.pain-card:hover{box-shadow:0 14px 42px rgba(236,64,122,0.14);transform:translateX(5px) !important;}
+.pain-icon{
+  width:50px;height:50px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.pain-card h4{font-size:.97rem;font-weight:700;margin-bottom:.3rem;color:var(--text-main);}
+.pain-card p{font-size:.83rem;color:var(--text-soft);line-height:1.65;}
+.pain-quote{
+  margin-top:.5rem;font-style:italic;font-size:.78rem;
+  color:var(--primary);border-left:3px solid rgba(236,64,122,0.3);
+  padding-left:.7rem;
+}
+
+/* ============================================================
+   SECTION 2 — IMPACT: 150 Million Voices
+   NEW ANIMATION: Morphing world map made of dots, each dot = a woman
+   Dots assemble from chaos into a glowing shape
+============================================================ */
+.s2-section{
+  padding:6rem 0;
+  background:linear-gradient(150deg,#1a0a12 0%,#2d0f1e 45%,#1e0a1a 100%);
+  position:relative;overflow:hidden;
+}
+#dotMapCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+.s2-inner{position:relative;z-index:2;}
+.s2-section .section-label{
+  background:rgba(236,64,122,0.2);border-color:rgba(236,64,122,0.35);
+  color:#f48fb1;
+}
+.s2-section .section-heading{
+  color:white;
+  background:linear-gradient(135deg,#fff 0%,#f48fb1 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s2-section .section-sub{color:rgba(255,255,255,0.7);}
+.s2-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;align-items:center;
+}
+/* Counter cards */
+.s2-counters{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;
+  margin-top:2.5rem;
+}
+.s2-counter{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(236,64,122,0.25);
+  border-radius:20px;padding:1.6rem;
+  backdrop-filter:blur(10px);
+  text-align:center;
+  opacity:0;transform:translateY(24px);
+  transition:all .7s cubic-bezier(.23,1.01,.32,1);
+}
+.s2-counter.visible{opacity:1;transform:translateY(0);}
+.s2-counter:hover{border-color:rgba(236,64,122,0.5);background:rgba(255,255,255,0.1);}
+.s2-counter-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;font-weight:900;
+  background:linear-gradient(135deg,#ec407a,#f48fb1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;line-height:1;margin-bottom:.4rem;
+}
+.s2-counter-label{font-size:.8rem;color:rgba(255,255,255,.65);font-weight:600;line-height:1.4;}
+/* Particle field (right side of s2) */
+.s2-visual{
+  position:relative;height:460px;
+  display:flex;align-items:center;justify-content:center;
+}
+#particleFieldCanvas{width:100%;height:100%;display:block;}
+
+/* ============================================================
+   SECTION 3 — JOURNEY: Her 40-Week Thread
+   NEW ANIMATION: "Living Thread" — a glowing silk thread that
+   draws itself through pregnancy milestones as you scroll,
+   each milestone node pulses in with a 3D card flip
+============================================================ */
+.s3-section{
+  padding:6rem 0;
+  background:linear-gradient(180deg,#faf5fb 0%,white 60%,#f5eef8 100%);
+  overflow:hidden;
+}
+.s3-timeline{
+  position:relative;
+  margin-top:4rem;
+}
+/* The living thread line */
+.thread-line{
+  position:absolute;left:50%;transform:translateX(-50%);
+  top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,transparent,#ec407a 8%,#ad1457 92%,transparent);
+  z-index:0;
+}
+.thread-glow{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:3px;top:0;
+  background:linear-gradient(180deg,rgba(236,64,122,0.8),rgba(173,20,87,0.8));
+  z-index:1;
+  height:0;
+  transition:height 1.5s ease;
+  box-shadow:0 0 12px rgba(236,64,122,0.6),0 0 24px rgba(236,64,122,0.3);
+}
+.thread-glow.drawn{height:100%;}
+
+/* Milestone nodes */
+.milestone-row{
+  display:flex;align-items:center;
+  margin-bottom:3.5rem;
+  position:relative;z-index:2;
+}
+.milestone-row:nth-child(odd){flex-direction:row;}
+.milestone-row:nth-child(even){flex-direction:row-reverse;}
+.milestone-node{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:1.1rem;
+  box-shadow:0 0 0 6px rgba(236,64,122,0.12),0 8px 25px rgba(236,64,122,0.35);
+  z-index:3;flex-shrink:0;
+  animation:node-pulse 3s ease-in-out infinite;
+}
+@keyframes node-pulse{
+  0%,100%{box-shadow:0 0 0 6px rgba(236,64,122,0.12),0 8px 25px rgba(236,64,122,0.35);}
+  50%{box-shadow:0 0 0 12px rgba(236,64,122,0.08),0 12px 35px rgba(236,64,122,0.45);}
+}
+/* 3D flip milestone card */
+.milestone-card-wrap{
+  width:calc(50% - 50px);
+  perspective:1000px;
+}
+.milestone-row:nth-child(odd) .milestone-card-wrap{margin-right:auto;padding-right:3rem;}
+.milestone-row:nth-child(even) .milestone-card-wrap{margin-left:auto;padding-left:3rem;}
+.milestone-card{
+  background:white;border-radius:22px;
+  padding:1.6rem 1.8rem;
+  box-shadow:0 8px 35px rgba(0,0,0,0.07);
+  border:1px solid var(--border-soft);
+  border-left:4px solid var(--primary);
+  opacity:0;
+  transform:rotateY(-45deg) translateX(-20px);
+  transition:all .8s cubic-bezier(.23,1.01,.32,1);
+  transform-style:preserve-3d;
+}
+.milestone-row:nth-child(even) .milestone-card{
+  border-left:none;border-right:4px solid var(--primary);
+  transform:rotateY(45deg) translateX(20px);
+}
+.milestone-card.visible{opacity:1;transform:rotateY(0deg) translateX(0);}
+.milestone-card:hover{
+  box-shadow:0 16px 50px rgba(236,64,122,0.15);
+  transform:translateY(-4px) rotateY(0deg) !important;
+}
+.mc-week{
+  display:inline-block;
+  background:linear-gradient(135deg,rgba(236,64,122,0.1),rgba(173,20,87,0.06));
+  color:var(--primary);padding:.25rem .75rem;border-radius:50px;
+  font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:.75rem;border:1px solid rgba(236,64,122,0.2);
+}
+.mc-title{font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--text-main);}
+.mc-desc{font-size:.85rem;color:var(--text-soft);line-height:1.7;}
+.mc-stat{
+  margin-top:.85rem;display:flex;align-items:center;gap:.5rem;
+  padding:.6rem .9rem;border-radius:10px;
+  background:linear-gradient(135deg,rgba(236,64,122,0.06),transparent);
+  font-size:.8rem;font-weight:700;color:var(--primary);
+  border:1px solid rgba(236,64,122,0.12);
+}
+
+/* CTA mid-section */
+.s3-midcta{
+  text-align:center;margin:3rem 0;
+  opacity:0;transform:translateY(20px);
+  transition:all .7s ease;
+}
+.s3-midcta.visible{opacity:1;transform:translateY(0);}
+
+/* ============================================================
+   SECTION 4 — CALL TO ACTION: Your Story Starts Tonight
+   NEW ANIMATION: "Firefly Galaxy" canvas behind — 
+   floating glowing orbs that spell out heart shapes,
+   plus a 3-column testimonial carousel with morphing avatars
+============================================================ */
+.s4-section{
+  padding:7rem 0;
+  background:linear-gradient(150deg,#0f0818 0%,#1a0a24 50%,#0d1020 100%);
+  position:relative;overflow:hidden;
+}
+#galaxyCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+.s4-inner{position:relative;z-index:2;}
+
+/* Section label on dark */
+.s4-section .section-label{
+  background:rgba(236,64,122,0.18);
+  border-color:rgba(236,64,122,0.35);
+  color:#f48fb1;
+}
+.s4-section .section-heading{
+  background:linear-gradient(135deg,#fff 0%,#f48fb1 60%,#ec407a 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.s4-section .section-sub{color:rgba(255,255,255,0.65);}
+
+/* Testimonial cards */
+.testimonial-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.8rem;margin-top:3.5rem;margin-bottom:3.5rem;
+}
+.t-card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(236,64,122,0.2);
+  border-radius:24px;padding:2rem 1.6rem;
+  backdrop-filter:blur(12px);
+  opacity:0;transform:translateY(30px);
+  transition:all .8s cubic-bezier(.23,1.01,.32,1);
+  position:relative;overflow:hidden;
+}
+.t-card::before{
+  content:'"';
+  position:absolute;top:-10px;left:1.2rem;
+  font-family:'Playfair Display',serif;
+  font-size:6rem;color:rgba(236,64,122,0.12);
+  line-height:1;pointer-events:none;
+}
+.t-card.visible{opacity:1;transform:translateY(0);}
+.t-card:hover{
+  background:rgba(255,255,255,0.1);
+  border-color:rgba(236,64,122,0.4);
+  transform:translateY(-6px) !important;
+  box-shadow:0 20px 55px rgba(236,64,122,0.2);
+}
+/* Morphing avatar */
+.t-avatar-wrap{position:relative;width:64px;height:64px;margin-bottom:1.2rem;}
+.t-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;color:white;
+  box-shadow:0 0 0 3px rgba(236,64,122,0.3),0 8px 25px rgba(236,64,122,0.3);
+  animation:avatar-morph 6s ease-in-out infinite;
+}
+@keyframes avatar-morph{
+  0%,100%{border-radius:50%;}
+  25%{border-radius:40% 60% 60% 40% / 60% 30% 70% 40%;}
+  50%{border-radius:60% 40% 30% 70% / 50% 60% 40% 50%;}
+  75%{border-radius:30% 70% 70% 30% / 30% 50% 50% 70%;}
+}
+.t-stars{color:#ffb300;font-size:.85rem;margin-bottom:1rem;letter-spacing:.1em;}
+.t-text{
+  font-size:.88rem;color:rgba(255,255,255,.8);
+  line-height:1.75;margin-bottom:1.2rem;font-style:italic;
+}
+.t-name{font-size:.82rem;font-weight:700;color:#f48fb1;}
+.t-role{font-size:.72rem;color:rgba(255,255,255,.45);}
+
+/* Grand CTA block */
+.grand-cta{
+  text-align:center;padding:3.5rem 2rem;
+  background:linear-gradient(135deg,rgba(236,64,122,0.15),rgba(173,20,87,0.1));
+  border:1px solid rgba(236,64,122,0.25);
+  border-radius:32px;
+  backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+}
+.grand-cta::before{
+  content:'';position:absolute;
+  top:-80px;left:50%;transform:translateX(-50%);
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(rgba(236,64,122,0.18),transparent 70%);
+  pointer-events:none;
+}
+.grand-cta h2{
+  font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;
+  color:white;margin-bottom:.9rem;line-height:1.15;
+}
+.grand-cta h2 .em{
+  background:linear-gradient(135deg,#ec407a,#f48fb1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.grand-cta p{
+  font-size:1.05rem;color:rgba(255,255,255,.7);
+  max-width:560px;margin:0 auto 2.5rem;line-height:1.8;
+}
+.grand-cta-btns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;}
+.btn-grand-primary{
+  padding:.9rem 2.4rem;border-radius:50px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:white;font-weight:800;font-size:1rem;
+  text-decoration:none;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:.6rem;
+  box-shadow:0 10px 35px rgba(236,64,122,0.45);
+  animation:grand-pulse 2.5s ease-in-out infinite;
+  transition:all .3s;
+}
+@keyframes grand-pulse{
+  0%,100%{box-shadow:0 10px 35px rgba(236,64,122,0.45);}
+  50%{box-shadow:0 15px 50px rgba(236,64,122,0.65),0 0 0 8px rgba(236,64,122,0.1);}
+}
+.btn-grand-primary:hover{animation:none;transform:translateY(-4px);box-shadow:0 18px 50px rgba(236,64,122,0.6);}
+.btn-grand-secondary{
+  padding:.9rem 2.4rem;border-radius:50px;
+  background:rgba(255,255,255,0.1);
+  color:white;font-weight:700;font-size:1rem;
+  text-decoration:none;border:1.5px solid rgba(255,255,255,0.25);
+  display:inline-flex;align-items:center;gap:.6rem;
+  transition:all .3s;backdrop-filter:blur(8px);
+}
+.btn-grand-secondary:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px);}
+.grand-cta-micro{
+  margin-top:1.4rem;font-size:.78rem;
+  color:rgba(255,255,255,.4);display:flex;
+  align-items:center;justify-content:center;gap:.4rem;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer{
+  background:#1a0a12;border-top:1px solid rgba(236,64,122,0.15);
+  padding:3rem 2rem 2rem;text-align:center;
+}
+.footer-inner{max-width:1400px;margin:0 auto;}
+.footer-logo{
+  font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.footer-tagline{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:1.5rem;}
+.footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+.footer-links a{font-size:.82rem;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:#f48fb1;}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.25);}
+
+/* ============================================================
+   RESPONSIVE — comprehensive mobile-first system
+============================================================ */
+
+/* ── Large tablet / small desktop ── */
+@media(max-width:1100px){
+  .section-inner{padding:0 1.5rem;}
+
+  /* Hero */
+  .hero{
+    grid-template-columns:1fr;
+    gap:2.5rem;min-height:auto;
+    padding:3rem 1.5rem 2.5rem;
+  }
+  .hero-visual{order:-1;}
+  .heartbeat-scene{width:360px;height:360px;}
+  .hb-ring:nth-child(1){width:360px;height:360px;}
+  .hb-ring:nth-child(2){width:280px;height:280px;}
+  .hb-ring:nth-child(3){width:200px;height:200px;}
+  .hb-ring:nth-child(4){width:120px;height:120px;}
+
+  /* S1 */
+  .s1-grid{grid-template-columns:1fr;gap:3rem;}
+  .blob-scene{width:360px;height:360px;}
+
+  /* S2 */
+  .s2-layout{grid-template-columns:1fr;gap:3rem;}
+  .s2-visual{height:320px;}
+  .s2-counters{grid-template-columns:repeat(2,1fr);}
+
+  /* S3 timeline stays central */
+  .thread-line,.thread-glow{left:50%;}
+
+  /* SNA */
+  .sna-layout{grid-template-columns:1fr;gap:3rem;}
+  .sna-nucleus-wrap{height:420px;}
+
+  /* SNB peer network */
+  .peer-network{grid-template-columns:repeat(2,1fr);}
+
+  /* Scroll dots */
+  .scroll-progress{display:none;}
+}
+
+/* ── Tablet ── */
+@media(max-width:900px){
+  .section-inner{padding:0 1.25rem;}
+
+  /* Hero */
+  .hero{
+    padding:2.5rem 1.25rem 2rem;
+    gap:2rem;
+  }
+  .hero-content{padding-left:0;}
+  .hero-title-3d{font-size:clamp(2rem,6vw,3.2rem);}
+  .hero-subtitle{font-size:1rem;max-width:100%;}
+  .hero-cta-row{gap:.75rem;}
+  .heartbeat-scene{width:300px;height:300px;}
+  .hb-ring:nth-child(1){width:300px;height:300px;}
+  .hb-ring:nth-child(2){width:230px;height:230px;}
+  .hb-ring:nth-child(3){width:170px;height:170px;}
+  .hb-ring:nth-child(4){width:110px;height:110px;}
+  .hb-core{width:130px;height:130px;}
+  /* Reposition floating words for smaller scene */
+  .ew1{top:3%;}
+  .ew2{top:18%;right:2%;}
+  .ew3{bottom:16%;right:4%;}
+  .ew4{bottom:3%;}
+  .ew5{bottom:18%;left:2%;}
+  .ew6{top:16%;left:3%;}
+
+  /* S1 pain section */
+  .s1-section{padding:4rem 0;}
+  .blob-scene{width:300px;height:300px;}
+  /* blob labels reposition for smaller canvas */
+  .bl1{top:2%;right:2%;max-width:170px;}
+  .bl2{bottom:2%;right:2%;max-width:170px;}
+  .bl3{bottom:2%;left:2%;max-width:170px;}
+
+  /* S2 */
+  .s2-section{padding:4rem 0;}
+  .s2-counters{grid-template-columns:repeat(2,1fr);gap:1rem;}
+  .s2-counter{padding:1.2rem;}
+  .s2-counter-num{font-size:2rem;}
+
+  /* S3 timeline — collapse to left-rail */
+  .thread-line,.thread-glow{left:24px;transform:none;}
+  .milestone-row,
+  .milestone-row:nth-child(even){flex-direction:column;padding-left:60px;}
+  .milestone-node{left:24px;transform:none;}
+  .milestone-card-wrap{width:100%;perspective:none;}
+  .milestone-row:nth-child(odd) .milestone-card-wrap{padding-right:0;margin-right:0;}
+  .milestone-row:nth-child(even) .milestone-card-wrap{padding-left:0;margin-left:0;}
+  .milestone-card,
+  .milestone-row:nth-child(even) .milestone-card{
+    border-left:4px solid var(--primary);
+    border-right:none;
+    transform:none;
+    opacity:1;
+  }
+  .milestone-card.visible{transform:none;}
+
+  /* S4 testimonials */
+  .testimonial-grid{grid-template-columns:1fr;gap:1.25rem;}
+  .s4-section{padding:4.5rem 0;}
+  .grand-cta{padding:2.5rem 1.5rem;border-radius:24px;}
+  .grand-cta h2{font-size:clamp(1.7rem,5vw,2.8rem);}
+
+  /* SNA */
+  .sna-section{padding:5rem 0;}
+  .sna-nucleus-wrap{height:340px;}
+  /* Hide floating nucleus badges on tablet — they overlap */
+  .nucleus-badge{display:none;}
+
+  /* SNB */
+  .snb-inner{padding:4rem 1.25rem;}
+  .peer-network{grid-template-columns:1fr;gap:1.25rem;}
+  .question-wall{height:260px;}
+  .live-ticker{flex-wrap:wrap;gap:.6rem;padding:.8rem 1rem;}
+  .women-bar{gap:.75rem;}
+  .wb-divider{display:none;}
+  .wb-item{font-size:.78rem;}
+}
+
+/* ── Mobile ── */
+@media(max-width:640px){
+  .section-inner{padding:0 1rem;}
+
+  /* Hero */
+  .hero{padding:2rem 1rem 1.75rem;gap:1.75rem;}
+  .hero-title-3d{font-size:clamp(1.8rem,7.5vw,2.4rem);line-height:1.1;}
+  .hero-badge{font-size:.74rem;padding:.35rem .85rem;margin-bottom:1rem;}
+  .hero-subtitle{font-size:.95rem;margin-bottom:1.5rem;}
+  .hero-cta-row{flex-direction:column;gap:.7rem;margin-bottom:1.25rem;}
+  .btn-hero{width:100%;justify-content:center;padding:.75rem 1.5rem;}
+  .hero-trust{flex-wrap:wrap;gap:.5rem;font-size:.76rem;}
+  .heartbeat-scene{width:260px;height:260px;}
+  .hb-ring:nth-child(1){width:260px;height:260px;}
+  .hb-ring:nth-child(2){width:200px;height:200px;}
+  .hb-ring:nth-child(3){width:148px;height:148px;}
+  .hb-ring:nth-child(4){width:98px;height:98px;}
+  .hb-core{width:110px;height:110px;}
+  .hb-core-icon{font-size:1.6rem;}
+  .hb-core-text{font-size:.65rem;}
+  /* Hide floating emotion words on small screens — they clip */
+  .emotion-word{display:none;}
+  .ecg-wrap{display:none;}
+
+  /* S1 */
+  .s1-section{padding:3.5rem 0;}
+  .blob-scene{width:100%;height:280px;}
+  .blob-label{font-size:.76rem;padding:.7rem 1rem;max-width:160px;}
+  .bl1{top:1%;right:1%;}
+  .bl2{bottom:1%;right:1%;}
+  .bl3{bottom:1%;left:1%;}
+  .pain-card{padding:1.1rem 1.2rem;gap:1rem;}
+  .pain-icon{width:42px;height:42px;font-size:1.1rem;}
+  .pain-card h4{font-size:.9rem;}
+  .pain-card p{font-size:.8rem;}
+
+  /* SNA */
+  .sna-section{padding:3.5rem 0;}
+  .story-card{padding:1.2rem 1.4rem;}
+  .story-card h4{font-size:.92rem;}
+  .story-card p{font-size:.8rem;}
+  .sna-nucleus-wrap{height:280px;}
+
+  /* SNB */
+  .snb-section{min-height:auto;}
+  .snb-inner{padding:3.5rem 1rem;}
+  .snb-title{font-size:clamp(1.7rem,6vw,2.5rem);}
+  .question-wall{height:200px;}
+  /* Hide some bubbles on mobile, show fewer */
+  .q-bubble:nth-child(n+6){display:none;}
+  .q-bubble{font-size:.72rem;padding:.4rem .85rem;}
+  .peer-card{padding:1.5rem 1.2rem;border-radius:20px;}
+  .peer-card h3{font-size:1rem;}
+  .peer-card p{font-size:.8rem;}
+  .live-ticker{padding:.7rem .85rem;gap:.5rem;border-radius:12px;}
+  .ticker-label{font-size:.66rem;}
+  .ticker-item{font-size:.76rem;padding:0 1.5rem;}
+  .women-bar{flex-direction:column;align-items:center;gap:.5rem;margin-top:1.5rem;}
+
+  /* S2 */
+  .s2-section{padding:3.5rem 0;}
+  .s2-counters{grid-template-columns:repeat(2,1fr);gap:.85rem;}
+  .s2-counter{padding:1rem .85rem;border-radius:16px;}
+  .s2-counter-num{font-size:1.75rem;}
+  .s2-counter-label{font-size:.73rem;}
+
+  /* S3 */
+  .s3-section{padding:3.5rem 0;}
+  .milestone-card{padding:1.2rem 1.4rem;border-radius:18px;}
+  .mc-week{font-size:.67rem;}
+  .mc-title{font-size:.95rem;}
+  .mc-desc{font-size:.8rem;}
+  .mc-stat{font-size:.75rem;padding:.5rem .75rem;}
+
+  /* S4 */
+  .s4-section{padding:3.5rem 0;}
+  .t-card{padding:1.5rem 1.2rem;border-radius:20px;}
+  .t-text{font-size:.82rem;}
+  .grand-cta{padding:2rem 1.1rem;border-radius:20px;}
+  .grand-cta h2{font-size:clamp(1.5rem,5.5vw,2.2rem);}
+  .grand-cta p{font-size:.92rem;}
+  .grand-cta-btns{flex-direction:column;align-items:stretch;gap:.75rem;}
+  .btn-grand-primary,.btn-grand-secondary{
+    width:100%;justify-content:center;
+    padding:.85rem 1.5rem;font-size:.92rem;
+  }
+  .grand-cta-micro{font-size:.72rem;}
+}
+
+/* ── Small mobile ── */
+@media(max-width:420px){
+  .hero-title-3d{font-size:1.65rem;}
+  .hero{padding:1.75rem .85rem 1.5rem;}
+  .section-inner{padding:0 .85rem;}
+  .s2-counters{grid-template-columns:1fr;}
+  .heartbeat-scene{width:230px;height:230px;}
+  .hb-ring:nth-child(1){width:230px;height:230px;}
+  .hb-ring:nth-child(2){width:176px;height:176px;}
+  .hb-ring:nth-child(3){width:130px;height:130px;}
+  .hb-ring:nth-child(4){width:86px;height:86px;}
+  .hb-core{width:96px;height:96px;}
+  .grand-cta h2{font-size:1.45rem;}
+  .nav-container{padding:0 1rem;}
+  .logo-text a{font-size:1.1rem;}
+}
+
+/* ── Ensure milestone cards are full-width on mobile after collapse ── */
+@media(max-width:900px){
+  .milestone-card-wrap{width:100% !important;padding-left:0 !important;padding-right:0 !important;}
+}
+
+/* ── DNA scene & nucleus height on mobile ── */
+@media(max-width:640px){
+  .dna-scene{height:300px;}
+  .sna-nucleus-wrap{height:240px;}
+  .s2-visual{height:280px;}
+  .peer-network{gap:1rem;}
+  /* Ensure blob scene doesn't overflow */
+  .blob-scene{box-sizing:border-box;}
+}
+
+@media(max-width:420px){
+  .dna-scene{height:240px;}
+  .sna-nucleus-wrap{height:200px;}
+  .s2-visual{height:220px;}
+}
+
+/* ============================================================
+   SECTION NEW-A — LIVING STORIES CONSTELLATION
+   Revolutionary "Story Weave" animation: research cards & recovery
+   stories orbit a central nucleus like DNA strands, each card
+   materializing from particle dust as you scroll
+============================================================ */
+.sna-section{
+  padding:7rem 0;
+  background:linear-gradient(170deg,#fdf6ff 0%,#fff0f5 40%,#f0f4ff 100%);
+  position:relative;overflow:hidden;
+}
+.sna-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 60% at 20% 50%,rgba(124,58,237,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 30%,rgba(236,64,122,0.07) 0%,transparent 55%);
+  pointer-events:none;
+}
+
+/* The DNA Helix canvas */
+.dna-scene{
+  position:relative;height:600px;width:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+#dnaHelixCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;
+}
+
+/* Story cards that emerge from the helix */
+.sna-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;
+  position:relative;
+}
+.sna-cards-col{
+  display:flex;flex-direction:column;gap:1.4rem;
+}
+
+/* Shimmer particle card */
+.story-card{
+  background:white;border-radius:24px;
+  padding:1.5rem 1.8rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  border:1px solid rgba(236,64,122,0.1);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateX(-40px) scale(0.95);
+  transition:all .8s cubic-bezier(.23,1.01,.32,1);
+  cursor:pointer;
+}
+.story-card.visible{opacity:1;transform:translateX(0) scale(1);}
+.story-card::before{
+  content:'';position:absolute;top:0;left:-100%;
+  width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);
+  transition:left 0.6s ease;
+}
+.story-card:hover::before{left:140%;}
+.story-card:hover{
+  box-shadow:0 16px 50px rgba(236,64,122,0.15);
+  border-color:rgba(236,64,122,0.3);
+  transform:translateX(6px) scale(1.02) !important;
+}
+.sc-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.25rem .7rem;border-radius:50px;margin-bottom:.75rem;
+}
+.sc-tag.research{background:rgba(124,58,237,0.1);color:#7c3aed;border:1px solid rgba(124,58,237,0.2);}
+.sc-tag.recovery{background:rgba(236,64,122,0.1);color:#ec407a;border:1px solid rgba(236,64,122,0.2);}
+.sc-tag.cancer{background:rgba(255,87,34,0.1);color:#e64a19;border:1px solid rgba(255,87,34,0.2);}
+.sc-tag.peer{background:rgba(0,188,212,0.1);color:#00838f;border:1px solid rgba(0,188,212,0.2);}
+.story-card h4{font-size:1rem;font-weight:800;margin-bottom:.45rem;color:var(--text-main);line-height:1.4;}
+.story-card p{font-size:.83rem;color:var(--text-soft);line-height:1.65;}
+.sc-meta{
+  display:flex;align-items:center;gap:.6rem;margin-top:.85rem;
+  padding-top:.75rem;border-top:1px solid var(--border-soft);
+}
+.sc-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-size:.9rem;flex-shrink:0;
+}
+.sc-author-name{font-size:.8rem;font-weight:700;color:var(--text-main);}
+.sc-author-sub{font-size:.7rem;color:var(--text-soft);}
+.sc-glow-bar{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#ec407a,#7c3aed,#ec407a);
+  background-size:200% 100%;
+  animation:bar-flow 3s linear infinite;
+  opacity:0;transition:opacity .3s;
+}
+.story-card:hover .sc-glow-bar{opacity:1;}
+@keyframes bar-flow{0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
+
+/* Central Nucleus visual on the right */
+.sna-nucleus-wrap{
+  position:relative;height:560px;
+  display:flex;align-items:center;justify-content:center;
+}
+#nucleusCanvas{width:100%;height:100%;display:block;}
+
+/* Floating research badges around nucleus */
+.nucleus-badge{
+  position:absolute;
+  background:white;border-radius:14px;
+  padding:.6rem 1rem;
+  box-shadow:0 8px 28px rgba(0,0,0,0.1);
+  border:1px solid rgba(236,64,122,0.15);
+  font-size:.76rem;font-weight:700;
+  white-space:nowrap;
+  animation:nb-float linear infinite;
+  cursor:default;
+  transition:transform .3s, box-shadow .3s;
+}
+.nucleus-badge:hover{transform:scale(1.1) !important;box-shadow:0 14px 40px rgba(236,64,122,0.2);}
+.nb1{top:8%;left:5%;color:#7c3aed;animation:nb-float1 7s ease-in-out infinite;}
+.nb2{top:18%;right:3%;color:#ec407a;animation:nb-float2 8.5s ease-in-out infinite;}
+.nb3{top:48%;right:0%;color:#e64a19;animation:nb-float3 6.5s ease-in-out infinite;}
+.nb4{bottom:18%;right:5%;color:#00838f;animation:nb-float4 9s ease-in-out infinite;}
+.nb5{bottom:8%;left:8%;color:#d81b60;animation:nb-float5 7.5s ease-in-out infinite;}
+.nb6{top:48%;left:0%;color:#7c3aed;animation:nb-float6 8s ease-in-out infinite;}
+@keyframes nb-float1{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-12px) rotate(1.5deg);}}
+@keyframes nb-float2{0%,100%{transform:translateY(0) rotate(1deg);}50%{transform:translateY(-14px) rotate(-2deg);}}
+@keyframes nb-float3{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+@keyframes nb-float4{0%,100%{transform:translateY(0) rotate(1.5deg);}50%{transform:translateY(-16px) rotate(-1deg);}}
+@keyframes nb-float5{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-11px) rotate(2.5deg);}}
+@keyframes nb-float6{0%,100%{transform:translateY(0) rotate(2deg);}50%{transform:translateY(-13px) rotate(-1.5deg);}}
+
+/* ============================================================
+   SECTION NEW-B — VOICE CONFLUENCE
+   Revolutionary "Living Wall of Questions" — questions from women
+   drift upward like glowing embers from the ground, each one
+   rippling outward when hovered, forming a peer network galaxy
+============================================================ */
+.snb-section{
+  padding:0;
+  background:#0c0416;
+  position:relative;overflow:hidden;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
+#voiceCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+.snb-inner{
+  position:relative;z-index:2;
+  max-width:1400px;margin:0 auto;padding:6rem 2rem;
+  width:100%;
+}
+.snb-header{text-align:center;margin-bottom:4rem;}
+.snb-section .section-label{
+  background:rgba(236,64,122,0.18);
+  border-color:rgba(236,64,122,0.35);color:#f48fb1;
+}
+.snb-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  font-weight:900;line-height:1.12;color:white;margin-bottom:.8rem;
+}
+.snb-title .em{
+  background:linear-gradient(135deg,#ec407a,#f48fb1);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.snb-subtitle{
+  font-size:1rem;color:rgba(255,255,255,0.6);
+  max-width:600px;margin:0 auto;line-height:1.8;
+}
+
+/* The Question Wall — floating bubbles */
+.question-wall{
+  position:relative;
+  height:340px;
+  margin:0 auto 3rem;
+  overflow:hidden;
+}
+#questionCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+}
+/* Interactive question bubbles (DOM layer for hover effects) */
+.q-bubble{
+  position:absolute;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(236,64,122,0.25);
+  border-radius:50px;
+  padding:.55rem 1.2rem;
+  font-size:.8rem;color:rgba(255,255,255,0.85);
+  font-weight:500;white-space:nowrap;
+  cursor:pointer;
+  transition:all .4s cubic-bezier(.23,1.01,.32,1);
+  animation:q-rise linear infinite;
+  transform-origin:center bottom;
+}
+.q-bubble:hover{
+  background:rgba(236,64,122,0.25);
+  border-color:rgba(236,64,122,0.6);
+  color:white;
+  transform:scale(1.12) translateY(-8px) !important;
+  box-shadow:0 0 30px rgba(236,64,122,0.4),0 0 60px rgba(236,64,122,0.2);
+  z-index:10;
+}
+@keyframes q-rise{
+  0%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-14px) scale(1.03);}
+  100%{transform:translateY(0) scale(1);}
+}
+
+/* Peer Network Rings */
+.peer-network{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2rem;margin:0 auto;max-width:1100px;
+}
+.peer-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(236,64,122,0.18);
+  border-radius:28px;padding:2rem 1.8rem;
+  backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(40px) scale(0.93);
+  transition:all .9s cubic-bezier(.23,1.01,.32,1);
+  cursor:pointer;
+}
+.peer-card.visible{opacity:1;transform:translateY(0) scale(1);}
+.peer-card:hover{
+  background:rgba(255,255,255,0.09);
+  border-color:rgba(236,64,122,0.4);
+  transform:translateY(-8px) scale(1.02) !important;
+  box-shadow:0 24px 60px rgba(236,64,122,0.2);
+}
+/* Ripple on peer card */
+.peer-card::after{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  width:0;height:0;
+  border-radius:50%;
+  background:rgba(236,64,122,0.1);
+  transform:translate(-50%,-50%);
+  transition:width .6s ease, height .6s ease, opacity .6s ease;
+  opacity:0;
+}
+.peer-card:hover::after{width:300px;height:300px;opacity:1;}
+
+.peer-icon-wrap{
+  width:64px;height:64px;border-radius:20px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;margin-bottom:1.2rem;
+  position:relative;
+}
+.peer-icon-wrap::before{
+  content:'';position:absolute;inset:-3px;border-radius:23px;
+  background:linear-gradient(135deg,rgba(236,64,122,0.4),rgba(124,58,237,0.4));
+  z-index:-1;animation:icon-spin 6s linear infinite;
+}
+@keyframes icon-spin{
+  0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}
+}
+.peer-card h3{
+  font-size:1.1rem;font-weight:800;color:white;
+  margin-bottom:.6rem;line-height:1.3;
+}
+.peer-card p{font-size:.85rem;color:rgba(255,255,255,0.6);line-height:1.7;}
+
+/* Live activity ticker */
+.live-ticker{
+  margin-top:3rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(236,64,122,0.18);
+  border-radius:16px;padding:1rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;
+  overflow:hidden;
+}
+.ticker-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#ec407a;flex-shrink:0;
+  animation:ticker-pulse 1.5s ease-in-out infinite;
+  box-shadow:0 0 10px #ec407a;
+}
+@keyframes ticker-pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.5;transform:scale(0.7);}
+}
+.ticker-label{font-size:.72rem;color:#ec407a;font-weight:800;text-transform:uppercase;letter-spacing:.1em;flex-shrink:0;}
+.ticker-track{flex:1;overflow:hidden;position:relative;height:22px;}
+.ticker-items{
+  display:flex;gap:0;
+  position:absolute;
+  animation:ticker-scroll 28s linear infinite;
+  white-space:nowrap;
+}
+.ticker-item{
+  font-size:.82rem;color:rgba(255,255,255,0.7);
+  padding:0 2.5rem;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.ticker-item strong{color:#f48fb1;}
+@keyframes ticker-scroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+/* Women count bar */
+.women-bar{
+  margin-top:2rem;
+  display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;
+  justify-content:center;
+}
+.wb-item{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.82rem;color:rgba(255,255,255,0.6);font-weight:500;
+}
+.wb-item strong{color:#f48fb1;font-size:.95rem;}
+.wb-divider{color:rgba(255,255,255,0.15);font-size:1.2rem;}
+
+/* Responsive for new sections handled in main responsive block below */
+</style>
+</head>
+<body>
+
+<!-- ===== SCROLL PROGRESS DOTS ===== -->
+<nav class="scroll-progress" aria-label="Page sections">
+  <div class="sp-dot active" data-section="hero" title="Home"></div>
+  <div class="sp-dot" data-section="s1" title="Pain Points"></div>
+  <div class="sp-dot" data-section="sna" title="Stories"></div>
+  <div class="sp-dot" data-section="snb" title="Voices"></div>
+  <div class="sp-dot" data-section="s2" title="Impact"></div>
+  <div class="sp-dot" data-section="s3" title="Journey"></div>
+  <div class="sp-dot" data-section="s4" title="Join Us"></div>
+</nav>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Complete Health</span>
+      </div>
+    </div>
+    <nav class="main-nav" aria-label="Main">
+      <div class="nav-item"><a href="services.html" class="nav-link">Services</a></div>
+      <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a class="btn-nav primary" href="login.html">Get Started</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+        <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mm-section">Navigate</div>
+  <a href="services.html" class="mm-link"><i class="fa-solid fa-grid-2" style="color:var(--deep-pink);width:20px;"></i> Services</a>
+  <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:var(--deep-pink);width:20px;"></i> About Us</a>
+  <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+    <a href="login.html" class="btn-nav outline" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+    <a href="login.html" class="btn-nav primary" style="flex:1;justify-content:center;">Get Started</a>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <canvas id="heroParticleCanvas"></canvas>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <i class="fa-solid fa-heart-pulse"></i>
+        For Every Woman. Every Stage.
+      </div>
+      <h1 class="hero-title-3d reveal reveal-delay-1">
+        You Deserve to<br>Feel <span class="title-emphasis">Seen, Heard</span><br>&amp; Never Alone.
+      </h1>
+      <p class="hero-subtitle reveal reveal-delay-2">
+        From your first missed period to your child's first steps — Nari Swasthya walks every path with you. Evidence-based, emotionally intelligent women's health, built for India's 350 million mothers.
+      </p>
+      <div class="hero-cta-row reveal reveal-delay-3">
+        <a href="login.html" class="btn-hero primary">
+          <i class="fa-solid fa-sparkles"></i> Begin Your Journey
+        </a>
+        <a href="journeys.html" class="btn-hero secondary">
+          <i class="fa-solid fa-play"></i> Explore Stories
+        </a>
+      </div>
+      <div class="hero-trust reveal reveal-delay-4">
+        <div class="trust-avatars">
+          <div class="trust-avatar">P</div>
+          <div class="trust-avatar">A</div>
+          <div class="trust-avatar">S</div>
+          <div class="trust-avatar">R</div>
+          <div class="trust-avatar">M</div>
+        </div>
+        <span>Joined by <strong>2.4 million</strong> women this year</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="heartbeat-scene">
+        <div class="hb-rings-wrap">
+          <div class="hb-ring"></div>
+          <div class="hb-ring"></div>
+          <div class="hb-ring"></div>
+          <div class="hb-ring"></div>
+        </div>
+        <div class="hb-core" onclick="window.location='login.html'">
+          <div class="hb-core-icon">🩷</div>
+          <div class="hb-core-text">Your health<br>starts here</div>
+        </div>
+        <div class="emotion-word ew1"><i class="fa-solid fa-seedling" style="color:var(--primary);"></i> Fertility</div>
+        <div class="emotion-word ew2">🤰 Pregnancy</div>
+        <div class="emotion-word ew3"><i class="fa-solid fa-baby" style="color:#9c5cf7;"></i> Newborn</div>
+        <div class="emotion-word ew4">🌸 Postpartum</div>
+        <div class="emotion-word ew5">🧠 Mental Health</div>
+        <div class="emotion-word ew6">💊 Menopause</div>
+        <div class="ecg-wrap"><canvas id="ecgCanvas"></canvas></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 1: PAIN POINTS — The Lonely Midnight Search ===== -->
+<section id="s1" class="s1-section">
+  <div class="section-inner">
+    <div class="s1-grid">
+
+      <!-- Left: morphing anxiety blob + floating labels -->
+      <div class="reveal-left">
+        <div class="blob-scene">
+          <canvas id="blobCanvas"></canvas>
+          <div class="blob-label bl1">
+            <strong>3 AM, alone, terrified</strong>
+            <span>Searching symptoms with no one to ask</span>
+          </div>
+          <div class="blob-label bl2">
+            <strong>Which doctor? Which hospital?</strong>
+            <span>No trusted guide in your language</span>
+          </div>
+          <div class="blob-label bl3">
+            <strong>Is this normal?</strong>
+            <span>Questions that deserve real answers</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: pain cards -->
+      <div>
+        <div class="section-label"><i class="fa-solid fa-heart-crack"></i> The Real Pain</div>
+        <h2 class="section-heading reveal">
+          Every woman has searched<br>in silence. <span class="em">You shouldn't have to.</span>
+        </h2>
+        <p class="section-sub reveal reveal-delay-1">
+          Millions of women navigate pregnancy, fertility loss, and maternal anxiety completely alone — armed only with unreliable search results at midnight.
+        </p>
+
+        <div class="pain-cards" style="margin-top:2rem;">
+          <div class="pain-card reveal" style="transition-delay:.1s;">
+            <div class="pain-icon" style="background:linear-gradient(135deg,#fce4ec,#f8bbd9);color:#c2185b;">🌑</div>
+            <div>
+              <h4>Midnight Fear, No Answer</h4>
+              <p>70% of pregnant women in India report Googling symptoms at night with no one to call. Misinformation costs lives.</p>
+              <div class="pain-quote">"I was bleeding at 3 AM. I had no idea if I should rush to the hospital or wait."</div>
+            </div>
+          </div>
+          <div class="pain-card reveal" style="transition-delay:.2s;">
+            <div class="pain-icon" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7);color:#7b1fa2;">💔</div>
+            <div>
+              <h4>Pregnancy Loss, Alone</h4>
+              <p>1 in 4 pregnancies end in miscarriage. Most women are sent home with a pamphlet and silence.</p>
+              <div class="pain-quote">"Nobody told me grief after loss is normal. I thought I was broken."</div>
+            </div>
+          </div>
+          <div class="pain-card reveal" style="transition-delay:.3s;">
+            <div class="pain-icon" style="background:linear-gradient(135deg,#fff8e1,#ffecb3);color:#f57f17;">📋</div>
+            <div>
+              <h4>Scattered, Contradictory Advice</h4>
+              <p>One doctor says rest. Another says exercise. Your mother-in-law says something else. Women deserve clarity.</p>
+              <div class="pain-quote">"I received 4 different answers to the same question. I stopped asking."</div>
+            </div>
+          </div>
+          <div class="pain-card reveal" style="transition-delay:.4s;">
+            <div class="pain-icon" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2);color:#00838f;">🌊</div>
+            <div>
+              <h4>Postpartum Invisible Struggle</h4>
+              <p>1 in 5 new mothers experience postpartum depression. Most suffer in secret, afraid of being judged.</p>
+              <div class="pain-quote">"I loved my baby but felt nothing. I was ashamed to tell anyone."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION NEW-A: LIVING STORIES CONSTELLATION ===== -->
+<section id="sna" class="sna-section">
+  <div class="section-inner">
+    <div class="sna-layout">
+
+      <!-- Left: Story Cards that materialize -->
+      <div>
+        <div class="section-label reveal"><i class="fa-solid fa-dna"></i> Research &amp; Recovery</div>
+        <h2 class="section-heading reveal reveal-delay-1">
+          Stories woven from<br><span class="em">science &amp; survival.</span>
+        </h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin-bottom:2rem;">
+          From breakthrough clinical studies to stage-3 cancer recoveries — every story on Nari Swasthya is a thread in a living tapestry of women's resilience.
+        </p>
+        <div class="sna-cards-col">
+
+          <div class="story-card" style="transition-delay:.1s;">
+            <div class="sc-glow-bar"></div>
+            <div class="sc-tag research"><i class="fa-solid fa-flask-vial"></i> Research</div>
+            <h4>New PCOS Research: Why 60% of diagnoses are missed until age 30</h4>
+            <p>A landmark AIIMS-Delhi study reveals hormonal markers doctors routinely overlook. Our platform surfaces this evidence in plain language — before you ever step into a clinic.</p>
+            <div class="sc-meta">
+              <div class="sc-avatar">🔬</div>
+              <div>
+                <div class="sc-author-name">Dr. Sunita Mehta, MD Endocrinology</div>
+                <div class="sc-author-sub">Summarized for 2.4M women · 12 min read</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" style="transition-delay:.22s;">
+            <div class="sc-glow-bar"></div>
+            <div class="sc-tag cancer"><i class="fa-solid fa-ribbon"></i> Cancer Recovery</div>
+            <h4>"I was 29 when they found Stage 3 cervical cancer. I'm 33 now, and I'm dancing."</h4>
+            <p>Ananya's recovery journey — surgery, radiation, grief, and rebirth — mapped week by week. Her story has helped 47,000 women ask the question they were afraid to voice.</p>
+            <div class="sc-meta">
+              <div class="sc-avatar">💃</div>
+              <div>
+                <div class="sc-author-name">Ananya Bose</div>
+                <div class="sc-author-sub">Kolkata, West Bengal · Shared with the community</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" style="transition-delay:.34s;">
+            <div class="sc-glow-bar"></div>
+            <div class="sc-tag recovery"><i class="fa-solid fa-heart-circle-check"></i> Recovery</div>
+            <h4>From 4 years of infertility to holding twins: Rekha's IVF truth</h4>
+            <p>No filter. No Instagram perfection. Rekha documents every injections, every failed cycle, every breakdown — and finally, the two heartbeats that changed everything.</p>
+            <div class="sc-meta">
+              <div class="sc-avatar">👶</div>
+              <div>
+                <div class="sc-author-name">Rekha Pillai</div>
+                <div class="sc-author-sub">Thiruvananthapuram · 6,800 comments of solidarity</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" style="transition-delay:.46s;">
+            <div class="sc-glow-bar"></div>
+            <div class="sc-tag peer"><i class="fa-solid fa-users"></i> Peer Network</div>
+            <h4>The silent miscarriage club: 2,300 women who said "me too" — and meant it</h4>
+            <p>A closed circle where loss is met with understanding, not platitudes. Real women sharing what helped, what didn't, and how they moved forward — together.</p>
+            <div class="sc-meta">
+              <div class="sc-avatar">🫂</div>
+              <div>
+                <div class="sc-author-name">Community Circle</div>
+                <div class="sc-author-sub">Private &amp; safe · Moderated by grief counsellors</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: Nucleus Canvas with floating badges -->
+      <div class="sna-nucleus-wrap">
+        <canvas id="nucleusCanvas"></canvas>
+        <div class="nucleus-badge nb1">🧬 PCOS Breakthroughs</div>
+        <div class="nucleus-badge nb2">🎗️ Breast Cancer Survival</div>
+        <div class="nucleus-badge nb3">🍃 Ayurvedic Fertility</div>
+        <div class="nucleus-badge nb4">🧠 Postpartum Research</div>
+        <div class="nucleus-badge nb5">💊 Hormone Therapy</div>
+        <div class="nucleus-badge nb6">🌙 Endometriosis Truth</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION NEW-B: VOICE CONFLUENCE — Peer Network Galaxy ===== -->
+<section id="snb" class="snb-section">
+  <canvas id="voiceCanvas"></canvas>
+
+  <div class="snb-inner">
+    <div class="snb-header">
+      <div class="section-label reveal"><i class="fa-solid fa-comments"></i> The Voices That Unite Us</div>
+      <h2 class="snb-title reveal reveal-delay-1">
+        The questions you were<br>afraid to ask. <span class="em">Someone already did.</span>
+      </h2>
+      <p class="snb-subtitle reveal reveal-delay-2">
+        Women from 28 states. Different languages, different gods, different fears — the same silence. Here, every question is brave. Every voice matters.
+      </p>
+    </div>
+
+    <!-- Floating question bubbles -->
+    <div class="question-wall reveal">
+      <canvas id="questionCanvas"></canvas>
+      <div class="q-bubble" style="left:2%;bottom:20%;animation-duration:7s;animation-delay:0s;">"Is it normal to cry this much after birth?"</div>
+      <div class="q-bubble" style="left:22%;bottom:30%;animation-duration:9s;animation-delay:1.2s;">"My doctor dismissed me. What do I do?"</div>
+      <div class="q-bubble" style="left:42%;bottom:15%;animation-duration:8s;animation-delay:0.5s;">"Can I still have children after my diagnosis?"</div>
+      <div class="q-bubble" style="left:62%;bottom:35%;animation-duration:7.5s;animation-delay:2s;">"Why does nobody talk about miscarriage grief?"</div>
+      <div class="q-bubble" style="left:78%;bottom:22%;animation-duration:10s;animation-delay:0.8s;">"Is my pain in my head, or is it real?"</div>
+      <div class="q-bubble" style="left:10%;bottom:55%;animation-duration:8.5s;animation-delay:1.5s;">"What if I never bond with my baby?"</div>
+      <div class="q-bubble" style="left:35%;bottom:60%;animation-duration:7s;animation-delay:0.3s;">"Nobody told me menopause would feel like this"</div>
+      <div class="q-bubble" style="left:58%;bottom:65%;animation-duration:9.5s;animation-delay:1.8s;">"Am I the only one who feels this way?"</div>
+      <div class="q-bubble" style="left:80%;bottom:58%;animation-duration:8s;animation-delay:0.9s;">"How do I tell my family about my diagnosis?"</div>
+    </div>
+
+    <!-- Peer network cards -->
+    <div class="peer-network">
+      <div class="peer-card reveal" style="transition-delay:.1s;">
+        <div class="peer-icon-wrap" style="background:linear-gradient(135deg,rgba(236,64,122,0.15),rgba(173,20,87,0.1));">🌸</div>
+        <h3>Ask Without Fear</h3>
+        <p>A space where no question is too embarrassing. Anonymous or named — women ask about bleeding, pain, intimacy, and shame, and receive evidence-based answers alongside lived experience. Over 1.2 million questions answered.</p>
+      </div>
+      <div class="peer-card reveal" style="transition-delay:.22s;">
+        <div class="peer-icon-wrap" style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(99,38,202,0.1));">🔗</div>
+        <h3>Circles of Solidarity</h3>
+        <p>From rural Rajasthan to urban Bengaluru — women in identical situations find each other. A woman who survived stage-4 ovarian cancer in Jaipur is holding hands (digitally) with someone newly diagnosed in Patna right now.</p>
+      </div>
+      <div class="peer-card reveal" style="transition-delay:.34s;">
+        <div class="peer-icon-wrap" style="background:linear-gradient(135deg,rgba(0,188,212,0.15),rgba(0,131,143,0.1));">🗺️</div>
+        <h3>Voices Across India</h3>
+        <p>Content in Hindi, Tamil, Telugu, Malayalam, Marathi, Bangla, Gujarati, and Odia. Health information that speaks her language, reflects her culture, and respects her reality — not a translated afterthought.</p>
+      </div>
+    </div>
+
+    <!-- Live Activity Ticker -->
+    <div class="live-ticker reveal" style="transition-delay:.4s;">
+      <div class="ticker-dot"></div>
+      <div class="ticker-label">Live</div>
+      <div class="ticker-track">
+        <div class="ticker-items" id="tickerItems">
+          <span class="ticker-item">💬 <strong>Meena from Jaipur</strong> just asked her first question about endometriosis</span>
+          <span class="ticker-item">🎗️ <strong>Lakshmi from Chennai</strong> shared her 2-year cancer-free milestone</span>
+          <span class="ticker-item">🤝 <strong>Anita from Lucknow</strong> joined the postpartum support circle</span>
+          <span class="ticker-item">🔬 <strong>New research</strong> on thyroid &amp; fertility just posted by our medical team</span>
+          <span class="ticker-item">💌 <strong>Prachi from Pune</strong> sent her first anonymous question — and got 47 replies</span>
+          <span class="ticker-item">🌟 <strong>Sunita from Bhopal</strong> just marked herself as "3 years postpartum anxiety-free"</span>
+          <span class="ticker-item">💬 <strong>Fatima from Hyderabad</strong> found her recovery circle after silent miscarriage</span>
+          <span class="ticker-item">🧬 <strong>AIIMS study</strong> on PCOS updated — 12,000 women reading it right now</span>
+          <!-- duplicate for seamless loop -->
+          <span class="ticker-item">💬 <strong>Meena from Jaipur</strong> just asked her first question about endometriosis</span>
+          <span class="ticker-item">🎗️ <strong>Lakshmi from Chennai</strong> shared her 2-year cancer-free milestone</span>
+          <span class="ticker-item">🤝 <strong>Anita from Lucknow</strong> joined the postpartum support circle</span>
+          <span class="ticker-item">🔬 <strong>New research</strong> on thyroid &amp; fertility just posted by our medical team</span>
+          <span class="ticker-item">💌 <strong>Prachi from Pune</strong> sent her first anonymous question — and got 47 replies</span>
+          <span class="ticker-item">🌟 <strong>Sunita from Bhopal</strong> just marked herself as "3 years postpartum anxiety-free"</span>
+          <span class="ticker-item">💬 <strong>Fatima from Hyderabad</strong> found her recovery circle after silent miscarriage</span>
+          <span class="ticker-item">🧬 <strong>AIIMS study</strong> on PCOS updated — 12,000 women reading it right now</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Women count bar -->
+    <div class="women-bar reveal" style="transition-delay:.5s;">
+      <div class="wb-item"><strong>2.4M+</strong> women asking questions</div>
+      <div class="wb-divider">·</div>
+      <div class="wb-item"><strong>28</strong> Indian states represented</div>
+      <div class="wb-divider">·</div>
+      <div class="wb-item"><strong>8</strong> regional languages</div>
+      <div class="wb-divider">·</div>
+      <div class="wb-item"><strong>100%</strong> anonymous, always</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== SECTION 2: IMPACT — 150 Million Voices ===== -->
+<section id="s2" class="s2-section">
+  <canvas id="dotMapCanvas"></canvas>
+  <div class="section-inner s2-inner">
+    <div class="s2-layout">
+      <div>
+        <div class="section-label"><i class="fa-solid fa-globe"></i> Our Impact</div>
+        <h2 class="section-heading reveal">
+          Every dot is a woman.<br><span class="em">Every woman matters.</span>
+        </h2>
+        <p class="section-sub reveal reveal-delay-1">
+          Behind every statistic is a mother, a daughter, a sister. We built Nari Swasthya so no woman becomes a number — she becomes a story of strength.
+        </p>
+        <div class="s2-counters">
+          <div class="s2-counter reveal">
+            <span class="s2-counter-num" data-target="2400000" data-suffix="M+">0</span>
+            <div class="s2-counter-label">Women on the platform</div>
+          </div>
+          <div class="s2-counter reveal reveal-delay-1">
+            <span class="s2-counter-num" data-target="350" data-suffix="M">0</span>
+            <div class="s2-counter-label">Women we aim to reach across India</div>
+          </div>
+          <div class="s2-counter reveal reveal-delay-2">
+            <span class="s2-counter-num" data-target="94" data-suffix="%">0</span>
+            <div class="s2-counter-label">Felt more confident in their health decisions</div>
+          </div>
+          <div class="s2-counter reveal reveal-delay-3">
+            <span class="s2-counter-num" data-target="72" data-suffix="%">0</span>
+            <div class="s2-counter-label">Reduction in unnecessary ER visits</div>
+          </div>
+        </div>
+        <div style="margin-top:2.5rem;" class="reveal reveal-delay-4">
+          <a href="login.html" class="btn-hero primary" style="display:inline-flex;">
+            <i class="fa-solid fa-heart"></i> Be Part of the Movement
+          </a>
+        </div>
+      </div>
+      <div class="s2-visual">
+        <canvas id="particleFieldCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: JOURNEY — Her 40-Week Thread ===== -->
+<section id="s3" class="s3-section">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <div class="section-label reveal"><i class="fa-solid fa-route"></i> Her Complete Journey</div>
+      <h2 class="section-heading reveal reveal-delay-1" style="text-align:center;max-width:700px;margin:0 auto .75rem;">
+        Every stage she faces.<br><span class="em">We face it together.</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="text-align:center;margin:0 auto 1rem;">
+        From the quiet hope of conceiving to the raw love of new motherhood — one platform, one thread connecting her entire life.
+      </p>
+    </div>
+
+    <div class="s3-timeline" id="s3Timeline">
+      <div class="thread-line"></div>
+      <div class="thread-glow" id="threadGlow"></div>
+
+      <div class="milestone-row">
+        <div class="milestone-card-wrap">
+          <div class="milestone-card">
+            <div class="mc-week">Before Conception</div>
+            <div class="mc-title">🌱 The Hope That Starts It All</div>
+            <div class="mc-desc">Cycle tracking, fertility windows, hormonal health, and preconception nutrition — everything she needs before the journey begins, personalized to her body.</div>
+            <div class="mc-stat"><i class="fa-solid fa-chart-line"></i> 83% of women felt more prepared after using our fertility tracker</div>
+          </div>
+        </div>
+        <div class="milestone-node" style="animation-delay:0s;"><i class="fa-solid fa-seedling"></i></div>
+      </div>
+
+      <div class="milestone-row">
+        <div class="milestone-card-wrap">
+          <div class="milestone-card">
+            <div class="mc-week">Weeks 1–12 · First Trimester</div>
+            <div class="mc-title">💛 The Quiet, Terrifying First Weeks</div>
+            <div class="mc-desc">Morning sickness, exhaustion, fear of loss — but also wonder. Our week-by-week guide tells her exactly what's happening inside her body today, and what to watch for.</div>
+            <div class="mc-stat"><i class="fa-solid fa-shield-heart"></i> Emergency symptom checker available 24/7, no appointment needed</div>
+          </div>
+        </div>
+        <div class="milestone-node" style="animation-delay:.3s;"><i class="fa-solid fa-baby-carriage"></i></div>
+      </div>
+
+      <div class="milestone-row">
+        <div class="milestone-card-wrap">
+          <div class="milestone-card">
+            <div class="mc-week">Weeks 13–28 · Second Trimester</div>
+            <div class="mc-title">✨ She Starts to Believe It's Real</div>
+            <div class="mc-desc">Anatomy scans, glucose tests, the first kick — paired with our interactive body map so she understands every test result and why it matters for her baby.</div>
+            <div class="mc-stat"><i class="fa-solid fa-magnifying-glass"></i> Personalized ANC visit reminders and test interpretation</div>
+          </div>
+        </div>
+        <div class="milestone-node" style="animation-delay:.6s;"><i class="fa-solid fa-heart-pulse"></i></div>
+      </div>
+
+      <div class="milestone-row">
+        <div class="milestone-card-wrap">
+          <div class="milestone-card">
+            <div class="mc-week">Weeks 29–40 · Third Trimester</div>
+            <div class="mc-title">🌊 The Final Push — Fear & Fierce Love</div>
+            <div class="mc-desc">Birth plans, kick-count tracking, GBS testing, and hospital bag checklists. She walks into delivery prepared, not terrified — because she knows what to expect.</div>
+            <div class="mc-stat"><i class="fa-solid fa-clipboard-check"></i> 91% of users felt more confident about labour after our prep module</div>
+          </div>
+        </div>
+        <div class="milestone-node" style="animation-delay:.9s;"><i class="fa-solid fa-baby"></i></div>
+      </div>
+
+      <div class="milestone-row">
+        <div class="milestone-card-wrap">
+          <div class="milestone-card">
+            <div class="mc-week">After Birth · The 4th Trimester</div>
+            <div class="mc-title">🌸 The Hardest, Most Beautiful Chapter</div>
+            <div class="mc-desc">Postpartum depression screening, breastfeeding support, newborn care guides, and a community that says "me too" — because new motherhood should never be lonely.</div>
+            <div class="mc-stat"><i class="fa-solid fa-users"></i> 24/7 community of 2.4M mothers who understand exactly how she feels</div>
+          </div>
+        </div>
+        <div class="milestone-node" style="animation-delay:1.2s;"><i class="fa-solid fa-hands-holding-heart"></i></div>
+      </div>
+
+      <div class="s3-midcta">
+        <a href="login.html" class="btn-hero primary" style="font-size:1.05rem;padding:1rem 2.5rem;">
+          <i class="fa-solid fa-sparkles"></i> Start Your Journey Today — It's Free
+        </a>
+        <div style="margin-top:.9rem;font-size:.82rem;color:var(--text-soft);">
+          No credit card. No judgement. Just support.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: CTA — Your Story Starts Tonight ===== -->
+<section id="s4" class="s4-section">
+  <canvas id="galaxyCanvas"></canvas>
+  <div class="section-inner s4-inner">
+    <div style="text-align:center;max-width:760px;margin:0 auto;">
+      <div class="section-label reveal"><i class="fa-solid fa-stars"></i> Real Voices</div>
+      <h2 class="section-heading reveal reveal-delay-1">
+        They were scared too.<br><span class="em">Then everything changed.</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" style="margin:0 auto;">
+        These are not testimonials. These are turning points. Women who found clarity, community, and courage — in the darkest hours of their journey.
+      </p>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="t-card">
+        <div class="t-avatar-wrap">
+          <div class="t-avatar">👩</div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"I had three miscarriages before anyone told me what a thrombophilia panel was. Nari Swasthya's loss support section held my hand when no doctor had time to. I finally felt understood."</p>
+        <div class="t-name">Priya Nair</div>
+        <div class="t-role">Mother of 1 · Kochi, Kerala</div>
+      </div>
+      <div class="t-card" style="transition-delay:.15s;">
+        <div class="t-avatar-wrap">
+          <div class="t-avatar" style="animation-delay:2s;">🧕</div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"My husband works in Dubai. I was pregnant, alone in a village, and terrified every single night. The emergency symptom checker told me what was serious. Once it literally told me to go to hospital immediately — it saved my baby."</p>
+        <div class="t-name">Fatima Shaikh</div>
+        <div class="t-role">First-time mother · Aurangabad, Maharashtra</div>
+      </div>
+      <div class="t-card" style="transition-delay:.3s;">
+        <div class="t-avatar-wrap">
+          <div class="t-avatar" style="animation-delay:4s;">👩‍⚕️</div>
+        </div>
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"I'm a nurse and still felt completely lost with my own postpartum depression. The platform's PHQ-9 screening and community forum made me realize I wasn't a bad mother — I was a sick one who needed help. That distinction saved my life."</p>
+        <div class="t-name">Deepa Krishnamurthy</div>
+        <div class="t-role">Registered Nurse · Bengaluru, Karnataka</div>
+      </div>
+    </div>
+
+    <div class="grand-cta reveal">
+      <h2>Tonight could be the night<br>you stop searching alone. <span class="em">Join us.</span></h2>
+      <p>Your account takes 60 seconds. Your journey takes a lifetime. Let's walk it together — with evidence-based care, a community of millions, and tools built for every woman in India.</p>
+      <div class="grand-cta-btns">
+        <a href="login.html" class="btn-grand-primary">
+          <i class="fa-solid fa-heart"></i> Create My Account — Free
+        </a>
+        <a href="journeys.html" class="btn-grand-secondary">
+          <i class="fa-solid fa-book-open"></i> Explore the Platform First
+        </a>
+      </div>
+      <div class="grand-cta-micro">
+        <i class="fa-solid fa-lock"></i> Private & secure · No ads · No data selling · Ever.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Nari Swasthya</div>
+    <div class="footer-tagline">Every Woman. Every Stage. Every Story.</div>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About Us</a>
+      <a href="journeys.html">Journeys</a>
+      <a href="antenatal_care.html">Antenatal Care</a>
+      <a href="emergency_guide.html">Emergency Guide</a>
+      <a href="stories.html">Stories</a>
+      <a href="login.html">Sign In</a>
+    </div>
+    <div class="footer-copy">© 2026 Nari Swasthya. Built with love for every woman in India.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   MOBILE MENU
+============================================================ */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';b2.style.cssText='opacity:0;';b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px)';}
+  else{b1.style.cssText='';b2.style.cssText='';b3.style.cssText='';}
+}
+document.addEventListener('click',function(e){
+  const m=document.getElementById('mobileMenu'),btn=document.getElementById('hamburgerBtn');
+  if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!btn.contains(e.target)){
+    m.classList.remove('open');
+    ['hb1','hb2','hb3'].forEach(id=>document.getElementById(id).style.cssText='');
+  }
+});
+
+/* ============================================================
+   SCROLL REVEAL + SECTION DOTS
+============================================================ */
+const revealObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.pain-card,.s2-counter,.milestone-card,.t-card,.s3-midcta').forEach(el=>revealObs.observe(el));
+
+const sections=['hero','s1','sna','snb','s2','s3','s4'];
+const sectionObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.sp-dot').forEach(d=>d.classList.remove('active'));
+      const dot=document.querySelector(`.sp-dot[data-section="${e.target.id}"]`);
+      if(dot)dot.classList.add('active');
+    }
+  });
+},{threshold:.3});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)sectionObs.observe(el);});
+document.querySelectorAll('.sp-dot').forEach(dot=>{
+  dot.addEventListener('click',()=>document.getElementById(dot.dataset.section)?.scrollIntoView({behavior:'smooth',block:'start'}));
+});
+
+/* ============================================================
+   HERO PARTICLE CANVAS — journeys.html style pink particles
+============================================================ */
+(function(){
+  const canvas=document.getElementById('heroParticleCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=document.getElementById('hero').offsetHeight||window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  class P{
+    constructor(){this.reset();}
+    reset(){
+      this.x=Math.random()*W;this.y=Math.random()*H;
+      this.vx=(Math.random()-.5)*.55;this.vy=(Math.random()-.5)*.55;
+      this.r=Math.random()*2.2+.8;this.alpha=Math.random()*.45+.15;
+      this.color=Math.random()>.6?'#ec407a':'#ad1457';
+    }
+    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>W)this.vx*=-1;if(this.y<0||this.y>H)this.vy*=-1;}
+    draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color;ctx.globalAlpha=this.alpha;ctx.fill();ctx.globalAlpha=1;}
+  }
+  for(let i=0;i<120;i++)particles.push(new P());
+  function connect(){
+    for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
+        ctx.strokeStyle=`rgba(236,64,122,${.15*(1-d/110)})`;ctx.lineWidth=.8;ctx.stroke();}
+    }
+  }
+  function animate(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});connect();requestAnimationFrame(animate);}
+  animate();
+})();
+
+/* ============================================================
+   ECG CANVAS — hero footer strip
+============================================================ */
+(function(){
+  const c=document.getElementById('ecgCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let t=0;
+  function resize(){c.width=c.offsetWidth||600;c.height=c.offsetHeight||60;}
+  resize();window.addEventListener('resize',resize);
+  function draw(){
+    const W=c.width,H=c.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.beginPath();
+    for(let x=0;x<W;x++){
+      const phase=(x+t)%W/W;
+      let y=H/2;
+      const seg=phase*8%1;
+      if(seg<.1)y=H/2;
+      else if(seg<.15)y=H/2-H*.6;
+      else if(seg<.2)y=H/2+H*.35;
+      else if(seg<.25)y=H/2-H*1.0;
+      else if(seg<.3)y=H/2;
+      else y=H/2+Math.sin(phase*Math.PI*2)*4;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    const g=ctx.createLinearGradient(0,0,W,0);
+    g.addColorStop(0,'rgba(236,64,122,0)');g.addColorStop(.3,'rgba(236,64,122,.8)');
+    g.addColorStop(.7,'rgba(236,64,122,.8)');g.addColorStop(1,'rgba(236,64,122,0)');
+    ctx.strokeStyle=g;ctx.lineWidth=2;ctx.stroke();
+    t+=1.5;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================================================
+   SECTION 1 — MORPHING ANXIETY BLOB CANVAS
+   Organic blob that morphs between anxiety shapes, glows
+   in pain colors, with a pulsing aura that reacts to time
+============================================================ */
+(function(){
+  const canvas=document.getElementById('blobCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let t=0;W=canvas.width=canvas.offsetHeight||440;H=canvas.height=canvas.offsetHeight||440;
+  function resize(){
+    const size=Math.min(canvas.parentElement.offsetWidth,440);
+    canvas.width=size;canvas.height=size;W=H=size;
+  }
+  resize();window.addEventListener('resize',resize);
+
+  const colors=[
+    ['#ec407a','#ad1457'],
+    ['#9c5cf7','#6a1b9a'],
+    ['#ff6090','#c2185b'],
+    ['#f06292','#880e4f'],
+  ];
+  let colorIdx=0,nextColorIdx=1,colorT=0;
+
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function lerpColor(c1,c2,t){
+    const r1=parseInt(c1.slice(1,3),16),g1=parseInt(c1.slice(3,5),16),b1=parseInt(c1.slice(5,7),16);
+    const r2=parseInt(c2.slice(1,3),16),g2=parseInt(c2.slice(3,5),16),b2=parseInt(c2.slice(5,7),16);
+    const r=Math.round(lerp(r1,r2,t)),g=Math.round(lerp(g1,g2,t)),b2c=Math.round(lerp(b1,b2,t));
+    return`rgb(${r},${g},${b2c})`;
+  }
+
+  function blobPoint(angle,time,complexity){
+    const r=W*0.28;
+    const noise=
+      Math.sin(angle*2+time*.7)*0.12+
+      Math.sin(angle*3-time*.5)*0.08+
+      Math.sin(angle*5+time*.3)*0.05+
+      Math.cos(angle*4-time*.9)*0.07;
+    return r*(1+noise*complexity);
+  }
+
+  function drawBlob(){
+    const cx=W/2,cy=H/2;
+    const complexity=1+Math.sin(t*0.02)*0.3;
+    const steps=120;
+    ctx.beginPath();
+    for(let i=0;i<=steps;i++){
+      const angle=(i/steps)*Math.PI*2;
+      const r=blobPoint(angle,t*.03,complexity);
+      const x=cx+Math.cos(angle)*r;
+      const y=cy+Math.sin(angle)*r;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    const prog=colorT/180;
+    const c1=lerpColor(colors[colorIdx][0],colors[nextColorIdx][0],prog);
+    const c2=lerpColor(colors[colorIdx][1],colors[nextColorIdx][1],prog);
+    const grad=ctx.createRadialGradient(cx-W*.08,cy-H*.08,W*.03,cx,cy,W*.32);
+    grad.addColorStop(0,c1);grad.addColorStop(1,c2);
+    ctx.fillStyle=grad;
+    ctx.shadowColor=c1;ctx.shadowBlur=40;
+    ctx.fill();ctx.shadowBlur=0;
+
+    // Outer aura rings
+    for(let ring=1;ring<=3;ring++){
+      const rScale=1+ring*0.15+Math.sin(t*.04+ring)*0.03;
+      ctx.beginPath();
+      for(let i=0;i<=steps;i++){
+        const angle=(i/steps)*Math.PI*2;
+        const r=blobPoint(angle,t*.03,complexity)*rScale;
+        const x=cx+Math.cos(angle)*r;const y=cy+Math.sin(angle)*r;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle=`rgba(236,64,122,${.18-ring*.05})`;ctx.lineWidth=1.5;ctx.stroke();
+    }
+
+    // Central icon
+    ctx.font=`${W*.12}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.globalAlpha=.9;ctx.fillStyle='white';
+    ctx.shadowColor='rgba(0,0,0,.2)';ctx.shadowBlur=10;
+    ctx.fillText(['😔','😰','💔','😢'][colorIdx],cx,cy);
+    ctx.shadowBlur=0;ctx.globalAlpha=1;
+
+    colorT++;
+    if(colorT>=180){colorT=0;colorIdx=nextColorIdx;nextColorIdx=(nextColorIdx+1)%colors.length;}
+    t++;requestAnimationFrame(drawBlob);
+  }
+  drawBlob();
+})();
+
+/* ============================================================
+   SECTION 2 — DOT MAP CANVAS
+   Hundreds of glowing dots assemble from random chaos into a
+   heart/mandala shape — representing women coming together
+============================================================ */
+(function(){
+  const canvas=document.getElementById('dotMapCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,dots=[],t=0,assembled=false,assembleProgress=0;
+
+  function resize(){W=canvas.width=canvas.offsetWidth||window.innerWidth;H=canvas.height=canvas.offsetHeight||600;}
+  resize();window.addEventListener('resize',()=>{resize();initDots();});
+
+  // Generate heart target positions
+  function heartPoint(angle,scale){
+    const x=16*Math.pow(Math.sin(angle),3);
+    const y=-(13*Math.cos(angle)-5*Math.cos(2*angle)-2*Math.cos(3*angle)-Math.cos(4*angle));
+    return{x:W/2+x*scale,y:H/2+y*scale};
+  }
+  const N=280;
+  function initDots(){
+    dots=[];
+    for(let i=0;i<N;i++){
+      const angle=(i/N)*Math.PI*2;
+      const target=heartPoint(angle,H*0.045);
+      dots.push({
+        x:Math.random()*W,y:Math.random()*H,
+        tx:target.x,ty:target.y,
+        vx:0,vy:0,
+        r:Math.random()*2.5+1.2,
+        color:Math.random()>.5?'#ec407a':'#f48fb1',
+        alpha:Math.random()*.5+.3,
+        phase:Math.random()*Math.PI*2,
+      });
+    }
+  }
+  initDots();
+
+  // Trigger assembly when s2 scrolls into view
+  const s2=document.getElementById('s2');
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting)assembled=true;
+  },{threshold:.3}).observe(s2||canvas);
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    if(assembled&&assembleProgress<1)assembleProgress=Math.min(1,assembleProgress+.006);
+
+    dots.forEach((d,i)=>{
+      const ease=assembleProgress<1?1-Math.pow(1-assembleProgress,3):1;
+      const dx=d.tx-d.x,dy=d.ty-d.y;
+      d.vx+=dx*0.04*ease;d.vy+=dy*0.04*ease;
+      d.vx*=.82;d.vy*=.82;
+      d.x+=d.vx;d.y+=d.vy;
+      d.phase+=.025;
+
+      const pulse=1+Math.sin(d.phase)*0.35*ease;
+      const r=d.r*pulse;
+      const a=d.alpha*(0.4+ease*0.6);
+
+      // Glow
+      const g=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,r*5);
+      g.addColorStop(0,d.color+'66');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(d.x,d.y,r*5,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=a*.5;ctx.fill();
+
+      // Core dot
+      ctx.beginPath();ctx.arc(d.x,d.y,r,0,Math.PI*2);
+      ctx.fillStyle=d.color;ctx.globalAlpha=a;ctx.fill();ctx.globalAlpha=1;
+    });
+    t++;requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   SECTION 2 — PARTICLE FIELD (right visual)
+   A living field of glowing orbs — like stars representing women
+   Orbs gently attract to cursor/mouse
+============================================================ */
+(function(){
+  const canvas=document.getElementById('particleFieldCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,orbs=[],mx=9999,my=9999;
+  function resize(){W=canvas.width=canvas.offsetWidth||500;H=canvas.height=canvas.offsetHeight||460;}
+  resize();window.addEventListener('resize',resize);
+  canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});
+  canvas.addEventListener('mouseleave',()=>{mx=9999;my=9999;});
+
+  const ORBS=80;
+  for(let i=0;i<ORBS;i++){
+    orbs.push({
+      x:Math.random()*500,y:Math.random()*460,
+      vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,
+      r:Math.random()*4+2,
+      color:['#ec407a','#f48fb1','#ad1457','#ff6090','#9c5cf7'][Math.floor(Math.random()*5)],
+      phase:Math.random()*Math.PI*2,glow:Math.random()*.5+.5,
+    });
+  }
+
+  function animate(){
+    resize();
+    ctx.clearRect(0,0,W,H);
+    // Dark background
+    ctx.fillStyle='rgba(20,5,15,0.0)';ctx.fillRect(0,0,W,H);
+
+    // Connections
+    for(let i=0;i<orbs.length;i++)for(let j=i+1;j<orbs.length;j++){
+      const dx=orbs[i].x-orbs[j].x,dy=orbs[i].y-orbs[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){
+        const g=ctx.createLinearGradient(orbs[i].x,orbs[i].y,orbs[j].x,orbs[j].y);
+        g.addColorStop(0,orbs[i].color+'44');g.addColorStop(1,orbs[j].color+'44');
+        ctx.beginPath();ctx.moveTo(orbs[i].x,orbs[i].y);ctx.lineTo(orbs[j].x,orbs[j].y);
+        ctx.strokeStyle=g;ctx.globalAlpha=.22*(1-d/90);ctx.lineWidth=1;ctx.stroke();ctx.globalAlpha=1;
+      }
+    }
+
+    orbs.forEach(o=>{
+      o.phase+=.02;
+      const dx=mx-o.x,dy=my-o.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<120){o.vx+=dx*.001;o.vy+=dy*.001;}
+      o.vx*=.96;o.vy*=.96;
+      o.x+=o.vx;o.y+=o.vy;
+      if(o.x<0)o.x=W;if(o.x>W)o.x=0;
+      if(o.y<0)o.y=H;if(o.y>H)o.y=0;
+      const pulse=1+Math.sin(o.phase)*.25;
+      const r=o.r*pulse;
+
+      const g=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,r*6);
+      g.addColorStop(0,o.color+'88');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(o.x,o.y,r*6,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=o.glow*.4;ctx.fill();
+
+      ctx.beginPath();ctx.arc(o.x,o.y,r,0,Math.PI*2);
+      ctx.fillStyle=o.color;ctx.globalAlpha=o.glow;ctx.fill();ctx.globalAlpha=1;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   SECTION 3 — THREAD DRAW on scroll
+============================================================ */
+(function(){
+  const s3=document.getElementById('s3');
+  const glow=document.getElementById('threadGlow');
+  if(!s3||!glow)return;
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting)glow.classList.add('drawn');
+  },{threshold:.1}).observe(s3);
+})();
+
+/* ============================================================
+   SECTION 2 — ANIMATED COUNTERS
+============================================================ */
+(function(){
+  function animateCounter(el){
+    const target=+el.dataset.target;
+    const suffix=el.dataset.suffix||'';
+    const dur=2200;const start=performance.now();
+    function format(v){
+      if(target>=1000000)return(v/1000000).toFixed(1)+'M'+suffix.replace('M+','').replace('M','');
+      if(target>=1000)return Math.floor(v/1000)+'K'+suffix.replace('K+','');
+      return Math.floor(v)+suffix;
+    }
+    function step(now){
+      const elapsed=now-start;
+      const prog=Math.min(elapsed/dur,1);
+      const ease=1-Math.pow(1-prog,4);
+      if(target>=1000000)el.textContent=(target/1000000*ease).toFixed(1)+'M+';
+      else if(suffix.includes('%'))el.textContent=Math.round(target*ease)+'%';
+      else if(target>=300)el.textContent=Math.round(target*ease)+'M';
+      else el.textContent=format(target*ease);
+      if(prog<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const counterObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        animateCounter(e.target);counterObs.unobserve(e.target);
+      }
+    });
+  },{threshold:.5});
+  document.querySelectorAll('.s2-counter-num[data-target]').forEach(el=>counterObs.observe(el));
+})();
+
+/* ============================================================
+   SECTION 4 — GALAXY / FIREFLY CANVAS
+   Thousands of firefly-like particles form constellations —
+   some gently drift into heart outlines, creating an emotional
+   living galaxy of women's stories
+============================================================ */
+(function(){
+  const canvas=document.getElementById('galaxyCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,t=0;
+  function resize(){W=canvas.width=canvas.offsetWidth||window.innerWidth;H=canvas.height=canvas.offsetHeight||800;}
+  resize();window.addEventListener('resize',()=>{resize();initGalaxy();});
+
+  const STARS=350;let stars=[];
+  function initGalaxy(){
+    stars=[];
+    for(let i=0;i<STARS;i++){
+      stars.push({
+        x:Math.random()*W,y:Math.random()*H,
+        vx:(Math.random()-.5)*.2,vy:(Math.random()-.5)*.2,
+        r:Math.random()*2.2+.4,
+        alpha:Math.random()*.8+.2,
+        phase:Math.random()*Math.PI*2,
+        speed:Math.random()*.02+.01,
+        color:Math.random()>.7?'#f48fb1':Math.random()>.5?'#ec407a':'#ffffff',
+        trail:[],
+      });
+    }
+    // Some special "story" stars that drift in arcs
+    for(let i=0;i<30;i++){
+      const angle=Math.random()*Math.PI*2,speed=.15+Math.random()*.25;
+      stars.push({
+        x:Math.random()*W,y:Math.random()*H,
+        vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,
+        r:Math.random()*3+1.5,
+        alpha:.9,phase:Math.random()*Math.PI*2,speed:.03,
+        color:'#f48fb1',trail:[],special:true,
+      });
+    }
+  }
+  initGalaxy();
+
+  // Shooting star occasional
+  let shooters=[];
+  function spawnShooter(){
+    shooters.push({
+      x:Math.random()*W*.3,y:Math.random()*H*.5,
+      vx:4+Math.random()*3,vy:1+Math.random()*2,
+      life:1,alpha:1,
+    });
+  }
+  setInterval(spawnShooter,3500);
+
+  function draw(){
+    ctx.fillStyle='rgba(10,3,15,0.18)';ctx.fillRect(0,0,W,H);
+
+    // Shooting stars
+    for(let i=shooters.length-1;i>=0;i--){
+      const s=shooters[i];
+      ctx.beginPath();
+      const g=ctx.createLinearGradient(s.x-80,s.y-30,s.x,s.y);
+      g.addColorStop(0,'transparent');g.addColorStop(1,`rgba(244,143,177,${s.alpha})`);
+      ctx.strokeStyle=g;ctx.lineWidth=2;
+      ctx.moveTo(s.x-80,s.y-30);ctx.lineTo(s.x,s.y);ctx.stroke();
+      s.x+=s.vx;s.y+=s.vy;s.alpha-=.012;
+      if(s.alpha<=0)shooters.splice(i,1);
+    }
+
+    // Connections between close stars
+    for(let i=0;i<stars.length;i+=2)for(let j=i+2;j<stars.length;j+=2){
+      const dx=stars[i].x-stars[j].x,dy=stars[i].y-stars[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<100&&Math.random()>.96){
+        ctx.beginPath();ctx.moveTo(stars[i].x,stars[i].y);ctx.lineTo(stars[j].x,stars[j].y);
+        ctx.strokeStyle=`rgba(244,143,177,${.08*(1-d/100)})`;ctx.lineWidth=.6;ctx.stroke();
+      }
+    }
+
+    stars.forEach(s=>{
+      s.phase+=s.speed;
+      s.x+=s.vx;s.y+=s.vy;
+      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
+      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
+      const twinkle=.5+Math.sin(s.phase)*.5;
+      const a=s.alpha*twinkle;
+      const r=s.r*(1+Math.sin(s.phase)*.2);
+
+      if(s.special){
+        const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,r*8);
+        g.addColorStop(0,s.color+'cc');g.addColorStop(.4,s.color+'33');g.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(s.x,s.y,r*8,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=a*.6;ctx.fill();
+      }
+      ctx.beginPath();ctx.arc(s.x,s.y,r,0,Math.PI*2);
+      ctx.fillStyle=s.color;ctx.globalAlpha=a;ctx.fill();ctx.globalAlpha=1;
+    });
+
+    t++;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ============================================================
+   SECTION NEW-A — NUCLEUS CANVAS
+   Spinning DNA-like double helix with glowing nodes &
+   orbiting story particles
+============================================================ */
+(function(){
+  const canvas=document.getElementById('nucleusCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,t=0;
+  function resize(){
+    W=canvas.width=canvas.offsetWidth||500;
+    H=canvas.height=canvas.offsetHeight||560;
+  }
+  resize();window.addEventListener('resize',resize);
+
+  const NODES=22;
+  const helixAmplitude=110;
+  const helixSpeed=0.016;
+
+  const PARTICLES=60;
+  const particles=[];
+  for(let i=0;i<PARTICLES;i++){
+    particles.push({
+      angle:Math.random()*Math.PI*2,
+      radius:90+Math.random()*150,
+      speed:(Math.random()>.5?1:-1)*(0.004+Math.random()*0.008),
+      r:Math.random()*3+1,
+      color:['#ec407a','#f48fb1','#7c3aed','#9c5cf7','#00bcd4','#ff6090'][Math.floor(Math.random()*6)],
+      alpha:Math.random()*.7+.3,
+      phase:Math.random()*Math.PI*2,
+    });
+  }
+
+  function drawNucleus(){
+    const cx=W/2,cy=H/2;
+    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,90);
+    g.addColorStop(0,'rgba(236,64,122,0.35)');
+    g.addColorStop(0.5,'rgba(173,20,87,0.15)');
+    g.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.arc(cx,cy,90,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    for(let i=0;i<3;i++){
+      ctx.beginPath();ctx.arc(cx,cy,22+i*16,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(236,64,122,${0.5-i*0.12})`;ctx.lineWidth=2-i*0.4;ctx.stroke();
+    }
+    const cg=ctx.createRadialGradient(cx,cy,0,cx,cy,18);
+    cg.addColorStop(0,'rgba(255,255,255,0.95)');
+    cg.addColorStop(0.4,'rgba(236,64,122,0.9)');
+    cg.addColorStop(1,'rgba(173,20,87,0.2)');
+    ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);ctx.fillStyle=cg;ctx.fill();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(t*0.02);
+    for(let i=0;i<3;i++){
+      ctx.rotate(Math.PI*2/3);
+      ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(14,0);
+      ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.beginPath();ctx.arc(14,0,3,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,0.8)';ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function drawHelix(){
+    const cx=W/2,cy=H/2;
+    const step=H/(NODES+2);
+    for(let strand=0;strand<2;strand++){
+      const phase=strand*Math.PI;
+      ctx.beginPath();
+      for(let i=0;i<=NODES+1;i++){
+        const yy=cy-H/2+i*step;
+        const xx=cx+Math.cos(t*helixSpeed*3+i*0.35+phase)*helixAmplitude;
+        if(i===0)ctx.moveTo(xx,yy);else ctx.lineTo(xx,yy);
+      }
+      const sg=ctx.createLinearGradient(cx-helixAmplitude,cy-H/2,cx+helixAmplitude,cy+H/2);
+      sg.addColorStop(0,'rgba(236,64,122,0.0)');
+      sg.addColorStop(0.2,'rgba(236,64,122,0.7)');
+      sg.addColorStop(0.5,'rgba(173,20,87,0.9)');
+      sg.addColorStop(0.8,'rgba(124,58,237,0.7)');
+      sg.addColorStop(1,'rgba(124,58,237,0.0)');
+      ctx.strokeStyle=sg;ctx.lineWidth=2.5;ctx.stroke();
+    }
+    for(let i=1;i<=NODES;i++){
+      const yy=cy-H/2+i*step;
+      const x1=cx+Math.cos(t*helixSpeed*3+i*0.35)*helixAmplitude;
+      const x2=cx+Math.cos(t*helixSpeed*3+i*0.35+Math.PI)*helixAmplitude;
+      ctx.beginPath();ctx.moveTo(x1,yy);ctx.lineTo(x2,yy);
+      ctx.strokeStyle=`rgba(244,143,177,${0.2+0.4*Math.abs(Math.sin(i*0.5))})`;
+      ctx.lineWidth=1;ctx.stroke();
+      [x1,x2].forEach((xn,si)=>{
+        const pulse=1+0.3*Math.sin(t*0.05+i*0.4+si);
+        const nr=3.5*pulse;
+        const ng=ctx.createRadialGradient(xn,yy,0,xn,yy,nr*3);
+        ng.addColorStop(0,si===0?'rgba(236,64,122,0.9)':'rgba(124,58,237,0.9)');
+        ng.addColorStop(1,'transparent');
+        ctx.beginPath();ctx.arc(xn,yy,nr*3,0,Math.PI*2);ctx.fillStyle=ng;ctx.globalAlpha=0.3;ctx.fill();ctx.globalAlpha=1;
+        ctx.beginPath();ctx.arc(xn,yy,nr,0,Math.PI*2);
+        ctx.fillStyle=si===0?'#ec407a':'#7c3aed';ctx.fill();
+      });
+    }
+  }
+
+  function drawParticles(){
+    const cx=W/2,cy=H/2;
+    particles.forEach(p=>{
+      p.angle+=p.speed;p.phase+=0.03;
+      const pulse=1+0.25*Math.sin(p.phase);
+      const px=cx+Math.cos(p.angle)*p.radius;
+      const py=cy+Math.sin(p.angle)*p.radius*0.4;
+      const r=p.r*pulse;
+      const g=ctx.createRadialGradient(px,py,0,px,py,r*5);
+      g.addColorStop(0,p.color+'66');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(px,py,r*5,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=p.alpha*0.4;ctx.fill();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(px,py,r,0,Math.PI*2);ctx.fillStyle=p.color;ctx.globalAlpha=p.alpha;ctx.fill();ctx.globalAlpha=1;
+    });
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,W,H);
+    drawParticles();drawHelix();drawNucleus();
+    t++;requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ============================================================
+   SECTION NEW-B — VOICE CANVAS
+   Ember-like rising particles forming peer network nebula
+============================================================ */
+(function(){
+  const canvas=document.getElementById('voiceCanvas');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H;
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=canvas.parentElement?canvas.parentElement.offsetHeight:window.innerHeight;
+  }
+  resize();window.addEventListener('resize',resize);
+
+  const embers=[];
+  function makeEmber(){
+    return{
+      x:Math.random()*W,y:H+Math.random()*40,
+      vx:(Math.random()-.5)*0.7,vy:-(0.5+Math.random()*1.4),
+      r:Math.random()*3+0.8,alpha:Math.random()*0.65+0.2,
+      phase:Math.random()*Math.PI*2,
+      color:Math.random()>0.55?'#ec407a':Math.random()>0.4?'#f48fb1':Math.random()>0.3?'#7c3aed':'#ff6090',
+      life:1,decay:0.003+Math.random()*0.003,
+    };
+  }
+  for(let i=0;i<180;i++){const e=makeEmber();e.y=Math.random()*H;e.life=Math.random();embers.push(e);}
+
+  const HUBS=12;const hubs=[];
+  const hc=['#ec407a','#f48fb1','#7c3aed','#ff6090','#00bcd4'];
+  for(let i=0;i<HUBS;i++){
+    hubs.push({
+      x:(0.06+0.23*(i%4))*W+(Math.random()-.5)*W*0.05,
+      y:(0.12+0.35*Math.floor(i/4))*H+(Math.random()-.5)*H*0.05,
+      r:4+Math.random()*6,phase:Math.random()*Math.PI*2,
+      color:hc[i%hc.length],
+    });
+  }
+
+  function drawNebula(){
+    [{x:W*0.15,y:H*0.3,r:200,c:'rgba(236,64,122,0.04)'},{x:W*0.75,y:H*0.5,r:280,c:'rgba(124,58,237,0.05)'},{x:W*0.45,y:H*0.75,r:180,c:'rgba(236,64,122,0.03)'}].forEach(cl=>{
+      const g=ctx.createRadialGradient(cl.x,cl.y,0,cl.x,cl.y,cl.r);
+      g.addColorStop(0,cl.c);g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(cl.x,cl.y,cl.r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    });
+  }
+
+  function drawHubs(){
+    for(let i=0;i<hubs.length;i++)for(let j=i+1;j<hubs.length;j++){
+      const dx=hubs[i].x-hubs[j].x,dy=hubs[i].y-hubs[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<W*0.35){
+        const alpha=0.12*(1-d/(W*0.35));
+        const g=ctx.createLinearGradient(hubs[i].x,hubs[i].y,hubs[j].x,hubs[j].y);
+        g.addColorStop(0,hubs[i].color+'44');g.addColorStop(1,hubs[j].color+'44');
+        ctx.beginPath();ctx.moveTo(hubs[i].x,hubs[i].y);ctx.lineTo(hubs[j].x,hubs[j].y);
+        ctx.strokeStyle=g;ctx.globalAlpha=alpha;ctx.lineWidth=1;ctx.stroke();ctx.globalAlpha=1;
+      }
+    }
+    hubs.forEach(h=>{
+      h.phase+=0.02;const pulse=1+0.3*Math.sin(h.phase);
+      const g=ctx.createRadialGradient(h.x,h.y,0,h.x,h.y,h.r*8*pulse);
+      g.addColorStop(0,h.color+'44');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(h.x,h.y,h.r*8*pulse,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=0.55;ctx.fill();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(h.x,h.y,h.r*pulse,0,Math.PI*2);ctx.fillStyle=h.color;ctx.fill();
+    });
+  }
+
+  function drawEmbers(){
+    for(let i=embers.length-1;i>=0;i--){
+      const e=embers[i];
+      e.phase+=0.05;e.x+=e.vx+Math.sin(e.phase*0.7)*0.3;e.y+=e.vy;e.life-=e.decay;
+      if(e.life<=0||e.y<-20){embers.splice(i,1);embers.push(makeEmber());continue;}
+      const a=e.alpha*e.life;const rr=e.r*(0.5+0.5*Math.sin(e.phase));
+      const g=ctx.createRadialGradient(e.x,e.y,0,e.x,e.y,rr*6);
+      g.addColorStop(0,e.color+'88');g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(e.x,e.y,rr*6,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=a*0.5;ctx.fill();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(e.x,e.y,rr,0,Math.PI*2);ctx.fillStyle=e.color;ctx.globalAlpha=a;ctx.fill();ctx.globalAlpha=1;
+    }
+  }
+
+  function animate(){
+    ctx.fillStyle='rgba(12,4,22,0.15)';ctx.fillRect(0,0,W,H);
+    drawNebula();drawEmbers();drawHubs();
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* Register new sections with reveal observer & section dots */
+document.querySelectorAll('.peer-card,.story-card').forEach(el=>revealObs.observe(el));
+</script>
+</body>
+</html>

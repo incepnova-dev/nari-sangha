@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About – Nari Swasthya Health</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Nari Swasthya – a comprehensive women's health companion platform." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="assets/app.css" />
+  
+  <style>
+    :root {
+      --primary-pink: #ec407a;
+      --deep-pink: #d81b60;
+      --lavender: #ede7f6;
+      --soft-purple: #ad1457;
+      --text-main: #212121;
+      --text-soft: #555;
+      --bg-light: #faf5fb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===================== HEADER (from stories.html) ===================== */
+    :root{--pink:#ec407a;--deep-pink:#d81b60;--primary:#ec407a;--primary-dark:#d81b60;--primary-light:#f48fb1;--lavender:#ede7f6;--bg:#faf5fb;--card-bg:#ffffff;--text-main:#212121;--text-soft:#555;--border-soft:#e0e0e0;--shadow:0 8px 30px rgba(0,0,0,0.08)}
+    .site-header{background:rgba(255,255,255,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:0;box-shadow:0 2px 24px rgba(236,64,122,0.09);position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(236,64,122,0.08);}
+    .nav-container{max-width:1400px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;height:64px;}
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#ec407a,#ad1457);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;}
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{text-decoration:none;font-family:'Playfair Display',serif;font-weight:900;font-size:1.25rem;line-height:1.1;background:linear-gradient(135deg,#ec407a,#ad1457);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .logo-text span{font-size:.62rem;color:var(--text-soft);font-family:'Manrope',sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;}
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:.3rem;text-decoration:none;color:var(--text-main);font-weight:500;font-size:.875rem;padding:.55rem .75rem;border-radius:8px;transition:all .25s;white-space:nowrap;cursor:pointer;background:none;border:none;font-family:inherit;}
+    .nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{font-size:.6rem;transition:transform .25s;color:var(--text-soft);margin-top:1px;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px);min-width:220px;background:white;border-radius:16px;box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);border:1px solid rgba(236,64,122,0.1);padding:.5rem;opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;}
+    .nav-dropdown::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:white;border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));}
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
+    .dd-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;border-radius:10px;text-decoration:none;color:var(--text-main);font-size:.85rem;font-weight:500;transition:all .2s;}
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1.1rem;}
+    .dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .dd-sep{height:1px;background:var(--border-soft);margin:.3rem .5rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;}
+    .btn-nav.outline{background:linear-gradient(135deg,#ec407a,#ad1457);color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);border:none;}
+    .btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+    .btn-nav.primary{border:1.5px solid var(--deep-pink);color:var(--deep-pink);background:#fff;box-shadow:none;}
+    .btn-nav.primary:hover{background:rgba(236,64,122,0.05);border-color:var(--deep-pink);}
+    /* Flyout sub-menus */
+    .dd-has-flyout{position:relative;cursor:pointer;}
+    .dd-has-flyout .dd-flyout-arrow{font-size:.55rem;color:var(--text-soft);margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      position:absolute;left:calc(100% + 6px);top:0;
+      min-width:230px;
+      background:white;
+      border-radius:14px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);
+      padding:.4rem;
+      opacity:0;pointer-events:none;
+      transition:all .22s cubic-bezier(.23,1.01,.32,1);
+      z-index:300;
+      transform:translateX(-4px);
+    }
+    .dd-has-flyout:hover .dd-flyout{opacity:1;pointer-events:all;transform:translateX(0);}
+    .dd-has-flyout:hover .dd-flyout-arrow{transform:rotate(90deg);color:var(--deep-pink);}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);border-radius:10px;}
+    .hamburger{display:none;width:38px;height:38px;border-radius:10px;background:none;border:1.5px solid var(--border-soft);align-items:center;justify-content:center;cursor:pointer;flex-direction:column;gap:4px;padding:8px;}
+    .hamburger span{display:block;height:2px;background:var(--text-main);border-radius:2px;transition:all .3s;}
+    .mobile-menu{display:none;position:fixed;inset:0;top:64px;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);z-index:999;padding:1.5rem;overflow-y:auto;}
+    .mobile-menu.open{display:block;}
+    .mm-link{display:flex;align-items:center;gap:.75rem;padding:.85rem 1rem;border-radius:12px;text-decoration:none;color:var(--text-main);font-weight:500;font-size:1rem;transition:all .2s;border-bottom:1px solid var(--border-soft);}
+    .mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){.main-nav{display:none;}.hamburger{display:flex;}}
+    @media(max-width:600px){.btn-nav.outline{display:none;}}
+
+    /* ==================== ABOUT PAGE STYLES (unchanged) ==================== */
+    .hero-constellation {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #faf5fb 0%, #fce4ec 50%, #ede7f6 100%);
+      padding: 4rem 2rem;
+    }
+
+    .constellation-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #particleCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    .gradient-morph {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(236, 64, 122, 0.15), transparent);
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: morph 15s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes morph {
+      0%, 100% { transform: translate(0%, 0%) scale(1); opacity: 0.5; }
+      33% { transform: translate(30%, 20%) scale(1.2); opacity: 0.7; }
+      66% { transform: translate(-20%, 30%) scale(0.9); opacity: 0.6; }
+    }
+
+    .hero-content-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-kicker {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(135deg, rgba(236, 64, 122, 0.1), rgba(173, 20, 87, 0.1));
+      border: 2px solid rgba(236, 64, 122, 0.3);
+      border-radius: 50px;
+      color: var(--deep-pink);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    .about-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    .about-heading span {
+      display: block;
+      background: linear-gradient(135deg, #ec407a, #ad1457);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .about-hero-text { animation: fadeInUp 1s ease 0.4s both; }
+
+    .about-body {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: var(--text-soft);
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease both;
+    }
+
+    .about-body:nth-child(1) { animation-delay: 0.5s; }
+    .about-body:nth-child(2) { animation-delay: 0.6s; }
+    .about-body:nth-child(3) { animation-delay: 0.7s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-sub-image { margin-top: 2rem; animation: fadeInUp 1.2s ease 0.8s both; }
+
+    .hero-sub-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 8px solid white;
+      box-shadow: 0 10px 30px rgba(236,64,122,0.2), 0 20px 60px rgba(236,64,122,0.15), inset 0 -2px 10px rgba(236,64,122,0.1);
+      transition: all 0.5s ease;
+    }
+
+    .hero-sub-image img:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(236,64,122,0.3), 0 30px 80px rgba(236,64,122,0.2);
+    }
+
+    .about-hero-media { position: relative; animation: fadeInUp 1s ease 0.6s both; }
+
+    .about-stats-panel {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(236,64,122,0.15), 0 0 0 1px rgba(236,64,122,0.1);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-stats-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-pink), #ad1457, var(--primary-pink));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+
+    .about-stat { padding: 1.5rem; border-bottom: 1px solid rgba(236,64,122,0.1); transition: all 0.3s ease; }
+    .about-stat:last-child { border-bottom: none; }
+    .about-stat:hover { background: linear-gradient(135deg, rgba(236,64,122,0.07), rgba(173,20,87,0.05)); border-radius: 12px; transform: translateX(5px); }
+    .about-stat-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--deep-pink); font-weight: 600; margin-bottom: 0.5rem; }
+    .about-stat-value { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-pink), var(--deep-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 0.3rem; }
+    .about-stat-sub { font-size: 0.9rem; color: var(--text-soft); }
+
+    .threed-border img {
+      width: 100%; height: auto; border-radius: 20px; border: 8px solid white;
+      box-shadow: 0 15px 50px rgba(236,64,122,0.25), 0 25px 70px rgba(236,64,122,0.2), inset 0 -2px 10px rgba(236,64,122,0.1);
+      transition: all 0.5s ease;
+    }
+    .threed-border img:hover { transform: translateY(-10px) rotate(2deg); box-shadow: 0 25px 70px rgba(236,64,122,0.35), 0 35px 90px rgba(236,64,122,0.25); }
+
+    .section { padding: 5rem 2rem; position: relative; }
+    .section.alt { background: white; }
+    .container { max-width: 1400px; margin: 0 auto; }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ec407a, #ad1457);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .sub { text-align: center; font-size: 1.1rem; color: var(--text-soft); max-width: 700px; margin: 0 auto 3rem; line-height: 1.8; }
+
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+
+    .card {
+      background: white; border-radius: 24px; padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(236,64,122,0.08), 0 0 0 1px rgba(236,64,122,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative; overflow: hidden;
+    }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ec407a, #ad1457); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .card:hover { transform: translateY(-15px); box-shadow: 0 20px 60px rgba(236,64,122,0.2), 0 0 0 1px rgba(236,64,122,0.1); }
+    .card:hover::before { transform: scaleX(1); }
+    .card .icon { width: 70px; height: 70px; background: linear-gradient(135deg, rgba(236,64,122,0.1), rgba(173,20,87,0.08)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--primary-pink); margin-bottom: 1.5rem; transition: all 0.4s ease; }
+    .card:hover .icon { background: linear-gradient(135deg, #ec407a, #ad1457); color: white; transform: rotate(10deg) scale(1.1); box-shadow: 0 10px 30px rgba(236,64,122,0.3); }
+    .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
+    .card p { font-size: 1rem; line-height: 1.7; color: var(--text-soft); }
+
+    .cta-band {
+      background: linear-gradient(135deg, rgba(236,64,122,0.05), rgba(173,20,87,0.05));
+      border-radius: 24px; padding: 3rem; text-align: left;
+      border: 2px solid rgba(236,64,122,0.1);
+      position: relative; overflow: hidden;
+    }
+    .cta-band::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(236,64,122,0.1), transparent); animation: rotate 20s linear infinite; pointer-events: none; }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .cta-band > * { position: relative; z-index: 1; }
+    .cta-band h2 { text-align: left; background: linear-gradient(135deg, #ec407a, #ad1457); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+
+    .btn { padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary-pink), var(--deep-pink)); color: white !important; border: none; box-shadow: 0 4px 15px rgba(236,64,122,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(236,64,122,0.4); }
+    .btn-ghost { background: rgba(236,64,122,0.1); color: var(--primary-pink) !important; border: 2px solid transparent; }
+    .btn-ghost:hover { background: rgba(236,64,122,0.2); border-color: var(--primary-pink); }
+
+    @media (max-width: 1024px) { 
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-hero-media { order: -1; }
+    }
+    
+    @media (max-width: 900px) {
+      /* Hero section */
+      .hero-constellation { 
+        padding: 3rem 1.5rem; 
+        min-height: auto; 
+      }
+      
+      /* About grid */
+      .about-grid { gap: 2.5rem; }
+      
+      /* Headings */
+      .about-heading { font-size: 2.5rem; }
+      
+      /* Cards */
+      .grid-cards { 
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+        gap: 1.8rem; 
+      }
+      
+      /* Sections */
+      .section { padding: 4rem 1.5rem; }
+      
+      /* Buttons */
+      .btn { padding: 0.65rem 1.3rem; font-size: 0.88rem; }
+    }
+    
+    @media (max-width: 768px) { 
+      /* Hero */
+      .hero-constellation { 
+        padding: 3rem 1rem; 
+        min-height: auto; 
+      }
+      
+      /* Headings */
+      .about-heading { font-size: 2rem; }
+      .about-subheading { font-size: 1rem; }
+      h2 { font-size: 1.8rem; }
+      
+      /* Cards */
+      .grid-cards { 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
+      }
+      
+      /* Card content */
+      .card { padding: 2rem; }
+      .card .icon { 
+        width: 60px; 
+        height: 60px; 
+        font-size: 1.6rem; 
+        margin-bottom: 1.2rem; 
+      }
+      .card h3 { font-size: 1.2rem; }
+      .card p { font-size: 0.9rem; }
+      
+      /* Sections */
+      .section { padding: 3rem 1rem; }
+      
+      /* About body text */
+      .about-body { font-size: 0.95rem; line-height: 1.7; }
+      
+      /* Sub text */
+      .sub { font-size: 0.95rem; }
+      
+      /* Hero media */
+      .about-hero-media { 
+        height: 350px; 
+      }
+      .about-hero-media-inner {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      /* Hero */
+      .hero-constellation { 
+        padding: 2rem 1rem; 
+      }
+      
+      /* Headings */
+      .about-heading { 
+        font-size: 1.7rem; 
+        line-height: 1.2; 
+      }
+      .about-subheading { 
+        font-size: 0.95rem; 
+      }
+      h2 { 
+        font-size: 1.5rem; 
+        line-height: 1.3; 
+      }
+      
+      /* About grid */
+      .about-grid { 
+        gap: 2rem; 
+      }
+      
+      /* Cards */
+      .card { 
+        padding: 1.5rem; 
+      }
+      .card .icon { 
+        width: 55px; 
+        height: 55px; 
+        font-size: 1.4rem; 
+        margin-bottom: 1rem; 
+      }
+      .card h3 { 
+        font-size: 1.1rem; 
+        margin-bottom: 0.8rem; 
+      }
+      .card p { 
+        font-size: 0.88rem; 
+        line-height: 1.6; 
+      }
+      
+      /* Grid spacing */
+      .grid-cards { 
+        gap: 1.2rem; 
+        margin-top: 2rem; 
+      }
+      
+      /* Sections */
+      .section { 
+        padding: 2.5rem 1rem; 
+      }
+      
+      /* Text content */
+      .about-body { 
+        font-size: 0.9rem; 
+        line-height: 1.65; 
+        margin-bottom: 1.2rem; 
+      }
+      .sub { 
+        font-size: 0.9rem; 
+        line-height: 1.6; 
+      }
+      
+      /* Buttons */
+      .btn { 
+        padding: 0.6rem 1.2rem; 
+        font-size: 0.85rem; 
+      }
+      
+      /* Hero media */
+      .about-hero-media { 
+        height: 300px; 
+      }
+      .about-hero-media-inner {
+        padding: 1.2rem;
+      }
+      .hero-sub-image {
+        width: 180px;
+        height: 180px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      /* Extra small screens */
+      .about-heading { 
+        font-size: 1.5rem; 
+      }
+      h2 { 
+        font-size: 1.3rem; 
+      }
+      .about-subheading,
+      .sub { 
+        font-size: 0.85rem; 
+      }
+      
+      /* Cards ultra compact */
+      .card { 
+        padding: 1.3rem; 
+      }
+      .card .icon { 
+        width: 50px; 
+        height: 50px; 
+        font-size: 1.3rem; 
+      }
+      .card h3 { 
+        font-size: 1rem; 
+      }
+      .card p { 
+        font-size: 0.85rem; 
+      }
+      
+      /* Text */
+      .about-body { 
+        font-size: 0.88rem; 
+      }
+      
+      /* Hero media */
+      .about-hero-media { 
+        height: 250px; 
+      }
+      .hero-sub-image {
+        width: 150px;
+        height: 150px;
+      }
+      
+      /* Buttons */
+      .btn { 
+        padding: 0.55rem 1rem; 
+        font-size: 0.82rem; 
+      }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* =====================================================================
+       COMPREHENSIVE MOBILE RESPONSIVE FIXES
+       ===================================================================== */
+
+    /* --- Particle canvas: must fill its parent at all times --- */
+    #particleCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* --- gradient-morph: fix fixed 600×600 causing overflow on mobile --- */
+    @media (max-width: 768px) {
+      .gradient-morph {
+        width: 320px;
+        height: 320px;
+        filter: blur(40px);
+      }
+    }
+    @media (max-width: 480px) {
+      .gradient-morph {
+        width: 220px;
+        height: 220px;
+        filter: blur(30px);
+      }
+    }
+
+    /* --- Hero constellation: ensure canvas + morph are truly contained --- */
+    .hero-constellation {
+      position: relative;
+    }
+    .constellation-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* --- About stats panel: reduce padding and font sizes on mobile --- */
+    @media (max-width: 768px) {
+      .about-stats-panel {
+        padding: 1.75rem;
+      }
+      .about-stat {
+        padding: 1.1rem;
+      }
+      .about-stat-value {
+        font-size: 2.2rem;
+      }
+      .about-stat-label {
+        font-size: 0.8rem;
+      }
+      .about-stat-sub {
+        font-size: 0.82rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .about-stats-panel {
+        padding: 1.25rem;
+        border-radius: 18px;
+      }
+      .about-stat {
+        padding: 0.9rem;
+      }
+      .about-stat-value {
+        font-size: 1.9rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .about-stats-panel {
+        padding: 1rem;
+        border-radius: 16px;
+      }
+      .about-stat {
+        padding: 0.75rem;
+      }
+      .about-stat-value {
+        font-size: 1.65rem;
+      }
+      .about-stat-label {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+      }
+      .about-stat-sub {
+        font-size: 0.78rem;
+      }
+    }
+
+    /* --- about-hero-media: remove fixed heights set in existing breakpoints,
+           let content determine natural height on smaller screens --- */
+    @media (max-width: 768px) {
+      .about-hero-media {
+        height: auto !important;
+      }
+      .about-hero-media-inner {
+        margin-top: 1.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .about-hero-media {
+        height: auto !important;
+      }
+      .about-hero-media-inner {
+        margin-top: 1.2rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .about-hero-media {
+        height: auto !important;
+      }
+    }
+
+    /* --- threed-border image: prevent overflow on small screens --- */
+    .threed-border {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .threed-border img {
+      border-radius: 20px;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @media (max-width: 600px) {
+      .threed-border img {
+        border-width: 5px;
+        border-radius: 14px;
+      }
+      .threed-border {
+        border-radius: 14px;
+      }
+    }
+    @media (max-width: 480px) {
+      .threed-border img {
+        border-width: 4px;
+        border-radius: 12px;
+      }
+    }
+
+    /* --- hero-sub-image: remove fixed width/height from existing breakpoints,
+           use fluid sizing instead --- */
+    .hero-sub-image {
+      width: 100%;
+      margin-top: 2rem;
+    }
+    .hero-sub-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .hero-sub-image {
+        width: 100% !important;
+        height: auto !important;
+        margin-top: 1.5rem;
+      }
+      .hero-sub-image img {
+        border-width: 5px;
+        border-radius: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-sub-image {
+        width: 100% !important;
+        height: auto !important;
+        margin-top: 1.2rem;
+      }
+      .hero-sub-image img {
+        border-width: 4px;
+        border-radius: 10px;
+      }
+    }
+
+    /* --- cta-band: reduce padding and center content on small screens --- */
+    @media (max-width: 768px) {
+      .cta-band {
+        padding: 2rem;
+        border-radius: 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .cta-band {
+        padding: 1.5rem;
+        border-radius: 16px;
+        text-align: center;
+      }
+      .cta-band h2 {
+        text-align: center !important;
+        font-size: 1.4rem;
+        margin-bottom: 0.75rem;
+      }
+      .cta-band p {
+        font-size: 0.9rem;
+      }
+      .cta-band > div[style*="display:flex"] {
+        justify-content: center;
+      }
+    }
+    @media (max-width: 480px) {
+      .cta-band {
+        padding: 1.25rem;
+      }
+      .cta-band h2 {
+        font-size: 1.25rem;
+      }
+      /* Stack CTA buttons vertically on very small screens */
+      .cta-band div[style*="display:flex"],
+      .cta-band div[style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+      }
+      .cta-band .btn {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    /* --- About kicker badge: prevent overflow on very small screens --- */
+    @media (max-width: 480px) {
+      .about-kicker {
+        font-size: 0.78rem;
+        padding: 0.4rem 1rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+      }
+    }
+
+    /* --- Cards: ensure hover transform doesn't cause overflow on mobile --- */
+    @media (max-width: 768px) {
+      .card:hover {
+        transform: translateY(-8px);
+      }
+      .card {
+        border-radius: 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      .card:hover {
+        transform: translateY(-4px);
+      }
+      .card {
+        border-radius: 16px;
+      }
+    }
+
+    /* --- about-stat hover: reduce translateX on mobile to avoid overflow --- */
+    @media (max-width: 768px) {
+      .about-stat:hover {
+        transform: translateX(3px);
+      }
+    }
+    @media (max-width: 480px) {
+      .about-stat:hover {
+        transform: none;
+      }
+    }
+
+    /* --- Section padding: extra breakpoint for very small screens --- */
+    @media (max-width: 380px) {
+      .section {
+        padding: 2rem 0.75rem;
+      }
+      .hero-constellation {
+        padding: 1.75rem 0.75rem;
+      }
+      .about-heading {
+        font-size: 1.35rem !important;
+      }
+      .about-body {
+        font-size: 0.85rem;
+      }
+      .about-kicker {
+        font-size: 0.72rem;
+      }
+      .about-stats-panel {
+        padding: 0.85rem;
+      }
+      .about-stat-value {
+        font-size: 1.5rem;
+      }
+      .card {
+        padding: 1.1rem;
+      }
+    }
+
+    /* --- sub text: ensure it doesn't overflow with large margins --- */
+    @media (max-width: 480px) {
+      .sub {
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* --- grid-cards: ensure consistent spacing at all sizes --- */
+    @media (max-width: 380px) {
+      .grid-cards {
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+    }
+
+    /* --- Prevent global horizontal overflow --- */
+    @media (max-width: 768px) {
+      .hero-constellation,
+      .about-stats-panel,
+      .cta-band,
+      .card {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    }
+
+    /* --- about-hero: ensure grid stacks cleanly at 1024px --- */
+    @media (max-width: 1024px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-hero-media {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    }
+
+    /* --- Section h2: prevent overly large text at mid sizes --- */
+    @media (max-width: 900px) {
+      .section h2 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+      }
+    }
+
+    /* ===================== FOOTER (from stories.html) ===================== */
+    :root {
+      --bg-footer: #1e1a1e;
+      --bg-bottom: #161316;
+      --pink-primary: #e8517a;
+      --pink-soft: #f0748e;
+      --text-main-f: #c9bfc9;
+      --text-muted-f: #7c7080;
+      --divider-f: rgba(232,81,122,0.18);
+      --font-display-f: 'Playfair Display', Georgia, serif;
+      --font-body-f: 'DM Sans', sans-serif;
+    }
+    footer.ns-footer { background: var(--bg-footer); color: var(--text-main-f); font-family: var(--font-body-f); border-top: 1px solid var(--divider-f); }
+    .footer-main { max-width: 1200px; margin: 0 auto; padding: 56px 32px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+    .footer-col h3 { font-family: var(--font-display-f); font-size: 1.05rem; font-weight: 600; color: var(--pink-primary); margin-bottom: 18px; letter-spacing: 0.01em; }
+    .footer-col p { font-size: 0.875rem; line-height: 1.75; color: var(--text-main-f); font-weight: 300; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { font-size: 0.875rem; color: var(--text-main-f); padding: 5px 0; font-weight: 300; position: relative; padding-left: 14px; transition: color 0.2s; }
+    .footer-col ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 50%; background: var(--pink-primary); opacity: 0.5; }
+    .footer-col ul li:hover { color: var(--pink-soft); }
+    .disclaimer-text { font-size: 0.875rem; line-height: 1.75; color: var(--text-main-f); font-weight: 300; }
+    .emergency-alert { font-size: 0.875rem; line-height: 1.7; color: var(--pink-primary); font-weight: 500; }
+    .emergency-alert strong { font-weight: 600; }
+    .footer-meta { border-top: 1px solid var(--divider-f); max-width: 1200px; margin: 0 auto; padding: 28px 32px; text-align: center; }
+    .footer-meta .meta-line { font-size: 0.8rem; color: var(--text-muted-f); letter-spacing: 0.04em; margin-bottom: 10px; }
+    .footer-meta .meta-line .sep { color: var(--pink-primary); margin: 0 6px; }
+    .footer-meta .tagline { font-size: 0.82rem; color: var(--text-muted-f); display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .footer-meta .tagline .heart { color: var(--pink-primary); font-size: 1rem; animation: footerPulse 2s ease-in-out infinite; }
+    @keyframes footerPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: 0.8; } }
+    .footer-bottom { background: var(--bg-bottom); border-top: 1px solid rgba(255,255,255,0.04); }
+    .footer-bottom-inner { max-width: 1200px; margin: 0 auto; padding: 22px 32px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .footer-links { display: flex; gap: 36px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.82rem; color: var(--text-muted-f); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--pink-soft); }
+    .footer-copy { font-size: 0.78rem; color: var(--text-muted-f); opacity: 0.7; letter-spacing: 0.02em; }
+    @media (max-width: 900px) { .footer-main { grid-template-columns: repeat(2,1fr); gap: 32px; } }
+    @media (max-width: 540px) { .footer-main { grid-template-columns: 1fr; padding: 40px 20px 32px; } .footer-meta { padding: 20px; } .footer-bottom-inner { padding: 18px 20px; } .footer-links { gap: 20px; } }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER (from stories.html) ===== -->
+<header class="site-header">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+          <circle cx="12" cy="5.5" r="2.8"/>
+          <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+          <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+          <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+          <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+          <path d="M8.2 22 Q7.6 17.2 8.8 15 Q10.2 13 12 13 Q13.8 13 15.2 15 Q16.4 17.2 15.8 22Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <a href="index.html">Nari Swasthya</a>
+        <span>Women's Complete Health</span>
+      </div>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+
+        <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+        <!-- Services dropdown (active) -->
+        <div class="nav-item">
+          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
+            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
+            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
+            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
+            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
+            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+
+        <!-- Additional Info dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
+            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <!-- NCD with flyout sub-items — first item -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
+            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
+            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right: Sign In + Contact Us -->
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
+    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <div class="mm-section">Specialised Care</div>
+    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+  
+  <main>
+    <!-- Hero Section with Particle Background -->
+    <section class="hero-constellation">
+      <div class="constellation-bg">
+        <canvas id="particleCanvas"></canvas>
+        <div class="gradient-morph"></div>
+      </div>
+
+      <div class="hero-content-wrapper">
+        <div class="container about-hero">
+          <p class="about-kicker">Our Story</p>
+          <h2 class="about-heading">
+            Reimagining guided health journeys
+            <span>for every Indian woman</span>
+          </h2>
+
+          <div class="about-grid">
+            <div class="about-hero-text">
+              <p class="about-body">
+                Nari Swasthya was created to close the gap between medical information and everyday decisions.
+                We combine evidence-based guidance, culturally aware content, and digital tools so women can
+                navigate pregnancy, periods, fertility, perimenopause, and beyond with confidence.
+              </p>
+
+              <p class="about-body">
+                From tier-1 cities to small towns, our aim is simple: make trustworthy women's health support
+                as accessible as your favorite app, in language and context that feels like a friend,
+                not a textbook.
+              </p>
+
+              <p class="about-body">
+                We believe language should never be a barrier to care. Nari Swasthya is built to speak to you 
+                in Hindi, Tamil, Telugu, Bengali, and Marathi, ensuring that complex medical advice is 
+                delivered in the mother tongue you trust most, bridging the gap for millions across India.
+              </p>
+
+              <div class="hero-sub-image">
+                <img 
+                  src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&auto=format&fit=crop&q=60" 
+                  alt="Diverse group of women smiling and supporting each other" 
+                />
+              </div>
+            </div>
+
+            <div class="about-hero-media">
+              <div class="about-stats-panel">
+                <div class="about-stat">
+                  <div class="about-stat-label">Women supported</div>
+                  <div class="about-stat-value">50K+</div>
+                  <div class="about-stat-sub">Across life stages</div>
+                </div>
+                <div class="about-stat">
+                  <div class="about-stat-label">Expert network</div>
+                  <div class="about-stat-value">120+</div>
+                  <div class="about-stat-sub">Doctors, educators & mentors</div>
+                </div>
+                <div class="about-stat">
+                  <div class="about-stat-label">Support</div>
+                  <div class="about-stat-value">24×7</div>
+                  <div class="about-stat-sub">Journeys, tools & stories</div>
+                </div>
+              </div>
+
+              <div class="about-hero-media-inner threed-border">
+                <img
+                  src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?w=1200"
+                  alt="Women discussing health with a doctor"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Stand For -->
+    <section class="section alt">
+      <div class="container">
+        <h2 class="fade-in">What Nari Swasthya stands for</h2>
+        <p class="sub fade-in">
+          Our platform blends clinical insight with lived experiences so women can make informed, practical choices every day.
+        </p>
+
+        <div class="grid-cards">
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3>Compassion first</h3>
+            <p>
+              Every journey is personal. We treat symptoms, stigma, and questions with the same empathy you would expect from a trusted friend.
+            </p>
+          </div>
+
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <h3>Evidence-based care</h3>
+            <p>
+              All guidance is rooted in clinical guidelines and expert review, translated into simple, action-focused language for women and families.
+            </p>
+          </div>
+
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <h3>Quality information</h3>
+            <p>
+              From PCOS and fertility to menopause, we prioritize clarity, accuracy, and Indian context over sensational content or fear-based advice.
+            </p>
+          </div>
+
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>Community & support</h3>
+            <p>
+              Women learn best from women. Stories, checklists, and shared experiences help you feel less alone and more prepared at every step.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How We Support -->
+    <section class="section">
+      <div class="container">
+        <h2 class="fade-in">How we support your health journey</h2>
+        <p class="sub fade-in">
+          Nari Swasthya brings together journeys, tools, and services so you always know what is happening, what is normal, and what you should do next.
+        </p>
+
+        <div class="grid-cards">
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-route"></i>
+            </div>
+            <h3>Guided Journeys</h3>
+            <p>
+              Step-by-step pathways for pregnancy, reproductive health, prevention, and menopause—aligned with checklists, reminders, and local realities.
+            </p>
+          </div>
+
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <h3>Symptom education</h3>
+            <p>
+              Symptom explanations in plain language, with clear "when to watch" and "when to seek care" guidance so you can act early and confidently.
+            </p>
+          </div>
+
+          <div class="card fade-in">
+            <div class="icon">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <h3>Bridging offline care</h3>
+            <p>
+              Use our tools to prepare for doctor visits, track questions, and understand prescriptions, making every appointment more productive.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section alt">
+      <div class="container">
+        <div class="cta-band fade-in">
+          <h2 style="text-align:left; margin-bottom:0.5rem;">
+            Ready to start your guided health journey?
+          </h2>
+          <p style="color:var(--text-soft); margin-bottom:1.25rem;">
+            Begin with a journey that matches your current life stage and come back to your dashboard anytime you need a gentle nudge.
+          </p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <a href="journeys.html" class="btn btn-primary">
+              <i class="fa-solid fa-route"></i>
+              Explore Journeys
+            </a>
+            <a href="community.html" class="btn btn-ghost">
+              <i class="fa-solid fa-users"></i>
+              Meet the Community
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!-- ===== FOOTER (from stories.html) ===== -->
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+
+    // Particle Canvas Animation
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    });
+
+    const particles = [];
+    const particleCount = 80;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => { particle.update(); particle.draw(); });
+      connectParticles();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Scroll Animation for Cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

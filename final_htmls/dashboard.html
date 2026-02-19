@@ -1,0 +1,2596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Nari Swasthya</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<style>
+
+:root{
+  --pink:#ec407a;
+  --deep-pink:#d81b60;
+  --primary:#ec407a;
+  --primary-dark:#d81b60;
+  --primary-light:#f48fb1;
+  --lavender:#ede7f6;
+  --bg:#faf5fb;
+  --card-bg:#ffffff;
+  --text-main:#212121;
+  --text-soft:#555;
+  --border-soft:#e0e0e0;
+  --success:#66bb6a;
+  --warning:#ffa726;
+  --critical:#ef5350;
+  --info:#4fc3f7;
+
+  --emergency:#ff1744;
+  --urgent:#ff9100;
+  --monitor:#42a5f5;
+
+  --shadow: 0 8px 30px rgba(0,0,0,0.08);
+  --shadow-strong: 0 15px 40px rgba(236, 64, 122, 0.18);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display', Georgia, serif;}
+button,input,select{font-family:inherit;}
+a{color:inherit;}
+.center{text-align:center;}
+.muted{color:var(--text-soft);}
+
+/* ===================== HEADER ===================== */
+    .site-header{
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      padding:0;
+      box-shadow:0 2px 24px rgba(236,64,122,0.09);
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(236,64,122,0.08);
+    }
+
+    /* Floating Hearts Background Animation */
+    .site-header::before {
+      content: '💗 ✨ 🌸 💕 ⭐ 🦋 💗 ✨ 🌸 💕';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      gap: 3rem;
+      opacity: 0.08;
+      animation: float-emojis 40s linear infinite;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @keyframes float-emojis {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+
+    /* Sparkle Effect on Hover */
+    .site-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(236, 64, 122, 0.1) 0%, 
+        transparent 25%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .site-header:hover::after {
+      opacity: 1;
+    }
+
+    .nav-container{
+      max-width:1400px;margin:0 auto;
+      padding:0 1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      height:64px;
+    }
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+    }
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{
+      text-decoration:none;font-family:'Playfair Display',serif;
+      font-weight:900;font-size:1.25rem;line-height:1.1;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .logo-text span{
+      font-size:.62rem;color:#555;font-family:'Manrope',sans-serif;
+      font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:.3rem;
+      text-decoration:none;color:#212121;
+      font-weight:500;font-size:.875rem;
+      padding:.55rem .75rem;border-radius:8px;
+      transition:all .25s;white-space:nowrap;
+      cursor:pointer;background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-link.active{color:#d81b60;background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{font-size:.6rem;transition:transform .25s;color:#555;margin-top:1px;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{
+      position:absolute;top:calc(100% + 8px);left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      min-width:220px;background:white;border-radius:16px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+      opacity:0;pointer-events:none;
+      transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+    }
+    .nav-dropdown::before{
+      content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+      border:6px solid transparent;border-bottom-color:white;
+      border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+    }
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+      opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+    }
+    .dd-item{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.65rem .9rem;border-radius:10px;
+      text-decoration:none;color:#212121;font-size:.85rem;font-weight:500;transition:all .2s;
+    }
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1.1rem;}
+    .dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .dd-sep{height:1px;background:#e0e0e0;margin:.3rem .5rem;}
+    /* Flyout submenu — appears to the right of the parent row */
+    .dd-has-flyout{position:relative;}
+    .dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      display:none;position:absolute;top:0;left:calc(100% + 4px);
+      min-width:190px;background:white;border-radius:12px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+    }
+    .dd-has-flyout:hover>.dd-flyout,
+    .dd-has-flyout:focus-within>.dd-flyout{display:block;}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:#d81b60;}
+    .dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+    .dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{
+      padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+      font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    .btn-nav.outline{
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);
+    }
+    .btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+    .btn-nav.primary{border:1.5px solid #d81b60;color:#d81b60;background:#fff;}
+    .btn-nav.primary:hover{background:rgba(236,64,122,0.05);}
+    .hamburger{
+      display:none;width:38px;height:38px;border-radius:10px;
+      background:none;border:1.5px solid #e0e0e0;
+      align-items:center;justify-content:center;cursor:pointer;
+      flex-direction:column;gap:4px;padding:8px;
+    }
+    .hamburger span{display:block;height:2px;background:#212121;border-radius:2px;transition:all .3s;}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+      z-index:999;padding:1.5rem;overflow-y:auto;
+    }
+    .mm-action-btn{display:inline-flex !important;}
+    .mobile-menu.open{display:block;}
+    .mm-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.85rem 1rem;border-radius:12px;
+      text-decoration:none;color:#212121;font-weight:500;font-size:1rem;
+      transition:all .2s;border-bottom:1px solid #e0e0e0;
+    }
+    .mm-link:hover{color:#d81b60;background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){
+      .main-nav{display:none;}
+      .hamburger{display:flex;}
+      .nav-actions .btn-nav{display:none;}
+    }
+
+
+/* Page shell */
+.page-shell{
+  max-width:1400px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+
+/* Background - Enhanced Particle Effect (Hero Section Only) */
+.hero-constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.gradient-morph {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(236, 64, 122, 0.15) 0%,
+    transparent 65%
+  );
+  animation: morph-pulse 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes morph-pulse {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.15); 
+  }
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 4rem 0 2rem;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    #faf5fb 0%, 
+    #f5f0fa 50%, 
+    #ede7f6 100%
+  );
+  border-radius: 32px;
+  margin-bottom: 3rem;
+  min-height: 85vh;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation:slideInLeft .8s ease;
+}
+
+@keyframes slideInLeft{
+  from{opacity:0; transform:translateX(-35px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  background:linear-gradient(135deg, rgba(236,64,122,0.10), rgba(168,230,207,0.10));
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:2px solid rgba(236,64,122,0.18);
+  margin-bottom:1.5rem;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.badge-icon{font-size:1.4rem;}
+.badge-text{font-weight:800;color:var(--primary-dark);font-size:.92rem;}
+
+.hero-title-3d{
+  font-size:clamp(2.4rem,5vw,4rem);
+  font-weight:900;
+  line-height:1.08;
+  margin-bottom:1.2rem;
+  background:linear-gradient(135deg,#212121 0%, #555 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.title-emphasis{
+  background:linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:title-shimmer 3s ease-in-out infinite;
+  filter:drop-shadow(0 2px 10px rgba(236,64,122,.35));
+}
+@keyframes title-shimmer{
+  0%,100%{filter:brightness(1) drop-shadow(0 2px 10px rgba(236,64,122,.35));}
+  50%{filter:brightness(1.35) drop-shadow(0 5px 18px rgba(236,64,122,.55));}
+}
+.hero-subtitle{
+  font-size:1.15rem;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  line-height:1.85;
+}
+.hero-stats{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:1rem;
+  margin-bottom:1.75rem;
+}
+.stat-item{
+  background:#fff;
+  border-radius:16px;
+  padding:1.1rem;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  border:2px solid transparent;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  text-align:center;
+}
+.stat-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(255,107,157,0.18);
+  border-color:rgba(244,143,177,0.55);
+}
+.stat-number{
+  display:block;
+  font-size:1.9rem;
+  font-weight:900;
+  color:var(--primary);
+  font-family:'Playfair Display', serif;
+}
+.stat-label{display:block;font-size:.9rem;color:var(--text-soft);font-weight:600;}
+
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary,.btn-secondary{
+  padding:1rem 2rem;
+  border-radius:999px;
+  font-weight:900;
+  font-size:1rem;
+  cursor:pointer;
+  border:none;
+  transition:all .25s ease;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--deep-pink), #f06292);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(216, 27, 96, 0.30);
+  animation:float-btn 3s ease-in-out infinite;
+}
+@keyframes float-btn{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:0 15px 35px rgba(216,27,96,0.42);}
+.btn-secondary{
+  background:#fff;
+  border:2px solid var(--primary);
+  color:var(--primary);
+}
+.btn-secondary:hover{background:var(--primary); color:#fff;}
+
+.daily-tip{
+  margin-top:2rem;
+  max-width:900px;
+  padding:1.2rem 1.4rem;
+  background:linear-gradient(135deg,#fff8e1 0%, #ffecb3 100%);
+  border-radius:16px;
+  border-left:6px solid var(--warning);
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  box-shadow:0 4px 15px rgba(255,167,38,0.18);
+}
+.tip-icon{font-size:2rem;}
+.daily-tip p{font-weight:800;color:#f57c00;}
+
+/* Hero Visual 3D - Right Side Animation */
+.hero-visual-3d {
+  position: relative;
+  z-index: 2;
+}
+
+.pregnancy-3d-container{
+  position:relative;
+  width:100%;
+  height:520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.pregnancy-core{
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:linear-gradient(135deg, rgba(236,64,122,0.08), rgba(237,231,246,0.12));
+  box-shadow:0 15px 50px rgba(236,64,122,0.20);
+  animation:core-pulse 4s ease-in-out infinite;
+}
+
+@keyframes core-pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
+
+.center-glow{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle, #ec407a 0%, rgba(236,64,122,0.3) 70%, transparent 100%);
+  transform:translate(-50%,-50%);
+  animation:glow-breathe 3s ease-in-out infinite;
+}
+
+@keyframes glow-breathe{
+  0%,100%{opacity:0.6; transform:translate(-50%,-50%) scale(1);}
+  50%{opacity:1; transform:translate(-50%,-50%) scale(1.15);}
+}
+
+.pulse-ring{
+  position:absolute;
+  top:50%;
+  left:50%;
+  border-radius:50%;
+  border:2px solid rgba(236,64,122,0.3);
+  animation:ring-expand 3s ease-out infinite;
+}
+.pulse-ring.ring-1{
+  width:140px;
+  height:140px;
+  margin-left:-70px;
+  margin-top:-70px;
+  animation-delay:0s;
+}
+.pulse-ring.ring-2{
+  width:180px;
+  height:180px;
+  margin-left:-90px;
+  margin-top:-90px;
+  animation-delay:1s;
+}
+.pulse-ring.ring-3{
+  width:220px;
+  height:220px;
+  margin-left:-110px;
+  margin-top:-110px;
+  animation-delay:2s;
+}
+
+@keyframes ring-expand{
+  0%{transform:scale(0.8); opacity:0;}
+  50%{opacity:1;}
+  100%{transform:scale(1.2); opacity:0;}
+}
+
+/* Health Icons orbiting */
+.health-icon{
+  position:absolute;
+  width:90px;
+  height:90px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+  border:3px solid rgba(236,64,122,0.15);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:all .3s ease;
+  animation:orbit-float 3s ease-in-out infinite;
+}
+
+.health-icon:hover{
+  transform:translateY(-8px) scale(1.12);
+  box-shadow:0 15px 45px rgba(236,64,122,0.28);
+  border-color:var(--primary);
+}
+
+.icon-inner{
+  font-size:2.2rem;
+  margin-bottom:0.25rem;
+}
+
+.icon-label{
+  font-size:0.75rem;
+  font-weight:700;
+  color:var(--primary-dark);
+}
+
+.health-icon.icon-1{
+  top:10%;
+  left:15%;
+  animation-delay:0s;
+}
+.health-icon.icon-2{
+  top:25%;
+  right:8%;
+  animation-delay:0.6s;
+}
+.health-icon.icon-3{
+  bottom:25%;
+  right:12%;
+  animation-delay:1.2s;
+}
+.health-icon.icon-4{
+  bottom:12%;
+  left:18%;
+  animation-delay:1.8s;
+}
+.health-icon.icon-5{
+  top:45%;
+  left:5%;
+  animation-delay:2.4s;
+}
+
+@keyframes orbit-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+
+/* Week Dial (repurposed for progress) */
+.week-dial{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 10px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  width:180px;
+  z-index:10;
+}
+
+.meter-reading{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:0.3rem;
+  margin-bottom:0.5rem;
+}
+
+.reading-value{
+  font-size:2.8rem;
+  font-weight:900;
+  color:var(--primary);
+  font-family:'Playfair Display', serif;
+}
+
+.reading-unit{
+  font-size:1rem;
+  font-weight:600;
+  color:var(--text-soft);
+}
+
+.meter-status{
+  font-size:0.85rem;
+  font-weight:700;
+  color:var(--text-soft);
+  margin-bottom:0.8rem;
+}
+
+.meter-bar{
+  height:6px;
+  background:#f0f0f0;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.meter-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius:10px;
+  transition:width .5s ease;
+}
+
+/* Hero Info Box */
+.hero-info-box{
+  margin-top:2rem;
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  border:2px solid rgba(236,64,122,0.12);
+}
+
+.info-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  background:rgba(236,64,122,0.08);
+  padding:0.5rem 1rem;
+  border-radius:20px;
+  margin-bottom:1rem;
+}
+
+.info-badge .badge-icon{
+  font-size:1.2rem;
+}
+
+.info-badge .badge-text{
+  font-size:0.8rem;
+  font-weight:700;
+  color:var(--primary-dark);
+}
+
+.info-title{
+  font-size:1.5rem;
+  margin-bottom:0.8rem;
+  color:var(--text-main);
+}
+
+.info-text{
+  color:var(--text-soft);
+  line-height:1.7;
+}
+
+/* Section Styling */
+.journey-section{
+  padding:3rem 0;
+  margin:2rem 0;
+}
+
+.section-header{
+  text-align:center;
+  max-width:800px;
+  margin:0 auto 3rem;
+}
+
+.header-badge-prominent{
+  display:inline-flex;
+  align-items:center;
+  gap:0.8rem;
+  background:linear-gradient(135deg, rgba(236,64,122,0.1), rgba(237,231,246,0.2));
+  padding:0.7rem 1.4rem;
+  border-radius:999px;
+  border:2px solid rgba(236,64,122,0.2);
+  margin-bottom:1.5rem;
+}
+
+.badge-pulse{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--primary);
+  animation:pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1; transform:scale(1);}
+  50%{opacity:0.5; transform:scale(1.3);}
+}
+
+.section-title-prominent{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:900;
+  line-height:1.2;
+  margin-bottom:1rem;
+  color:var(--text-main);
+}
+
+.title-highlight{
+  background:linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.section-subtitle-prominent{
+  font-size:1.1rem;
+  color:var(--text-soft);
+  line-height:1.75;
+}
+
+/* Quick Actions Grid */
+.actions-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:2rem;
+}
+
+.action-card{
+  background:#fff;
+  padding:2.5rem;
+  border-radius:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:all .3s ease;
+  border:2px solid transparent;
+}
+
+.action-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 40px rgba(236,64,122,0.2);
+  border-color:var(--primary-light);
+}
+
+.action-icon{
+  font-size:4rem;
+  margin-bottom:1rem;
+  animation:float 3s ease-in-out infinite;
+}
+
+.action-card h3{
+  font-size:1.4rem;
+  margin-bottom:0.8rem;
+  color:var(--primary-dark);
+}
+
+.action-card p{
+  color:var(--text-soft);
+  line-height:1.6;
+  margin-bottom:1.5rem;
+}
+
+.action-btn{
+  padding:0.8rem 1.5rem;
+  background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color:white;
+  border:none;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  font-size:0.95rem;
+}
+
+.action-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(236,64,122,0.3);
+}
+
+/* Reminders List */
+.reminders-list{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+
+.reminder-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  display:flex;
+  gap:1.5rem;
+  align-items:center;
+  transition:all .3s ease;
+  border:2px solid transparent;
+  border-left:6px solid var(--primary);
+}
+
+.reminder-card:hover{
+  transform:translateX(8px);
+  box-shadow:0 12px 40px rgba(236,64,122,0.2);
+  border-color:var(--primary-light);
+}
+
+.reminder-date-badge{
+  background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color:white;
+  border-radius:16px;
+  padding:1rem;
+  text-align:center;
+  min-width:80px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.date-month{
+  display:block;
+  font-size:0.9rem;
+  text-transform:uppercase;
+  opacity:0.9;
+  font-weight:700;
+}
+
+.date-day{
+  display:block;
+  font-size:2rem;
+  font-weight:900;
+  line-height:1;
+  margin-top:0.3rem;
+}
+
+.reminder-content{
+  flex:1;
+}
+
+.reminder-content h3{
+  font-size:1.3rem;
+  margin-bottom:0.5rem;
+  color:var(--primary-dark);
+}
+
+.reminder-details{
+  color:var(--text-soft);
+  margin-bottom:0.8rem;
+}
+
+.reminder-meta{
+  display:flex;
+  gap:1.5rem;
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+
+.reminder-btn{
+  padding:0.6rem 1.2rem;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  font-size:0.85rem;
+}
+
+.reminder-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 15px rgba(236,64,122,0.3);
+}
+
+/* Health Stats Grid */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:1.5rem;
+}
+
+.stat-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:all .3s ease;
+  border:2px solid transparent;
+}
+
+.stat-card:hover{
+  transform:scale(1.05);
+  box-shadow:0 12px 40px rgba(236,64,122,0.2);
+  border-color:var(--primary-light);
+}
+
+.stat-icon{
+  font-size:3rem;
+  margin-bottom:1rem;
+}
+
+.stat-value{
+  font-size:2.5rem;
+  font-weight:900;
+  color:var(--primary);
+  font-family:'Playfair Display', serif;
+  margin:0.5rem 0;
+}
+
+.stat-label{
+  color:var(--text-soft);
+  font-size:0.9rem;
+  margin-bottom:0.5rem;
+}
+
+.stat-status{
+  display:inline-block;
+  padding:0.3rem 0.8rem;
+  border-radius:20px;
+  font-size:0.75rem;
+  font-weight:700;
+  margin:0.5rem 0;
+}
+
+.stat-status.normal{
+  background:#e8f5e9;
+  color:#27ae60;
+}
+
+.stat-status.good{
+  background:#e3f2fd;
+  color:#1976d2;
+}
+
+.stat-status.warning{
+  background:#fff3e0;
+  color:#f39c12;
+}
+
+.mini-progress{
+  width:100%;
+  height:4px;
+  background:#f0f0f0;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:0.8rem;
+}
+
+.mini-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius:10px;
+  transition:width 1s ease;
+}
+
+/* Active Journeys */
+.journeys-list{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+
+.journey-card-main{
+  background:#fff;
+  border-radius:24px;
+  padding:3rem;
+  box-shadow:0 6px 30px rgba(0,0,0,0.10);
+  transition:all .3s ease;
+  border:2px solid transparent;
+  position:relative;
+}
+
+.journey-card-main:hover{
+  transform:translateY(-8px);
+  box-shadow:0 15px 50px rgba(236,64,122,0.25);
+  border-color:var(--primary-light);
+}
+
+.journey-badge{
+  position:absolute;
+  top:2rem;
+  right:2rem;
+  padding:0.5rem 1.2rem;
+  border-radius:20px;
+  font-size:0.85rem;
+  font-weight:700;
+  color:white;
+}
+
+.journey-badge.active{
+  background:#66bb6a;
+}
+
+.journey-badge.pending{
+  background:#ffa726;
+}
+
+.journey-icon-large{
+  font-size:5rem;
+  margin-bottom:1.5rem;
+}
+
+.journey-title{
+  font-size:1.8rem;
+  margin-bottom:0.8rem;
+  color:var(--primary-dark);
+}
+
+.journey-subtitle{
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  font-size:1.05rem;
+}
+
+.journey-progress-section{
+  background:rgba(236,64,122,0.05);
+  border-radius:16px;
+  padding:1.5rem;
+  margin:2rem 0;
+}
+
+.progress-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:0.8rem;
+}
+
+.progress-label{
+  font-weight:700;
+  color:var(--text-main);
+}
+
+.progress-percent{
+  font-weight:700;
+  color:var(--primary);
+}
+
+.journey-progress-bar{
+  width:100%;
+  height:10px;
+  background:#fff;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.journey-progress-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border-radius:10px;
+  transition:width 1s ease;
+}
+
+.journey-stats-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin:2rem 0;
+}
+
+.journey-stat-item{
+  background:rgba(237,231,246,0.3);
+  padding:1.5rem;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+}
+
+.stat-item-label{
+  font-size:0.85rem;
+  color:var(--text-soft);
+  font-weight:600;
+}
+
+.stat-item-value{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--text-main);
+}
+
+.journey-actions{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+/* Activity Timeline */
+.activity-timeline{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
+}
+
+.activity-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  display:flex;
+  gap:1.5rem;
+  align-items:center;
+  transition:all .3s ease;
+  border:2px solid transparent;
+}
+
+.activity-card:hover{
+  transform:translateX(8px);
+  box-shadow:0 12px 40px rgba(236,64,122,0.2);
+  border-color:var(--primary-light);
+}
+
+.activity-icon-badge{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.8rem;
+  color:white;
+  flex-shrink:0;
+}
+
+.activity-icon-badge.success{
+  background:#66bb6a;
+}
+
+.activity-icon-badge.info{
+  background:#42a5f5;
+}
+
+.activity-icon-badge.warning{
+  background:#ffa726;
+}
+
+.activity-content{
+  flex:1;
+}
+
+.activity-content h3{
+  font-size:1.2rem;
+  margin-bottom:0.5rem;
+  color:var(--text-main);
+}
+
+.activity-content p{
+  color:var(--text-soft);
+  font-size:0.95rem;
+}
+
+.activity-time{
+  margin-top:0.5rem;
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+
+.activity-action-btn{
+  padding:0.6rem 1.2rem;
+  background:white;
+  border:2px solid var(--primary);
+  color:var(--primary);
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  font-size:0.85rem;
+}
+
+.activity-action-btn:hover{
+  background:var(--primary);
+  color:white;
+}
+
+/* Recommendations Grid */
+.recommendations-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:2rem;
+}
+
+.recommendation-card{
+  background:#fff;
+  border-radius:20px;
+  padding:2.5rem;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  text-align:center;
+  transition:all .3s ease;
+  border:2px solid transparent;
+  position:relative;
+}
+
+.recommendation-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 40px rgba(236,64,122,0.2);
+  border-color:var(--primary-light);
+}
+
+.rec-icon{
+  font-size:4rem;
+  margin-bottom:1rem;
+}
+
+.rec-badge{
+  position:absolute;
+  top:1.5rem;
+  right:1.5rem;
+  background:rgba(236,64,122,0.1);
+  color:var(--primary-dark);
+  padding:0.4rem 0.8rem;
+  border-radius:20px;
+  font-size:0.75rem;
+  font-weight:700;
+}
+
+.recommendation-card h3{
+  font-size:1.4rem;
+  margin-bottom:0.8rem;
+  color:var(--primary-dark);
+}
+
+.recommendation-card p{
+  color:var(--text-soft);
+  line-height:1.6;
+  margin-bottom:1.5rem;
+}
+
+.rec-btn{
+  padding:0.8rem 1.5rem;
+  background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color:white;
+  border:none;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .3s;
+  font-size:0.9rem;
+}
+
+.rec-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(236,64,122,0.3);
+}
+
+/* CTA Section */
+.cta-section{
+  background:linear-gradient(135deg, rgba(236,64,122,0.08), rgba(237,231,246,0.15));
+  border-radius:30px;
+  padding:4rem 2rem;
+  text-align:center;
+  margin:3rem 0;
+}
+
+.cta-content{
+  max-width:700px;
+  margin:0 auto;
+}
+
+.cta-title{
+  font-size:clamp(2rem,4vw,2.8rem);
+  font-weight:900;
+  margin-bottom:1rem;
+  color:var(--text-main);
+}
+
+.cta-subtitle{
+  font-size:1.1rem;
+  color:var(--text-soft);
+  margin-bottom:2rem;
+  line-height:1.7;
+}
+
+.cta-buttons{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* Footer */
+
+/* ========== COMPREHENSIVE RESPONSIVE BREAKPOINTS ========== */
+
+/* Large tablet / small desktop */
+@media(max-width:1100px){
+  .hero{
+    grid-template-columns:1fr;
+    gap:2rem;
+    padding:3rem 1.5rem 2rem;
+    min-height:auto;
+    border-radius:20px;
+    margin-bottom:2rem;
+  }
+  .hero-content{padding:0;}
+  /* Hide complex 3D orbital animation — it overflows and breaks layout on narrow viewports */
+  .hero-visual-3d{display:none;}
+  .pregnancy-3d-container{height:360px;}
+
+  .actions-grid{grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));}
+  .stats-grid{grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));}
+  .recommendations-grid{grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));}
+  .journey-stats-grid{grid-template-columns:1fr;}
+
+  .journey-card-main{padding:2rem;}
+  .reminders-list, .activity-timeline, .journeys-list{max-width:100%;}
+}
+
+/* Tablet */
+@media(max-width:900px){
+  .page-shell{padding:0 1.25rem;}
+
+  .hero{
+    padding:2.5rem 1.25rem 2rem;
+    border-radius:16px;
+  }
+
+  .hero-title-3d{font-size:clamp(1.9rem,5.5vw,3rem);}
+  .hero-subtitle{font-size:1rem;}
+
+  .hero-stats{
+    grid-template-columns:repeat(3,1fr);
+    gap:.75rem;
+  }
+  .stat-number{font-size:1.5rem;}
+  .stat-label{font-size:.78rem;}
+  .stat-item{padding:.75rem .5rem;}
+
+  .hero-cta-row{
+    flex-direction:column;
+    gap:.75rem;
+  }
+  .btn-primary,.btn-secondary{
+    width:100%;
+    padding:.85rem 1.5rem;
+    text-align:center;
+    justify-content:center;
+    display:flex;
+    align-items:center;
+  }
+
+  .daily-tip{
+    flex-direction:column;
+    gap:.6rem;
+    text-align:center;
+    padding:1rem;
+  }
+  .tip-icon{font-size:1.5rem;}
+
+  .section-title-prominent{font-size:clamp(1.6rem,5vw,2.4rem);}
+  .section-subtitle-prominent{font-size:1rem;}
+  .section-header{margin-bottom:2rem;}
+
+  /* Actions grid — 2 cols on tablet */
+  .actions-grid{grid-template-columns:repeat(2, 1fr); gap:1.25rem;}
+  .action-card{padding:1.75rem 1.25rem;}
+
+  /* Stats — 3 cols on tablet */
+  .stats-grid{grid-template-columns:repeat(3, 1fr); gap:1rem;}
+  .stat-card{padding:1.5rem 1rem;}
+  .stat-value{font-size:2rem;}
+
+  /* Reminders */
+  .reminder-card{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1rem;
+    padding:1.5rem;
+  }
+  .reminder-date-badge{
+    flex-direction:row;
+    gap:.75rem;
+    padding:.6rem 1rem;
+    border-radius:12px;
+    width:auto;
+    min-width:unset;
+  }
+  .date-day{font-size:1.5rem; margin-top:0;}
+  .reminder-meta{flex-wrap:wrap; gap:.5rem 1rem;}
+  .reminder-btn{align-self:flex-start;}
+
+  /* Journey cards */
+  .journey-card-main{padding:1.75rem 1.25rem;}
+  .journey-title{font-size:1.5rem;}
+  .journey-actions{flex-direction:column; gap:.75rem;}
+  .journey-actions .btn-primary,
+  .journey-actions .btn-secondary{width:100%; justify-content:center; display:flex; align-items:center;}
+
+  /* Activity timeline */
+  .activity-card{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1rem;
+    padding:1.5rem;
+  }
+  .activity-action-btn{align-self:flex-start;}
+
+  /* Recommendations */
+  .recommendations-grid{grid-template-columns:repeat(2,1fr); gap:1.25rem;}
+  .recommendation-card{padding:1.75rem 1.25rem;}
+
+  /* CTA */
+  .cta-section{padding:2.5rem 1.25rem; border-radius:20px; margin:2rem 0;}
+  .cta-title{font-size:clamp(1.6rem,5vw,2.2rem);}
+  .cta-buttons{flex-direction:column; align-items:stretch; gap:.75rem;}
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-secondary{width:100%; justify-content:center; display:flex; align-items:center;}
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .page-shell{padding:0 1rem;}
+
+  .hero{
+    padding:2rem 1rem 1.5rem;
+    border-radius:12px;
+    margin-bottom:1.5rem;
+  }
+
+  .hero-badge{padding:.5rem 1rem; font-size:.8rem;}
+  .hero-title-3d{font-size:clamp(1.6rem,7vw,2.2rem);}
+  .hero-subtitle{font-size:.95rem;}
+
+  /* hero stats go 1-col on mobile */
+  .hero-stats{grid-template-columns:1fr; gap:.6rem;}
+
+  .journey-section{padding:1.75rem 0; margin:1rem 0;}
+
+  /* Actions — 1 col on mobile */
+  .actions-grid{grid-template-columns:1fr; gap:1rem;}
+  .action-card{padding:1.5rem 1rem;}
+  .action-card h3{font-size:1.2rem;}
+
+  /* Stats — 2 cols on mobile */
+  .stats-grid{grid-template-columns:repeat(2,1fr); gap:.85rem;}
+  .stat-card{padding:1.25rem .85rem;}
+  .stat-value{font-size:1.75rem;}
+  .stat-icon{font-size:2.2rem; margin-bottom:.6rem;}
+
+  /* Reminders */
+  .reminder-card{border-radius:16px;}
+  .reminder-content h3{font-size:1.1rem;}
+
+  /* Journey card */
+  .journey-card-main{padding:1.25rem 1rem; border-radius:18px;}
+  .journey-icon-large{font-size:3.5rem; margin-bottom:1rem;}
+  .journey-title{font-size:1.3rem;}
+  .journey-subtitle{font-size:.95rem;}
+  .journey-progress-section{padding:1rem; margin:1.25rem 0;}
+  .journey-stats-grid{gap:1rem; margin:1.25rem 0;}
+  .journey-stat-item{padding:1rem;}
+  .stat-item-value{font-size:1rem;}
+
+  /* Activity */
+  .activity-card{border-radius:16px;}
+  .activity-icon-badge{width:48px; height:48px; font-size:1.4rem;}
+  .activity-content h3{font-size:1.05rem;}
+
+  /* Recommendations — 1 col on mobile */
+  .recommendations-grid{grid-template-columns:1fr; gap:1rem;}
+  .recommendation-card{padding:1.5rem 1rem;}
+  .recommendation-card h3{font-size:1.2rem;}
+
+  /* CTA */
+  .cta-section{padding:2rem 1rem; border-radius:16px;}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  .hero-title-3d{font-size:1.45rem;}
+  .hero-stats{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr;}
+  .nav-container{padding:0 1rem;}
+  .logo-text a{font-size:1.1rem;}
+  .reminder-date-badge{width:100%;}
+  .hero-badge{font-size:.75rem; padding:.45rem .9rem;}
+}
+
+</style>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <circle cx="12" cy="5.5" r="2.8"/>
+            <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+            <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+            <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+            <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+            <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <a href="index.html">Nari Swasthya</a>
+          <span>Women's Complete Health</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+
+        <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+        <!-- Services dropdown (active) -->
+        <div class="nav-item">
+          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
+            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
+            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
+            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
+            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
+            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+
+        <!-- Additional Info dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
+            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <!-- NCD with flyout sub-items — first item -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
+            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
+            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right: Sign In + Contact Us -->
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Mobile Menu -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
+    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <div class="mm-section">Specialised Care</div>
+    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+
+
+
+  <div class="page-shell">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <!-- Particle Background -->
+    <div class="hero-constellation-bg" aria-hidden="true">
+      <canvas id="particleCanvas"></canvas>
+      <div class="gradient-morph"></div>
+    </div>
+    
+    <div class="hero-content">
+
+        <div class="hero-badge">
+          <span class="badge-icon">👋</span>
+          <span class="badge-text">Welcome Back, Priya!</span>
+        </div>
+
+        <h1 class="hero-title-3d">
+          Your <span class="title-emphasis">Personalized Health</span> Dashboard
+        </h1>
+
+        <p class="hero-subtitle">
+          Stay on track with reminders, progress tracking, and actionable next steps. Your complete health journey in one place.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Reminders Due</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Active Journeys</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">85%</span>
+            <span class="stat-label">Goals Achieved</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-row">
+          <button class="btn-primary" type="button" onclick="Dashboard.viewAllReminders()">View All Reminders</button>
+          <button class="btn-secondary" type="button" onclick="Dashboard.scrollTo('#quick-actions')">Quick Actions</button>
+        </div>
+
+        <div class="daily-tip">
+          <div class="tip-icon">💡</div>
+          <p id="dashboardTip">Tip: Stay hydrated! Aim for 8-10 glasses of water daily for optimal health.</p>
+        </div>
+      </div>
+
+      <!-- Dashboard visual navigation (right side animation) -->
+      <div class="hero-visual-3d">
+        <div class="pregnancy-3d-container" aria-label="Interactive dashboard navigation">
+          <div class="pregnancy-core" aria-hidden="true">
+            <div class="center-glow"></div>
+            <div class="pulse-ring ring-1"></div>
+            <div class="pulse-ring ring-2"></div>
+            <div class="pulse-ring ring-3"></div>
+          </div>
+
+          <button class="health-icon icon-1" type="button" onclick="Dashboard.scrollTo('#reminders')">
+            <div class="icon-inner">🔔</div>
+            <div class="icon-label">Reminders</div>
+          </button>
+          <button class="health-icon icon-2" type="button" onclick="Dashboard.scrollTo('#health-stats')">
+            <div class="icon-inner">📊</div>
+            <div class="icon-label">Stats</div>
+          </button>
+          <button class="health-icon icon-3" type="button" onclick="Dashboard.scrollTo('#journeys')">
+            <div class="icon-inner">🗺️</div>
+            <div class="icon-label">Journeys</div>
+          </button>
+          <button class="health-icon icon-4" type="button" onclick="Dashboard.scrollTo('#activity')">
+            <div class="icon-inner">📝</div>
+            <div class="icon-label">Activity</div>
+          </button>
+          <button class="health-icon icon-5" type="button" onclick="Dashboard.scrollTo('#recommendations')">
+            <div class="icon-inner">💡</div>
+            <div class="icon-label">Insights</div>
+          </button>
+
+          <!-- Progress indicator -->
+          <div class="week-dial" role="group" aria-label="Overall progress">
+            <div class="meter-reading">
+              <span class="reading-value">85</span>
+              <span class="reading-unit">%</span>
+            </div>
+            <div class="meter-status">Goals Complete</div>
+            <div class="meter-bar">
+              <div class="meter-fill" style="width: 85%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-info-box">
+          <div class="info-badge">
+            <span class="badge-icon">✨</span>
+            <span class="badge-text">Your Command Center</span>
+          </div>
+          <h3 class="info-title">Track Everything in One Place</h3>
+          <p class="info-text">
+            Monitor your health journeys, upcoming appointments, medications, and personalized recommendations all from your dashboard.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <section id="quick-actions" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Quick Actions</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Take <span class="title-highlight">Control</span> of Your Health
+        </h2>
+        <p class="section-subtitle-prominent">
+          Access the most important tools and features with one click.
+        </p>
+      </div>
+
+      <div class="actions-grid">
+        <div class="action-card">
+          <div class="action-icon">📅</div>
+          <h3>Schedule Appointment</h3>
+          <p>Book your next doctor visit or health screening</p>
+          <button class="action-btn" onclick="Dashboard.scheduleAppointment()">Schedule Now</button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">💊</div>
+          <h3>Track Medication</h3>
+          <p>Log your daily medications and set reminders</p>
+          <button class="action-btn" onclick="Dashboard.trackMedication()">Track Now</button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">📊</div>
+          <h3>View Health Records</h3>
+          <p>Access your complete medical history and reports</p>
+          <button class="action-btn" onclick="Dashboard.viewRecords()">View Records</button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">🎯</div>
+          <h3>Set Health Goals</h3>
+          <p>Create personalized goals and track progress</p>
+          <button class="action-btn" onclick="Dashboard.setGoals()">Set Goals</button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">🔬</div>
+          <h3>Lab Results</h3>
+          <p>Check your latest test results and trends</p>
+          <button class="action-btn" onclick="Dashboard.viewLabResults()">Check Results</button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">👥</div>
+          <h3>Join Community</h3>
+          <p>Connect with others on similar health journeys</p>
+          <button class="action-btn" onclick="window.location.href='community.html'">Join Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPCOMING REMINDERS -->
+    <section id="reminders" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Upcoming Reminders</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Never Miss <span class="title-highlight">Important Dates</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Your scheduled appointments, medications, and health checkups.
+        </p>
+      </div>
+
+      <div class="reminders-list">
+        <div class="reminder-card">
+          <div class="reminder-date-badge">
+            <span class="date-month">FEB</span>
+            <span class="date-day">20</span>
+          </div>
+          <div class="reminder-content">
+            <h3>Prenatal Checkup - Dr. Sarah Johnson</h3>
+            <p class="reminder-details">Regular prenatal visit and ultrasound</p>
+            <div class="reminder-meta">
+              <span>🕐 10:00 AM</span>
+              <span>📍 Women's Health Clinic</span>
+            </div>
+          </div>
+          <button class="reminder-btn">View Details</button>
+        </div>
+
+        <div class="reminder-card">
+          <div class="reminder-date-badge">
+            <span class="date-month">FEB</span>
+            <span class="date-day">22</span>
+          </div>
+          <div class="reminder-content">
+            <h3>Prenatal Vitamin Refill</h3>
+            <p class="reminder-details">Pick up prescription from pharmacy</p>
+            <div class="reminder-meta">
+              <span>💊 Monthly Supply</span>
+              <span>📍 City Pharmacy</span>
+            </div>
+          </div>
+          <button class="reminder-btn">Set Reminder</button>
+        </div>
+
+        <div class="reminder-card">
+          <div class="reminder-date-badge">
+            <span class="date-month">MAR</span>
+            <span class="date-day">15</span>
+          </div>
+          <div class="reminder-content">
+            <h3>Mammogram Screening</h3>
+            <p class="reminder-details">Annual breast cancer screening</p>
+            <div class="reminder-meta">
+              <span>🕐 2:00 PM</span>
+              <span>📍 Diagnostic Center</span>
+            </div>
+          </div>
+          <button class="reminder-btn">Reschedule</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALTH STATS -->
+    <section id="health-stats" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Health Metrics</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Your <span class="title-highlight">Health at a Glance</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Track key health indicators and progress over time.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">💗</div>
+          <div class="stat-value">72</div>
+          <div class="stat-label">Heart Rate (BPM)</div>
+          <div class="stat-status normal">Normal</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 72%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🩸</div>
+          <div class="stat-value">120/80</div>
+          <div class="stat-label">Blood Pressure</div>
+          <div class="stat-status normal">Optimal</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">⚖️</div>
+          <div class="stat-value">65.2</div>
+          <div class="stat-label">Weight (kg)</div>
+          <div class="stat-status normal">On Track</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 68%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-value">8,542</div>
+          <div class="stat-label">Steps Today</div>
+          <div class="stat-status good">85% Goal</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">😴</div>
+          <div class="stat-value">7.5h</div>
+          <div class="stat-label">Sleep Last Night</div>
+          <div class="stat-status normal">Good</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 75%;"></div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">💧</div>
+          <div class="stat-value">6/8</div>
+          <div class="stat-label">Water Intake</div>
+          <div class="stat-status warning">75%</div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" style="width: 75%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIVE JOURNEYS -->
+    <section id="journeys" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Your Active Journeys</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Continue Your <span class="title-highlight">Health Journeys</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Pick up where you left off with personalized health paths.
+        </p>
+      </div>
+
+      <div class="journeys-list">
+        <div class="journey-card-main">
+          <div class="journey-badge active">Active</div>
+          <div class="journey-icon-large">🤰</div>
+          <h3 class="journey-title">Pregnancy Journey - Week 22</h3>
+          <p class="journey-subtitle">Your baby is now the size of a papaya! 🫑</p>
+          
+          <div class="journey-progress-section">
+            <div class="progress-header">
+              <span class="progress-label">Journey Progress</span>
+              <span class="progress-percent">55% Complete</span>
+            </div>
+            <div class="journey-progress-bar">
+              <div class="journey-progress-fill" style="width: 55%;"></div>
+            </div>
+          </div>
+
+          <div class="journey-stats-grid">
+            <div class="journey-stat-item">
+              <span class="stat-item-label">Next Milestone</span>
+              <span class="stat-item-value">Third Trimester Begins</span>
+            </div>
+            <div class="journey-stat-item">
+              <span class="stat-item-label">Completed Tasks</span>
+              <span class="stat-item-value">14 of 25 Tasks</span>
+            </div>
+          </div>
+
+          <div class="journey-actions">
+            <button class="btn-primary" onclick="window.location.href='pregnancy.html'">Continue Journey</button>
+            <button class="btn-secondary" onclick="Dashboard.viewChecklist('pregnancy')">View Checklist</button>
+          </div>
+        </div>
+
+        <div class="journey-card-main">
+          <div class="journey-badge pending">In Progress</div>
+          <div class="journey-icon-large">🔬</div>
+          <h3 class="journey-title">Preventive Screening Path</h3>
+          <p class="journey-subtitle">Stay ahead with age-appropriate health screenings</p>
+          
+          <div class="journey-progress-section">
+            <div class="progress-header">
+              <span class="progress-label">Screening Completion</span>
+              <span class="progress-percent">70% Complete</span>
+            </div>
+            <div class="journey-progress-bar">
+              <div class="journey-progress-fill" style="width: 70%;"></div>
+            </div>
+          </div>
+
+          <div class="journey-stats-grid">
+            <div class="journey-stat-item">
+              <span class="stat-item-label">Next Screening</span>
+              <span class="stat-item-value">Mammogram - Mar 15</span>
+            </div>
+            <div class="journey-stat-item">
+              <span class="stat-item-label">Completed</span>
+              <span class="stat-item-value">7 of 10 Screenings</span>
+            </div>
+          </div>
+
+          <div class="journey-actions">
+            <button class="btn-primary" onclick="window.location.href='screening.html'">View Guide</button>
+            <button class="btn-secondary" onclick="Dashboard.scheduleScreening()">Schedule Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT ACTIVITY -->
+    <section id="activity" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Recent Activity</span>
+        </div>
+        <h2 class="section-title-prominent">
+          Your <span class="title-highlight">Health Timeline</span>
+        </h2>
+        <p class="section-subtitle-prominent">
+          Track all your health activities and milestones.
+        </p>
+      </div>
+
+      <div class="activity-timeline">
+        <div class="activity-card">
+          <div class="activity-icon-badge success">✓</div>
+          <div class="activity-content">
+            <h3>Completed Health Checkup</h3>
+            <p>Annual wellness exam with Dr. Johnson</p>
+            <div class="activity-time">📅 February 10, 2026</div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon-badge info">📄</div>
+          <div class="activity-content">
+            <h3>Lab Results Available</h3>
+            <p>Blood work and thyroid panel results ready</p>
+            <div class="activity-time">📅 February 8, 2026</div>
+          </div>
+          <button class="activity-action-btn">View Results</button>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon-badge warning">🔔</div>
+          <div class="activity-content">
+            <h3>Reminder Set</h3>
+            <p>Prenatal vitamin refill scheduled for Mar 22</p>
+            <div class="activity-time">📅 February 5, 2026</div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon-badge success">👥</div>
+          <div class="activity-content">
+            <h3>Joined Community Group</h3>
+            <p>Second Trimester Support Group</p>
+            <div class="activity-time">📅 February 1, 2026</div>
+          </div>
+          <button class="activity-action-btn" onclick="window.location.href='community.html'">Visit Community</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONALIZED RECOMMENDATIONS -->
+    <section id="recommendations" class="journey-section">
+      <div class="section-header">
+        <div class="header-badge-prominent">
+          <span class="badge-pulse"></span>
+          <span class="badge-text">Personalized Recommendations</span>
+        </div>
+        <h2 class="section-title-prominent">
+          <span class="title-highlight">For You</span> Based on Your Journey
+        </h2>
+        <p class="section-subtitle-prominent">
+          Curated content and resources tailored to your health profile.
+        </p>
+      </div>
+
+      <div class="recommendations-grid">
+        <div class="recommendation-card">
+          <div class="rec-icon">📖</div>
+          <div class="rec-badge">Recommended Read</div>
+          <h3>Second Trimester Nutrition</h3>
+          <p>What to eat for baby's development during weeks 14-27</p>
+          <button class="rec-btn">Read Now →</button>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="rec-icon">🧘‍♀️</div>
+          <div class="rec-badge">Suggested Exercise</div>
+          <h3>Prenatal Yoga Routine</h3>
+          <p>20-minute gentle yoga for second trimester</p>
+          <button class="rec-btn">Start Workout →</button>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="rec-icon">💬</div>
+          <div class="rec-badge">Join Discussion</div>
+          <h3>Week 22 Milestone Chat</h3>
+          <p>Share your experience with other expecting mothers</p>
+          <button class="rec-btn" onclick="window.location.href='community.html'">Join Now →</button>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="rec-icon">🎧</div>
+          <div class="rec-badge">Listen & Learn</div>
+          <h3>Pregnancy Meditation</h3>
+          <p>Guided meditation for stress relief and bonding</p>
+          <button class="rec-btn">Listen Now →</button>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="rec-icon">🍎</div>
+          <div class="rec-badge">Meal Plan</div>
+          <h3>Weekly Meal Ideas</h3>
+          <p>Nutritionist-approved recipes for pregnancy</p>
+          <button class="rec-btn">View Meals →</button>
+        </div>
+
+        <div class="recommendation-card">
+          <div class="rec-icon">👶</div>
+          <div class="rec-badge">Expert Advice</div>
+          <h3>Baby Gear Checklist</h3>
+          <p>Essential items to prepare before delivery</p>
+          <button class="rec-btn">Get Checklist →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORE MORE -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">Explore More Features</h2>
+        <p class="cta-subtitle">Discover all that Nari Swasthya has to offer for your health journey.</p>
+        <div class="cta-buttons">
+          <button class="btn-primary" onclick="window.location.href='journeys.html'">All Journeys</button>
+          <button class="btn-secondary" onclick="window.location.href='community.html'">Community</button>
+          <button class="btn-secondary" onclick="window.location.href='products.html'">Shop Products</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<!-- FOOTER -->
+<style>
+  :root {
+    --bg-footer:     #1e1a1e;
+    --bg-bottom:     #161316;
+    --pink-primary:  #e8517a;
+    --pink-soft:     #f0748e;
+    --text-main-f:   #c9bfc9;
+    --text-muted-f:  #7c7080;
+    --divider-f:     rgba(232,81,122,0.18);
+    --font-display-f:'Playfair Display', Georgia, serif;
+    --font-body-f:   'DM Sans', sans-serif;
+  }
+  footer.ns-footer{background:var(--bg-footer);color:var(--text-main-f);font-family:var(--font-body-f);border-top:1px solid var(--divider-f);}
+  .footer-main{max-width:1200px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+  .footer-col h3{font-family:var(--font-display-f);font-size:1.05rem;font-weight:600;color:var(--pink-primary);margin-bottom:18px;letter-spacing:.01em;}
+  .footer-col p{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{font-size:.875rem;color:var(--text-main-f);padding:5px 0;font-weight:300;position:relative;padding-left:14px;transition:color .2s;}
+  .footer-col ul li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--pink-primary);opacity:.5;}
+  .footer-col ul li:hover{color:var(--pink-soft);}
+  .disclaimer-text{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+  .emergency-alert{font-size:.875rem;line-height:1.7;color:var(--pink-primary);font-weight:500;}
+  .emergency-alert strong{font-weight:600;}
+  .footer-meta{border-top:1px solid var(--divider-f);max-width:1200px;margin:0 auto;padding:28px 32px;text-align:center;}
+  .footer-meta .meta-line{font-size:.8rem;color:var(--text-muted-f);letter-spacing:.04em;margin-bottom:10px;}
+  .footer-meta .meta-line .sep{color:var(--pink-primary);margin:0 6px;}
+  .footer-meta .tagline{font-size:.82rem;color:var(--text-muted-f);display:flex;align-items:center;justify-content:center;gap:6px;}
+  .footer-meta .tagline .heart{color:var(--pink-primary);font-size:1rem;animation:footerPulse 2s ease-in-out infinite;}
+  @keyframes footerPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.25);opacity:.8;}}
+  .footer-bottom{background:var(--bg-bottom);border-top:1px solid rgba(255,255,255,0.04);}
+  .footer-bottom-inner{max-width:1200px;margin:0 auto;padding:22px 32px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .footer-links{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;}
+  .footer-links a{font-size:.82rem;color:var(--text-muted-f);text-decoration:none;letter-spacing:.03em;transition:color .2s;}
+  .footer-links a:hover{color:var(--pink-soft);}
+  .footer-copy{font-size:.78rem;color:var(--text-muted-f);opacity:.7;letter-spacing:.02em;}
+  @media(max-width:900px){.footer-main{grid-template-columns:repeat(2,1fr);gap:32px;}}
+  @media(max-width:540px){.footer-main{grid-template-columns:1fr;padding:40px 20px 32px;}.footer-meta{padding:20px;}.footer-bottom-inner{padding:18px 20px;}.footer-links{gap:20px;}}
+</style>
+
+<footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Guide</h3>
+      <p>Comprehensive, evidence-based information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data (724,115+ women).</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>ICMR India</li>
+        <li>NFHS-5 Survey</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Emergency</h3>
+      <p class="emergency-alert">Heavy bleeding, fever, chest pain, or severe abdominal pain require immediate medical attention. <strong>Don't delay.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+  </script>
+
+  <script>
+    /* dashboard.js
+   Nari Swasthya — Dashboard Page
+   Matches antenatal_care.js animation and interaction patterns
+*/
+(function () {
+  "use strict";
+
+  /* Global Dashboard object for inline onclick handlers */
+  window.Dashboard = window.Dashboard || {};
+  const Dashboard = window.Dashboard;
+
+  /* Helper functions */
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  /* Smooth scroll function */
+  Dashboard.scrollTo = function(selector) {
+    const el = $(selector);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  /* Dashboard Action Functions */
+  Dashboard.viewAllReminders = function() {
+    Dashboard.scrollTo('#reminders');
+  };
+
+  Dashboard.scheduleAppointment = function() {
+    alert('Schedule Appointment feature coming soon! You\'ll be able to book appointments directly from your dashboard.');
+  };
+
+  Dashboard.trackMedication = function() {
+    alert('Medication Tracking feature coming soon! You\'ll be able to log medications and set automatic reminders.');
+  };
+
+  Dashboard.viewRecords = function() {
+    alert('Health Records feature coming soon! You\'ll have secure access to all your medical documents and reports.');
+  };
+
+  Dashboard.setGoals = function() {
+    alert('Set Health Goals feature coming soon! Create personalized goals and track your progress over time.');
+  };
+
+  Dashboard.viewLabResults = function() {
+    alert('Lab Results feature coming soon! View your latest test results and track trends over time.');
+  };
+
+  Dashboard.viewChecklist = function(journeyType) {
+    alert(`View ${journeyType} checklist feature coming soon! You'll see all your tasks and milestones.`);
+  };
+
+  Dashboard.scheduleScreening = function() {
+    alert('Schedule Screening feature coming soon! Book your preventive health screenings with ease.');
+  };
+
+  /* Daily Tips Rotation */
+  const dashboardTips = [
+    'Tip: Stay hydrated! Aim for 8-10 glasses of water daily for optimal health.',
+    'Tip: Take 10-minute walks after meals to improve digestion and blood sugar levels.',
+    'Tip: Practice deep breathing for 5 minutes daily to reduce stress and anxiety.',
+    'Tip: Get 7-9 hours of quality sleep each night for better overall health.',
+    'Tip: Keep a health journal to track symptoms, medications, and appointments.',
+    'Tip: Schedule your preventive screenings at the beginning of each year.',
+    'Tip: Take your prenatal vitamins with food to improve absorption.',
+    'Tip: Join community support groups to connect with others on similar journeys.'
+  ];
+
+  function setRandomTip() {
+    const tipElement = $('#dashboardTip');
+    if (tipElement) {
+      const randomTip = dashboardTips[Math.floor(Math.random() * dashboardTips.length)];
+      tipElement.textContent = randomTip;
+    }
+  }
+
+  /* Enhanced Particle Animation (matches antenatal_care.js) */
+  (function initEnhancedParticles() {
+    const particleCanvas = document.getElementById('particleCanvas');
+    if (!particleCanvas) return;
+    
+    const ctx = particleCanvas.getContext('2d');
+    
+    function resizeCanvas() {
+      particleCanvas.width = particleCanvas.offsetWidth;
+      particleCanvas.height = particleCanvas.offsetHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    const particles = [];
+    const particleCount = 100;
+    
+    class Particle {
+      constructor() {
+        this.x = Math.random() * particleCanvas.width;
+        this.y = Math.random() * particleCanvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        if (this.x < 0 || this.x > particleCanvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > particleCanvas.height) this.vy *= -1;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(236, 64, 122, 0.6)';
+        ctx.fill();
+      }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+    
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(236, 64, 122, ${0.2 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      connectParticles();
+      
+      requestAnimationFrame(animateParticles);
+    }
+    
+    animateParticles();
+  })();
+
+  /* Animate Progress Bars */
+  function animateProgressBars() {
+    $$('.journey-progress-fill, .mini-progress-fill').forEach(bar => {
+      const targetWidth = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => {
+        bar.style.width = targetWidth;
+      }, 300);
+    });
+  }
+
+  /* Initialize on DOM ready */
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Nari Swasthya Dashboard initialized');
+    
+    // Set random tip
+    setRandomTip();
+
+    // Add smooth scroll behavior to all internal links
+    $$('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href !== '#') {
+          e.preventDefault();
+          Dashboard.scrollTo(href);
+        }
+      });
+    });
+
+    // Animate progress bars
+    animateProgressBars();
+
+    // Animate stats on scroll
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            entry.target.style.transition = 'all 0.6s ease';
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, 100);
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe cards for scroll animation
+    $$('.action-card, .reminder-card, .stat-card, .journey-card-main, .activity-card, .recommendation-card').forEach(card => {
+      observer.observe(card);
+    });
+
+    // Update greeting based on time of day
+    const hour = new Date().getHours();
+    let greeting = 'Welcome back';
+    
+    if (hour < 12) {
+      greeting = 'Good morning';
+    } else if (hour < 18) {
+      greeting = 'Good afternoon';
+    } else {
+      greeting = 'Good evening';
+    }
+    
+    // You can update the hero badge if needed
+    const badgeText = $('.badge-text');
+    if (badgeText && badgeText.textContent.includes('Welcome Back')) {
+      badgeText.textContent = `${greeting}, Priya!`;
+    }
+
+    // Simulate real-time stat updates (every 30 seconds)
+    setInterval(() => {
+      const onlineCount = $('.stat-number');
+      if (onlineCount && onlineCount.textContent === '3') {
+        // Subtle animation to show updates
+        onlineCount.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          onlineCount.style.transform = 'scale(1)';
+        }, 300);
+      }
+    }, 30000);
+
+    // Add click handlers to reminder buttons
+    $$('.reminder-btn').forEach(btn => {
+      if (!btn.hasAttribute('onclick')) {
+        btn.addEventListener('click', () => {
+          alert('Reminder details and actions coming soon!');
+        });
+      }
+    });
+
+    // Add click handlers to activity action buttons
+    $$('.activity-action-btn').forEach(btn => {
+      if (!btn.hasAttribute('onclick')) {
+        btn.addEventListener('click', () => {
+          alert('View details feature coming soon!');
+        });
+      }
+    });
+
+    // Add click handlers to recommendation buttons
+    $$('.rec-btn').forEach(btn => {
+      if (!btn.hasAttribute('onclick')) {
+        btn.addEventListener('click', () => {
+          alert('This feature is coming soon! You\'ll have access to curated content and resources.');
+        });
+      }
+    });
+  });
+
+  /* Expose utility functions for debugging */
+  Dashboard.refreshStats = function() {
+    animateProgressBars();
+    console.log('Stats refreshed');
+  };
+
+  Dashboard.changeTip = function() {
+    setRandomTip();
+  };
+
+})();
+
+  </script>
+  <script>
+    (function initHeaderSparkle() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      header.addEventListener('mousemove', (e) => {
+        const rect = header.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        header.style.setProperty('--mouse-x', `${x}%`);
+        header.style.setProperty('--mouse-y', `${y}%`);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,5929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pregnancy Journey – Interactive 40-Week Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<style>
+/* =========================================
+   PREGNANCY JOURNEY - COMPREHENSIVE STYLES
+   ========================================= */
+
+:root {
+  --pink: #ec407a;
+  --deep-pink: #d81b60;
+  --lavender: #ede7f6;
+  --bg: #faf5fb;
+  --card-bg: #ffffff;
+  --text-main: #212121;
+  --text-soft: #555;
+  --border-soft: #e0e0e0;
+  --chip-bg: #f3e5f5;
+  --success: #66bb6a;
+  --warning: #ffa726;
+  --info: #42a5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Prevent any child from causing horizontal scroll */
+*, *::before, *::after { max-width: 100%; }
+img, svg, canvas, video { max-width: 100%; height: auto; }
+
+/* =========================================
+   HEADER NAVIGATION
+   ========================================= */
+.site-header{
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  padding:0;
+  box-shadow:0 2px 24px rgba(236,64,122,0.09);
+  position:sticky;top:0;z-index:1000;
+  border-bottom:1px solid rgba(236,64,122,0.08);
+}
+.nav-container{
+  max-width:1400px;margin:0 auto;
+  padding:0 1.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  height:64px;
+}
+.logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(236,64,122,0.35);
+  flex-shrink:0;
+}
+.logo-icon svg{width:22px;height:22px;fill:white;}
+.logo-text{display:flex;flex-direction:column;gap:0;}
+.logo-text a{
+  text-decoration:none;
+  font-family:'Playfair Display',serif;
+  font-weight:900;font-size:1.25rem;line-height:1.1;
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.logo-text span{
+  font-size:.62rem;color:var(--text-soft);
+  font-family:'Manrope',sans-serif;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.main-nav{display:flex;align-items:center;gap:.2rem;}
+.nav-item{position:relative;}
+.nav-link{
+  display:flex;align-items:center;gap:.3rem;
+  text-decoration:none;color:var(--text-main);
+  font-weight:500;font-size:.875rem;
+  padding:.55rem .75rem;border-radius:8px;
+  transition:all .25s;white-space:nowrap;
+  cursor:pointer;background:none;border:none;font-family:inherit;
+}
+.nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
+.nav-link .chevron{font-size:.6rem;transition:transform .25s;color:var(--text-soft);margin-top:1px;}
+.nav-item:hover .chevron{transform:rotate(180deg);}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  min-width:220px;background:white;border-radius:16px;
+  box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+  opacity:0;pointer-events:none;
+  transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+}
+.nav-dropdown::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-bottom-color:white;
+  border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+}
+.nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+  opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+}
+.dd-item{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.65rem .9rem;border-radius:10px;
+  text-decoration:none;color:var(--text-main);
+  font-size:.85rem;font-weight:500;transition:all .2s;
+}
+.dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1.1rem;}
+.dd-icon{
+  width:28px;height:28px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;flex-shrink:0;
+}
+.dd-sep{height:1px;background:rgba(0,0,0,0.07);margin:.3rem .5rem;}
+/* Flyout submenu */
+.dd-has-flyout{position:relative;}
+.dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+.dd-flyout{
+  display:none;position:absolute;top:0;left:calc(100% + 4px);
+  min-width:190px;background:white;border-radius:12px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+  border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+}
+.dd-has-flyout:hover>.dd-flyout,
+.dd-has-flyout:focus-within>.dd-flyout{display:block;}
+.dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);}
+.dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+.dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:var(--deep-pink);padding-left:1rem;}
+.nav-actions{display:flex;gap:.6rem;align-items:center;}
+.btn-nav{
+  padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+  font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+  font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+}
+.btn-nav.outline{
+  background:linear-gradient(135deg,#ec407a,#ad1457);
+  color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);border:none;
+}
+.btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+.btn-nav.primary{
+  border:1.5px solid var(--deep-pink);
+  color:var(--deep-pink);background:#fff;box-shadow:none;
+}
+.btn-nav.primary:hover{background:rgba(236,64,122,0.05);border-color:var(--deep-pink);}
+.hamburger{
+  display:none;width:38px;height:38px;border-radius:10px;
+  background:none;border:1.5px solid rgba(0,0,0,0.12);
+  align-items:center;justify-content:center;cursor:pointer;
+  flex-direction:column;gap:4px;padding:8px;
+}
+.hamburger span{display:block;height:2px;background:#212121;border-radius:2px;transition:all .3s;}
+.mobile-menu{
+  display:none;position:fixed;inset:0;top:64px;
+  background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+  z-index:999;padding:1.5rem;overflow-y:auto;
+}
+.mm-action-btn{display:inline-flex !important;}
+.mobile-menu.open{display:block;}
+.mm-link{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.85rem 1rem;border-radius:12px;
+  text-decoration:none;color:#212121;
+  font-weight:500;font-size:1rem;
+  transition:all .2s;border-bottom:1px solid rgba(0,0,0,0.07);
+}
+.mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
+.mm-section{font-size:.72rem;font-weight:700;color:#757575;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+/* Footer vars */
+:root{
+  --bg-footer:#1e1a1e;--bg-bottom:#161316;
+  --pink-primary:#e8517a;--pink-soft:#f0748e;
+  --text-main-f:#c9bfc9;--text-muted-f:#7c7080;
+  --divider-f:rgba(232,81,122,0.18);
+  --font-display-f:'Playfair Display',Georgia,serif;
+  --font-body-f:'Manrope',sans-serif;
+}
+footer.ns-footer{background:var(--bg-footer);color:var(--text-main-f);font-family:var(--font-body-f);border-top:1px solid var(--divider-f);}
+.footer-main{max-width:1200px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;}
+.footer-col h3{font-family:var(--font-display-f);font-size:1.05rem;font-weight:600;color:var(--pink-primary);margin-bottom:18px;letter-spacing:.01em;}
+.footer-col p{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+.footer-col ul{list-style:none;padding:0;}
+.footer-col ul li{font-size:.875rem;color:var(--text-main-f);padding:5px 0 5px 14px;font-weight:300;position:relative;transition:color .2s;}
+.footer-col ul li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:var(--pink-primary);opacity:.5;}
+.footer-col ul li:hover{color:var(--pink-soft);}
+.disclaimer-text{font-size:.875rem;line-height:1.75;color:var(--text-main-f);font-weight:300;}
+.emergency-alert{font-size:.875rem;line-height:1.7;color:var(--pink-primary);font-weight:500;}
+.emergency-alert strong{font-weight:600;}
+.footer-meta{border-top:1px solid var(--divider-f);max-width:1200px;margin:0 auto;padding:28px 32px;text-align:center;}
+.footer-meta .meta-line{font-size:.8rem;color:var(--text-muted-f);letter-spacing:.04em;margin-bottom:10px;}
+.footer-meta .meta-line .sep{color:var(--pink-primary);margin:0 6px;}
+.footer-meta .tagline{font-size:.82rem;color:var(--text-muted-f);display:flex;align-items:center;justify-content:center;gap:6px;}
+.footer-meta .tagline .heart{color:var(--pink-primary);font-size:1rem;animation:footerPulse 2s ease-in-out infinite;}
+@keyframes footerPulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.25);opacity:.8;}}
+.ns-footer-bottom{background:var(--bg-bottom);border-top:1px solid rgba(255,255,255,0.04);}
+.footer-bottom-inner{max-width:1200px;margin:0 auto;padding:22px 32px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.footer-links{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;}
+.footer-links a{font-size:.82rem;color:var(--text-muted-f);text-decoration:none;letter-spacing:.03em;transition:color .2s;}
+.footer-links a:hover{color:var(--pink-soft);}
+.footer-copy{font-size:.78rem;color:var(--text-muted-f);opacity:.7;letter-spacing:.02em;}
+@media(max-width:1060px){
+  .main-nav{display:none;}
+  .hamburger{display:flex;}
+  /* Hide both header buttons at tablet/mobile — they live in the mobile menu */
+  .nav-actions .btn-nav{display:none;}
+}
+@media(max-width:900px){.footer-main{grid-template-columns:repeat(2,1fr);gap:32px;}}
+@media(max-width:540px){.footer-main{grid-template-columns:1fr;padding:40px 20px 32px;}.footer-meta{padding:20px;}.footer-bottom-inner{padding:18px 20px;}.footer-links{gap:20px;}}
+
+/* =========================================
+   REVOLUTIONARY HERO CONSTELLATION
+   ========================================= */
+.hero-constellation {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #faf5fb 0%, #ede7f6 50%, #fce4ec 100%);
+}
+
+/* Animated Background */
+.constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gradient-morph {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(236, 64, 122, 0.08) 0%, 
+              transparent 50%);
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+/* 2. Constrain the Visual Container */
+/* Target ALL possible visuals in the right column */
+.hero-right, 
+.bond-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* --- COMPACT VISUAL STYLES --- */
+.hero-visual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.hero-right {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.stage-constellation {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  max-width: 600px; /* Limit maximum width */
+  position: relative;
+  overflow: visible;
+}
+
+.pregnancy-svg {
+  width: 100%;
+  max-width: 800px; /* Reduced from 500px to 300px */
+  height: auto;
+  max-height: 600px;
+  filter: drop-shadow(0 10px 20px rgba(236, 64, 122, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.pregnancy-svg:hover {
+  transform: scale(1.02);
+}
+
+/* Ensure the layout respects the smaller image */
+.hero-content-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr; /* Text left, visual right */
+  align-items: center;
+  gap: 4rem; /* Proper spacing */
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 4rem 2rem;
+}
+
+
+/* Force the image/canvas/svg to be small */
+.hero-right img, 
+.hero-right svg, 
+.hero-right canvas,
+.hero-visual img,
+.hero-visual svg {
+  width: 100% !important;
+  max-width: 320px !important; /* Strict limit */
+  height: auto !important;
+  max-height: 320px !important; /* Strict height limit */
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* Mobile: Stack them */
+@media (max-width: 968px) {
+  .hero-content-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .hero-right img, 
+  .hero-visual img {
+    max-width: 250px !important; /* Even smaller on mobile */
+  }
+}
+/* Stack right panel below left */
+.hero-right, 
+.hero-visual {
+  margin-top: 0;
+}
+
+/* Hero left animation - slide in from left */
+.hero-left {
+  animation: slideInLeft 0.8s ease;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Hero right animation - slide in from right */
+.hero-right {
+  animation: slideInRight 0.8s ease;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+  
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* Add this inside your <style> tag if not already present */
+  .slider-labels-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 5;
+  }
+  
+  .slider-label-badge {
+    background: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+
+/* 3D Title Effect */
+.hero-title-3d {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.title-line {
+  display: block;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-float 3s ease-in-out infinite;
+}
+
+.title-line:nth-child(1) { animation-delay: 0s; }
+.title-line:nth-child(2) { animation-delay: 0.2s; }
+.title-line:nth-child(3) { animation-delay: 0.4s; }
+
+.title-emphasis {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 50%, #ad1457 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  transform: scale(1.05);
+}
+
+@keyframes title-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 42ch;
+  margin: 0;
+}
+
+/* Badge Constellation */
+.badge-constellation {
+  position: relative;
+  padding: 1rem 0;
+}
+
+.badge-orbit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-badge-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236, 64, 122, 0.2);
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  animation: badge-float 4s ease-in-out infinite;
+}
+
+.badge-1 { animation-delay: 0s; }
+.badge-2 { animation-delay: 0.5s; }
+.badge-3 { animation-delay: 1s; }
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.hero-badge-3d:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(236, 64, 122, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-color: var(--deep-pink);
+}
+
+.badge-icon {
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* CTA Buttons */
+.hero-cta-constellation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn-primary-3d,
+.btn-secondary-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.btn-primary-3d {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(236, 64, 122, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary-3d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(236, 64, 122, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary-3d:hover .btn-shine {
+  left: 100%;
+}
+
+.btn-arrow {
+  transition: transform 0.3s;
+}
+
+.btn-primary-3d:hover .btn-arrow {
+  transform: translateY(3px);
+}
+
+.btn-secondary-3d {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--deep-pink);
+  border: 2px solid rgba(236, 64, 122, 0.3);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary-3d:hover {
+  transform: translateY(-3px);
+  background: white;
+  border-color: var(--deep-pink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.btn-delivery-normal {
+  text-decoration: none;
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe4f0 100%);
+  border: 2px solid rgba(236, 64, 122, 0.4);
+  box-shadow: 0 6px 0 rgba(216, 27, 96, 0.25), 0 8px 20px rgba(236, 64, 122, 0.15);
+  color: var(--deep-pink);
+}
+.btn-delivery-normal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(216, 27, 96, 0.25), 0 12px 28px rgba(236, 64, 122, 0.25);
+  background: linear-gradient(135deg, #ffe4f0 0%, #ffd6ea 100%);
+}
+.btn-delivery-normal:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(216, 27, 96, 0.25), 0 4px 10px rgba(236, 64, 122, 0.1);
+}
+
+.btn-delivery-csection {
+  text-decoration: none;
+  background: linear-gradient(135deg, #f3e5f5 0%, #e8d5f5 100%);
+  border: 2px solid rgba(156, 39, 176, 0.35);
+  box-shadow: 0 6px 0 rgba(123, 31, 162, 0.2), 0 8px 20px rgba(156, 39, 176, 0.12);
+  color: #7b1fa2;
+}
+.btn-delivery-csection:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 rgba(123, 31, 162, 0.2), 0 12px 28px rgba(156, 39, 176, 0.22);
+  background: linear-gradient(135deg, #e8d5f5 0%, #dcc2f5 100%);
+}
+.btn-delivery-csection:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(123, 31, 162, 0.2), 0 4px 10px rgba(156, 39, 176, 0.1);
+}
+
+.btn-icon {
+  font-size: 1.3rem;
+}
+
+/* Right Side: Stage Constellation */
+.hero-right {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Hormone Core */
+.hormone-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.8) 0%, rgba(216,27,96,0.4) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(236,64,122,0.5),
+              0 0 80px rgba(236,64,122,0.3),
+              inset 0 0 20px rgba(255,255,255,0.3);
+  z-index: 10;
+  animation: core-pulse 3s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.core-pulse {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 2px solid rgba(236,64,122,0.3);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.core-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* Stage Orbs */
+.stage-orb {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  cursor: pointer;
+  animation: orb-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards,
+             orb-float 4s ease-in-out infinite;
+  animation-delay: var(--delay), calc(var(--delay) + 0.6s);
+}
+
+@keyframes orb-entrance {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* --- STRETCHED ORB POSITIONS --- */
+
+/* First Trimester: Move to far Top-Left */
+/* --- ADJUSTED ORB POSITIONS (Right & Downside Tweak) --- */
+
+/* First Trimester: Moved Right & Down from the corner */
+/* --- ADJUSTED ORB 1 POSITION (Down & Right) --- */
+
+/* --- FIXED ORB 1 POSITION (Clear of Center) --- */
+
+.orb-1 {
+  top: 30% !important;   /* Kept down */
+  left: 0% !important;   /* Moved to Left Edge to stop overlapping */
+  transform: none !important;
+}
+
+/* Keep others as they were */
+.orb-2 {
+  top: 10% !important;
+  right: 0% !important;
+  transform: translate(-10%, 0) !important;
+}
+
+.orb-3 {
+  bottom: 5% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Container Safety */
+.orb-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(236,64,122,0.4) 0%, transparent 70%);
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.stage-orb:hover .orb-glow {
+  opacity: 1;
+  animation: glow-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.6; }
+}
+
+.orb-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(236, 64, 122, 0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1),
+              inset 0 1px 0 rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stage-orb:hover .orb-content {
+  transform: scale(1.1);
+  background: white;
+  border-color: var(--deep-pink);
+  box-shadow: 0 15px 50px rgba(236,64,122,0.3),
+              inset 0 1px 0 rgba(255,255,255,1);
+}
+
+.orb-number {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(236, 64, 122, 0.4);
+}
+
+.orb-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  transition: transform 0.3s;
+}
+
+.stage-orb:hover .orb-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.orb-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.orb-sublabel {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+/* Orb Tooltips */
+.orb-tooltip {
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(236, 64, 122, 0.2);
+  min-width: 200px;
+  max-width: 250px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+.stage-orb:hover .orb-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  bottom: -90px;
+}
+
+.orb-tooltip h4 {
+  margin: 0 0 0.3rem;
+  font-size: 0.9rem;
+  color: var(--deep-pink);
+}
+
+.orb-tooltip p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgba(255, 255, 255, 0.98);
+}
+
+/* Connection Lines */
+.connection-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.connection-path {
+  filter: drop-shadow(0 0 5px rgba(236,64,122,0.3));
+}
+
+/* Floating Info Cards */
+.floating-info-cards {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.info-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(236, 64, 122, 0.15);
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orb-1:hover ~ .floating-info-cards .card-repro,
+.orb-2:hover ~ .floating-info-cards .card-peri,
+.orb-3:hover ~ .floating-info-cards .card-post {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-repro {
+  top: 20%;
+  left: -10%;
+}
+
+.card-peri {
+  top: 20%;
+  right: -10%;
+}
+
+.card-post {
+  bottom: 10%;
+  right: 20%;
+}
+
+.card-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.stat-num {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.detail-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.detail-text {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+/* =========================================
+   PAGE SHELL & SECTIONS
+   ========================================= */
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 6rem;
+}
+
+.section-block {
+  margin-bottom: 4rem;
+}
+
+.section-title-row {
+  margin-bottom: 1.5rem;
+}
+
+.section-title-row h2 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  color: var(--text-main);
+}
+
+.section-tagline {
+  font-size: 1rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* =========================================
+   WEEK TRACKER
+   ========================================= */
+.week-selector-wrapper {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.week-input-control {
+  margin-bottom: 1rem;
+}
+
+.week-input-control label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.slider-display {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#weekSlider {
+  flex: 1;
+  height: 8px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #e1bee7 0%, #ec407a 50%, #d81b60 100%);
+  outline: none;
+  -webkit-appearance: none;
+}
+
+#weekSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+  transition: transform 0.2s;
+}
+
+#weekSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#weekSlider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.4);
+}
+
+.week-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(236, 64, 122, 0.3);
+  min-width: 100px;
+}
+
+.week-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.week-label {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.trimester-indicator {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.tri-badge {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #8e24aa;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+
+/* --- ROBUST TIMELINE STYLES --- */
+
+.week-timeline {
+  position: relative;
+  margin: 2rem 0 1rem;
+  padding: 0 0 2.5rem;
+  width: 100%;
+}
+
+.timeline-track {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background: #f0e6f0;
+  border-radius: 10px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.timeline-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ec407a, #f48fb1);
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+.timeline-milestones {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.milestone {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.milestone-dot {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border: 3px solid #ec407a;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(236,64,122,0.25);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.milestone-label {
+  position: absolute;
+  top: 18px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #e91e63;
+  letter-spacing: 0.02em;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  white-space: nowrap;
+  line-height: 1;
+  background: rgba(252, 228, 236, 0.85);
+  padding: 0.28rem 0.7rem;
+  border-radius: 50px;
+  border: 1px solid rgba(236,64,122,0.15);
+  transition: all 0.3s ease;
+  user-select: none;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.milestone.active .milestone-dot {
+  background: #ec407a;
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(236,64,122,0.3);
+  width: 18px;
+  height: 18px;
+}
+
+.milestone.active .milestone-label {
+  color: #d81b60;
+  font-weight: 800;
+  background: rgba(236,64,122,0.18);
+  border-color: rgba(236,64,122,0.35);
+}
+
+.milestone:hover .milestone-dot {
+  transform: translate(-50%, -50%) scale(1.3);
+  box-shadow: 0 0 0 4px rgba(236,64,122,0.2);
+}
+
+.milestone:hover .milestone-label {
+  color: #d81b60;
+  background: rgba(236,64,122,0.15);
+}
+
+/* Week Details Card */
+.week-details-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.week-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.week-card-header h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.week-card-header p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.week-emoji {
+  font-size: 3rem;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.week-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin-bottom: 0.2rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.week-development {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.week-development h4 {
+  margin: 0 0 1rem;
+  color: var(--deep-pink);
+}
+
+.week-development ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.week-development li {
+  margin-bottom: 0.5rem;
+  color: var(--text-soft);
+}
+
+.week-tips h4 {
+  margin: 0 0 1rem;
+  color: var(--deep-pink);
+}
+
+.tip-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tip-chip {
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #6a1b9a;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* =========================================
+   3D PREGNANCY SIMULATOR
+   ========================================= */
+.simulator-dashboard {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 0;
+}
+
+@media (max-width: 900px) {
+  .simulator-dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+.simulator-controls {
+  background: #f9f9f9;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.control-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.control-group {
+  margin-bottom: 1.5rem;
+}
+
+.control-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.view-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.view-btn {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e0e0e0;
+  background: white;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.85rem;
+}
+
+.view-btn:hover {
+  border-color: var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+.view-btn.active {
+  background: var(--deep-pink);
+  border-color: var(--deep-pink);
+  color: white;
+}
+
+.layer-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.toggle-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.animate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.animate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+.simulator-stats {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.simulator-stats h4 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--deep-pink);
+}
+
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-name {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+.stat-row .stat-value {
+  font-weight: 700;
+  color: var(--deep-pink);
+  font-size: 0.95rem;
+}
+
+.simulator-visual {
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pregnancy-svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+}
+
+/* SVG Animations */
+.belly-growth {
+  transition: all 1s ease;
+}
+
+.baby-growth {
+  transition: all 1s ease;
+}
+
+.body-group,
+.baby-group,
+.organs-group,
+.measures-group {
+  transition: opacity 0.5s ease;
+}
+
+.view-label {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--deep-pink);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   JOURNEY SECTIONS (Trimester Cards)
+   ========================================= */
+.journey {
+  background: linear-gradient(180deg, rgba(252,228,236,0.35), rgba(243,229,245,0.25));
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(216,27,96,0.10);
+}
+
+.journey-track {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.6rem;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.track-dot {
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-soft);
+  font-weight: 650;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.track-dot:hover {
+  transform: translateY(-2px);
+  background: rgba(236,64,122,0.08);
+}
+
+.track-dot.active {
+  background: var(--deep-pink);
+  color: white;
+  box-shadow: 0 10px 22px rgba(216,27,96,0.25);
+}
+
+.journey-stage-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  animation: stageIn 0.4s ease both;
+}
+
+@keyframes stageIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stage-top {
+  margin-bottom: 1.5rem;
+}
+
+.stage-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+.stage-title {
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.stage-one-liner {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.stage-badges {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.stage-badge {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(236,64,122,0.10);
+  color: var(--deep-pink);
+  border: 1px solid rgba(216,27,96,0.18);
+  font-weight: 600;
+}
+
+.stage-steps {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+}
+
+.step {
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: white;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.step:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.step button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.step button span {
+  color: var(--text-soft);
+  font-weight: 650;
+  font-size: 0.9rem;
+}
+
+.step .step-body {
+  padding: 0 1.2rem 1.2rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  display: none;
+}
+
+.step.open .step-body {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chev {
+  transition: transform 0.2s ease;
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+.step.open .chev {
+  transform: rotate(180deg);
+}
+
+/* Symptom Flip Cards */
+.journey-subhead {
+  margin: 2rem 0 1rem;
+}
+
+.journey-subhead h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.journey-subhead p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+
+.symptom-flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.flip {
+  perspective: 1000px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  height: 200px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flip.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 1.2rem;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-front .tiny {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8e24aa;
+  font-weight: 600;
+}
+
+.flip-front strong {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+}
+
+.flip-front p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.flip-action {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+  color: var(--deep-pink);
+  font-weight: 700;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+}
+
+.flip-back strong {
+  font-size: 1rem;
+  color: var(--deep-pink);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.flip-back ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.flip-back li {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.flip-back .ask {
+  font-size: 0.75rem;
+  background: #fff3e0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #ef6c00;
+}
+
+/* =========================================
+   NUTRITION SECTION
+   ========================================= */
+.nutrition-calculator {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-bottom: 2rem;
+}
+
+.calc-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--deep-pink);
+}
+
+.nutrition-results {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+
+.nutrition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.nutrient-card {
+  background: white;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.nutrient-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.nutrient-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.nutrient-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: var(--deep-pink);
+}
+
+.nutrient-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+  margin-bottom: 0.8rem;
+}
+
+.nutrient-card p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.food-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.source-tag {
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  background: var(--chip-bg);
+  color: #6a1b9a;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* =========================================
+   ALERT & WARNING SECTIONS
+   ========================================= */
+.alert-strip {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-left: 5px solid #ff9800;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.alert-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.alert-content h3 {
+  margin: 0 0 1rem;
+  color: #e65100;
+  font-size: 1.3rem;
+}
+
+.warning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.8rem;
+}
+
+.warning-item {
+  background: white;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border-left: 3px solid #ff9800;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   PRENATAL CARE TIMELINE
+   ========================================= */
+.care-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.care-phase {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.care-phase:hover {
+  transform: translateX(5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.phase-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.phase-icon {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.phase-header h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.3rem;
+  color: var(--deep-pink);
+}
+
+.phase-header p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.phase-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.check-item:hover {
+  background: #f9f9f9;
+}
+
+.check-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.check-item span {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.check-item input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: var(--text-soft);
+}
+
+/* Reminder Setup */
+.reminder-setup {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  margin-top: 2rem;
+}
+
+.reminder-setup h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: var(--deep-pink);
+}
+
+.reminder-setup > p {
+  margin: 0 0 1.5rem;
+  color: var(--text-soft);
+}
+
+.reminder-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(236, 64, 122, 0.4);
+}
+
+/* =========================================
+   HOSPITAL BAG BUILDER
+   ========================================= */
+.bag-builder {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.bag-categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-radius: 15px;
+}
+
+.bag-tab {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--text-soft);
+}
+
+.bag-tab:hover {
+  background: rgba(236, 64, 122, 0.08);
+  color: var(--deep-pink);
+}
+
+.bag-tab.active {
+  background: var(--deep-pink);
+  color: white;
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.3);
+}
+
+.bag-section {
+  display: none;
+}
+
+.bag-section.active {
+  display: block;
+  animation: fadeInUp 0.4s ease;
+}
+
+.bag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.bag-item-card {
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.bag-item-card h4 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: var(--deep-pink);
+}
+
+.bag-check {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: white;
+}
+
+.bag-check:hover {
+  background: rgba(236, 64, 122, 0.05);
+}
+
+.bag-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.bag-check span {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.bag-check input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  color: var(--text-soft);
+}
+
+.bag-progress {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  border-radius: 15px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.progress-bar {
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #ec407a, #d81b60);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.progress-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+.bag-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-secondary,
+.btn-ghost {
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary {
+  background: white;
+  border: 2px solid var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+.btn-secondary:hover {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid #e0e0e0;
+  color: var(--text-soft);
+}
+
+.btn-ghost:hover {
+  border-color: var(--deep-pink);
+  color: var(--deep-pink);
+}
+
+/* =========================================
+   WELLNESS SECTION
+   ========================================= */
+.wellness-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.wellness-card {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.wellness-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.wellness-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.wellness-card h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.3rem;
+  color: var(--deep-pink);
+}
+
+.wellness-card > p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.wellness-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tip-item {
+  padding: 0.5rem 0.8rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  border-left: 3px solid var(--deep-pink);
+}
+
+/* =========================================
+   CARE STRIP (NEXT STEPS)
+   ========================================= */
+.care-strip {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+@media (max-width: 900px) {
+  .care-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+.care-strip h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.8rem;
+  color: var(--deep-pink);
+}
+
+.care-strip > div > p {
+  margin: 0 0 1rem;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+
+.care-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.care-pill {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  color: #6a1b9a;
+  border: 1px solid rgba(255,255,255,0.7);
+  font-weight: 600;
+}
+
+.care-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.care-cta {
+  font-size: 0.9rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.care-cta.primary {
+  background: var(--deep-pink);
+  color: white;
+}
+
+.care-cta.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236, 64, 122, 0.4);
+}
+
+.care-cta.ghost {
+  background: transparent;
+  color: var(--deep-pink);
+  border: 2px solid rgba(216,27,96,0.4);
+}
+
+.care-cta.ghost:hover {
+  background: white;
+  border-color: var(--deep-pink);
+}
+
+/* =========================================
+   FLOATING HUD
+   ========================================= */
+.floating-hud {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  padding: 1rem 1.5rem;
+  z-index: 999;
+  transition: all 0.3s;
+  border: 2px solid var(--deep-pink);
+}
+
+.floating-hud.collapsed {
+  transform: translateY(calc(100% - 60px));
+}
+
+.hud-content {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.hud-label {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hud-week {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-pink);
+}
+
+.hud-size {
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.hud-toggle {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--deep-pink);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+  transition: all 0.3s;
+}
+
+.hud-toggle:hover {
+  transform: translateX(-50%) scale(1.1);
+}
+
+.floating-hud.collapsed .hud-toggle i {
+  transform: rotate(180deg);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN — COMPREHENSIVE
+   ========================================= */
+
+/* ── CARE-PILL LINKS (missing style) ── */
+.care-pill-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ec407a, #d81b60);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(236,64,122,0.25);
+}
+.care-pill-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(236,64,122,0.4);
+}
+
+/* ── 1200 px – wide desktops already fine ── */
+
+/* ── 968 px – hero stacks (already declared above, reinforced here) ── */
+@media (max-width: 968px) {
+  .hero-content-wrapper {
+    grid-template-columns: 1fr !important;
+    padding: 3rem 1.5rem;
+    gap: 2.5rem;
+  }
+  .hero-right {
+    min-height: 360px;
+  }
+  .stage-constellation {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* ── 900 px ── */
+@media (max-width: 900px) {
+  .nutrition-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .wellness-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bag-grid {
+    grid-template-columns: 1fr;
+  }
+  .symptom-flip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .week-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ── 768 px – tablets ── */
+@media (max-width: 768px) {
+  /* Body & shell */
+  body { overflow-x: hidden; }
+  .page-shell { padding: 1.5rem 0.85rem 4rem; }
+  .section-block { margin-bottom: 2.5rem; }
+  .section-title-row h2 { font-size: 1.5rem; }
+
+  /* Hero */
+  .hero-constellation { padding: 1.5rem 0.75rem; min-height: auto; }
+  .hero-content-wrapper { padding: 2rem 1rem; gap: 2rem; }
+  .hero-title-3d { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .hero-description { font-size: 0.95rem; max-width: 100%; }
+  .hero-eyebrow { font-size: 0.75rem; }
+  .badge-orbit { gap: 0.6rem; }
+  .hero-badge-3d { font-size: 0.78rem; padding: 0.5rem 0.9rem; }
+  .hero-cta-constellation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .btn-primary-3d,
+  .btn-secondary-3d {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.2rem;
+  }
+
+  /* Orbs / constellation */
+  .hero-right { min-height: 300px; }
+  .stage-constellation { max-width: 320px; min-height: 320px; }
+  .stage-orb { width: 95px; height: 95px; }
+  .orb-icon { font-size: 1.8rem; }
+  .orb-label { font-size: 0.75rem; }
+  .orb-sublabel { font-size: 0.62rem; }
+  .hormone-core { width: 64px; height: 64px; }
+  .core-label { font-size: 0.58rem; }
+  .orb-tooltip { min-width: 160px; font-size: 0.78rem; }
+
+  /* Week tracker */
+  .week-selector-wrapper { padding: 1.2rem; }
+  .slider-display { gap: 0.75rem; }
+  .week-display { min-width: 76px; padding: 0.6rem 0.9rem; }
+  .week-number { font-size: 1.6rem; }
+  .week-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .week-details-card { padding: 1.2rem; }
+  .week-card-header h3 { font-size: 1.3rem; }
+  .week-emoji { font-size: 2.2rem; }
+  .week-development { padding: 1rem; }
+  .milestone-label { font-size: 0.65rem; }
+
+  /* Simulator */
+  .simulator-dashboard { grid-template-columns: 1fr; }
+  .simulator-controls { padding: 1.2rem; gap: 1.2rem; }
+  .simulator-visual { padding: 1.2rem; }
+  .pregnancy-svg { max-width: 260px !important; }
+  .view-buttons { flex-wrap: wrap; }
+  .view-btn { min-width: 0; flex: 1; font-size: 0.8rem; padding: 0.6rem 0.5rem; }
+
+  /* Trimester journey track */
+  .journey { padding: 1rem; }
+  .journey-track {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.5rem;
+    border-radius: 14px;
+  }
+  .journey-track::-webkit-scrollbar { display: none; }
+  .track-dot { white-space: nowrap; flex-shrink: 0; font-size: 0.8rem; padding: 0.5rem 0.75rem; }
+  .journey-stage-card { padding: 1.2rem; }
+  .stage-title { font-size: 1.4rem; }
+  .symptom-flip-grid { grid-template-columns: 1fr 1fr; }
+  .flip { height: 180px; }
+
+  /* Alert strip */
+  .alert-strip { flex-direction: column; gap: 1rem; }
+  .alert-icon { font-size: 2rem; }
+  .alert-content h3 { font-size: 1.1rem; }
+  .warning-grid { grid-template-columns: 1fr; }
+
+  /* Nutrition */
+  .nutrition-calculator { padding: 1.2rem; }
+  .calc-inputs { grid-template-columns: 1fr; gap: 1rem; }
+  .nutrition-grid { grid-template-columns: 1fr; }
+  .nutrition-results { padding: 1rem; }
+
+  /* Prenatal care */
+  .care-phase { padding: 1.2rem; }
+  .phase-header { gap: 0.75rem; }
+  .phase-header h3 { font-size: 1.1rem; }
+
+  /* Reminder form */
+  .reminder-setup { padding: 1.2rem; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Hospital bag */
+  .bag-builder { padding: 1.2rem; }
+  .bag-categories {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.4rem;
+  }
+  .bag-categories::-webkit-scrollbar { display: none; }
+  .bag-tab { flex-shrink: 0; min-width: auto; font-size: 0.82rem; padding: 0.65rem 0.85rem; }
+  .bag-grid { grid-template-columns: 1fr; }
+  .bag-actions { flex-direction: column; }
+  .btn-secondary, .btn-ghost { width: 100%; justify-content: center; }
+
+  /* Wellness */
+  .wellness-grid { grid-template-columns: 1fr; }
+  .wellness-card { padding: 1.4rem; }
+
+  /* Care strip (next steps) */
+  .care-strip { grid-template-columns: 1fr; padding: 1.4rem; gap: 1.2rem; }
+  .care-strip h2 { font-size: 1.4rem; }
+  .care-pills { gap: 0.4rem; }
+  .care-pill-link { font-size: 0.82rem; padding: 0.5rem 0.9rem; }
+
+  /* Floating HUD */
+  .floating-hud {
+    bottom: 1rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    padding: 0.8rem 1.2rem;
+  }
+  .hud-week { font-size: 1.4rem; }
+  .hud-size { font-size: 0.9rem; }
+}
+
+/* ── 540 px – large phones ── */
+@media (max-width: 540px) {
+  .hero-title-3d { font-size: clamp(1.6rem, 8vw, 2rem); }
+  .symptom-flip-grid { grid-template-columns: 1fr; }
+  .flip { height: 170px; }
+  .week-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .nutrition-grid { grid-template-columns: 1fr; }
+  .wellness-grid { grid-template-columns: 1fr; }
+  .bag-grid { grid-template-columns: 1fr; }
+  .hero-badge-3d { font-size: 0.75rem; padding: 0.45rem 0.75rem; }
+  .section-title-row h2 { font-size: 1.35rem; }
+  .stage-orb { width: 82px; height: 82px; }
+  .orb-icon { font-size: 1.5rem; }
+  .stage-constellation { max-width: 280px; min-height: 280px; }
+  .hormone-core { width: 54px; height: 54px; }
+  .stat-value { font-size: 1.2rem; }
+  .care-pill-link { width: 100%; justify-content: center; }
+  .care-pills { flex-direction: column; }
+}
+
+/* ── 400 px – small phones ── */
+@media (max-width: 400px) {
+  .hero-content-wrapper { padding: 1.5rem 0.75rem; }
+  .nav-container { padding: 0 0.75rem; }
+  .logo-text a { font-size: 1.05rem; }
+  .week-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .stat-card { padding: 0.75rem 0.5rem; }
+  .stat-value { font-size: 1.1rem; }
+  .btn-primary-3d, .btn-secondary-3d { padding: 0.75rem 1rem; font-size: 0.88rem; }
+  .journey-stage-card { padding: 1rem; }
+  .stage-title { font-size: 1.2rem; }
+  .hero-right { min-height: 240px; }
+  .stage-constellation { max-width: 240px; min-height: 240px; }
+  .stage-orb { width: 70px; height: 70px; }
+  .orb-icon { font-size: 1.3rem; }
+  .hormone-core { width: 46px; height: 46px; }
+  .floating-hud { left: 0.4rem; right: 0.4rem; }
+}
+
+/* =========================================
+   UTILITY CLASSES
+   ========================================= */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS FIXES
+   ========================================= */
+
+/* --- Global overflow guard --- */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* --- Stage constellation container must clip its children --- */
+.stage-constellation {
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Connection lines SVG must not overflow --- */
+.connection-lines {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* --- Floating info cards: keep inside bounds by default --- */
+.card-repro,
+.card-peri,
+.card-post {
+  pointer-events: none;
+}
+
+/* --- Week timeline: milestone label — horizontal pill style --- */
+.milestone-label {
+  writing-mode: horizontal-tb;
+  white-space: nowrap;
+  max-width: none;
+  font-size: 0.72rem;
+}
+
+/* --- Orb tooltip: cap width and prevent overflow --- */
+.orb-tooltip {
+  min-width: 160px;
+  max-width: min(230px, 90vw);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+}
+.stage-orb:hover .orb-tooltip {
+  transform: translateX(-50%) scale(1);
+}
+
+/* --- Slider display: allow column on very narrow screens --- */
+@media (max-width: 360px) {
+  .slider-display {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .week-display {
+    min-width: unset;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* --- Hero orbs: use % positioning that stays inside container --- */
+@media (max-width: 968px) {
+  /* Ensure stage constellation doesn't overflow hero-right */
+  .hero-right {
+    overflow: hidden;
+    min-height: 340px;
+  }
+  .stage-constellation {
+    min-height: 340px;
+  }
+
+  /* Reposition orbs to stay within the container on tablet */
+  .orb-1 {
+    top: 25% !important;
+    left: 2% !important;
+    transform: none !important;
+  }
+  .orb-2 {
+    top: 5% !important;
+    right: 2% !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  .orb-3 {
+    bottom: 3% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Floating info cards: hide on tablet/mobile (they overflow) */
+  .floating-info-cards {
+    display: none;
+  }
+
+  /* Hero CTA: wrap buttons in 2-column grid on tablet */
+  .hero-cta-constellation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .btn-primary-3d,
+  .btn-secondary-3d {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- 768px: Tablet portrait --- */
+@media (max-width: 768px) {
+  /* Hero orbs: tighter positioning */
+  .hero-right {
+    min-height: 300px;
+    overflow: hidden;
+  }
+  .stage-constellation {
+    min-height: 300px;
+    max-width: 100%;
+  }
+  .orb-1 {
+    top: 30% !important;
+    left: 0% !important;
+    transform: none !important;
+  }
+  .orb-2 {
+    top: 2% !important;
+    right: 0% !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  .orb-3 {
+    bottom: 2% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Hero CTA: stack all buttons */
+  .hero-cta-constellation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  /* Floating HUD: full-width at bottom */
+  .floating-hud {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 1rem;
+    max-width: calc(100vw - 1.5rem);
+  }
+
+  /* Week timeline: compact padding for vertical labels */
+  .week-timeline {
+    padding-bottom: 2.5rem;
+    overflow: visible;
+  }
+
+  /* Navigation container: tighter padding */
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  /* Logo text: smaller on mobile */
+  .logo-text a {
+    font-size: 1.1rem;
+  }
+
+  /* Simulator SVG: constrain width */
+  .simulator-visual svg.pregnancy-svg {
+    max-width: 240px !important;
+    width: 100% !important;
+  }
+
+  /* Alert strip: ensure icon and content don't overflow */
+  .alert-strip {
+    flex-direction: column;
+    padding: 1.2rem;
+  }
+
+  /* Care strip: single column */
+  .care-strip {
+    grid-template-columns: 1fr;
+    padding: 1.2rem;
+  }
+
+  /* Section title */
+  .section-title-row h2 {
+    font-size: 1.4rem;
+  }
+}
+
+/* --- 540px: Large phones --- */
+@media (max-width: 540px) {
+  .hero-right {
+    min-height: 270px;
+    overflow: hidden;
+  }
+  .stage-constellation {
+    min-height: 270px;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+  .stage-orb {
+    width: 85px;
+    height: 85px;
+  }
+  .orb-icon {
+    font-size: 1.6rem;
+  }
+  .orb-label {
+    font-size: 0.7rem;
+  }
+  .hormone-core {
+    width: 56px;
+    height: 56px;
+  }
+  .core-label {
+    font-size: 0.55rem;
+  }
+
+  /* Orb positions on large phones */
+  .orb-1 {
+    top: 32% !important;
+    left: 0% !important;
+    transform: none !important;
+  }
+  .orb-2 {
+    top: 3% !important;
+    right: 0% !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  .orb-3 {
+    bottom: 2% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* Orb tooltip: much smaller */
+  .orb-tooltip {
+    min-width: 140px;
+    font-size: 0.75rem;
+    padding: 0.7rem 0.9rem;
+  }
+
+  /* Hero title */
+  .hero-title-3d {
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+  }
+
+  /* Hero CTA: full-width single column */
+  .hero-cta-constellation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .btn-primary-3d,
+  .btn-secondary-3d {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+  }
+
+  /* Badges: smaller */
+  .hero-badge-3d {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  /* Week tracker */
+  .week-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Milestone labels: compact */
+  .milestone-label {
+    font-size: 0.62rem;
+    max-width: none;
+  }
+
+  /* Floating HUD */
+  .floating-hud {
+    left: 0.5rem;
+    right: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Simulator visual */
+  .simulator-visual {
+    padding: 1rem;
+  }
+  .simulator-visual svg.pregnancy-svg {
+    max-width: 200px !important;
+  }
+
+  /* Nutrition grid: single column */
+  .nutrition-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hospital bag grid: single column */
+  .bag-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Wellness grid: single column */
+  .wellness-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Journey stage card */
+  .journey-stage-card {
+    padding: 1rem;
+  }
+  .stage-title {
+    font-size: 1.3rem;
+  }
+
+  /* Care pills: full-width */
+  .care-pill-link {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Bag actions */
+  .bag-actions {
+    flex-direction: column;
+  }
+  .btn-secondary,
+  .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- 400px: Small phones --- */
+@media (max-width: 400px) {
+  .hero-content-wrapper {
+    padding: 1.5rem 0.75rem;
+  }
+  .nav-container {
+    padding: 0 0.75rem;
+  }
+  .logo-text a {
+    font-size: 1rem;
+  }
+  .logo-text span {
+    display: none; /* hide tagline on very small screens */
+  }
+
+  /* Hero right: tighter */
+  .hero-right {
+    min-height: 240px;
+    overflow: hidden;
+  }
+  .stage-constellation {
+    max-width: 250px;
+    min-height: 240px;
+  }
+  .stage-orb {
+    width: 72px;
+    height: 72px;
+  }
+  .orb-icon {
+    font-size: 1.3rem;
+  }
+  .hormone-core {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Title */
+  .hero-title-3d {
+    font-size: clamp(1.45rem, 8vw, 1.9rem);
+  }
+
+  /* Stats */
+  .week-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .stat-card {
+    padding: 0.7rem 0.5rem;
+  }
+  .stat-value {
+    font-size: 1.1rem;
+  }
+
+  /* Buttons */
+  .btn-primary-3d,
+  .btn-secondary-3d {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+  }
+
+  /* Journey card */
+  .journey-stage-card {
+    padding: 0.85rem;
+  }
+  .stage-title {
+    font-size: 1.15rem;
+  }
+
+  /* Floating HUD */
+  .floating-hud {
+    left: 0.35rem;
+    right: 0.35rem;
+    padding: 0.65rem 0.85rem;
+  }
+  .hud-week {
+    font-size: 1.3rem;
+  }
+
+  /* Simulator SVG */
+  .simulator-visual svg.pregnancy-svg {
+    max-width: 170px !important;
+  }
+
+  /* Page shell */
+  .page-shell {
+    padding: 1.2rem 0.65rem 3rem;
+  }
+
+  /* Section title */
+  .section-title-row h2 {
+    font-size: 1.2rem;
+  }
+  .section-tagline {
+    font-size: 0.88rem;
+  }
+
+  /* Bag/form padding */
+  .bag-builder {
+    padding: 1rem;
+  }
+  .nutrition-calculator {
+    padding: 1rem;
+  }
+  .reminder-setup {
+    padding: 1rem;
+  }
+  .care-phase {
+    padding: 1rem;
+  }
+  .wellness-card {
+    padding: 1.2rem;
+  }
+}
+
+/* --- Prevent hero animation overflow on all screen sizes --- */
+.hero-constellation {
+  overflow: hidden;
+}
+
+/* --- Ensure badge orbit wraps gracefully --- */
+.badge-orbit {
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+/* --- Slider labels container: wrap on small screens --- */
+.slider-labels-container {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* --- Navigation: prevent text overflow in mobile menu --- */
+.mm-link {
+  word-break: break-word;
+}
+
+/* --- Ensure care-actions stack neatly on all mobile --- */
+@media (max-width: 640px) {
+  .care-actions {
+    width: 100%;
+  }
+  .care-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Bag tab: prevent text truncation on very small screens --- */
+@media (max-width: 400px) {
+  .bag-tab {
+    font-size: 0.78rem;
+    padding: 0.55rem 0.65rem;
+    min-width: 90px;
+  }
+}
+
+/* --- Ensure form inputs don't overflow on any size --- */
+.input-group input,
+.input-group select,
+.form-field input,
+.form-field select {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* --- Track dot: scrollable on very small screens --- */
+@media (max-width: 400px) {
+  .journey-track {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+  .track-dot {
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    padding: 0.45rem 0.65rem;
+  }
+}
+
+/* --- Flip cards: full width on very small screens --- */
+@media (max-width: 360px) {
+  .symptom-flip-grid {
+    grid-template-columns: 1fr;
+  }
+  .flip {
+    height: 160px;
+  }
+}
+
+/* --- Warning grid: single column on small phones --- */
+@media (max-width: 480px) {
+  .warning-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Nutrition grid 2-col on mid-size --- */
+@media (min-width: 541px) and (max-width: 768px) {
+  .nutrition-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- View buttons: 2 per row on tiny screens --- */
+@media (max-width: 400px) {
+  .view-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .view-btn {
+    min-width: 0;
+    font-size: 0.78rem;
+    padding: 0.55rem 0.3rem;
+  }
+}
+
+/* --- Prevent HUD from overlapping main content on landscape phones --- */
+@media (max-height: 500px) and (max-width: 900px) {
+  .floating-hud {
+    display: none;
+  }
+}
+
+</style>
+<body>
+
+  <!-- HEADER NAVIGATION -->
+  <header class="site-header">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <circle cx="12" cy="5.5" r="2.8"/>
+            <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+            <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+            <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+            <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+            <path d="M8.2 22 Q7.6 17.2 8.8 15 Q10.2 13 12 13 Q13.8 13 15.2 15 Q16.4 17.2 15.8 22Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <a href="index.html">Nari Swasthya</a>
+          <span>Women's Complete Health</span>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <div class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">
+            Journeys <i class="fa-solid fa-chevron-down chevron"></i>
+          </button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#757575;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item">
+              <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#757575;">Preparation &amp; planning</span></div>
+            </a>
+            <a href="fertility.html" class="dd-item">
+              <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#757575;">Cycle &amp; ovulation</span></div>
+            </a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#757575;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#757575;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#757575;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#757575;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item">
+              <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#757575;">ANC visits &amp; checklist</span></div>
+            </a>
+            <!-- Non Communicable Diseases with flyout -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#757575;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#757575;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#757575;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#757575;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <div class="dd-sep"></div>
+            <a href="newborn_postpartum_care.html" class="dd-item">
+              <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#757575;">4th trimester care</span></div>
+            </a>
+            <a href="breastfeeding-journey.html" class="dd-item">
+              <div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#757575;">Latch, supply, nutrition</span></div>
+            </a>
+            <a href="menopause.html" class="dd-item">
+              <div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#757575;">Perimenopause &amp; beyond</span></div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">
+            Services <i class="fa-solid fa-chevron-down chevron"></i>
+          </button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;box-shadow:0 4px 12px rgba(236,64,122,0.35);"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#757575;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item">
+              <div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#757575;">AI-powered diagnosis</span></div>
+            </a>
+            <a href="dashboard.html" class="dd-item">
+              <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#757575;">Track your health</span></div>
+            </a>
+            <a href="screening.html" class="dd-item">
+              <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#757575;">Cancer &amp; preventive</span></div>
+            </a>
+            <a href="vaccination.html" class="dd-item">
+              <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#757575;">Immunization schedule</span></div>
+            </a>
+            <a href="otc.html" class="dd-item">
+              <div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#757575;">Safe self-care options</span></div>
+            </a>
+            <a href="government-schemes.html" class="dd-item">
+              <div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#757575;">Benefits you deserve</span></div>
+            </a>
+            <a href="insurance.html" class="dd-item">
+              <div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#757575;">Coverage &amp; claims guide</span></div>
+            </a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="stories.html" class="nav-link">Stories</a>
+        </div>
+        <div class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">
+            Additional Info <i class="fa-solid fa-chevron-down chevron"></i>
+          </button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#757575;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#757575;">Cycle, conceiving &amp; IVF</span></div>
+            </a>
+            <a href="pregnancy_journey.html" class="dd-item">
+              <div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#757575;">All trimesters covered</span></div>
+            </a>
+            <a href="newborn_postpartum_care.html" class="dd-item">
+              <div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#757575;">Newborn &amp; postpartum</span></div>
+            </a>
+            <a href="menopause.html" class="dd-item">
+              <div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#757575;">Menopause, bone, mental</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item">
+              <div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#757575;">Share &amp; connect</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#757575;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <a href="autoimmune_health_journey.html" class="dd-item">
+              <div class="dd-icon" style="background:#e0f7fa;color:#00838f;"><i class="fa-solid fa-shield-virus"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Autoimmune Health</strong><span style="font-size:.73rem;color:#757575;">Lupus, Hashimoto's, RA</span></div>
+            </a>
+            <!-- Non Communicable Diseases with flyout -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#757575;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#757575;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#757575;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#757575;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone-health-women.html" class="dd-item">
+              <div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#757575;">Osteoporosis prevention</span></div>
+            </a>
+            <a href="depression.html" class="dd-item">
+              <div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#757575;">Anxiety, depression, support</span></div>
+            </a>
+            <a href="loss_support.html" class="dd-item">
+              <div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div>
+              <div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#757575;">You are never alone</span></div>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="signin.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#ec407a;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#ec407a;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#ec407a;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#ec407a;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#ec407a;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#ec407a;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding-journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#ec407a;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#ec407a;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#ec407a;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#ec407a;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#ec407a;width:20px;"></i> Health Screening</a>
+    <a href="vaccination.html" class="mm-link"><i class="fa-solid fa-syringe" style="color:#ec407a;width:20px;"></i> Vaccination</a>
+    <a href="otc.html" class="mm-link"><i class="fa-solid fa-pills" style="color:#ec407a;width:20px;"></i> OTC Medicine Guide</a>
+    <a href="government-schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#ec407a;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#ec407a;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <a href="cancer_simulation_journey.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Cancer</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#ec407a;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#ec407a;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#ec407a;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="signin.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+
+  <!-- REVOLUTIONARY HERO: PREGNANCY CONSTELLATION -->
+  <section class="hero-constellation">
+    <!-- Animated Background -->
+    <div class="constellation-bg">
+      <canvas id="particleCanvas"></canvas>
+      <div class="gradient-morph"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="hero-content-wrapper">
+      <!-- Left Content -->
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span class="pulse-dot"></span>
+          YOUR PREGNANCY JOURNEY
+        </div>
+        
+        <h1 class="hero-title-3d">
+          <span class="title-line">Experience Your</span>
+          <span class="title-line title-emphasis">40-Week Miracle</span>
+          <span class="title-line">Week by Week</span>
+        </h1>
+
+        <p class="hero-description">
+          An immersive, interactive guide through every trimester, every week, and every milestone 
+          of your pregnancy journey with 3D visualizations, personalized nutrition plans, and expert guidance.
+        </p>
+
+        <!-- Badge Constellation -->
+        <div class="badge-constellation">
+          <div class="badge-orbit">
+            <div class="hero-badge-3d badge-1">
+              <span class="badge-icon">👶</span>
+              <span>40 Weeks Tracked</span>
+            </div>
+            <div class="hero-badge-3d badge-2">
+              <span class="badge-icon">🧬</span>
+              <span>3D Baby Simulator</span>
+            </div>
+            <div class="hero-badge-3d badge-3">
+              <span class="badge-icon">📱</span>
+              <span>Smart Reminders</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+      <div class="hero-cta-constellation">
+        <button class="btn-primary-3d" onclick="scrollToWeekTracker()">
+          <span class="btn-icon">🎯</span>
+          <span>Start Your Journey</span>
+          <span class="btn-arrow">↓</span>
+          <div class="btn-shine"></div>
+        </button>
+        
+        <!-- NEW: Antenatal Care Button -->
+        <button class="btn-primary-3d" onclick="window.location.href='antenatal_care.html'">
+          <span class="btn-icon">🩺</span>
+          <span>Medical Care Plan</span>
+          <span class="btn-arrow">→</span>
+          <div class="btn-shine"></div>
+        </button>
+        
+        <button class="btn-secondary-3d" onclick="scrollToSimulator()">
+          <span class="btn-icon">🤰</span>
+          <span>See Baby Grow</span>
+        </button>
+
+        <a class="btn-secondary-3d btn-delivery-normal" href="normal_delivery.html">
+          <span class="btn-icon">🌸</span>
+          <span>Normal Delivery</span>
+          <span class="btn-arrow">→</span>
+        </a>
+
+        <a class="btn-secondary-3d btn-delivery-csection" href="csection.html">
+          <span class="btn-icon">🏥</span>
+          <span>C-Section</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+      </div>
+      <!-- /hero-left -->
+
+      <!-- Right Side: Interactive Trimester Orbs -->
+      <div class="hero-right">
+        <div class="stage-constellation">
+          <!-- Hormone Core (Center) -->
+          <div class="hormone-core">
+            <div class="core-pulse"></div>
+            <div class="core-pulse" style="animation-delay: 0.5s;"></div>
+            <div class="core-label">YOUR<br/>JOURNEY</div>
+          </div>
+
+          <!-- Trimester Orbs -->
+          <div class="stage-orb orb-1" style="--delay: 0.2s;" onclick="jumpToTrimester(1)">
+            <div class="orb-glow"></div>
+            <div class="orb-content">
+              <span class="orb-number">01</span>
+              <span class="orb-icon">🌱</span>
+              <div class="orb-label">First<br/>Trimester</div>
+              <div class="orb-sublabel">Weeks 1-12</div>
+            </div>
+            <div class="orb-tooltip">
+              <div class="tooltip-arrow"></div>
+              <h4>First Trimester</h4>
+              <p>Foundation phase where major organs begin forming. Morning sickness common but baby developing rapidly.</p>
+            </div>
+          </div>
+
+          <div class="stage-orb orb-2" style="--delay: 0.4s;" onclick="jumpToTrimester(2)">
+            <div class="orb-glow"></div>
+            <div class="orb-content">
+              <span class="orb-number">02</span>
+              <span class="orb-icon">💗</span>
+              <div class="orb-label">Second<br/>Trimester</div>
+              <div class="orb-sublabel">Weeks 13-26</div>
+            </div>
+            <div class="orb-tooltip">
+              <div class="tooltip-arrow"></div>
+              <h4>Second Trimester</h4>
+              <p>The "golden period" - energy returns, baby movements felt, and bump becomes visible. Anatomy scan reveals details.</p>
+            </div>
+          </div>
+
+          <div class="stage-orb orb-3" style="--delay: 0.6s;" onclick="jumpToTrimester(3)">
+            <div class="orb-glow"></div>
+            <div class="orb-content">
+              <span class="orb-number">03</span>
+              <span class="orb-icon">🎀</span>
+              <div class="orb-label">Third<br/>Trimester</div>
+              <div class="orb-sublabel">Weeks 27-40</div>
+            </div>
+            <div class="orb-tooltip">
+              <div class="tooltip-arrow"></div>
+              <h4>Third Trimester</h4>
+              <p>Final countdown! Baby gains weight, lungs mature, and you prepare for delivery. Nesting instinct kicks in.</p>
+            </div>
+          </div>
+
+          <!-- Connection Lines SVG -->
+       <svg class="connection-lines" viewBox="0 0 500 500">
+          <defs>
+            <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ec407a;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#d81b60;stop-opacity:0.3" />
+            </linearGradient>
+          </defs>
+          
+          <path class="connection-path" d="M 50 150 Q 250 250 250 250" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+          </path>
+          
+          <path class="connection-path" d="M 400 100 Q 250 250 250 250" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+          </path>
+          
+          <path class="connection-path" d="M 250 450 L 250 250" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="5,5">
+            <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+          </path>
+        </svg>
+
+          <!-- Floating Info Cards -->
+          <div class="floating-info-cards">
+            <div class="info-card card-repro">
+              <div class="card-stat">
+                <div class="stat-num">12</div>
+                <div class="stat-label">Weeks</div>
+              </div>
+              <div class="card-detail">
+                <div class="detail-title">Early Growth</div>
+                <div class="detail-text">Organs form</div>
+              </div>
+            </div>
+            <div class="info-card card-peri">
+              <div class="card-stat">
+                <div class="stat-num">14</div>
+                <div class="stat-label">Weeks</div>
+              </div>
+              <div class="card-detail">
+                <div class="detail-title">Sweet Spot</div>
+                <div class="detail-text">Feel kicks</div>
+              </div>
+            </div>
+            <div class="info-card card-post">
+              <div class="card-stat">
+                <div class="stat-num">14</div>
+                <div class="stat-label">Weeks</div>
+              </div>
+              <div class="card-detail">
+                <div class="detail-title">Final Prep</div>
+                <div class="detail-text">Ready to meet</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT SHELL -->
+  <div class="page-shell">
+
+    <!-- INTERACTIVE WEEK TRACKER -->
+    <section class="section-block" id="weekTracker">
+      <div class="section-title-row">
+        <div>
+          <h2>📅 Your Week-by-Week Timeline</h2>
+          <p class="section-tagline">Select your current week to see personalized insights</p>
+        </div>
+      </div>
+
+      <div class="week-selector-wrapper">
+        <div class="week-input-control">
+          <label for="weekSlider">Current Week:</label>
+          <div class="slider-display">
+            <input type="range" id="weekSlider" min="1" max="40" value="20" />
+            <div class="week-display">
+              <span class="week-number" id="weekNumber">20</span>
+              <span class="week-label">weeks</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trimester-indicator" id="trimesterIndicator">
+          <span class="tri-badge">Second Trimester</span>
+        </div>
+      </div>
+
+      <!-- Week Timeline Visual -->
+      <div class="week-timeline">
+        <div class="timeline-track">
+          <div class="timeline-fill" id="timelineFill"></div>
+          <div class="timeline-milestones">
+            <div class="milestone" style="left: 0%;" data-week="1">
+              <div class="milestone-dot"></div>
+              <div class="milestone-label">Week 1</div>
+            </div>
+            <div class="milestone" style="left: 28.2%;" data-week="12">
+              <div class="milestone-dot"></div>
+              <div class="milestone-label">Week 12</div>
+            </div>
+            <div class="milestone" style="left: 64.1%;" data-week="26">
+              <div class="milestone-dot"></div>
+              <div class="milestone-label">Week 26</div>
+            </div>
+            <div class="milestone" style="left: 100%;" data-week="40">
+              <div class="milestone-dot"></div>
+              <div class="milestone-label">Week 40</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week Details Card -->
+      <div class="week-details-card" id="weekDetailsCard">
+        <div class="week-card-header">
+          <div>
+            <h3 id="weekTitle">Week 20: Halfway There!</h3>
+            <p id="weekSubtitle">Your baby is the size of a banana</p>
+          </div>
+          <div class="week-emoji" id="weekEmoji">🍌</div>
+        </div>
+        
+        <div class="week-stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📏</div>
+            <div class="stat-value" id="babyLength">25 cm</div>
+            <div class="stat-label">Baby Length</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-value" id="babyWeight">300 g</div>
+            <div class="stat-label">Baby Weight</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🫀</div>
+            <div class="stat-value" id="heartRate">140 bpm</div>
+            <div class="stat-label">Heart Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-value" id="daysLeft">140 days</div>
+            <div class="stat-label">Days Until Due</div>
+          </div>
+        </div>
+
+        <div class="week-development" id="weekDevelopment">
+          <h4>🧬 This Week's Development</h4>
+          <ul id="developmentList">
+            <li>Baby can hear your voice and heartbeat</li>
+            <li>Vernix caseosa (protective coating) forms on skin</li>
+            <li>Eyebrows and eyelashes are visible</li>
+            <li>Baby starts practicing breathing movements</li>
+          </ul>
+        </div>
+
+        <div class="week-tips" id="weekTips">
+          <h4>💡 Tips for This Week</h4>
+          <div class="tip-chips">
+            <span class="tip-chip">Schedule anatomy scan</span>
+            <span class="tip-chip">Start prenatal yoga</span>
+            <span class="tip-chip">Track baby movements</span>
+            <span class="tip-chip">Stay hydrated</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D PREGNANCY SIMULATOR -->
+    <section class="section-block" id="pregnancySimulator">
+      <div class="section-title-row">
+        <div>
+          <h2>🤰 Interactive Pregnancy Simulator</h2>
+          <p class="section-tagline">Watch your body transform week by week</p>
+        </div>
+      </div>
+
+      <div class="simulator-dashboard">
+        <div class="simulator-controls">
+          <div class="control-panel">
+            <h3>Visualization Controls</h3>
+            <div class="control-group">
+              <label>View Angle:</label>
+              <div class="view-buttons">
+                <button class="view-btn active" data-view="front" onclick="changeView('front')">Front View</button>
+                <button class="view-btn" data-view="side" onclick="changeView('side')">Side View</button>
+                <button class="view-btn" data-view="xray" onclick="changeView('xray')">X-Ray View</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>Show Layers:</label>
+              <div class="layer-toggles">
+                <label class="toggle-label">
+                  <input type="checkbox" id="showBaby" checked onchange="toggleLayer('baby')">
+                  <span>Baby Position</span>
+                </label>
+                <label class="toggle-label">
+                  <input type="checkbox" id="showOrgans" onchange="toggleLayer('organs')">
+                  <span>Organs</span>
+                </label>
+                <label class="toggle-label">
+                  <input type="checkbox" id="showMeasures" checked onchange="toggleLayer('measures')">
+                  <span>Measurements</span>
+                </label>
+              </div>
+            </div>
+            <button class="animate-btn" onclick="animateGrowth()">
+              <i class="fas fa-play"></i> Animate Growth
+            </button>
+          </div>
+
+          <div class="simulator-stats">
+            <h4>Current Stats</h4>
+            <div class="stats-list">
+              <div class="stat-row">
+                <span class="stat-name">Uterus Size:</span>
+                <span class="stat-value" id="uterusSize">Grapefruit</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Fundal Height:</span>
+                <span class="stat-value" id="fundalHeight">20 cm</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Amniotic Fluid:</span>
+                <span class="stat-value" id="amnioticFluid">400 ml</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Blood Volume:</span>
+                <span class="stat-value" id="bloodVolume">+40%</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-name">Weight Gain:</span>
+                <span class="stat-value" id="weightGain">10 lbs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="simulator-visual">
+          <svg id="pregnancySVG" viewBox="0 0 400 700" class="pregnancy-svg">
+            <!-- Background -->
+            <defs>
+              <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#ffd7ba;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ffb89d;stop-opacity:1" />
+              </linearGradient>
+              <radialGradient id="bellyGrad" cx="50%" cy="50%">
+                <stop offset="0%" style="stop-color:#ffe4d1;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ffc7a8;stop-opacity:1" />
+              </radialGradient>
+              <filter id="softShadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+                <feOffset dx="0" dy="4" result="offsetblur"/>
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.3"/>
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Body Structure -->
+            <g id="bodyGroup" class="body-group">
+              <!-- Head -->
+              <ellipse cx="200" cy="80" rx="45" ry="55" fill="url(#skinGrad)" filter="url(#softShadow)"/>
+              
+              <!-- Hair -->
+              <ellipse cx="200" cy="50" rx="48" ry="35" fill="#4a2c2a"/>
+              <path d="M 152 70 Q 150 50 165 40 Q 180 35 200 35 Q 220 35 235 40 Q 250 50 248 70" 
+                    fill="#4a2c2a" stroke="none"/>
+              
+              <!-- Face features -->
+              <circle cx="185" cy="75" r="3" fill="#3d2817"/>
+              <circle cx="215" cy="75" r="3" fill="#3d2817"/>
+              <path d="M 190 95 Q 200 100 210 95" stroke="#d4816f" stroke-width="2" fill="none" stroke-linecap="round"/>
+              
+              <!-- Neck -->
+              <rect x="185" y="125" width="30" height="25" fill="url(#skinGrad)" rx="5"/>
+              
+              <!-- Shoulders -->
+              <ellipse cx="140" cy="165" rx="35" ry="20" fill="#ec407a" opacity="0.9"/>
+              <ellipse cx="260" cy="165" rx="35" ry="20" fill="#ec407a" opacity="0.9"/>
+              
+              <!-- Torso -->
+              <path d="M 120 170 Q 115 250 120 350 L 180 460 Q 200 470 220 460 L 280 350 Q 285 250 280 170 Z" 
+                    fill="#ec407a" opacity="0.95"/>
+              
+              <!-- Growing Belly (animated) -->
+              <ellipse id="bellyMain" cx="200" cy="320" rx="80" ry="110" fill="url(#bellyGrad)" 
+                       filter="url(#softShadow)" class="belly-growth"/>
+              
+              <!-- Belly button -->
+              <ellipse cx="200" cy="300" rx="4" ry="6" fill="#d4816f" opacity="0.6"/>
+              
+              <!-- Arms -->
+              <ellipse cx="100" cy="240" rx="18" ry="65" fill="url(#skinGrad)" transform="rotate(-10 100 240)"/>
+              <ellipse cx="300" cy="240" rx="18" ry="65" fill="url(#skinGrad)" transform="rotate(10 300 240)"/>
+              
+              <!-- Legs -->
+              <ellipse cx="170" cy="540" rx="20" ry="90" fill="#5d4157"/>
+              <ellipse cx="230" cy="540" rx="20" ry="90" fill="#5d4157"/>
+            </g>
+
+            <!-- Baby Inside (X-ray view) -->
+            <g id="babyGroup" class="baby-group" opacity="1">
+              <ellipse id="babyBody" cx="200" cy="320" rx="35" ry="50" fill="#f8bbd0" opacity="0.8" 
+                       class="baby-growth"/>
+              <circle id="babyHead" cx="200" cy="260" r="28" fill="#f8bbd0" opacity="0.8" 
+                      class="baby-growth"/>
+              <ellipse cx="200" cy="270" rx="20" ry="25" fill="#fce4ec" opacity="0.6"/>
+              
+              <!-- Baby features -->
+              <circle cx="193" cy="265" r="2" fill="#d81b60"/>
+              <circle cx="207" cy="265" r="2" fill="#d81b60"/>
+              <path d="M 196 273 Q 200 275 204 273" stroke="#d81b60" stroke-width="1" fill="none"/>
+              
+              <!-- Umbilical cord -->
+              <path id="umbilicalCord" d="M 200 345 Q 190 365 200 380" stroke="#f06292" stroke-width="3" 
+                    fill="none" opacity="0.7" stroke-linecap="round"/>
+            </g>
+
+            <!-- Organs overlay -->
+            <g id="organsGroup" class="organs-group" opacity="0">
+              <!-- Uterus outline -->
+              <ellipse cx="200" cy="320" rx="85" ry="115" fill="none" stroke="#d81b60" stroke-width="2" 
+                       stroke-dasharray="5,5"/>
+              <text x="200" y="445" text-anchor="middle" fill="#d81b60" font-size="12" font-weight="600">
+                Uterus
+              </text>
+              
+              <!-- Placenta -->
+              <ellipse cx="230" cy="300" rx="25" ry="20" fill="#c2185b" opacity="0.5"/>
+              <text x="260" y="305" fill="#c2185b" font-size="10">Placenta</text>
+              
+              <!-- Amniotic sac -->
+              <ellipse cx="200" cy="320" rx="75" ry="105" fill="none" stroke="#4fc3f7" stroke-width="1.5" 
+                       stroke-dasharray="3,3"/>
+              <text x="125" y="330" fill="#0288d1" font-size="10">Amniotic Sac</text>
+            </g>
+
+            <!-- Measurements overlay -->
+            <g id="measuresGroup" class="measures-group" opacity="1">
+              <!-- Fundal height line -->
+              <line x1="150" y1="210" x2="250" y2="210" stroke="#f06292" stroke-width="2" 
+                    stroke-dasharray="4,4"/>
+              <text x="255" y="215" fill="#d81b60" font-size="11" font-weight="600">
+                Fundal Height: <tspan id="svgFundalHeight">20cm</tspan>
+              </text>
+              
+              <!-- Baby length -->
+              <line x1="180" y1="260" x2="180" y2="370" stroke="#9c27b0" stroke-width="2"/>
+              <text x="165" y="315" fill="#9c27b0" font-size="11" font-weight="600" transform="rotate(-90 165 315)">
+                <tspan id="svgBabyLength">25cm</tspan>
+              </text>
+            </g>
+
+            <!-- Week label -->
+            <text x="200" y="670" text-anchor="middle" fill="#d81b60" font-size="18" font-weight="700" 
+                  id="svgWeekLabel">
+              Week 20
+            </text>
+          </svg>
+
+          <div class="view-label" id="viewLabel">Front View</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIMESTER-BY-TRIMESTER JOURNEY -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>🌸 Your Trimester Journey</h2>
+          <p class="section-tagline">Explore each phase with detailed milestones</p>
+        </div>
+      </div>
+
+      <div class="journey">
+        <div class="journey-track">
+          <button class="track-dot active" data-stage="tri1" onclick="selectStage('tri1')">
+            <span>🌱</span> First Trimester
+          </button>
+          <button class="track-dot" data-stage="tri2" onclick="selectStage('tri2')">
+            <span>💗</span> Second Trimester
+          </button>
+          <button class="track-dot" data-stage="tri3" onclick="selectStage('tri3')">
+            <span>🎀</span> Third Trimester
+          </button>
+        </div>
+
+        <!-- Trimester Cards (will be populated by JS) -->
+        <div id="journeyStageContent"></div>
+      </div>
+    </section>
+
+    <!-- ESSENTIAL PREGNANCY NUTRITION -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>🥗 Essential Pregnancy Nutrition</h2>
+          <p class="section-tagline">Personalized daily requirements calculator</p>
+        </div>
+      </div>
+
+      <div class="nutrition-calculator">
+        <div class="calc-inputs">
+          <div class="input-group">
+            <label>Pre-Pregnancy Weight (kg):</label>
+            <input type="number" id="preWeight" value="60" min="40" max="150" 
+                   onchange="calculateNutrition()">
+          </div>
+          <div class="input-group">
+            <label>Current Week:</label>
+            <input type="number" id="nutritionWeek" value="20" min="1" max="40" 
+                   onchange="calculateNutrition()">
+          </div>
+          <div class="input-group">
+            <label>Activity Level:</label>
+            <select id="activityLevel" onchange="calculateNutrition()">
+              <option value="1.2">Sedentary</option>
+              <option value="1.375">Lightly Active</option>
+              <option value="1.55" selected>Moderately Active</option>
+              <option value="1.725">Very Active</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="nutrition-results" id="nutritionResults">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="nutrition-grid">
+        <div class="nutrient-card">
+          <div class="nutrient-icon">💊</div>
+          <h4>Folic Acid</h4>
+          <div class="nutrient-amount">400-800 mcg</div>
+          <p>Prevents neural tube defects. Start before conception.</p>
+          <div class="food-sources">
+            <span class="source-tag">Leafy greens</span>
+            <span class="source-tag">Fortified cereals</span>
+            <span class="source-tag">Beans</span>
+          </div>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">🦴</div>
+          <h4>Calcium</h4>
+          <div class="nutrient-amount">1000 mg</div>
+          <p>For baby's bones and teeth development.</p>
+          <div class="food-sources">
+            <span class="source-tag">Milk</span>
+            <span class="source-tag">Yogurt</span>
+            <span class="source-tag">Cheese</span>
+            <span class="source-tag">Kale</span>
+          </div>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">🩸</div>
+          <h4>Iron</h4>
+          <div class="nutrient-amount">27 mg</div>
+          <p>Prevents anemia, supports blood volume increase.</p>
+          <div class="food-sources">
+            <span class="source-tag">Red meat</span>
+            <span class="source-tag">Spinach</span>
+            <span class="source-tag">Lentils</span>
+          </div>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">🐟</div>
+          <h4>DHA (Omega-3)</h4>
+          <div class="nutrient-amount">200-300 mg</div>
+          <p>Critical for brain and eye development.</p>
+          <div class="food-sources">
+            <span class="source-tag">Salmon</span>
+            <span class="source-tag">Walnuts</span>
+            <span class="source-tag">Supplements</span>
+          </div>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">☀️</div>
+          <h4>Vitamin D</h4>
+          <div class="nutrient-amount">600 IU</div>
+          <p>Helps calcium absorption and immune function.</p>
+          <div class="food-sources">
+            <span class="source-tag">Sunlight</span>
+            <span class="source-tag">Fortified milk</span>
+            <span class="source-tag">Eggs</span>
+          </div>
+        </div>
+
+        <div class="nutrient-card">
+          <div class="nutrient-icon">🥩</div>
+          <h4>Protein</h4>
+          <div class="nutrient-amount">71 g</div>
+          <p>Essential for tissue growth and repair.</p>
+          <div class="food-sources">
+            <span class="source-tag">Chicken</span>
+            <span class="source-tag">Eggs</span>
+            <span class="source-tag">Legumes</span>
+            <span class="source-tag">Nuts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGNANCY SYMPTOMS & CONCERNS -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>🌡️ Common Pregnancy Concerns</h2>
+          <p class="section-tagline">Know what's normal and when to call your doctor</p>
+        </div>
+      </div>
+
+      <div class="journey-subhead">
+        <h3>Symptom Tracker</h3>
+        <p>Click on each symptom to learn management strategies</p>
+      </div>
+
+      <div class="symptom-flip-grid">
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">FIRST TRIMESTER</div>
+                <strong>Morning Sickness</strong>
+                <p>Nausea and vomiting, usually worse in morning</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Management Tips:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Eat small, frequent meals</li>
+                <li>Try ginger tea or crackers</li>
+                <li>Avoid triggers</li>
+                <li>Stay hydrated</li>
+              </ul>
+              <div class="ask">Ask your doctor if severe</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">ALL TRIMESTERS</div>
+                <strong>Fatigue</strong>
+                <p>Overwhelming tiredness and need for rest</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Management Tips:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Get 8-9 hours of sleep</li>
+                <li>Take short naps</li>
+                <li>Light exercise helps</li>
+                <li>Eat iron-rich foods</li>
+              </ul>
+              <div class="ask">Normal in first & third trimester</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">THIRD TRIMESTER</div>
+                <strong>Back Pain</strong>
+                <p>Lower back discomfort from weight gain</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Management Tips:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Maintain good posture</li>
+                <li>Use pregnancy support belt</li>
+                <li>Prenatal massage</li>
+                <li>Warm compress</li>
+              </ul>
+              <div class="ask">Consider physical therapy</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">SECOND/THIRD TRIMESTER</div>
+                <strong>Heartburn</strong>
+                <p>Burning sensation in chest after eating</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Management Tips:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Eat smaller meals</li>
+                <li>Avoid spicy/fatty foods</li>
+                <li>Sleep with head elevated</li>
+                <li>Antacids (doctor approved)</li>
+              </ul>
+              <div class="ask">Common due to hormones</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">ALL TRIMESTERS</div>
+                <strong>Frequent Urination</strong>
+                <p>Need to pee more often, especially at night</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Why It Happens:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Increased blood volume</li>
+                <li>Uterus pressing on bladder</li>
+                <li>Hormonal changes</li>
+                <li>Baby's position</li>
+              </ul>
+              <div class="ask">Normal throughout pregnancy</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">SECOND/THIRD TRIMESTER</div>
+                <strong>Swelling (Edema)</strong>
+                <p>Puffy feet, ankles, and hands</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Management Tips:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Elevate feet when sitting</li>
+                <li>Wear compression socks</li>
+                <li>Stay hydrated</li>
+                <li>Reduce sodium intake</li>
+              </ul>
+              <div class="ask">⚠️ Call doctor if sudden/severe</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">THIRD TRIMESTER</div>
+                <strong>Braxton Hicks</strong>
+                <p>Practice contractions, irregular and painless</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>How to Tell:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Irregular timing</li>
+                <li>Don't increase in intensity</li>
+                <li>Stop with position change</li>
+                <li>Felt in front, not back</li>
+              </ul>
+              <div class="ask">⚠️ Real labor = regular & painful</div>
+            </div>
+          </div>
+        </button>
+
+        <button class="flip symptom-card" onclick="flipCard(this)">
+          <div class="flip-inner">
+            <div class="flip-face flip-front">
+              <div>
+                <div class="tiny">ALL TRIMESTERS</div>
+                <strong>Mood Changes</strong>
+                <p>Emotional ups and downs, anxiety</p>
+              </div>
+              <div class="flip-action">Tap to learn more →</div>
+            </div>
+            <div class="flip-face flip-back">
+              <strong>Support Strategies:</strong>
+              <ul style="text-align: left; font-size: 0.85rem; margin: 0.5rem 0;">
+                <li>Talk to loved ones</li>
+                <li>Join support groups</li>
+                <li>Practice mindfulness</li>
+                <li>Get enough sleep</li>
+              </ul>
+              <div class="ask">⚠️ Seek help if depressed</div>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <!-- Warning Signs -->
+      <div class="alert-strip">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-content">
+          <h3>Call Your Doctor Immediately If You Experience:</h3>
+          <div class="warning-grid">
+            <div class="warning-item">🩸 Heavy vaginal bleeding</div>
+            <div class="warning-item">💥 Severe abdominal pain</div>
+            <div class="warning-item">👶 Sudden decrease in baby movements</div>
+            <div class="warning-item">🤒 High fever above 101°F</div>
+            <div class="warning-item">💧 Fluid leaking from vagina</div>
+            <div class="warning-item">🤕 Severe headache with vision changes</div>
+            <div class="warning-item">🫁 Difficulty breathing</div>
+            <div class="warning-item">🤰 Contractions before 37 weeks</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRENATAL CARE SCHEDULE -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>🏥 Prenatal Care Schedule</h2>
+          <p class="section-tagline">Never miss an appointment or test</p>
+        </div>
+      </div>
+
+      <div class="care-timeline">
+        <div class="care-phase">
+          <div class="phase-header">
+            <div class="phase-icon">📋</div>
+            <div>
+              <h3>First Visit (6-8 weeks)</h3>
+              <p>Comprehensive health assessment</p>
+            </div>
+          </div>
+          <div class="phase-checklist">
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Complete medical history</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Blood tests (blood type, Rh factor, anemia)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Urine tests (protein, glucose, bacteria)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>STI screening</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Confirm pregnancy & estimate due date</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>First ultrasound</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="care-phase">
+          <div class="phase-header">
+            <div class="phase-icon">📅</div>
+            <div>
+              <h3>Monthly Visits (Weeks 8-28)</h3>
+              <p>Regular monitoring every 4 weeks</p>
+            </div>
+          </div>
+          <div class="phase-checklist">
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Weight and blood pressure check</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Urine protein and glucose test</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Fetal heartbeat monitoring</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Fundal height measurement</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Anatomy scan (18-22 weeks)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Glucose screening (24-28 weeks)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="care-phase">
+          <div class="phase-header">
+            <div class="phase-icon">🔄</div>
+            <div>
+              <h3>Bi-Weekly Visits (Weeks 28-36)</h3>
+              <p>Increased monitoring every 2 weeks</p>
+            </div>
+          </div>
+          <div class="phase-checklist">
+            <label class="check-item">
+              <input type="checkbox">
+              <span>All routine checks continue</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Baby position assessment</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Discuss birth plan</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Warning signs education</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Third trimester ultrasound (if needed)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="care-phase">
+          <div class="phase-header">
+            <div class="phase-icon">⏰</div>
+            <div>
+              <h3>Weekly Visits (Weeks 36-40)</h3>
+              <p>Final preparations for delivery</p>
+            </div>
+          </div>
+          <div class="phase-checklist">
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Cervical checks for dilation</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Baby position confirmation</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Group B strep test (35-37 weeks)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Non-stress test (if needed)</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Finalize delivery plan</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox">
+              <span>Discuss induction if overdue</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appointment Reminder Setup -->
+      <div class="reminder-setup">
+        <h3>📲 Set Up Appointment Reminders</h3>
+        <p>Never miss a prenatal visit with automated reminders</p>
+        <div class="reminder-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Next Appointment Date:</label>
+              <input type="date" id="nextAppointment">
+            </div>
+            <div class="form-field">
+              <label>Reminder Time:</label>
+              <select id="reminderTime">
+                <option value="24">1 day before</option>
+                <option value="48">2 days before</option>
+                <option value="72">3 days before</option>
+                <option value="168">1 week before</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Contact Method:</label>
+              <select id="contactMethod">
+                <option value="email">Email</option>
+                <option value="sms">SMS</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="setReminder()">
+            <i class="fas fa-bell"></i> Set Reminder
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOSPITAL BAG CHECKLIST -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>🧳 Hospital Bag Checklist</h2>
+          <p class="section-tagline">Pack smart by week 36 - Interactive builder</p>
+        </div>
+      </div>
+
+      <div class="bag-builder">
+        <div class="bag-categories">
+          <button class="bag-tab active" data-category="mom" onclick="switchBagCategory('mom')">
+            👩 For Mom
+          </button>
+          <button class="bag-tab" data-category="baby" onclick="switchBagCategory('baby')">
+            👶 For Baby
+          </button>
+          <button class="bag-tab" data-category="partner" onclick="switchBagCategory('partner')">
+            🤝 For Partner
+          </button>
+          <button class="bag-tab" data-category="essentials" onclick="switchBagCategory('essentials')">
+            📋 Essentials
+          </button>
+        </div>
+
+        <div class="bag-content" id="bagContent">
+          <!-- Mom Category (default) -->
+          <div class="bag-section active" data-section="mom">
+            <div class="bag-grid">
+              <div class="bag-item-card">
+                <h4>📄 Documents</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-id">
+                  <span>Insurance cards & ID</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-birth-plan">
+                  <span>Birth plan copies (3)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-medical">
+                  <span>Medical records</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-emergency">
+                  <span>Emergency contacts</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>👗 Clothing</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-gown">
+                  <span>Comfortable nightgown (2)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-robe">
+                  <span>Robe & slippers</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-bra">
+                  <span>Nursing bras (2-3)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-underwear">
+                  <span>Comfortable underwear (5-6)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-home-outfit">
+                  <span>Going-home outfit (loose)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-socks">
+                  <span>Warm socks</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🧴 Toiletries</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-toothbrush">
+                  <span>Toothbrush & toothpaste</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-shampoo">
+                  <span>Shampoo & conditioner</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-soap">
+                  <span>Body wash</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-deodorant">
+                  <span>Deodorant</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-hairbrush">
+                  <span>Hairbrush & hair ties</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-lip-balm">
+                  <span>Lip balm</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-glasses">
+                  <span>Glasses/contacts</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🩹 Postpartum Care</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-pads">
+                  <span>Maternity pads (heavy flow)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-nipple-cream">
+                  <span>Nipple cream</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-nursing-pads">
+                  <span>Nursing pads</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-pain-relief">
+                  <span>Pain relief (doctor approved)</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>📱 Comfort & Entertainment</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-phone">
+                  <span>Phone & charger</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-camera">
+                  <span>Camera</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-pillow">
+                  <span>Own pillow</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-music">
+                  <span>Music player/headphones</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="mom-snacks">
+                  <span>Snacks & drinks</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Baby Category -->
+          <div class="bag-section" data-section="baby">
+            <div class="bag-grid">
+              <div class="bag-item-card">
+                <h4>🚗 Safety</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-car-seat">
+                  <span>Car seat (installed!)</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>👕 Clothing</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-home-outfit">
+                  <span>Going-home outfit</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-onesies-nb">
+                  <span>Onesies - Newborn (3)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-onesies-0-3">
+                  <span>Onesies - 0-3 months (3)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-sleepers">
+                  <span>Sleepers with feet (2-3)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-hat">
+                  <span>Hat (2)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-mittens">
+                  <span>Mittens</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-socks">
+                  <span>Socks (3-4 pairs)</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🍼 Feeding</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-burp-cloths">
+                  <span>Burp cloths (4-5)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-bib">
+                  <span>Bibs (2)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-nursing-pillow">
+                  <span>Nursing pillow (optional)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-bottles">
+                  <span>Bottles (if not breastfeeding)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-formula">
+                  <span>Formula (if needed)</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🧷 Diapering</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-diapers-nb">
+                  <span>Diapers - Newborn</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-wipes">
+                  <span>Wipes (sensitive)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-cream">
+                  <span>Diaper cream</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-changing-pad">
+                  <span>Portable changing pad</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🛏️ Comfort</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-blankets">
+                  <span>Receiving blankets (3-4)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-swaddle">
+                  <span>Swaddle blankets (2)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-pacifiers">
+                  <span>Pacifiers (if using)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="baby-lovey">
+                  <span>Small comfort item</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Partner Category -->
+          <div class="bag-section" data-section="partner">
+            <div class="bag-grid">
+              <div class="bag-item-card">
+                <h4>🎒 Essentials</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-clothes">
+                  <span>Change of clothes (2 days)</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-toiletries">
+                  <span>Toiletries</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-phone">
+                  <span>Phone & charger</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-id">
+                  <span>ID & insurance</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🍕 Comfort</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-snacks">
+                  <span>Snacks & drinks</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-pillow">
+                  <span>Pillow & blanket</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-entertainment">
+                  <span>Books/tablet</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🎬 Memories</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-camera">
+                  <span>Camera/video camera</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-memory-cards">
+                  <span>Extra memory cards</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="partner-batteries">
+                  <span>Extra batteries</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Essentials Category -->
+          <div class="bag-section" data-section="essentials">
+            <div class="bag-grid">
+              <div class="bag-item-card">
+                <h4>💰 Financial</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-wallet">
+                  <span>Wallet with cash</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-credit-cards">
+                  <span>Credit cards</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-insurance">
+                  <span>Insurance information</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>📞 Contacts</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-contact-list">
+                  <span>List of people to call</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-ob-number">
+                  <span>OB/GYN phone number</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-pediatrician">
+                  <span>Pediatrician info</span>
+                </label>
+              </div>
+
+              <div class="bag-item-card">
+                <h4>🏠 Home Prep</h4>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-house-keys">
+                  <span>House keys</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-pet-plan">
+                  <span>Pet care plan</span>
+                </label>
+                <label class="bag-check">
+                  <input type="checkbox" data-item="ess-fridge-stocked">
+                  <span>Fridge stocked</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="bag-progress">
+          <div class="progress-header">
+            <span>Packing Progress</span>
+            <span id="progressPercent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <p class="progress-note" id="progressNote">Start checking items to track your progress!</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bag-actions">
+          <button class="btn-primary" onclick="downloadChecklist()">
+            <i class="fas fa-download"></i> Download PDF Checklist
+          </button>
+          <button class="btn-secondary" onclick="emailChecklist()">
+            <i class="fas fa-envelope"></i> Email to Partner
+          </button>
+          <button class="btn-ghost" onclick="printChecklist()">
+            <i class="fas fa-print"></i> Print
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGNANCY WELLNESS TIPS -->
+    <section class="section-block">
+      <div class="section-title-row">
+        <div>
+          <h2>💆‍♀️ Pregnancy Wellness Tips</h2>
+          <p class="section-tagline">Self-care practices for a healthy pregnancy</p>
+        </div>
+      </div>
+
+      <div class="wellness-grid">
+        <div class="wellness-card">
+          <div class="wellness-icon">🚶‍♀️</div>
+          <h3>Stay Active</h3>
+          <p>30 minutes of moderate exercise most days. Walking, swimming, and prenatal yoga are excellent choices.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Start slowly if new to exercise</div>
+            <div class="tip-item">✓ Stay hydrated during workouts</div>
+            <div class="tip-item">✓ Avoid overheating</div>
+            <div class="tip-item">✓ Stop if dizzy or in pain</div>
+          </div>
+        </div>
+
+        <div class="wellness-card">
+          <div class="wellness-icon">😴</div>
+          <h3>Rest Well</h3>
+          <p>7-9 hours of sleep nightly. Use pregnancy pillows and sleep on your left side for better circulation.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Establish bedtime routine</div>
+            <div class="tip-item">✓ Keep room cool and dark</div>
+            <div class="tip-item">✓ Limit screen time before bed</div>
+            <div class="tip-item">✓ Take short afternoon naps</div>
+          </div>
+        </div>
+
+        <div class="wellness-card">
+          <div class="wellness-icon">💧</div>
+          <h3>Hydrate</h3>
+          <p>8-10 glasses of water daily. Prevents constipation, reduces swelling, and maintains amniotic fluid.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Carry water bottle everywhere</div>
+            <div class="tip-item">✓ Flavor with lemon or cucumber</div>
+            <div class="tip-item">✓ Drink before feeling thirsty</div>
+            <div class="tip-item">✓ Monitor urine color</div>
+          </div>
+        </div>
+
+        <div class="wellness-card">
+          <div class="wellness-icon">🧘‍♀️</div>
+          <h3>Manage Stress</h3>
+          <p>Practice meditation, prenatal massage, and breathing exercises. Join support groups for emotional wellness.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Try prenatal meditation apps</div>
+            <div class="tip-item">✓ Journal your feelings</div>
+            <div class="tip-item">✓ Talk to supportive friends</div>
+            <div class="tip-item">✓ Seek professional help if needed</div>
+          </div>
+        </div>
+
+        <div class="wellness-card">
+          <div class="wellness-icon">🚭</div>
+          <h3>Avoid Harmful Substances</h3>
+          <p>No smoking, alcohol, or recreational drugs. Limit caffeine to 200mg (1-2 cups coffee) per day.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Read medication labels carefully</div>
+            <div class="tip-item">✓ Ask doctor before taking anything</div>
+            <div class="tip-item">✓ Avoid secondhand smoke</div>
+            <div class="tip-item">✓ Check food safety guidelines</div>
+          </div>
+        </div>
+
+        <div class="wellness-card">
+          <div class="wellness-icon">📚</div>
+          <h3>Educate Yourself</h3>
+          <p>Take childbirth classes, read about labor and delivery, and prepare a birth plan with your partner.</p>
+          <div class="wellness-tips">
+            <div class="tip-item">✓ Tour your birthing facility</div>
+            <div class="tip-item">✓ Learn breathing techniques</div>
+            <div class="tip-item">✓ Understand pain management options</div>
+            <div class="tip-item">✓ Practice with partner</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT BEST STEPS -->
+    <section class="section-block">
+      <div class="care-strip">
+        <div>
+          <h2>🎯 Next Best Steps</h2>
+          <p>Continue your journey with vaccination planning and set reminders</p>
+          
+          <div class="care-pills">
+            <span class="care-pill">Vaccination Schedule</span>
+            <span class="care-pill">Postpartum Care</span>
+            <span class="care-pill">Newborn Care</span>
+            <span class="care-pill">Breastfeeding Guide</span>
+          </div>
+          </div>
+       
+      </div>
+
+
+      <div class="care-pills">
+  
+        <a href="vaccination.html" class="care-pill-link">
+          <i class="fas fa-syringe" style="margin-right:8px;"></i> Vaccination
+        </a>
+
+        <a href="depression.html" class="care-pill-link">
+          <i class="fas fa-heart-pulse" style="margin-right:8px;"></i> Postpartum Care
+        </a>
+
+        <a href="newborn_care.html" class="care-pill-link">
+          <i class="fas fa-baby" style="margin-right:8px;"></i> Newborn Care
+        </a>
+
+        <a href="breastfeeding-journey.html" class="care-pill-link">
+          <i class="fas fa-person-breastfeeding" style="margin-right:8px;"></i> Breastfeeding Guide
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Floating HUD -->
+  <div class="floating-hud" id="floatingHud">
+    <div class="hud-content">
+      <div class="hud-label">Your Week:</div>
+      <div class="hud-week" id="hudWeek">20</div>
+      <div class="hud-label">Baby Size:</div>
+      <div class="hud-size" id="hudSize">🍌 Banana</div>
+    </div>
+    <button class="hud-toggle" onclick="toggleHud()">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <script>
+    // =========================================
+// PREGNANCY JOURNEY - COMPREHENSIVE JAVASCRIPT
+// =========================================
+
+// =========================================
+// PARTICLE ANIMATION BACKGROUND
+// =========================================
+function initParticleAnimation() {
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const heroSection = canvas.closest('.hero-constellation') || canvas.parentElement.parentElement;
+
+  function resizeCanvas() {
+    canvas.width  = heroSection.offsetWidth  || window.innerWidth;
+    canvas.height = heroSection.offsetHeight || window.innerHeight;
+  }
+  resizeCanvas();
+  
+  const particles = [];
+  const particleCount = 50;
+  
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 0.5 - 0.25;
+      this.speedY = Math.random() * 0.5 - 0.25;
+      this.opacity = Math.random() * 0.5 + 0.2;
+    }
+    
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      
+      if (this.x > canvas.width) this.x = 0;
+      if (this.x < 0) this.x = canvas.width;
+      if (this.y > canvas.height) this.y = 0;
+      if (this.y < 0) this.y = canvas.height;
+    }
+    
+    draw() {
+      ctx.fillStyle = `rgba(236, 64, 122, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+      particle.update();
+      particle.draw();
+    });
+    
+    // Draw connections
+    particles.forEach((a, i) => {
+      particles.slice(i + 1).forEach(b => {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 150) {
+          ctx.strokeStyle = `rgba(236, 64, 122, ${0.1 * (1 - distance / 150)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      });
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+  
+  window.addEventListener('resize', () => {
+    canvas.width  = heroSection.offsetWidth  || window.innerWidth;
+    canvas.height = heroSection.offsetHeight || window.innerHeight;
+  });
+}
+
+// Gradient morph effect
+function initGradientMorph() {
+  const morph = document.querySelector('.gradient-morph');
+  if (!morph) return;
+  
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    morph.style.setProperty('--mouse-x', `${x}%`);
+    morph.style.setProperty('--mouse-y', `${y}%`);
+  });
+}
+
+// =========================================
+// WEEK TRACKER FUNCTIONALITY
+// =========================================
+let currentWeek = 20;
+
+const weekData = {
+  1: { size: "Poppy Seed", emoji: "•", length: "0.1 cm", weight: "0 g", heartRate: "N/A", 
+       development: ["Fertilization occurs", "Single cell divides rapidly", "Blastocyst forms", "Implantation begins"],
+       tips: ["Start prenatal vitamins", "Avoid alcohol & smoking", "Track ovulation", "Healthy diet"] },
+  5: { size: "Apple Seed", emoji: "🍎", length: "0.2 cm", weight: "0.1 g", heartRate: "100 bpm",
+       development: ["Heart begins to beat", "Neural tube forms", "Arm and leg buds appear", "Placenta develops"],
+       tips: ["First prenatal visit", "Confirm pregnancy", "Start folic acid", "Rest when tired"] },
+  8: { size: "Raspberry", emoji: "🫐", length: "1.6 cm", weight: "1 g", heartRate: "150 bpm",
+       development: ["Webbed fingers and toes", "Facial features form", "Major organs developing", "Eyelids form"],
+       tips: ["Combat morning sickness", "Stay hydrated", "Eat small meals", "First ultrasound"] },
+  12: { size: "Lime", emoji: "🍋", length: "5.4 cm", weight: "14 g", heartRate: "160 bpm",
+        development: ["Reflexes develop", "Intestines in place", "Fingernails grow", "Vocal cords form"],
+        tips: ["First trimester screening", "Discuss genetic testing", "Maternity clothes shopping", "Document bump"] },
+  16: { size: "Avocado", emoji: "🥑", length: "11.6 cm", weight: "100 g", heartRate: "150 bpm",
+        development: ["Facial expressions possible", "Circulatory system works", "Hearing develops", "Baby can hiccup"],
+        tips: ["Amniocentesis if needed", "Feel first movements soon", "Pelvic floor exercises", "Sleep on side"] },
+  20: { size: "Banana", emoji: "🍌", length: "25 cm", weight: "300 g", heartRate: "140 bpm",
+        development: ["Can hear your voice", "Vernix caseosa forms", "Eyebrows visible", "Practices breathing"],
+        tips: ["Anatomy scan scheduled", "Track baby movements", "Start prenatal yoga", "Stay hydrated"] },
+  24: { size: "Corn", emoji: "🌽", length: "30 cm", weight: "600 g", heartRate: "140 bpm",
+        development: ["Lungs develop", "Taste buds form", "Footprints visible", "Responds to sound"],
+        tips: ["Glucose screening test", "Watch for swelling", "Braxton Hicks may start", "Childbirth classes"] },
+  28: { size: "Eggplant", emoji: "🍆", length: "37 cm", weight: "1000 g", heartRate: "140 bpm",
+        development: ["Eyes can open", "Can dream", "Billions of neurons", "Fat accumulates"],
+        tips: ["Third trimester begins", "Tdap vaccine", "Kick counts daily", "Hospital tour"] },
+  32: { size: "Jicama", emoji: "🥥", length: "42 cm", weight: "1700 g", heartRate: "140 bpm",
+        development: ["Bones harden", "Lungs maturing", "Fingernails reach fingertips", "Practices breathing"],
+        tips: ["Bi-weekly appointments", "Pack hospital bag", "Write birth plan", "Perineal massage"] },
+  36: { size: "Romaine", emoji: "🥬", length: "47 cm", weight: "2600 g", heartRate: "140 bpm",
+        development: ["Head engaged", "Digestive system ready", "Immune system works", "Ready for birth"],
+        tips: ["Weekly appointments", "Group B strep test", "Finalize birth plan", "Rest as much as possible"] },
+  40: { size: "Watermelon", emoji: "🍉", length: "51 cm", weight: "3400 g", heartRate: "140 bpm",
+        development: ["Fully developed", "Ready for birth", "Strong reflexes", "Waiting for labor"],
+        tips: ["Watch for labor signs", "Stay calm", "Walk to encourage labor", "Hospital bag ready"] }
+};
+
+function interpolateWeekData(week) {
+  const knownWeeks = [1, 5, 8, 12, 16, 20, 24, 28, 32, 36, 40];
+  
+  if (weekData[week]) return weekData[week];
+  
+  let lower = knownWeeks[0];
+  let upper = knownWeeks[knownWeeks.length - 1];
+  
+  for (let i = 0; i < knownWeeks.length - 1; i++) {
+    if (week >= knownWeeks[i] && week <= knownWeeks[i + 1]) {
+      lower = knownWeeks[i];
+      upper = knownWeeks[i + 1];
+      break;
+    }
+  }
+  
+  const lowerData = weekData[lower];
+  const upperData = weekData[upper];
+  const ratio = (week - lower) / (upper - lower);
+  
+  const lowerLength = parseFloat(lowerData.length);
+  const upperLength = parseFloat(upperData.length);
+  const length = (lowerLength + (upperLength - lowerLength) * ratio).toFixed(1);
+  
+  const lowerWeight = parseFloat(lowerData.weight);
+  const upperWeight = parseFloat(upperData.weight);
+  const weight = Math.round(lowerWeight + (upperWeight - lowerWeight) * ratio);
+  
+  return {
+    size: lowerData.size,
+    emoji: lowerData.emoji,
+    length: `${length} cm`,
+    weight: `${weight} g`,
+    heartRate: lowerData.heartRate,
+    development: lowerData.development,
+    tips: lowerData.tips
+  };
+}
+
+function updateWeekDisplay(week) {
+  currentWeek = week;
+  
+  document.getElementById('weekNumber').textContent = week;
+  document.getElementById('weekSlider').value = week;
+  
+  // Update trimester indicator
+  let trimester = "First Trimester";
+  if (week >= 13 && week <= 26) trimester = "Second Trimester";
+  else if (week >= 27) trimester = "Third Trimester";
+  document.getElementById('trimesterIndicator').innerHTML = `<span class="tri-badge">${trimester}</span>`;
+  
+  // Update timeline fill
+  const fillPercent = (week / 40) * 100;
+  document.getElementById('timelineFill').style.width = `${fillPercent}%`;
+  
+  // Get week data
+  const data = interpolateWeekData(week);
+  
+  // Update week details card
+  document.getElementById('weekTitle').textContent = `Week ${week}: ${getTrimesterPhrase(week)}`;
+  document.getElementById('weekSubtitle').textContent = `Your baby is the size of a ${data.size}`;
+  document.getElementById('weekEmoji').textContent = data.emoji;
+  
+  document.getElementById('babyLength').textContent = data.length;
+  document.getElementById('babyWeight').textContent = data.weight;
+  document.getElementById('heartRate').textContent = data.heartRate;
+  document.getElementById('daysLeft').textContent = `${(40 - week) * 7} days`;
+  
+  // Update development list
+  const devList = document.getElementById('developmentList');
+  devList.innerHTML = data.development.map(item => `<li>${item}</li>`).join('');
+  
+  // Update tips
+  const tipsContainer = document.querySelector('.tip-chips');
+  tipsContainer.innerHTML = data.tips.map(tip => `<span class="tip-chip">${tip}</span>`).join('');
+  
+  // Update floating HUD
+  document.getElementById('hudWeek').textContent = week;
+  document.getElementById('hudSize').textContent = `${data.emoji} ${data.size}`;
+  
+  // Update simulator
+  updateSimulator(week);
+}
+
+function getTrimesterPhrase(week) {
+  if (week <= 4) return "The Beginning";
+  if (week <= 8) return "Rapid Development";
+  if (week <= 12) return "Almost There!";
+  if (week <= 16) return "Energy Returns";
+  if (week <= 20) return "Halfway There!";
+  if (week <= 24) return "Growing Strong";
+  if (week <= 28) return "Third Trimester Begins";
+  if (week <= 32) return "Preparing for Birth";
+  if (week <= 36) return "Almost Ready";
+  return "Full Term!";
+}
+
+// =========================================
+// PREGNANCY SIMULATOR
+// =========================================
+function updateSimulator(week) {
+  // Update belly size
+  const bellyRx = 80 + (week * 1.5);
+  const bellyRy = 110 + (week * 2);
+  const belly = document.getElementById('bellyMain');
+  if (belly) {
+    belly.setAttribute('rx', bellyRx);
+    belly.setAttribute('ry', bellyRy);
+  }
+  
+  // Update baby size
+  const babySize = 28 + (week * 0.5);
+  const babyBody = document.getElementById('babyBody');
+  const babyHead = document.getElementById('babyHead');
+  if (babyBody) {
+    babyBody.setAttribute('rx', 35 + week * 0.3);
+    babyBody.setAttribute('ry', 50 + week * 0.5);
+  }
+  if (babyHead) {
+    babyHead.setAttribute('r', babySize);
+  }
+  
+  // Update stats
+  const data = interpolateWeekData(week);
+  document.getElementById('uterusSize').textContent = getUterusSize(week);
+  document.getElementById('fundalHeight').textContent = `${Math.max(0, week - 20 + 20)} cm`;
+  document.getElementById('amnioticFluid').textContent = `${200 + week * 10} ml`;
+  document.getElementById('bloodVolume').textContent = `+${Math.min(50, week * 1.5)}%`;
+  document.getElementById('weightGain').textContent = `${Math.round(week * 0.5)} lbs`;
+  
+  // Update SVG labels
+  document.getElementById('svgFundalHeight').textContent = `${Math.max(0, week - 20 + 20)}cm`;
+  document.getElementById('svgBabyLength').textContent = data.length;
+  document.getElementById('svgWeekLabel').textContent = `Week ${week}`;
+}
+
+function getUterusSize(week) {
+  if (week < 6) return "Plum";
+  if (week < 10) return "Orange";
+  if (week < 12) return "Grapefruit";
+  if (week < 16) return "Cantaloupe";
+  if (week < 20) return "Papaya";
+  if (week < 28) return "Basketball";
+  if (week < 36) return "Watermelon";
+  return "Full Size";
+}
+
+function changeView(view) {
+  // Update button states
+  document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-view="${view}"]`).classList.add('active');
+  
+  const babyGroup = document.getElementById('babyGroup');
+  const organsGroup = document.getElementById('organsGroup');
+  const bodyGroup = document.getElementById('bodyGroup');
+  const viewLabel = document.getElementById('viewLabel');
+  
+  if (view === 'front') {
+    bodyGroup.style.opacity = '1';
+    babyGroup.style.opacity = '0.3';
+    organsGroup.style.opacity = '0';
+    viewLabel.textContent = 'Front View';
+  } else if (view === 'side') {
+    bodyGroup.style.opacity = '0.8';
+    babyGroup.style.opacity = '0.5';
+    organsGroup.style.opacity = '0';
+    viewLabel.textContent = 'Side View';
+  } else if (view === 'xray') {
+    bodyGroup.style.opacity = '0.3';
+    babyGroup.style.opacity = '1';
+    organsGroup.style.opacity = '1';
+    viewLabel.textContent = 'X-Ray View';
+  }
+}
+
+function toggleLayer(layer) {
+  const checkbox = document.getElementById(`show${layer.charAt(0).toUpperCase() + layer.slice(1)}`);
+  const group = document.getElementById(`${layer}Group`);
+  
+  if (checkbox.checked) {
+    group.style.opacity = layer === 'baby' ? '1' : '1';
+  } else {
+    group.style.opacity = '0';
+  }
+}
+
+function animateGrowth() {
+  const btn = document.querySelector('.animate-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Animating...';
+  
+  let week = 1;
+  const interval = setInterval(() => {
+    updateWeekDisplay(week);
+    week++;
+    
+    if (week > 40) {
+      clearInterval(interval);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-play"></i> Animate Growth';
+      updateWeekDisplay(currentWeek);
+    }
+  }, 200);
+}
+
+// =========================================
+// TRIMESTER JOURNEY
+// =========================================
+const trimesterData = {
+  tri1: {
+    kicker: "WEEKS 1-12",
+    title: "First Trimester: Foundation Phase",
+    description: "The incredible journey begins with rapid cell division and the formation of all major organs.",
+    badges: ["12 weeks", "Morning sickness", "First ultrasound", "Neural tube forms"],
+    phases: [
+      {
+        title: "Weeks 1-4: Conception & Implantation",
+        content: "Fertilization occurs and the embryo implants in the uterine wall. The placenta begins to form."
+      },
+      {
+        title: "Weeks 5-8: Organ Formation",
+        content: "Heart begins beating around week 6. Brain, spinal cord, and all major organs start developing. Limb buds appear."
+      },
+      {
+        title: "Weeks 9-12: Fetal Development",
+        content: "Now called a fetus. Fingers and toes form. Baby can make small movements. Sex organs develop."
+      }
+    ]
+  },
+  tri2: {
+    kicker: "WEEKS 13-26",
+    title: "Second Trimester: The Golden Period",
+    description: "Energy returns, nausea fades, and you'll feel your baby move! The most comfortable trimester for many.",
+    badges: ["14 weeks", "Energy boost", "Anatomy scan", "Feel movements"],
+    phases: [
+      {
+        title: "Weeks 13-16: Growing Stronger",
+        content: "Baby's skeleton hardens. Facial features more defined. Can suck thumb and make facial expressions."
+      },
+      {
+        title: "Weeks 17-20: Halfway Milestone",
+        content: "Anatomy scan reveals baby's sex. You'll feel definite movements (quickening). Baby can hear sounds."
+      },
+      {
+        title: "Weeks 21-26: Rapid Growth",
+        content: "Baby gains weight rapidly. Lungs develop. Regular sleep-wake cycles. Eyelids can open."
+      }
+    ]
+  },
+  tri3: {
+    kicker: "WEEKS 27-40",
+    title: "Third Trimester: Final Countdown",
+    description: "Baby gains weight, lungs mature, and you prepare for delivery. The finish line is in sight!",
+    badges: ["14 weeks", "Braxton Hicks", "Hospital bag", "Birth plan"],
+    phases: [
+      {
+        title: "Weeks 27-32: Preparing Systems",
+        content: "Brain develops rapidly. Eyes can open. Baby can taste amniotic fluid. Bones fully developed but soft."
+      },
+      {
+        title: "Weeks 33-36: Final Preparations",
+        content: "Baby moves into head-down position. Lungs nearly mature. Fingernails reach fingertips. Weekly checkups begin."
+      },
+      {
+        title: "Weeks 37-40: Full Term",
+        content: "Baby is full term at 37 weeks. Gaining about 0.5 lbs per week. Ready for birth at any time. Watch for labor signs."
+      }
+    ]
+  }
+};
+
+function selectStage(stage) {
+  // Update buttons
+  document.querySelectorAll('.track-dot').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`[data-stage="${stage}"]`).classList.add('active');
+  
+  // Update content
+  const data = trimesterData[stage];
+  const container = document.getElementById('journeyStageContent');
+  
+  container.innerHTML = `
+    <div class="journey-stage-card">
+      <div class="stage-top">
+        <div>
+          <div class="stage-kicker">${data.kicker}</div>
+          <h3 class="stage-title">${data.title}</h3>
+          <p class="stage-one-liner">${data.description}</p>
+          <div class="stage-badges">
+            ${data.badges.map(badge => `<span class="stage-badge">${badge}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+      
+      <div class="stage-steps">
+        ${data.phases.map((phase, index) => `
+          <div class="step">
+            <button onclick="toggleStep(this)">
+              ${phase.title}
+              <span class="chev">▼</span>
+            </button>
+            <div class="step-body">${phase.content}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function toggleStep(button) {
+  const step = button.parentElement;
+  step.classList.toggle('open');
+}
+
+function jumpToTrimester(tri) {
+  const weekRanges = { 1: 6, 2: 20, 3: 32 };
+  updateWeekDisplay(weekRanges[tri]);
+  
+  // Scroll to week tracker
+  document.getElementById('weekTracker').scrollIntoView({ behavior: 'smooth' });
+}
+
+// =========================================
+// SYMPTOM FLIP CARDS
+// =========================================
+function flipCard(card) {
+  card.classList.toggle('is-flipped');
+}
+
+// =========================================
+// NUTRITION CALCULATOR
+// =========================================
+function calculateNutrition() {
+  const preWeight = parseFloat(document.getElementById('preWeight').value) || 60;
+  const week = parseInt(document.getElementById('nutritionWeek').value) || 20;
+  const activityLevel = parseFloat(document.getElementById('activityLevel').value) || 1.55;
+  
+  // Calculate BMR (Basal Metabolic Rate) - Harris-Benedict
+  const bmr = 655 + (9.6 * preWeight) + (1.8 * 165) - (4.7 * 28); // Assuming avg height and age
+  
+  // Calculate TDEE (Total Daily Energy Expenditure)
+  let tdee = bmr * activityLevel;
+  
+  // Add pregnancy calories
+  if (week <= 12) tdee += 0; // No extra calories first trimester
+  else if (week <= 26) tdee += 340; // Second trimester
+  else tdee += 450; // Third trimester
+  
+  const protein = 71; // grams
+  const carbs = Math.round((tdee * 0.45) / 4); // 45% of calories
+  const fats = Math.round((tdee * 0.30) / 9); // 30% of calories
+  const water = Math.round(preWeight * 0.033 + 1); // liters
+  
+  const resultsHTML = `
+    <h4>Your Daily Nutritional Needs</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+      <div style="background: white; padding: 1rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 0.85rem; color: #666;">Calories</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d81b60;">${Math.round(tdee)}</div>
+        <div style="font-size: 0.75rem; color: #888;">kcal/day</div>
+      </div>
+      <div style="background: white; padding: 1rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 0.85rem; color: #666;">Protein</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d81b60;">${protein}</div>
+        <div style="font-size: 0.75rem; color: #888;">grams/day</div>
+      </div>
+      <div style="background: white; padding: 1rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 0.85rem; color: #666;">Carbs</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d81b60;">${carbs}</div>
+        <div style="font-size: 0.75rem; color: #888;">grams/day</div>
+      </div>
+      <div style="background: white; padding: 1rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 0.85rem; color: #666;">Healthy Fats</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d81b60;">${fats}</div>
+        <div style="font-size: 0.75rem; color: #888;">grams/day</div>
+      </div>
+      <div style="background: white; padding: 1rem; border-radius: 10px; text-align: center;">
+        <div style="font-size: 0.85rem; color: #666;">Water</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: #d81b60;">${water}</div>
+        <div style="font-size: 0.75rem; color: #888;">liters/day</div>
+      </div>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666; text-align: center;">
+      💡 These are general estimates. Consult your healthcare provider for personalized nutrition advice.
+    </p>
+  `;
+  
+  document.getElementById('nutritionResults').innerHTML = resultsHTML;
+}
+
+// =========================================
+// HOSPITAL BAG BUILDER
+// =========================================
+function switchBagCategory(category) {
+  // Update tabs
+  document.querySelectorAll('.bag-tab').forEach(tab => tab.classList.remove('active'));
+  document.querySelector(`[data-category="${category}"]`).classList.add('active');
+  
+  // Update sections
+  document.querySelectorAll('.bag-section').forEach(section => section.classList.remove('active'));
+  document.querySelector(`[data-section="${category}"]`).classList.add('active');
+  
+  updateBagProgress();
+}
+
+function updateBagProgress() {
+  const allCheckboxes = document.querySelectorAll('.bag-check input[type="checkbox"]');
+  const checkedCheckboxes = document.querySelectorAll('.bag-check input[type="checkbox"]:checked');
+  
+  const total = allCheckboxes.length;
+  const checked = checkedCheckboxes.length;
+  const percent = Math.round((checked / total) * 100);
+  
+  document.getElementById('progressPercent').textContent = `${percent}%`;
+  document.getElementById('progressFill').style.width = `${percent}%`;
+  
+  let note = "Start checking items to track your progress!";
+  if (percent > 0 && percent < 30) note = "Good start! Keep packing...";
+  else if (percent >= 30 && percent < 60) note = "You're making great progress!";
+  else if (percent >= 60 && percent < 90) note = "Almost done! Just a few more items.";
+  else if (percent >= 90 && percent < 100) note = "So close! You've got this!";
+  else if (percent === 100) note = "🎉 All packed and ready for the big day!";
+  
+  document.getElementById('progressNote').textContent = note;
+}
+
+function downloadChecklist() {
+  alert('Download functionality would generate a PDF checklist of all items.');
+}
+
+function emailChecklist() {
+  alert('Email functionality would send the checklist to your partner or family member.');
+}
+
+function printChecklist() {
+  window.print();
+}
+
+// =========================================
+// APPOINTMENT REMINDERS
+// =========================================
+function setReminder() {
+  const date = document.getElementById('nextAppointment').value;
+  const time = document.getElementById('reminderTime').value;
+  const method = document.getElementById('contactMethod').value;
+  
+  if (!date) {
+    alert('Please select an appointment date.');
+    return;
+  }
+  
+  alert(`✅ Reminder set!\n\nAppointment: ${date}\nReminder: ${time} hours before\nMethod: ${method}\n\nYou'll receive a notification via ${method}.`);
+}
+
+// =========================================
+// FLOATING HUD
+// =========================================
+function toggleHud() {
+  const hud = document.getElementById('floatingHud');
+  hud.classList.toggle('collapsed');
+}
+
+// =========================================
+// SCROLL FUNCTIONS
+// =========================================
+function scrollToWeekTracker() {
+  document.getElementById('weekTracker').scrollIntoView({ behavior: 'smooth' });
+}
+
+function scrollToSimulator() {
+  document.getElementById('pregnancySimulator').scrollIntoView({ behavior: 'smooth' });
+}
+
+// =========================================
+// INITIALIZATION
+// =========================================
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize particle animation
+  initParticleAnimation();
+  initGradientMorph();
+  
+  // Week tracker
+  const weekSlider = document.getElementById('weekSlider');
+  if (weekSlider) {
+    weekSlider.addEventListener('input', (e) => {
+      updateWeekDisplay(parseInt(e.target.value));
+    });
+    updateWeekDisplay(20);
+  }
+  
+  // Initialize trimester journey
+  selectStage('tri1');
+  
+  // Initialize nutrition calculator
+  calculateNutrition();
+  
+  // Hospital bag checkboxes
+  document.querySelectorAll('.bag-check input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', updateBagProgress);
+  });
+  updateBagProgress();
+  
+  // Prenatal care checkboxes
+  document.querySelectorAll('.check-item input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const label = this.nextElementSibling;
+      if (this.checked) {
+        label.style.textDecoration = 'line-through';
+        label.style.color = '#999';
+      } else {
+        label.style.textDecoration = 'none';
+        label.style.color = '#212121';
+      }
+    });
+  });
+  
+  console.log('🤰 Pregnancy Journey initialized successfully!');
+});
+  </script>
+
+  <footer class="ns-footer" aria-label="Site footer">
+    <div class="footer-main">
+      <div class="footer-col">
+        <h3>About This Guide</h3>
+        <p class="disclaimer-text">Comprehensive, evidence-based pregnancy information synthesized from WHO, ACOG, ICMR guidelines, peer-reviewed research, and NFHS-5 data.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Evidence Sources</h3>
+        <ul>
+          <li>World Health Organization</li>
+          <li>ACOG Guidelines</li>
+          <li>ICMR India</li>
+          <li>NFHS-5 Survey</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Important Disclaimer</h3>
+        <p class="disclaimer-text">This provides general information only. Each pregnancy is unique. Medical decisions should be made with qualified healthcare providers who can assess your individual circumstances.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Emergency</h3>
+        <p class="emergency-alert">Heavy bleeding, severe abdominal pain, reduced fetal movement, or sudden swelling require immediate medical attention. <strong>Don't delay.</strong></p>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Comprehensive <span class="sep">•</span> Empowering</p>
+      <p class="tagline"><span class="heart">🩷</span> Dedicated to empowering every mother's journey</p>
+    </div>
+    <div class="ns-footer-bottom">
+      <div class="footer-bottom-inner">
+        <nav class="footer-links" aria-label="Legal and support links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Contact Support</a>
+        </nav>
+        <p class="footer-copy">&copy; 2026 Nari Swasthya. Empowering Women's Health.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobile(){
+      const menu=document.getElementById('mobileMenu');
+      const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+      const open=menu.classList.toggle('open');
+      if(open){
+        b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+        b2.style.cssText='opacity:0;';
+        b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+      } else {
+        b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+      }
+    }
+    document.addEventListener('click',function(e){
+      const menu=document.getElementById('mobileMenu');
+      const btn=document.getElementById('hamburgerBtn');
+      if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+        menu.classList.remove('open');
+        document.getElementById('hb1').style.cssText='';
+        document.getElementById('hb2').style.cssText='';
+        document.getElementById('hb3').style.cssText='';
+      }
+    });
+  </script>
+</body>
+</html>

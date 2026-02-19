@@ -1,0 +1,2948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Miscarriage, Stillbirth & Loss Support – Nari Shakti</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="loss_support.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<style>
+  /* =========================================
+   LOSS SUPPORT - "JOURNEY THEME" ADAPTATION
+   Matches pregnancy_journey.css aesthetics
+   ========================================= */
+
+:root {
+  /* --- PALETTE: Matches Journey Page --- */
+  --primary-pink: #ec407a;
+  --deep-pink: #d81b60;
+  --soft-pink: #fce4ec;
+  --lavender: #f3e5f5;
+  --bg-color: #faf5fb;
+  --card-bg: #ffffff;
+  
+  --text-main: #212121;
+  --text-soft: #555;
+  --border-soft: #e0e0e0;
+  
+  /* Status Colors */
+  --crisis-red: #ef5350;
+  --crisis-bg: #ffebee;
+  --hope-gold: #ffa726; /* Kept subtle for emphasis */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  background: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+/* --- WRAPPER FOR SEAMLESS FLOW --- */
+.healing-ribbon-wrapper {
+  background: linear-gradient(180deg, #faf5fb 0%, #fce4ec 100%); /* Soft Pink Gradient */
+  padding-bottom: 4rem;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- SECTION 1: INTERACTIVE JOURNAL --- */
+.journal-container {
+  display: flex;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  min-height: 500px;
+}
+
+/* Sidebar */
+.journal-sidebar {
+  width: 300px;
+  background: #fff0f6; /* Very light pink */
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-right: 1px solid rgba(236, 64, 122, 0.1);
+}
+
+.journal-tab {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: none;
+  background: transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.journal-tab:hover {
+  background: rgba(255,255,255,0.6);
+}
+
+.journal-tab.active {
+  background: white;
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.15);
+}
+
+.tab-icon { font-size: 1.5rem; }
+.tab-text { display: flex; flex-direction: column; flex: 1; }
+.tab-title { font-weight: 700; color: var(--text-main); font-size: 0.95rem; }
+.tab-sub { font-size: 0.75rem; color: var(--text-soft); }
+.tab-arrow { opacity: 0; transform: translateX(-10px); transition: all 0.3s; color: var(--deep-pink); }
+.journal-tab.active .tab-arrow { opacity: 1; transform: translateX(0); }
+
+/* Content Area */
+.journal-content {
+  flex: 1;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.journal-page {
+  display: none;
+  animation: fadeInRight 0.5s ease;
+}
+.journal-page.active { display: block; }
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #fce4ec;
+  padding-bottom: 1rem;
+}
+
+.page-header h3 { margin: 0; font-size: 1.8rem; color: var(--deep-pink); }
+.stat-badge {
+  background: #fce4ec; color: var(--deep-pink);
+  padding: 0.4rem 1rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem;
+}
+
+.insight-box {
+  background: #f3e5f5; /* Lavender */
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.insight-box.blue-theme { background: #e3f2fd; }
+.insight-icon { font-size: 1.5rem; }
+
+/* Accordion */
+.treatment-accordion h4 { margin-bottom: 1rem; color: var(--text-main); }
+.accordion-item {
+  border: 1px solid #eee; border-radius: 12px; margin-bottom: 0.5rem; overflow: hidden;
+}
+.acc-head {
+  padding: 1rem; background: #fafafa; cursor: pointer; font-weight: 600;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.acc-body {
+  padding: 1rem; display: none; background: white; color: var(--text-soft); font-size: 0.9rem;
+}
+.accordion-item.open .acc-body { display: block; }
+.accordion-item.open .acc-head i { transform: rotate(45deg); }
+
+/* Memory Grid */
+.memory-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.mem-item { background: white; border: 1px solid #eee; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; }
+
+/* Alert */
+.alert-mini {
+  margin-top: 1.5rem; padding: 1rem; background: #ffebee; border-radius: 12px;
+  color: #c62828; font-size: 0.9rem; display: flex; gap: 0.8rem; align-items: center;
+}
+
+/* Mobile Adjustments for Journal */
+@media (max-width: 768px) {
+  .journal-container { flex-direction: column; }
+  .journal-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #eee; overflow-x: auto; flex-direction: row; }
+  .journal-tab { min-width: 200px; }
+}
+
+
+/* --- THE CONNECTOR RIBBON --- */
+.ribbon-connector {
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin-top: -50px; /* Pull it up to overlap */
+  z-index: 1;
+  pointer-events: none;
+}
+.ribbon-connector svg { width: 100%; height: 100%; }
+.ribbon-connector path { fill: #fce4ec; /* Matches bottom of gradient */ }
+
+
+/* --- SECTION 2: CONSTELLATION (Emotions) --- */
+.emotions-section {
+  position: relative;
+  z-index: 2;
+  margin-top: 0; /* Ribbon handles spacing */
+  padding-top: 0;
+}
+
+.constellation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto 3rem;
+  perspective: 1000px;
+}
+
+.star-card {
+  height: 280px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+/* The Stagger Effect */
+@media (min-width: 768px) {
+  .star-card.staggered { margin-top: 3rem; }
+}
+
+.star-face {
+  position: absolute; inset: 0; border-radius: 24px;
+  backface-visibility: hidden; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(236, 64, 122, 0.15);
+}
+
+.star-front { background: white; border: 1px solid rgba(255,255,255,0.5); }
+.star-back { background: linear-gradient(135deg, #d81b60, #ad1457); color: white; transform: rotateY(180deg); }
+
+.star-card.flipped .star-front { transform: rotateY(180deg); }
+.star-card.flipped .star-back { transform: rotateY(0deg); }
+
+.star-icon { font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+.star-card h4 { font-size: 1.3rem; margin: 0 0 0.5rem; color: var(--text-main); }
+.star-card span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--deep-pink); }
+
+/* PTSD Note */
+.ptsd-note {
+  max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.8);
+  padding: 1rem 1.5rem; border-radius: 16px; display: flex; gap: 1rem; align-items: center;
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+
+/* =========================================
+   HEADER (Unified)
+   ========================================= */
+/* ──────────── HEADER ────────────── */
+    .site-header{
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(24px);
+      -webkit-backdrop-filter:blur(24px);
+      padding:0;
+      box-shadow:0 2px 24px rgba(236,64,122,0.09);
+      position:sticky;top:0;z-index:1000;
+      border-bottom:1px solid rgba(236,64,122,0.08);
+    }
+
+    /* Floating Hearts Background Animation */
+    .site-header::before {
+      content: '💗 ✨ 🌸 💕 ⭐ 🦋 💗 ✨ 🌸 💕';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      gap: 3rem;
+      opacity: 0.08;
+      animation: float-emojis 40s linear infinite;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @keyframes float-emojis {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+
+    /* Sparkle Effect on Hover */
+    .site-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(236, 64, 122, 0.1) 0%, 
+        transparent 25%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .site-header:hover::after {
+      opacity: 1;
+    }
+
+    .nav-container{
+      max-width:1400px;margin:0 auto;
+      padding:0 1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      height:64px;
+    }
+    .logo{display:flex;align-items:center;gap:.65rem;flex-shrink:0;}
+    .logo-icon{
+      width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 14px rgba(236,64,122,0.35);flex-shrink:0;
+    }
+    .logo-icon svg{width:22px;height:22px;fill:white;}
+    .logo-text{display:flex;flex-direction:column;gap:0;}
+    .logo-text a{
+      text-decoration:none;font-family:'Playfair Display',serif;
+      font-weight:900;font-size:1.25rem;line-height:1.1;
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .logo-text span{
+      font-size:.62rem;color:#555;font-family:'Manrope',sans-serif;
+      font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    }
+    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .nav-item{position:relative;}
+    .nav-link{
+      display:flex;align-items:center;gap:.3rem;
+      text-decoration:none;color:#212121;
+      font-weight:500;font-size:.875rem;
+      padding:.55rem .75rem;border-radius:8px;
+      transition:all .25s;white-space:nowrap;
+      cursor:pointer;background:none;border:none;font-family:inherit;
+    }
+    .nav-link:hover,.nav-link.active{color:#d81b60;background:rgba(236,64,122,0.06);}
+    .nav-link .chevron{font-size:.6rem;transition:transform .25s;color:#555;margin-top:1px;}
+    .nav-item:hover .chevron{transform:rotate(180deg);}
+    .nav-dropdown{
+      position:absolute;top:calc(100% + 8px);left:50%;
+      transform:translateX(-50%) translateY(-6px);
+      min-width:220px;background:white;border-radius:16px;
+      box-shadow:0 16px 50px rgba(0,0,0,0.12),0 4px 16px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.1);padding:.5rem;
+      opacity:0;pointer-events:none;
+      transition:all .25s cubic-bezier(.23,1.01,.32,1);z-index:200;
+    }
+    .nav-dropdown::before{
+      content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+      border:6px solid transparent;border-bottom-color:white;
+      border-top:none;filter:drop-shadow(0 -2px 4px rgba(0,0,0,0.06));
+    }
+    .nav-item:hover .nav-dropdown,.nav-item:focus-within .nav-dropdown{
+      opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+    }
+    .dd-item{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.65rem .9rem;border-radius:10px;
+      text-decoration:none;color:#212121;font-size:.85rem;font-weight:500;transition:all .2s;
+    }
+    .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1.1rem;}
+    .dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+    .dd-sep{height:1px;background:#e0e0e0;margin:.3rem .5rem;}
+    /* Flyout submenu — appears to the right of the parent row */
+    .dd-has-flyout{position:relative;}
+    .dd-has-flyout>.dd-flyout-arrow{font-size:.6rem;color:#aaa;margin-left:auto;transition:transform .2s;}
+    .dd-flyout{
+      display:none;position:absolute;top:0;left:calc(100% + 4px);
+      min-width:190px;background:white;border-radius:12px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.12),0 4px 12px rgba(236,64,122,0.1);
+      border:1px solid rgba(236,64,122,0.12);padding:.4rem;z-index:300;
+    }
+    .dd-has-flyout:hover>.dd-flyout,
+    .dd-has-flyout:focus-within>.dd-flyout{display:block;}
+    .dd-has-flyout:hover{background:rgba(236,64,122,0.07);color:#d81b60;}
+    .dd-flyout .dd-item{padding:.55rem .8rem;font-size:.82rem;}
+    .dd-flyout .dd-item:hover{background:rgba(236,64,122,0.07);color:#d81b60;padding-left:1rem;}
+    .nav-actions{display:flex;gap:.6rem;align-items:center;}
+    .btn-nav{
+      padding:.46rem 1.1rem;border-radius:50px;text-decoration:none;
+      font-weight:600;font-size:.82rem;transition:all .3s;border:none;cursor:pointer;
+      font-family:inherit;display:inline-flex;align-items:center;gap:.4rem;
+    }
+    .btn-nav.outline{
+      background:linear-gradient(135deg,#ec407a,#ad1457);
+      color:#fff;box-shadow:0 4px 15px rgba(236,64,122,0.3);
+    }
+    .btn-nav.outline:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(236,64,122,0.4);color:#fff;}
+    .btn-nav.primary{border:1.5px solid #d81b60;color:#d81b60;background:#fff;}
+    .btn-nav.primary:hover{background:rgba(236,64,122,0.05);}
+    .hamburger{
+      display:none;width:38px;height:38px;border-radius:10px;
+      background:none;border:1.5px solid #e0e0e0;
+      align-items:center;justify-content:center;cursor:pointer;
+      flex-direction:column;gap:4px;padding:8px;
+    }
+    .hamburger span{display:block;height:2px;background:#212121;border-radius:2px;transition:all .3s;}
+    .mobile-menu{
+      display:none;position:fixed;inset:0;top:64px;
+      background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);
+      z-index:999;padding:1.5rem;overflow-y:auto;
+    }
+    .mm-action-btn{display:inline-flex !important;}
+    .mobile-menu.open{display:block;}
+    .mm-link{
+      display:flex;align-items:center;gap:.75rem;
+      padding:.85rem 1rem;border-radius:12px;
+      text-decoration:none;color:#212121;font-weight:500;font-size:1rem;
+      transition:all .2s;border-bottom:1px solid #e0e0e0;
+    }
+    .mm-link:hover{color:#d81b60;background:rgba(236,64,122,0.05);}
+    .mm-section{font-size:.72rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
+    @media(max-width:1060px){
+      .main-nav{display:none;}
+      .hamburger{display:flex;}
+      .nav-actions .btn-nav{display:none;}
+    }
+
+
+/* =========================================
+   HERO SECTION (Constellation Style)
+   ========================================= */
+.hero-constellation {
+  position: relative;
+  min-height: 80vh; /* Slightly shorter than Journey */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #faf5fb 0%, #ede7f6 50%, #fce4ec 100%);
+  overflow: hidden;
+  border-radius: 0 0 50px 50px;
+}
+
+.constellation-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(236, 64, 122, 0.2);
+  box-shadow: 0 4px 15px rgba(236, 64, 122, 0.1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--deep-pink);
+  margin-bottom: 1.5rem;
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.hero-title-3d {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #212121 0%, #555 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-emphasis {
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 3D Buttons */
+.btn-primary-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(236, 64, 122, 0.3);
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn-primary-3d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(236, 64, 122, 0.4);
+}
+
+.btn-secondary-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  background: white;
+  color: var(--deep-pink);
+  border: 2px solid rgba(236, 64, 122, 0.3);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-secondary-3d:hover {
+  transform: translateY(-3px);
+  border-color: var(--deep-pink);
+  background: #fff0f6;
+}
+
+/* =========================================
+   LAYOUT & SECTIONS
+   ========================================= */
+.page-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.section-block {
+  margin-bottom: 6rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.2rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  color: var(--text-soft);
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   CARDS (Unified Style)
+   ========================================= */
+.card-base {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: transform 0.3s ease;
+}
+
+.intro-card {
+  text-align: center;
+  border-left: 5px solid var(--primary-pink);
+}
+
+/* =========================================
+   TABS (Pill Style)
+   ========================================= */
+.navigator-tabs, .options-tabs, .resource-categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.nav-tab, .option-tab, .res-cat-btn {
+  background: white;
+  border: 2px solid var(--border-soft);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-tab:hover, .option-tab:hover, .res-cat-btn:hover {
+  border-color: var(--primary-pink);
+  color: var(--primary-pink);
+}
+
+.nav-tab.active, .option-tab.active, .res-cat-btn.active {
+  background: var(--deep-pink);
+  color: white;
+  border-color: var(--deep-pink);
+  box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
+}
+
+/* =========================================
+   LOSS PANELS & INFO
+   ========================================= */
+.loss-panel {
+  animation: fadeIn 0.5s ease;
+}
+
+.info-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media(max-width: 768px) { .info-grid-2col { grid-template-columns: 1fr; } }
+
+.gentle-list { list-style: none; padding: 0; }
+.gentle-list li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-soft);
+}
+.gentle-list li::before {
+  content: "•";
+  color: var(--deep-pink);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+
+/* --- FUTURE COMPASS SECTION --- */
+.future-compass-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media(max-width: 768px) {
+  .future-compass-container { grid-template-columns: 1fr; }
+}
+
+/* Compass Card (Left) */
+.compass-card {
+  background: white;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+}
+.compass-subtitle { color: var(--text-soft); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+.toggle-switch-container {
+  background: #f5f5f5;
+  border-radius: 50px;
+  padding: 0.3rem;
+  display: flex;
+  margin-bottom: 2rem;
+}
+.toggle-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.8rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-soft);
+  transition: all 0.3s;
+}
+.toggle-btn.active {
+  background: white;
+  color: var(--deep-pink);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.readiness-content { display: none; animation: fadeIn 0.4s ease; text-align: left; }
+.readiness-content.active { display: block; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #faf5fb;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+}
+.check-icon { font-size: 1.5rem; }
+
+/* Medical Toolkit (Right) */
+.medical-toolkit {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); /* Medical Blue Theme */
+  border-radius: 24px;
+  padding: 2rem;
+  color: #0d47a1;
+}
+.toolkit-header h3 { margin: 0; color: #1565c0; }
+.toolkit-header p { margin: 0 0 1.5rem; font-size: 0.9rem; opacity: 0.8; }
+
+.scenario-buttons { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+.scen-btn {
+  flex: 1;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.3);
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: #0d47a1;
+  font-weight: 600;
+  cursor: pointer;
+}
+.scen-btn:hover { background: rgba(255,255,255,0.6); }
+.scen-btn.active { background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+.scen-content { display: none; background: rgba(255,255,255,0.9); padding: 1.5rem; border-radius: 16px; animation: fadeIn 0.4s; }
+.scen-content.active { display: block; }
+.scen-content h4 { margin: 0 0 0.5rem; color: #1565c0; }
+.action-badge {
+  display: inline-block; background: #e3f2fd; color: #1565c0; padding: 0.4rem 1rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.8rem; margin-top: 1rem;
+}
+.action-badge.warning { background: #ffebee; color: #c62828; }
+
+
+/* --- MEMORY GARDEN SECTION --- */
+.garden-interactive {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+  overflow: hidden;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Top Half: Visual Scene */
+.garden-scene {
+  background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 100%); /* Nature Green */
+  height: 250px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  gap: 1rem;
+}
+
+.garden-item {
+  background: none; border: none; cursor: pointer;
+  font-size: 3.5rem;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+}
+.garden-item:hover { transform: translateY(-15px) scale(1.1); }
+.garden-item:focus { outline: none; transform: translateY(-15px) scale(1.1); }
+
+.item-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2e7d32;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  background: rgba(255,255,255,0.8);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.garden-item:hover .item-label { opacity: 1; }
+
+/* Bottom Half: Info Card */
+.ritual-display-card {
+  padding: 2rem;
+  text-align: center;
+  min-height: 200px;
+  background: white;
+}
+
+.ritual-content { display: none; animation: fadeIn 0.4s ease; }
+.ritual-content.active { display: block; }
+.ritual-icon-lg { font-size: 3rem; margin-bottom: 0.5rem; }
+.ritual-content h3 { color: #2e7d32; margin: 0 0 0.5rem; }
+.ritual-content p { color: var(--text-soft); max-width: 600px; margin: 0 auto; }
+
+.garden-instruction { font-size: 0.8rem; color: #aaa; margin-top: 2rem; font-style: italic; }
+
+/* =========================================
+   EMOTION CARDS (Flip Style)
+   ========================================= */
+.grief-emotions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.emotion-card {
+  perspective: 1000px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.emotion-front, .emotion-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.emotion-front { background: white; }
+.emotion-back { 
+  background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+  transform: rotateY(180deg);
+  border: 1px solid var(--primary-pink);
+}
+
+.emotion-card.flipped .emotion-front { transform: rotateY(180deg); }
+.emotion-card.flipped .emotion-back { transform: rotateY(0deg); }
+
+.emotion-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* =========================================
+   TIMELINE (Track Style)
+   ========================================= */
+.timeline-horizontal {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 3rem;
+}
+
+/* The Line */
+.timeline-horizontal::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  right: 50px;
+  height: 6px;
+  background: #eee;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.timeline-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+}
+
+.step-marker {
+  width: 45px;
+  height: 45px;
+  background: white;
+  border: 4px solid var(--primary-pink);
+  color: var(--deep-pink);
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(236, 64, 122, 0.2);
+  transition: all 0.3s;
+}
+
+.timeline-step:hover .step-marker {
+  transform: scale(1.1);
+  background: var(--primary-pink);
+  color: white;
+}
+
+/* =========================================
+   RELATIONSHIP & RESOURCE CARDS
+   ========================================= */
+.relationship-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.rel-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+
+.rel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(236, 64, 122, 0.15);
+}
+
+.rel-icon-circle {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background: var(--soft-pink);
+  color: var(--deep-pink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+/* =========================================
+   CRISIS BOX (Alert Strip)
+   ========================================= */
+.warning-grid {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-left: 6px solid #ff9800;
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.warning-icon { font-size: 2rem; color: #ef6c00; }
+.warning-content h3 { margin: 0 0 0.5rem; color: #e65100; }
+
+
+/* --- SUPPORT ORBIT SYSTEM --- */
+.orbit-system-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+  min-height: 500px;
+}
+
+@media (max-width: 850px) {
+  .orbit-system-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .orbit-nav-area { order: 1; height: 350px; }
+  .orbit-display-area { order: 2; }
+}
+
+/* --- LEFT: The Orbit Nav --- */
+.orbit-nav-area {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Perspective for slight 3D tilt */
+  perspective: 1000px;
+}
+
+/* The Rings */
+.orbit-rings {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+.ring-1, .ring-2, .ring-3 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(236, 64, 122, 0.1);
+  box-shadow: 0 0 20px rgba(236, 64, 122, 0.05);
+}
+.ring-1 { width: 140px; height: 140px; border-style: dashed; animation: spin 20s linear infinite; }
+.ring-2 { width: 240px; height: 240px; border: 1px solid rgba(236, 64, 122, 0.2); }
+.ring-3 { width: 340px; height: 340px; border: 1px solid rgba(236, 64, 122, 0.05); }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* The Center (YOU) */
+.orbit-center {
+  width: 90px;
+  height: 90px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 30px rgba(236, 64, 122, 0.2);
+  z-index: 10;
+  border: 3px solid var(--soft-pink);
+  color: var(--deep-pink);
+}
+.orbit-center i { font-size: 1.8rem; margin-bottom: 2px; }
+.orbit-center span { font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; }
+
+/* The Planets */
+.orbit-planet {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 20;
+  
+  /* Positioning Magic */
+  --radius: 120px; /* Distance from center */
+  transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(var(--angle) * -1));
+}
+
+@media(max-width: 850px) { .orbit-planet { --radius: 100px; } }
+
+.orbit-planet:hover {
+  transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(var(--angle) * -1)) scale(1.1);
+  box-shadow: 0 0 20px rgba(236, 64, 122, 0.4);
+  border-color: var(--primary-pink);
+}
+
+.orbit-planet.active {
+  background: var(--deep-pink);
+  color: white;
+  transform: rotate(var(--angle)) translate(var(--radius)) rotate(calc(var(--angle) * -1)) scale(1.2);
+  box-shadow: 0 0 30px rgba(216, 27, 96, 0.4);
+  z-index: 30;
+}
+
+.planet-icon { font-size: 1.2rem; margin-bottom: 2px; }
+.planet-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; }
+
+/* --- RIGHT: Content Display --- */
+.orbit-display-area {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  min-height: 400px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.orbit-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+  height: 100%;
+}
+.orbit-content.active { display: block; }
+
+.content-header-strip {
+  padding: 2rem;
+  color: white;
+}
+.crisis-theme { background: linear-gradient(135deg, #ef5350, #c62828); }
+.therapy-theme { background: linear-gradient(135deg, #42a5f5, #1565c0); }
+.groups-theme { background: linear-gradient(135deg, #66bb6a, #2e7d32); }
+.online-theme { background: linear-gradient(135deg, #ab47bc, #6a1b9a); }
+
+.content-header-strip h3 { margin: 0 0 0.5rem; font-size: 1.5rem; }
+.content-header-strip p { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+
+.resource-cards-list {
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.res-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #f0f0f0;
+  transition: transform 0.2s;
+}
+.res-card:hover { background: #faf5fb; transform: translateX(5px); }
+.res-card.featured { border-left: 4px solid var(--deep-pink); background: #fff0f6; }
+
+.rc-icon { font-size: 1.8rem; }
+.rc-info h4 { margin: 0; color: var(--text-main); font-size: 1rem; }
+.rc-info p { margin: 0 0 0.5rem; color: var(--text-soft); font-size: 0.85rem; }
+
+.rc-btn {
+  display: inline-block;
+  background: var(--deep-pink);
+  color: white;
+  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.rc-btn.outline { background: transparent; border: 1px solid var(--deep-pink); color: var(--deep-pink); }
+.rc-btn.text-only { background: none; color: var(--deep-pink); padding: 0; text-decoration: underline; }
+
+.mini-list { margin: 0; padding-left: 1rem; font-size: 0.85rem; color: var(--text-soft); }
+
+/* ──────────── FOOTER ────────────── */
+:root{
+  --bg-footer:#1e1a1e; --bg-bottom:#161316;
+  --pink-primary:#e8517a; --pink-soft:#f0748e;
+  --text-main-f:#c9bfc9; --text-muted-f:#7c7080;
+  --divider-f:rgba(232,81,122,0.18);
+  --font-display-f:'Playfair Display',Georgia,serif;
+  --font-body-f:'DM Sans',sans-serif;
+}
+footer.ns-footer{background:var(--bg-footer); color:var(--text-main-f); font-family:var(--font-body-f); border-top:1px solid var(--divider-f);}
+.footer-main{max-width:1200px; margin:0 auto; padding:56px 32px 48px; display:grid; grid-template-columns:repeat(4,1fr); gap:40px;}
+.footer-col h3{font-family:var(--font-display-f); font-size:1.05rem; font-weight:600; color:var(--pink-primary); margin-bottom:18px; letter-spacing:.01em;}
+.footer-col p{font-size:.875rem; line-height:1.75; color:var(--text-main-f); font-weight:300;}
+.footer-col ul{list-style:none; padding:0; margin:0;}
+.footer-col ul li{font-size:.875rem; color:var(--text-main-f); padding:5px 0; font-weight:300; position:relative; padding-left:14px; transition:color .2s;}
+.footer-col ul li::before{content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:5px; height:5px; border-radius:50%; background:var(--pink-primary); opacity:.5;}
+.footer-col ul li:hover{color:var(--pink-soft);}
+.disclaimer-text{font-size:.875rem; line-height:1.75; color:var(--text-main-f); font-weight:300;}
+.emergency-alert{font-size:.875rem; line-height:1.7; color:var(--pink-primary); font-weight:500;}
+.emergency-alert strong{font-weight:600;}
+.footer-meta{border-top:1px solid var(--divider-f); max-width:1200px; margin:0 auto; padding:28px 32px; text-align:center;}
+.footer-meta .meta-line{font-size:.8rem; color:var(--text-muted-f); letter-spacing:.04em; margin-bottom:10px;}
+.footer-meta .meta-line .sep{color:var(--pink-primary); margin:0 6px;}
+.footer-meta .tagline{font-size:.82rem; color:var(--text-muted-f); display:flex; align-items:center; justify-content:center; gap:6px;}
+.footer-meta .tagline .heart{color:var(--pink-primary); font-size:1rem; animation:footerPulse 2s ease-in-out infinite;}
+@keyframes footerPulse{0%,100%{transform:scale(1); opacity:1;} 50%{transform:scale(1.25); opacity:.8;}}
+.footer-bottom{background:var(--bg-bottom); border-top:1px solid rgba(255,255,255,.04);}
+.footer-bottom-inner{max-width:1200px; margin:0 auto; padding:22px 32px; display:flex; flex-direction:column; align-items:center; gap:10px;}
+.footer-links{display:flex; gap:36px; flex-wrap:wrap; justify-content:center;}
+.footer-links a{font-size:.82rem; color:var(--text-muted-f); text-decoration:none; letter-spacing:.03em; transition:color .2s;}
+.footer-links a:hover{color:var(--pink-soft);}
+.footer-copy{font-size:.78rem; color:var(--text-muted-f); opacity:.7; letter-spacing:.02em;}
+@media(max-width:900px){.footer-main{grid-template-columns:repeat(2,1fr); gap:32px;}}
+@media(max-width:540px){.footer-main{grid-template-columns:1fr; padding:40px 20px 32px;} .footer-meta{padding:20px;} .footer-bottom-inner{padding:18px 20px;} .footer-links{gap:20px;}}
+
+/* Animations */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Utility */
+.hidden { display: none; }
+
+/* =========================================
+   COMPREHENSIVE MOBILE RESPONSIVE FIXES
+   ========================================= */
+
+/* --- Section headers fluid sizing --- */
+.section-header h2 {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+}
+.section-header p {
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+
+/* --- Page shell tighter on mobile --- */
+@media (max-width: 768px) {
+  .page-shell { padding: 2rem 1rem; }
+  .section-block { margin-bottom: 3.5rem; }
+}
+@media (max-width: 480px) {
+  .page-shell { padding: 1.5rem 0.75rem; }
+  .section-block { margin-bottom: 2.5rem; }
+}
+
+/* --- Hero section --- */
+@media (max-width: 600px) {
+  .hero-constellation {
+    padding: 2.5rem 1rem;
+    border-radius: 0 0 30px 30px;
+    min-height: auto;
+  }
+  .hero-title-3d { font-size: clamp(2rem, 8vw, 3rem); }
+  .hero-desc { font-size: 1rem; }
+  /* Warning grid: stack on very small screens */
+  .warning-grid {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+  }
+}
+
+/* --- Intro card --- */
+@media (max-width: 600px) {
+  .card-base { padding: 1.5rem 1rem; }
+}
+@media (max-width: 400px) {
+  .card-base { padding: 1.25rem 0.875rem; }
+}
+
+/* --- Healing ribbon wrapper --- */
+@media (max-width: 600px) {
+  .healing-ribbon-wrapper { border-radius: 16px; padding-bottom: 2rem; }
+}
+
+/* --- Journal container — full mobile overhaul --- */
+@media (max-width: 768px) {
+  .journal-container { flex-direction: column; min-height: auto; }
+  .journal-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(236,64,122,0.15);
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0.75rem;
+    gap: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .journal-sidebar::-webkit-scrollbar { display: none; }
+  .journal-tab { min-width: 150px; padding: 0.75rem; border-radius: 12px; }
+  .tab-arrow { display: none; }
+  .journal-content { padding: 1.5rem 1rem; }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .page-header h3 { font-size: 1.4rem; }
+}
+@media (max-width: 400px) {
+  .journal-tab { min-width: 130px; }
+  .tab-title { font-size: 0.85rem; }
+  .journal-content { padding: 1rem 0.75rem; }
+}
+
+/* --- Constellation (star) cards --- */
+@media (max-width: 600px) {
+  .constellation-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .star-card { height: 220px; }
+  .star-icon { font-size: 2.5rem; }
+  .star-card h4 { font-size: 1.1rem; }
+}
+@media (max-width: 400px) {
+  .constellation-grid { grid-template-columns: 1fr; }
+  .star-card { height: 200px; }
+  .star-card.staggered { margin-top: 0; }
+}
+
+/* --- PTSD note --- */
+@media (max-width: 600px) {
+  .ptsd-note { flex-direction: column; gap: 0.5rem; padding: 1rem; }
+}
+
+/* --- Timeline horizontal — vertical on mobile --- */
+@media (max-width: 700px) {
+  .timeline-horizontal {
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
+    padding-left: 2rem;
+  }
+  /* Replace horizontal line with vertical */
+  .timeline-horizontal::before {
+    top: 0; bottom: 0; left: 22px;
+    right: auto;
+    width: 4px;
+    height: auto;
+    border-radius: 10px;
+  }
+  .timeline-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: left;
+    padding: 0 0 1.5rem 0;
+  }
+  .step-marker { margin: 0; flex-shrink: 0; }
+}
+
+/* --- Orbit system — small phone fixes --- */
+@media (max-width: 480px) {
+  .orbit-nav-area { height: 280px; }
+  .ring-1 { width: 100px; height: 100px; }
+  .ring-2 { width: 180px; height: 180px; }
+  .ring-3 { width: 260px; height: 260px; }
+  .orbit-planet { --radius: 75px; width: 58px; height: 58px; }
+  .orbit-center { width: 72px; height: 72px; }
+  .orbit-center i { font-size: 1.4rem; }
+  .planet-icon { font-size: 1rem; }
+  .planet-label { font-size: 0.58rem; }
+  .orbit-display-area { min-height: 320px; }
+  .content-header-strip { padding: 1.25rem; }
+  .content-header-strip h3 { font-size: 1.2rem; }
+  .resource-cards-list { padding: 1rem; }
+}
+@media (max-width: 360px) {
+  .orbit-nav-area { height: 250px; }
+  .ring-2 { width: 160px; height: 160px; }
+  .ring-3 { width: 230px; height: 230px; }
+  .orbit-planet { --radius: 65px; }
+}
+
+/* --- Resource cards — wrap on small screens --- */
+@media (max-width: 480px) {
+  .res-card { flex-wrap: wrap; gap: 0.75rem; }
+  .rc-info { width: 100%; }
+}
+
+/* --- Relationship cards — tighten min-width --- */
+@media (max-width: 480px) {
+  .relationship-cards { grid-template-columns: 1fr; }
+}
+
+/* --- Future compass container --- */
+@media (max-width: 480px) {
+  .scenario-buttons { flex-wrap: wrap; }
+  .scen-btn { flex: 1 1 calc(50% - 0.5rem); min-width: 80px; font-size: 0.85rem; }
+  .compass-card { padding: 1.5rem 1rem; }
+  .medical-toolkit { padding: 1.5rem 1rem; }
+}
+
+/* --- Memory garden --- */
+@media (max-width: 600px) {
+  .garden-scene { height: auto; min-height: 160px; flex-wrap: wrap; padding: 1.5rem 1rem 2.5rem; gap: 0.75rem; }
+  .garden-item { font-size: 2.5rem; }
+  .ritual-display-card { padding: 1.5rem 1rem; }
+}
+@media (max-width: 400px) {
+  .garden-item { font-size: 2.2rem; }
+}
+
+/* --- Closing message card --- */
+@media (max-width: 600px) {
+  .section-block .card-base p { font-size: 1rem; }
+}
+
+/* --- Orbit system text — prevent overflow on display panel --- */
+@media (max-width: 600px) {
+  .rc-info h4 { font-size: 0.95rem; }
+  .rc-info p { font-size: 0.8rem; }
+}
+
+/* --- General text size floor on very small phones --- */
+@media (max-width: 360px) {
+  body { font-size: 0.9375rem; }
+  .section-header h2 { font-size: 1.4rem; }
+  .nav-link { font-size: .82rem; padding: .5rem .6rem; }
+}
+
+/* --- Prevent any horizontal scroll globally --- */
+html, body { max-width: 100%; overflow-x: hidden; }
+</style>
+<body>
+
+<!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="nav-container">
+      <!-- Logo -->
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <circle cx="12" cy="5.5" r="2.8"/>
+            <path d="M9.3 4.8 Q9.1 2.5 12 2.2 Q14.9 2.5 14.7 4.8" opacity="0.7"/>
+            <path d="M9.5 13.2 Q9 10.5 10 9.3 Q11 8.6 12 8.6 Q13 8.6 14 9.3 Q15 10.5 14.5 13.2Z"/>
+            <path d="M9.5 13.2 Q7.2 13.8 6.8 16.2 Q7.8 16.4 8.8 15Z" opacity="0.85"/>
+            <path d="M14.5 13.2 Q16.8 13.8 17.2 16.2 Q16.2 16.4 15.2 15Z" opacity="0.85"/>
+            <path d="M8.8 15 Q8.2 17.5 9.5 19.5 Q11 21 12 21 Q13 21 14.5 19.5 Q15.8 17.5 15.2 15Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <a href="index.html">Nari Swasthya</a>
+          <span>Women's Complete Health</span>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+
+        <!-- Journeys dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
+            <!-- Pregnancy Journey with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
+              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
+                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
+                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
+              </div>
+            </div>
+            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
+            <!-- NCD with flyout sub-items -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
+            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
+          </div>
+        </div>
+
+        <!-- Services dropdown (active) -->
+        <div class="nav-item">
+          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown">
+            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
+              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
+              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
+            </a>
+            <div class="dd-sep"></div>
+            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
+            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
+            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
+            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
+            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
+            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
+            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
+        <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
+
+        <!-- Additional Info dropdown -->
+        <div class="nav-item">
+          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
+          <div class="nav-dropdown" style="min-width:240px;">
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
+            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
+            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
+            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
+            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
+            <div class="dd-sep"></div>
+            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
+            <div class="dd-sep"></div>
+            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
+            <!-- NCD with flyout sub-items — first item -->
+            <div class="dd-item dd-has-flyout">
+              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
+              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
+              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
+              <div class="dd-flyout">
+                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
+                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
+                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
+              </div>
+            </div>
+            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
+            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
+            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right: Sign In + Contact Us -->
+      <div class="nav-actions">
+        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
+          <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+<!-- Mobile Menu -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mm-section">Navigation</div>
+    <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
+    <div class="mm-section">Journeys</div>
+    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
+    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
+    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
+    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
+    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
+    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
+    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
+    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
+    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
+    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
+    <div class="mm-section">Services</div>
+    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
+    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
+    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
+    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
+    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
+    <div class="mm-section">Specialised Care</div>
+    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
+    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
+    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
+    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
+    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
+    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
+    <div class="mm-section">More</div>
+    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
+    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
+    <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
+    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
+      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </div>
+
+
+
+  <section class="hero-constellation">
+    <div class="constellation-bg"></div>
+    
+    <div class="hero-content">
+      <div class="hero-badge-3d">
+        <i class="fas fa-dove"></i> You Are Not Alone
+      </div>
+      
+      <div class="grief-acknowledged">
+        <h1 class="hero-title-3d">
+          Healing After <br>
+          <span class="title-emphasis">Pregnancy Loss</span>
+        </h1>
+        <p class="hero-desc">
+          Whether you're experiencing a miscarriage, stillbirth, or processing a past loss, 
+          this is a safe space for your grief, questions, and healing journey.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+        <button class="btn-primary-3d" onclick="scrollToSection('understanding')">
+          <i class="fas fa-book-medical"></i> Understanding Loss
+        </button>
+        <button class="btn-secondary-3d" onclick="scrollToSection('emotions')">
+          <i class="fas fa-heart-pulse"></i> Emotional Support
+        </button>
+      </div>
+      
+      <div class="warning-grid" id="crisis-support">
+          <div class="warning-icon">🆘</div>
+          <div class="warning-content" style="text-align: left;">
+              <h3>In Crisis?</h3>
+              <p>National Suicide Prevention Lifeline: <strong>988</strong> | Crisis Text Line: Text <strong>HOME</strong> to <strong>741741</strong></p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-shell"> 
+    
+    <section class="section-block">
+      <div class="card-base intro-card"> 
+        <h2>🕊️ A Message to You</h2>
+        <p style="font-size: 1.1rem; color: var(--text-soft);">
+          Pregnancy loss is deeply personal, and there is no "right" way to grieve. Whether your loss 
+          happened this week or years ago, at 6 weeks or 40 weeks, your pain is real and your baby's 
+          life mattered. This resource is here to support you with medical information, emotional guidance, 
+          and a path toward healing—at your own pace.
+        </p>
+        <div style="margin-top:1.5rem; border-left: 4px solid var(--primary-pink); padding-left: 1rem; font-style: italic; color: var(--text-main);">
+            <p>"We acknowledge your baby. We honor your grief. We stand with you in your healing."</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="healing-ribbon-wrapper">
+
+      <section class="section-block" id="understanding">
+        <div class="section-header">
+          <h2>Understanding Your Loss</h2>
+          <p>Medical facts presented with compassion</p>
+        </div>
+
+        <div class="journal-container">
+          <div class="journal-sidebar">
+            <button class="journal-tab active" onclick="openJournal(event, 'early-miscarriage')">
+              <div class="tab-icon">🌸</div>
+              <div class="tab-text">
+                <span class="tab-title">Early Miscarriage</span>
+                <span class="tab-sub">First 12 Weeks</span>
+              </div>
+              <i class="fas fa-chevron-right tab-arrow"></i>
+            </button>
+
+            <button class="journal-tab" onclick="openJournal(event, 'late-miscarriage')">
+              <div class="tab-icon">🌺</div>
+              <div class="tab-text">
+                <span class="tab-title">Late Miscarriage</span>
+                <span class="tab-sub">12-20 Weeks</span>
+              </div>
+              <i class="fas fa-chevron-right tab-arrow"></i>
+            </button>
+
+            <button class="journal-tab" onclick="openJournal(event, 'stillbirth')">
+              <div class="tab-icon">🦋</div>
+              <div class="tab-text">
+                <span class="tab-title">Stillbirth</span>
+                <span class="tab-sub">After 20 Weeks</span>
+              </div>
+              <i class="fas fa-chevron-right tab-arrow"></i>
+            </button>
+          </div>
+
+          <div class="journal-content">
+            
+            <div class="journal-page active" id="page-early-miscarriage">
+              <div class="page-header">
+                <h3>Early Miscarriage</h3>
+                <span class="stat-badge">10-20% of pregnancies</span>
+              </div>
+              
+              <div class="page-body">
+                <div class="insight-box">
+                  <div class="insight-icon">🧬</div>
+                  <div class="insight-text">
+                    <strong>The "Why":</strong> Most often (50-70%) caused by chromosomal abnormalities. It is a biological event, not a result of your actions.
+                  </div>
+                </div>
+
+                <div class="treatment-accordion">
+                  <h4>Treatment Paths</h4>
+                  <div class="accordion-item" onclick="toggleAccordion(this)">
+                    <div class="acc-head"><span>⏳ Expectant (Natural)</span> <i class="fas fa-plus"></i></div>
+                    <div class="acc-body">Allows natural completion (2-6 weeks). Success rate ~80%.</div>
+                  </div>
+                  <div class="accordion-item" onclick="toggleAccordion(this)">
+                    <div class="acc-head"><span>💊 Medical (Pills)</span> <i class="fas fa-plus"></i></div>
+                    <div class="acc-body">Medication (Misoprostol) accelerates the process at home. Success rate 70-90%.</div>
+                  </div>
+                  <div class="accordion-item" onclick="toggleAccordion(this)">
+                    <div class="acc-head"><span>🏥 Surgical (D&C)</span> <i class="fas fa-plus"></i></div>
+                    <div class="acc-body">Quick outpatient procedure under anesthesia. Success rate 99%.</div>
+                  </div>
+                </div>
+
+                <div class="alert-mini">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <span><strong>Call Doctor if:</strong> Soaking 2 pads/hr or fever > 100.4°F.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="journal-page" id="page-late-miscarriage">
+              <div class="page-header">
+                <h3>Late Miscarriage</h3>
+                <span class="stat-badge">1-2% of pregnancies</span>
+              </div>
+              <div class="page-body">
+                 <div class="insight-box blue-theme">
+                  <div class="insight-icon">💧</div>
+                  <div class="insight-text">
+                    <strong>Context:</strong> Often related to cervical insufficiency or infection. Because you may have felt movement, the silence can feel deafening.
+                  </div>
+                </div>
+                <p style="margin-top:1rem; color:var(--text-soft)">Physical recovery involves labor-like cramping. Lactation may occur, which can be emotionally triggering.</p>
+              </div>
+            </div>
+
+            <div class="journal-page" id="page-stillbirth">
+              <div class="page-header">
+                <h3>Stillbirth</h3>
+                <span class="stat-badge">After 20 weeks</span>
+              </div>
+              <div class="page-body">
+                <p style="margin-bottom:1.5rem">Labor and delivery will occur. This is a moment of profound meeting and parting.</p>
+                <div class="memory-grid">
+                   <div class="mem-item">📸 Photos</div>
+                   <div class="mem-item">👣 Footprints</div>
+                   <div class="mem-item">🧸 Holding</div>
+                   <div class="mem-item">✂️ Hair Lock</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <div class="ribbon-connector">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="#ffffff" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
+
+      <section class="section-block emotions-section" id="emotions">
+        <div class="section-header">
+          <h2>The Waves of Grief</h2>
+          <p>Feelings are not facts—they are energy moving through you</p>
+        </div>
+
+        <div class="constellation-grid">
+          
+          <div class="star-card" onclick="flipStar(this)">
+            <div class="star-face star-front">
+              <div class="star-icon">🌫️</div>
+              <h4>The Fog</h4>
+              <span>Shock & Denial</span>
+            </div>
+            <div class="star-face star-back">
+              <p>Numbness is nature's way of managing pain too great to feel all at once. Take it slow.</p>
+            </div>
+          </div>
+
+          <div class="star-card staggered" onclick="flipStar(this)">
+            <div class="star-face star-front">
+              <div class="star-icon">🔥</div>
+              <h4>The Fire</h4>
+              <span>Anger & Rage</span>
+            </div>
+            <div class="star-face star-back">
+              <p>Anger is pain's bodyguard. Scream into a pillow, run, write. Let the fire burn out safely.</p>
+            </div>
+          </div>
+
+          <div class="star-card" onclick="flipStar(this)">
+            <div class="star-face star-front">
+              <div class="star-icon">🌪️</div>
+              <h4>The Spiral</h4>
+              <span>Guilt & Blame</span>
+            </div>
+            <div class="star-face star-back">
+              <p><strong>It was not your fault.</strong> Biology is imperfect. You did everything you could with what you knew.</p>
+            </div>
+          </div>
+
+          <div class="star-card staggered" onclick="flipStar(this)">
+            <div class="star-face star-front">
+              <div class="star-icon">✨</div>
+              <h4>The Light</h4>
+              <span>Integration</span>
+            </div>
+            <div class="star-face star-back">
+              <p>You don't "move on," you move forward with them. Joy will return, different but real.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="ptsd-note">
+          <div class="ptsd-icon">🧠</div>
+          <div>
+            <strong>Trauma & PTSD:</strong> If flashbacks or nightmares persist >1 month, therapies like EMDR can help heal the trauma loop.
+          </div>
+        </div>
+
+      </section>
+
+
+
+    <!-- SUPPORT RESOURCES -->
+    <section class="section-block" id="resources">
+  <div class="section-header">
+    <h2>🤝 The Circle of Support</h2>
+    <p>You are the center of this journey, but you are never alone.</p>
+  </div>
+
+  <div class="orbit-system-container">
+    
+    <div class="orbit-nav-area">
+      <div class="orbit-rings">
+        <div class="ring-1"></div>
+        <div class="ring-2"></div>
+        <div class="ring-3"></div>
+      </div>
+      
+      <div class="orbit-center">
+        <i class="fas fa-user-heart"></i>
+        <span>YOU</span>
+      </div>
+
+      <button class="orbit-planet active" onclick="rotateOrbit('crisis')" style="--angle: 0deg;" id="planet-crisis">
+        <div class="planet-icon"><i class="fas fa-phone-volume"></i></div>
+        <span class="planet-label">Crisis</span>
+      </button>
+
+      <button class="orbit-planet" onclick="rotateOrbit('therapy')" style="--angle: 90deg;" id="planet-therapy">
+        <div class="planet-icon"><i class="fas fa-user-md"></i></div>
+        <span class="planet-label">Therapy</span>
+      </button>
+
+      <button class="orbit-planet" onclick="rotateOrbit('groups')" style="--angle: 180deg;" id="planet-groups">
+        <div class="planet-icon"><i class="fas fa-users"></i></div>
+        <span class="planet-label">Groups</span>
+      </button>
+
+      <button class="orbit-planet" onclick="rotateOrbit('online')" style="--angle: 270deg;" id="planet-online">
+        <div class="planet-icon"><i class="fas fa-laptop"></i></div>
+        <span class="planet-label">Online</span>
+      </button>
+    </div>
+
+    <div class="orbit-display-area">
+      
+      <div class="orbit-content active" id="content-crisis">
+        <div class="content-header-strip crisis-theme">
+          <h3>🚨 Immediate Crisis Support</h3>
+          <p>Available 24/7. Confidential. Free.</p>
+        </div>
+        <div class="resource-cards-list">
+          <div class="res-card featured">
+            <div class="rc-icon">📞</div>
+            <div class="rc-info">
+              <h4>988 Lifeline</h4>
+              <p>National Suicide Prevention</p>
+              <a href="tel:988" class="rc-btn">Call 988</a>
+            </div>
+          </div>
+          <div class="res-card featured">
+            <div class="rc-icon">💬</div>
+            <div class="rc-info">
+              <h4>Crisis Text Line</h4>
+              <p>Text 'HOME' to 741741</p>
+              <a href="sms:741741&body=HOME" class="rc-btn">Text Now</a>
+            </div>
+          </div>
+          <div class="res-card">
+            <div class="rc-icon">🆘</div>
+            <div class="rc-info">
+              <h4>PSI Helpline</h4>
+              <p>Postpartum Support Int.</p>
+              <a href="tel:1-800-944-4773" class="rc-btn text-only">1-800-944-4773</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit-content" id="content-therapy">
+        <div class="content-header-strip therapy-theme">
+          <h3>🧠 Professional Guidance</h3>
+          <p>Therapists specialized in grief and trauma.</p>
+        </div>
+        <div class="resource-cards-list">
+          <div class="res-card">
+            <div class="rc-icon">🔎</div>
+            <div class="rc-info">
+              <h4>Psychology Today</h4>
+              <p>Find a Grief Specialist</p>
+              <a href="https://www.psychologytoday.com" target="_blank" class="rc-btn outline">Search</a>
+            </div>
+          </div>
+          <div class="res-card">
+            <div class="rc-icon">💊</div>
+            <div class="rc-info">
+              <h4>Psychiatric Care</h4>
+              <p>Medication Management</p>
+              <span class="rc-note">SSRIs can be effective for trauma.</span>
+            </div>
+          </div>
+          <div class="res-card">
+            <div class="rc-icon">💑</div>
+            <div class="rc-info">
+              <h4>Couples Counseling</h4>
+              <p>Navigate grief together</p>
+              <span class="rc-note">Reduces relationship strain.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit-content" id="content-groups">
+        <div class="content-header-strip groups-theme">
+          <h3>👥 Community Circles</h3>
+          <p>Find others who truly understand your loss.</p>
+        </div>
+        <div class="resource-cards-list">
+           <div class="res-card">
+            <div class="rc-icon">👶</div>
+            <div class="rc-info">
+              <h4>Share Support</h4>
+              <p>Pregnancy & Infant Loss</p>
+              <a href="https://nationalshare.org" target="_blank" class="rc-btn outline">Find Group</a>
+            </div>
+          </div>
+          <div class="res-card">
+            <div class="rc-icon">⭐</div>
+            <div class="rc-info">
+              <h4>Star Legacy</h4>
+              <p>Stillbirth Support</p>
+              <a href="https://starlegacyfoundation.org" target="_blank" class="rc-btn outline">Visit Site</a>
+            </div>
+          </div>
+           <div class="res-card">
+            <div class="rc-icon">🌸</div>
+            <div class="rc-info">
+              <h4>Compassionate Friends</h4>
+              <p>Bereaved Parents Network</p>
+              <a href="https://www.compassionatefriends.org" target="_blank" class="rc-btn outline">Connect</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="orbit-content" id="content-online">
+        <div class="content-header-strip online-theme">
+          <h3>💻 Digital Resources</h3>
+          <p>Books, forums, and medical knowledge.</p>
+        </div>
+        <div class="resource-cards-list">
+           <div class="res-card">
+            <div class="rc-icon">📖</div>
+            <div class="rc-info">
+              <h4>Recommended Books</h4>
+              <ul class="mini-list">
+                <li>"Empty Cradle, Broken Heart"</li>
+                <li>"Loved Baby"</li>
+                <li>"I Had a Miscarriage"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="res-card">
+            <div class="rc-icon">📱</div>
+            <div class="rc-info">
+              <h4>Reddit Communities</h4>
+              <p>r/Miscarriage & r/babyloss</p>
+              <span class="rc-note">Anonymous peer support.</span>
+            </div>
+          </div>
+           <div class="res-card">
+            <div class="rc-icon">🏥</div>
+            <div class="rc-info">
+              <h4>March of Dimes</h4>
+              <p>Medical Research & Facts</p>
+              <a href="https://www.marchofdimes.org" target="_blank" class="rc-btn outline">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+   <section class="section-block" id="future">
+  <div class="section-header">
+    <h2>🌈 The Path Forward</h2>
+    <p>Navigating future pregnancies when the time feels right</p>
+  </div>
+
+  <div class="future-compass-container">
+    
+    <div class="compass-card">
+      <h3>Am I Ready?</h3>
+      <p class="compass-subtitle">Explore the two sides of readiness</p>
+      
+      <div class="toggle-switch-container">
+        <button class="toggle-btn active" onclick="toggleReadiness('physical')">Physical Body</button>
+        <button class="toggle-btn" onclick="toggleReadiness('emotional')">Emotional Heart</button>
+      </div>
+
+      <div id="readiness-physical" class="readiness-content active">
+        <div class="check-item">
+          <div class="check-icon">🩸</div>
+          <div><strong>Cycle Return:</strong> Usually 4-6 weeks after loss.</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">🩺</div>
+          <div><strong>Doctor's OK:</strong> Often recommended to wait 1 normal cycle.</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">💊</div>
+          <div><strong>Vitamins:</strong> Start prenatal vitamins 1 month before trying.</div>
+        </div>
+      </div>
+
+      <div id="readiness-emotional" class="readiness-content">
+        <div class="check-item">
+          <div class="check-icon">❤️‍🩹</div>
+          <div><strong>Grief Space:</strong> Have you processed the initial shock?</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">😰</div>
+          <div><strong>Anxiety Check:</strong> Are you prepared for pregnancy anxiety?</div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon">🤝</div>
+          <div><strong>Partner Check:</strong> Are you both on the same page?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="medical-toolkit">
+      <div class="toolkit-header">
+        <h3>🩺 When to Seek Help</h3>
+        <p>Click a scenario to see medical guidance</p>
+      </div>
+      
+      <div class="scenario-buttons">
+        <button class="scen-btn" onclick="showScenario(1)">1st Loss</button>
+        <button class="scen-btn" onclick="showScenario(2)">2nd Loss</button>
+        <button class="scen-btn active" onclick="showScenario(3)">Recurrent (3+)</button>
+      </div>
+
+      <div class="scenario-display">
+        <div id="scen-1" class="scen-content">
+          <h4>After First Loss</h4>
+          <p><strong>Standard Care:</strong> Usually no testing is needed. 10-20% of pregnancies end in miscarriage due to random genetic errors.</p>
+          <div class="action-badge">Focus on Healing</div>
+        </div>
+        <div id="scen-2" class="scen-content">
+          <h4>After Second Loss</h4>
+          <p><strong>Standard Care:</strong> Some doctors begin basic testing (thyroid, clotting). Others wait for a third loss.</p>
+          <div class="action-badge">Discuss with OBGYN</div>
+        </div>
+        <div id="scen-3" class="scen-content active">
+          <h4>Recurrent Loss (3+)</h4>
+          <p><strong>Comprehensive Workup:</strong> Genetic karyotyping, anatomical scans (hysteroscopy), and autoimmune panels are strongly recommended.</p>
+          <div class="action-badge warning">See Specialist (RE)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-block" id="memorial">
+  <div class="section-header">
+    <h2>💝 Your Memory Garden</h2>
+    <p>Click the icons to discover ways to honor your baby</p>
+  </div>
+
+  <div class="garden-interactive">
+    <div class="garden-scene">
+      <button class="garden-item item-candle" onclick="openRitual('candle')" aria-label="Light a Candle">
+        🕯️
+        <span class="item-label">Light</span>
+      </button>
+      <button class="garden-item item-tree" onclick="openRitual('tree')" aria-label="Plant a Tree">
+        🌱
+        <span class="item-label">Grow</span>
+      </button>
+      <button class="garden-item item-letter" onclick="openRitual('letter')" aria-label="Write a Letter">
+        ✍️
+        <span class="item-label">Write</span>
+      </button>
+      <button class="garden-item item-box" onclick="openRitual('box')" aria-label="Memory Box">
+        📦
+        <span class="item-label">Keep</span>
+      </button>
+      <button class="garden-item item-jewelry" onclick="openRitual('jewelry')" aria-label="Wear Jewelry">
+        💎
+        <span class="item-label">Wear</span>
+      </button>
+    </div>
+
+    <div class="ritual-display-card" id="ritual-display">
+      <div class="ritual-content active" id="ritual-candle">
+        <div class="ritual-icon-lg">🕯️</div>
+        <h3>Wave of Light</h3>
+        <p>Every October 15th at 7pm, participate in the global "Wave of Light" by lighting a candle for one hour to honor all babies gone too soon.</p>
+      </div>
+      
+      <div class="ritual-content" id="ritual-tree">
+        <div class="ritual-icon-lg">🌱</div>
+        <h3>Living Tribute</h3>
+        <p>Plant a tree, rosebush, or indoor plant. Watching it grow can provide a comforting, living connection to your baby's memory.</p>
+      </div>
+      
+      <div class="ritual-content" id="ritual-letter">
+        <div class="ritual-icon-lg">✍️</div>
+        <h3>Unsent Letters</h3>
+        <p>Write a letter to your baby telling them about your love, your hopes, and your grief. Keep it in a journal or burn it to release the words.</p>
+      </div>
+
+      <div class="ritual-content" id="ritual-box">
+        <div class="ritual-icon-lg">📦</div>
+        <h3>Memory Box</h3>
+        <p>Create a special box for ultrasound photos, hospital bracelets, or pregnancy tests. It gives you a tangible place to visit your baby.</p>
+      </div>
+
+      <div class="ritual-content" id="ritual-jewelry">
+        <div class="ritual-icon-lg">💎</div>
+        <h3>Wearable Love</h3>
+        <p>Wear a birthstone ring, an initial necklace, or a simple heart. It allows you to carry them with you into the world silently.</p>
+      </div>
+      
+      <p class="garden-instruction">Select an item in the garden above to see details.</p>
+    </div>
+  </div>
+</section>
+
+
+    </div><section class="section-block" style="margin-top: 4rem;">
+      <div class="card-base" style="text-align: center;">
+        <h2 style="color:var(--deep-pink)">You Will Survive This</h2>
+        <p style="font-size:1.1rem; margin-bottom:2rem; color:var(--text-soft);">
+          Right now, the pain may feel unbearable. But countless women have walked this path before you, 
+          and they've found ways not just to survive, but eventually to live fully again.
+          <br><br>
+          <strong>Your baby mattered. Your grief matters. You matter.</strong>
+        </p>
+      </div>
+    </section>
+
+  </div><footer class="ns-footer" aria-label="Site footer">
+  <div class="footer-main">
+    <div class="footer-col">
+      <h3>About This Resource</h3>
+      <p>Compassionate, evidence-based support for pregnancy loss — synthesized from WHO, ACOG, RCOG guidelines and peer-reviewed grief research.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Evidence Sources</h3>
+      <ul>
+        <li>World Health Organization</li>
+        <li>ACOG Guidelines</li>
+        <li>RCOG Green-top Guidelines</li>
+        <li>Tommy's Charity UK</li>
+        <li>Star Legacy Foundation</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Important Disclaimer</h3>
+      <p class="disclaimer-text">This provides general information and emotional support only. Every loss is unique. Medical and mental health decisions should be made with qualified healthcare providers.</p>
+    </div>
+    <div class="footer-col">
+      <h3>Crisis Support</h3>
+      <p class="emergency-alert">If you are in crisis, please reach out immediately. <strong>988 Lifeline</strong> — call or text 988. Crisis Text Line — text HOME to 741741. <strong>You are not alone.</strong></p>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <p class="meta-line">Last Updated: February 2026 <span class="sep">|</span> Evidence-Based <span class="sep">•</span> Compassionate <span class="sep">•</span> Trauma-Informed</p>
+    <p class="tagline"><span class="heart">🩷</span> Dedicated to every baby remembered, and every mother still standing</p>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <nav class="footer-links" aria-label="Legal and support links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+        <a href="#">Crisis Resources</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 Nari Swasthya. Supporting Women Through Every Stage of Life.</p>
+    </div>
+  </div>
+</footer>
+
+
+   <script>
+     // ═══════════════════════════════════════════════════════════════
+// LOSS SUPPORT - INTERACTIVE JAVASCRIPT
+// Trauma-informed, compassionate interaction design
+// ═══════════════════════════════════════════════════════════════
+
+// ───────────────────────────────────────────────────────────────
+// 1. ANIMATED BACKGROUND PARTICLES (Gentle, Calming)
+// ───────────────────────────────────────────────────────────────
+class ParticleCanvas {
+    constructor() {
+        this.canvas = document.getElementById('particleCanvas');
+        if (!this.canvas) return;
+        
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.particleCount = 60;
+        this.mouse = { x: null, y: null, radius: 120 };
+        
+        this.init();
+        this.animate();
+        this.setupEvents();
+    }
+    
+    init() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        
+        // Create gentle particles
+        for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                size: Math.random() * 2.5 + 1,
+                speedX: (Math.random() - 0.5) * 0.3,
+                speedY: (Math.random() - 0.5) * 0.3,
+                opacity: Math.random() * 0.4 + 0.1
+            });
+        }
+    }
+    
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        // Draw connections
+        this.particles.forEach((p1, i) => {
+            this.particles.slice(i + 1).forEach(p2 => {
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 120) {
+                    this.ctx.strokeStyle = `rgba(147, 112, 219, ${0.15 * (1 - distance / 120)})`;
+                    this.ctx.lineWidth = 0.5;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(p1.x, p1.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                    this.ctx.stroke();
+                }
+            });
+        });
+        
+        // Update and draw particles
+        this.particles.forEach(particle => {
+            particle.x += particle.speedX;
+            particle.y += particle.speedY;
+            
+            // Bounce off edges
+            if (particle.x < 0 || particle.x > this.canvas.width) particle.speedX *= -1;
+            if (particle.y < 0 || particle.y > this.canvas.height) particle.speedY *= -1;
+            
+            // Mouse interaction
+            if (this.mouse.x !== null) {
+                const dx = this.mouse.x - particle.x;
+                const dy = this.mouse.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < this.mouse.radius) {
+                    const force = (this.mouse.radius - distance) / this.mouse.radius;
+                    particle.x -= dx * force * 0.02;
+                    particle.y -= dy * force * 0.02;
+                }
+            }
+            
+            // Draw particle
+            this.ctx.fillStyle = `rgba(147, 112, 219, ${particle.opacity})`;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+    
+    setupEvents() {
+        window.addEventListener('resize', () => {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        });
+        
+        window.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.x;
+            this.mouse.y = e.y;
+        });
+        
+        window.addEventListener('mouseleave', () => {
+            this.mouse.x = null;
+            this.mouse.y = null;
+        });
+    }
+}
+
+// ───────────────────────────────────────────────────────────────
+// 2. SMOOTH SCROLL NAVIGATION
+// ───────────────────────────────────────────────────────────────
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 3. LOSS TYPE CARDS - INTERACTIVE SELECTION
+// ───────────────────────────────────────────────────────────────
+function initLossTypeCards() {
+    const cards = document.querySelectorAll('.loss-type-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove active from all cards
+            cards.forEach(c => c.classList.remove('active'));
+            
+            // Add active to clicked card
+            this.classList.add('active');
+            
+            // Get loss type
+            const lossType = this.dataset.lossType;
+            
+            // Update content sections (fade effect)
+            updateLossContent(lossType);
+            
+            // Scroll to relevant info
+            setTimeout(() => {
+                document.getElementById('understanding').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 300);
+        });
+    });
+}
+
+function updateLossContent(lossType) {
+    // This would dynamically update content based on selected loss type
+    // For now, we'll show a subtle notification
+    showNotification(`Viewing resources for ${lossType.replace('-', ' ')}`);
+}
+
+// ───────────────────────────────────────────────────────────────
+// 4. EMOTION CARDS - FLIP INTERACTION
+// ───────────────────────────────────────────────────────────────
+function initEmotionCards() {
+    const cards = document.querySelectorAll('.emotion-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 5. TREATMENT OPTIONS - COMPARISON TABLE
+// ───────────────────────────────────────────────────────────────
+function initTreatmentComparison() {
+    const optionBtns = document.querySelectorAll('.treatment-option-btn');
+    
+    optionBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const option = this.dataset.option;
+            const details = this.nextElementSibling;
+            
+            // Toggle details
+            if (details && details.classList.contains('treatment-details')) {
+                details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                this.classList.toggle('active');
+            }
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 6. PTSD SYMPTOM CHECKER
+// ───────────────────────────────────────────────────────────────
+function initPTSDChecker() {
+    const checkboxes = document.querySelectorAll('.ptsd-symptom-check');
+    const resultDiv = document.getElementById('ptsdResult');
+    
+    if (!resultDiv) return;
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const checked = document.querySelectorAll('.ptsd-symptom-check:checked').length;
+            const total = checkboxes.length;
+            const percentage = (checked / total * 100).toFixed(0);
+            
+            let message = '';
+            let color = '';
+            
+            if (percentage === '0') {
+                message = 'No symptoms checked. Remember, grief manifests differently for everyone.';
+                color = '#9370DB';
+            } else if (percentage <= 30) {
+                message = 'Mild symptoms detected. Self-care and support groups may help.';
+                color = '#88C0D0';
+            } else if (percentage <= 60) {
+                message = 'Moderate symptoms. Consider speaking with a grief counselor.';
+                color = '#EBCB8B';
+            } else {
+                message = 'Significant symptoms. We strongly recommend professional support.';
+                color = '#D08770';
+            }
+            
+            resultDiv.innerHTML = `
+                <div style="background: linear-gradient(135deg, ${color}33, ${color}11); 
+                            border-left: 4px solid ${color}; padding: 1.5rem; border-radius: 12px;
+                            margin-top: 1.5rem; animation: fadeIn 0.4s ease;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: ${color};">
+                        ${checked} of ${total} symptoms (${percentage}%)
+                    </h4>
+                    <p style="margin: 0; color: #2E3440;">${message}</p>
+                </div>
+            `;
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 7. MEMORIAL IDEAS - INTERACTIVE GALLERY
+// ───────────────────────────────────────────────────────────────
+function initMemorialIdeas() {
+    const cards = document.querySelectorAll('.memorial-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 8. RESOURCE FILTER SYSTEM
+// ───────────────────────────────────────────────────────────────
+function initResourceFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const resourceCards = document.querySelectorAll('.resource-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const filter = this.dataset.filter;
+            
+            // Filter resources
+            resourceCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.4s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 9. ACCORDION SECTIONS
+// ───────────────────────────────────────────────────────────────
+function initAccordions() {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('i:last-child');
+            
+            // Toggle content
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.style.padding = '0 1.5rem';
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close other accordions
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    c.style.maxHeight = null;
+                    c.style.padding = '0 1.5rem';
+                });
+                document.querySelectorAll('.accordion-header i:last-child').forEach(i => {
+                    i.style.transform = 'rotate(0deg)';
+                });
+                
+                // Open clicked accordion
+                content.style.maxHeight = content.scrollHeight + 40 + 'px';
+                content.style.padding = '1.5rem';
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 10. CRISIS HELPLINE - ALWAYS VISIBLE
+// ───────────────────────────────────────────────────────────────
+function initCrisisHelpline() {
+    const helplineBtn = document.getElementById('crisisHelplineBtn');
+    
+    if (helplineBtn) {
+        helplineBtn.addEventListener('click', function() {
+            showCrisisModal();
+        });
+    }
+    
+    // Show/hide based on scroll
+    window.addEventListener('scroll', () => {
+        if (helplineBtn) {
+            if (window.scrollY > 300) {
+                helplineBtn.style.display = 'flex';
+            } else {
+                helplineBtn.style.display = 'none';
+            }
+        }
+    });
+}
+
+function showCrisisModal() {
+    const modal = document.createElement('div');
+    modal.className = 'crisis-modal';
+    modal.innerHTML = `
+        <div class="crisis-modal-content">
+            <button class="crisis-modal-close" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="text-align: center; padding: 2rem;">
+                <i class="fas fa-phone-volume" style="font-size: 3rem; color: #D08770; margin-bottom: 1rem;"></i>
+                <h2 style="margin-bottom: 1rem; color: #2E3440;">24/7 Crisis Support</h2>
+                <p style="color: #4C566A; margin-bottom: 2rem;">You don't have to face this alone.</p>
+                
+                <div style="background: #ECEFF4; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                    <h3 style="margin: 0 0 0.5rem 0; color: #5E81AC;">National Crisis Hotline</h3>
+                    <a href="tel:988" style="font-size: 2rem; font-weight: bold; color: #D08770; text-decoration: none;">
+                        988
+                    </a>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #4C566A;">Call or Text</p>
+                </div>
+                
+                <div style="background: #ECEFF4; padding: 1.5rem; border-radius: 12px;">
+                    <h3 style="margin: 0 0 0.5rem 0; color: #5E81AC;">Pregnancy Loss Support</h3>
+                    <a href="tel:1-800-273-8255" style="font-size: 1.5rem; font-weight: bold; color: #D08770; text-decoration: none;">
+                        1-800-273-8255
+                    </a>
+                </div>
+                
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #4C566A;">
+                    Available 24/7. Confidential. Free.
+                </p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close on background click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 11. NOTIFICATION SYSTEM
+// ───────────────────────────────────────────────────────────────
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-info-circle"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'fadeOut 0.4s ease';
+        setTimeout(() => notification.remove(), 400);
+    }, 3000);
+}
+
+// ───────────────────────────────────────────────────────────────
+// 12. LOADING ANIMATIONS
+// ───────────────────────────────────────────────────────────────
+function initLoadingAnimations() {
+    // Animate sections on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all major sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(section);
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 13. FORM VALIDATIONS (For Support Forums)
+// ───────────────────────────────────────────────────────────────
+function initFormValidations() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate inputs
+            const inputs = this.querySelectorAll('input[required], textarea[required]');
+            let valid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = '#D08770';
+                    valid = false;
+                } else {
+                    input.style.borderColor = '#9370DB';
+                }
+            });
+            
+            if (valid) {
+                showNotification('Your message has been sent. You are not alone. 💜', 'success');
+                this.reset();
+            } else {
+                showNotification('Please fill in all required fields.', 'warning');
+            }
+        });
+    });
+}
+
+// ───────────────────────────────────────────────────────────────
+// 14. ACCESSIBILITY ENHANCEMENTS
+// ───────────────────────────────────────────────────────────────
+function initAccessibility() {
+    // Keyboard navigation for cards
+    const interactiveElements = document.querySelectorAll('.loss-type-card, .emotion-card, .memorial-card');
+    
+    interactiveElements.forEach(element => {
+        element.setAttribute('tabindex', '0');
+        element.setAttribute('role', 'button');
+        
+        element.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+    
+    // Focus visible styles
+    const style = document.createElement('style');
+    style.textContent = `
+        *:focus-visible {
+            outline: 3px solid #9370DB;
+            outline-offset: 2px;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// ───────────────────────────────────────────────────────────────
+// 15. MAIN INITIALIZATION
+// ───────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components
+    new ParticleCanvas();
+    initSmoothScroll();
+    initLossTypeCards();
+    initEmotionCards();
+    initTreatmentComparison();
+    initPTSDChecker();
+    initMemorialIdeas();
+    initResourceFilter();
+    initAccordions();
+    initCrisisHelpline();
+    initLoadingAnimations();
+    initFormValidations();
+    initAccessibility();
+    
+    // Show welcome message
+    setTimeout(() => {
+        const hasVisited = localStorage.getItem('lossSupport_visited');
+        if (!hasVisited) {
+            showNotification('You are not alone. Take your time exploring these resources. 💜', 'info');
+            localStorage.setItem('lossSupport_visited', 'true');
+        }
+    }, 1000);
+    
+    console.log('🕊️ Loss Support initialized with compassion');
+});
+
+// ───────────────────────────────────────────────────────────────
+// 16. READING TIME TRACKER (Optional wellness feature)
+// ───────────────────────────────────────────────────────────────
+let readingStartTime = Date.now();
+
+window.addEventListener('beforeunload', function() {
+    const readingTime = Math.floor((Date.now() - readingStartTime) / 1000);
+    console.log(`Time spent: ${readingTime} seconds. Thank you for being here.`);
+});
+
+
+// Switch Journal Pages
+// 1. Switch Journal Pages (Early/Late/Stillbirth)
+function openJournal(evt, pageId) {
+  // Remove active class from all tabs
+  document.querySelectorAll('.journal-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  
+  // Add active class to clicked tab
+  evt.currentTarget.classList.add('active');
+  
+  // Hide all pages
+  document.querySelectorAll('.journal-page').forEach(page => {
+    page.classList.remove('active');
+  });
+  
+  // Show the selected page
+  const targetPage = document.getElementById('page-' + pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
+}
+
+// 2. Toggle Treatment Accordion items
+function toggleAccordion(element) {
+  // Close other open items if you want only one open at a time (Optional)
+  // document.querySelectorAll('.accordion-item').forEach(item => item.classList.remove('open'));
+  
+  element.classList.toggle('open');
+}
+
+// 3. Flip Constellation Star Cards
+function flipStar(element) {
+  element.classList.toggle('flipped');
+}
+
+// --- UTILITY FUNCTIONS ---
+
+function scrollToSection(id) {
+  const element = document.getElementById(id);
+  if(element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+    // 2. THE PATH FORWARD (COMPASS) LOGIC  <-- THIS WAS MISSING
+    // ═══════════════════════════════════════════════════════════════
+
+    // Toggle between Physical Body and Emotional Heart
+    function toggleReadiness(type) {
+      // 1. Update Buttons
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      // Use event.target or closest button in case user clicks the edge
+      event.target.closest('button').classList.add('active'); 
+      
+      // 2. Update Content
+      document.querySelectorAll('.readiness-content').forEach(c => c.classList.remove('active'));
+      const content = document.getElementById('readiness-' + type);
+      if(content) content.classList.add('active');
+    }
+
+    // Switch between 1st Loss, 2nd Loss, Recurrent scenarios
+    function showScenario(num) {
+      // 1. Update Buttons
+      document.querySelectorAll('.scen-btn').forEach(b => b.classList.remove('active'));
+      event.target.closest('button').classList.add('active');
+      
+      // 2. Update Content
+      document.querySelectorAll('.scen-content').forEach(c => c.classList.remove('active'));
+      const content = document.getElementById('scen-' + num);
+      if(content) content.classList.add('active');
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // 3. MEMORY GARDEN LOGIC <-- THIS WAS MISSING
+    // ═══════════════════════════════════════════════════════════════
+    
+    function openRitual(type) {
+      // Hide all descriptions
+      document.querySelectorAll('.ritual-content').forEach(c => c.classList.remove('active'));
+      
+      // Show selected description
+      const target = document.getElementById('ritual-' + type);
+      if(target) {
+        target.classList.add('active');
+        
+        // Optional: Smooth scroll to the display card on mobile so they see the result
+        if(window.innerWidth < 768) {
+             document.getElementById('ritual-display').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // 4. UTILITIES
+    // ═══════════════════════════════════════════════════════════════
+    
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if(element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
+    // Resource Filtering (If you kept the resources section)
+    function filterResources(category) {
+        // Update buttons
+        document.querySelectorAll('.res-cat-btn').forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // Update lists
+        document.querySelectorAll('.resource-category').forEach(cat => {
+            if (cat.dataset.category === category) {
+                cat.classList.add('active');
+                // Trigger animation reset
+                cat.style.animation = 'none';
+                cat.offsetHeight; /* trigger reflow */
+                cat.style.animation = 'fadeIn 0.5s ease';
+            } else {
+                cat.classList.remove('active');
+            }
+        });
+    }
+
+
+    // ═══════════════════════════════════════════════════════════════
+    // 5. SUPPORT ORBIT LOGIC
+    // ═══════════════════════════════════════════════════════════════
+    function rotateOrbit(type) {
+      // 1. Activate Button
+      document.querySelectorAll('.orbit-planet').forEach(p => p.classList.remove('active'));
+      document.getElementById('planet-' + type).classList.add('active');
+
+      // 2. Show Content
+      document.querySelectorAll('.orbit-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('content-' + type).classList.add('active');
+
+      // 3. Visual Rotation (Optional "Spin to active")
+      // We calculate rotation so active item is at top-right (approx 45deg)
+      const container = document.querySelector('.orbit-nav-area');
+      
+      // Reset all angles (base state)
+      const planets = {
+        'crisis': 0,
+        'therapy': 90,
+        'groups': 180,
+        'online': 270
+      };
+      
+      // Calculate offset to bring selected to 0deg (Top)
+      const targetAngle = planets[type];
+      const rotationOffset = -targetAngle; // Spin counter-clockwise to bring to top
+      
+      // Apply rotation to the whole container rings? 
+      // Or just highlight. For simplicity, we just highlight to avoid complex CSS transforms breaking layout on mobile.
+      // If you want actual spinning, un-comment below:
+      /*
+      document.querySelectorAll('.orbit-planet').forEach(p => {
+         const id = p.id.split('-')[1];
+         const originalAngle = planets[id];
+         const newAngle = originalAngle + rotationOffset;
+         p.style.transform = `rotate(${newAngle}deg) translate(var(--radius)) rotate(${-newAngle}deg)`;
+      });
+      */
+    }
+
+// ═══════════════════════════════════════════════════════════════
+// END OF LOSS SUPPORT JAVASCRIPT
+// ═══════════════════════════════════════════════════════════════
+
+/* Mobile menu toggle */
+function toggleMobile(){
+  const menu=document.getElementById('mobileMenu');
+  const b1=document.getElementById('hb1'),b2=document.getElementById('hb2'),b3=document.getElementById('hb3');
+  const open=menu.classList.toggle('open');
+  if(open){
+    b1.style.cssText='transform:rotate(45deg) translate(4px,4px);';
+    b2.style.cssText='opacity:0;';
+    b3.style.cssText='transform:rotate(-45deg) translate(4px,-4px);';
+  } else {
+    b1.style.cssText=''; b2.style.cssText=''; b3.style.cssText='';
+  }
+}
+document.addEventListener('click',function(e){
+  const menu=document.getElementById('mobileMenu');
+  const btn=document.getElementById('hamburgerBtn');
+  if(menu&&menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){
+    menu.classList.remove('open');
+    document.getElementById('hb1').style.cssText='';
+    document.getElementById('hb2').style.cssText='';
+    document.getElementById('hb3').style.cssText='';
+  }
+});
+
+   </script>
+  <script>
+    (function initHeaderSparkle() {
+      const header = document.querySelector('.site-header');
+      if (!header) return;
+      header.addEventListener('mousemove', (e) => {
+        const rect = header.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        header.style.setProperty('--mouse-x', `${x}%`);
+        header.style.setProperty('--mouse-y', `${y}%`);
+      });
+    })();
+  </script>
+</body>
+</html>
