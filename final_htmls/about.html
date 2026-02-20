@@ -47,7 +47,7 @@
     .logo-text{display:flex;flex-direction:column;gap:0;}
     .logo-text a{text-decoration:none;font-family:'Playfair Display',serif;font-weight:900;font-size:1.25rem;line-height:1.1;background:linear-gradient(135deg,#ec407a,#ad1457);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
     .logo-text span{font-size:.62rem;color:var(--text-soft);font-family:'Manrope',sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;}
-    .main-nav{display:flex;align-items:center;gap:.2rem;}
+    .main-nav{display:flex;align-items:center;gap:.2rem;flex:1;justify-content:center;}
     .nav-item{position:relative;}
     .nav-link{display:flex;align-items:center;gap:.3rem;text-decoration:none;color:var(--text-main);font-weight:500;font-size:.875rem;padding:.55rem .75rem;border-radius:8px;transition:all .25s;white-space:nowrap;cursor:pointer;background:none;border:none;font-family:inherit;}
     .nav-link:hover,.nav-link.active{color:var(--deep-pink);background:rgba(236,64,122,0.06);}
@@ -933,102 +933,15 @@
     <nav class="main-nav" aria-label="Main navigation">
         <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
 
-        <!-- Journeys dropdown -->
-        <div class="nav-item">
-          <button class="nav-link" aria-haspopup="true">Journeys <i class="fa-solid fa-chevron-down chevron"></i></button>
-          <div class="nav-dropdown">
-            <a href="journeys.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
-              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-map"></i></div>
-              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">View Full Journeys</strong><span style="font-size:.73rem;color:#555;">Browse all her journeys</span></div>
-            </a>
-            <div class="dd-sep"></div>
-            <a href="conceiving.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Conceiving</strong><span style="font-size:.73rem;color:#555;">Preparation &amp; planning</span></div></a>
-            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-dna"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle &amp; ovulation</span></div></a>
-            <!-- Pregnancy Journey with flyout sub-items -->
-            <div class="dd-item dd-has-flyout">
-              <div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-baby-carriage"></i></div>
-              <a href="pregnancy_journey.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Pregnancy Journey</strong><span style="font-size:.73rem;color:#555;">Week by week guide</span></a>
-              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
-              <div class="dd-flyout">
-                <a href="normal_delivery.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-circle-check"></i></div><div><strong style="display:block;font-size:.82rem;">Normal Delivery</strong><span style="font-size:.73rem;color:#555;">Vaginal birth guide</span></div></a>
-                <a href="csection.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-hospital"></i></div><div><strong style="display:block;font-size:.82rem;">C-Section</strong><span style="font-size:.73rem;color:#555;">Surgical birth info</span></div></a>
-                <a href="pregnancy_loss.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy Loss</strong><span style="font-size:.73rem;color:#555;">Support &amp; care</span></div></a>
-              </div>
-            </div>
-            <a href="antenatal_care.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-clipboard-list"></i></div><div><strong style="display:block;font-size:.82rem;">Antenatal Care</strong><span style="font-size:.73rem;color:#555;">ANC visits &amp; checklist</span></div></a>
-            <!-- NCD with flyout sub-items -->
-            <div class="dd-item dd-has-flyout">
-              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
-              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
-              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
-              <div class="dd-flyout">
-                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
-                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
-                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
-              </div>
-            </div>
-            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Newborn &amp; Postpartum</strong><span style="font-size:.73rem;color:#555;">4th trimester care</span></div></a>
-            <a href="breastfeeding_journey.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57c00;"><i class="fa-solid fa-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Breastfeeding</strong><span style="font-size:.73rem;color:#555;">Latch, supply, nutrition</span></div></a>
-            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-fire-flame-curved"></i></div><div><strong style="display:block;font-size:.82rem;">Menopause</strong><span style="font-size:.73rem;color:#555;">Perimenopause &amp; beyond</span></div></a>
-          </div>
-        </div>
 
-        <!-- Services dropdown (active) -->
-        <div class="nav-item">
-          <button class="nav-link active" aria-haspopup="true">Services <i class="fa-solid fa-chevron-down chevron"></i></button>
-          <div class="nav-dropdown">
-            <a href="services.html" class="dd-item" style="background:linear-gradient(135deg,rgba(236,64,122,0.08),rgba(173,20,87,0.04));border-radius:10px;margin-bottom:.3rem;">
-              <div class="dd-icon" style="background:linear-gradient(135deg,#ec407a,#ad1457);color:white;"><i class="fa-solid fa-grid-2"></i></div>
-              <div><strong style="display:block;font-size:.82rem;color:#d81b60;">Services Available</strong><span style="font-size:.73rem;color:#555;">Browse all our services</span></div>
-            </a>
-            <div class="dd-sep"></div>
-            <a href="symptom_checker.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-stethoscope"></i></div><div><strong style="display:block;font-size:.82rem;">Symptom Checker</strong><span style="font-size:.73rem;color:#555;">AI-powered diagnosis</span></div></a>
-            <a href="dashboard.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-gauge-high"></i></div><div><strong style="display:block;font-size:.82rem;">My Dashboard</strong><span style="font-size:.73rem;color:#555;">Track your health</span></div></a>
-            <a href="screening.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-magnifying-glass-plus"></i></div><div><strong style="display:block;font-size:.82rem;">Health Screening</strong><span style="font-size:.73rem;color:#555;">Cancer &amp; preventive</span></div></a>
-            <a href="vaccination.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-syringe"></i></div><div><strong style="display:block;font-size:.82rem;">Vaccination</strong><span style="font-size:.73rem;color:#555;">Immunization schedule</span></div></a>
-            <a href="otc.html" class="dd-item"><div class="dd-icon" style="background:#e0f7fa;color:#006064;"><i class="fa-solid fa-pills"></i></div><div><strong style="display:block;font-size:.82rem;">OTC Medicine Guide</strong><span style="font-size:.73rem;color:#555;">Safe self-care options</span></div></a>
-            <a href="government_schemes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#e65100;"><i class="fa-solid fa-landmark"></i></div><div><strong style="display:block;font-size:.82rem;">Govt Schemes</strong><span style="font-size:.73rem;color:#555;">Benefits you deserve</span></div></a>
-            <a href="insurance.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#1b5e20;"><i class="fa-solid fa-shield-halved"></i></div><div><strong style="display:block;font-size:.82rem;">Insurance</strong><span style="font-size:.73rem;color:#555;">Coverage &amp; claims guide</span></div></a>
-          </div>
-        </div>
-
-        <div class="nav-item"><a href="stories.html" class="nav-link">Stories</a></div>
         <div class="nav-item"><a href="about.html" class="nav-link">About Us</a></div>
 
         <!-- Additional Info dropdown -->
-        <div class="nav-item">
-          <button class="nav-link" aria-haspopup="true">Additional Info <i class="fa-solid fa-chevron-down chevron"></i></button>
-          <div class="nav-dropdown" style="min-width:240px;">
-            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Health Topics</div>
-            <a href="fertility.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ec407a;"><i class="fa-solid fa-seedling"></i></div><div><strong style="display:block;font-size:.82rem;">Fertility</strong><span style="font-size:.73rem;color:#555;">Cycle, conceiving &amp; IVF</span></div></a>
-            <a href="pregnancy_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#7b1fa2;"><i class="fa-solid fa-baby-carriage"></i></div><div><strong style="display:block;font-size:.82rem;">Pregnancy</strong><span style="font-size:.73rem;color:#555;">All trimesters covered</span></div></a>
-            <a href="newborn_postpartum_care.html" class="dd-item"><div class="dd-icon" style="background:#e3f2fd;color:#1565c0;"><i class="fa-solid fa-baby"></i></div><div><strong style="display:block;font-size:.82rem;">Motherhood</strong><span style="font-size:.73rem;color:#555;">Newborn &amp; postpartum</span></div></a>
-            <a href="menopause.html" class="dd-item"><div class="dd-icon" style="background:#e8f5e9;color:#2e7d32;"><i class="fa-solid fa-spa"></i></div><div><strong style="display:block;font-size:.82rem;">Wellness</strong><span style="font-size:.73rem;color:#555;">Menopause, bone, mental</span></div></a>
-            <div class="dd-sep"></div>
-            <a href="community.html" class="dd-item"><div class="dd-icon" style="background:#ede7f6;color:#4527a0;"><i class="fa-solid fa-users"></i></div><div><strong style="display:block;font-size:.82rem;">Community</strong><span style="font-size:.73rem;color:#555;">Share &amp; connect</span></div></a>
-            <div class="dd-sep"></div>
-            <div style="padding:.4rem .9rem .2rem;font-size:.7rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.08em;">Specialised Care</div>
-            <!-- NCD with flyout sub-items — first item -->
-            <div class="dd-item dd-has-flyout">
-              <div class="dd-icon" style="background:#e8eaf6;color:#283593;"><i class="fa-solid fa-heart-pulse"></i></div>
-              <a href="ncd_pregnancy.html" style="text-decoration:none;color:inherit;flex:1;"><strong style="display:block;font-size:.82rem;">Non Communicable Diseases</strong><span style="font-size:.73rem;color:#555;">Diabetes, hypertension &amp; more</span></a>
-              <i class="fa-solid fa-chevron-right dd-flyout-arrow"></i>
-              <div class="dd-flyout">
-                <a href="gestational_diabetes.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-droplet"></i></div><div><strong style="display:block;font-size:.82rem;">Gestational Diabetes</strong><span style="font-size:.73rem;color:#555;">Manage blood sugar</span></div></a>
-                <a href="preeclampsia_education.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#c2185b;"><i class="fa-solid fa-heart-circle-exclamation"></i></div><div><strong style="display:block;font-size:.82rem;">Preeclampsia</strong><span style="font-size:.73rem;color:#555;">Blood pressure care</span></div></a>
-                <a href="cancer_simulation_journey.html" class="dd-item"><div class="dd-icon" style="background:#f3e5f5;color:#6a1b9a;"><i class="fa-solid fa-ribbon"></i></div><div><strong style="display:block;font-size:.82rem;">Cancer</strong><span style="font-size:.73rem;color:#555;">Simulation journey</span></div></a>
-              </div>
-            </div>
-            <a href="bone_health.html" class="dd-item"><div class="dd-icon" style="background:#fce4ec;color:#ad1457;"><i class="fa-solid fa-bone"></i></div><div><strong style="display:block;font-size:.82rem;">Bone Health</strong><span style="font-size:.73rem;color:#555;">Osteoporosis prevention</span></div></a>
-            <a href="depression.html" class="dd-item"><div class="dd-icon" style="background:#fff8e1;color:#f57f17;"><i class="fa-solid fa-brain"></i></div><div><strong style="display:block;font-size:.82rem;">Mental Health</strong><span style="font-size:.73rem;color:#555;">Anxiety, depression, support</span></div></a>
-            <a href="loss_support.html" class="dd-item"><div class="dd-icon" style="background:#fafafa;color:#9e9e9e;"><i class="fa-solid fa-hands-holding-heart"></i></div><div><strong style="display:block;font-size:.82rem;">Loss Support</strong><span style="font-size:.73rem;color:#555;">You are never alone</span></div></a>
-          </div>
-        </div>
-      </nav>
+    </nav>
 
       <!-- Right: Sign In + Contact Us -->
       <div class="nav-actions">
-        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a class="btn-nav outline" href="signin.html"><i class="fa-regular fa-user"></i> Sign In</a>
         <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
           <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
@@ -1041,36 +954,9 @@
   <div class="mobile-menu" id="mobileMenu">
     <div class="mm-section">Navigation</div>
     <a href="index.html" class="mm-link"><i class="fa-solid fa-house" style="color:#d81b60;width:20px;"></i> Home</a>
-    <div class="mm-section">Journeys</div>
-    <a href="conceiving.html" class="mm-link"><i class="fa-solid fa-seedling" style="color:#d81b60;width:20px;"></i> Conceiving</a>
-    <a href="fertility.html" class="mm-link"><i class="fa-solid fa-dna" style="color:#d81b60;width:20px;"></i> Fertility</a>
-    <a href="pregnancy_journey.html" class="mm-link"><i class="fa-solid fa-baby-carriage" style="color:#d81b60;width:20px;"></i> Pregnancy Journey</a>
-    <a href="normal_delivery.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> Normal Delivery</a>
-    <a href="csection.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#ec407a;width:20px;"></i> C-Section</a>
-    <a href="pregnancy_loss.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#9e9e9e;width:20px;"></i> Pregnancy Loss</a>
-    <a href="antenatal_care.html" class="mm-link"><i class="fa-solid fa-clipboard-list" style="color:#d81b60;width:20px;"></i> Antenatal Care</a>
-    <a href="newborn_postpartum_care.html" class="mm-link"><i class="fa-solid fa-baby" style="color:#d81b60;width:20px;"></i> Newborn &amp; Postpartum</a>
-    <a href="breastfeeding_journey.html" class="mm-link"><i class="fa-solid fa-heart" style="color:#d81b60;width:20px;"></i> Breastfeeding</a>
-    <a href="menopause.html" class="mm-link"><i class="fa-solid fa-fire-flame-curved" style="color:#d81b60;width:20px;"></i> Menopause</a>
-    <div class="mm-section">Services</div>
-    <a href="symptom_checker.html" class="mm-link"><i class="fa-solid fa-stethoscope" style="color:#d81b60;width:20px;"></i> Symptom Checker</a>
-    <a href="dashboard.html" class="mm-link"><i class="fa-solid fa-gauge-high" style="color:#d81b60;width:20px;"></i> My Dashboard</a>
-    <a href="screening.html" class="mm-link"><i class="fa-solid fa-magnifying-glass-plus" style="color:#d81b60;width:20px;"></i> Health Screening</a>
-    <a href="government_schemes.html" class="mm-link"><i class="fa-solid fa-landmark" style="color:#d81b60;width:20px;"></i> Govt Schemes</a>
-    <a href="insurance.html" class="mm-link"><i class="fa-solid fa-shield-halved" style="color:#1b5e20;width:20px;"></i> Insurance</a>
-    <div class="mm-section">Specialised Care</div>
-    <a href="bone_health.html" class="mm-link"><i class="fa-solid fa-bone" style="color:#ad1457;width:20px;"></i> Bone Health</a>
-    <a href="depression.html" class="mm-link"><i class="fa-solid fa-brain" style="color:#f57f17;width:20px;"></i> Mental Health</a>
-    <a href="loss_support.html" class="mm-link"><i class="fa-solid fa-hands-holding-heart" style="color:#9e9e9e;width:20px;"></i> Loss Support</a>
-    <a href="ncd_pregnancy.html" class="mm-link"><i class="fa-solid fa-heart-pulse" style="color:#283593;width:20px;"></i> Non Communicable Diseases</a>
-    <a href="gestational_diabetes.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Gestational Diabetes</a>
-    <a href="preeclampsia_education.html" class="mm-link" style="padding-left:2.5rem;font-size:.88rem;"><i class="fa-solid fa-circle-check" style="color:#283593;width:20px;"></i> Preeclampsia</a>
-    <div class="mm-section">More</div>
-    <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:#d81b60;width:20px;"></i> Stories</a>
-    <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
     <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
     <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
-      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="signin.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
       <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
     </div>
   </div>
@@ -1254,16 +1140,6 @@
           <p style="color:var(--text-soft); margin-bottom:1.25rem;">
             Begin with a journey that matches your current life stage and come back to your dashboard anytime you need a gentle nudge.
           </p>
-          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-            <a href="journeys.html" class="btn btn-primary">
-              <i class="fa-solid fa-route"></i>
-              Explore Journeys
-            </a>
-            <a href="community.html" class="btn btn-ghost">
-              <i class="fa-solid fa-users"></i>
-              Meet the Community
-            </a>
-          </div>
         </div>
       </div>
     </section>
