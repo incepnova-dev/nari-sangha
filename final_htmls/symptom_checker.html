@@ -284,8 +284,26 @@ a {
 .mm-link:hover{color:var(--deep-pink);background:rgba(236,64,122,0.05);}
 .mm-section{font-size:.72rem;font-weight:700;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;padding:.6rem 1rem .3rem;}
 
-@media(max-width:1060px){.main-nav{display:none;}.hamburger{display:flex;}}
-@media(max-width:600px){.btn-nav.outline{display:none;}}
+/* At <=1060px: show hamburger, hide desktop nav AND header buttons */
+@media(max-width:1060px){
+  .main-nav{display:none;}
+  .hamburger{display:flex;}
+  .nav-actions .btn-nav{display:none;}
+}
+/* Mobile menu bottom action buttons */
+.mm-cta-row{
+  display:flex;gap:.75rem;
+  margin-top:1rem;padding:.5rem;
+}
+.mm-cta-row .btn-nav{
+  flex:1;justify-content:center;
+  padding:.6rem .75rem;
+  font-size:.82rem;
+  border-radius:12px;
+  white-space:nowrap;
+  min-width:0;
+  display:inline-flex !important;
+}
 
 /* ========================================
    HERO SECTION - REVOLUTIONARY DESIGN
@@ -7890,9 +7908,9 @@ p, h1, h2, h3, h4, h5, h6, li, span, a {
     <a href="stories.html" class="mm-link"><i class="fa-solid fa-book-open" style="color:var(--deep-pink);width:20px;"></i> Stories</a>
     <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:var(--deep-pink);width:20px;"></i> Community</a>
     <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:var(--deep-pink);width:20px;"></i> About Us</a>
-    <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
-      <a href="signin.html" class="btn-nav outline" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
-      <a href="contact.html" class="btn-nav primary" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    <div class="mm-cta-row">
+      <a href="signin.html" class="btn-nav outline"><i class="fa-regular fa-user"></i> Sign In</a>
+      <a href="contact.html" class="btn-nav primary"><i class="fa-solid fa-envelope"></i> Contact Us</a>
     </div>
   </div>
 
