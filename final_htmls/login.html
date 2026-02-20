@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-auth.js"></script>
 </head>
 
 <style>
@@ -360,6 +365,24 @@ a{color:inherit;}
   color:var(--primary);font-weight:700;text-decoration:none;transition:color .2s;
 }
 .card-footer-text a:hover{color:var(--primary-dark);}
+
+/* Sign-up mode styles */
+.mode-toggle{
+  display:flex;gap:0.5rem;margin-bottom:1.5rem;
+  background:rgba(236,64,122,0.08);padding:0.4rem;border-radius:12px;
+}
+.mode-toggle button{
+  flex:1;padding:0.6rem 1rem;border:none;background:transparent;
+  border-radius:8px;font-weight:600;font-size:0.85rem;
+  color:var(--text-soft);cursor:pointer;transition:all 0.25s;
+}
+.mode-toggle button.active{
+  background:white;color:var(--primary-dark);
+  box-shadow:0 2px 8px rgba(236,64,122,0.15);
+}
+.signup-field{display:none;}
+.signup-mode .signup-field{display:block;}
+.signup-mode .remember-forgot{display:none;}
 
 /* ===================== RIGHT SIDE — ORBITAL ANIMATION ===================== */
 .hero-visual-3d{
@@ -817,13 +840,28 @@ footer.ns-footer{
       </p>
 
       <!-- Login Card -->
-      <div class="login-card">
+      <div class="login-card" id="loginCard">
         <div class="card-header">
-          <div class="card-title">Log In</div>
-          <div class="card-subtitle">Access your health journey &amp; dashboard.</div>
+          <!-- Mode Toggle -->
+          <div class="mode-toggle">
+            <button type="button" id="loginModeBtn" class="active">Log In</button>
+            <button type="button" id="signupModeBtn">Sign Up</button>
+          </div>
+          
+          <div class="card-title" id="cardTitle">Log In</div>
+          <div class="card-subtitle" id="cardSubtitle">Access your health journey &amp; dashboard.</div>
         </div>
 
         <form id="loginForm" autocomplete="on">
+          <!-- Name field (signup only) -->
+          <div class="form-group signup-field">
+            <label for="nameInput">Full Name</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-user input-icon"></i>
+              <input id="nameInput" type="text" placeholder="Your name" autocomplete="name" />
+            </div>
+          </div>
+
           <div class="form-group">
             <label for="emailInput">Email</label>
             <div class="input-wrap">
@@ -843,14 +881,26 @@ footer.ns-footer{
             </div>
           </div>
 
-          <div class="row-between">
+          <!-- Confirm Password (signup only) -->
+          <div class="form-group signup-field">
+            <label for="confirmPasswordInput">Confirm Password</label>
+            <div class="input-wrap">
+              <i class="fa-solid fa-lock input-icon"></i>
+              <input id="confirmPasswordInput" type="password" placeholder="••••••••" autocomplete="new-password" />
+              <button type="button" class="toggle-pw" id="toggleConfirmPw" aria-label="Toggle password visibility">
+                <i class="fa-solid fa-eye" id="eyeIconConfirm"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="row-between remember-forgot">
             <label class="remember-label">
               <input type="checkbox" id="rememberMe" /> Remember me
             </label>
-            <a href="#" class="forgot-link">Forgot password?</a>
+            <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot password?</a>
           </div>
 
-          <button type="submit" class="btn-login">
+          <button type="submit" class="btn-login" id="submitBtn">
             <i class="fa-solid fa-right-to-bracket"></i> Log In
           </button>
 
@@ -868,7 +918,7 @@ footer.ns-footer{
         </form>
 
         <p class="card-footer-text">
-          New here? <a href="journeys.html">Start with Journeys</a>
+          <span id="footerText">New here? </span><a href="journeys.html">Start with Journeys</a>
           &nbsp;·&nbsp; <a href="index.html">Go Home</a>
         </p>
       </div>
@@ -998,21 +1048,197 @@ document.getElementById('togglePw').addEventListener('click',function(){
   }
 });
 
-/* ===== Login form — front-end redirect ===== */
-document.getElementById('loginForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  const btn=this.querySelector('.btn-login');
-  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Signing in…';
-  btn.style.animation='none';
-  btn.disabled=true;
-  setTimeout(()=>{ window.location.href='dashboard.html'; },1000);
+/* ===== Toggle confirm password visibility ===== */
+document.getElementById('toggleConfirmPw').addEventListener('click',function(){
+  const inp=document.getElementById('confirmPasswordInput');
+  const icon=document.getElementById('eyeIconConfirm');
+  if(inp.type==='password'){
+    inp.type='text';
+    icon.className='fa-solid fa-eye-slash';
+  } else {
+    inp.type='password';
+    icon.className='fa-solid fa-eye';
+  }
 });
 
-/* ===== Google button placeholder ===== */
-document.getElementById('googleBtn').addEventListener('click',function(){
-  this.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Redirecting…';
-  setTimeout(()=>{ window.location.href='dashboard.html'; },900);
+/* ===== Mode Toggle (Login/Signup) ===== */
+let isSignupMode = false;
+const loginCard = document.getElementById('loginCard');
+const loginModeBtn = document.getElementById('loginModeBtn');
+const signupModeBtn = document.getElementById('signupModeBtn');
+const cardTitle = document.getElementById('cardTitle');
+const cardSubtitle = document.getElementById('cardSubtitle');
+const submitBtn = document.getElementById('submitBtn');
+const footerText = document.getElementById('footerText');
+const nameInput = document.getElementById('nameInput');
+const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+
+loginModeBtn.addEventListener('click', function() {
+  isSignupMode = false;
+  loginCard.classList.remove('signup-mode');
+  loginModeBtn.classList.add('active');
+  signupModeBtn.classList.remove('active');
+  cardTitle.textContent = 'Log In';
+  cardSubtitle.textContent = 'Access your health journey & dashboard.';
+  submitBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Log In';
+  footerText.textContent = 'New here? ';
+  // Clear signup-specific fields
+  nameInput.value = '';
+  confirmPasswordInput.value = '';
+  // Update autocomplete
+  document.getElementById('passwordInput').setAttribute('autocomplete', 'current-password');
 });
+
+signupModeBtn.addEventListener('click', function() {
+  isSignupMode = true;
+  loginCard.classList.add('signup-mode');
+  signupModeBtn.classList.add('active');
+  loginModeBtn.classList.remove('active');
+  cardTitle.textContent = 'Sign Up';
+  cardSubtitle.textContent = 'Create your account and start your health journey.';
+  submitBtn.innerHTML = '<i class="fa-solid fa-user-plus"></i> Sign Up';
+  footerText.textContent = 'Already have an account? ';
+  // Update autocomplete
+  document.getElementById('passwordInput').setAttribute('autocomplete', 'new-password');
+});
+
+/* ===== Login/Signup form — Firebase Authentication ===== */
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+  const name = document.getElementById('nameInput').value.trim();
+  const confirmPassword = document.getElementById('confirmPasswordInput').value;
+  const btn = this.querySelector('.btn-login');
+  const originalHTML = btn.innerHTML;
+  
+  // Validation for signup mode
+  if (isSignupMode) {
+    if (!name) {
+      alert('Please enter your name.');
+      return;
+    }
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters long.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+  }
+  
+  // Show loading state
+  btn.innerHTML = isSignupMode 
+    ? '<i class="fa-solid fa-spinner fa-spin"></i> Creating account…'
+    : '<i class="fa-solid fa-spinner fa-spin"></i> Signing in…';
+  btn.style.animation = 'none';
+  btn.disabled = true;
+  
+  // Wait for Firebase to be ready
+  if (typeof authService === 'undefined') {
+    setTimeout(async () => {
+      if (isSignupMode) {
+        await handleSignup(email, password, name, btn, originalHTML);
+      } else {
+        await handleLogin(email, password, btn, originalHTML);
+      }
+    }, 500);
+  } else {
+    if (isSignupMode) {
+      await handleSignup(email, password, name, btn, originalHTML);
+    } else {
+      await handleLogin(email, password, btn, originalHTML);
+    }
+  }
+});
+
+async function handleLogin(email, password, btn, originalHTML) {
+  try {
+    const result = await authService.signInWithEmail(email, password);
+    
+    if (result.success) {
+      // Check if there's a redirect URL
+      const redirectUrl = sessionStorage.getItem('redirectAfterLogin') || 'dashboard.html';
+      sessionStorage.removeItem('redirectAfterLogin');
+      window.location.href = redirectUrl;
+    } else {
+      // Show error
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      alert('Sign in failed: ' + result.error);
+    }
+  } catch (error) {
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+    alert('An error occurred. Please try again.');
+    console.error('Login error:', error);
+  }
+}
+
+async function handleSignup(email, password, name, btn, originalHTML) {
+  try {
+    const result = await authService.signUpWithEmail(email, password, name);
+    
+    if (result.success) {
+      // Sign up successful, redirect to dashboard
+      const redirectUrl = sessionStorage.getItem('redirectAfterLogin') || 'dashboard.html';
+      sessionStorage.removeItem('redirectAfterLogin');
+      window.location.href = redirectUrl;
+    } else {
+      // Show error
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      alert('Sign up failed: ' + result.error);
+    }
+  } catch (error) {
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+    alert('An error occurred. Please try again.');
+    console.error('Signup error:', error);
+  }
+}
+
+/* ===== Google Sign-In — Firebase Authentication ===== */
+document.getElementById('googleBtn').addEventListener('click', async function(){
+  const originalHTML = this.innerHTML;
+  this.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Redirecting…';
+  this.disabled = true;
+  
+  // Wait for Firebase to be ready
+  if (typeof authService === 'undefined') {
+    setTimeout(async () => {
+      await handleGoogleSignIn(this, originalHTML);
+    }, 500);
+  } else {
+    await handleGoogleSignIn(this, originalHTML);
+  }
+});
+
+async function handleGoogleSignIn(btn, originalHTML) {
+  try {
+    const result = await authService.signInWithGoogle();
+    
+    if (result.success && !result.redirect) {
+      // Popup method succeeded
+      const redirectUrl = sessionStorage.getItem('redirectAfterLogin') || 'dashboard.html';
+      sessionStorage.removeItem('redirectAfterLogin');
+      window.location.href = redirectUrl;
+    } else if (result.redirect) {
+      // Redirect method - page will reload after auth
+      // Do nothing, Firebase will handle redirect
+    } else {
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      alert('Google sign-in failed: ' + result.error);
+    }
+  } catch (error) {
+    btn.innerHTML = originalHTML;
+    btn.disabled = false;
+    alert('An error occurred. Please try again.');
+    console.error('Google sign-in error:', error);
+  }
+}
 
 /* ===== Particle canvas ===== */
 (function initParticles(){
@@ -1070,6 +1296,43 @@ document.getElementById('googleBtn').addEventListener('click',function(){
   }
   animate();
 })();
+
+/* ===== Password Reset ===== */
+document.getElementById('forgotPasswordLink').addEventListener('click', async function(e){
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value.trim();
+  
+  if (!email) {
+    const inputEmail = prompt('Enter your email address to reset your password:');
+    if (inputEmail) {
+      await sendPasswordReset(inputEmail);
+    }
+  } else {
+    await sendPasswordReset(email);
+  }
+});
+
+async function sendPasswordReset(email) {
+  if (typeof authService === 'undefined') {
+    alert('Please wait for the page to fully load, then try again.');
+    return;
+  }
+  
+  try {
+    const result = await authService.resetPassword(email);
+    if (result.success) {
+      alert('Password reset email sent! Please check your inbox and follow the instructions.');
+    } else {
+      alert('Error: ' + result.error);
+    }
+  } catch (error) {
+    alert('An error occurred. Please try again.');
+    console.error('Password reset error:', error);
+  }
+}
 </script>
+
+<!-- Feedback Widget -->
+<script src="js/feedback-widget.js"></script>
 </body>
 </html>

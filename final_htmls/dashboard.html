@@ -8,6 +8,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-auth.js"></script>
+  <script src="js/auth-guard.js"></script>
 </head>
 <style>
 
@@ -1601,10 +1607,20 @@ a{color:inherit;}
         </div>
       </nav>
 
-      <!-- Right: Sign In + Contact Us -->
+      <!-- Right: User Menu / Sign In + Contact Us -->
       <div class="nav-actions">
-        <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
-        <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <!-- User Menu (shown when authenticated) -->
+        <div id="userMenu" style="display: none; align-items: center; gap: 0.75rem;">
+          <span id="userEmail" style="font-size: 0.85rem; color: var(--text-soft); font-weight: 500;"></span>
+          <button onclick="handleSignOut()" class="btn-nav primary" style="padding: 0.46rem 1.1rem;">
+            <i class="fa-solid fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+        <!-- Sign In (shown when not authenticated) -->
+        <div id="signInMenu" style="display: flex; gap: 0.6rem; align-items: center;">
+          <a class="btn-nav outline" href="login.html"><i class="fa-regular fa-user"></i> Sign In</a>
+          <a class="btn-nav primary" href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        </div>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleMobile()">
           <span id="hb1"></span><span id="hb2"></span><span id="hb3"></span>
         </button>
@@ -1647,8 +1663,21 @@ a{color:inherit;}
     <a href="community.html" class="mm-link"><i class="fa-solid fa-users" style="color:#d81b60;width:20px;"></i> Community</a>
     <a href="about.html" class="mm-link"><i class="fa-solid fa-circle-info" style="color:#d81b60;width:20px;"></i> About Us</a>
     <div style="display:flex;gap:.75rem;margin-top:1rem;padding:.5rem;">
-      <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
-      <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      <!-- Mobile User Menu (shown when authenticated) -->
+      <div id="mobileUserMenu" style="display: none; flex-direction: column; gap: 0.5rem; width: 100%;">
+        <div style="padding: 0.5rem; font-size: 0.85rem; color: var(--text-soft);">
+          <i class="fa-solid fa-user" style="margin-right: 0.5rem;"></i>
+          <span id="mobileUserEmail"></span>
+        </div>
+        <button onclick="handleSignOut()" class="btn-nav primary mm-action-btn" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-sign-out-alt"></i> Sign Out
+        </button>
+      </div>
+      <!-- Mobile Sign In (shown when not authenticated) -->
+      <div id="mobileSignInMenu" style="display: flex; gap: 0.75rem; width: 100%;">
+        <a href="login.html" class="btn-nav outline mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-regular fa-user"></i> Sign In</a>
+        <a href="contact.html" class="btn-nav primary mm-action-btn" style="flex:1;justify-content:center;"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      </div>
     </div>
   </div>
 
@@ -2594,5 +2623,74 @@ document.addEventListener('click',function(e){
       });
     })();
   </script>
+  
+  <!-- Firebase Auth State Management -->
+  <script>
+    // Show/hide user menu based on auth state
+    function updateUserMenu() {
+      if (typeof firebaseAuth === 'undefined') {
+        // Wait for Firebase to load
+        setTimeout(updateUserMenu, 100);
+        return;
+      }
+      
+      firebaseAuth.onAuthStateChanged((user) => {
+        const userMenu = document.getElementById('userMenu');
+        const signInMenu = document.getElementById('signInMenu');
+        const mobileUserMenu = document.getElementById('mobileUserMenu');
+        const mobileSignInMenu = document.getElementById('mobileSignInMenu');
+        const userEmail = document.getElementById('userEmail');
+        const mobileUserEmail = document.getElementById('mobileUserEmail');
+        
+        if (user) {
+          // User is signed in
+          if (userMenu) userMenu.style.display = 'flex';
+          if (signInMenu) signInMenu.style.display = 'none';
+          if (mobileUserMenu) mobileUserMenu.style.display = 'flex';
+          if (mobileSignInMenu) mobileSignInMenu.style.display = 'none';
+          
+          const email = user.email || 'User';
+          if (userEmail) userEmail.textContent = email;
+          if (mobileUserEmail) mobileUserEmail.textContent = email;
+        } else {
+          // User is signed out
+          if (userMenu) userMenu.style.display = 'none';
+          if (signInMenu) signInMenu.style.display = 'flex';
+          if (mobileUserMenu) mobileUserMenu.style.display = 'none';
+          if (mobileSignInMenu) mobileSignInMenu.style.display = 'flex';
+        }
+      });
+    }
+    
+    // Sign out handler
+    async function handleSignOut() {
+      if (typeof authService === 'undefined') {
+        alert('Please wait for the page to fully load, then try again.');
+        return;
+      }
+      
+      try {
+        const result = await authService.signOut();
+        if (result.success) {
+          window.location.href = 'index.html';
+        } else {
+          alert('Sign out failed: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Sign out error:', error);
+        alert('An error occurred during sign out.');
+      }
+    }
+    
+    // Initialize user menu on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateUserMenu);
+    } else {
+      updateUserMenu();
+    }
+  </script>
+  
+  <!-- Feedback Widget -->
+  <script src="js/feedback-widget.js"></script>
 </body>
 </html>
